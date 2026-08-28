@@ -13,24 +13,28 @@
 <style>
 
     :root {
-      /* Monochrome European */
-      --bg-primary: #F4F4F1;
+      /* Apple-influenced system palette (handoff v2, 28 Aug 2026) */
+      --bg-primary: #F5F5F7;
       --surface-primary: #FFFFFF;
-      --surface-secondary: #E7E6E5;
-      --surface-subtle: #EFEFEC;
-      --text-primary: #20211F;
-      --text-secondary: #73756F;
-      --text-muted: #9C9B91;
-      --graphite: #454A45;
-      --mineral-grey: #9C9B91;
-      --border-subtle: #E1E1DC;
-      --border-strong: #C9C9C2;
-      --status-success: #5F6860;
-      --status-warning: #A18B60;
-      --status-error: #9B5B4B;
-      --status-success-soft: rgba(95, 104, 96, .09);
-      --status-warning-soft: rgba(161, 139, 96, .10);
-      --status-error-soft: rgba(155, 91, 75, .09);
+      --surface-secondary: #E8E8ED;
+      --surface-subtle: #FBFBFD;
+      --text-primary: #1D1D1F;
+      --text-secondary: #6E6E73;
+      --text-muted: #86868B;
+      --graphite: #424245;
+      --mineral-grey: #86868B;
+      --border-subtle: #E5E5EA;
+      --border-strong: #D2D2D7;
+      --action-primary: #0071E3;
+      --action-primary-hover: #0066CC;
+      --action-soft: rgba(0, 113, 227, .08);
+      --focus-ring: rgba(0, 125, 250, .32);
+      --status-success: #1E7A34;
+      --status-warning: #B55C00;
+      --status-error: #D70015;
+      --status-success-soft: rgba(30, 122, 52, .08);
+      --status-warning-soft: rgba(181, 92, 0, .08);
+      --status-error-soft: rgba(215, 0, 21, .07);
 
       /* Existing component aliases */
       --canvas: var(--bg-primary);
@@ -39,10 +43,10 @@
       --surface-warm: var(--surface-secondary);
       --ink: var(--text-primary);
       --ink-soft: var(--graphite);
-      --ink-faint: var(--text-muted);
+      --ink-faint: var(--text-secondary);
       --line: var(--border-subtle);
       --line-strong: var(--border-strong);
-      --umber: var(--graphite);
+      --umber: var(--action-primary-hover);
       --umber-dark: var(--text-primary);
       --sand: var(--mineral-grey);
       --sage: var(--status-success);
@@ -53,8 +57,8 @@
       --amber-soft: var(--status-warning-soft);
       --blue: var(--graphite);
       --blue-soft: var(--surface-subtle);
-      --shadow-sm: 0 1px 2px rgba(32, 33, 31, .035);
-      --shadow-lg: 0 12px 34px rgba(32, 33, 31, .075);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, .035);
+      --shadow-lg: 0 12px 34px rgba(0, 0, 0, .075);
       --radius-sm:5px;
       --radius-md:10px;
       --radius-lg:12.5px;
@@ -68,7 +72,7 @@
     body { margin:0; background: var(--canvas); color: var(--ink); font-family: var(--font-ui); font-size:19.3px; line-height:1.5; }
     button, input, select, textarea { font: inherit; }
     button, a, input, select, textarea { outline: none; }
-    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { box-shadow: 0 0 0 3px rgba(69, 74, 69, .24); border-color: var(--umber); }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { box-shadow: 0 0 0 3px var(--focus-ring); border-color: var(--action-primary); }
     button, .button, .nav-link, .order-card { min-height:60.7px; }
     a { color: inherit; }
     img, svg { display: block; }
@@ -143,7 +147,7 @@
     .order-card__top, .order-card__meta, .order-card__progress-row { display: flex; align-items: center; justify-content: space-between; gap:13.8px; }
     .order-card__po { color: var(--umber); font-size:13.8px; font-weight: 800; }
     .order-card__meta { color: var(--ink-soft); font-size:13.8px; }
-    .progress { height:9.7px; overflow: hidden; border-radius:1248.8px; background: rgba(156,155,145,.28); }
+    .progress { height:9.7px; overflow: hidden; border-radius:1248.8px; background: rgba(134,134,139,.22); }
     .progress__bar { height:100%; border-radius:inherit; background: var(--umber); }
     .activity-item { grid-template-columns: auto minmax(0,1fr); border-color: transparent; padding:11px 8.3px; }
     .activity-item__dot { width:12.4px; height:12.4px; margin-top:6.9px; border: 2px solid var(--surface); border-radius:50%; background: var(--sage); box-shadow: 0 0 0 1px var(--line-strong); }
@@ -156,10 +160,10 @@
     .login-story::before { content: ""; position: absolute; inset:0; background: radial-gradient(circle at 20% 15%, rgba(156,155,145,.32), transparent 28%), radial-gradient(circle at 82% 88%, rgba(69,74,69,.24), transparent 26%); }
     .login-story__content { position: relative; z-index: 1; display: flex; max-width:520px; flex-direction: column; justify-content: space-between; }
     .login-story__quote { font-family: var(--font-display); font-size:clamp(49.7px, 5vw, 88.3px); font-weight: 500; line-height:.98; letter-spacing: -.035em; }
-    .login-story__note { max-width:420px; color: #9C9B91; }
+    .login-story__note { max-width:420px; color: #86868B; }
     .login-form-wrap { display: grid; place-items: center; padding:38.6px 27.6px; }
     .login-form { width:min(100%, 410px); }
-    .login-form__tagline { margin-top:38.6px; color: var(--ink-soft); }
+    .login-form__tagline { margin-top:38.6px; color: var(--action-primary); font-size:15.2px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
     .login-form h2 { margin-top:11px; font-family: var(--font-display); font-size:52.4px; font-weight: 500; letter-spacing: -.025em; }
     .form-stack { display: grid; gap:19.3px; margin-top:38.6px; }
     .field { display: grid; gap:9.7px; }
@@ -208,11 +212,11 @@
     .product-card__meta { display: flex; flex-wrap: wrap; gap:5.5px 16.6px; margin-top:9.7px; color: var(--ink-soft); font-size:12.4px; }
     .product-card__stage { display: flex; align-items: center; justify-content: space-between; gap:13.8px; margin-top:16.6px; }
     .product-card__actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap:11px; }
-    .photo-placeholder { position: relative; display: grid; min-height:104.9px; place-items: end start; overflow: hidden; border: 1px solid rgba(69,74,69,.16); border-radius:12.5px; background: linear-gradient(145deg, #9C9B91, #454A45 52%, #73756F); color: var(--surface); }
+    .photo-placeholder { position: relative; display: grid; min-height:104.9px; place-items: end start; overflow: hidden; border: 1px solid rgba(66,66,69,.14); border-radius:12.5px; background: linear-gradient(145deg, #86868B, #424245 52%, #6E6E73); color: var(--surface); }
     .photo-placeholder::before { content: ""; position: absolute; inset:0; background: linear-gradient(30deg, transparent 37%, rgba(255,255,255,.14) 38%, transparent 40%), linear-gradient(115deg, transparent 62%, rgba(32,33,31,.18) 63%, transparent 66%); }
-    .photo-placeholder--white { background: linear-gradient(145deg, #F4F4F1, #FFFFFF 48%, #9C9B91); color: var(--ink); }
-    .photo-placeholder--grey { background: linear-gradient(145deg, #73756F, #9C9B91 53%, #454A45); }
-    .photo-placeholder--drawing { background-color: #F4F4F1; background-image: linear-gradient(rgba(156,155,145,.45) 1px, transparent 1px), linear-gradient(90deg,rgba(156,155,145,.45) 1px,transparent 1px); background-size: 16px 16px; color: var(--umber-dark); }
+    .photo-placeholder--white { background: linear-gradient(145deg, #F5F5F7, #FFFFFF 48%, #D2D2D7); color: var(--ink); }
+    .photo-placeholder--grey { background: linear-gradient(145deg, #86868B, #D2D2D7 53%, #424245); }
+    .photo-placeholder--drawing { background-color: #F5F5F7; background-image: linear-gradient(rgba(134,134,139,.32) 1px, transparent 1px), linear-gradient(90deg,rgba(134,134,139,.32) 1px,transparent 1px); background-size: 16px 16px; color: var(--umber-dark); }
     .photo-placeholder span { position: relative; z-index: 1; padding:9.7px 11px; font-size:11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .product-gallery { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:11px; }
     .product-gallery .photo-placeholder:first-child { grid-column: 1 / -1; min-height:207px; }
@@ -235,7 +239,7 @@
     .stage-row__media { display: flex; flex-wrap: wrap; gap:9.7px; margin-top:11px; }
     .stage-row__media .button { min-height:60.7px; padding-inline:15.2px; font-size:12.4px; }
     .stage-row--done .stage-row__icon { border-color: transparent; background: var(--sage-soft); color: var(--sage); }
-    .stage-row--current { border-color: var(--sand); box-shadow: 0 0 0 1px rgba(156,155,145,.24); }
+    .stage-row--current { border-color: var(--action-primary); box-shadow: 0 0 0 1px var(--action-soft); }
     .stage-row--current .stage-row__icon { border-color: transparent; background: var(--surface-warm); color: var(--umber); }
     .stage-row--hold { border-color: var(--ink); border-style: dashed; background: var(--surface); }
     .stage-row--hold .stage-row__icon { border-color: transparent; background: var(--rust-soft); color: var(--rust); }
@@ -257,17 +261,17 @@
     .approval-gate__title { display: flex; align-items: center; gap:11px; font-size:15.2px; font-weight: 800; }
     .approval-gate__copy { color: var(--ink-soft); font-size:12.4px; }
     .buyer-welcome { padding:27.6px; border-radius:var(--radius-lg); background: var(--umber-dark); color: white; }
-    .buyer-welcome .eyebrow { color: #9C9B91; }
-    .buyer-welcome .detail-subtitle { color: #F4F4F1; }
+    .buyer-welcome .eyebrow { color: #86868B; }
+    .buyer-welcome .detail-subtitle { color: #F5F5F7; }
     .buyer-progress { display: grid; gap:13.8px; margin-top:24.8px; }
     .buyer-progress__row { display: flex; align-items: center; justify-content: space-between; gap:16.6px; font-size:13.8px; }
     .buyer-safe-note { display: flex; gap:12.4px; margin-top:16.6px; color: var(--ink-faint); font-size:12.4px; }
     .staff-shell { background: var(--canvas); }
     .staff-header { display: flex; flex-direction: column; gap:19.3px; padding:24.8px 22.1px; border-bottom:1.4px solid var(--line-strong); background: var(--umber-dark); color: white; }
-    .staff-header .wordmark__byline { color: #9C9B91; }
+    .staff-header .wordmark__byline { color: #86868B; }
     .staff-header .search input { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.1); color: white; }
-    .staff-header .search input::placeholder { color: #9C9B91; }
-    .staff-header .search .icon { color: #F4F4F1; }
+    .staff-header .search input::placeholder { color: #86868B; }
+    .staff-header .search .icon { color: #F5F5F7; }
     .staff-list { display: grid; gap:16.6px; padding:19.3px; }
     .staff-product { padding:20.7px; border: 1px solid var(--line-strong); border-radius:var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm); }
     .staff-product__thumb { min-height:173.9px; margin-bottom:17.9px; }
@@ -319,23 +323,23 @@
     .icon-swatch__icon { display: grid; width:58px; height:58px; flex: 0 0 auto; place-items: center; border-radius:var(--radius-md); background: var(--surface-warm); color: var(--umber); }
     .icon-swatch strong { display: block; font-size:13.8px; }
     .icon-swatch code { color: var(--ink-faint); font-size:11px; }
-    .photo-viewer { min-height:720px; padding:19.3px; background: #20211F; color: #FFFFFF; }
+    .photo-viewer { min-height:720px; padding:19.3px; background: #1D1D1F; color: #FFFFFF; }
     .photo-viewer__bar { display: flex; align-items: center; justify-content: space-between; gap:13.8px; min-height:69px; }
     .photo-viewer__title { font-size:15.2px; font-weight: 700; }
-    .photo-viewer__meta { margin-top:4.1px; color: #9C9B91; font-size:11px; }
-    .photo-viewer__canvas { display: grid; min-height:520px; place-items: center; margin-top:13.8px; border-radius:var(--radius-lg); background: #454A45; }
+    .photo-viewer__meta { margin-top:4.1px; color: #86868B; font-size:11px; }
+    .photo-viewer__canvas { display: grid; min-height:520px; place-items: center; margin-top:13.8px; border-radius:var(--radius-lg); background: #424245; }
     .photo-viewer__image { width:min(88%, 820px); aspect-ratio: 4 / 3; border-radius:12.5px; }
     .photo-viewer__filmstrip { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap:9.7px; margin-top:13.8px; }
     .photo-viewer__filmstrip .photo-placeholder { min-height:88.3px; opacity: .62; }
     .photo-viewer__filmstrip .photo-placeholder:first-child { outline: 2px solid var(--sand); opacity: 1; }
 
-    /* Monochrome European master component treatment */
+    /* Apple-influenced component treatment */
 
     .role-chip { border: 1px solid var(--border-subtle); background: var(--surface-subtle); }
     .badge { border: 1px solid transparent; background: var(--surface-subtle); color: var(--text-secondary); }
-    .badge--success { border-color: rgba(95,104,96,.18); background: var(--status-success-soft); color: var(--status-success); }
-    .badge--pending { border-color: rgba(161,139,96,.32); background: var(--status-warning-soft); color: var(--text-primary); }
-    .badge--alert { border-color: rgba(155,91,75,.2); background: var(--status-error-soft); color: var(--status-error); }
+    .badge--success { border-color: rgba(30,122,52,.18); background: var(--status-success-soft); color: var(--text-primary); }
+    .badge--pending { border-color: rgba(181,92,0,.24); background: var(--status-warning-soft); color: var(--text-primary); }
+    .badge--alert { border-color: rgba(215,0,21,.18); background: var(--status-error-soft); color: var(--status-error); }
     .eyebrow,
     .breadcrumb,
     .screen-note { color: var(--graphite); }
@@ -359,8 +363,17 @@
     .nav-link,
     .order-card,
     .content-tab { transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, opacity 180ms ease; }
-    .button { border-radius:7.5px; }
-    .button:hover { background: var(--graphite); }
+    .button { border-radius:10px; background: var(--action-primary); }
+    .button:hover { background: var(--action-primary-hover); }
+    /* the repaint above re-set .button's background, so restate the modifiers after it */
+    .button--secondary { border-color: var(--line-strong); background: var(--surface-primary); color: var(--ink); }
+    .button--quiet { background: transparent; color: var(--ink-soft); }
+    .button--quiet:hover { background: var(--action-soft); color: var(--action-primary); }
+    .button--danger { background: var(--rust); color: #fff; }
+    .button--success { background: var(--sage); color: #fff; }
+    .data-table td small { display: block; }
+    .upload-drop.is-over { border-color: var(--action-primary); background: var(--action-soft); }
+    .upload-drop .button--quiet { min-height: 0; padding: 0 4px; text-decoration: underline; }
     .button--secondary:hover { border-color: var(--graphite); background: var(--surface-subtle); color: var(--text-primary); }
     .button--quiet:hover { background: rgba(255,255,255,.08); }
     .order-card:hover { border-color: var(--border-strong); background: var(--surface-subtle); }
@@ -806,7 +819,8 @@ const S = {
   pos:[], posById:{}, items:[], itemsById:{}, stByItem:{},
   comments:[], commentsByItem:{}, photos:[], photosByItem:{},
   docsByPo:{}, readMarks:{}, activity:[], profilesAll:[],
-  urlCache:{}, lastLoad:0, ready:false
+  urlCache:{}, lastLoad:0, ready:false,
+  payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{}
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 function isStaff(){ return S.profile && S.profile.role==='staff'; }
@@ -840,6 +854,7 @@ async function loadStaffData(){
   const shipBy={}; (sp.data||[]).forEach(p=>{ shipBy[p.po_id]={expected_ship_date:p.expected_ship_date, status:p.po_status}; });
   S.buyers=[]; S.buyersById={}; S.pos=[]; S.posById={}; S.comments=[]; S.commentsByItem={};
   S.docsByPo={}; S.readMarks={}; S.activity=[]; S.profilesAll=[];
+  S.payments=[]; S.charges=[]; indexFinance();
   S.items=(it.data||[]); S.itemsById={}; S.stByItem={};
   const activeStageIds = S.stages.filter(s=>s.active).map(s=>s.id);
   S.items.forEach(x=>{
@@ -971,12 +986,55 @@ function searchHits(q){
   return {q, pos, items};
 }
 
+/* ---- money: what a PO is worth, what came in, what is still owed ----
+   Admin-only. S.payments and S.charges are empty for every other role, and the
+   database refuses to return them anyway, so these helpers degrade to zero. */
+function indexFinance(){
+  S.payByPo={}; S.chgByPo={}; S.payByBuyer={};
+  (S.payments||[]).forEach(x=>{
+    if(x.po_id) (S.payByPo[x.po_id]=S.payByPo[x.po_id]||[]).push(x);
+    (S.payByBuyer[x.buyer_id]=S.payByBuyer[x.buyer_id]||[]).push(x);
+  });
+  (S.charges||[]).forEach(x=>{ (S.chgByPo[x.po_id]=S.chgByPo[x.po_id]||[]).push(x); });
+}
+function num(v){ const n=Number(v); return isFinite(n)?n:0; }
+
+// One PO's money. Extras are added on top of the PO value; a negative extra is a discount.
+function poMoney(p){
+  const cur = p.currency || 'INR';
+  const value = num(p.amount_total);
+  const extras = (S.chgByPo[p.id]||[]).reduce((a,c)=>a+num(c.amount),0);
+  const paid = (S.payByPo[p.id]||[]).reduce((a,c)=>a+num(c.amount),0);
+  const due = value + extras;
+  return { cur, value, extras, paid, due, balance: due - paid,
+           hasValue: p.amount_total != null };
+}
+
+// A buyer's account, grouped by currency — adding rupees to dollars would be a lie.
+function buyerMoney(buyerId){
+  const byCur = {};
+  const touch = c => (byCur[c] = byCur[c] || { cur:c, due:0, paid:0, balance:0, orders:0, unallocated:0 });
+  S.pos.filter(p=>p.buyer_id===buyerId && p.status!=='cancelled').forEach(p=>{
+    const m = poMoney(p);
+    if(!m.hasValue && !m.extras && !m.paid) return;
+    const g = touch(m.cur);
+    g.due += m.due; g.paid += m.paid; g.orders++;
+  });
+  // payments not tied to a PO still reduce what the buyer owes
+  (S.payByBuyer[buyerId]||[]).filter(x=>!x.po_id).forEach(x=>{
+    const g = touch(x.currency||'INR');
+    g.paid += num(x.amount); g.unallocated += num(x.amount);
+  });
+  Object.values(byCur).forEach(g=>{ g.balance = g.due - g.paid; });
+  return Object.values(byCur).sort((a,b)=>b.due-a.due);
+}
+
 async function loadData(){
   if(isStaff()) return loadStaffData();
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -984,9 +1042,11 @@ async function loadData(){
     sb.from('bt_documents').select('*').order('created_at'),
     sb.from('bt_read_marks').select('*'),
     sb.from('bt_activity').select('*').order('created_at',{ascending:false}).limit(200),
-    admin ? sb.from('bt_profiles').select('*').order('created_at') : Promise.resolve({data:[]})
+    admin ? sb.from('bt_profiles').select('*').order('created_at') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_payments').select('*').order('paid_on',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_charges').select('*').order('created_at') : Promise.resolve({data:[]})
   ]);
-  const err = [b,po,cm,ph,dc,rm,ac,pr].find(r=>r.error);
+  const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg].find(r=>r.error);
   if(err) throw err.error;
 
   S.buyers = b.data||[]; S.buyersById={}; S.buyers.forEach(x=>S.buyersById[x.id]=x);
@@ -1019,6 +1079,8 @@ async function loadData(){
   (rm.data||[]).forEach(r=>{ if(r.user_id===uid()) S.readMarks[r.item_id]=r.last_read_at; });
   S.activity = ac.data||[];
   S.profilesAll = pr.data||[];
+  S.payments = pay.data||[]; S.charges = chg.data||[];
+  indexFinance();
   S.lastLoad = Date.now();
 }
 
@@ -1217,6 +1279,7 @@ function updateHeader(){
       ['#/home','Orders',0],
       ['#/updates','Client updates',nDue],
       ['#/approvals','Photo approvals',nPend],
+      ['#/finance','Finance',0],
       ['#/daily','Daily log',0],
       ['#/buyers','Buyers &amp; logins',0],
       ['#/activity','Activity',0],
@@ -1618,7 +1681,18 @@ function vPO(id){
         ['Ship to', p.ship_to],
         ['Payment terms', p.payment_terms],
         ['Status', p.status]
-      ])+'</section>';
+      ])+
+      (admin && (function(){ const m=poMoney(p);
+        if(!m.hasValue && !m.extras && !m.paid) return '';
+        return '<p class="field-hint space-top-12">Account</p>'+sideRows([
+          ['Order value', money(m.value, m.cur)],
+          ['Extras', m.extras ? money(m.extras, m.cur) : ''],
+          ['Received', m.paid ? money(m.paid, m.cur) : ''],
+          ['Balance', money(m.balance, m.cur)]
+        ])+'<div class="button-row space-top-12">'+
+          '<button class="button button--secondary" type="button" onclick="mPayment(\''+p.buyer_id+'\',\''+p.id+'\')">Record payment</button>'+
+          '<button class="button button--quiet" type="button" onclick="mCharge(\''+p.id+'\')">Add extra</button></div>';
+      })() || '')+'</section>';
   if(tab!=='shipping') h+=shipPanel(p, true);
   if(tab!=='docs') h+=docsPanel(p, true);
   h+='</aside></div>';
@@ -2066,6 +2140,116 @@ function vUpdates(){
 }
 
 /* ---------------------------------------------------------------------------
+   Finance — admin only.
+
+   Deliberately a statement of account, not accounting: purchase orders, extras
+   added later, money received, what is still owed. No invoicing, no tax
+   ledgers, nothing that pretends to be Tally. Buyers cannot see any of it yet;
+   the database refuses them the rows, not just the screen.
+--------------------------------------------------------------------------- */
+
+function vFinance(){
+  if(!isAdmin()) return vHome();
+  const buyers = S.buyers.filter(b=>S.pos.some(p=>p.buyer_id===b.id) || (S.payByBuyer[b.id]||[]).length);
+
+  let h = '<div class="page-heading"><div>'+eyebrow('Statement of account')+
+    '<h2 class="display-title">Finance</h2>'+
+    '<p class="lede">What each buyer has ordered, what they have paid, and what is still owed. '+
+    'Only you can see this — buyers and floor staff cannot, at the database level.</p></div></div>';
+
+  if(!buyers.length){ $('app').innerHTML = h+'<div class="empty-state">No buyers with orders yet.</div>'; return; }
+
+  // headline totals across every buyer, grouped by currency
+  const all = {};
+  buyers.forEach(b=>buyerMoney(b.id).forEach(g=>{
+    const t = all[g.cur] = all[g.cur] || {cur:g.cur, due:0, paid:0};
+    t.due += g.due; t.paid += g.paid;
+  }));
+  const tot = Object.values(all);
+  if(tot.length){
+    h += '<section class="summary-grid">'+
+      tot.slice(0,2).map(t=>
+        statCard('Ordered'+(tot.length>1?' ('+t.cur+')':''), money(t.due, t.cur), 'Including extras') +
+        statCard('Received'+(tot.length>1?' ('+t.cur+')':''), money(t.paid, t.cur), '') +
+        statCard('Outstanding'+(tot.length>1?' ('+t.cur+')':''), money(t.due - t.paid, t.cur),
+                 t.due - t.paid > 0 ? 'Across all buyers' : 'Nothing outstanding')
+      ).join('') + '</section>';
+  }
+
+  h += '<div class="utility-stack">';
+  buyers.forEach(b=>{
+    const groups = buyerMoney(b.id);
+    const pos = S.pos.filter(p=>p.buyer_id===b.id && p.status!=='cancelled');
+    const onAccount = (S.payByBuyer[b.id]||[]).filter(x=>!x.po_id);
+
+    h += '<section class="panel"><div class="panel__head"><div>'+
+      eyebrow(pos.length+' order'+(pos.length!==1?'s':''))+
+      '<h3 class="panel__title">'+esc(b.company)+'</h3>'+
+      '<p class="panel__description">'+
+        (groups.length
+          ? groups.map(g=>esc(money(g.balance,g.cur))+' outstanding of '+esc(money(g.due,g.cur))).join(' · ')
+          : 'No values recorded yet.')+
+      '</p></div>'+
+      '<div class="button-row">'+
+        (groups.some(g=>g.balance>0.005) ? badge('Owes you','alert')
+          : groups.some(g=>g.balance<-0.005) ? badge('In credit','pending')
+          : badge('Settled','success'))+
+        '<button class="button" type="button" onclick="mPayment(\''+b.id+'\',null)">+ Record payment</button>'+
+      '</div></div>'+
+      '<div class="panel__body">';
+
+    // per-PO breakdown
+    h += '<div class="data-table-wrap"><table class="data-table">'+
+      '<tr><th>Purchase order</th><th>Value</th><th>Extras</th><th>Received</th><th>Balance</th><th></th></tr>'+
+      (pos.length ? pos.map(p=>{
+        const m = poMoney(p);
+        const extras = (S.chgByPo[p.id]||[]);
+        return '<tr>'+
+          '<td><strong style="cursor:pointer;text-decoration:underline" onclick="go(\'#/po/'+p.id+'\')">'+esc(p.po_number)+'</strong>'+
+            '<small>'+esc([p.project, p.payment_terms].filter(Boolean).join(' · ')||'—')+'</small></td>'+
+          '<td>'+(m.hasValue?esc(money(m.value,m.cur)):'<small>not set</small>')+'</td>'+
+          '<td>'+(extras.length
+              ? esc(money(m.extras,m.cur))+'<small>'+esc(extras.map(c=>c.label).join(', '))+'</small>'
+              : '<small>—</small>')+'</td>'+
+          '<td>'+(m.paid?esc(money(m.paid,m.cur)):'<small>—</small>')+'</td>'+
+          '<td><strong>'+esc(money(m.balance,m.cur))+'</strong>'+
+            (m.balance>0.005?'<small style="color:var(--rust)">outstanding</small>'
+             :m.balance<-0.005?'<small>overpaid</small>':'<small>settled</small>')+'</td>'+
+          '<td class="nowrap">'+
+            '<button class="button button--quiet" type="button" onclick="mPayment(\''+b.id+'\',\''+p.id+'\')">Payment</button> '+
+            '<button class="button button--quiet" type="button" onclick="mCharge(\''+p.id+'\')">Extra</button>'+
+          '</td></tr>';
+      }).join('') : '<tr><td colspan="6"><small>No orders yet.</small></td></tr>')+
+      '</table></div>';
+
+    if(onAccount.length){
+      h += '<p class="field-hint space-top-12">On account, not tied to an order: '+
+        onAccount.map(x=>esc(money(x.amount,x.currency))+' on '+esc(fdate(x.paid_on))).join(' · ')+'</p>';
+    }
+
+    // payment history
+    const pays = (S.payByBuyer[b.id]||[]).slice().sort((x,y)=>String(y.paid_on).localeCompare(String(x.paid_on)));
+    if(pays.length){
+      h += '<div class="side-card__rows space-top-12">'+pays.map(x=>{
+        const po = x.po_id ? S.posById[x.po_id] : null;
+        return '<div class="side-row"><span>'+esc(fdate(x.paid_on))+' · '+
+          esc([x.method, x.reference, po?po.po_number:'on account'].filter(Boolean).join(' · '))+
+          (x.note?' — '+esc(x.note):'')+'</span>'+
+          '<strong>'+esc(money(x.amount,x.currency))+
+          ' <button class="button button--quiet" type="button" style="min-height:28px;padding:0 8px" '+
+          'onclick="delPayment(\''+x.id+'\')">✕</button></strong></div>';
+      }).join('')+'</div>';
+    }
+
+    h += '</div></section>';
+  });
+  h += '</div>';
+  h += '<p class="field-hint space-top-12">This is a statement of account, not a ledger. '+
+       'Extras are things added after the order — freight, packing — and a negative extra is a discount.</p>';
+  $('app').innerHTML = h;
+}
+
+/* ---------------------------------------------------------------------------
    Admin utility screens
 --------------------------------------------------------------------------- */
 
@@ -2186,10 +2370,24 @@ function vSettings(){
 function vImport(){
   if(!isAdmin()) return vHome();
   const h='<div class="page-heading"><div>'+eyebrow('Bulk entry')+
-    '<h2 class="display-title">Import order lines</h2>'+
-    '<p class="lede">Paste CSV rows or choose a file. POs that do not exist yet are created automatically.</p></div></div>'+
+    '<h2 class="display-title">Import an order</h2>'+
+    '<p class="lede">Drop the buyer\'s purchase order PDF and it fills itself in, or paste CSV rows.</p></div></div>'+
   '<section class="form-card"><div class="form-card__head"><div>'+
-    '<h3 class="form-card__title">CSV import</h3>'+
+    '<h3 class="form-card__title">From a PO PDF</h3>'+
+    '<p class="form-card__description">Reads the order number, dates, value, terms and the product lines. '+
+    'You check everything before anything is saved.</p></div>'+badge('Fastest')+'</div>'+
+    '<div class="upload-drop space-top-14" id="pdf-drop" '+
+      'ondragover="event.preventDefault();this.classList.add(\'is-over\')" '+
+      'ondragleave="this.classList.remove(\'is-over\')" '+
+      'ondrop="dropPoPdf(event)">'+
+      '<div>'+icon('stage-confirmed','icon--lg')+
+      '<strong>Drop the purchase order PDF here</strong>'+
+      '<p>or <button class="button button--quiet" type="button" onclick="pickPoPdf()">choose a file</button></p>'+
+      '<p class="field-hint">A scan or photo has no text to read — send those to me in the chat instead.</p></div>'+
+    '</div></section>'+
+  '<div id="imp-out"></div>'+
+  '<section class="form-card space-top-18"><div class="form-card__head"><div>'+
+    '<h3 class="form-card__title">Or paste a CSV</h3>'+
     '<p class="form-card__description">Header row required. Only <strong>po_number</strong> and <strong>product</strong> are compulsory.</p></div>'+
     badge('CSV')+'</div>'+
     '<p class="field-hint space-top-12">po_number, po_date, product, stone, finish, qty, unit, l_mm, w_mm, h_mm, dims_text, target_date, notes</p>'+
@@ -2201,7 +2399,7 @@ function vImport(){
         '<input type="file" id="imp-file" accept=".csv,text/csv" style="display:none" onchange="impFile(this)">'+
         '<button class="button button--secondary" type="button" onclick="$(\'imp-file\').click()">Choose file</button>'+
         '<button class="button" type="button" onclick="impPreview()">Preview import</button></div>'+
-    '</div><div id="imp-out"></div></section>';
+    '</div></section>';
   $('app').innerHTML=h;
 }
 
@@ -2237,6 +2435,7 @@ function render(){
   else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
   else if(parts[0]==='updates') vUpdates();
   else if(parts[0]==='approvals') vApprovals();
+  else if(parts[0]==='finance') vFinance();
   else if(parts[0]==='daily') vDaily();
   else if(parts[0]==='buyers') vBuyers();
   else if(parts[0]==='settings') vSettings();
@@ -2752,6 +2951,90 @@ function mBulk(poId){
   };
 }
 
+/* ---------- money ---------- */
+function mPayment(buyerId, poId){
+  const b = S.buyersById[buyerId];
+  const pos = S.pos.filter(p=>p.buyer_id===buyerId && p.status!=='cancelled');
+  const cur = (poId && S.posById[poId] && S.posById[poId].currency) || 'INR';
+  const m = poId ? poMoney(S.posById[poId]) : null;
+  const modal_ = modal('<h3>Record a payment</h3><div class="sub">'+esc(b?b.company:'')+
+    (m && m.balance>0 ? ' · '+esc(money(m.balance,m.cur))+' outstanding on this order' : '')+'</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label for="pm-po">Against</label><select id="pm-po">'+
+      '<option value="">On account (not one order)</option>'+
+      pos.map(p=>'<option value="'+p.id+'"'+(p.id===poId?' selected':'')+'>'+esc(p.po_number)+
+        (p.project?' · '+esc(p.project):'')+'</option>').join('')+
+    '</select></div>'+
+    '<div class="field"><label for="pm-amt">Amount</label><input id="pm-amt" type="number" step="0.01" inputmode="decimal" '+
+      'value="'+(m && m.balance>0 ? String(Math.round(m.balance*100)/100) : '')+'"></div>'+
+    '<div class="field"><label for="pm-cur">Currency</label><select id="pm-cur">'+
+      ['INR','USD','EUR','GBP','AED'].map(c=>'<option'+(c===cur?' selected':'')+'>'+c+'</option>').join('')+'</select></div>'+
+    '<div class="field"><label for="pm-date">Received on</label><input id="pm-date" type="date" value="'+today()+'"></div>'+
+    '<div class="field"><label for="pm-method">Method</label><select id="pm-method">'+
+      ['NEFT/RTGS','Wire transfer','UPI','Cheque','Cash','Letter of credit','Other']
+        .map(x=>'<option>'+x+'</option>').join('')+'</select></div>'+
+    '<div class="field field--full"><label for="pm-ref">Reference (UTR, cheque no.)</label><input id="pm-ref"></div>'+
+    '<div class="field field--full"><label for="pm-note">Note</label><input id="pm-note" placeholder="e.g. advance against Site Experience Centre"></div>'+
+    '<div class="button-row field--full"><button class="button" type="button" id="pm-save">Save payment</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+
+  modal_.m.querySelector('#pm-save').onclick = async () => {
+    const amount = Number($('pm-amt').value);
+    if(!amount){ toast('Enter an amount',{err:true}); return; }
+    const {error} = await sb.from('bt_payments').insert({
+      buyer_id: buyerId, po_id: $('pm-po').value || null,
+      amount, currency: $('pm-cur').value, paid_on: $('pm-date').value || today(),
+      method: $('pm-method').value, reference: $('pm-ref').value.trim() || null,
+      note: $('pm-note').value.trim() || null, created_by: uid()
+    });
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render();
+    toast('Payment recorded');
+  };
+}
+
+function mCharge(poId){
+  const p = S.posById[poId];
+  const modal_ = modal('<h3>Add an extra</h3><div class="sub">'+esc(p.po_number)+
+    ' · added on top of the order value. A negative amount is a discount.</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label for="ch-label">What is it</label><input id="ch-label" placeholder="Freight to Gurugram" list="ch-list">'+
+      '<datalist id="ch-list"><option>Freight</option><option>Packing / crating</option><option>Insurance</option>'+
+      '<option>Loading</option><option>Discount</option></datalist></div>'+
+    '<div class="field"><label for="ch-amt">Amount</label><input id="ch-amt" type="number" step="0.01" inputmode="decimal"></div>'+
+    '<div class="field"><label for="ch-cur">Currency</label><select id="ch-cur">'+
+      ['INR','USD','EUR','GBP','AED'].map(c=>'<option'+(c===(p.currency||'INR')?' selected':'')+'>'+c+'</option>').join('')+'</select></div>'+
+    (S.chgByPo[poId]&&S.chgByPo[poId].length
+      ? '<div class="field--full"><p class="field-hint">Already on this order:</p>'+
+        S.chgByPo[poId].map(c=>'<label class="check-row"><span>'+esc(c.label)+' — '+esc(money(c.amount,c.currency))+
+          ' <button class="button button--quiet" type="button" style="min-height:28px;padding:0 8px" onclick="delCharge(\''+c.id+'\')">✕</button></span></label>').join('')+'</div>'
+      : '')+
+    '<div class="button-row field--full"><button class="button" type="button" id="ch-save">Add</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+
+  modal_.m.querySelector('#ch-save').onclick = async () => {
+    const label = $('ch-label').value.trim(), amount = Number($('ch-amt').value);
+    if(!label){ toast('Give it a name',{err:true}); return; }
+    if(!amount){ toast('Enter an amount',{err:true}); return; }
+    const {error} = await sb.from('bt_charges').insert({
+      po_id: poId, label, amount, currency: $('ch-cur').value, created_by: uid() });
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render();
+  };
+}
+
+async function delPayment(id){
+  if(!confirm('Remove this payment from the account?')) return;
+  const {error} = await sb.from('bt_payments').delete().eq('id', id);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
+}
+async function delCharge(id){
+  const {error} = await sb.from('bt_charges').delete().eq('id', id);
+  if(error){ toast(error.message,{err:true}); return; }
+  closeModal(); await loadData(); render();
+}
+
 /* ---------- buyers & logins ---------- */
 function mBuyer(id){
   const b=id?S.buyersById[id]:{active:true};
@@ -2888,6 +3171,303 @@ async function addStage(){
   if(error){ toast(error.message,{err:true}); return; }
   toast('Stage added. It applies to items created from now on.');
   await loadCore(); await loadData(); render();
+}
+
+/* ---------------------------------------------------------------------------
+   Drop-a-PDF purchase order import.
+
+   Reads the text layer of a PO with pdf.js, reconstructs lines by their y
+   position (naive concatenation destroys tables), then guesses the header
+   fields and the item rows. Every guess lands in an editable preview and
+   NOTHING is written until Yash presses Import — a wrong PO is worse than no
+   PO. Scanned/photographed PDFs have no text layer and are told so plainly
+   rather than silently importing nothing.
+--------------------------------------------------------------------------- */
+
+const PDFJS_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+const PDFJS_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+function loadPdfJs(){
+  if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+  if(window.__pdfjsLoading) return window.__pdfjsLoading;
+  window.__pdfjsLoading = new Promise((res, rej)=>{
+    const s=document.createElement('script');
+    s.src=PDFJS_SRC;
+    s.onload=()=>{ try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS_WORKER; }catch(e){}
+      res(window.pdfjsLib); };
+    s.onerror=()=>rej(new Error('Could not load the PDF reader. Check your internet connection.'));
+    document.head.appendChild(s);
+  });
+  return window.__pdfjsLoading;
+}
+
+async function pdfLines(file){
+  const lib = await loadPdfJs();
+  const buf = await file.arrayBuffer();
+  const pdf = await lib.getDocument({data:buf}).promise;
+  const lines=[];
+  for(let i=1;i<=pdf.numPages;i++){
+    const page = await pdf.getPage(i);
+    const tc = await page.getTextContent();
+    const rows={};
+    tc.items.forEach(it=>{
+      const y=it.transform[5], key=Math.round(y/3);
+      (rows[key]=rows[key]||[]).push({x:it.transform[4], s:it.str});
+    });
+    Object.keys(rows).map(Number).sort((a,b)=>b-a).forEach(k=>{
+      const t=rows[k].sort((a,b)=>a.x-b.x).map(o=>o.s).join(' ').replace(/\s+/g,' ').trim();
+      if(t) lines.push(t);
+    });
+  }
+  return lines;
+}
+
+const _num = t => { const n=Number(String(t).replace(/[^0-9.\-]/g,'')); return isFinite(n)?n:null; };
+
+// dd/mm/yyyy, dd-mm-yy, 27 Aug 2026, 2026-08-27 -> yyyy-mm-dd
+function _date(t){
+  if(!t) return null;
+  const s=String(t).trim();
+  let m=s.match(/(\d{4})-(\d{2})-(\d{2})/); if(m) return m[0];
+  m=s.match(/(\d{1,2})\s*[\/\-.]\s*(\d{1,2})\s*[\/\-.]\s*(\d{2,4})/);
+  if(m){ let y=+m[3]; if(y<100) y+=2000;
+    return y+'-'+String(+m[2]).padStart(2,'0')+'-'+String(+m[1]).padStart(2,'0'); }
+  m=s.match(/(\d{1,2})\s*([A-Za-z]{3,9})\.?\,?\s*(\d{4})/);
+  if(m){ const i=MON.findIndex(x=>m[2].toLowerCase().startsWith(x.toLowerCase()));
+    if(i>=0) return m[3]+'-'+String(i+1).padStart(2,'0')+'-'+String(+m[1]).padStart(2,'0'); }
+  return null;
+}
+
+// value that follows a label, on the same line or the next one
+function _after(lines, res){
+  for(let i=0;i<lines.length;i++){
+    for(const re of res){
+      const m=lines[i].match(re);
+      if(m){
+        const tail=(m[1]||'').trim().replace(/^[:\-–—\s]+/,'').trim();
+        if(tail) return tail;
+        if(lines[i+1] && lines[i+1].length<90) return lines[i+1].trim();
+      }
+    }
+  }
+  return null;
+}
+
+function parsePoText(lines){
+  const all = lines.join('\n');
+  const out = { po_number:null, po_date:null, project:null, reference:null,
+                expected_ship_date:null, amount_total:null, currency:'INR',
+                payment_terms:null, ship_to:null, items:[], lines };
+
+  out.po_number = _after(lines, [
+    /\b(?:purchase\s*order|p\.?\s*o\.?)\s*(?:no\.?|number|#)\s*[:\-]?\s*(.*)$/i,
+    /\bpo\s*(?:no\.?|number|#)\s*[:\-]?\s*(.*)$/i,
+    /\border\s*(?:no\.?|number)\s*[:\-]?\s*(.*)$/i ]);
+  if(out.po_number) out.po_number = out.po_number.split(/\s{2,}|\s(?=dated|date)/i)[0].trim();
+  if(!out.po_number){ const m=all.match(/\b([A-Z]{2,6}[\/\-][A-Z]{0,4}[\/\-]?[0-9]{2,4}[\-\/][0-9]{2,4}[\/\-][0-9]{2,6})\b/); if(m) out.po_number=m[1]; }
+
+  out.po_date = _date(_after(lines, [/\b(?:po|order|invoice)?\s*date[d]?\s*[:\-]?\s*(.*)$/i]));
+  out.expected_ship_date = _date(_after(lines, [
+    /\b(?:delivery|despatch|dispatch|shipment|ship(?:ping)?)\s*(?:date|by|on|schedule)?\s*[:\-]?\s*(.*)$/i,
+    /\bexpected\s*(?:delivery|ship)\w*\s*[:\-]?\s*(.*)$/i ]));
+
+  out.project   = _after(lines, [/\b(?:project|site|job)\s*(?:name)?\s*[:\-]\s*(.*)$/i]);
+  out.reference = _after(lines, [/\b(?:ref(?:erence)?|indent|enquiry|quotation|quote)\s*(?:no\.?)?\s*[:\-]\s*(.*)$/i]);
+  out.payment_terms = _after(lines, [/\b(?:payment\s*terms?|terms\s*of\s*payment|terms)\s*[:\-]\s*(.*)$/i]);
+  out.ship_to = _after(lines, [/\b(?:ship\s*to|deliver(?:y)?\s*(?:to|address)|consignee)\s*[:\-]?\s*(.*)$/i]);
+
+  if(/USD|\$|US\s*Dollar/i.test(all)) out.currency='USD';
+  else if(/EUR|€/i.test(all)) out.currency='EUR';
+  else if(/GBP|£/i.test(all)) out.currency='GBP';
+
+  const totLine = lines.filter(l=>/\b(grand\s*total|total\s*amount|net\s*(payable|amount)|amount\s*payable|total)\b/i.test(l)).pop();
+  if(totLine){ const nums=(totLine.match(/[\d,]+\.?\d*/g)||[]).map(_num).filter(n=>n!==null); if(nums.length) out.amount_total=Math.max.apply(null,nums); }
+
+  out.items = parsePoItems(lines);
+  return out;
+}
+
+function parsePoItems(lines){
+  const items=[];
+  const isHead = l => { const s=l.toLowerCase(); let n=0;
+    if(/desc|particular|product|item|material/.test(s)) n++;
+    if(/qty|quantity|nos|pcs/.test(s)) n++;
+    if(/rate|price|unit/.test(s)) n++;
+    if(/amount|value|total/.test(s)) n++;
+    return n>=2; };
+  const isEnd = l => /\b(grand\s*total|sub\s*total|amount\s*in\s*words|terms|declaration|signature|for\s+[A-Z])/i.test(l);
+
+  let start = lines.findIndex(isHead);
+  if(start < 0) start = -1;
+  for(let i=start+1;i<lines.length;i++){
+    const l=lines[i];
+    if(start>=0 && isEnd(l)) break;
+    // a line worth treating as an item has words and at least one number
+    const nums=(l.match(/[\d,]+\.?\d*/g)||[]).map(_num).filter(n=>n!==null && n>0);
+    const words=l.replace(/[\d,.\/×x\-]+/g,' ').replace(/\s+/g,' ').trim();
+    if(words.length<4 || !nums.length) continue;
+    if(/^(page|gst|cgst|sgst|igst|hsn|tax|invoice|bank|ifsc|account)\b/i.test(l)) continue;
+
+    const it = { product:'', item_ref:null, stone:null, qty:1, unit:'pcs',
+                 l_mm:null, w_mm:null, h_mm:null, dims_text:null, _raw:l };
+    const d = l.match(/(\d+(?:\.\d+)?)\s*[x×X]\s*(\d+(?:\.\d+)?)\s*[x×X]\s*(\d+(?:\.\d+)?)/);
+    if(d){ it.l_mm=+d[1]; it.w_mm=+d[2]; it.h_mm=+d[3]; }
+    const code = l.match(/\b([A-Z][A-Z ]{2,20}[\-\/]\s?\d{1,5})\b/);
+    if(code) it.item_ref = code[1].replace(/\s+/g,' ').trim();
+    const q = l.match(/\b(\d{1,4}(?:\.\d+)?)\s*(nos?|pcs?|pieces?|sets?|pairs?|sqft|sq\.?\s*ft|cft)\b/i);
+    if(q){ it.qty=+q[1]; it.unit=q[2].toLowerCase().replace(/\.|\s/g,''); }
+    let name = l;
+    if(d) name = name.replace(d[0],' ');
+    if(q) name = name.replace(q[0],' ');
+    name = name.replace(/[\d,]+\.\d{2}\b/g,' ')          // money
+               .replace(/^\s*\d{1,3}[.)]\s*/,'')          // leading serial
+               .replace(/\s{2,}/g,' ').replace(/\s+$/,'').trim();
+    it.product = name.slice(0,120) || 'Item';
+    items.push(it);
+  }
+  return items.slice(0,40);
+}
+
+/* ---- UI ---- */
+function dropPoPdf(ev){
+  ev.preventDefault();
+  const el=document.getElementById('pdf-drop'); if(el) el.classList.remove('is-over');
+  const f=[...(ev.dataTransfer&&ev.dataTransfer.files||[])].find(x=>/pdf$/i.test(x.name)||x.type==='application/pdf');
+  if(!f){ toast('Drop a PDF file',{err:true}); return; }
+  readPoPdf(f);
+}
+
+function pickPoPdf(){
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='application/pdf,.pdf';
+  inp.onchange=async ()=>{
+    const f=inp.files[0]; if(!f) return;
+    await readPoPdf(f);
+  };
+  inp.click();
+}
+
+async function readPoPdf(file){
+  const out=$('imp-out'); if(out) out.innerHTML='<p class="field-hint">Reading '+esc(file.name)+'…</p>';
+  try{
+    const lines = await pdfLines(file);
+    if(!lines.length || lines.join('').replace(/\s/g,'').length < 40){
+      out.innerHTML='<div class="attn attn--warn attn--flat"><span><strong>No text in this PDF.</strong> '+
+        'It looks like a scan or a photograph, so there is nothing to read. Send it to me in the chat and I will '+
+        'type it in, or paste the details into the CSV box below.</span></div>';
+      return;
+    }
+    window.__poParse = parsePoText(lines);
+    window.__poParse.fileName = file.name;
+    renderPoPreview();
+  }catch(e){
+    out.innerHTML='<div class="attn attn--error attn--flat"><span>Could not read that PDF: '+esc(e.message||String(e))+'</span></div>';
+  }
+}
+
+function renderPoPreview(){
+  const d = window.__poParse; if(!d) return;
+  const f = (id,label,val,type) => '<div class="field"><label for="'+id+'">'+esc(label)+'</label>'+
+    '<input id="'+id+'"'+(type?' type="'+type+'"':'')+' value="'+esc(val==null?'':val)+'"></div>';
+  let h = '<section class="form-card space-top-14"><div class="form-card__head"><div>'+
+    '<h3 class="form-card__title">Check before importing</h3>'+
+    '<p class="form-card__description">Read from <strong>'+esc(d.fileName)+'</strong>. '+
+    'Anything blank or wrong, fix it here — nothing is saved until you press Import.</p></div>'+
+    badge(d.items.length+' line'+(d.items.length===1?'':'s')+' found')+'</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label for="pi-buyer">Buyer</label><select id="pi-buyer">'+
+      S.buyers.map(b=>'<option value="'+b.id+'">'+esc(b.company)+'</option>').join('')+'</select></div>'+
+    f('pi-po','PO number', d.po_number)+
+    f('pi-date','PO date', d.po_date, 'date')+
+    f('pi-proj','Project', d.project)+
+    f('pi-ref','Reference', d.reference)+
+    f('pi-esd','Delivery / ship by', d.expected_ship_date, 'date')+
+    f('pi-val','PO value', d.amount_total, 'number')+
+    '<div class="field"><label for="pi-cur">Currency</label><select id="pi-cur">'+
+      ['INR','USD','EUR','GBP','AED'].map(c=>'<option'+(c===d.currency?' selected':'')+'>'+c+'</option>').join('')+'</select></div>'+
+    f('pi-pay','Payment terms', d.payment_terms)+
+    '<div class="field field--full"><label for="pi-ship">Ship to</label><input id="pi-ship" value="'+esc(d.ship_to||'')+'"></div>'+
+    '</div>';
+
+  h += '<p class="field-hint space-top-14">Products — untick anything that is not a real line item.</p>'+
+    '<div class="data-table-wrap"><table class="data-table" id="pi-items">'+
+    '<tr><th>Use</th><th>Product</th><th>Code</th><th>Stone</th><th>Qty</th><th>Unit</th><th>L</th><th>W</th><th>H</th></tr>'+
+    (d.items.length ? d.items.map((it,i)=>'<tr data-i="'+i+'">'+
+      '<td><input type="checkbox" class="pi-use" checked style="width:auto;min-height:0"></td>'+
+      '<td><div class="field"><input class="pi-prod" value="'+esc(it.product)+'"></div>'+
+        '<small>'+esc((it._raw||'').slice(0,110))+'</small></td>'+
+      '<td><div class="field"><input class="pi-ref" value="'+esc(it.item_ref||'')+'"></div></td>'+
+      '<td><div class="field"><input class="pi-stone" value="'+esc(it.stone||'')+'"></div></td>'+
+      '<td><div class="field"><input class="pi-qty" type="number" step="1" value="'+esc(it.qty||1)+'"></div></td>'+
+      '<td><div class="field"><input class="pi-unit" value="'+esc(it.unit||'pcs')+'"></div></td>'+
+      '<td><div class="field"><input class="pi-l" type="number" value="'+esc(it.l_mm==null?'':it.l_mm)+'"></div></td>'+
+      '<td><div class="field"><input class="pi-w" type="number" value="'+esc(it.w_mm==null?'':it.w_mm)+'"></div></td>'+
+      '<td><div class="field"><input class="pi-h" type="number" value="'+esc(it.h_mm==null?'':it.h_mm)+'"></div></td>'+
+    '</tr>').join('') : '<tr><td colspan="9"><small>No product rows recognised — add them by hand after importing the order.</small></td></tr>')+
+    '</table></div>'+
+    '<div class="button-row space-top-14">'+
+      '<button class="button" type="button" onclick="commitPoImport()">Import this order</button>'+
+      '<button class="button button--secondary" type="button" onclick="pickPoPdf()">Try another PDF</button>'+
+      '<button class="button button--quiet" type="button" onclick="showPoText()">Show the raw text</button>'+
+    '</div></section>';
+  $('imp-out').innerHTML = h;
+}
+
+function showPoText(){
+  const d=window.__poParse; if(!d) return;
+  modal('<h3>What the PDF actually says</h3><div class="sub">Useful when a field came out wrong.</div>'+
+    '<p class="stage-note pre-wrap" style="max-height:50vh;overflow:auto">'+esc(d.lines.join('\n'))+'</p>'+
+    '<div class="button-row"><button class="button button--secondary" type="button" onclick="closeModal()">Close</button></div>');
+}
+
+async function commitPoImport(){
+  const d=window.__poParse; if(!d) return;
+  const po_number=$('pi-po').value.trim();
+  if(!po_number){ toast('A PO number is required',{err:true}); return; }
+  const buyer_id=$('pi-buyer').value;
+  if(!buyer_id){ toast('Add a buyer first from Buyers & logins',{err:true}); return; }
+
+  const rows=[...document.querySelectorAll('#pi-items tr[data-i]')].filter(tr=>tr.querySelector('.pi-use').checked);
+  const val=$('pi-val').value;
+  const rec={ buyer_id, po_number,
+    po_date:$('pi-date').value||today(), project:$('pi-proj').value.trim()||null,
+    reference:$('pi-ref').value.trim()||null, expected_ship_date:$('pi-esd').value||null,
+    amount_total: val?Number(val):null, currency:$('pi-cur').value,
+    payment_terms:$('pi-pay').value.trim()||null, ship_to:$('pi-ship').value.trim()||null };
+
+  $('loading').style.display='flex';
+  try{
+    const dup=S.pos.find(p=>p.buyer_id===buyer_id && p.po_number===po_number);
+    if(dup && !confirm(po_number+' already exists for this buyer. Add these products to it?')){
+      $('loading').style.display='none'; return; }
+    let poId;
+    if(dup){ poId=dup.id; }
+    else{
+      const ins=await sb.from('bt_purchase_orders').insert(rec).select().single();
+      if(ins.error) throw ins.error;
+      poId=ins.data.id;
+    }
+    let line=dup?(dup.items||[]).reduce((m,i)=>Math.max(m,i.line_no||0),0):0;
+    for(const tr of rows){
+      line++;
+      const g=c=>tr.querySelector('.'+c).value.trim();
+      const n=c=>{ const v=tr.querySelector('.'+c).value; return v?Number(v):null; };
+      const ins=await sb.from('bt_order_items').insert({
+        po_id:poId, line_no:line, product:g('pi-prod')||'Item',
+        item_ref:g('pi-ref')||null, stone:g('pi-stone')||null,
+        qty:n('pi-qty')||1, unit:g('pi-unit')||'pcs',
+        l_mm:n('pi-l'), w_mm:n('pi-w'), h_mm:n('pi-h'),
+        target_date:rec.expected_ship_date });
+      if(ins.error) throw ins.error;
+    }
+    window.__poParse=null;
+    await loadData();
+    $('loading').style.display='none';
+    toast(rows.length+' product'+(rows.length===1?'':'s')+' imported into '+po_number);
+    go('#/po/'+poId);
+  }catch(e){
+    $('loading').style.display='none';
+    toast('Import failed: '+(e.message||e),{err:true});
+  }
 }
 
 /* ---------- import ---------- */
