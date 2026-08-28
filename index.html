@@ -86,6 +86,8 @@ label{display:block; font-size:12px; font-weight:600; color:var(--muted); margin
 /* item rows */
 .item-row{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line2); cursor:pointer; align-items:center}
 .item-row:first-of-type{border-top:0}
+.thumb{width:54px; height:54px; border-radius:10px; background:var(--line2); overflow:hidden; flex-shrink:0}
+.thumb img{width:100%; height:100%; object-fit:cover}
 .item-main{flex:1; min-width:0}
 .item-name{font-weight:600; font-size:14.5px}
 .item-sub{font-size:12.5px; color:var(--muted); margin-top:1px}
@@ -388,8 +390,11 @@ async function loadData(){
 
   S.comments = cm.data||[]; S.commentsByItem={};
   S.comments.forEach(c=>{ (S.commentsByItem[c.item_id]=S.commentsByItem[c.item_id]||[]).push(c); });
-  S.photos = ph.data||[]; S.photosByItem={};
-  S.photos.forEach(x=>{ (S.photosByItem[x.item_id]=S.photosByItem[x.item_id]||[]).push(x); });
+  S.photos = ph.data||[]; S.photosByItem={}; S.photosByPo={};
+  S.photos.forEach(x=>{
+    if(x.item_id){ (S.photosByItem[x.item_id]=S.photosByItem[x.item_id]||[]).push(x); }
+    else if(x.po_id){ (S.photosByPo[x.po_id]=S.photosByPo[x.po_id]||[]).push(x); }
+  });
   S.docsByPo={};
   (dc.data||[]).forEach(d=>{ (S.docsByPo[d.po_id]=S.docsByPo[d.po_id]||[]).push(d); });
   S.readMarks={};
@@ -598,7 +603,9 @@ function actRow(a){
 function itemRow(it){
   const un=unreadCount(it.id);
   const apr=(S.stByItem[it.id]||[]).some(r=>r.approval==='requested');
+  const thumb=(S.photosByItem[it.id]||[])[0];
   return '<div class="item-row" onclick="go(\'#/item/'+it.id+'\')">'+
+    (thumb?'<div class="thumb"><img alt="" data-ph-path="'+esc(thumb.path)+'"></div>':'')+
     '<div class="item-main"><div class="item-name">'+esc(it.product)+(it.qty>1?' <span class="meta">× '+(+it.qty)+'</span>':'')+'</div>'+
       '<div class="item-sub">'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · '))+'</div>'+
       '<div class="row mt8"><div class="pbar" style="flex:1;max-width:220px"><i style="width:'+Math.round(it.progress*100)+'%"></i></div>'+stageChip(it)+statusChip(it)+'</div>'+
@@ -656,12 +663,25 @@ function vPO(id){
     (isAdmin()?'<button class="btn sm" onclick="mBulk(\''+p.id+'\')">Bulk update</button><button class="btn sm pri" onclick="mItem(\''+p.id+'\',null)">+ Add item</button>':'')+'</div>'+
     (p.items.length?p.items.map(itemRow).join(''):'<div class="sub mt8">No items yet.</div>')+'</div>';
 
+  const poPh=S.photosByPo[p.id]||[];
+  if(poPh.length||isAdmin()){
+    h+='<div class="card"><div class="row"><b>Order photos</b><span class="sp"></span>'+
+      (isAdmin()?'<button class="btn sm pri" onclick="pickPhotos(null,null,\''+p.id+'\')">+ Photos</button>':'')+'</div>'+
+      (poPh.length?'<div class="ph-grid">'+poPh.map(x=>'<div class="ph" onclick="openPhoto(event, this)" data-ph-path="'+esc(x.path)+'" data-cap="'+esc(x.caption||'')+'">'+
+        '<img alt="" data-ph-path="'+esc(x.path)+'">'+
+        (isAdmin()?'<button class="del" onclick="delPhoto(event, \''+x.id+'\',\''+esc(x.path)+'\')">✕</button>':'')+
+      '</div>').join('')+'</div>'
+      :'<div class="sub mt8">Photos of the whole order, packing and crates go here. Photos of each piece live on its item page.</div>')+
+    '</div>';
+  }
+
   h+=shipPanel(p);
   h+=docsPanel(p);
   if(isAdmin()){
     h+='<div class="btnrow"><button class="btn wa" onclick="waPO(\''+p.id+'\')">Share status on WhatsApp</button></div>';
   }
   $('app').innerHTML=h;
+  hydrateImages();
 }
 
 function photoGrid(itemId, stageId, editable){
@@ -735,7 +755,9 @@ function vItem(id){
     (it.description?'<div class="sub mt8">'+esc(it.description)+'</div>':'')+
     '</div><div>'+statusChip(it)+'</div></div>'+
     '<div class="row mt8"><div class="pbar" style="flex:1"><i style="width:'+Math.round(it.progress*100)+'%"></i></div><span class="meta">'+Math.round(it.progress*100)+'%</span></div>'+
-    (isAdmin()?'<div class="btnrow"><button class="btn sm" onclick="mItem(\''+p.id+'\',\''+it.id+'\')">Edit item</button>'+
+    photoGrid(it.id, null, isAdmin())+
+    (isAdmin()?'<div class="btnrow"><button class="btn sm pri" onclick="pickPhotos(\''+it.id+'\',null)">+ Photos</button>'+
+      '<button class="btn sm" onclick="mItem(\''+p.id+'\',\''+it.id+'\')">Edit item</button>'+
       '<button class="btn sm wa" onclick="waItem(\''+it.id+'\')">WhatsApp update</button></div>':'')+
   '</div>';
 
@@ -761,6 +783,7 @@ function vItem(id){
         '<span class="sp"></span>'+
         (stagePhotos?'<span class="meta">📷 '+stagePhotos+'</span>':'')+
         (stageComments?'<span class="meta">💬 '+stageComments+'</span>':'')+
+        (isAdmin()?'<button class="btn sm" style="padding:2px 8px" title="Add photos to this stage" onclick="event.stopPropagation();pickPhotos(\''+it.id+'\','+st.id+')">📷+</button>':'')+
         '<span class="tl-date">'+dates+'</span></div>'+
       (open?
         ((st.description&&!isAdmin())?'<div class="tl-desc">'+esc(st.description)+'</div>':'')+
@@ -987,23 +1010,25 @@ function mNote(itemId, stageId){
   };
 }
 
-function pickPhotos(itemId, stageId){
+function pickPhotos(itemId, stageId, poId){
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.multiple=true;
   inp.onchange=async ()=>{
     const files=[...inp.files]; if(!files.length) return;
     toast('Uploading '+files.length+' photo'+(files.length>1?'s':'')+'…');
-    const it=S.itemsById[itemId];
-    const stKey=(S.stagesById[stageId]||{}).key||'stage';
+    const it=itemId?S.itemsById[itemId]:null;
+    const buyerId=it?it.po.buyer_id:(S.posById[poId]||{}).buyer_id;
+    const stKey=stageId?((S.stagesById[stageId]||{}).key||'stage'):(itemId?'item':'order');
+    const base=itemId?(buyerId+'/items/'+itemId+'/'):(buyerId+'/po/'+poId+'/');
     let ok=0;
     for(let i=0;i<files.length;i++){
       const blob=await resizeImage(files[i]);
-      const path=it.po.buyer_id+'/items/'+itemId+'/'+stKey+'-'+Date.now()+'-'+i+'.jpg';
+      const path=base+stKey+'-'+Date.now()+'-'+i+'.jpg';
       const up=await sb.storage.from(CONFIG.bucket).upload(path, blob, {contentType:'image/jpeg'});
       if(up.error){ toast('Upload failed: '+up.error.message,{err:true}); continue; }
-      const ins=await sb.from('bt_photos').insert({item_id:itemId, stage_id:stageId, path, uploaded_by:uid()});
+      const ins=await sb.from('bt_photos').insert({item_id:itemId||null, stage_id:stageId||null, po_id:poId||null, path, uploaded_by:uid()});
       if(!ins.error) ok++;
     }
-    window.__openStages[itemId+'-'+stageId]=true;
+    if(itemId&&stageId) window.__openStages[itemId+'-'+stageId]=true;
     await loadData(); render();
     if(ok) toast(ok+' photo'+(ok>1?'s':'')+' added');
   };
