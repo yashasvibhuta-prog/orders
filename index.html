@@ -586,6 +586,8 @@ a{color:var(--text-primary)}
 .order-card,.po-rail__item,.product-card,.staff-product,.stat-card,.panel{overflow:hidden}
 #login-root,.login-screen{min-height:100vh}
 .login-form__fineprint{text-align:left}
+/* the brand line shows once: hero on desktop, under the wordmark on phone */
+@media (min-width:1100px){.login-form__tagline{display:none}}
 .staff-header .button--quiet{color:#F4F4F1;border-color:rgba(255,255,255,.28);min-height:44px;padding:0 14px;font-size:14px;white-space:nowrap;flex-shrink:0}
 .staff-header .button--quiet:hover{background:rgba(255,255,255,.12)}
 .mobile-dock__item .badge{min-height:20px;padding:0 6px;font-size:11px}
@@ -1263,13 +1265,13 @@ function vLogin(msg){
     '<aside class="login-story"><div class="login-story__content">'+
       '<div class="wordmark"><span class="wordmark__mark wordmark__mark--inverse">'+icon('i-mark','icon--lg')+'</span>'+
       '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by '+esc(S.settings.company_name||'Gujraj Impex')+'</span></span></div>'+
-      '<p class="login-story__quote">From the first stone to the final room.</p>'+
+      '<p class="login-story__quote">Craft in progress.</p>'+
       '<p class="login-story__note">A private view into selection, hand-finishing, approvals and dispatch — made for the people commissioning the work.</p>'+
     '</div></aside>'+
     '<main class="login-form-wrap"><div class="login-form">'+
       '<div class="wordmark"><span class="wordmark__mark">'+icon('i-mark','icon--lg')+'</span>'+
       '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by '+esc(S.settings.company_name||'Gujraj Impex')+'</span></span></div>'+
-      '<p class="login-form__tagline">Order progress, without the chasing.</p>'+
+      '<p class="login-form__tagline">Craft in progress.</p>'+
       '<h2>Welcome back</h2>'+
       '<div class="form-stack">'+
         (msg?'<div class="form-error">'+icon('stage-selection','icon--sm')+'<span>'+esc(msg)+'</span></div>':'')+
@@ -2216,7 +2218,7 @@ function render(){
     root.innerHTML='<div class="login-screen"><aside class="login-story"><div class="login-story__content">'+
       '<div class="wordmark"><span class="wordmark__mark wordmark__mark--inverse">'+icon('i-mark','icon--lg')+'</span>'+
       '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by Gujraj Impex</span></span></div>'+
-      '<p class="login-story__quote">From the first stone to the final room.</p></div></aside>'+
+      '<p class="login-story__quote">Craft in progress.</p></div></aside>'+
       '<main class="login-form-wrap"><div class="login-form"><h2>No access yet</h2>'+
       '<p class="login-form__tagline">This login has not been given access. Please contact Gujraj Impex.</p>'+
       '<div class="button-row"><button class="button" type="button" onclick="signOut()">Sign out</button></div></div></main></div>';
