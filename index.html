@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Gujraj Impex · Order Tracker</title>
+<title>StoneFlow · Gujraj Impex</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪨</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,12 +31,95 @@ input,select,textarea{font-family:var(--sans); font-size:15px; color:var(--ink);
   border:1px solid var(--line); border-radius:8px; padding:9px 11px; width:100%}
 input:focus,textarea:focus,select:focus{outline:2px solid var(--bronze-t); border-color:var(--bronze)}
 label{display:block; font-size:12px; font-weight:600; color:var(--muted); margin:12px 0 4px; text-transform:uppercase; letter-spacing:.06em}
-.wrap{max-width:980px; margin:0 auto; padding:0 14px}
+.wrap{max-width:1400px; margin:0 auto; padding:0 14px}
+@media (min-width:768px){ .wrap{padding:0 22px} .hdr-in{padding:12px 22px} .tabs{padding:8px 22px 0} }
+
+/* ---- responsive shell: phone = 1 col, tablet = wider cards, desktop = rail + main + side ---- */
+.shell{display:block}
+@media (min-width:1080px){
+  .shell{display:grid; grid-template-columns:290px minmax(0,1fr); gap:22px; align-items:start}
+  .shell.with-side{grid-template-columns:290px minmax(0,1fr) 360px}
+  .rail{position:sticky; top:104px; max-height:calc(100vh - 124px); overflow:auto}
+  .side{position:sticky; top:104px; max-height:calc(100vh - 124px); overflow:auto}
+}
+@media (max-width:1079px){
+  .rail{display:none}
+  .side{display:block}
+}
+.rail-h{font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin:18px 0 6px}
+.rail-item{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:12px;
+  padding:11px 13px; margin-bottom:8px; cursor:pointer; font:inherit}
+.rail-item.on{background:var(--ink); border-color:var(--ink); color:#fff}
+.rail-item.on .meta, .rail-item.on .rail-sub{color:#cfc6b6}
+.rail-item .rail-num{font-family:var(--serif); font-size:16px; font-weight:700}
+.rail-sub{font-size:12px; color:var(--muted); margin-top:2px}
+.rail-item .pbar{margin-top:8px; background:rgba(0,0,0,.09)}
+.rail-item.on .pbar{background:rgba(255,255,255,.22)}
+
+/* tabbed side panel */
+.ptabs{display:flex; gap:4px; margin-bottom:10px}
+.ptab{flex:1; border:1px solid var(--line); background:#fff; color:var(--muted); border-radius:9px; padding:7px 4px;
+  font-size:12.5px; font-weight:600; cursor:pointer; text-align:center}
+.ptab.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+
+/* item grid: 1 col phone, 2 col tablet+ */
+.item-grid{display:grid; grid-template-columns:1fr; gap:0}
+@media (min-width:700px){ .item-grid{grid-template-columns:1fr 1fr; gap:0 20px} }
+@media (min-width:1080px) and (max-width:1319px){ .item-grid{grid-template-columns:1fr} }
+
+/* timeline two-up on wide screens */
+@media (min-width:700px){
+  .tl.two{display:grid; grid-template-columns:1fr 1fr; gap:0 22px; align-items:start}
+  .tl.two .tl-grp{grid-column:1 / -1}
+  .tl.two .tl-row.open-row{grid-column:1 / -1}
+}
+
+/* search */
+.searchbar{position:relative; margin:14px 0 4px}
+.searchbar input{padding-left:38px; height:46px; border-radius:12px; font-size:15px; background:#fff;
+  box-shadow:var(--shadow); border-color:var(--line)}
+.searchbar .ic{position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--faint); font-size:15px; pointer-events:none}
+.searchbar .clr{position:absolute; right:8px; top:50%; transform:translateY(-50%); border:0; background:transparent;
+  color:var(--muted); cursor:pointer; font-size:15px; padding:6px 8px}
+
+/* next-action pill */
+.na{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px}
+.na.do{background:var(--bronze-t); color:var(--bronze-d)}
+.na.you{background:var(--red-t); color:var(--red)}
+.na.wait{background:var(--blue-t); color:var(--blue)}
+.na.ok{background:var(--green-t); color:var(--green)}
+.na .dot{width:6px; height:6px; border-radius:99px; background:currentColor; flex-shrink:0}
+
+/* quick action button on rows */
+.quick{border:1px solid var(--bronze); background:var(--bronze); color:#fff; border-radius:9px; padding:7px 12px;
+  font-size:12.5px; font-weight:600; cursor:pointer; white-space:nowrap; flex-shrink:0}
+.quick:hover{background:var(--bronze-d); border-color:var(--bronze-d)}
+.quick.ghost{background:#fff; color:var(--bronze-d)}
+
+/* hover lift on interactive cards */
+.po-card, .item-row, .rail-item{transition:transform .12s ease, box-shadow .12s ease, background .12s ease}
+@media (hover:hover){
+  .po-card:hover{transform:translateY(-1px); box-shadow:0 2px 4px rgba(33,29,23,.06), 0 10px 26px rgba(33,29,23,.09)}
+  .item-row:hover{background:#faf7f1}
+  .rail-item:hover{border-color:var(--bronze)}
+}
+.item-row{border-radius:10px; padding-left:8px; padding-right:8px; margin:0 -8px}
+
+/* daily log */
+.day-h{display:flex; align-items:baseline; gap:10px; margin:18px 0 6px}
+.day-h b{font-family:var(--serif); font-size:19px; font-weight:600}
+
+/* countdown pill */
+.cd{display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:999px;
+  background:#eee9de; color:var(--muted); white-space:nowrap}
+.cd.soon{background:var(--amber-t); color:var(--amber)}
+.cd.late{background:var(--red-t); color:var(--red)}
+.cd.done{background:var(--green-t); color:var(--green)}
 
 /* header */
 .hdr{position:sticky; top:0; z-index:40; background:rgba(246,243,236,.94); backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line)}
-.hdr-in{max-width:980px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; gap:12px}
+.hdr-in{max-width:1400px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; gap:12px}
 .wordmark{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:.14em; white-space:nowrap; cursor:pointer}
 .wordmark small{display:block; font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:.32em; color:var(--bronze); margin-top:-2px}
 .hdr-sp{flex:1}
@@ -44,7 +127,7 @@ label{display:block; font-size:12px; font-weight:600; color:var(--muted); margin
 .hdr .who b{display:block; color:var(--ink); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 
 /* nav tabs (admin) */
-.tabs{display:flex; gap:4px; overflow-x:auto; padding:8px 14px 0; max-width:980px; margin:0 auto; scrollbar-width:none}
+.tabs{display:flex; gap:4px; overflow-x:auto; padding:8px 14px 0; max-width:1400px; margin:0 auto; scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{border:1px solid var(--line); background:#fff; color:var(--muted); border-radius:999px; padding:6px 14px;
   font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap}
@@ -56,6 +139,10 @@ label{display:block; font-size:12px; font-weight:600; color:var(--muted); margin
 .sub{color:var(--muted); font-size:13px}
 .rule{height:1px; background:var(--line); margin:12px 0}
 .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0}
+.kpi-lab{font-size:11px; color:var(--faint); margin-top:3px}
+.crumb{font-size:12.5px; color:var(--muted); margin:14px 0 2px}
+.crumb b{color:var(--ink); font-weight:600}
+.page-h{font-family:var(--serif); font-size:clamp(24px,4vw,34px); font-weight:700; line-height:1.15; margin:2px 0 4px}
 .kpi{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 8px 10px; text-align:center; cursor:default}
 .kpi b{font-family:var(--serif); font-size:26px; font-weight:600; display:block; line-height:1.1}
 .kpi span{font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
@@ -83,13 +170,24 @@ label{display:block; font-size:12px; font-weight:600; color:var(--muted); margin
 .row{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
 .sp{flex:1}
 
-/* item rows */
-.item-row{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line2); cursor:pointer; align-items:center}
+/* item cards */
+.item-row{display:flex; gap:13px; padding:14px 0; border-top:1px solid var(--line2); cursor:pointer; align-items:flex-start}
 .item-row:first-of-type{border-top:0}
-.thumb{width:54px; height:54px; border-radius:10px; background:var(--line2); overflow:hidden; flex-shrink:0}
+.thumb{width:62px; height:62px; border-radius:11px; background:var(--line2); overflow:hidden; flex-shrink:0}
 .thumb img{width:100%; height:100%; object-fit:cover}
+.item-row .act{margin-left:auto; display:flex; flex-direction:column; gap:6px; align-items:flex-end; flex-shrink:0}
+/* inside a 2-up grid each row becomes a self-contained card */
+.item-grid .item-row{border-top:0; border:1px solid var(--line); border-radius:13px; background:#fff;
+  padding:14px; margin:0 0 12px; flex-wrap:wrap}
+.item-grid .item-row .act{flex-direction:row; width:100%; margin-left:0; justify-content:flex-start; align-items:center; margin-top:2px}
+.item-grid .item-row .item-main{flex:1 1 190px; min-width:0}
+@media (max-width:699px){ .item-grid .item-row{border:0; border-top:1px solid var(--line2); border-radius:0; padding:14px 0; margin:0}
+  .item-grid .item-row:first-child{border-top:0} }
 .item-main{flex:1; min-width:0}
-.item-name{font-weight:600; font-size:14.5px}
+.item-name{font-weight:600; font-size:15px; line-height:1.35}
+.item-name .qty{white-space:nowrap; color:var(--muted); font-weight:500}
+.item-grid .item-row .pbar{width:100%; max-width:none}
+.item-grid .item-row .prow{width:100%}
 .item-sub{font-size:12.5px; color:var(--muted); margin-top:1px}
 .badge{min-width:20px; height:20px; border-radius:99px; background:var(--red); color:#fff; font-size:11px; font-weight:700;
   display:inline-flex; align-items:center; justify-content:center; padding:0 6px}
@@ -204,7 +302,7 @@ label{display:block; font-size:12px; font-weight:600; color:var(--muted); margin
 <div id="loading"><div class="spin"></div><div>Loading…</div></div>
 <header class="hdr" id="hdr" style="display:none">
   <div class="hdr-in">
-    <div class="wordmark" onclick="go('#/home')">GUJRAJ IMPEX<small>ORDER TRACKER</small></div>
+    <div class="wordmark" onclick="go('#/home')">StoneFlow<small>BY GUJRAJ IMPEX</small></div>
     <div class="hdr-sp"></div>
     <div class="who" id="who"></div>
     <button class="btn sm" onclick="signOut()" title="Sign out">Sign out</button>
@@ -262,6 +360,22 @@ function dimsOf(it){
     return t;
   }
   return '';
+}
+
+function daysUntil(d){
+  if(!d) return null;
+  const t=new Date(String(d).slice(0,10)+'T00:00:00');
+  if(isNaN(t)) return null;
+  const now=new Date(); now.setHours(0,0,0,0);
+  return Math.round((t-now)/86400000);
+}
+function countdown(d, done){
+  const n=daysUntil(d);
+  if(n===null) return '';
+  if(done) return '<span class="cd done">Delivered</span>';
+  if(n<0) return '<span class="cd late">'+Math.abs(n)+' day'+(Math.abs(n)===1?'':'s')+' overdue</span>';
+  if(n===0) return '<span class="cd soon">Due today</span>';
+  return '<span class="cd'+(n<=7?' soon':'')+'">'+n+' day'+(n===1?'':'s')+' to delivery</span>';
 }
 
 function csvParse(text){
@@ -341,12 +455,12 @@ function uid(){ return S.session && S.session.user.id; }
 async function loadCore(){
   const [p,se,st] = await Promise.all([
     sb.from('bt_profiles').select('*').eq('user_id', uid()).maybeSingle(),
-    sb.from('bt_settings').select('*').eq('id',1).maybeSingle(),
+    sb.rpc('bt_public_settings'),
     sb.from('bt_stages').select('*').order('sort_order')
   ]);
   if(p.error) throw p.error;
   S.profile = p.data;
-  S.settings = se.data || {};
+  S.settings = (Array.isArray(se.data)? se.data[0] : se.data) || {};
   S.stages = (st.data||[]);
   S.stagesById = {}; S.stages.forEach(s=>S.stagesById[s.id]=s);
 }
@@ -377,12 +491,63 @@ async function loadStaffData(){
     const inprog=rows.some(r=>activeStageIds.includes(r.stage_id)&&r.status==='in_progress')?0.5:0;
     x.progress = activeStageIds.length? Math.min(1,(done+inprog)/activeStageIds.length):0;
   });
-  S.photos=ph.data||[]; S.photosByItem={}; S.photosByPo={};
+  indexPhotos(ph.data||[]);
+  S.lastLoad=Date.now();
+}
+
+function indexPhotos(list){
+  S.photos=list; S.photosByItem={}; S.photosByPo={}; S.dailyByDate={};
   S.photos.forEach(x=>{
-    if(x.item_id){ (S.photosByItem[x.item_id]=S.photosByItem[x.item_id]||[]).push(x); }
+    if(x.log_date){ (S.dailyByDate[x.log_date]=S.dailyByDate[x.log_date]||[]).push(x); }
+    else if(x.item_id){ (S.photosByItem[x.item_id]=S.photosByItem[x.item_id]||[]).push(x); }
     else if(x.po_id){ (S.photosByPo[x.po_id]=S.photosByPo[x.po_id]||[]).push(x); }
   });
-  S.lastLoad=Date.now();
+}
+
+// ---- next action: the single most useful thing to do about an item, right now ----
+function nextAction(it){
+  const rows=S.stByItem[it.id]||[];
+  const appr=rows.find(r=>r.approval==='requested');
+  if(appr) return isAdmin()||isStaff()
+    ? {t:'Waiting on buyer', k:'wait', stage:S.stagesById[appr.stage_id]}
+    : {t:'Your approval needed', k:'you', stage:S.stagesById[appr.stage_id]};
+  const chg=rows.find(r=>r.approval==='changes_requested');
+  if(chg) return {t:'Changes requested', k:'you', stage:S.stagesById[chg.stage_id]};
+  if(!isAdmin()&&!isStaff()){
+    if(unreadCount(it.id)) return {t:unreadCount(it.id)+' new message'+(unreadCount(it.id)>1?'s':''), k:'you'};
+    const cur=S.stagesById[it.current_stage_id];
+    return {t:cur?('In '+cur.name):'Scheduled', k:'ok'};
+  }
+  if(pendingPhotos().some(p=>p.item_id===it.id)) return {t:'Photos to approve', k:'you'};
+  if(unreadCount(it.id)) return {t:unreadCount(it.id)+' new message'+(unreadCount(it.id)>1?'s':''), k:'you'};
+  const active=S.stages.filter(s=>s.active);
+  const byId={}; rows.forEach(r=>byId[r.stage_id]=r);
+  const running=active.find(s=>byId[s.id]&&byId[s.id].status==='in_progress');
+  if(running) return {t:'In '+running.name.replace(/^Production — /,'')+' — mark done when finished', k:'do', stage:running, mark:true};
+  const next=active.find(s=>!byId[s.id]||byId[s.id].status==='pending');
+  if(next) return {t:'Ready to move to '+next.name.replace(/^Production — /,''), k:'do', stage:next, mark:false};
+  return {t:'All stages complete', k:'ok'};
+}
+function nextStageFor(it){
+  const rows=S.stByItem[it.id]||[]; const byId={}; rows.forEach(r=>byId[r.stage_id]=r);
+  const active=S.stages.filter(s=>s.active);
+  const running=active.find(s=>byId[s.id]&&byId[s.id].status==='in_progress');
+  if(running) return {stage:running, complete:true, label:'Mark '+running.name+' complete', short:'Mark done'};
+  const next=active.find(s=>!byId[s.id]||byId[s.id].status==='pending');
+  if(!next) return null;
+  return {stage:next, complete:false, label:'Move to '+next.name, short:'Move to '+next.name.replace(/^Production — /,'')};
+}
+
+// ---- global search across POs and products ----
+function searchHits(q){
+  q=(q||'').trim().toLowerCase();
+  if(!q) return null;
+  const pos=S.pos.filter(p=>{
+    const b=S.buyersById[p.buyer_id];
+    return ((p.po_number||'')+' '+(p.project||'')+' '+(p.reference||'')+' '+(b?b.company:'')).toLowerCase().indexOf(q)>=0;
+  });
+  const items=S.items.filter(it=>((it.product||'')+' '+(it.stone||'')+' '+(it.finish||'')).toLowerCase().indexOf(q)>=0);
+  return {q, pos, items};
 }
 
 async function loadData(){
@@ -426,11 +591,7 @@ async function loadData(){
 
   S.comments = cm.data||[]; S.commentsByItem={};
   S.comments.forEach(c=>{ (S.commentsByItem[c.item_id]=S.commentsByItem[c.item_id]||[]).push(c); });
-  S.photos = ph.data||[]; S.photosByItem={}; S.photosByPo={};
-  S.photos.forEach(x=>{
-    if(x.item_id){ (S.photosByItem[x.item_id]=S.photosByItem[x.item_id]||[]).push(x); }
-    else if(x.po_id){ (S.photosByPo[x.po_id]=S.photosByPo[x.po_id]||[]).push(x); }
-  });
+  indexPhotos(ph.data||[]);
   S.docsByPo={};
   (dc.data||[]).forEach(d=>{ (S.docsByPo[d.po_id]=S.docsByPo[d.po_id]||[]).push(d); });
   S.readMarks={};
@@ -531,7 +692,7 @@ function updateHeader(){
     tabs.style.display='';
     const cur=location.hash||'#/home';
     const nPend=pendingPhotos().length;
-    const T=[['#/home','Orders'],['#/approvals','Photo approvals'+(nPend?' ('+nPend+')':'')],['#/buyers','Buyers & logins'],['#/activity','Activity'],['#/import','Import'],['#/settings','Settings']];
+    const T=[['#/home','Orders'],['#/approvals','Photo approvals'+(nPend?' ('+nPend+')':'')],['#/daily','Daily log'],['#/buyers','Buyers & logins'],['#/activity','Activity'],['#/import','Import'],['#/settings','Settings']];
     tabs.innerHTML=T.map(t=>'<button class="tab'+(cur.indexOf(t[0])===0?' on':'')+'" onclick="go(\''+t[0]+'\')">'+t[1]+'</button>').join('');
   } else { tabs.style.display='none'; tabs.innerHTML=''; }
 }
@@ -561,12 +722,34 @@ function vStaffHome(){
   if(pend) h+='<div class="attn" style="cursor:default">'+pend+' photo'+(pend>1?'s':'')+' waiting for approval. They reach the client only after approval.</div>';
   if(rej) h+='<div class="attn red" style="cursor:default">'+rej+' photo'+(rej>1?'s were':' was')+' sent back. Please reshoot and upload again.</div>';
 
-  h+='<div class="card"><input id="staff-q" placeholder="Search product or stone…" value="'+esc(window.__staffQ||'')+'" oninput="staffSearch(this.value)">';
-  h+=(openItems.length?openItems.map(staffItemRow).join(''):'<div class="empty">Nothing matches.</div>');
-  h+='</div>';
-  if(doneItems.length) h+='<div class="sect">Completed</div><div class="card">'+doneItems.map(staffItemRow).join('')+'</div>';
+  h+='<div class="btnrow"><button class="btn pri" onclick="pickDaily()">📷 Add today\'s production photos</button></div>';
+
+  h+='<div class="searchbar"><span class="ic">⌕</span><input id="staff-q" placeholder="Search product or stone…" value="'+esc(window.__staffQ||'')+'" oninput="staffSearch(this.value)">'+
+     (window.__staffQ?'<button class="clr" onclick="staffSearch(\'\')">✕</button>':'')+'</div>';
+  h+='<div class="card">'+(openItems.length?'<div class="item-grid">'+openItems.map(staffItemRow).join('')+'</div>':'<div class="empty">Nothing matches.</div>')+'</div>';
+  if(doneItems.length) h+='<div class="sect">Completed</div><div class="card"><div class="item-grid">'+doneItems.map(staffItemRow).join('')+'</div></div>';
+  h+=dailyLog();
   $('app').innerHTML=h;
   hydrateImages();
+}
+
+function dailyLog(){
+  const dates=Object.keys(S.dailyByDate||{}).sort().reverse().slice(0,14);
+  let h='<div class="sect">Daily production log</div><div class="sub">Photos of the day\'s work on the floor. Internal — the client never sees these.</div>';
+  if(isAdmin()) h+='<div class="btnrow"><button class="btn sm pri" onclick="pickDaily()">📷 Add photos for today</button></div>';
+  if(!dates.length) return h+'<div class="empty">No entries yet.</div>';
+  dates.forEach(d=>{
+    const list=S.dailyByDate[d];
+    const notes=[...new Set(list.map(x=>x.note).filter(Boolean))];
+    h+='<div class="day-h"><b>'+fdate(d)+'</b><span class="meta">'+list.length+' photo'+(list.length>1?'s':'')+'</span>'+
+      (list.some(x=>x.status==='pending')?'<span class="chip c-amber">pending approval</span>':'')+'</div>'+
+      (notes.length?'<div class="sub" style="margin-bottom:6px">'+esc(notes.join(' · '))+'</div>':'')+
+      '<div class="ph-grid">'+list.map(x=>'<div class="ph" onclick="openPhoto(event,this)" data-ph-path="'+esc(x.path)+'" data-cap="'+esc(x.note||'')+'">'+
+        '<img alt="" data-ph-path="'+esc(x.path)+'">'+photoStatusChip(x)+
+        ((isAdmin()||(isStaff()&&x.uploaded_by===uid()&&x.status!=='approved'))?'<button class="del" onclick="delPhoto(event, \''+x.id+'\',\''+esc(x.path)+'\')">✕</button>':'')+
+      '</div>').join('')+'</div>';
+  });
+  return h;
 }
 
 function staffItemRow(it){
@@ -574,13 +757,13 @@ function staffItemRow(it){
   const ph=(S.photosByItem[it.id]||[]);
   const thumb=ph[0];
   const ship=it.po&&it.po.expected_ship_date;
-  const late=ship && new Date(ship) < new Date() && it.status!=='shipped' && it.status!=='delivered';
   return '<div class="item-row" onclick="go(\'#/item/'+it.id+'\')">'+
     (thumb?'<div class="thumb"><img alt="" data-ph-path="'+esc(thumb.path)+'"></div>':'')+
-    '<div class="item-main"><div class="item-name">'+esc(it.product)+(it.qty>1?' <span class="meta">× '+(+it.qty)+' '+esc(it.unit||'pcs')+'</span>':'')+'</div>'+
+    '<div class="item-main"><div class="item-name">'+esc(it.product)+(it.qty>1?' <span class="qty">× '+(+it.qty)+' '+esc(it.unit||'pcs')+'</span>':'')+'</div>'+
       '<div class="item-sub">'+esc([it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+'</div>'+
       '<div class="row mt8">'+(st?'<span class="chip c-bronze">'+esc(st.name)+'</span>':'')+
-        (ship?'<span class="chip '+(late?'c-red':'c-grey')+'">Ship by '+fdate(ship)+'</span>':'')+
+        (ship?countdown(ship, it.status==='delivered'):'')+
+        (ship?'<span class="meta">Ship by '+fdate(ship)+'</span>':'')+
         (ph.filter(p=>p.status==='pending').length?'<span class="chip c-amber">'+ph.filter(p=>p.status==='pending').length+' pending</span>':'')+
       '</div>'+
     '</div>'+
@@ -597,13 +780,13 @@ function vApprovals(){
   if(!pend.length){ h+='<div class="empty">Nothing waiting. Staff uploads will appear here.</div>'; }
   else{
     const byItem={};
-    pend.forEach(p=>{ const k=p.item_id||('po-'+p.po_id); (byItem[k]=byItem[k]||[]).push(p); });
+    pend.forEach(p=>{ const k=p.item_id||(p.po_id?('po-'+p.po_id):('day-'+p.log_date)); (byItem[k]=byItem[k]||[]).push(p); });
     Object.keys(byItem).forEach(k=>{
       const list=byItem[k]; const first=list[0];
       const it=first.item_id?S.itemsById[first.item_id]:null;
-      const po=it?it.po:S.posById[first.po_id];
+      const po=it?it.po:(first.po_id?S.posById[first.po_id]:null);
       const who=S.profilesAll.find(x=>x.user_id===first.uploaded_by);
-      h+='<div class="card"><div class="row"><b>'+esc(it?it.product:'Order photos')+'</b>'+
+      h+='<div class="card"><div class="row"><b>'+esc(it?it.product:(first.log_date?('Daily log · '+fdate(first.log_date)):'Order photos'))+'</b>'+
         (po?'<span class="chip c-grey">'+esc(po.po_number||'')+'</span>':'')+
         '<span class="sp"></span><span class="meta">by '+esc(who?(who.full_name||who.email):'staff')+' · '+ftime(first.created_at)+'</span></div>'+
         '<div class="ph-grid">'+list.map(p=>{
@@ -632,8 +815,8 @@ function vLogin(msg){
   $('hdr').style.display='none';
   $('app').innerHTML =
   '<div class="login">'+
-    '<div class="brand"><div class="bw">GUJRAJ IMPEX</div><div class="bt">Order Tracker</div><div class="rule2"></div>'+
-    '<div class="sub">Follow your orders through every stage of the workshop.</div></div>'+
+    '<div class="brand"><div class="bw">StoneFlow</div><div class="bt">by '+esc(S.settings.company_name||'Gujraj Impex')+'</div><div class="rule2"></div>'+
+    '<div class="sub">Order progress, without the chasing.</div></div>'+
     '<div class="card">'+
       (msg?'<div class="attn red" style="cursor:default">'+esc(msg)+'</div>':'')+
       '<label>Email</label><input id="li-email" type="email" autocomplete="username" inputmode="email">'+
@@ -673,6 +856,7 @@ function poCard(p){
   const b=S.buyersById[p.buyer_id];
   const n=p.items.length;
   const shipped = p.shipped_at || p.items.some(i=>i.status==='shipped'||i.status==='delivered');
+  const allDone = p.items.length && p.items.every(i=>i.status==='delivered');
   return '<div class="card po-card" onclick="go(\'#/po/'+p.id+'\')">'+
     '<div class="po-top"><span class="po-num">'+esc(p.po_number)+'</span>'+poStatusChip(p)+
       (isAdmin()&&!S.buyerFilter&&b?'<span class="chip c-grey">'+esc(b.company)+'</span>':'')+
@@ -680,10 +864,34 @@ function poCard(p){
     (p.project?'<div class="meta mt8">'+esc(p.project)+'</div>':'')+
     '<div class="row mt8"><div class="pbar" style="flex:1"><i style="width:'+Math.round(p.progress*100)+'%"></i></div>'+
       '<span class="meta">'+Math.round(p.progress*100)+'%</span></div>'+
+    (function(){ const acts=p.items.map(nextAction);
+      const pri=acts.find(a=>a.k==='you')||acts.find(a=>a.k==='do')||acts.find(a=>a.k==='wait')||acts[0];
+      return pri?'<div class="row mt8"><span class="na '+pri.k+'"><span class="dot"></span>'+esc(pri.t)+'</span></div>':''; })()+
     '<div class="row mt8"><span class="meta">'+n+' item'+(n!==1?'s':'')+'</span>'+
-      (p.expected_ship_date?'<span class="meta">· expected ship '+fdate(p.expected_ship_date)+'</span>':'')+
+      (p.expected_ship_date?countdown(p.expected_ship_date, allDone||p.status==='completed'):'')+
+      (p.expected_ship_date?'<span class="meta">'+fdate(p.expected_ship_date)+'</span>':'')+
       (shipped&&p.ship_mode?'<span class="chip c-green">'+esc(p.ship_mode)+(p.eta?' · ETA '+fdate(p.eta):'')+'</span>':'')+
     '</div></div>';
+}
+
+function poRail(activeId){
+  const hits=searchHits(window.__gq);
+  const pool=hits ? S.pos.filter(p=>hits.pos.indexOf(p)>=0 || hits.items.some(i=>i.po_id===p.id)) : S.pos;
+  const list=pool.filter(p=>p.status!=='completed'&&p.status!=='cancelled');
+  const done=pool.filter(p=>p.status==='completed'||p.status==='cancelled');
+  const row=p=>'<button class="rail-item'+(p.id===activeId?' on':'')+'" onclick="go(\'#/po/'+p.id+'\')">'+
+    '<div class="rail-num">'+esc(p.po_number)+'</div>'+
+    '<div class="rail-sub">'+esc([(isAdmin()&&S.buyersById[p.buyer_id]?S.buyersById[p.buyer_id].company:''), p.project].filter(Boolean).join(' · ')||(p.items.length+' item'+(p.items.length!==1?'s':'')))+'</div>'+
+    '<div class="pbar"><i style="width:'+Math.round(p.progress*100)+'%"></i></div>'+
+    '<div class="row mt8"><span class="meta">'+Math.round(p.progress*100)+'% complete</span><span class="sp"></span>'+
+      (p.expected_ship_date?'<span class="meta">'+fdate(p.expected_ship_date)+'</span>':'')+'</div>'+
+  '</button>';
+  return '<div class="rail">'+
+    '<div class="rail-h">Purchase orders'+(isAdmin()?' · '+S.pos.length:'')+'</div>'+
+    (isAdmin()?'<button class="btn sm pri" style="width:100%;justify-content:center;margin-bottom:10px" onclick="mNewPO()">+ New PO</button>':'')+
+    (list.length?list.map(row).join(''):'<div class="sub">'+(hits?'No match in open orders.':'No open orders.')+'</div>')+
+    (done.length?'<div class="rail-h">Completed</div>'+done.map(row).join(''):'')+
+  '</div>';
 }
 
 function vHome(){
@@ -696,7 +904,21 @@ function vHome(){
       '</select><span class="sp"></span><button class="btn pri" onclick="mNewPO()">+ New PO</button></div>';
   } else {
     const b=S.buyersById[S.profile.buyer_id];
-    h+='<div class="sect" style="margin-top:18px">'+esc(b?b.company:'')+'</div><div class="sub">Your orders with '+esc(S.settings.company_name||'Gujraj Impex')+', updated live from the workshop.</div>';
+    h+='<div class="page-h" style="margin-top:18px">'+esc(b?b.company:'')+'</div><div class="sub">Your orders with '+esc(S.settings.company_name||'Gujraj Impex')+', updated live from the workshop.</div>';
+  }
+  h+='<div class="searchbar"><span class="ic">⌕</span>'+
+    '<input id="gq" placeholder="Search a PO number, project'+(admin?', buyer':'')+' or product…" value="'+esc(window.__gq||'')+'" oninput="gSearch(this.value)">'+
+    (window.__gq?'<button class="clr" onclick="gSearch(\'\')">✕</button>':'')+'</div>';
+  const hits=searchHits(window.__gq);
+  if(hits){
+    h+='<div class="sub" style="margin-bottom:6px">'+(hits.pos.length+hits.items.length)+' match'+((hits.pos.length+hits.items.length)===1?'':'es')+' for “'+esc(hits.q)+'”</div>';
+    if(hits.pos.length) h+=hits.pos.map(poCard).join('');
+    if(hits.items.length) h+='<div class="card"><b>Products</b><div class="item-grid">'+hits.items.map(itemRow).join('')+'</div></div>';
+    if(!hits.pos.length&&!hits.items.length) h+='<div class="empty">Nothing matches. Try part of a PO number or a product name.</div>';
+    $('app').innerHTML='<div class="shell">'+poRail(null)+'<div>'+h+'</div></div>';
+    hydrateImages();
+    const gi=$('gq'); if(gi){ gi.focus(); gi.setSelectionRange(gi.value.length,gi.value.length); }
+    return;
   }
   const openPos=S.pos.filter(p=>p.status==='open'||p.status==='on_hold');
   const inProd=S.items.filter(i=>i.status==='in_production'||i.status==='on_hold').length;
@@ -724,7 +946,8 @@ function vHome(){
     h+='<div class="sect">Recent updates</div><div class="card">'+acts.map(actRow).join('')+
       '<div class="center mt8"><button class="btn sm" onclick="go(\'#/activity\')">View all activity</button></div></div>';
   }
-  $('app').innerHTML=h;
+  $('app').innerHTML='<div class="shell">'+poRail(null)+'<div>'+h+'</div></div>';
+  hydrateImages();
 }
 
 function actRow(a){
@@ -743,27 +966,33 @@ function actRow(a){
 function itemRow(it){
   const un=unreadCount(it.id);
   const apr=(S.stByItem[it.id]||[]).some(r=>r.approval==='requested');
+  const na=nextAction(it);
+  const nx=isAdmin()?nextStageFor(it):null;
   const thumb=(S.photosByItem[it.id]||[])[0];
   return '<div class="item-row" onclick="go(\'#/item/'+it.id+'\')">'+
     (thumb?'<div class="thumb"><img alt="" data-ph-path="'+esc(thumb.path)+'"></div>':'')+
-    '<div class="item-main"><div class="item-name">'+esc(it.product)+(it.qty>1?' <span class="meta">× '+(+it.qty)+'</span>':'')+'</div>'+
+    '<div class="item-main"><div class="item-name">'+esc(it.product)+(it.qty>1?' <span class="qty">× '+(+it.qty)+'</span>':'')+'</div>'+
       '<div class="item-sub">'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · '))+'</div>'+
-      '<div class="row mt8"><div class="pbar" style="flex:1;max-width:220px"><i style="width:'+Math.round(it.progress*100)+'%"></i></div>'+stageChip(it)+statusChip(it)+'</div>'+
+      '<div class="row mt8 prow"><div class="pbar" style="flex:1;min-width:90px"><i style="width:'+Math.round(it.progress*100)+'%"></i></div>'+
+        '<span class="meta">'+Math.round(it.progress*100)+'%</span></div>'+
+      '<div class="row mt8">'+stageChip(it)+statusChip(it)+'</div>'+
+      (na?'<div class="row mt8"><span class="na '+na.k+'"><span class="dot"></span>'+esc(na.t)+'</span></div>':'')+
     '</div>'+
-    '<div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end">'+
-      (un?'<span class="badge">'+un+'</span>':'')+
+    '<div class="act">'+
+      (un?'<span class="badge" title="'+un+' unread">'+un+'</span>':'')+
       (apr?'<span class="chip c-amber">Approval</span>':'')+
+      (isAdmin()&&nx?'<button class="quick" title="'+esc(nx.label)+'" onclick="event.stopPropagation();quickAdvance(\''+it.id+'\')">'+esc(nx.short)+'</button>':'')+
     '</div>'+
   '</div>';
 }
 
-function shipPanel(p){
+function shipPanel(p, always){
   const rows=[['Mode',p.ship_mode],['Forwarder / transporter',p.forwarder],['Container / LR no.',p.container_no],['Vessel',p.vessel],
     ['Port of loading',p.port_loading],['Port of discharge',p.port_discharge],['ETD',fdate(p.etd)],['ETA',fdate(p.eta)],
     ['Shipped on',fdate(p.shipped_at)],['Delivered on',fdate(p.delivered_at)]].filter(r=>r[1]);
   const any=rows.length||p.tracking_url||p.shipping_notes;
-  if(!any&&!isAdmin()) return '';
-  let h='<div class="card"><div class="row"><b>Shipping details</b><span class="sp"></span>'+
+  if(!any&&!isAdmin()&&!always) return '';
+  let h='<div class="card" style="margin-top:0"><div class="row"><b>Shipping details</b><span class="sp"></span>'+
     (isAdmin()?'<button class="btn sm" onclick="mShip(\''+p.id+'\')">Edit</button>':'')+'</div>';
   if(rows.length){ h+='<div class="ship-grid">'+rows.map(r=>'<div><div class="lab">'+esc(r[0])+'</div><div class="val">'+esc(r[1])+'</div></div>').join('')+'</div>'; }
   else h+='<div class="sub mt8">Not yet dispatched. Details will appear here once the consignment ships.</div>';
@@ -773,10 +1002,10 @@ function shipPanel(p){
   return h;
 }
 
-function docsPanel(p){
+function docsPanel(p, always){
   const docs=S.docsByPo[p.id]||[];
-  if(!docs.length&&!isAdmin()) return '';
-  let h='<div class="card"><div class="row"><b>Documents</b><span class="sp"></span>'+
+  if(!docs.length&&!isAdmin()&&!always) return '';
+  let h='<div class="card" style="margin-top:0"><div class="row"><b>Documents</b><span class="sp"></span>'+
     (isAdmin()?'<button class="btn sm" onclick="pickDoc(\''+p.id+'\')">Upload</button>':'')+'</div>';
   if(!docs.length) h+='<div class="sub mt8">No documents yet.</div>';
   else h+=docs.map(d=>'<div class="row mt8"><a href="javascript:void(0)" onclick="openDoc(\''+esc(d.path)+'\')">'+esc(d.name)+'</a>'+
@@ -790,39 +1019,56 @@ function vPO(id){
   const p=S.posById[id];
   if(!p){ $('app').innerHTML='<div class="empty">Purchase order not found.</div>'; return; }
   const b=S.buyersById[p.buyer_id];
-  let h='<div class="row" style="margin-top:14px"><button class="btn sm" onclick="go(\'#/home\')">← Orders</button></div>';
-  h+='<div class="card"><div class="po-top"><span class="po-num">'+esc(p.po_number)+'</span>'+poStatusChip(p)+
-    '<span class="sp"></span>'+(isAdmin()?'<button class="btn sm" onclick="mEditPO(\''+p.id+'\')">Edit</button>':'')+'</div>'+
-    '<div class="meta mt8">'+[b?b.company:'', p.project, p.po_date?('PO date '+fdate(p.po_date)):'', p.reference].filter(Boolean).map(esc).join(' · ')+'</div>'+
-    (p.expected_ship_date?'<div class="meta">Expected ship: '+fdate(p.expected_ship_date)+'</div>':'')+
-    (p.notes?'<div class="tl-note mt8">'+esc(p.notes)+'</div>':'')+
-    '<div class="row mt8"><div class="pbar" style="flex:1"><i style="width:'+Math.round(p.progress*100)+'%"></i></div><span class="meta">'+Math.round(p.progress*100)+'%</span></div>'+
+  const allDone = p.items.length && p.items.every(i=>i.status==='delivered');
+  const stagesDone = p.items.length ? Math.round(p.progress*100) : 0;
+  const cur = p.items.map(i=>S.stagesById[i.current_stage_id]).filter(Boolean)
+                .sort((a,c)=>a.sort_order-c.sort_order)[0];
+
+  let main='<div class="crumb"><button class="btn sm" onclick="go(\'#/home\')">← Orders</button>'+
+    (b?' <b style="margin-left:8px">'+esc(b.company)+'</b>':'')+(p.project?' / '+esc(p.project):'')+'</div>'+
+    '<div class="row"><div style="flex:1;min-width:200px"><div class="page-h">'+esc(p.po_number)+'</div>'+
+      '<div class="sub">'+esc([p.po_date?('PO date '+fdate(p.po_date)):'', p.reference].filter(Boolean).join(' · '))+'</div></div>'+
+      '<div class="row">'+poStatusChip(p)+(isAdmin()?'<button class="btn sm" onclick="mEditPO(\''+p.id+'\')">Edit PO</button>':'')+'</div></div>';
+
+  const small='font-size:15px;line-height:1.35;padding:6px 2px 2px';
+  main+='<div class="kpis">'+
+    '<div class="kpi"><b style="'+small+'">'+(cur?esc(cur.name):'—')+'</b><span>Current stage</span></div>'+
+    '<div class="kpi"><b>'+stagesDone+'%</b><span>Overall progress</span></div>'+
+    '<div class="kpi"><b>'+p.items.length+'</b><span>Items on order</span></div>'+
+    '<div class="kpi"><b style="'+small+'">'+(p.expected_ship_date?countdown(p.expected_ship_date, allDone||p.status==='completed'):'—')+'</b>'+
+      '<span>'+(p.expected_ship_date?('Planned '+fdate(p.expected_ship_date)):'Delivery')+'</span></div>'+
   '</div>';
 
-  h+='<div class="card"><div class="row"><b>Items ('+p.items.length+')</b><span class="sp"></span>'+
-    (isAdmin()?'<button class="btn sm" onclick="mBulk(\''+p.id+'\')">Bulk update</button><button class="btn sm pri" onclick="mItem(\''+p.id+'\',null)">+ Add item</button>':'')+'</div>'+
-    (p.items.length?p.items.map(itemRow).join(''):'<div class="sub mt8">No items yet.</div>')+'</div>';
+  if(p.notes) main+='<div class="tl-note">'+esc(p.notes)+'</div>';
 
+  main+='<div class="card"><div class="row"><b>Items ('+p.items.length+')</b><span class="sp"></span>'+
+    (isAdmin()?'<button class="btn sm" onclick="mBulk(\''+p.id+'\')">Bulk update</button><button class="btn sm pri" onclick="mItem(\''+p.id+'\',null)">+ Add item</button>':'')+'</div>'+
+    (p.items.length?'<div class="item-grid">'+p.items.map(itemRow).join('')+'</div>':'<div class="sub mt8">No items yet.</div>')+'</div>';
+
+  if(isAdmin()) main+='<div class="btnrow"><button class="btn wa" onclick="waPO(\''+p.id+'\')">Share status on WhatsApp</button></div>';
+
+  // side panel: photos / shipping / documents
+  const tab = window.__poTab || 'photos';
   const poPh=visiblePhotos(S.photosByPo[p.id]||[]);
-  if(poPh.length||isAdmin()){
-    h+='<div class="card"><div class="row"><b>Order photos</b><span class="sp"></span>'+
+  let side='<div class="ptabs">'+
+    ['photos','shipping','docs'].map(t=>'<button class="ptab'+(tab===t?' on':'')+'" onclick="poTab(\''+t+'\')">'+
+      (t==='photos'?'Photos':t==='shipping'?'Shipping':'Documents')+'</button>').join('')+'</div>';
+  if(tab==='photos'){
+    side+='<div class="card" style="margin-top:0"><div class="row"><b>Order photos</b><span class="sp"></span>'+
       (isAdmin()?'<button class="btn sm pri" onclick="pickPhotos(null,null,\''+p.id+'\')">+ Photos</button>':'')+'</div>'+
       (poPh.length?'<div class="ph-grid">'+poPh.map(x=>'<div class="ph" onclick="openPhoto(event, this)" data-ph-path="'+esc(x.path)+'" data-cap="'+esc(x.caption||'')+'">'+
-        '<img alt="" data-ph-path="'+esc(x.path)+'">'+
+        '<img alt="" data-ph-path="'+esc(x.path)+'">'+ photoStatusChip(x)+
         (isAdmin()?'<button class="del" onclick="delPhoto(event, \''+x.id+'\',\''+esc(x.path)+'\')">✕</button>':'')+
       '</div>').join('')+'</div>'
       :'<div class="sub mt8">Photos of the whole order, packing and crates go here. Photos of each piece live on its item page.</div>')+
     '</div>';
-  }
+  } else if(tab==='shipping'){ side+=shipPanel(p, true); }
+  else { side+=docsPanel(p, true); }
 
-  h+=shipPanel(p);
-  h+=docsPanel(p);
-  if(isAdmin()){
-    h+='<div class="btnrow"><button class="btn wa" onclick="waPO(\''+p.id+'\')">Share status on WhatsApp</button></div>';
-  }
-  $('app').innerHTML=h;
+  $('app').innerHTML='<div class="shell with-side">'+poRail(p.id)+'<div>'+main+'</div><div class="side">'+side+'</div></div>';
   hydrateImages();
 }
+function poTab(t){ window.__poTab=t; render(); }
 
 function photoGrid(itemId, stageId, editable){
   const list=visiblePhotos((S.photosByItem[itemId]||[]).filter(x=>x.stage_id===stageId));
@@ -891,14 +1137,16 @@ function vItem(id){
   if(!it){ $('app').innerHTML='<div class="empty">Item not found.</div>'; return; }
   const p=it.po;
   const staff=isStaff();
-  let h='<div class="row" style="margin-top:14px"><button class="btn sm" onclick="go(\''+(staff?'#/home':'#/po/'+p.id)+'\')">← '+(staff?'Production floor':esc(p.po_number))+'</button></div>';
-  h+='<div class="card"><div class="row"><div style="flex:1"><div class="item-name" style="font-size:18px">'+esc(it.product)+(it.qty>1?' <span class="meta">× '+(+it.qty)+' '+esc(it.unit||'pcs')+'</span>':'')+'</div>'+
-    '<div class="item-sub">'+esc([it.stone,it.finish].filter(Boolean).join(' · '))+'</div>'+
-    (dimsOf(it)?'<div class="item-sub">'+esc(dimsOf(it))+'</div>':'')+
-    (it.target_date?'<div class="item-sub">Target: '+fdate(it.target_date)+'</div>':'')+
-    (staff&&p.expected_ship_date?'<div class="item-sub">Ship by: '+fdate(p.expected_ship_date)+'</div>':'')+
+  const due = it.target_date || (p&&p.expected_ship_date);
+  const itDone = it.status==='delivered';
+  let h='<div class="crumb"><button class="btn sm" onclick="go(\''+(staff?'#/home':'#/po/'+p.id)+'\')">← '+(staff?'Production floor':esc(p.po_number))+'</button></div>'+
+    '<div class="page-h">'+esc(it.product)+'</div>'+
+    '<div class="sub">'+esc([(+it.qty)+' '+(it.unit||'pcs'), it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+'</div>';
+  h+='<div class="card"><div class="row">'+statusChip(it)+
+      (S.stagesById[it.current_stage_id]?'<span class="chip c-bronze">'+esc(S.stagesById[it.current_stage_id].name)+'</span>':'')+
+      (due?countdown(due, itDone):'')+
+      (due?'<span class="meta">'+(it.target_date?'Target ':'Ship by ')+fdate(due)+'</span>':'')+'</div>'+
     (it.description?'<div class="sub mt8">'+esc(it.description)+'</div>':'')+
-    '</div><div>'+statusChip(it)+'</div></div>'+
     '<div class="row mt8"><div class="pbar" style="flex:1"><i style="width:'+Math.round(it.progress*100)+'%"></i></div><span class="meta">'+Math.round(it.progress*100)+'%</span></div>'+
     photoGrid(it.id, null, isAdmin())+
     (isAdmin()?'<div class="btnrow"><button class="btn sm pri" onclick="pickPhotos(\''+it.id+'\',null)">+ Photos</button>'+
@@ -911,7 +1159,7 @@ function vItem(id){
   const rows=S.stByItem[it.id]||[];
   const rowByStage={}; rows.forEach(r=>rowByStage[r.stage_id]=r);
   let lastGrp=null;
-  h+='<div class="tl">';
+  h+='<div class="tl two">';
   const stages=S.stages.filter(s=>s.active||rowByStage[s.id]);
   stages.forEach((st,idx)=>{
     const row=rowByStage[st.id]||{status:'pending',approval:'none'};
@@ -923,7 +1171,7 @@ function vItem(id){
     const stagePhotos=(S.photosByItem[it.id]||[]).filter(x=>x.stage_id===st.id).length;
     const stageComments=(S.commentsByItem[it.id]||[]).filter(c=>c.stage_id===st.id).length;
     const open = row.status==='in_progress' || row.approval==='requested' || (window.__openStages&&window.__openStages[it.id+'-'+st.id]);
-    h+='<div class="tl-row"><div class="tl-rail"><div class="tl-dot '+dotCls+'"></div>'+(idx<stages.length-1?'<div class="tl-line"></div>':'')+'</div>'+
+    h+='<div class="tl-row'+(open?' open-row':'')+'"><div class="tl-rail"><div class="tl-dot '+dotCls+'"></div>'+(idx<stages.length-1?'<div class="tl-line"></div>':'')+'</div>'+
       '<div class="tl-body">'+
       '<div class="tl-name" onclick="toggleStage(\''+it.id+'\','+st.id+')">'+esc(st.name)+
         (st.approval_gate?' <span class="chip c-amber" style="font-size:10px">Approval gate</span>':'')+
@@ -944,7 +1192,7 @@ function vItem(id){
   });
   h+='</div>';
   h+='<div style="height:30px"></div>';
-  $('app').innerHTML=h;
+  $('app').innerHTML = staff ? h : '<div class="shell">'+poRail(p.id)+'<div>'+h+'</div></div>';
   hydrateImages();
   if(!isStaff()) markRead(it.id);
 }
@@ -993,6 +1241,7 @@ function vBuyers(){
 
 function vSettings(){
   if(!isAdmin()) return vHome();
+  if(!S.settings.__priv){ S.settings.__priv=1; loadPrivateSettings().then(()=>render()); }
   const s=S.settings||{};
   let h='<div class="sect" style="margin-top:18px">Settings</div>'+
   '<div class="card">'+
@@ -1039,7 +1288,7 @@ function render(){
   if(!S.session){ vLogin(); return; }
   if(!S.profile){
     $('hdr').style.display='none';
-    $('app').innerHTML='<div class="login"><div class="brand"><div class="bw">GUJRAJ IMPEX</div><div class="bt">Order Tracker</div></div>'+
+    $('app').innerHTML='<div class="login"><div class="brand"><div class="bw">StoneFlow</div><div class="bt">by Gujraj Impex</div></div>'+
       '<div class="card center">This login has no access yet.<br>Please contact Gujraj Impex.<div class="btnrow" style="justify-content:center"><button class="btn" onclick="signOut()">Sign out</button></div></div></div>';
     return;
   }
@@ -1055,6 +1304,7 @@ function render(){
   if(parts[0]==='po' && parts[1]) vPO(parts[1]);
   else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
   else if(parts[0]==='approvals') vApprovals();
+  else if(parts[0]==='daily'){ $('app').innerHTML=dailyLog(); hydrateImages(); }
   else if(parts[0]==='buyers') vBuyers();
   else if(parts[0]==='settings') vSettings();
   else if(parts[0]==='activity') vActivity();
@@ -1143,6 +1393,41 @@ async function requestApproval(itemId, stageId, on){
     const it=S.itemsById[itemId]; const st=S.stagesById[stageId];
     offerWhatsApp(it, waMsgApproval(it, st));
   }
+}
+
+function gSearch(v){ window.__gq=v; render(); }
+
+// One tap from any list: finish the running stage, or start the next one.
+async function quickAdvance(itemId){
+  const it=S.itemsById[itemId]; const nx=nextStageFor(it);
+  if(!nx){ toast('All stages are complete for this item'); return; }
+  const {error}=await sb.rpc('bt_advance',{p_item:itemId,p_stage:nx.stage.id,p_date:today(),p_complete:nx.complete});
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
+  offerWhatsApp(S.itemsById[itemId], waMsgStage(S.itemsById[itemId], nx.stage, nx.complete));
+}
+
+// Staff: photos of the day's work, not tied to one order. Internal only.
+function pickDaily(){
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.multiple=true;
+  inp.onchange=async ()=>{
+    const files=[...inp.files]; if(!files.length) return;
+    const note=prompt('What is this? (optional, e.g. "Moulding bay — 3 blocks dressed")')||null;
+    toast('Uploading '+files.length+' photo'+(files.length>1?'s':'')+'…');
+    const d=today(); let ok=0;
+    for(let i=0;i<files.length;i++){
+      const blob=await resizeImage(files[i]);
+      const path='staff/daily/'+d+'/'+Date.now()+'-'+i+'.jpg';
+      const up=await sb.storage.from(CONFIG.bucket).upload(path, blob, {contentType:'image/jpeg'});
+      if(up.error){ toast('Upload failed: '+up.error.message,{err:true}); continue; }
+      const ins=await sb.from('bt_photos').insert({log_date:d, note, path, uploaded_by:uid(),
+        status: isStaff()?'pending':'approved'});
+      if(!ins.error) ok++;
+    }
+    await loadData(); render();
+    if(ok) toast(ok+' photo'+(ok>1?'s':'')+' added to today\'s production log');
+  };
+  inp.click();
 }
 
 async function advance(itemId, stageId, complete){
@@ -1523,6 +1808,10 @@ async function delLogin(userId, email){
 }
 
 /* ---------- settings & stages ---------- */
+async function loadPrivateSettings(){
+  const {data}=await sb.from('bt_settings').select('*').eq('id',1).maybeSingle();
+  if(data) S.settings=Object.assign({}, S.settings, data);
+}
 async function saveSettings(){
   const {error}=await sb.from('bt_settings').update({company_name:$('set-name').value.trim()||'Gujraj Impex',
     tagline:$('set-tag').value.trim()||null, admin_whatsapp:$('set-wa').value.replace(/[^0-9]/g,'')||null,
