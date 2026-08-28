@@ -373,6 +373,11 @@
     .button--success { background: var(--sage); color: #fff; }
     .data-table td small { display: block; }
     .upload-drop.is-over { border-color: var(--action-primary); background: var(--action-soft); }
+    .daily-entry { padding: 18px 0; border-top: 1px solid var(--line); }
+    .daily-entry:first-child { padding-top: 0; border-top: 0; }
+    .daily-entry:last-child { padding-bottom: 0; }
+    .photo-card[data-on='0'] .photo-placeholder { opacity: .38; filter: grayscale(1); }
+    .photo-card[data-on='1'] .photo-placeholder { outline: 3px solid var(--action-soft); outline-offset: 1px; }
     .upload-drop .button--quiet { min-height: 0; padding: 0 4px; text-decoration: underline; }
     .button--secondary:hover { border-color: var(--graphite); background: var(--surface-subtle); color: var(--text-primary); }
     .button--quiet:hover { background: rgba(255,255,255,.08); }
@@ -605,6 +610,11 @@ a{color:var(--text-primary)}
 .staff-header .button--quiet:hover{background:rgba(255,255,255,.12)}
 .mobile-dock__item .badge{min-height:20px;padding:0 6px;font-size:11px}
 .mobile-dock__item .icon{width:22px;height:22px}
+/* in a narrow panel the name must push the buttons onto their own line,
+   not be squeezed into a three-word-tall column beside them */
+.login-row .grow{min-width:190px}
+.daily-entry{padding:18px 0;border-top:1px solid var(--line)}
+.daily-entry:first-child{border-top:0}
 
 </style>
 <body>
@@ -820,7 +830,8 @@ const S = {
   comments:[], commentsByItem:{}, photos:[], photosByItem:{},
   docsByPo:{}, readMarks:{}, activity:[], profilesAll:[],
   urlCache:{}, lastLoad:0, ready:false,
-  payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{}
+  payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{},
+  updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{}
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 function isStaff(){ return S.profile && S.profile.role==='staff'; }
@@ -841,12 +852,14 @@ async function loadCore(){
 
 async function loadStaffData(){
   // Staff never query buyers, POs, comments or documents — the shop floor view only.
-  const [it, st, ph, sp, dc] = await Promise.all([
+  const [it, st, ph, sp, dc, upd, updi] = await Promise.all([
     sb.from('bt_order_items').select('*, bt_item_stages(*)').order('created_at',{ascending:false}),
     Promise.resolve({data:S.stages}),
     sb.from('bt_photos').select('*').order('created_at'),
     sb.rpc('bt_staff_pos'),
-    sb.from('bt_documents').select('*').order('created_at')
+    sb.from('bt_documents').select('*').order('created_at'),
+    sb.from('bt_updates').select('*').order('work_date',{ascending:false}),
+    sb.from('bt_update_internal').select('*')
   ]);
   const err=[it,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -855,6 +868,9 @@ async function loadStaffData(){
   S.buyers=[]; S.buyersById={}; S.pos=[]; S.posById={}; S.comments=[]; S.commentsByItem={};
   S.docsByPo={}; S.readMarks={}; S.activity=[]; S.profilesAll=[];
   S.payments=[]; S.charges=[]; indexFinance();
+  S.updates = upd.data||[]; S.updInternal = {};
+  (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
+  indexUpdates();
   S.items=(it.data||[]); S.itemsById={}; S.stByItem={};
   const activeStageIds = S.stages.filter(s=>s.active).map(s=>s.id);
   S.items.forEach(x=>{
@@ -879,6 +895,67 @@ function indexPhotos(list){
     else if(x.item_id){ (S.photosByItem[x.item_id]=S.photosByItem[x.item_id]||[]).push(x); }
     else if(x.po_id){ (S.photosByPo[x.po_id]=S.photosByPo[x.po_id]||[]).push(x); }
   });
+}
+
+/* ---- daily workshop updates ----------------------------------------------
+   A daily update is a record inside a stage, not a new stage. Buyers only ever
+   receive rows the database has already published; the pending ones are not
+   filtered here, they never arrive. */
+function indexUpdates(){
+  S.updByItem={}; S.photosByUpdate={};
+  (S.updates||[]).forEach(u=>{ (S.updByItem[u.item_id]=S.updByItem[u.item_id]||[]).push(u); });
+  Object.values(S.updByItem).forEach(l=>l.sort((a,b)=>String(b.work_date).localeCompare(String(a.work_date))
+    || String(b.submitted_at).localeCompare(String(a.submitted_at))));
+  (S.photos||[]).forEach(p=>{ if(p.update_id) (S.photosByUpdate[p.update_id]=S.photosByUpdate[p.update_id]||[]).push(p); });
+  Object.values(S.photosByUpdate).forEach(l=>l.sort((a,b)=>(a.display_order||0)-(b.display_order||0)));
+}
+function updatesFor(itemId){ return S.updByItem[itemId]||[]; }
+function updateToday(itemId){ const t=today(); return updatesFor(itemId).find(u=>u.work_date===t); }
+function daysSinceUpdate(itemId){
+  const l=updatesFor(itemId)[0];
+  if(!l) return null;
+  return Math.floor((new Date(today()+'T00:00:00') - new Date(l.work_date+'T00:00:00'))/86400000);
+}
+// products that should have been recorded today: in the workshop, not finished
+function activeItems(){
+  return (S.items||[]).filter(it=>it.status!=='delivered' && it.status!=='cancelled' && it.status!=='shipped');
+}
+function itemsMissingToday(){ return activeItems().filter(it=>!updateToday(it.id)); }
+function pendingUpdates(){ return (S.updates||[]).filter(u=>u.review_status==='pending' || u.review_status==='changes_requested'); }
+function blockedItems(){
+  return activeItems().map(it=>{
+    const u=updatesFor(it.id).find(x=>x.work_status==='blocked');
+    if(!u) return null;
+    const int_=S.updInternal[u.id];
+    return {item:it, update:u, reason:int_?int_.blocker_reason:null,
+            owner:int_?int_.blocker_owner:null, revised:int_?int_.revised_completion_date:null};
+  }).filter(Boolean);
+}
+// what the buyer is allowed to see for one update: approved photos only
+function updatePhotos(updateId){ return visiblePhotos(S.photosByUpdate[updateId]||[]); }
+
+// stage-specific prompts. Guidance, not gates.
+const PHOTO_PROMPTS = {
+  stone_selection:['Full block or slab','Vein detail','Any defect or repair'],
+  dressing_sizing:['Complete product','The face worked today','Dimension check'],
+  prod_sizing:['Overall form','Readable measuring tape or caliper'],
+  moulding:['Full profile','Detail of the carving'],
+  finishing:['Full product','Surface close-up','Edge or corner detail'],
+  sealing:['Application coverage','Completed surface'],
+  final_photos:['All sides','Dimensions','Finish and any accessories'],
+  packing:['Protected product','Closed crate','Shipping label'],
+  production_drawing_79:['The drawing as issued','Marked stone against the drawing']
+};
+function promptsFor(stage){
+  if(!stage) return ['Full product','Detail of today\'s work'];
+  if(PHOTO_PROMPTS[stage.key]) return PHOTO_PROMPTS[stage.key];
+  const n=(stage.name||'').toLowerCase();
+  if(n.indexOf('pack')>=0) return PHOTO_PROMPTS.packing;
+  if(n.indexOf('finish')>=0||n.indexOf('polish')>=0) return PHOTO_PROMPTS.finishing;
+  if(n.indexOf('siz')>=0) return PHOTO_PROMPTS.prod_sizing;
+  if(n.indexOf('mould')>=0||n.indexOf('carv')>=0) return PHOTO_PROMPTS.moulding;
+  if(n.indexOf('seal')>=0) return PHOTO_PROMPTS.sealing;
+  return ['Full product','Detail of today\'s work','Dimension check'];
 }
 
 // ---- next action: the single most useful thing to do about an item, right now ----
@@ -1034,7 +1111,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -1044,9 +1121,11 @@ async function loadData(){
     sb.from('bt_activity').select('*').order('created_at',{ascending:false}).limit(200),
     admin ? sb.from('bt_profiles').select('*').order('created_at') : Promise.resolve({data:[]}),
     admin ? sb.from('bt_payments').select('*').order('paid_on',{ascending:false}) : Promise.resolve({data:[]}),
-    admin ? sb.from('bt_charges').select('*').order('created_at') : Promise.resolve({data:[]})
+    admin ? sb.from('bt_charges').select('*').order('created_at') : Promise.resolve({data:[]}),
+    sb.from('bt_updates').select('*').order('work_date',{ascending:false}),
+    admin ? sb.from('bt_update_internal').select('*') : Promise.resolve({data:[]})
   ]);
-  const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg].find(r=>r.error);
+  const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
 
   S.buyers = b.data||[]; S.buyersById={}; S.buyers.forEach(x=>S.buyersById[x.id]=x);
@@ -1081,6 +1160,9 @@ async function loadData(){
   S.profilesAll = pr.data||[];
   S.payments = pay.data||[]; S.charges = chg.data||[];
   indexFinance();
+  S.updates = upd.data||[]; S.updInternal = {};
+  (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
+  indexUpdates();
   S.lastLoad = Date.now();
 }
 
@@ -1098,11 +1180,15 @@ function pendingApprovals(){
   return out;
 }
 function itemsWithUnread(){ return S.items.filter(it=>unreadCount(it.id)>0); }
-function pendingPhotos(){ return S.photos.filter(p=>p.status==='pending'); }
+// Photos attached to a daily update are reviewed in Daily updates, not here —
+// approving one in isolation would publish an image without its wording.
+function pendingPhotos(){ return S.photos.filter(p=>p.status==='pending' && !p.update_id); }
 function visiblePhotos(list){
   list=list||[];
   if(isAdmin()||isStaff()) return list;
-  return list.filter(p=>p.status==='approved');
+  const published={}; (S.updates||[]).forEach(u=>{ if(u.published_at) published[u.id]=1; });
+  // approved is not enough: a daily-update photo also needs its update published
+  return list.filter(p=>p.status==='approved' && (!p.update_id || published[p.update_id]));
 }
 
 async function signedUrl(path){
@@ -1279,6 +1365,7 @@ function updateHeader(){
       ['#/home','Orders',0],
       ['#/updates','Client updates',nDue],
       ['#/approvals','Photo approvals',nPend],
+      ['#/review','Daily updates',pendingUpdates().length],
       ['#/finance','Finance',0],
       ['#/daily','Daily log',0],
       ['#/buyers','Buyers &amp; logins',0],
@@ -1856,6 +1943,8 @@ function vItem(id){
       '</div></section>';
   }
 
+  h+=progressFeed(it);
+
   /* the timeline */
   const rows=S.stByItem[it.id]||[];
   const byStage={}; rows.forEach(r=>byStage[r.stage_id]=r);
@@ -1901,14 +1990,15 @@ function stageRow(it, st, row){
     : row.status==='in_progress'?('Started '+fdate(row.started_at))
     : row.status==='on_hold'?'On hold'
     : row.status==='skipped'?'Skipped'
-    : (st.approval_gate?'Needs the buyer’s sign-off when reached':'Pending');
+    : (st.approval_gate?'Needs the buyer’s sign-off when reached':'');
 
   let h='<article class="stage-row'+cls+'">'+
     '<span class="stage-row__icon">'+icon(stageSymbol(st))+'</span>'+
     '<div style="min-width:0">'+
       '<div class="stage-row__top" style="cursor:pointer" onclick="toggleStage(\''+it.id+'\','+st.id+')">'+
         '<p class="stage-row__name">'+esc(st.name)+'</p>'+stateBadge+'</div>'+
-      '<p class="stage-row__meta">'+esc(meta)+esc(row.note&&!open?' · '+row.note.slice(0,60):'')+'</p>'+
+      ((meta||(row.note&&!open))?'<p class="stage-row__meta">'+esc(meta)+
+        esc(row.note&&!open?(meta?' · ':'')+row.note.slice(0,60):'')+'</p>':'')+
       (open?'':'<div class="stage-row__media">'+
         (photos.length?badge(photos.length+' photo'+(photos.length>1?'s':'')):'')+
         (nCmt&&!staff?badge(nCmt+' comment'+(nCmt>1?'s':'')):'')+
@@ -1988,7 +2078,8 @@ function staffProduct(it){
       '</strong></div>'+
     '</div>'+
     '<div class="staff-product__actions">'+
-      '<button class="button button--workshop" type="button" onclick="pickPhotos(\''+it.id+'\',null)">'+icon('i-camera')+'Add photos</button>'+
+      '<button class="button button--workshop" type="button" onclick="mDailyUpdate(\''+it.id+'\',null)">'+icon('i-camera')+
+        (updateToday(it.id)?'Add another update':'Today’s update')+'</button>'+
       (drawing?'<button class="button button--secondary button--workshop" type="button" onclick="openDoc(\''+esc(drawing.path)+'\')">Drawing</button>'
               :'<button class="button button--secondary button--workshop" type="button" onclick="go(\'#/item/'+it.id+'\')">Stages</button>')+
     '</div>'+
@@ -2137,6 +2228,143 @@ function vUpdates(){
   });
   h+='</div><p class="field-hint space-top-12">The message is built from the live data, so it is right by definition. You can edit it in WhatsApp before sending.</p>';
   $('app').innerHTML=h;
+}
+
+/* ---------------------------------------------------------------------------
+   Daily updates — the three faces of the same record.
+--------------------------------------------------------------------------- */
+
+function updStatusBadge(u){
+  const m={pending:['Awaiting review','pending'], partially_approved:['Published','success'],
+           approved:['Published','success'], changes_requested:['Reshoot asked','alert']};
+  const x=m[u.review_status]||[u.review_status,''];
+  return badge(x[0], x[1]);
+}
+
+/* ---- buyer + admin: the progress feed on a product page ---- */
+function progressFeed(it){
+  const buyer = !isAdmin() && !isStaff();
+  let list = updatesFor(it.id);
+  if(buyer) list = list.filter(u=>u.published_at && u.work_status!=='no_work');
+  if(!list.length){
+    return '<section class="panel space-top-18"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Latest progress</h3>'+
+      '<p class="panel__description">'+(buyer
+        ? 'Workshop photographs appear here as the piece is made.'
+        : 'No daily updates recorded yet.')+'</p></div></div>'+
+      '<div class="panel__body"><div class="empty-state">'+(buyer
+        ? 'Nothing published yet for this piece.'
+        : 'When the floor submits an update it will show here.')+'</div></div></section>';
+  }
+  let h='<section class="panel space-top-18"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Latest progress</h3>'+
+    '<p class="panel__description">Photographs from the workshop, newest first.</p></div>'+
+    badge(list.length+' update'+(list.length===1?'':'s'))+'</div><div class="panel__body">';
+
+  list.slice(0,25).forEach(u=>{
+    const st=S.stagesById[u.stage_id];
+    const ph=updatePhotos(u.id);
+    const int_=(!buyer && S.updInternal[u.id])||null;
+    const cmts=(S.commentsByItem[it.id]||[]).filter(c=>c.update_id===u.id);
+    h+='<article class="daily-entry">'+
+      '<div class="row-between">'+
+        '<div><h4 class="attention-item__title">'+esc(fdate(u.work_date))+'</h4>'+
+        '<p class="activity-item__meta">'+esc([st?st.name:'', u.published_at?('published '+ftime(u.published_at)):''].filter(Boolean).join(' · '))+'</p></div>'+
+        (buyer ? (ph.length?badge(ph.length+' photo'+(ph.length===1?'':'s'),'success'):'') : updStatusBadge(u))+
+      '</div>'+
+      (u.work_status==='no_work'
+        ? '<p class="stage-note space-top-10">No work today — '+esc(u.no_work_reason||'')+'</p>'
+        : (u.public_summary?'<p class="stage-note space-top-10">'+esc(u.public_summary)+'</p>':''))+
+      (int_ && int_.internal_note ? '<p class="field-hint">Internal: '+esc(int_.internal_note)+'</p>':'')+
+      (int_ && int_.blocker_reason ? '<div class="attn attn--error attn--flat"><span><strong>Blocked:</strong> '+
+          esc(int_.blocker_reason)+(int_.blocker_owner?' — '+esc(int_.blocker_owner):'')+
+          (int_.revised_completion_date?' · revised to '+esc(fdate(int_.revised_completion_date)):'')+'</span></div>':'')+
+      (ph.length?photoGridOf(ph,{del:!buyer}):'')+
+      (cmts.length?'<div class="comment-thread space-top-12">'+cmts.map(c=>
+        '<div class="comment"><span class="comment__avatar">'+esc(initials(c.author_name||'?'))+'</span>'+
+        '<div class="comment__bubble"><strong>'+esc(c.author_name||c.author_role)+'</strong>'+esc(c.body)+
+        '<div class="field-hint space-top-10">'+ftime(c.created_at)+'</div></div></div>').join('')+'</div>':'')+
+      (isStaff()?'':'<div class="comment-composer space-top-12">'+
+        '<input type="text" id="ucmt-'+u.id+'" placeholder="Comment on this update" '+
+        'onkeydown="if(event.key===\'Enter\')sendUpdateComment(\''+it.id+'\',\''+u.id+'\')">'+
+        '<button class="button" type="button" onclick="sendUpdateComment(\''+it.id+'\',\''+u.id+'\')">Send</button></div>')+
+      (isAdmin()&&u.review_status==='pending'
+        ? '<div class="button-row space-top-12"><button class="button" type="button" onclick="mReviewUpdate(\''+u.id+'\')">Review and publish</button></div>':'')+
+    '</article>';
+  });
+  h+='</div></section>';
+  return h;
+}
+
+/* ---- admin: the review queue ---- */
+function vReview(){
+  if(!isAdmin()) return vHome();
+  const pend=pendingUpdates();
+  const missing=itemsMissingToday();
+  const blocked=blockedItems();
+  const todayDone=activeItems().filter(it=>updateToday(it.id));
+
+  let h='<div class="page-heading"><div>'+eyebrow('Owner review')+
+    '<h2 class="display-title">Daily updates</h2>'+
+    '<p class="lede">Approve a day’s photographs, edit what the client reads, and see which pieces have gone quiet.</p></div></div>';
+
+  h+='<section class="summary-grid">'+
+    statCard('Awaiting review', pend.length, pend.length?'Nothing reaches the client until you publish':'Queue is clear')+
+    statCard('Updated today', todayDone.length+' of '+activeItems().length, '')+
+    statCard('Missing today', missing.length, missing.length?'Active pieces with no record':'All recorded')+
+    statCard('Blocked', blocked.length, blocked.length?'Needs your attention':'Nothing blocked')+
+  '</section>';
+
+  h+='<div class="dashboard-grid"><section class="panel dashboard-grid__wide">'+
+    '<div class="panel__head"><div><h3 class="panel__title">Awaiting review</h3>'+
+    '<p class="panel__description">Only approved photographs and published text reach the buyer.</p></div>'+
+    (pend.length?badge(pend.length+'','alert'):badge('Clear','success'))+'</div><div class="panel__body">';
+  if(!pend.length) h+='<div class="empty-state">Nothing waiting. Submissions from the floor appear here.</div>';
+  else pend.forEach(u=>{
+    const it=S.itemsById[u.item_id]; const st=S.stagesById[u.stage_id];
+    const ph=(S.photosByUpdate[u.id]||[]);
+    const who=S.profilesAll.find(p=>p.user_id===u.submitted_by);
+    h+='<article class="daily-entry"><div class="row-between">'+
+      '<div>'+eyebrow([st?st.name:'', fdate(u.work_date)].filter(Boolean).join(' · '))+
+      '<h4 class="approval-group__name">'+esc(it?it.product:'—')+'</h4>'+
+      '<p class="approval-group__meta">'+esc([ph.length+' photo'+(ph.length===1?'':'s'),
+        'by '+(who?shortLogin(who.full_name||who.email):'staff'), ftime(u.submitted_at)].join(' · '))+'</p></div>'+
+      updStatusBadge(u)+'</div>'+
+      (u.public_summary?'<p class="stage-note space-top-10">'+esc(u.public_summary)+'</p>':'')+
+      (u.work_status==='no_work'?'<div class="attn attn--warn attn--flat"><span>No work — '+esc(u.no_work_reason||'')+'</span></div>':'')+
+      (ph.length?photoGridOf(ph):'')+
+      '<div class="button-row space-top-12">'+
+        '<button class="button" type="button" onclick="mReviewUpdate(\''+u.id+'\')">Review and publish</button>'+
+        (it?'<button class="button button--quiet" type="button" onclick="go(\'#/item/'+it.id+'\')">Open product</button>':'')+
+      '</div></article>';
+  });
+  h+='</div></section>';
+
+  h+='<section class="panel dashboard-grid__side"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Missing today</h3><p class="panel__description">Active pieces with no record for '+esc(fdate(today()))+'.</p></div></div>'+
+    '<div class="panel__body">';
+  if(!missing.length) h+='<div class="empty-state">Every active piece has today’s update.</div>';
+  else h+=missing.map(it=>{
+    const d=daysSinceUpdate(it.id);
+    return '<div class="login-row"><div class="grow"><strong>'+esc(it.product)+'</strong>'+
+      '<p class="field-hint">'+esc(d===null?'never updated':(d===0?'updated today':d+' day'+(d===1?'':'s')+' since last update'))+'</p></div>'+
+      '<div class="button-row"><button class="button button--quiet" type="button" onclick="remindItem(\''+it.id+'\')">Remind</button>'+
+      '<button class="button button--secondary" type="button" onclick="mDailyUpdate(\''+it.id+'\',null)">Add for them</button></div></div>';
+  }).join('');
+  h+='</div></section>';
+
+  if(blocked.length){
+    h+='<section class="panel dashboard-grid__wide"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Blocked</h3><p class="panel__description">Reported from the floor. The buyer does not see any of this.</p></div>'+
+      badge(blocked.length+'','alert')+'</div><div class="panel__body">'+
+      blocked.map(b=>'<div class="login-row"><div class="grow"><strong>'+esc(b.item.product)+'</strong>'+
+        '<p class="field-hint">'+esc([b.reason, b.owner, b.revised?('revised to '+fdate(b.revised)):''].filter(Boolean).join(' · '))+'</p></div>'+
+        '<div class="button-row"><button class="button button--quiet" type="button" onclick="go(\'#/item/'+b.item.id+'\')">Open</button></div></div>').join('')+
+      '</div></section>';
+  }
+  h+='</div>';
+  $('app').innerHTML=h;
+  hydrateImages();
 }
 
 /* ---------------------------------------------------------------------------
@@ -2435,6 +2663,7 @@ function render(){
   else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
   else if(parts[0]==='updates') vUpdates();
   else if(parts[0]==='approvals') vApprovals();
+  else if(parts[0]==='review') vReview();
   else if(parts[0]==='finance') vFinance();
   else if(parts[0]==='daily') vDaily();
   else if(parts[0]==='buyers') vBuyers();
@@ -2949,6 +3178,302 @@ function mBulk(poId){
         ids.map(id=>'• '+S.itemsById[id].product).join('\n')+'\nNow at: '+st.name+'\nTrack: '+trackerUrl();
       window.open(waLink(b&&b.phone,text),'_blank'); }});
   };
+}
+
+/* ---------------------------------------------------------------------------
+   Daily workshop update — submission (staff and admin).
+
+   Camera-first: the file input carries capture="environment" so a phone opens
+   straight into the camera. Photos are resized through a canvas, which also
+   strips EXIF, so no GPS ever reaches a buyer. Nothing is buyer-visible until
+   the owner publishes: photos go in as 'pending' and the update as 'pending'.
+--------------------------------------------------------------------------- */
+
+window.__du = { files: [], itemId: null, stageId: null };
+
+function mDailyUpdate(itemId, stageId){
+  const it = S.itemsById[itemId];
+  if(!it) return;
+  const stage = S.stagesById[stageId || it.current_stage_id];
+  const existing = updateToday(itemId);
+  window.__du = { files: [], itemId, stageId: stage ? stage.id : null };
+
+  const stages = S.stages.filter(s=>s.active);
+  const prompts = promptsFor(stage);
+
+  modal('<h3>Today’s update</h3><div class="sub">'+esc(it.product)+
+      (it.item_ref?' · '+esc(it.item_ref):'')+' · '+esc(fdate(today()))+'</div>'+
+    (existing ? '<div class="attn attn--warn attn--flat"><span>An update for today already exists ('+
+        esc(existing.review_status.replace(/_/g,' '))+'). Adding another keeps both — nothing is overwritten.</span></div>' : '')+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="du-stage">Stage worked on</label><select id="du-stage">'+
+        stages.map(s=>'<option value="'+s.id+'"'+(stage&&s.id===stage.id?' selected':'')+'>'+esc(s.name)+'</option>').join('')+
+      '</select></div>'+
+
+      '<div class="upload-drop field--full" id="du-drop">'+
+        '<div>'+icon('i-camera','icon--lg')+
+        '<strong>Add today’s photos</strong>'+
+        '<p>'+prompts.map(p=>esc(p)).join(' · ')+'</p>'+
+        '<div class="button-row" style="justify-content:center">'+
+          '<button class="button button--workshop" type="button" id="du-cam">'+icon('i-camera','icon--sm')+'Take photos</button>'+
+          '<button class="button button--secondary" type="button" id="du-pick">Choose images</button>'+
+        '</div>'+
+        '<input id="du-cam-input" type="file" accept="image/*" capture="environment" multiple hidden>'+
+        '<input id="du-file-input" type="file" accept="image/*" multiple hidden>'+
+      '</div></div>'+
+      '<div class="field--full" id="du-previews"></div>'+
+
+      '<div class="field field--full"><label for="du-summary">What was done today</label>'+
+        '<textarea id="du-summary" rows="3" placeholder="e.g. First block dressed on four faces. Dimensions checked against the approved drawing."></textarea>'+
+        '<p class="field-hint">The office may edit this before the client sees it.</p></div>'+
+
+      '<div class="field field--full"><label for="du-internal">Internal note <span class="muted">(the client never sees this)</span></label>'+
+        '<textarea id="du-internal" rows="2" placeholder="Workshop or quality note"></textarea></div>'+
+
+      '<label class="check-row field--full"><input type="checkbox" id="du-blocked" onchange="duToggle()">'+
+        '<span>Work is blocked or delayed</span></label>'+
+      '<div class="field field--full" id="du-blocker" hidden><label for="du-blocker-why">What is blocking it</label>'+
+        '<input id="du-blocker-why" placeholder="Waiting for drawing approval, tool repair, material…">'+
+        '<label for="du-blocker-who" class="space-top-10">Who is chasing it</label><input id="du-blocker-who">'+
+        '<label for="du-blocker-date" class="space-top-10">Revised completion date</label><input id="du-blocker-date" type="date"></div>'+
+
+      '<label class="check-row field--full"><input type="checkbox" id="du-nowork" onchange="duToggle()">'+
+        '<span>No work today</span></label>'+
+      '<div class="field field--full" id="du-nowork-why" hidden><label for="du-nowork-reason">Why</label>'+
+        '<select id="du-nowork-reason"><option value="">Choose a reason</option>'+
+        ['Curing / drying time','Waiting for buyer approval','Waiting for material','Planned workshop pause','Holiday / non-working day','Other']
+          .map(x=>'<option>'+x+'</option>').join('')+'</select></div>'+
+
+      '<div class="button-row field--full"><button class="button button--wide button--workshop" type="button" id="du-save">Submit for review</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+
+  const pick = cap => { const i = document.getElementById(cap ? 'du-cam-input' : 'du-file-input'); i.value=''; i.click(); };
+  document.getElementById('du-cam').onclick  = e => { e.preventDefault(); pick(true); };
+  document.getElementById('du-pick').onclick = e => { e.preventDefault(); pick(false); };
+  ['du-cam-input','du-file-input'].forEach(id=>{
+    document.getElementById(id).onchange = ev => duAdd(ev.target.files);
+  });
+  const drop = document.getElementById('du-drop');
+  drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('is-over'); });
+  drop.addEventListener('dragleave', ()=>drop.classList.remove('is-over'));
+  drop.addEventListener('drop', e=>{ e.preventDefault(); drop.classList.remove('is-over'); duAdd(e.dataTransfer.files); });
+  document.getElementById('du-save').onclick = duSubmit;
+}
+
+function duToggle(){
+  const b=document.getElementById('du-blocked'), n=document.getElementById('du-nowork');
+  document.getElementById('du-blocker').hidden = !b.checked;
+  document.getElementById('du-nowork-why').hidden = !n.checked;
+  // a no-work day needs no photos and no summary
+  document.getElementById('du-summary').disabled = n.checked;
+  document.getElementById('du-cam').disabled = n.checked;
+  document.getElementById('du-pick').disabled = n.checked;
+}
+
+function duAdd(list){
+  const imgs=[...(list||[])].filter(f=>/^image\//.test(f.type));
+  if(!imgs.length) return;
+  imgs.forEach(f=>{
+    // same name + size + modified time in one submission is an accidental double-pick
+    if(window.__du.files.some(x=>x.file.name===f.name && x.file.size===f.size && x.file.lastModified===f.lastModified)) return;
+    window.__du.files.push({ file:f, url:URL.createObjectURL(f), id:'f'+Math.random().toString(36).slice(2,9) });
+  });
+  duRenderPreviews();
+}
+function duRemove(id){
+  const f=window.__du.files.find(x=>x.id===id);
+  if(f) URL.revokeObjectURL(f.url);
+  window.__du.files=window.__du.files.filter(x=>x.id!==id);
+  duRenderPreviews();
+}
+function duRenderPreviews(){
+  const el=document.getElementById('du-previews'); if(!el) return;
+  const fs=window.__du.files;
+  el.innerHTML = !fs.length ? '' :
+    '<p class="field-hint">'+fs.length+' photo'+(fs.length===1?'':'s')+' ready. Remove anything blurred or duplicated.</p>'+
+    '<div class="photo-grid">'+fs.map(f=>
+      '<div class="photo-card"><div class="photo-placeholder is-loaded" style="cursor:zoom-in" onclick="lightbox(\''+f.url+'\',\''+esc(f.file.name)+'\')">'+
+      '<img alt="" src="'+f.url+'">'+
+      '<button class="ph-del" type="button" title="Remove" onclick="event.stopPropagation();duRemove(\''+f.id+'\')">✕</button>'+
+      '</div></div>').join('')+'</div>';
+}
+
+async function duSubmit(){
+  const d=window.__du;
+  const noWork=document.getElementById('du-nowork').checked;
+  const blocked=document.getElementById('du-blocked').checked;
+  const summary=document.getElementById('du-summary').value.trim();
+  const stageId=Number(document.getElementById('du-stage').value)||null;
+
+  if(noWork && !document.getElementById('du-nowork-reason').value){ toast('Choose a reason for no work today',{err:true}); return; }
+  if(!noWork && !d.files.length){ toast('Add at least one photo of today’s work',{err:true}); return; }
+  if(!noWork && !summary){ toast('Write one line about what was done',{err:true}); return; }
+  if(blocked && !document.getElementById('du-blocker-why').value.trim()){ toast('Say what is blocking it',{err:true}); return; }
+
+  const btn=document.getElementById('du-save');
+  btn.disabled=true; btn.textContent='Uploading…';
+  const staff=isStaff();
+  try{
+    const ins=await sb.from('bt_updates').insert({
+      item_id:d.itemId, stage_id:stageId, work_date:today(),
+      work_status: noWork?'no_work':(blocked?'blocked':'worked'),
+      public_summary: noWork?null:summary,
+      no_work_reason: noWork?document.getElementById('du-nowork-reason').value:null,
+      review_status:'pending', submitted_by:uid()
+    }).select().single();
+    if(ins.error) throw ins.error;
+    const updateId=ins.data.id;
+
+    const internal=document.getElementById('du-internal').value.trim();
+    if(internal || blocked){
+      await sb.from('bt_update_internal').insert({
+        update_id:updateId, internal_note:internal||null,
+        blocker_reason: blocked?document.getElementById('du-blocker-why').value.trim():null,
+        blocker_owner: blocked?(document.getElementById('du-blocker-who').value.trim()||null):null,
+        revised_completion_date: blocked?(document.getElementById('du-blocker-date').value||null):null });
+    }
+
+    let done=0, failed=0;
+    for(let i=0;i<d.files.length;i++){
+      btn.textContent='Uploading '+(i+1)+' of '+d.files.length+'…';
+      try{
+        const blob=await resizeImage(d.files[i].file);   // canvas redraw: strips EXIF/GPS
+        const path=(staff?'staff/':'')+'daily/'+d.itemId+'/'+updateId+'-'+i+'.jpg';
+        const up=await sb.storage.from(CONFIG.bucket).upload(path, blob, {contentType:'image/jpeg'});
+        if(up.error) throw up.error;
+        const pi=await sb.from('bt_photos').insert({ item_id:d.itemId, stage_id:stageId, update_id:updateId,
+          path, uploaded_by:uid(), status:'pending', display_order:i });
+        if(pi.error) throw pi.error;
+        done++;
+      }catch(e){ failed++; }
+    }
+    if(failed && !done){
+      // keep the chosen photos so a bad connection does not lose the work
+      btn.disabled=false; btn.textContent='Retry upload';
+      toast('No photos uploaded — check the connection and press Retry. Your photos are still here.',{err:true});
+      return;
+    }
+    d.files.forEach(f=>URL.revokeObjectURL(f.url));
+    window.__du={files:[],itemId:null,stageId:null};
+    closeModal();
+    await loadData(); render();
+    toast(noWork ? 'Recorded: no work today.'
+      : done+' photo'+(done===1?'':'s')+' sent to the office for approval'+(failed?' ('+failed+' failed)':''));
+  }catch(e){
+    btn.disabled=false; btn.textContent='Submit for review';
+    toast('Could not save: '+(e.message||e),{err:true});
+  }
+}
+
+/* ---- owner review -------------------------------------------------------- */
+
+function mReviewUpdate(updateId){
+  if(!isAdmin()) return;
+  const u=(S.updates||[]).find(x=>x.id===updateId); if(!u) return;
+  const it=S.itemsById[u.item_id];
+  const st=S.stagesById[u.stage_id];
+  const int_=S.updInternal[u.id]||{};
+  const photos=(S.photosByUpdate[u.id]||[]);
+  const who=S.profilesAll.find(p=>p.user_id===u.submitted_by);
+
+  modal('<h3>Review update</h3><div class="sub">'+esc(it?it.product:'')+' · '+esc(st?st.name:'')+
+      ' · '+esc(fdate(u.work_date))+' · by '+esc(who?shortLogin(who.full_name||who.email):'staff')+'</div>'+
+    (int_.internal_note?'<p class="stage-note"><strong>Internal note:</strong> '+esc(int_.internal_note)+'</p>':'')+
+    (int_.blocker_reason?'<div class="attn attn--error attn--flat"><span><strong>Blocked:</strong> '+esc(int_.blocker_reason)+
+      (int_.blocker_owner?' — '+esc(int_.blocker_owner):'')+
+      (int_.revised_completion_date?' · revised to '+esc(fdate(int_.revised_completion_date)):'')+'</span></div>':'')+
+    (u.work_status==='no_work'?'<div class="attn attn--warn attn--flat"><span>No work recorded: '+esc(u.no_work_reason||'')+'</span></div>':'')+
+    '<div class="form-grid">'+
+      (u.work_status!=='no_work'
+        ? '<div class="field field--full"><label for="ru-summary">What the client will read</label>'+
+          '<textarea id="ru-summary" rows="3">'+esc(u.public_summary||'')+'</textarea>'+
+          '<p class="field-hint">Edit freely — the original wording is kept in the audit record.</p></div>'
+        : '')+
+      (photos.length
+        ? '<div class="field--full"><p class="field-hint">Tap a photo to include or exclude it. Only the ticked ones reach the client.</p>'+
+          '<div class="photo-grid" id="ru-photos">'+photos.map(p=>
+            '<div class="photo-card" data-id="'+p.id+'" data-on="'+(p.status!=='rejected'?'1':'0')+'" onclick="ruToggle(this)" style="cursor:pointer">'+
+            (p.status==='rejected'?badge('Excluded','alert'):badge('Included','success'))+
+            '<div class="photo-placeholder" data-ph-path="'+esc(p.path)+'">'+
+            '<img alt="" data-ph-path="'+esc(p.path)+'" onload="this.parentNode.classList.add(\'is-loaded\')"><span>Photo</span></div></div>').join('')+
+          '</div></div>'
+        : '<p class="field-hint field--full">No photos on this update.</p>')+
+      '<div class="button-row field--full">'+
+        '<button class="button button--success" type="button" onclick="ruPublish(\''+u.id+'\')">Publish to the client</button>'+
+        '<button class="button button--secondary" type="button" onclick="ruChanges(\''+u.id+'\')">Ask for better photos</button>'+
+        '<button class="button button--quiet" type="button" onclick="closeModal()">Close</button>'+
+      '</div></div>');
+  hydrateImages();
+}
+
+function ruToggle(el){ const on=el.getAttribute('data-on')==='1'; el.setAttribute('data-on', on?'0':'1');
+  const b=el.querySelector('.badge');
+  b.className='badge badge--'+(on?'alert':'success'); b.textContent=on?'Excluded':'Included'; }
+
+async function ruPublish(updateId){
+  const u=(S.updates||[]).find(x=>x.id===updateId); if(!u) return;
+  const cards=[...document.querySelectorAll('#ru-photos .photo-card')];
+  const keep=cards.filter(c=>c.getAttribute('data-on')==='1').map(c=>c.getAttribute('data-id'));
+  const drop=cards.filter(c=>c.getAttribute('data-on')!=='1').map(c=>c.getAttribute('data-id'));
+  const el=document.getElementById('ru-summary');
+  const summary=el?el.value.trim():null;
+  try{
+    if(keep.length){ const r=await sb.from('bt_photos').update({status:'approved', rejection_reason:null}).in('id',keep); if(r.error) throw r.error; }
+    if(drop.length){ const r=await sb.from('bt_photos').update({status:'rejected'}).in('id',drop); if(r.error) throw r.error; }
+    const patch={ review_status: drop.length?'partially_approved':'approved',
+                  published_at:new Date().toISOString(), reviewed_by:uid(), reviewed_at:new Date().toISOString(),
+                  updated_at:new Date().toISOString() };
+    if(el && summary!==u.public_summary){
+      if(!u.public_summary_original) patch.public_summary_original = u.public_summary;
+      patch.public_summary = summary;
+    }
+    const r=await sb.from('bt_updates').update(patch).eq('id',updateId);
+    if(r.error) throw r.error;
+    closeModal(); await loadData(); render();
+    const it=S.itemsById[u.item_id];
+    if(it) offerWhatsApp(it, (S.settings.company_name||'Gujraj Impex')+' — progress on '+it.product+
+      '\n'+(summary||'')+'\nPhotos on your tracker: '+trackerUrl());
+    else toast('Published to the client');
+  }catch(e){ toast(e.message||String(e),{err:true}); }
+}
+
+async function ruChanges(updateId){
+  const why=prompt('What should the workshop reshoot?','Please retake the full view — it is out of focus.');
+  if(why===null) return;
+  try{
+    const ids=(S.photosByUpdate[updateId]||[]).map(p=>p.id);
+    if(ids.length) await sb.from('bt_photos').update({status:'rejected', rejection_reason:why||null}).in('id',ids);
+    const r=await sb.from('bt_updates').update({review_status:'changes_requested', reviewed_by:uid(),
+      reviewed_at:new Date().toISOString(), updated_at:new Date().toISOString()}).eq('id',updateId);
+    if(r.error) throw r.error;
+    closeModal(); await loadData(); render();
+    toast('Sent back to the workshop');
+  }catch(e){ toast(e.message||String(e),{err:true}); }
+}
+
+async function remindItem(itemId){
+  const it=S.itemsById[itemId];
+  await sb.from('bt_activity').insert({ item_id:itemId, po_id:it?it.po_id:null, actor_id:uid(),
+    actor_role:'admin', actor_name:(S.profile.full_name||'Owner'), action:'reminder_sent',
+    detail:'Daily update reminder — '+(it?it.product:'') }).catch(()=>{});
+  toast('Reminder recorded'+(it?' for '+it.product:''));
+  await loadData(); render();
+}
+
+async function sendUpdateComment(itemId, updateId){
+  const el=document.getElementById('ucmt-'+updateId); if(!el) return;
+  const body=el.value.trim(); if(!body){ toast('Write something first'); return; }
+  const {error}=await sb.from('bt_comments').insert({
+    item_id:itemId, update_id:updateId, stage_id:null, author_id:uid(),
+    author_role:isAdmin()?'admin':'buyer',
+    author_name:S.profile.full_name||S.profile.email||'', body });
+  if(error){ toast('Could not send: '+error.message,{err:true}); return; }
+  await loadData(); render();
+  if(isAdmin()){
+    const it=S.itemsById[itemId];
+    if(it) offerWhatsApp(it, 'Note on '+it.product+': '+body);
+  }
 }
 
 /* ---------- money ---------- */
