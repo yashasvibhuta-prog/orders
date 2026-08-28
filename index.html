@@ -335,6 +335,7 @@ const S = {
   urlCache:{}, lastLoad:0, ready:false
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
+function isStaff(){ return S.profile && S.profile.role==='staff'; }
 function uid(){ return S.session && S.session.user.id; }
 
 async function loadCore(){
@@ -350,7 +351,42 @@ async function loadCore(){
   S.stagesById = {}; S.stages.forEach(s=>S.stagesById[s.id]=s);
 }
 
+async function loadStaffData(){
+  // Staff never query buyers, POs, comments or documents — the shop floor view only.
+  const [it, st, ph, sp] = await Promise.all([
+    sb.from('bt_order_items').select('*, bt_item_stages(*)').order('created_at',{ascending:false}),
+    Promise.resolve({data:S.stages}),
+    sb.from('bt_photos').select('*').order('created_at'),
+    sb.rpc('bt_staff_pos')
+  ]);
+  const err=[it,ph,sp].find(r=>r.error);
+  if(err) throw err.error;
+
+  const shipBy={}; (sp.data||[]).forEach(p=>{ shipBy[p.po_id]={expected_ship_date:p.expected_ship_date, status:p.po_status}; });
+  S.buyers=[]; S.buyersById={}; S.pos=[]; S.posById={}; S.comments=[]; S.commentsByItem={};
+  S.docsByPo={}; S.readMarks={}; S.activity=[]; S.profilesAll=[];
+  S.items=(it.data||[]); S.itemsById={}; S.stByItem={};
+  const activeStageIds = S.stages.filter(s=>s.active).map(s=>s.id);
+  S.items.forEach(x=>{
+    S.itemsById[x.id]=x;
+    x.po = Object.assign({id:x.po_id, po_number:'', buyer_id:null}, shipBy[x.po_id]||{});
+    const rows=(x.bt_item_stages||[]).slice();
+    rows.sort((a,c)=>(S.stagesById[a.stage_id]?S.stagesById[a.stage_id].sort_order:999)-(S.stagesById[c.stage_id]?S.stagesById[c.stage_id].sort_order:999));
+    S.stByItem[x.id]=rows;
+    const done=rows.filter(r=>activeStageIds.includes(r.stage_id)&&(r.status==='completed'||r.status==='skipped')).length;
+    const inprog=rows.some(r=>activeStageIds.includes(r.stage_id)&&r.status==='in_progress')?0.5:0;
+    x.progress = activeStageIds.length? Math.min(1,(done+inprog)/activeStageIds.length):0;
+  });
+  S.photos=ph.data||[]; S.photosByItem={}; S.photosByPo={};
+  S.photos.forEach(x=>{
+    if(x.item_id){ (S.photosByItem[x.item_id]=S.photosByItem[x.item_id]||[]).push(x); }
+    else if(x.po_id){ (S.photosByPo[x.po_id]=S.photosByPo[x.po_id]||[]).push(x); }
+  });
+  S.lastLoad=Date.now();
+}
+
 async function loadData(){
+  if(isStaff()) return loadStaffData();
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
@@ -418,6 +454,12 @@ function pendingApprovals(){
   return out;
 }
 function itemsWithUnread(){ return S.items.filter(it=>unreadCount(it.id)>0); }
+function pendingPhotos(){ return S.photos.filter(p=>p.status==='pending'); }
+function visiblePhotos(list){
+  list=list||[];
+  if(isAdmin()||isStaff()) return list;
+  return list.filter(p=>p.status==='approved');
+}
 
 async function signedUrl(path){
   const c=S.urlCache[path];
@@ -479,6 +521,7 @@ function updateHeader(){
   hdr.style.display='';
   const who=$('who');
   if(isAdmin()) who.innerHTML='<b>'+esc(S.profile.full_name||'Admin')+'</b>Admin · '+esc(S.settings.company_name||'Gujraj Impex');
+  else if(isStaff()) who.innerHTML='<b>'+esc(S.profile.full_name||S.profile.email||'Staff')+'</b>Production floor';
   else{
     const b=S.buyersById[S.profile.buyer_id];
     who.innerHTML='<b>'+esc(b?b.company:(S.profile.full_name||''))+'</b>Buyer portal';
@@ -487,9 +530,102 @@ function updateHeader(){
   if(isAdmin()){
     tabs.style.display='';
     const cur=location.hash||'#/home';
-    const T=[['#/home','Orders'],['#/buyers','Buyers & logins'],['#/activity','Activity'],['#/import','Import'],['#/settings','Settings']];
+    const nPend=pendingPhotos().length;
+    const T=[['#/home','Orders'],['#/approvals','Photo approvals'+(nPend?' ('+nPend+')':'')],['#/buyers','Buyers & logins'],['#/activity','Activity'],['#/import','Import'],['#/settings','Settings']];
     tabs.innerHTML=T.map(t=>'<button class="tab'+(cur.indexOf(t[0])===0?' on':'')+'" onclick="go(\''+t[0]+'\')">'+t[1]+'</button>').join('');
-  } else tabs.style.display='none';
+  } else { tabs.style.display='none'; tabs.innerHTML=''; }
+}
+
+function photoStatusChip(p){
+  if(p.status==='pending') return '<span class="chip c-amber" style="position:absolute;left:4px;bottom:4px;font-size:10px">Pending</span>';
+  if(p.status==='rejected') return '<span class="chip c-red" style="position:absolute;left:4px;bottom:4px;font-size:10px">Rejected</span>';
+  return '';
+}
+
+function vStaffHome(){
+  const q=(window.__staffQ||'').toLowerCase();
+  let items=S.items.slice();
+  if(q) items=items.filter(it=>((it.product||'')+' '+(it.stone||'')+' '+(it.finish||'')).toLowerCase().indexOf(q)>=0);
+  const openItems=items.filter(it=>it.status!=='delivered'&&it.status!=='cancelled');
+  const doneItems=items.filter(it=>it.status==='delivered'||it.status==='cancelled');
+  const mine=S.photos.filter(p=>p.uploaded_by===uid());
+  const pend=mine.filter(p=>p.status==='pending').length;
+  const rej=mine.filter(p=>p.status==='rejected').length;
+
+  let h='<div class="sect" style="margin-top:18px">Production floor</div>'+
+    '<div class="sub">Products in the workshop. Tap one to see its stages and add photos.</div>'+
+    '<div class="kpis"><div class="kpi"><b>'+openItems.length+'</b><span>In workshop</span></div>'+
+    '<div class="kpi"><b>'+mine.filter(p=>p.status==='approved').length+'</b><span>Photos approved</span></div>'+
+    '<div class="kpi"><b>'+pend+'</b><span>Awaiting approval</span></div>'+
+    '<div class="kpi"><b>'+rej+'</b><span>Needs redo</span></div></div>';
+  if(pend) h+='<div class="attn" style="cursor:default">'+pend+' photo'+(pend>1?'s':'')+' waiting for approval. They reach the client only after approval.</div>';
+  if(rej) h+='<div class="attn red" style="cursor:default">'+rej+' photo'+(rej>1?'s were':' was')+' sent back. Please reshoot and upload again.</div>';
+
+  h+='<div class="card"><input id="staff-q" placeholder="Search product or stone…" value="'+esc(window.__staffQ||'')+'" oninput="staffSearch(this.value)">';
+  h+=(openItems.length?openItems.map(staffItemRow).join(''):'<div class="empty">Nothing matches.</div>');
+  h+='</div>';
+  if(doneItems.length) h+='<div class="sect">Completed</div><div class="card">'+doneItems.map(staffItemRow).join('')+'</div>';
+  $('app').innerHTML=h;
+  hydrateImages();
+}
+
+function staffItemRow(it){
+  const st=S.stagesById[it.current_stage_id];
+  const ph=(S.photosByItem[it.id]||[]);
+  const thumb=ph[0];
+  const ship=it.po&&it.po.expected_ship_date;
+  const late=ship && new Date(ship) < new Date() && it.status!=='shipped' && it.status!=='delivered';
+  return '<div class="item-row" onclick="go(\'#/item/'+it.id+'\')">'+
+    (thumb?'<div class="thumb"><img alt="" data-ph-path="'+esc(thumb.path)+'"></div>':'')+
+    '<div class="item-main"><div class="item-name">'+esc(it.product)+(it.qty>1?' <span class="meta">× '+(+it.qty)+' '+esc(it.unit||'pcs')+'</span>':'')+'</div>'+
+      '<div class="item-sub">'+esc([it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+'</div>'+
+      '<div class="row mt8">'+(st?'<span class="chip c-bronze">'+esc(st.name)+'</span>':'')+
+        (ship?'<span class="chip '+(late?'c-red':'c-grey')+'">Ship by '+fdate(ship)+'</span>':'')+
+        (ph.filter(p=>p.status==='pending').length?'<span class="chip c-amber">'+ph.filter(p=>p.status==='pending').length+' pending</span>':'')+
+      '</div>'+
+    '</div>'+
+    '<div class="meta">📷 '+ph.length+'</div>'+
+  '</div>';
+}
+function staffSearch(v){ window.__staffQ=v; vStaffHome(); const i=$('staff-q'); if(i){ i.focus(); i.setSelectionRange(i.value.length,i.value.length); } }
+
+function vApprovals(){
+  if(!isAdmin()) return vHome();
+  const pend=pendingPhotos();
+  let h='<div class="sect" style="margin-top:18px">Photo approvals</div>'+
+    '<div class="sub">Photos uploaded by staff. The client sees them only after you approve.</div>';
+  if(!pend.length){ h+='<div class="empty">Nothing waiting. Staff uploads will appear here.</div>'; }
+  else{
+    const byItem={};
+    pend.forEach(p=>{ const k=p.item_id||('po-'+p.po_id); (byItem[k]=byItem[k]||[]).push(p); });
+    Object.keys(byItem).forEach(k=>{
+      const list=byItem[k]; const first=list[0];
+      const it=first.item_id?S.itemsById[first.item_id]:null;
+      const po=it?it.po:S.posById[first.po_id];
+      const who=S.profilesAll.find(x=>x.user_id===first.uploaded_by);
+      h+='<div class="card"><div class="row"><b>'+esc(it?it.product:'Order photos')+'</b>'+
+        (po?'<span class="chip c-grey">'+esc(po.po_number||'')+'</span>':'')+
+        '<span class="sp"></span><span class="meta">by '+esc(who?(who.full_name||who.email):'staff')+' · '+ftime(first.created_at)+'</span></div>'+
+        '<div class="ph-grid">'+list.map(p=>{
+          const st=S.stagesById[p.stage_id];
+          return '<div class="ph" onclick="openPhoto(event,this)" data-ph-path="'+esc(p.path)+'" data-cap="'+esc(st?st.name:'')+'">'+
+            '<img alt="" data-ph-path="'+esc(p.path)+'">'+(st?'<span class="chip c-grey" style="position:absolute;left:4px;bottom:4px;font-size:10px">'+esc(st.name)+'</span>':'')+'</div>';
+        }).join('')+'</div>'+
+        '<div class="btnrow"><button class="btn grn" onclick="setPhotoStatus('+JSON.stringify(list.map(p=>p.id)).replace(/"/g,'&quot;')+',\'approved\')">Approve all ('+list.length+')</button>'+
+        '<button class="btn dgr" onclick="setPhotoStatus('+JSON.stringify(list.map(p=>p.id)).replace(/"/g,'&quot;')+',\'rejected\')">Send back</button>'+
+        (it?'<button class="btn" onclick="go(\'#/item/'+it.id+'\')">Open item</button>':'')+'</div>'+
+      '</div>';
+    });
+  }
+  const rej=S.photos.filter(p=>p.status==='rejected');
+  if(rej.length){
+    h+='<div class="sect">Sent back</div><div class="card"><div class="ph-grid">'+rej.map(p=>
+      '<div class="ph" onclick="openPhoto(event,this)" data-ph-path="'+esc(p.path)+'" data-cap=""><img alt="" data-ph-path="'+esc(p.path)+'">'+
+      '<button class="del" onclick="delPhoto(event, \''+p.id+'\',\''+esc(p.path)+'\')">✕</button></div>').join('')+'</div>'+
+      '<div class="note-sm mt8">These stay hidden from the client. Delete them once the staff have reshot.</div></div>';
+  }
+  $('app').innerHTML=h;
+  hydrateImages();
 }
 
 function vLogin(msg){
@@ -511,6 +647,10 @@ function vLogin(msg){
 
 function attentionBlocks(){
   let h='';
+  if(isAdmin()){
+    const np=pendingPhotos().length;
+    if(np) h+='<div class="attn" onclick="go(\'#/approvals\')"><b>'+np+' staff photo'+(np>1?'s':'')+' waiting for your approval</b> · the client cannot see them yet</div>';
+  }
   pendingApprovals().forEach(a=>{
     const mine=!isAdmin();
     h+='<div class="attn'+(mine?' red':'')+'" onclick="go(\'#/item/'+a.item.id+'\')">'+
@@ -663,7 +803,7 @@ function vPO(id){
     (isAdmin()?'<button class="btn sm" onclick="mBulk(\''+p.id+'\')">Bulk update</button><button class="btn sm pri" onclick="mItem(\''+p.id+'\',null)">+ Add item</button>':'')+'</div>'+
     (p.items.length?p.items.map(itemRow).join(''):'<div class="sub mt8">No items yet.</div>')+'</div>';
 
-  const poPh=S.photosByPo[p.id]||[];
+  const poPh=visiblePhotos(S.photosByPo[p.id]||[]);
   if(poPh.length||isAdmin()){
     h+='<div class="card"><div class="row"><b>Order photos</b><span class="sp"></span>'+
       (isAdmin()?'<button class="btn sm pri" onclick="pickPhotos(null,null,\''+p.id+'\')">+ Photos</button>':'')+'</div>'+
@@ -685,12 +825,15 @@ function vPO(id){
 }
 
 function photoGrid(itemId, stageId, editable){
-  const list=(S.photosByItem[itemId]||[]).filter(x=>x.stage_id===stageId);
+  const list=visiblePhotos((S.photosByItem[itemId]||[]).filter(x=>x.stage_id===stageId));
   if(!list.length) return '';
-  return '<div class="ph-grid">'+list.map(x=>'<div class="ph" onclick="openPhoto(event, this)" data-ph-path="'+esc(x.path)+'" data-cap="'+esc(x.caption||'')+'">'+
-    '<img alt="" data-ph-path="'+esc(x.path)+'">'+
-    (editable?'<button class="del" onclick="delPhoto(event, \''+x.id+'\',\''+esc(x.path)+'\')">✕</button>':'')+
-  '</div>').join('')+'</div>';
+  return '<div class="ph-grid">'+list.map(x=>{
+    const canDel = isAdmin() || (isStaff() && x.uploaded_by===uid() && x.status!=='approved');
+    return '<div class="ph" onclick="openPhoto(event, this)" data-ph-path="'+esc(x.path)+'" data-cap="'+esc(x.caption||'')+'">'+
+    '<img alt="" data-ph-path="'+esc(x.path)+'">'+ photoStatusChip(x)+
+    (canDel?'<button class="del" onclick="delPhoto(event, \''+x.id+'\',\''+esc(x.path)+'\')">✕</button>':'')+
+    (isAdmin()&&x.status==='pending'?'<button class="del" style="right:29px;background:rgba(62,125,84,.9)" title="Approve" onclick="event.stopPropagation();setPhotoStatus([\''+x.id+'\'],\'approved\')">✓</button>':'')+
+  '</div>'; }).join('')+'</div>';
 }
 
 function commentsBlock(it, stageId){
@@ -747,11 +890,13 @@ function vItem(id){
   const it=S.itemsById[id];
   if(!it){ $('app').innerHTML='<div class="empty">Item not found.</div>'; return; }
   const p=it.po;
-  let h='<div class="row" style="margin-top:14px"><button class="btn sm" onclick="go(\'#/po/'+p.id+'\')">← '+esc(p.po_number)+'</button></div>';
+  const staff=isStaff();
+  let h='<div class="row" style="margin-top:14px"><button class="btn sm" onclick="go(\''+(staff?'#/home':'#/po/'+p.id)+'\')">← '+(staff?'Production floor':esc(p.po_number))+'</button></div>';
   h+='<div class="card"><div class="row"><div style="flex:1"><div class="item-name" style="font-size:18px">'+esc(it.product)+(it.qty>1?' <span class="meta">× '+(+it.qty)+' '+esc(it.unit||'pcs')+'</span>':'')+'</div>'+
     '<div class="item-sub">'+esc([it.stone,it.finish].filter(Boolean).join(' · '))+'</div>'+
     (dimsOf(it)?'<div class="item-sub">'+esc(dimsOf(it))+'</div>':'')+
     (it.target_date?'<div class="item-sub">Target: '+fdate(it.target_date)+'</div>':'')+
+    (staff&&p.expected_ship_date?'<div class="item-sub">Ship by: '+fdate(p.expected_ship_date)+'</div>':'')+
     (it.description?'<div class="sub mt8">'+esc(it.description)+'</div>':'')+
     '</div><div>'+statusChip(it)+'</div></div>'+
     '<div class="row mt8"><div class="pbar" style="flex:1"><i style="width:'+Math.round(it.progress*100)+'%"></i></div><span class="meta">'+Math.round(it.progress*100)+'%</span></div>'+
@@ -759,6 +904,8 @@ function vItem(id){
     (isAdmin()?'<div class="btnrow"><button class="btn sm pri" onclick="pickPhotos(\''+it.id+'\',null)">+ Photos</button>'+
       '<button class="btn sm" onclick="mItem(\''+p.id+'\',\''+it.id+'\')">Edit item</button>'+
       '<button class="btn sm wa" onclick="waItem(\''+it.id+'\')">WhatsApp update</button></div>':'')+
+    (staff?'<div class="btnrow"><button class="btn pri" onclick="pickPhotos(\''+it.id+'\',null)">📷 Add photos of this product</button></div>'+
+      '<div class="note-sm mt8">Your photos are checked by the office before the client sees them.</div>':'')+
   '</div>';
 
   const rows=S.stByItem[it.id]||[];
@@ -782,16 +929,16 @@ function vItem(id){
         (st.approval_gate?' <span class="chip c-amber" style="font-size:10px">Approval gate</span>':'')+
         '<span class="sp"></span>'+
         (stagePhotos?'<span class="meta">📷 '+stagePhotos+'</span>':'')+
-        (stageComments?'<span class="meta">💬 '+stageComments+'</span>':'')+
-        (isAdmin()?'<button class="btn sm" style="padding:2px 8px" title="Add photos to this stage" onclick="event.stopPropagation();pickPhotos(\''+it.id+'\','+st.id+')">📷+</button>':'')+
+        (stageComments&&!isStaff()?'<span class="meta">💬 '+stageComments+'</span>':'')+
+        (isAdmin()||isStaff()?'<button class="btn sm" style="padding:2px 8px" title="Add photos to this stage" onclick="event.stopPropagation();pickPhotos(\''+it.id+'\','+st.id+')">📷+</button>':'')+
         '<span class="tl-date">'+dates+'</span></div>'+
       (open?
         ((st.description&&!isAdmin())?'<div class="tl-desc">'+esc(st.description)+'</div>':'')+
         (row.note?'<div class="tl-note">'+esc(row.note)+'</div>':'')+
-        approvalBlock(it,row,st)+
+        (isStaff()?'':approvalBlock(it,row,st))+
         photoGrid(it.id, st.id, isAdmin())+
         adminStageControls(it,row,st)+
-        commentsBlock(it, st.id)
+        (isStaff()?'<div class="btnrow"><button class="btn sm pri" onclick="pickPhotos(\''+it.id+'\','+st.id+')">📷 Add photos</button></div>':commentsBlock(it, st.id))
       :'')+
       '</div></div>';
   });
@@ -799,7 +946,7 @@ function vItem(id){
   h+='<div style="height:30px"></div>';
   $('app').innerHTML=h;
   hydrateImages();
-  markRead(it.id);
+  if(!isStaff()) markRead(it.id);
 }
 
 function vActivity(){
@@ -827,8 +974,17 @@ function vBuyers(){
       '<div class="btnrow"><button class="btn sm" onclick="mNewLogin(\''+b.id+'\')">+ Create login</button></div>'+
     '</div>';
   });
+  const staff=S.profilesAll.filter(x=>x.role==='staff');
+  h+='<div class="card"><div class="row"><b>Office / floor staff logins</b><span class="sp"></span><button class="btn sm pri" onclick="mNewLogin(null,\'staff\')">+ Add staff</button></div>'+
+    '<div class="note-sm mt8">Staff see the products being made, their stages and ship-by dates, and can upload photos. They never see client names, PO numbers, prices, comments or documents, and their photos reach the client only after you approve them.</div>'+
+    (staff.length?staff.map(l=>'<div class="row mt8"><span>'+esc(l.email)+'</span>'+(l.full_name?'<span class="meta">'+esc(l.full_name)+'</span>':'')+'<span class="sp"></span>'+
+      '<button class="btn sm" onclick="mResetPw(\''+l.user_id+'\',\''+esc(l.email)+'\')">Reset password</button>'+
+      '<button class="btn sm dgr" onclick="delLogin(\''+l.user_id+'\',\''+esc(l.email)+'\')">Remove</button></div>').join('')
+     :'<div class="sub mt8">No staff logins yet.</div>')+
+  '</div>';
+
   const admins=S.profilesAll.filter(x=>x.role==='admin');
-  h+='<div class="card"><div class="row"><b>Admin logins</b><span class="sp"></span><button class="btn sm" onclick="mNewLogin(null)">+ Add admin</button></div>'+
+  h+='<div class="card"><div class="row"><b>Admin logins</b><span class="sp"></span><button class="btn sm" onclick="mNewLogin(null,\'admin\')">+ Add admin</button></div>'+
     admins.map(l=>'<div class="row mt8"><span>'+esc(l.email)+'</span><span class="sp"></span>'+
       (l.user_id!==uid()?'<button class="btn sm" onclick="mResetPw(\''+l.user_id+'\',\''+esc(l.email)+'\')">Reset password</button>':'<span class="chip c-grey">you</span>')+'</div>').join('')+
   '</div>';
@@ -891,8 +1047,14 @@ function render(){
   const hash=location.hash||'#/home';
   const parts=hash.slice(2).split('/');
   window.scrollTo(0,0);
+  if(isStaff()){
+    if(parts[0]==='item' && parts[1]) vItem(parts[1]);
+    else vStaffHome();
+    return;
+  }
   if(parts[0]==='po' && parts[1]) vPO(parts[1]);
   else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
+  else if(parts[0]==='approvals') vApprovals();
   else if(parts[0]==='buyers') vBuyers();
   else if(parts[0]==='settings') vSettings();
   else if(parts[0]==='activity') vActivity();
@@ -1016,23 +1178,40 @@ function pickPhotos(itemId, stageId, poId){
     const files=[...inp.files]; if(!files.length) return;
     toast('Uploading '+files.length+' photo'+(files.length>1?'s':'')+'…');
     const it=itemId?S.itemsById[itemId]:null;
-    const buyerId=it?it.po.buyer_id:(S.posById[poId]||{}).buyer_id;
+    const staff=isStaff();
+    const buyerId=staff?null:(it?it.po.buyer_id:(S.posById[poId]||{}).buyer_id);
     const stKey=stageId?((S.stagesById[stageId]||{}).key||'stage'):(itemId?'item':'order');
-    const base=itemId?(buyerId+'/items/'+itemId+'/'):(buyerId+'/po/'+poId+'/');
+    const base=staff?('staff/'+(itemId||poId)+'/')
+                    :(itemId?(buyerId+'/items/'+itemId+'/'):(buyerId+'/po/'+poId+'/'));
     let ok=0;
     for(let i=0;i<files.length;i++){
       const blob=await resizeImage(files[i]);
       const path=base+stKey+'-'+Date.now()+'-'+i+'.jpg';
       const up=await sb.storage.from(CONFIG.bucket).upload(path, blob, {contentType:'image/jpeg'});
       if(up.error){ toast('Upload failed: '+up.error.message,{err:true}); continue; }
-      const ins=await sb.from('bt_photos').insert({item_id:itemId||null, stage_id:stageId||null, po_id:poId||null, path, uploaded_by:uid()});
+      const ins=await sb.from('bt_photos').insert({item_id:itemId||null, stage_id:stageId||null, po_id:poId||null,
+        path, uploaded_by:uid(), status: staff?'pending':'approved'});
       if(!ins.error) ok++;
     }
     if(itemId&&stageId) window.__openStages[itemId+'-'+stageId]=true;
     await loadData(); render();
-    if(ok) toast(ok+' photo'+(ok>1?'s':'')+' added');
+    if(ok) toast(staff? (ok+' photo'+(ok>1?'s':'')+' sent to the office for approval') : (ok+' photo'+(ok>1?'s':'')+' added'));
   };
   inp.click();
+}
+
+async function setPhotoStatus(ids, status){
+  if(!isAdmin()) return;
+  if(status==='rejected' && !confirm('Send these photos back to the staff? The client will not see them.')) return;
+  const {error}=await sb.from('bt_photos').update({status}).in('id', ids);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
+  if(status==='approved'){
+    const first=S.photos.find(p=>p.id===ids[0]);
+    const it=first&&first.item_id?S.itemsById[first.item_id]:null;
+    if(it) offerWhatsApp(it, (S.settings.company_name||'Gujraj Impex')+' — new photos\n'+it.product+' ('+(it.po?it.po.po_number:'')+')\nPlease see the latest photos on your tracker: '+trackerUrl());
+    else toast(ids.length+' photo'+(ids.length>1?'s':'')+' approved and now visible to the client');
+  } else toast('Sent back to staff');
 }
 async function delPhoto(ev, id, path){
   ev.stopPropagation();
@@ -1290,20 +1469,32 @@ async function adminApi(body){
   if(!res.ok||out.error) throw new Error(out.error||('HTTP '+res.status));
   return out;
 }
-function mNewLogin(buyerId){
+function mNewLogin(buyerId, kind){
+  const role = buyerId ? 'buyer' : (kind||'admin');
+  const title = role==='buyer'?'Buyer login':(role==='staff'?'Staff login':'Admin login');
   const pw=genPassword();
-  const m=modal('<h3>'+(buyerId?'Buyer login':'Admin login')+'</h3>'+
+  const m=modal('<h3>'+title+'</h3>'+
     (buyerId?'<div class="sub">'+esc((S.buyersById[buyerId]||{}).company||'')+'</div>':'')+
-    '<label>Email</label><input id="lg-em" type="email" placeholder="name@company.com">'+
+    (role==='staff'?'<div class="sub">Sees products, stages and ship-by dates. No client names, no PO numbers, no prices. Photos need your approval.</div>':'')+
+    (role==='staff'?'<label>Name</label><input id="lg-nm" placeholder="e.g. Kunal">':'')+
+    '<label>Email</label><input id="lg-em" type="email" placeholder="'+(role==='staff'?'kunal@gujraj-impex.local':'name@company.com')+'">'+
     '<label>Password</label><input id="lg-pw" value="'+pw+'">'+
-    '<div class="note-sm mt8">Share these by WhatsApp once created. The buyer cannot reset the password himself — you can, from this screen.</div>'+
+    '<div class="note-sm mt8">'+(role==='staff'
+      ?'Any email address works, even one that does not exist — it is only a username. Note it down and hand it over.'
+      :'Share these by WhatsApp once created. The buyer cannot reset the password himself — you can, from this screen.')+'</div>'+
     '<div class="btnrow"><button class="btn pri" id="lg-go">Create login</button><button class="btn" onclick="closeModal()">Cancel</button></div>');
   m.m.querySelector('#lg-go').onclick=async ()=>{
     const email=$('lg-em').value.trim(), password=$('lg-pw').value;
     if(!email){ toast('Email required',{err:true}); return; }
+    const nm=$('lg-nm');
     try{
-      await adminApi({action:'create_user', email, password, role:buyerId?'buyer':'admin', buyer_id:buyerId, full_name:buyerId?(S.buyersById[buyerId]||{}).contact_name:null});
+      await adminApi({action:'create_user', email, password, role, buyer_id:buyerId||null,
+        full_name: role==='staff'?(nm?nm.value.trim():null):(buyerId?(S.buyersById[buyerId]||{}).contact_name:null)});
       closeModal(); await loadData(); render();
+      if(role==='staff'){
+        toast('Staff login created.', {action:'Copy ▸', onAction:()=>copyText('Gujraj Impex production floor\n'+trackerUrl()+'\nEmail: '+email+'\nPassword: '+password)});
+        return;
+      }
       const b=buyerId?S.buyersById[buyerId]:null;
       toast('Login created.', {action:'Send on WhatsApp ▸', onAction:()=>{
         const text='Your '+(S.settings.company_name||'Gujraj Impex')+' order tracker access:\n'+trackerUrl()+'\nEmail: '+email+'\nPassword: '+password;
