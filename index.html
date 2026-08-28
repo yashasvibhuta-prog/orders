@@ -378,6 +378,13 @@ function countdown(d, done){
   return '<span class="cd'+(n<=7?' soon':'')+'">'+n+' day'+(n===1?'':'s')+' to delivery</span>';
 }
 
+function money(v, cur){
+  if(v==null||v==='') return '';
+  const n=Number(v); if(!isFinite(n)) return '';
+  try{ return new Intl.NumberFormat('en-IN',{style:'currency',currency:cur||'INR',maximumFractionDigits:0}).format(n); }
+  catch(e){ return (cur||'INR')+' '+n.toLocaleString('en-IN'); }
+}
+
 function csvParse(text){
   const rows=[]; let row=[], cur='', q=false;
   for(let i=0;i<text.length;i++){
@@ -467,11 +474,12 @@ async function loadCore(){
 
 async function loadStaffData(){
   // Staff never query buyers, POs, comments or documents — the shop floor view only.
-  const [it, st, ph, sp] = await Promise.all([
+  const [it, st, ph, sp, dc] = await Promise.all([
     sb.from('bt_order_items').select('*, bt_item_stages(*)').order('created_at',{ascending:false}),
     Promise.resolve({data:S.stages}),
     sb.from('bt_photos').select('*').order('created_at'),
-    sb.rpc('bt_staff_pos')
+    sb.rpc('bt_staff_pos'),
+    sb.from('bt_documents').select('*').order('created_at')
   ]);
   const err=[it,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -492,6 +500,7 @@ async function loadStaffData(){
     x.progress = activeStageIds.length? Math.min(1,(done+inprog)/activeStageIds.length):0;
   });
   indexPhotos(ph.data||[]);
+  S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
 }
 
@@ -760,7 +769,7 @@ function staffItemRow(it){
   return '<div class="item-row" onclick="go(\'#/item/'+it.id+'\')">'+
     (thumb?'<div class="thumb"><img alt="" data-ph-path="'+esc(thumb.path)+'"></div>':'')+
     '<div class="item-main"><div class="item-name">'+esc(it.product)+(it.qty>1?' <span class="qty">× '+(+it.qty)+' '+esc(it.unit||'pcs')+'</span>':'')+'</div>'+
-      '<div class="item-sub">'+esc([it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+'</div>'+
+      '<div class="item-sub">'+esc([it.item_ref, it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+'</div>'+
       '<div class="row mt8">'+(st?'<span class="chip c-bronze">'+esc(st.name)+'</span>':'')+
         (ship?countdown(ship, it.status==='delivered'):'')+
         (ship?'<span class="meta">Ship by '+fdate(ship)+'</span>':'')+
@@ -987,7 +996,7 @@ function itemRow(it){
 }
 
 function shipPanel(p, always){
-  const rows=[['Mode',p.ship_mode],['Forwarder / transporter',p.forwarder],['Container / LR no.',p.container_no],['Vessel',p.vessel],
+  const rows=[['Ship to',p.ship_to],['Mode',p.ship_mode],['Forwarder / transporter',p.forwarder],['Container / LR no.',p.container_no],['Vessel',p.vessel],
     ['Port of loading',p.port_loading],['Port of discharge',p.port_discharge],['ETD',fdate(p.etd)],['ETA',fdate(p.eta)],
     ['Shipped on',fdate(p.shipped_at)],['Delivered on',fdate(p.delivered_at)]].filter(r=>r[1]);
   const any=rows.length||p.tracking_url||p.shipping_notes;
@@ -1009,7 +1018,9 @@ function docsPanel(p, always){
     (isAdmin()?'<button class="btn sm" onclick="pickDoc(\''+p.id+'\')">Upload</button>':'')+'</div>';
   if(!docs.length) h+='<div class="sub mt8">No documents yet.</div>';
   else h+=docs.map(d=>'<div class="row mt8"><a href="javascript:void(0)" onclick="openDoc(\''+esc(d.path)+'\')">'+esc(d.name)+'</a>'+
-    (d.doc_type?'<span class="chip c-grey">'+esc(d.doc_type)+'</span>':'')+'<span class="sp"></span><span class="meta">'+fdate(d.created_at&&d.created_at.slice(0,10))+'</span>'+
+    (d.doc_type?'<span class="chip c-grey">'+esc(d.doc_type)+'</span>':'')+
+    (isAdmin()?(d.for_staff?'<span class="chip c-bronze" style="font-size:10px">floor</span>':'')+(d.for_buyer?'<span class="chip c-blue" style="font-size:10px">buyer</span>':''):'')+
+    '<span class="sp"></span><span class="meta">'+fdate(d.created_at&&d.created_at.slice(0,10))+'</span>'+
     (isAdmin()?' <button class="btn sm dgr" onclick="delDoc(\''+d.id+'\',\''+esc(d.path)+'\')">✕</button>':'')+'</div>').join('');
   h+='</div>';
   return h;
@@ -1034,7 +1045,9 @@ function vPO(id){
   main+='<div class="kpis">'+
     '<div class="kpi"><b style="'+small+'">'+(cur?esc(cur.name):'—')+'</b><span>Current stage</span></div>'+
     '<div class="kpi"><b>'+stagesDone+'%</b><span>Overall progress</span></div>'+
-    '<div class="kpi"><b>'+p.items.length+'</b><span>Items on order</span></div>'+
+    (p.amount_total!=null
+      ? '<div class="kpi"><b style="'+small+'">'+esc(money(p.amount_total,p.currency))+'</b><span>'+esc(p.payment_terms||'PO value')+'</span></div>'
+      : '<div class="kpi"><b>'+p.items.length+'</b><span>Items on order</span></div>')+
     '<div class="kpi"><b style="'+small+'">'+(p.expected_ship_date?countdown(p.expected_ship_date, allDone||p.status==='completed'):'—')+'</b>'+
       '<span>'+(p.expected_ship_date?('Planned '+fdate(p.expected_ship_date)):'Delivery')+'</span></div>'+
   '</div>';
@@ -1141,7 +1154,7 @@ function vItem(id){
   const itDone = it.status==='delivered';
   let h='<div class="crumb"><button class="btn sm" onclick="go(\''+(staff?'#/home':'#/po/'+p.id)+'\')">← '+(staff?'Production floor':esc(p.po_number))+'</button></div>'+
     '<div class="page-h">'+esc(it.product)+'</div>'+
-    '<div class="sub">'+esc([(+it.qty)+' '+(it.unit||'pcs'), it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+'</div>';
+    '<div class="sub">'+esc([(+it.qty)+' '+(it.unit||'pcs'), it.item_ref, it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+'</div>';
   h+='<div class="card"><div class="row">'+statusChip(it)+
       (S.stagesById[it.current_stage_id]?'<span class="chip c-bronze">'+esc(S.stagesById[it.current_stage_id].name)+'</span>':'')+
       (due?countdown(due, itDone):'')+
@@ -1154,7 +1167,11 @@ function vItem(id){
       '<button class="btn sm wa" onclick="waItem(\''+it.id+'\')">WhatsApp update</button></div>':'')+
     (staff?'<div class="btnrow"><button class="btn pri" onclick="pickPhotos(\''+it.id+'\',null)">📷 Add photos of this product</button></div>'+
       '<div class="note-sm mt8">Your photos are checked by the office before the client sees them.</div>':'')+
-  '</div>';
+  '</div>'+
+  (staff&&(S.staffDocs||[]).filter(d=>d.po_id===it.po_id).length
+    ? '<div class="card"><b>Drawings</b>'+(S.staffDocs||[]).filter(d=>d.po_id===it.po_id).map(d=>
+        '<div class="row mt8"><a href="javascript:void(0)" onclick="openDoc(\''+esc(d.path)+'\')">'+esc(d.name)+'</a></div>').join('')+'</div>'
+    : '');
 
   const rows=S.stByItem[it.id]||[];
   const rowByStage={}; rows.forEach(r=>rowByStage[r.stage_id]=r);
@@ -1524,8 +1541,11 @@ function pickDoc(poId){
     const path=p.buyer_id+'/po/'+poId+'/'+Date.now()+'-'+clean;
     const up=await sb.storage.from(CONFIG.bucket).upload(path, f, {contentType:f.type||'application/octet-stream'});
     if(up.error){ toast('Upload failed: '+up.error.message,{err:true}); return; }
-    const type=prompt('Document type (e.g. PO copy, Proforma invoice, Packing list, Invoice, BL/LR):','')||null;
-    await sb.from('bt_documents').insert({po_id:poId, name:f.name, doc_type:type, path, uploaded_by:uid()});
+    const type=prompt('Document type (e.g. PO copy, Drawing, Packing list, Invoice, BL/LR):','')||null;
+    const isDwg=/draw/i.test(type||'');
+    await sb.from('bt_documents').insert({po_id:poId, name:f.name, doc_type:type, path, uploaded_by:uid(),
+      for_staff:isDwg||confirm('Show this document to the production staff?'),
+      for_buyer:confirm('Show this document to the buyer?')});
     await loadData(); render();
   };
   inp.click();
@@ -1567,37 +1587,114 @@ function waPO(poId){
 }
 
 /* ---------- PO / item CRUD ---------- */
+function poFields(p){
+  p=p||{};
+  return '<div class="grid2"><div><label>PO number *</label><input id="po-num" value="'+esc(p.po_number||'')+'"></div>'+
+    '<div><label>Project</label><input id="po-proj" value="'+esc(p.project||'')+'"></div>'+
+    '<div><label>PO date</label><input id="po-date" type="date" value="'+esc(p.po_date||today())+'"></div>'+
+    '<div><label>Delivery / ship by</label><input id="po-esd" type="date" value="'+esc(p.expected_ship_date||'')+'"></div>'+
+    '<div><label>PO value</label><input id="po-val" type="number" step="0.01" inputmode="decimal" value="'+esc(p.amount_total!=null?p.amount_total:'')+'" placeholder="e.g. 269630"></div>'+
+    '<div><label>Payment terms</label><input id="po-pay" value="'+esc(p.payment_terms||'')+'" placeholder="e.g. 100% advance"></div></div>'+
+    '<label>Reference (indent, PIO, BOM…)</label><input id="po-ref" value="'+esc(p.reference||'')+'">'+
+    '<label>Shipping address</label><textarea id="po-ship" rows="2">'+esc(p.ship_to||'')+'</textarea>'+
+    '<label>Notes (visible to buyer)</label><textarea id="po-notes" rows="2">'+esc(p.notes||'')+'</textarea>'+
+    '<div class="note-sm">PO value and payment terms are visible to you and to this buyer. Staff logins can never read them.</div>';
+}
+function poFieldValues(){
+  return {po_number:$('po-num').value.trim(), project:$('po-proj').value.trim()||null,
+    po_date:$('po-date').value||null, expected_ship_date:$('po-esd').value||null,
+    amount_total:$('po-val').value?Number($('po-val').value):null,
+    payment_terms:$('po-pay').value.trim()||null, reference:$('po-ref').value.trim()||null,
+    ship_to:$('po-ship').value.trim()||null, notes:$('po-notes').value.trim()||null};
+}
+
 function mNewPO(){
+  window.__poFiles={img:[], dwg:[]};
   const m=modal('<h3>New purchase order</h3>'+
-    '<label>Buyer</label><select id="po-buyer">'+S.buyers.filter(b=>b.active).map(b=>'<option value="'+b.id+'"'+(S.buyerFilter===b.id?' selected':'')+'>'+esc(b.company)+'</option>').join('')+'</select>'+
-    '<div class="grid2"><div><label>PO number</label><input id="po-num"></div><div><label>PO date</label><input id="po-date" type="date" value="'+today()+'"></div></div>'+
-    '<label>Project / reference</label><input id="po-proj">'+
-    '<label>Expected ship date</label><input id="po-esd" type="date">'+
-    '<label>Notes (visible to buyer)</label><textarea id="po-notes" rows="2"></textarea>'+
-    '<div class="btnrow"><button class="btn pri" id="po-save">Create</button><button class="btn" onclick="closeModal()">Cancel</button></div>');
+    '<label>Buyer *</label><select id="po-buyer">'+S.buyers.filter(b=>b.active).map(b=>'<option value="'+b.id+'"'+(S.buyerFilter===b.id?' selected':'')+'>'+esc(b.company)+'</option>').join('')+'</select>'+
+    '<div class="note-sm mt8">The buyer you pick here is the only login that will ever see this order.</div>'+
+    poFields(null)+
+    '<label>First product (optional — you can add more later)</label><input id="po-prod" placeholder="e.g. Red Travertine stone block">'+
+    '<div class="grid3"><div><label>Qty</label><input id="po-qty" type="number" min="1" value="1"></div>'+
+    '<div><label>Unit</label><input id="po-unit" value="pcs"></div>'+
+    '<div><label>Item code</label><input id="po-iref" placeholder="STONE BLOCK-079"></div></div>'+
+    '<div class="grid3"><div><label>L (mm)</label><input id="po-l" type="number"></div>'+
+    '<div><label>W (mm)</label><input id="po-w" type="number"></div>'+
+    '<div><label>H (mm)</label><input id="po-h" type="number"></div></div>'+
+    '<div class="card" style="background:#faf6ee"><b>Product images &amp; drawings</b>'+
+      '<div class="note-sm mt8">Optional. Reference images go to the buyer and the floor; drawings go to the floor and, if you tick the box, to the buyer.</div>'+
+      '<div class="btnrow"><button class="btn" id="pf-img">📷 Product images</button>'+
+      '<button class="btn" id="pf-dwg">📄 Drawings (PDF or image)</button></div>'+
+      '<div class="checkbox-row"><input type="checkbox" id="pf-dwg-buyer"> <span>Also show drawings to the buyer</span></div>'+
+      '<div id="pf-list" class="note-sm mt8">No files chosen.</div>'+
+    '</div>'+
+    '<div class="btnrow"><button class="btn pri" id="po-save">Create order</button><button class="btn" onclick="closeModal()">Cancel</button></div>');
+
+  const listEl=()=>m.m.querySelector('#pf-list');
+  const paint=()=>{ const f=window.__poFiles;
+    listEl().innerHTML = (!f.img.length&&!f.dwg.length) ? 'No files chosen.'
+      : [f.img.length?f.img.length+' image'+(f.img.length>1?'s':''):'', f.dwg.length?f.dwg.length+' drawing'+(f.dwg.length>1?'s':''):''].filter(Boolean).join(' · ')+' ready to upload'; };
+  const pick=(kind, accept)=>{ const i=document.createElement('input'); i.type='file'; i.multiple=true; i.accept=accept;
+    i.onchange=()=>{ window.__poFiles[kind]=[...i.files]; paint(); }; i.click(); };
+  m.m.querySelector('#pf-img').onclick=e=>{ e.preventDefault(); pick('img','image/*'); };
+  m.m.querySelector('#pf-dwg').onclick=e=>{ e.preventDefault(); pick('dwg','image/*,application/pdf'); };
+
   m.m.querySelector('#po-save').onclick=async ()=>{
-    const num=$('po-num').value.trim(); if(!num){ toast('PO number is required',{err:true}); return; }
-    const {data,error}=await sb.from('bt_purchase_orders').insert({buyer_id:$('po-buyer').value, po_number:num,
-      po_date:$('po-date').value||null, project:$('po-proj').value.trim()||null,
-      expected_ship_date:$('po-esd').value||null, notes:$('po-notes').value.trim()||null}).select().single();
-    if(error){ toast(error.message,{err:true}); return; }
-    closeModal(); await loadData(); go('#/po/'+data.id);
+    const rec=poFieldValues();
+    if(!rec.po_number){ toast('PO number is required',{err:true}); return; }
+    rec.buyer_id=$('po-buyer').value;
+    if(!rec.buyer_id){ toast('Add a buyer first from Buyers & logins',{err:true}); return; }
+    const dwgToBuyer=m.m.querySelector('#pf-dwg-buyer').checked;
+    const prod=$('po-prod').value.trim();
+    const item = prod? {product:prod, qty:Number($('po-qty').value)||1, unit:$('po-unit').value.trim()||'pcs',
+      item_ref:$('po-iref').value.trim()||null,
+      l_mm:$('po-l').value?Number($('po-l').value):null, w_mm:$('po-w').value?Number($('po-w').value):null,
+      h_mm:$('po-h').value?Number($('po-h').value):null, target_date:rec.expected_ship_date} : null;
+
+    $('loading').style.display='flex';
+    try{
+      const {data,error}=await sb.from('bt_purchase_orders').insert(rec).select().single();
+      if(error) throw error;
+      let itemId=null;
+      if(item){ item.po_id=data.id; item.line_no=1;
+        const ii=await sb.from('bt_order_items').insert(item).select().single();
+        if(ii.error) throw ii.error;
+        itemId=ii.data.id;
+      }
+      const f=window.__poFiles;
+      for(let i=0;i<f.img.length;i++){
+        const blob=await resizeImage(f.img[i]);
+        const path=rec.buyer_id+'/po/'+data.id+'/ref-'+Date.now()+'-'+i+'.jpg';
+        const up=await sb.storage.from(CONFIG.bucket).upload(path, blob, {contentType:'image/jpeg'});
+        if(up.error) continue;
+        await sb.from('bt_photos').insert({po_id:data.id, item_id:itemId, path, uploaded_by:uid(), status:'approved', caption:'Reference'});
+      }
+      for(let i=0;i<f.dwg.length;i++){
+        const file=f.dwg[i];
+        const clean=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+        const path=rec.buyer_id+'/po/'+data.id+'/dwg-'+Date.now()+'-'+clean;
+        const up=await sb.storage.from(CONFIG.bucket).upload(path, file, {contentType:file.type||'application/octet-stream'});
+        if(up.error) continue;
+        await sb.from('bt_documents').insert({po_id:data.id, name:file.name, doc_type:'Drawing', path,
+          uploaded_by:uid(), for_staff:true, for_buyer:dwgToBuyer});
+      }
+      window.__poFiles={img:[],dwg:[]};
+      closeModal(); await loadData();
+      $('loading').style.display='none';
+      go('#/po/'+data.id);
+    }catch(e){ $('loading').style.display='none'; toast(e.message||String(e),{err:true}); }
   };
 }
 function mEditPO(poId){
   const p=S.posById[poId];
   const m=modal('<h3>Edit '+esc(p.po_number)+'</h3>'+
-    '<div class="grid2"><div><label>PO number</label><input id="po-num" value="'+esc(p.po_number)+'"></div>'+
-    '<div><label>PO date</label><input id="po-date" type="date" value="'+esc(p.po_date||'')+'"></div></div>'+
-    '<label>Project / reference</label><input id="po-proj" value="'+esc(p.project||'')+'">'+
-    '<label>Expected ship date</label><input id="po-esd" type="date" value="'+esc(p.expected_ship_date||'')+'">'+
+    poFields(p)+
     '<label>Status</label><select id="po-status">'+['open','on_hold','completed','cancelled'].map(s=>'<option '+(p.status===s?'selected':'')+'>'+s+'</option>').join('')+'</select>'+
-    '<label>Notes (visible to buyer)</label><textarea id="po-notes" rows="2">'+esc(p.notes||'')+'</textarea>'+
     '<div class="btnrow"><button class="btn pri" id="po-save">Save</button><button class="btn dgr" id="po-del">Delete PO</button><button class="btn" onclick="closeModal()">Cancel</button></div>');
   m.m.querySelector('#po-save').onclick=async ()=>{
-    const {error}=await sb.from('bt_purchase_orders').update({po_number:$('po-num').value.trim(), po_date:$('po-date').value||null,
-      project:$('po-proj').value.trim()||null, expected_ship_date:$('po-esd').value||null,
-      status:$('po-status').value, notes:$('po-notes').value.trim()||null}).eq('id',poId);
+    const rec=poFieldValues(); rec.status=$('po-status').value;
+    if(!rec.po_number){ toast('PO number is required',{err:true}); return; }
+    const {error}=await sb.from('bt_purchase_orders').update(rec).eq('id',poId);
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await loadData(); render();
   };
