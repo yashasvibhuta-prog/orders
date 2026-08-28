@@ -319,8 +319,21 @@ label{display:block; font-size:12px; font-weight:600; color:var(--muted); margin
 const CONFIG = {
   url: 'https://ooetmikoyqflqajlehtc.supabase.co',
   anon: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vZXRtaWtveXFmbHFhamxlaHRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwNjU4MDgsImV4cCI6MjEwMjY0MTgwOH0.19khX0_PajPjXm0Nh6kEAz_1SwNLbZGgAytMat2WPjM',
-  bucket: 'tracker-files'
+  bucket: 'tracker-files',
+  staffDomain: 'gujraj-impex.local'   // staff sign in with a bare name; this is appended behind the scenes
 };
+
+// "kunal.tak" -> "kunal.tak@gujraj-impex.local"; anything already containing @ is left alone.
+function normLogin(v){
+  v=String(v||'').trim().toLowerCase();
+  if(!v) return '';
+  return v.indexOf('@')>=0 ? v : (v.replace(/[^a-z0-9._-]/g,'') + '@' + CONFIG.staffDomain);
+}
+// display the short form back to the user
+function shortLogin(v){
+  v=String(v||'');
+  return v.toLowerCase().endsWith('@'+CONFIG.staffDomain) ? v.slice(0, -(CONFIG.staffDomain.length+1)) : v;
+}
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function $(id){ return document.getElementById(id); }
@@ -828,7 +841,7 @@ function vLogin(msg){
     '<div class="sub">Order progress, without the chasing.</div></div>'+
     '<div class="card">'+
       (msg?'<div class="attn red" style="cursor:default">'+esc(msg)+'</div>':'')+
-      '<label>Email</label><input id="li-email" type="email" autocomplete="username" inputmode="email">'+
+      '<label>Email or login name</label><input id="li-email" autocomplete="username" placeholder="name@company.com or kunal.tak">'+
       '<label>Password</label><input id="li-pass" type="password" autocomplete="current-password">'+
       '<div class="btnrow"><button class="btn pri" style="flex:1;justify-content:center" onclick="doLogin()">Sign in</button></div>'+
       '<div class="note-sm mt8 center">Access is provided by Gujraj Impex.<br>Forgotten password? Message us and we will reset it.</div>'+
@@ -1242,7 +1255,7 @@ function vBuyers(){
   const staff=S.profilesAll.filter(x=>x.role==='staff');
   h+='<div class="card"><div class="row"><b>Office / floor staff logins</b><span class="sp"></span><button class="btn sm pri" onclick="mNewLogin(null,\'staff\')">+ Add staff</button></div>'+
     '<div class="note-sm mt8">Staff see the products being made, their stages and ship-by dates, and can upload photos. They never see client names, PO numbers, prices, comments or documents, and their photos reach the client only after you approve them.</div>'+
-    (staff.length?staff.map(l=>'<div class="row mt8"><span>'+esc(l.email)+'</span>'+(l.full_name?'<span class="meta">'+esc(l.full_name)+'</span>':'')+'<span class="sp"></span>'+
+    (staff.length?staff.map(l=>'<div class="row mt8"><span><b>'+esc(shortLogin(l.email))+'</b></span>'+(l.full_name?'<span class="meta">'+esc(l.full_name)+'</span>':'')+'<span class="sp"></span>'+
       '<button class="btn sm" onclick="mResetPw(\''+l.user_id+'\',\''+esc(l.email)+'\')">Reset password</button>'+
       '<button class="btn sm dgr" onclick="delLogin(\''+l.user_id+'\',\''+esc(l.email)+'\')">Remove</button></div>').join('')
      :'<div class="sub mt8">No staff logins yet.</div>')+
@@ -1339,7 +1352,7 @@ function toggleStage(itemId, stageId){
 }
 
 async function doLogin(){
-  const email=$('li-email').value.trim(), pass=$('li-pass').value;
+  const email=normLogin($('li-email').value), pass=$('li-pass').value;
   if(!email||!pass) return;
   $('loading').style.display='flex';
   const {error} = await sb.auth.signInWithPassword({email, password:pass});
@@ -1859,22 +1872,25 @@ function mNewLogin(buyerId, kind){
     (buyerId?'<div class="sub">'+esc((S.buyersById[buyerId]||{}).company||'')+'</div>':'')+
     (role==='staff'?'<div class="sub">Sees products, stages and ship-by dates. No client names, no PO numbers, no prices. Photos need your approval.</div>':'')+
     (role==='staff'?'<label>Name</label><input id="lg-nm" placeholder="e.g. Kunal">':'')+
-    '<label>Email</label><input id="lg-em" type="email" placeholder="'+(role==='staff'?'kunal@gujraj-impex.local':'name@company.com')+'">'+
+    (role==='staff'
+      ? '<label>Login name</label><input id="lg-em" placeholder="kunal.tak" autocapitalize="none">'
+      : '<label>Email</label><input id="lg-em" type="email" placeholder="name@company.com">')+
     '<label>Password</label><input id="lg-pw" value="'+pw+'">'+
     '<div class="note-sm mt8">'+(role==='staff'
-      ?'Any email address works, even one that does not exist — it is only a username. Note it down and hand it over.'
+      ?'Use a simple name like <b>kunal.tak</b> — no email address needed. That is exactly what they type to sign in. One login per person, so you can see who took which photo.'
       :'Share these by WhatsApp once created. The buyer cannot reset the password himself — you can, from this screen.')+'</div>'+
     '<div class="btnrow"><button class="btn pri" id="lg-go">Create login</button><button class="btn" onclick="closeModal()">Cancel</button></div>');
   m.m.querySelector('#lg-go').onclick=async ()=>{
-    const email=$('lg-em').value.trim(), password=$('lg-pw').value;
-    if(!email){ toast('Email required',{err:true}); return; }
+    const email=normLogin($('lg-em').value), password=$('lg-pw').value;
+    if(!email){ toast(role==='staff'?'Login name required':'Email required',{err:true}); return; }
     const nm=$('lg-nm');
     try{
       await adminApi({action:'create_user', email, password, role, buyer_id:buyerId||null,
         full_name: role==='staff'?(nm?nm.value.trim():null):(buyerId?(S.buyersById[buyerId]||{}).contact_name:null)});
       closeModal(); await loadData(); render();
       if(role==='staff'){
-        toast('Staff login created.', {action:'Copy ▸', onAction:()=>copyText('Gujraj Impex production floor\n'+trackerUrl()+'\nEmail: '+email+'\nPassword: '+password)});
+        toast('Staff login created.', {action:'Copy ▸', onAction:()=>copyText(
+          'StoneFlow — production floor\n'+trackerUrl()+'\nLogin name: '+shortLogin(email)+'\nPassword: '+password)});
         return;
       }
       const b=buyerId?S.buyersById[buyerId]:null;
@@ -1894,7 +1910,8 @@ function mResetPw(userId, email){
     try{
       await adminApi({action:'set_password', user_id:userId, password:npw});
       closeModal();
-      toast('Password reset.', {action:'Copy ▸', onAction:()=>copyText('Tracker: '+trackerUrl()+'\nEmail: '+email+'\nNew password: '+npw)});
+      toast('Password reset.', {action:'Copy ▸', onAction:()=>copyText('StoneFlow: '+trackerUrl()+'\n'+
+        (shortLogin(email)===email?'Email: ':'Login name: ')+shortLogin(email)+'\nNew password: '+npw)});
     }catch(e){ toast(e.message,{err:true}); }
   };
 }
