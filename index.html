@@ -836,9 +836,83 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   .wt:not(.wt--big){grid-template-columns:132px minmax(0,1fr);gap:16px;align-items:center}
   .wt:not(.wt--big) .wt__pic{aspect-ratio:1}
 }
+
+/* ---------------------------------------------------------------------------
+   Owner product page — the five answers, the current stage, the journey.
+--------------------------------------------------------------------------- */
+.prod-hero{background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:22px 22px 18px;margin-top:14px}
+.prod-hero__top{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.prod-hero .detail-title{margin:2px 0 4px}
+
+.answer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px;margin-top:18px}
+.answer{background:var(--canvas);border:1px solid var(--line);border-radius:12px;padding:12px 13px;
+  display:flex;flex-direction:column;gap:3px;min-width:0}
+.answer>span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.answer>strong{font-size:15px;line-height:1.3;color:var(--ink);overflow-wrap:anywhere}
+.answer>small{font-size:12px;color:var(--ink-faint);line-height:1.35;overflow-wrap:anywhere}
+.answer--warn{border-color:var(--status-warning);background:var(--status-warning-soft)}
+
+.prod-layout{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px;align-items:start}
+@media (min-width:1100px){ .prod-layout{grid-template-columns:minmax(0,1fr) 320px} }
+.prod-main{min-width:0}
+.prod-side{min-width:0;display:flex;flex-direction:column}
+
+.stage-now{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:16px}
+.stage-now__head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.stage-now__label{display:flex;align-items:center;gap:12px;min-width:0}
+.stage-now__num{width:34px;height:34px;flex:none;border-radius:50%;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-weight:700;font-size:14px}
+.stage-now__label span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.stage-now__label strong{display:block;font-size:17px;color:var(--ink)}
+.stage-now__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:16px}
+.stage-now__grid>div{background:var(--canvas);border-radius:10px;padding:10px 12px;min-width:0}
+.stage-now__grid span{display:block;font-size:11px;color:var(--ink-faint);margin-bottom:2px}
+.stage-now__grid strong{font-size:14px;color:var(--ink);overflow-wrap:anywhere}
+.stage-now__task{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;
+  background:var(--canvas);border-radius:10px;padding:12px 13px;margin-top:12px}
+.stage-now__task strong{display:block;font-size:13px;margin-bottom:2px}
+.stage-now__task p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.45}
+.stage-now__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+
+.jnodes{display:flex;gap:4px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.jnode{flex:1 0 68px;min-width:68px;background:none;border:0;padding:4px 2px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
+.jnode i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;
+  font-size:12px;font-weight:700;background:var(--canvas);color:var(--ink-faint);border:1px solid var(--line)}
+.jnode span{font-size:10px;line-height:1.2;color:var(--ink-faint);overflow-wrap:anywhere}
+.jnode--done i{background:var(--ink);color:#fff;border-color:var(--ink)}
+.jnode--now  i{background:var(--action-primary);color:#fff;border-color:var(--action-primary)}
+.jnode--now  span{color:var(--ink);font-weight:600}
+.jnode--hold i{background:var(--status-warning-soft);border-color:var(--status-warning);color:var(--ink)}
+.jnode--skip i{opacity:.5}
+
+.jrow{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;cursor:pointer;
+  border:1px solid transparent}
+.jrow:hover{background:var(--canvas)}
+.jrow__n{width:26px;height:26px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-size:12px;font-weight:700;background:var(--canvas);border:1px solid var(--line);color:var(--ink-faint)}
+.jrow strong{display:block;font-size:14px;color:var(--ink)}
+.jrow small{display:block;font-size:12px;color:var(--ink-faint);margin-top:1px}
+.jrow>div{min-width:0;flex:1}
+.jrow__count{font-size:12px;color:var(--ink-faint);white-space:nowrap}
+.jrow--done .jrow__n{background:var(--ink);color:#fff;border-color:var(--ink)}
+.jrow--now{background:var(--canvas);border-color:var(--line)}
+.jrow--now .jrow__n{background:var(--action-primary);color:#fff;border-color:var(--action-primary)}
+.jrow--hold .jrow__n{background:var(--status-warning-soft);border-color:var(--status-warning);color:var(--ink)}
+.future-stages[hidden]{display:none}
+
+.att{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
+  padding:11px 0;border-bottom:1px solid var(--line)}
+.att:last-child{border-bottom:0;padding-bottom:0}
+.att strong{display:block;font-size:13px;color:var(--ink);line-height:1.35}
+.att span{display:block;font-size:12px;color:var(--ink-faint);margin-top:2px;line-height:1.4}
+.att--calm strong{color:var(--ink-faint);font-weight:600}
+.att>div{min-width:0}
+.side-row strong.is-missing{color:var(--ink-faint);font-weight:500}
 </style>
 <body>
-<script>const BUILD_ID='20ce197b8c5d';</script>
+<script>const BUILD_ID='002fbb86da80';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -1833,6 +1907,182 @@ function trackerUrl(){
   return (S.settings && S.settings.tracker_url) || (location.origin+location.pathname);
 }
 async function refresh(){ try{ await loadData(); render(); }catch(e){ console.error(e); } }
+
+/* ---------------------------------------------------------------------------
+   The owner's product page — the five questions, and the panels behind them.
+
+   The old page was a timeline with controls attached to it, which answers
+   "what are the stages" rather than the questions Yash is actually holding when
+   he opens a piece. Everything below is derived from real rows; where the data
+   does not exist the answer says so rather than inventing a value.
+--------------------------------------------------------------------------- */
+
+// The stage the piece is on right now: the running one, else the last completed.
+function stageNow(it){
+  const rows=S.stByItem[it.id]||[]; const by={}; rows.forEach(r=>by[r.stage_id]=r);
+  const active=S.stages.filter(s=>s.active);
+  const running=active.find(s=>by[s.id]&&by[s.id].status==='in_progress');
+  const held=active.find(s=>by[s.id]&&by[s.id].status==='on_hold');
+  const s=running||held||active.slice().reverse().find(s=>by[s.id]&&by[s.id].status==='completed')||active[0];
+  if(!s) return null;
+  const idx=active.findIndex(x=>x.id===s.id);
+  const row=by[s.id]||{status:'pending',approval:'none',stage_id:s.id};
+  // running / held describe THIS stage, not "is anything anywhere held" — the
+  // first cut of this asked the wrong question and reported a piece on hold
+  // because a later stage was.
+  return { stage:s, row:row,
+           internal:stageInternal(it.id, s.id), number:idx+1, total:active.length,
+           running:row.status==='in_progress', held:row.status==='on_hold' };
+}
+
+// Photographs waiting on Yash for this piece, and the update they belong to.
+function itemPending(it){
+  return (S.photosByItem[it.id]||[]).filter(p=>p.status==='pending');
+}
+function itemUpdatesWaiting(it){
+  return (S.updByItem[it.id]||[]).filter(u=>u.review_status==='pending');
+}
+function itemApprovedUnsent(it){
+  return (S.updByItem[it.id]||[]).filter(u=>
+    (u.review_status==='approved'||u.review_status==='partially_approved') && !u.published_at);
+}
+
+// The five answers. Each is {q, a, sub} — and `sub` is allowed to be empty.
+function itemAnswers(it){
+  const now=stageNow(it);
+  const pend=itemPending(it);
+  const waiting=itemUpdatesWaiting(it);
+  const late=lateness(it);
+  const nxt=nextStageFor(it);
+  const feed=(S.updByItem[it.id]||[]);
+  const lastUpd=feed[0];
+  const lastPhoto=(S.photosByItem[it.id]||[]).slice()
+    .sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)))[0];
+
+  // Where is it
+  const where = now
+    ? { a: now.stage.name, sub: 'Stage '+now.number+' of '+now.total+
+        (now.held?' · on hold':(now.row.started_at?' · started '+fdate(now.row.started_at):' · not started')) }
+    : { a:'Not started', sub:'' };
+
+  // What happened
+  let happened={a:'Nothing yet', sub:'No update or photograph on this piece'};
+  if(lastUpd || lastPhoto){
+    const updNewer = lastUpd && (!lastPhoto ||
+      String(lastUpd.submitted_at||lastUpd.work_date) >= String(lastPhoto.created_at));
+    if(updNewer){
+      happened={ a: workStatusLabel(lastUpd),
+        sub: fdate(lastUpd.work_date)+' · '+(staffName(lastUpd.submitted_by)||'the workshop') };
+    } else {
+      const n=(S.photosByItem[it.id]||[]).filter(p=>p.created_at&&p.created_at.slice(0,10)===String(lastPhoto.created_at).slice(0,10)).length;
+      happened={ a: n+' photograph'+(n===1?'':'s')+' added', sub: ftime(lastPhoto.created_at) };
+    }
+  }
+
+  // Is it delayed
+  let delayed={a:'On track', sub:''};
+  const plan = now && now.internal && now.internal.planned_date;
+  if(now && now.held) delayed={a:'On hold', sub:(now.internal&&now.internal.hold_reason)||'Reason not recorded'};
+  else if(late && late.state==='late') delayed={a:late.days+' day'+(late.days===1?'':'s')+' late', sub:'Against '+(it.target_date?'the target date':'the ship date')};
+  else if(plan && daysUntil(plan)<0 && now.row.status!=='completed')
+    delayed={a:'Behind plan', sub:'This stage was planned for '+fdate(plan)};
+  else {
+    const due=it.target_date||(it.po&&it.po.expected_ship_date);
+    delayed={a:'On track', sub:plan?('Stage planned '+fdate(plan)):(due?('Piece due '+fdate(due)):'')};
+  }
+
+  // What needs approval
+  let appr={a:'Nothing waiting', sub:''};
+  const gate = now && now.row.approval==='requested';
+  if(waiting.length) appr={a:waiting.length+' update'+(waiting.length===1?'':'s'), sub:'Submitted by the workshop, not yet reviewed'};
+  else if(pend.length) appr={a:pend.length+' photograph'+(pend.length===1?'':'s'), sub:'Waiting on your review'};
+  else if(gate) appr={a:'Buyer decision', sub:'Approval requested at '+now.stage.name};
+  else if(itemApprovedUnsent(it).length) appr={a:'Approved, not sent', sub:'The buyer cannot see it until you publish'};
+
+  // What happens next
+  const next = nxt
+    ? { a: nxt.complete?('Complete '+nxt.stage.name):nxt.stage.name,
+        sub: nxt.complete?'Then the piece moves on':'Once this stage is finished' }
+    : { a:'Nothing left', sub:'Every stage is done' };
+
+  return [
+    {q:'Where is it?',           a:where.a,     sub:where.sub},
+    {q:'What happened?',         a:happened.a,  sub:happened.sub},
+    {q:'Is it delayed?',         a:delayed.a,   sub:delayed.sub, warn:/late|hold|Behind/i.test(delayed.a)},
+    {q:'What needs approval?',   a:appr.a,      sub:appr.sub,    warn:appr.a!=='Nothing waiting'},
+    {q:'What happens next?',     a:next.a,      sub:next.sub}
+  ];
+}
+
+function workStatusLabel(u){
+  if(!u) return '';
+  if(u.work_status==='no_work')  return 'No work logged';
+  if(u.work_status==='blocked')  return 'Reported blocked';
+  return 'Work logged';
+}
+
+// Staff names never leave the admin's screen; this is only ever called there.
+function staffName(userId){
+  if(!userId || !isAdmin()) return '';
+  const p=(S.profilesAll||[]).find(x=>x.user_id===userId);
+  return p ? shortLogin(p.full_name||p.email||'') : '';
+}
+
+// Only the things that can actually hold this piece up.
+function itemAttention(it){
+  const out=[];
+  const now=stageNow(it);
+  const waiting=itemUpdatesWaiting(it);
+  const pend=itemPending(it);
+  const unsent=itemApprovedUnsent(it);
+  if(waiting.length) out.push({ title:'Review '+waiting.length+' workshop update'+(waiting.length===1?'':'s'),
+    sub:'Submitted '+fdate(waiting[0].work_date)+' · nothing reaches the buyer until you approve it',
+    action:'Review', run:"go('#/production/review')" });
+  if(pend.length) out.push({ title:'Review '+pend.length+' photograph'+(pend.length===1?'':'s'),
+    sub:'Uploaded by the workshop · the buyer cannot see them yet',
+    action:'Review', run:"go('#/production/photos')" });
+  if(unsent.length) out.push({ title:'Approved work not sent to the buyer',
+    sub:unsent.length+' update'+(unsent.length===1?' is':'s are')+' approved but unpublished',
+    action:'Publish', run:"go('#/production/review')" });
+  if(now && now.held) out.push({ title:'This stage is on hold',
+    sub:((now.internal&&now.internal.hold_reason)||'No reason recorded')+
+        ((now.internal&&now.internal.hold_revised_date)?(' · revised to '+fdate(now.internal.hold_revised_date)):''),
+    action:'Open', run:"toggleStage('"+it.id+"',"+now.stage.id+")" });
+  if(now && now.row.approval==='requested') out.push({ title:'Waiting on the buyer',
+    sub:'Approval requested at '+now.stage.name, action:'', run:'' });
+  const cmt=(S.commentsByItem[it.id]||[]).filter(c=>c.author_role==='buyer' && !c.resolved_at);
+  if(cmt.length) out.push({ title:cmt.length+' unanswered buyer question'+(cmt.length===1?'':'s'),
+    sub:'Left against a stage on this piece', action:'Open', run:"go('#/item/"+it.id+"')" });
+  if(!out.length) out.push({ title:'Nothing is holding this piece up',
+    sub:(now && now.internal && now.internal.planned_date)
+        ? ('Next checkpoint: '+now.stage.name+' by '+fdate(now.internal.planned_date))
+        : 'No decision is waiting on you', action:'', run:'', calm:true });
+  return out;
+}
+
+// What the workshop should be comparing its work against.
+function itemReferences(it){
+  const docs=(S.docsByItem&&S.docsByItem[it.id])||[];
+  const poDocs=(S.docsByPo&&S.docsByPo[it.po_id])||[];
+  const pics=(S.photosByItem[it.id]||[]).filter(x=>!x.stage_id);
+  const kind=k=>pics.filter(p=>p.photo_type===k);
+  const drawing=docs.concat(poDocs).filter(d=>d.doc_type==='drawing').slice(-1)[0];
+  const out=[];
+  out.push({ k:'Production drawing', v: drawing?(drawing.name||'On file'):'None on file',
+             miss:!drawing, open: drawing?("openDoc('"+esc(drawing.path)+"')"):'' });
+  out.push({ k:'Target product', v: kind('reference').length?(kind('reference').length+' image'+(kind('reference').length===1?'':'s')):'None', miss:!kind('reference').length });
+  out.push({ k:'Approved block', v: kind('block').length?(kind('block').length+' photograph'+(kind('block').length===1?'':'s')):'None', miss:!kind('block').length });
+  out.push({ k:'3D model', v: kind('model').length?'On file':(docs.some(d=>d.doc_type==='model')?'On file':'None'), miss:!kind('model').length && !docs.some(d=>d.doc_type==='model') });
+  out.push({ k:'Specification', v: (it.dims_text||dimsOf(it))?'Recorded':'Not recorded', miss:!(it.dims_text||dimsOf(it)) });
+  return out;
+}
+
+// The activity log for one piece, in words rather than system events.
+function itemActivity(it, n){
+  return (S.activity||[]).filter(a=>a.item_id===it.id)
+    .filter(a=>!/^photo_submitted$/.test(a.action))
+    .slice(0, n||8);
+}
 </script>
 <script>
 'use strict';
@@ -3015,6 +3265,9 @@ function vItem(id){
   const it=S.itemsById[id];
   if(!it){ const m='<div class="empty-state">Product not found.</div>';
     if(isStaff()) $('app').innerHTML=m; else paint(m,null); return; }
+  // The owner gets the question-led page; the buyer and the workshop keep the
+  // views they already have, which are built for different jobs.
+  if(isAdmin()) return vItemOwner(it);
   const p=it.po;
   const staff=isStaff();
   const admin=isAdmin();
@@ -3950,6 +4203,222 @@ function render(){
   else if(parts[0]==='activity') vReports('activity');
   else if(parts[0]==='import') vAdmin('import');
   else vCommandCentre();
+}
+
+/* ---------------------------------------------------------------------------
+   The owner's product page.
+
+   Built from the ChatGPT #product handoff. The page leads with the five
+   questions Yash actually holds when he opens a piece, then gives one obvious
+   next action, and keeps the reference material and the order facts to the side
+   where they do not compete with the work.
+--------------------------------------------------------------------------- */
+
+function vItemOwner(it){
+  const p=it.po;
+  const now=stageNow(it);
+  const answers=itemAnswers(it);
+  const due=it.target_date||(p&&p.expected_ship_date);
+
+  let h='<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#/orders">Orders</a>'+icon('i-chevron','icon--sm')+
+    '<a href="#/po/'+p.id+'">'+esc(p.po_number)+'</a>'+icon('i-chevron','icon--sm')+
+    '<strong aria-current="page">'+esc(it.item_ref||it.item_code||it.product)+'</strong></nav>';
+
+  /* hero */
+  h+='<section class="prod-hero"><div class="prod-hero__top"><div>'+
+    eyebrow([it.item_ref||it.item_code, (+it.qty||1)+' '+(it.unit||'pcs'), 'owner view'].filter(Boolean).join(' · '))+
+    '<h1 class="detail-title">'+esc(it.product)+'</h1>'+
+    '<p class="detail-subtitle">'+esc([it.stone, it.finish, dimsOf(it), p.project].filter(Boolean).join(' · '))+'</p></div>'+
+    '<div class="page-heading__actions">'+
+      '<button class="button button--quiet" type="button" onclick="waItem(\''+it.id+'\')">WhatsApp update</button>'+
+      '<button class="button button--secondary" type="button" onclick="mItem(\''+p.id+'\',\''+it.id+'\')">Edit product</button>'+
+      '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\','+((now&&now.stage)?now.stage.id:'null')+')">'+icon('i-camera','icon--sm')+'Add today’s update</button>'+
+    '</div></div>'+
+    '<div class="answer-grid">'+answers.map(a=>
+      '<div class="answer'+(a.warn?' answer--warn':'')+'"><span>'+esc(a.q)+'</span>'+
+      '<strong>'+esc(a.a)+'</strong>'+(a.sub?'<small>'+esc(a.sub)+'</small>':'<small>&nbsp;</small>')+'</div>').join('')+
+    '</div></section>';
+
+  h+='<div class="prod-layout">';
+
+  /* ---------------- main column ---------------- */
+  h+='<div class="prod-main">';
+
+  /* current stage */
+  if(now){
+    const int_=now.internal||{};
+    const st=now.stage;
+    const state = now.held?badge('On hold','warn')
+                : now.row.status==='completed'?badge('Complete','success')
+                : now.running?badge('In progress','pending')
+                : badge('Not started');
+    const inStage = now.row.started_at ? dayGap(now.row.started_at, today()) : null;
+    const lastUpd=(S.updByItem[it.id]||[])[0];
+    h+='<section class="stage-now"><div class="stage-now__head">'+
+      '<div class="stage-now__label"><span class="stage-now__num">'+now.number+'</span>'+
+      '<div><span>Current stage</span><strong>'+esc(st.name)+'</strong></div></div>'+state+'</div>'+
+      '<div class="stage-now__grid">'+
+        '<div><span>Planned start</span><strong>'+(int_.planned_date?esc(fdate(int_.planned_date)):'Not planned')+'</strong></div>'+
+        '<div><span>Started</span><strong>'+(now.row.started_at?esc(fdate(now.row.started_at)):'Not yet')+'</strong></div>'+
+        '<div><span>Time in stage</span><strong>'+(inStage!==null?(inStage+' day'+(inStage===1?'':'s')):'—')+'</strong></div>'+
+        '<div><span>Last update by</span><strong>'+esc((lastUpd&&staffName(lastUpd.submitted_by))||'—')+'</strong></div>'+
+      '</div>'+
+      (st.description||int_.hold_reason?'<div class="stage-now__task"><div>'+
+        '<strong>'+(now.held?'Why it is held':'What this stage must produce')+'</strong>'+
+        '<p>'+esc(now.held?(int_.hold_reason||'No reason recorded'):st.description)+'</p></div>'+
+        (itemPending(it).length?badge(itemPending(it).length+' photo'+(itemPending(it).length===1?'':'s')+' waiting','warn'):'')+
+      '</div>':'')+
+      '<div class="stage-now__actions">'+
+        '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\','+st.id+')">'+icon('i-camera','icon--sm')+'Add today’s update</button>'+
+        '<button class="button button--secondary" type="button" onclick="pickPhotos(\''+it.id+'\','+st.id+')">Add photographs</button>'+
+        '<button class="button button--secondary" type="button" onclick="mHold(\''+it.id+'\','+st.id+')">'+(now.held?'Update the hold':'Report a blocker')+'</button>'+
+        '<button class="button button--secondary" type="button" onclick="quickAdvance(\''+it.id+'\')">'+esc((nextStageFor(it)||{label:'Nothing left'}).label)+'</button>'+
+      '</div></section>';
+  }
+
+  /* latest work */
+  const feed=(S.updByItem[it.id]||[]);
+  const latest=feed[0];
+  const latestPhotos=latest?((S.photosByUpdate[latest.id]||[])):[];
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Latest work</h3>'+
+    '<p class="panel__description">'+(latest
+      ? esc(fdate(latest.work_date)+' · '+(S.stagesById[latest.stage_id]?S.stagesById[latest.stage_id].name:'')+
+            (staffName(latest.submitted_by)?(' · submitted by '+staffName(latest.submitted_by)):''))
+      : 'Nothing has been logged on this piece yet.')+'</p></div>'+
+    (latest?(latest.review_status==='pending'?badge('Awaiting review','warn')
+            :latest.published_at?badge('Published to the buyer','success')
+            :badge('Approved, not sent','warn')):'')+'</div>'+
+    '<div class="panel__body">';
+  if(latest){
+    h+='<p class="stage-note">'+esc(latest.public_summary||latest.no_work_reason||workStatusLabel(latest))+'</p>';
+    if(latestPhotos.length) h+='<div class="space-top-12">'+photoGridOf(latestPhotos)+'</div>';
+    h+='<div class="button-row space-top-12">'+
+      (latest.review_status==='pending'?'<button class="button" type="button" onclick="go(\'#/production/review\')">Review it</button>':'')+
+      '<button class="button button--quiet" type="button" onclick="go(\'#/production\')">All updates</button></div>';
+  } else {
+    h+='<div class="empty-state">No workshop update yet. Until one is published the buyer sees only the stage he is on.</div>'+
+       '<div class="button-row space-top-12"><button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\','+((now&&now.stage)?now.stage.id:'null')+')">Add the first update</button></div>';
+  }
+  h+='</div></section>';
+
+  /* production journey */
+  const rows=S.stByItem[it.id]||[]; const by={}; rows.forEach(r=>by[r.stage_id]=r);
+  const active=S.stages.filter(s=>s.active||by[s.id]);
+  const doneN=active.filter(s=>by[s.id]&&(by[s.id].status==='completed'||by[s.id].status==='skipped')).length;
+  const nodeState=s=>{ const r=by[s.id]||{}; return r.status==='completed'?'done':r.status==='skipped'?'skip'
+    :r.status==='in_progress'?'now':r.status==='on_hold'?'hold':'wait'; };
+  const shown=[], future=[];
+  active.forEach((s,i)=>{ const st=nodeState(s); (st==='wait'?future:shown).push({s,i}); });
+  const journeyRow=(o)=>{
+    const s=o.s, r=by[s.id]||{status:'pending',approval:'none',stage_id:s.id};
+    const st=nodeState(s);
+    const int_=stageInternal(it.id, s.id)||{};
+    const nph=(S.photosByItem[it.id]||[]).filter(x=>x.stage_id===s.id).length;
+    const sub = st==='done' ? ('Completed '+(r.completed_at?fdate(r.completed_at):'')+(r.approval==='approved'?' · buyer approved':''))
+      : st==='skip' ? 'Not needed'
+      : st==='hold' ? ('On hold'+(int_.hold_reason?' · '+int_.hold_reason:''))
+      : st==='now'  ? ('Current'+(r.started_at?' · started '+fdate(r.started_at):'')+(int_.planned_date?' · planned '+fdate(int_.planned_date):''))
+      : ('Pending'+(int_.planned_date?' · planned '+fdate(int_.planned_date):' · dates begin when the previous stage completes'));
+    return '<div class="jrow jrow--'+st+'" onclick="toggleStage(\''+it.id+'\','+s.id+')">'+
+      '<span class="jrow__n">'+(st==='done'?'✓':st==='skip'?'–':(o.i+1))+'</span>'+
+      '<div><strong>'+esc(s.name)+'</strong><small>'+esc(sub)+'</small></div>'+
+      (nph?'<span class="jrow__count">'+nph+' photo'+(nph===1?'':'s')+'</span>':'')+'</div>';
+  };
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Production journey</h3>'+
+    '<p class="panel__description">One '+active.length+'-stage sequence, shared by you, the workshop and the buyer.</p></div>'+
+    badge(Math.round(it.progress*100)+'% complete')+'</div><div class="panel__body">'+
+    '<div class="jnodes">'+active.map((s,i)=>
+      '<button class="jnode jnode--'+nodeState(s)+'" type="button" title="'+esc(s.name)+'" onclick="toggleStage(\''+it.id+'\','+s.id+')">'+
+      '<i>'+(nodeState(s)==='done'?'✓':(i+1))+'</i><span>'+esc(s.name)+'</span></button>').join('')+'</div>'+
+    '<div class="space-top-12">'+shown.map(journeyRow).join('')+'</div>'+
+    (future.length?'<div class="future-stages" id="future-stages" hidden>'+future.map(journeyRow).join('')+'</div>'+
+      '<div class="button-row space-top-10"><button class="button button--quiet" type="button" id="future-toggle" '+
+      'onclick="var f=document.getElementById(\'future-stages\');f.hidden=!f.hidden;this.textContent=f.hidden?\'View '+future.length+' future stages\':\'Hide future stages\';">'+
+      'View '+future.length+' future stage'+(future.length===1?'':'s')+'</button></div>':'')+
+    '</div></section>';
+
+  /* the full timeline, with every existing control, kept below */
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Stage controls</h3>'+
+    '<p class="panel__description">Dates, photographs, notes, approval gates and the buyer’s comments, stage by stage.</p></div></div></section>';
+  h+='<section class="timeline-card"><div class="timeline">';
+  let grp=null, openGroup=false;
+  active.forEach(st=>{
+    const g=st.grp||'Production';
+    if(g.toLowerCase()!==String(grp||'').toLowerCase()){
+      if(openGroup) h+='</div>';
+      h+='<div class="timeline-group"><p class="timeline-group__title">'+esc(g)+'</p>';
+      grp=g; openGroup=true;
+    }
+    h+=stageRow(it, st, by[st.id]||{status:'pending',approval:'none',stage_id:st.id});
+  });
+  if(openGroup) h+='</div>';
+  h+='</div></section>';
+
+  /* meaningful activity */
+  const acts=itemActivity(it, 8);
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Meaningful activity</h3>'+
+    '<p class="panel__description">Decisions and work records on this piece.</p></div>'+
+    '<button class="button button--quiet" type="button" onclick="go(\'#/reports\')">Full history</button></div>'+
+    '<div class="panel__body">'+
+    (acts.length?acts.map(a=>'<article class="activity-item"><span class="activity-item__dot"></span><div>'+
+      '<p class="activity-item__title">'+esc((a.actor_name||'Someone')+' · '+String(a.action).replace(/_/g,' '))+'</p>'+
+      (a.detail?'<p class="activity-item__meta">'+esc(a.detail)+'</p>':'')+
+      '<p class="activity-item__meta">'+esc(ftime(a.created_at))+'</p></div></article>').join('')
+      :'<div class="empty-state">Nothing recorded on this piece yet.</div>')+
+    '</div></section>';
+
+  h+='</div>';   /* /prod-main */
+
+  /* ---------------- side column ---------------- */
+  h+='<aside class="prod-side">';
+
+  const att=itemAttention(it);
+  h+='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Attention required</h3>'+
+    '<p class="panel__description">Only decisions that can hold this piece up.</p></div></div>'+
+    '<div class="panel__body">'+att.map(a=>
+      '<article class="att'+(a.calm?' att--calm':'')+'"><div><strong>'+esc(a.title)+'</strong>'+
+      (a.sub?'<span>'+esc(a.sub)+'</span>':'')+'</div>'+
+      (a.action?'<button class="button button--secondary" type="button" onclick="'+a.run+'">'+esc(a.action)+'</button>':'')+
+      '</article>').join('')+'</div></section>';
+
+  h+='<section class="panel space-top-14"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Reference package</h3>'+
+    '<p class="panel__description">What the workshop should compare its work against.</p></div></div>'+
+    '<div class="panel__body"><div class="side-card__rows">'+
+    itemReferences(it).map(r=>'<div class="side-row"'+(r.open?' style="cursor:pointer" onclick="'+r.open+'"':'')+'>'+
+      '<span>'+esc(r.k)+'</span><strong'+(r.miss?' class="is-missing"':'')+'>'+esc(r.v)+'</strong></div>').join('')+
+    '</div><div class="button-row space-top-12">'+
+    '<button class="button button--secondary" type="button" onclick="mMedia(\''+it.id+'\')">'+icon('i-camera','icon--sm')+'Add reference media</button></div>'+
+    '</div></section>';
+
+  const b=S.buyersById[p.buyer_id];
+  h+='<section class="panel space-top-14"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Product details</h3>'+
+    '<p class="panel__description">Kept to the side so it does not compete with the work.</p></div></div>'+
+    '<div class="panel__body"><div class="side-card__rows">'+
+    '<div class="side-row"><span>Purchase order</span><strong>'+esc(p.po_number)+'</strong></div>'+
+    '<div class="side-row"><span>Buyer</span><strong>'+esc(b?b.company:'—')+'</strong></div>'+
+    '<div class="side-row"><span>Quantity</span><strong>'+esc((+it.qty||1)+' '+(it.unit||'pcs'))+'</strong></div>'+
+    (it.item_code?'<div class="side-row"><span>Item code</span><strong>'+esc(it.item_code)+'</strong></div>':'')+
+    '<div class="side-row"><span>Dispatch target</span><strong>'+(due?esc(fdate(due)):'Not set')+'</strong></div>'+
+    '<div class="side-row"><span>Buyer sees</span><strong>Approved work only</strong></div>'+
+    '</div>'+
+    (it.notes?'<p class="field-hint space-top-10">'+esc(it.notes)+'</p>':'')+
+    '<div class="button-row space-top-12"><button class="button button--quiet" type="button" onclick="go(\'#/po/'+p.id+'\')">Open the order</button></div>'+
+    '</div></section>';
+
+  h+='<p class="field-hint space-top-12">Money stays in Finance and follows its own rules. The workshop never sees this page.</p>';
+  h+='</aside></div><div style="height:24px"></div>';
+
+  // No purchase-order rail here: this page is about one piece and it needs the
+  // width. The rail stays on the order pages, where hopping between POs is the job.
+  paintPlain(h);
+  markRead(it.id);
 }
 </script>
 <script>
