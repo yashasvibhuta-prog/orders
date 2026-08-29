@@ -1004,9 +1004,49 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .staff-list--page > .daily-log{margin-bottom:14px}
 .staff-list--page > .ws-grid{margin-bottom:0}
 
+/* ---- People & access ---- */
+.access-layout{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px;align-items:start}
+@media (min-width:1000px){ .access-layout{grid-template-columns:210px minmax(0,1fr)} }
+@media (min-width:1360px){ .access-layout{grid-template-columns:210px minmax(0,1fr) 330px} }
+.access-group{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;
+  background:none;border:0;padding:9px 10px;border-radius:9px;cursor:pointer;font:inherit;font-size:13px;
+  color:var(--ink-soft);text-align:left}
+.access-group:hover{background:var(--canvas)}
+.access-group.is-on{background:var(--canvas);color:var(--ink);font-weight:600}
+.access-group em{font-style:normal;font-size:12px;color:var(--ink-faint)}
+.access-search{display:flex;align-items:center;gap:8px;flex:1;min-width:0;
+  border:1px solid var(--line-strong);border-radius:9px;padding:7px 10px;background:var(--surface)}
+.access-search input{border:0;outline:0;background:none;font:inherit;font-size:14px;width:100%;color:var(--ink)}
+.access-count{font-size:12px;color:var(--ink-faint);white-space:nowrap}
+.access-rows{display:flex;flex-direction:column}
+.access-row{display:grid;grid-template-columns:34px minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr) auto;
+  gap:12px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px}
+.access-row:last-child{border-bottom:0}
+.access-row:hover{background:var(--canvas)}
+.access-row.is-open{background:var(--canvas);box-shadow:inset 3px 0 0 var(--action-primary)}
+.access-row strong{display:block;font-size:13px;color:var(--ink);overflow-wrap:anywhere}
+.access-row span{display:block;font-size:11px;color:var(--ink-faint);overflow-wrap:anywhere}
+.access-avatar{width:34px;height:34px;border-radius:50%;background:var(--canvas);border:1px solid var(--line);
+  display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--ink-faint)}
+.access-avatar--lg{width:44px;height:44px;font-size:14px}
+.access-person{display:flex;gap:12px;align-items:center}
+.access-person strong{display:block;font-size:15px;color:var(--ink)}
+.access-person span{display:block;font-size:12px;color:var(--ink-faint)}
+.access-perms{list-style:none;margin:0;padding:0}
+.access-perms li{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.45;
+  padding:5px 0;color:var(--ink-soft)}
+.access-perms i{font-style:normal;font-size:11px;width:16px;flex:none;text-align:center;font-weight:700}
+.access-perms .yes i{color:var(--status-success)}
+.access-perms .no{color:var(--ink-faint)}
+.access-perms .no i{color:var(--status-error)}
+@media (max-width:760px){
+  .access-row{grid-template-columns:34px minmax(0,1fr) auto;row-gap:6px}
+  .access-row .access-scope{grid-column:2 / -1}
+}
+
 </style>
 <body>
-<script>const BUILD_ID='ec5d51fc751b';</script>
+<script>const BUILD_ID='543025e3d338';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -2186,6 +2226,19 @@ function itemActivity(it, n){
     .filter(a=>!/^photo_submitted$/.test(a.action))
     .slice(0, n||8);
 }
+
+// Logins missing something that stops them working, for the sidebar badge.
+function accessNeedsAttention(){
+  if(!isAdmin()) return 0;
+  let n=0;
+  (S.profilesAll||[]).forEach(p=>{
+    if(p.role==='staff' && !p.phone) n++;
+    else if(p.role==='buyer' && !p.buyer_id) n++;
+  });
+  (S.buyers||[]).forEach(b=>{ if(!(S.profilesAll||[]).some(p=>p.buyer_id===b.id)) n++; });
+  return n;
+}
+
 </script>
 <script>
 'use strict';
@@ -2369,6 +2422,7 @@ function updateHeader(){
       link('#/finance','Finance',q.overdueCount)+
       link('#/reports','Reports',0)+
       grp('Administration')+
+      link('#/access','People & access', accessNeedsAttention())+
       link('#/admin','Admin',0);
 
     window.__moreNav=[['#/production','Production',q.workshop],['#/clients','Clients',q.clientUpdates],
@@ -2749,7 +2803,7 @@ function vClients(tab){
   if(!isAdmin()) return vHome();
   const q=queueCounts();
   const tabs=[
-    ['logins','Buyers & logins','#/clients',0],
+    ['logins','Buyers','#/clients',0],
     ['updates','Send an update','#/clients/updates', q.clientUpdates]
   ];
   if(tab==='updates'){ withTabs(vUpdates, tabs, 'updates'); return; }
@@ -4446,6 +4500,7 @@ function render(){
   else if(parts[0]==='production') vProduction(parts[1]||'priority');
   else if(parts[0]==='clients') vClients(parts[1]);
   else if(parts[0]==='reports') vReports(parts[1]);
+  else if(parts[0]==='access') vAccess();
   else if(parts[0]==='admin') vAdmin(parts[1]);
   // the routes that existed before the console, still honoured so that a
   // bookmark, a WhatsApp link or an old habit never lands on a blank page
@@ -4455,7 +4510,7 @@ function render(){
   else if(parts[0]==='finance') vFinance();
   else if(parts[0]==='accounts') vAccounts();
   else if(parts[0]==='daily') vReports('log');
-  else if(parts[0]==='buyers') vClients('logins');
+  else if(parts[0]==='buyers') vAccess();
   else if(parts[0]==='settings') vAdmin('settings');
   else if(parts[0]==='activity') vReports('activity');
   else if(parts[0]==='import') vAdmin('import');
@@ -4977,6 +5032,233 @@ function vBuyerMessages(){
   }).join('');
   paintPlain(buyerPage('Messages.','Your conversation with us',
     'Every question stays attached to the piece it is about.', '', body));
+}
+
+/* ---------------------------------------------------------------------------
+   People & access.
+
+   Built from the newer ADMIN handoff. Every login in one list, grouped by what
+   it can reach, with the actual scope spelled out rather than implied. The scope
+   lines are not decoration: each one names a boundary that is enforced by a
+   policy in the database, so this page doubles as the plain-English version of
+   the security audit.
+--------------------------------------------------------------------------- */
+
+const ACCESS_GROUPS=[
+  ['all',      'Everyone'],
+  ['buyer',    'Buyer access'],
+  ['staff',    'Workshop'],
+  ['admin',    'Office & finance'],
+  ['nologin',  'No login yet'],
+  ['attention','Needs attention']
+];
+
+// One row per person or company, with what that login actually reaches.
+function accessPeople(){
+  const out=[];
+  (S.profilesAll||[]).forEach(p=>{
+    const b=p.buyer_id?S.buyersById[p.buyer_id]:null;
+    const last=(S.activity||[]).find(a=>a.actor_id===p.user_id);
+    out.push({
+      kind:'person', id:p.user_id, profile:p, buyer:b,
+      name:p.full_name||shortLogin(p.email||'')||'Unnamed',
+      identity:p.role==='staff'?shortLogin(p.email||''):(p.email||''),
+      org:b?b.company:(S.settings.company_name||'Gujraj Impex'),
+      role:accessRoleLabel(p),
+      scope:accessScopeLabel(p, b),
+      lastAt:last?last.created_at:null,
+      attention:accessAttention(p, b)
+    });
+  });
+  // A buyer company with no login cannot see anything — that is worth surfacing
+  // here rather than leaving Yash to notice the absence.
+  (S.buyers||[]).forEach(b=>{
+    if((S.profilesAll||[]).some(p=>p.buyer_id===b.id)) return;
+    out.push({ kind:'company', id:b.id, buyer:b, name:b.company,
+      identity:'No login yet', org:b.company, role:'Buyer company',
+      scope:'Cannot sign in', lastAt:null,
+      attention:['This company has no login, so nobody there can see their orders'] });
+  });
+  return out;
+}
+
+function accessRoleLabel(p){
+  if(p.role==='admin') return 'Owner administrator';
+  if(p.role==='staff') return 'Workshop staff';
+  return p.finance_access===false?'Buyer — progress only':'Buyer administrator';
+}
+
+function accessScopeLabel(p, b){
+  if(p.role==='admin') return 'Everything, including prices';
+  if(p.role==='staff') return 'Every piece on the floor';
+  const n=(S.pos||[]).filter(x=>x.buyer_id===p.buyer_id).length;
+  return n+' order'+(n===1?'':'s')+(p.finance_access===false?'':' · account');
+}
+
+function accessAttention(p, b){
+  const out=[];
+  if(p.role==='staff' && !p.phone) out.push('No WhatsApp number, so a reminder has nowhere to go');
+  if(p.role==='buyer' && !p.buyer_id) out.push('Buyer login with no company attached — it can see nothing');
+  if(p.role==='buyer' && b && !b.active) out.push('The company is marked inactive');
+  const seen=(S.activity||[]).some(a=>a.actor_id===p.user_id);
+  if(!seen && p.role!=='admin') out.push('Has never done anything in StoneFlow');
+  return out;
+}
+
+// What this login can and cannot reach, in the words of the boundary itself.
+function accessPermissions(p){
+  if(!p) return [];
+  if(p.role==='admin') return [
+    [true,'Every order, buyer, price and payment'],
+    [true,'Approve photographs and publish updates to buyers'],
+    [true,'Create and remove logins'],
+    [true,'Read the internal activity log']
+  ];
+  if(p.role==='staff') return [
+    [true,'Every piece being made, its stages, sizes and target dates'],
+    [true,'Upload photographs and post the daily update'],
+    [true,'Read workshop notes, planned dates and holds'],
+    [false,'Buyer or company names'],
+    [false,'Order numbers, prices, payments or invoices'],
+    [false,'Buyer comments and documents'],
+    [false,'Publish anything to a buyer without your approval']
+  ];
+  const fin=p.finance_access!==false;
+  return [
+    [true,'Their own company’s orders and pieces'],
+    [true,'Approved photographs and published updates'],
+    [true,'Approve stages and leave comments'],
+    [fin,'Invoices, e-way bills and the statement'],
+    [false,'Any other buyer’s orders'],
+    [false,'Staff names, internal notes, planned dates or holds'],
+    [false,'Photographs you have not approved']
+  ];
+}
+
+function setAccessGroup(k){ window.__accessGroup=k; window.__accessSel=null; render(); }
+function setAccessQuery(v){ window.__accessQ=v; render();
+  const i=$('access-q'); if(i){ i.focus(); i.setSelectionRange(i.value.length,i.value.length); } }
+function selectAccess(id){ window.__accessSel=id; render(); }
+function closeAccess(){ window.__accessSel=null; render(); }
+
+function vAccess(){
+  if(!isAdmin()) return vHome();
+  const people=accessPeople();
+  const g=window.__accessGroup||'all';
+  const q=(window.__accessQ||'').toLowerCase();
+  const inGroup=x=>
+    g==='all'?true:
+    g==='buyer'?(x.kind==='person'&&x.profile.role==='buyer'):
+    g==='staff'?(x.kind==='person'&&x.profile.role==='staff'):
+    g==='admin'?(x.kind==='person'&&x.profile.role==='admin'):
+    g==='nologin'?(x.kind==='company'):
+    x.attention.length>0;
+  let list=people.filter(inGroup);
+  if(q) list=list.filter(x=>(x.name+' '+x.identity+' '+x.org+' '+x.role).toLowerCase().indexOf(q)>=0);
+  list.sort((a,b)=>(b.attention.length?1:0)-(a.attention.length?1:0) || a.name.localeCompare(b.name));
+
+  const counts={};
+  ACCESS_GROUPS.forEach(([k])=>{ counts[k]=people.filter(x=>{
+    const save=window.__accessGroup; window.__accessGroup=k;
+    const r=(k==='all')||(k==='buyer'&&x.kind==='person'&&x.profile.role==='buyer')||
+      (k==='staff'&&x.kind==='person'&&x.profile.role==='staff')||
+      (k==='admin'&&x.kind==='person'&&x.profile.role==='admin')||
+      (k==='nologin'&&x.kind==='company')||(k==='attention'&&x.attention.length>0);
+    window.__accessGroup=save; return r;
+  }).length; });
+
+  const sel=window.__accessSel?people.find(x=>x.id===window.__accessSel):null;
+
+  let h='<div class="page-head"><div>'+eyebrow('Administration · identity and permissions')+
+    '<h1 class="display-title">People &amp; access.</h1>'+
+    '<p class="lede">Every login, what it can reach, and what it cannot. Passwords are never shown here — reset one instead.</p></div>'+
+    '<div class="page-heading__actions">'+
+    '<button class="button button--secondary" type="button" onclick="mBuyer(null)">Add a buyer company</button>'+
+    '<button class="button" type="button" onclick="mNewLogin(null)">+ Add a person</button></div></div>';
+
+  h+='<div class="kpi-grid">'+[
+    ['Active people', people.filter(x=>x.kind==='person').length, 'Across the office, the floor and buyers','all'],
+    ['Buyer logins', counts.buyer, counts.buyer?'One company each':'Nobody can see their orders','buyer'],
+    ['Needs attention', counts.attention, counts.attention?'Missing contact or never used':'Nothing outstanding','attention'],
+    ['Full access', counts.admin, 'Can see prices and payments','admin']
+  ].map(t=>'<button class="kpi'+(t[0]==='Needs attention'&&t[1]?' kpi--warn':'')+(g===t[3]?' kpi--on':'')+
+    '" type="button" onclick="setAccessGroup(\''+t[3]+'\')">'+
+    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
+    '<span class="kpi__note">'+esc(t[2])+'</span></button>').join('')+'</div>';
+
+  h+='<div class="access-layout">';
+
+  h+='<aside class="panel access-groups"><div class="panel__body">'+
+    '<p class="side-nav__label">Access groups</p>'+
+    ACCESS_GROUPS.map(([k,label])=>'<button class="access-group'+(g===k?' is-on':'')+'" type="button" onclick="setAccessGroup(\''+k+'\')">'+
+      '<span>'+esc(label)+'</span><em>'+counts[k]+'</em></button>').join('')+
+    '<div class="side-help space-top-12"><strong>Roles do not overlap</strong>'+
+    '<p>The workshop, a buyer and the office each see a different database. A login gets only what its role is given — nothing is hidden by the menu alone.</p></div>'+
+    '</div></aside>';
+
+  h+='<section class="panel access-list"><div class="panel__head"><div class="access-search">'+
+    icon('i-search','icon--sm')+'<input id="access-q" type="search" placeholder="Search a name, login or company" '+
+    'value="'+esc(window.__accessQ||'')+'" oninput="setAccessQuery(this.value)"></div>'+
+    '<span class="access-count">'+list.length+' of '+people.length+'</span></div>'+
+    '<div class="panel__body">';
+  if(!list.length) h+='<div class="empty-state">Nobody in this group.</div>';
+  else h+='<div class="access-rows">'+list.map(x=>
+    '<article class="access-row'+(sel&&sel.id===x.id?' is-open':'')+(x.attention.length?' has-attn':'')+'" onclick="selectAccess(\''+x.id+'\')">'+
+      '<span class="access-avatar">'+esc(initials(x.name))+'</span>'+
+      '<div class="access-who"><strong>'+esc(x.name)+'</strong><span>'+esc(x.identity||'—')+'</span></div>'+
+      '<div class="access-role"><strong>'+esc(x.role)+'</strong><span>'+esc(x.org)+'</span></div>'+
+      '<div class="access-scope"><strong>'+esc(x.scope)+'</strong>'+
+        '<span>'+esc(x.lastAt?('Last seen '+ftime(x.lastAt)):'Not used yet')+'</span></div>'+
+      (x.attention.length?badge('Needs attention','warn'):badge('Active','success'))+
+    '</article>').join('')+'</div>';
+  h+='</div></section>';
+
+  h+='<aside class="panel access-detail">';
+  if(!sel){
+    h+='<div class="panel__body"><div class="empty-state">Pick someone to see exactly what their login reaches.</div></div>';
+  } else if(sel.kind==='company'){
+    h+='<div class="panel__head"><div><h3 class="panel__title">'+esc(sel.name)+'</h3>'+
+      '<p class="panel__description">A buyer company with nobody able to sign in.</p></div>'+
+      '<button class="button button--quiet" type="button" onclick="closeAccess()">Close</button></div>'+
+      '<div class="panel__body"><div class="empty-state">Nobody at '+esc(sel.name)+' can see their orders yet.</div>'+
+      '<div class="button-row space-top-12">'+
+      '<button class="button" type="button" onclick="mNewLogin(\''+sel.buyer.id+'\')">Create their login</button>'+
+      '<button class="button button--secondary" type="button" onclick="mBuyer(\''+sel.buyer.id+'\')">Edit the company</button></div></div>';
+  } else {
+    const p=sel.profile;
+    h+='<div class="panel__head"><div><h3 class="panel__title">Access details</h3>'+
+      '<p class="panel__description">Identity, role and what it reaches.</p></div>'+
+      '<button class="button button--quiet" type="button" onclick="closeAccess()">Close</button></div>'+
+      '<div class="panel__body">'+
+      '<div class="access-person"><span class="access-avatar access-avatar--lg">'+esc(initials(sel.name))+'</span>'+
+      '<div><strong>'+esc(sel.name)+'</strong><span>'+esc([sel.identity, sel.org].filter(Boolean).join(' · '))+'</span></div></div>'+
+      '<p class="eyebrow space-top-14">Login &amp; contact</p><div class="side-card__rows">'+
+        '<div class="side-row"><span>Signs in as</span><strong>'+esc(sel.identity||'—')+'</strong></div>'+
+        '<div class="side-row"'+(p.role==='staff'?' style="cursor:pointer" onclick="mStaffPhone(\''+p.user_id+'\')"':'')+
+          '><span>WhatsApp</span><strong'+(p.role==='staff'&&!p.phone?' class="is-missing"':'')+'>'+
+          esc(p.phone||(p.role==='staff'?'Add a number':'Not saved'))+'</strong></div>'+
+        '<div class="side-row"><span>Last seen</span><strong>'+esc(sel.lastAt?ftime(sel.lastAt):'Never')+'</strong></div>'+
+      '</div>'+
+      '<p class="eyebrow space-top-14">Role &amp; scope</p><div class="side-card__rows">'+
+        '<div class="side-row"><span>Role</span><strong>'+esc(sel.role)+'</strong></div>'+
+        '<div class="side-row"><span>Scope</span><strong>'+esc(sel.scope)+'</strong></div>'+
+      '</div>'+
+      '<ul class="access-perms space-top-12">'+accessPermissions(p).map(x=>
+        '<li class="'+(x[0]?'yes':'no')+'"><i>'+(x[0]?'✓':'✕')+'</i>'+esc(x[1])+'</li>').join('')+'</ul>'+
+      (p.role==='buyer'?'<label class="check-row space-top-12"><input type="checkbox" id="fin-'+p.user_id+'"'+
+        (p.finance_access!==false?' checked':'')+' onchange="setFinanceAccess(\''+p.user_id+'\',this.checked)">'+
+        '<span>Can see invoices, e-way bills and the statement</span></label>'+
+        '<p class="field-hint">Turn this off for a project manager who should follow production but not the money. '+
+        'It is enforced in the database, not by hiding the menu.</p>':'')+
+      (sel.attention.length?'<div class="attn attn--warn attn--flat space-top-12"><span>'+
+        sel.attention.map(esc).join('<br>')+'</span></div>':'')+
+      '<div class="button-row space-top-14">'+
+        '<button class="button button--secondary" type="button" onclick="mResetPw(\''+p.user_id+'\',\''+esc(p.email||'')+'\')">Reset the password</button>'+
+        (p.role!=='admin'?'<button class="button button--danger" type="button" onclick="delLogin(\''+p.user_id+'\',\''+esc(p.email||'')+'\')">Remove this login</button>':'')+
+      '</div></div>';
+  }
+  h+='</aside></div>';
+  $('app').innerHTML=h;
 }
 
 </script>
@@ -7857,6 +8139,15 @@ function mHandover(){
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await loadData(); render(); toast('Handed over');
   };
+}
+
+// The buyer-side finance permission. Enforced by bt_my_finance() in the policies
+// on invoices, e-way bills and the ledger — this switch only sets the flag.
+async function setFinanceAccess(userId, on){
+  const {error}=await sb.from('bt_profiles').update({finance_access:!!on}).eq('user_id', userId);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
+  toast(on?'They can now see invoices and the statement':'Invoices and the statement are now hidden from them');
 }
 
 </script>
