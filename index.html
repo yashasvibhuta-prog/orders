@@ -616,10 +616,21 @@ a{color:var(--text-primary)}
 .daily-entry{padding:18px 0;border-top:1px solid var(--line)}
 .daily-entry:first-child{border-top:0}
 
+/* the brand mark is a solid traced shape, not line art like the rest of the sprite */
+/* solid traced shape, not line art like the rest of the sprite; and it must
+   fill more of its tile than a line icon would, or the S-channel closes up */
+.wordmark__mark .icon{fill:currentColor;stroke:none;width:64%;height:64%}
+/* the workshop-only strip: planned dates, delay and hold detail. It is tinted
+   and labelled so nobody mistakes it for something the buyer can read. */
+.internal-strip{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:12px;
+  padding:10px 13px;border:1px dashed var(--line-strong);border-radius:var(--radius-md);
+  background:var(--surface-soft);color:var(--ink-soft);font-size:14px}
+.internal-strip__tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.internal-strip__hold{flex-basis:100%;color:var(--rust);font-weight:600}
 </style>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
-    <symbol id="i-mark" viewBox="0 0 24 24"><path d="M4 8.5 12 4l8 4.5v7L12 20l-8-4.5z"/><path d="m4 8.5 8 4.5 8-4.5M12 13v7"/></symbol>
+    <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
     <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4z"/><circle cx="12" cy="13.5" r="3"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4 4L19 7"/></symbol>
@@ -852,14 +863,15 @@ async function loadCore(){
 
 async function loadStaffData(){
   // Staff never query buyers, POs, comments or documents — the shop floor view only.
-  const [it, st, ph, sp, dc, upd, updi] = await Promise.all([
+  const [it, st, ph, sp, dc, upd, updi, sti] = await Promise.all([
     sb.from('bt_order_items').select('*, bt_item_stages(*)').order('created_at',{ascending:false}),
     Promise.resolve({data:S.stages}),
     sb.from('bt_photos').select('*').order('created_at'),
     sb.rpc('bt_staff_pos'),
     sb.from('bt_documents').select('*').order('created_at'),
     sb.from('bt_updates').select('*').order('work_date',{ascending:false}),
-    sb.from('bt_update_internal').select('*')
+    sb.from('bt_update_internal').select('*'),
+    sb.from('bt_stage_internal').select('*')
   ]);
   const err=[it,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -870,6 +882,7 @@ async function loadStaffData(){
   S.payments=[]; S.charges=[]; indexFinance();
   S.updates = upd.data||[]; S.updInternal = {};
   (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
+  indexStageInternal((sti&&sti.data)||[]);
   indexUpdates();
   S.items=(it.data||[]); S.itemsById={}; S.stByItem={};
   const activeStageIds = S.stages.filter(s=>s.active).map(s=>s.id);
@@ -909,6 +922,78 @@ function indexUpdates(){
   (S.photos||[]).forEach(p=>{ if(p.update_id) (S.photosByUpdate[p.update_id]=S.photosByUpdate[p.update_id]||[]).push(p); });
   Object.values(S.photosByUpdate).forEach(l=>l.sort((a,b)=>(a.display_order||0)-(b.display_order||0)));
 }
+// Planned dates and hold detail. The buyer has no policy on bt_stage_internal,
+// so for a buyer this index is simply empty and every helper below returns null
+// — the privacy does not depend on any caller remembering to check the role.
+function indexStageInternal(rows){
+  S.stInternal = {};
+  (rows||[]).forEach(r=>{ S.stInternal[r.item_id+'|'+r.stage_id] = r; });
+}
+function stageInternal(itemId, stageId){ return (S.stInternal||{})[itemId+'|'+stageId] || null; }
+
+function dayGap(a, b){
+  if(!a || !b) return null;
+  const ms = new Date(b+'T00:00:00') - new Date(a+'T00:00:00');
+  return Math.round(ms / 86400000);
+}
+
+// A stage is late against its own plan, not against the delivery date: catching
+// a slip at moulding is what stops it becoming a slip at dispatch.
+function stageDelay(itemId, row){
+  if(!row) return null;
+  const si = stageInternal(itemId, row.stage_id);
+  const planned = si && si.planned_date;
+  if(!planned) return null;
+  if(row.status === 'completed'){
+    const late = dayGap(planned, row.completed_at || today());
+    return { planned, done: row.completed_at, days: late,
+             state: late > 0 ? 'late' : 'ontime' };
+  }
+  if(row.status === 'skipped') return null;
+  const over = dayGap(planned, today());
+  return { planned, done: null, days: over,
+           state: over > 0 ? 'overdue' : 'due' };
+}
+
+function holdOf(itemId, row){
+  if(!row || row.status !== 'on_hold') return null;
+  const si = stageInternal(itemId, row.stage_id);
+  if(!si) return null;
+  if(!si.hold_reason && !si.hold_owner && !si.hold_revised_date) return null;
+  return si;
+}
+
+// Every piece currently on hold, for the owner's dashboard.
+function heldStages(){
+  const out = [];
+  (S.items||[]).forEach(it=>{
+    (S.stByItem[it.id]||[]).forEach(r=>{
+      const h = holdOf(it.id, r);
+      if(h) out.push({ item: it, row: r, stage: S.stagesById[r.stage_id], hold: h });
+    });
+  });
+  return out;
+}
+
+// Stages running past their planned date, worst first.
+function lateStages(){
+  const out = [];
+  (S.items||[]).forEach(it=>{
+    (S.stByItem[it.id]||[]).forEach(r=>{
+      if(r.status !== 'in_progress' && r.status !== 'on_hold') return;
+      const d = stageDelay(it.id, r);
+      if(d && d.state === 'overdue') out.push({ item: it, row: r, stage: S.stagesById[r.stage_id], delay: d });
+    });
+  });
+  return out.sort((a,b)=>b.delay.days - a.delay.days);
+}
+
+// A buyer's question counts as open until somebody closes it, so the panel
+// empties as things are dealt with instead of growing for ever.
+function openDecisions(){
+  return (S.comments||[]).filter(c=>c.author_role === 'buyer' && !c.resolved_at);
+}
+
 function updatesFor(itemId){ return S.updByItem[itemId]||[]; }
 function updateToday(itemId){ const t=today(); return updatesFor(itemId).find(u=>u.work_date===t); }
 function daysSinceUpdate(itemId){
@@ -1111,7 +1196,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -1123,7 +1208,8 @@ async function loadData(){
     admin ? sb.from('bt_payments').select('*').order('paid_on',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_charges').select('*').order('created_at') : Promise.resolve({data:[]}),
     sb.from('bt_updates').select('*').order('work_date',{ascending:false}),
-    admin ? sb.from('bt_update_internal').select('*') : Promise.resolve({data:[]})
+    admin ? sb.from('bt_update_internal').select('*') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_stage_internal').select('*') : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -1162,6 +1248,7 @@ async function loadData(){
   indexFinance();
   S.updates = upd.data||[]; S.updInternal = {};
   (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
+  indexStageInternal((sti&&sti.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
 }
@@ -1788,6 +1875,24 @@ function vPO(id){
 }
 function poTab(t){ window.__poTab=t; render(); }
 
+// How a piece was crated is the thing a buyer asks about when it arrives, so
+// the packing and dispatch photographs belong on the shipping panel rather than
+// buried in the general gallery. Approval rules are unchanged.
+function packingPhotos(p, compact){
+  if(compact) return '';
+  const dispatchIds = (S.stages||[])
+    .filter(s=>['packing','shipped','delivered'].includes(s.key))
+    .map(s=>s.id);
+  if(!dispatchIds.length) return '';
+  let list = [];
+  (p.items||[]).forEach(it=>{
+    list = list.concat((S.photosByItem[it.id]||[]).filter(x=>dispatchIds.includes(x.stage_id)));
+  });
+  list = visiblePhotos(list);
+  if(!list.length) return '';
+  return '<div class="space-top-12"><p class="eyebrow">Packing and dispatch</p>'+photoGridOf(list)+'</div>';
+}
+
 function shipPanel(p, compact){
   const admin=isAdmin();
   const rows=[['Ship to',p.ship_to],['Mode',p.ship_mode],['Forwarder',p.forwarder],['Container / LR no.',p.container_no],
@@ -1798,6 +1903,7 @@ function shipPanel(p, compact){
   const body=(any?sideRows(rows):'<p class="panel__description space-top-12">Not yet dispatched. Details appear here once the consignment ships.</p>')+
     (p.tracking_url?'<div class="button-row space-top-12"><a class="button button--secondary" href="'+esc(p.tracking_url)+'" target="_blank" rel="noopener">Track consignment ↗</a></div>':'')+
     (p.shipping_notes?'<p class="stage-note space-top-10">'+esc(p.shipping_notes)+'</p>':'')+
+    packingPhotos(p, compact)+
     (admin?'<div class="button-row space-top-12"><button class="button button--secondary" type="button" onclick="mShip(\''+p.id+'\')">Edit shipping</button></div>':'');
   if(compact) return '<section class="side-card"><h3 class="side-card__title">Shipping</h3>'+body+'</section>';
   return '<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Shipping details</h3>'+
@@ -1835,7 +1941,16 @@ function commentThread(it, stageId){
         '<div class="comment__bubble"><strong>'+esc(c.author_name||c.author_role)+(me?' · you':'')+'</strong>'+esc(c.body)+
         (c.attachment_path?'<div class="photo-placeholder space-top-10" style="min-height:120px;cursor:zoom-in" onclick="openPhoto(event,this)" data-ph-path="'+esc(c.attachment_path)+'" data-cap="">'+
           '<img alt="" data-ph-path="'+esc(c.attachment_path)+'" onload="this.parentNode.classList.add(\'is-loaded\')"><span>Attachment</span></div>':'')+
-        '<div class="field-hint space-top-10">'+ftime(c.created_at)+'</div></div></div>';
+        '<div class="field-hint space-top-10">'+ftime(c.created_at)+
+        (c.resolved_at?' · dealt with':'')+
+        // A buyer's question stays open until somebody closes it, so the panel
+        // of things needing attention empties instead of growing for ever.
+        (isAdmin()&&c.author_role==='buyer'
+          ? (c.resolved_at
+              ? ' · <a href="#" onclick="event.preventDefault();reopenComment(\''+c.id+'\')">reopen</a>'
+              : ' · <a href="#" onclick="event.preventDefault();resolveComment(\''+c.id+'\')">mark dealt with</a>')
+          : '')+
+        '</div></div></div>';
     }).join('')+'</div>';
   }
   h+='<div class="comment-composer"><input type="text" id="cmt-'+stageId+'" placeholder="Leave a comment on this stage" '+
@@ -1878,10 +1993,53 @@ function stageActions(it, row, st){
   if(row.status==='completed') h+='<button class="button button--secondary" type="button" onclick="setStage(\''+it.id+'\','+st.id+',\'in_progress\')">Reopen</button>';
   h+='<button class="button button--secondary" type="button" onclick="pickPhotos(\''+it.id+'\','+st.id+')">'+icon('i-camera','icon--sm')+'Add photos</button>';
   h+='<button class="button button--secondary" type="button" onclick="mNote(\''+it.id+'\','+st.id+')">Workshop note</button>';
+  h+='<button class="button button--secondary" type="button" onclick="mPlan(\''+it.id+'\','+st.id+')">Planned date</button>';
+  if(row.status==='on_hold')
+    h+='<button class="button button--success" type="button" onclick="liftHold(\''+it.id+'\','+st.id+')">Lift hold</button>';
+  else
+    h+='<button class="button button--secondary" type="button" onclick="mHold(\''+it.id+'\','+st.id+')">Put on hold</button>';
+  // Not every piece needs every stage — a plain slab never gets moulded.
+  if(row.status==='skipped')
+    h+='<button class="button button--quiet" type="button" onclick="setStage(\''+it.id+'\','+st.id+',\'pending\')">Needed after all</button>';
+  else if(row.status!=='completed')
+    h+='<button class="button button--quiet" type="button" onclick="skipStage(\''+it.id+'\','+st.id+')">Not needed</button>';
   if(row.approval==='none'||row.approval==='approved'||!row.approval)
     h+='<button class="button button--secondary" type="button" onclick="requestApproval(\''+it.id+'\','+st.id+',true)">Ask buyer to approve</button>';
   h+='</div>';
   return h;
+}
+
+// A one-word slip warning on the collapsed row, workshop-side only.
+function lateChip(it, row){
+  if(!isAdmin() && !isStaff()) return '';
+  const d = stageDelay(it.id, row);
+  if(!d || d.state !== 'overdue') return '';
+  return badge(d.days+' day'+(d.days===1?'':'s')+' over', 'alert');
+}
+
+// Planned dates, delays and hold detail are shown to the workshop only. A buyer
+// reading "planned 5 Sep" and then watching it pass is the phone call we are
+// trying to stop; what he sees is the delivery date and what has actually happened.
+function stageInternalPanel(it, row){
+  if(!isAdmin() && !isStaff()) return '';
+  const d = stageDelay(it.id, row);
+  const hold = holdOf(it.id, row);
+  if(!d && !hold) return '';
+  let h = '<div class="internal-strip"><span class="internal-strip__tag">Workshop only</span>';
+  if(d){
+    const label = d.state==='late'    ? Math.abs(d.days)+' day'+(Math.abs(d.days)===1?'':'s')+' late'
+                : d.state==='ontime'  ? (d.days===0?'On time':Math.abs(d.days)+' day'+(Math.abs(d.days)===1?'':'s')+' early')
+                : d.state==='overdue' ? d.days+' day'+(d.days===1?'':'s')+' over'
+                : 'Due '+fdate(d.planned);
+    const tone = (d.state==='late'||d.state==='overdue') ? 'alert' : 'success';
+    h += '<span>Planned '+esc(fdate(d.planned))+'</span>'+badge(label, tone);
+  }
+  if(hold){
+    h += '<span class="internal-strip__hold">'+
+      esc([hold.hold_reason, hold.hold_owner, hold.hold_revised_date?('revised to '+fdate(hold.hold_revised_date)):'']
+        .filter(Boolean).join(' · '))+'</span>';
+  }
+  return h + '</div>';
 }
 
 function vItem(id){
@@ -2002,6 +2160,7 @@ function stageRow(it, st, row){
       (open?'':'<div class="stage-row__media">'+
         (photos.length?badge(photos.length+' photo'+(photos.length>1?'s':'')):'')+
         (nCmt&&!staff?badge(nCmt+' comment'+(nCmt>1?'s':'')):'')+
+        lateChip(it,row)+
         ((admin||staff)?'<button class="button button--secondary" type="button" onclick="event.stopPropagation();pickPhotos(\''+it.id+'\','+st.id+')">'+
           icon('i-camera','icon--sm')+'Add photos</button>':'')+
         '<button class="button button--quiet" type="button" onclick="toggleStage(\''+it.id+'\','+st.id+')">Open</button>'+
@@ -2009,6 +2168,7 @@ function stageRow(it, st, row){
     '</div>';
   if(open){
     h+='<div class="stage-expanded">'+
+      stageInternalPanel(it,row)+
       (row.note?'<p class="stage-note"><strong>Workshop note:</strong> '+esc(row.note)+'</p>':'')+
       ((st.description&&!admin)?'<p class="stage-note">'+esc(st.description)+'</p>':'')+
       (photos.length?photoGridOf(photos):'<p class="panel__description">No photos on this stage yet.</p>')+
@@ -2341,7 +2501,8 @@ function vReview(){
   h+='</div></section>';
 
   h+='<section class="panel dashboard-grid__side"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Missing today</h3><p class="panel__description">Active pieces with no record for '+esc(fdate(today()))+'.</p></div></div>'+
+    '<h3 class="panel__title">Missing today</h3><p class="panel__description">Active pieces with no record for '+esc(fdate(today()))+'.</p></div>'+
+    (missing.length?'<button class="button button--secondary" type="button" onclick="remindAll()">Remind everyone</button>':'')+'</div>'+
     '<div class="panel__body">';
   if(!missing.length) h+='<div class="empty-state">Every active piece has today’s update.</div>';
   else h+=missing.map(it=>{
@@ -2355,11 +2516,39 @@ function vReview(){
 
   if(blocked.length){
     h+='<section class="panel dashboard-grid__wide"><div class="panel__head"><div>'+
-      '<h3 class="panel__title">Blocked</h3><p class="panel__description">Reported from the floor. The buyer does not see any of this.</p></div>'+
+      '<h3 class="panel__title">Reported blocked</h3><p class="panel__description">Raised by the floor in a daily update. The buyer does not see any of this.</p></div>'+
       badge(blocked.length+'','alert')+'</div><div class="panel__body">'+
       blocked.map(b=>'<div class="login-row"><div class="grow"><strong>'+esc(b.item.product)+'</strong>'+
         '<p class="field-hint">'+esc([b.reason, b.owner, b.revised?('revised to '+fdate(b.revised)):''].filter(Boolean).join(' · '))+'</p></div>'+
         '<div class="button-row"><button class="button button--quiet" type="button" onclick="go(\'#/item/'+b.item.id+'\')">Open</button></div></div>').join('')+
+      '</div></section>';
+  }
+
+  // A stage held with a reason and an owner, and a stage running past its plan,
+  // are the two things that turn into a telephone call if nobody looks at them.
+  const held = heldStages();
+  if(held.length){
+    h+='<section class="panel dashboard-grid__wide"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Stages on hold</h3><p class="panel__description">Held by you, with a reason, a person and a revised date. Workshop only.</p></div>'+
+      badge(held.length+'','alert')+'</div><div class="panel__body">'+
+      held.map(x=>'<div class="login-row"><div class="grow"><strong>'+esc(x.item.product)+'</strong>'+
+        '<p class="field-hint">'+esc([x.stage?x.stage.name:'', x.hold.hold_reason, x.hold.hold_owner,
+          x.hold.hold_revised_date?('revised to '+fdate(x.hold.hold_revised_date)):''].filter(Boolean).join(' · '))+'</p></div>'+
+        '<div class="button-row"><button class="button button--success" type="button" onclick="liftHold(\''+x.item.id+'\','+x.row.stage_id+')">Lift hold</button>'+
+        '<button class="button button--quiet" type="button" onclick="go(\'#/item/'+x.item.id+'\')">Open</button></div></div>').join('')+
+      '</div></section>';
+  }
+
+  const late = lateStages();
+  if(late.length){
+    h+='<section class="panel dashboard-grid__wide"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Running late</h3><p class="panel__description">Past their planned date. The buyer sees the delivery date, not this.</p></div>'+
+      badge(late.length+'','alert')+'</div><div class="panel__body">'+
+      late.map(x=>'<div class="login-row"><div class="grow"><strong>'+esc(x.item.product)+'</strong>'+
+        '<p class="field-hint">'+esc((x.stage?x.stage.name+' · ':'')+'planned '+fdate(x.delay.planned)+' · '+
+          x.delay.days+' day'+(x.delay.days===1?'':'s')+' over')+'</p></div>'+
+        '<div class="button-row"><button class="button button--secondary" type="button" onclick="mPlan(\''+x.item.id+'\','+x.row.stage_id+')">Re-plan</button>'+
+        '<button class="button button--quiet" type="button" onclick="go(\'#/item/'+x.item.id+'\')">Open</button></div></div>').join('')+
       '</div></section>';
   }
   h+='</div>';
@@ -2829,6 +3018,96 @@ function mNote(itemId, stageId){
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await loadData(); render();
   };
+}
+
+// ---- Planned dates, holds and conditional stages ------------------------
+// All of this writes to bt_stage_internal, which the buyer has no policy on.
+
+async function saveStageInternal(itemId, stageId, patch){
+  const row = Object.assign({ item_id:itemId, stage_id:stageId, updated_by:uid(),
+                              updated_at:new Date().toISOString() }, patch);
+  const {error} = await sb.from('bt_stage_internal').upsert(row, {onConflict:'item_id,stage_id'});
+  return error;
+}
+
+function mPlan(itemId, stageId){
+  const st = S.stagesById[stageId] || {};
+  const si = stageInternal(itemId, stageId) || {};
+  const m = modal('<h3>Planned date</h3><div class="sub">'+esc(st.name||'Stage')+
+    ' — for the workshop. The buyer never sees this; he sees the delivery date.</div>'+
+    '<div class="form-grid"><div class="field field--full"><label for="pl-d">Planned completion</label>'+
+    '<input id="pl-d" type="date" value="'+esc(si.planned_date||'')+'"></div>'+
+    '<div class="button-row field--full"><button class="button" type="button" id="pl-save">Save</button>'+
+    (si.planned_date?'<button class="button button--quiet" type="button" id="pl-clear">Clear</button>':'')+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  const write = async (v)=>{
+    const err = await saveStageInternal(itemId, stageId, { planned_date: v || null });
+    if(err){ toast(err.message,{err:true}); return; }
+    closeModal(); await loadData(); render();
+  };
+  m.m.querySelector('#pl-save').onclick = ()=> write($('pl-d').value || null);
+  const c = m.m.querySelector('#pl-clear'); if(c) c.onclick = ()=> write(null);
+}
+
+// A hold without a reason, an owner and a revised date is just a stalled job
+// nobody is accountable for, so all three are asked for here.
+function mHold(itemId, stageId){
+  const st = S.stagesById[stageId] || {};
+  const si = stageInternal(itemId, stageId) || {};
+  const m = modal('<h3>Put on hold</h3><div class="sub">'+esc(st.name||'Stage')+
+    ' — workshop only. Nothing here reaches the buyer.</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label for="hd-r">Why is it held</label>'+
+    '<input id="hd-r" placeholder="Tool repair pending" value="'+esc(si.hold_reason||'')+'"></div>'+
+    '<div class="field"><label for="hd-o">Who is on it</label>'+
+    '<input id="hd-o" placeholder="Kunal" value="'+esc(si.hold_owner||'')+'"></div>'+
+    '<div class="field"><label for="hd-d">Revised completion</label>'+
+    '<input id="hd-d" type="date" value="'+esc(si.hold_revised_date||'')+'"></div>'+
+    '<div class="button-row field--full"><button class="button button--danger" type="button" id="hd-save">Put on hold</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#hd-save').onclick = async ()=>{
+    const reason = $('hd-r').value.trim();
+    if(!reason){ toast('A hold needs a reason.',{err:true}); return; }
+    const err = await saveStageInternal(itemId, stageId, {
+      hold_reason: reason,
+      hold_owner: $('hd-o').value.trim() || null,
+      hold_revised_date: $('hd-d').value || null
+    });
+    if(err){ toast(err.message,{err:true}); return; }
+    closeModal();
+    await setStage(itemId, stageId, 'on_hold');
+  };
+}
+
+async function liftHold(itemId, stageId){
+  const err = await saveStageInternal(itemId, stageId,
+    { hold_reason:null, hold_owner:null, hold_revised_date:null });
+  if(err){ toast(err.message,{err:true}); return; }
+  await setStage(itemId, stageId, 'in_progress');
+  toast('Hold lifted.');
+}
+
+// Conditional stages: a plain slab is never moulded, and the timeline should
+// say so rather than showing a step that will sit pending for ever.
+async function skipStage(itemId, stageId){
+  await setStage(itemId, stageId, 'skipped');
+}
+
+// Closing a buyer's question so the "what needs you" panel empties.
+async function resolveComment(commentId){
+  const {error} = await sb.from('bt_comments')
+    .update({ resolved_at: new Date().toISOString(), resolved_by: uid() })
+    .eq('id', commentId);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
+  toast('Marked as dealt with.');
+}
+
+async function reopenComment(commentId){
+  const {error} = await sb.from('bt_comments')
+    .update({ resolved_at: null, resolved_by: null }).eq('id', commentId);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
 }
 
 function pickPhotos(itemId, stageId, poId){
@@ -3452,13 +3731,48 @@ async function ruChanges(updateId){
   }catch(e){ toast(e.message||String(e),{err:true}); }
 }
 
+// Recording a reminder in the activity log tells nobody. These open WhatsApp
+// with the message already written, which is the only channel that actually
+// reaches the floor today — a scheduled push needs a WhatsApp Business account.
+function staffPhones(){
+  return (S.profilesAll||[]).filter(p=>p.role==='staff' && p.phone)
+    .map(p=>({ name: shortLogin(p.full_name||p.email||'staff'), phone: p.phone }));
+}
+
 async function remindItem(itemId){
   const it=S.itemsById[itemId];
   await sb.from('bt_activity').insert({ item_id:itemId, po_id:it?it.po_id:null, actor_id:uid(),
     actor_role:'admin', actor_name:(S.profile.full_name||'Owner'), action:'reminder_sent',
     detail:'Daily update reminder — '+(it?it.product:'') }).catch(()=>{});
-  toast('Reminder recorded'+(it?' for '+it.product:''));
+  const who = staffPhones();
+  const text = 'StoneFlow: today’s update is still missing for '+(it?it.product:'a piece')+
+    '. Please add a photo and a line about what was done.';
+  if(who.length){
+    window.open(waLink(who[0].phone, text), '_blank');
+    toast('Reminder opened in WhatsApp for '+who[0].name+'.');
+  } else {
+    toast('Reminder logged. Add a phone number under Buyers & logins to send it on WhatsApp.');
+  }
   await loadData(); render();
+}
+
+// One message listing everything still missing, rather than one tap per piece.
+async function remindAll(){
+  const missing = itemsMissingToday();
+  if(!missing.length){ toast('Every active piece has today’s update.'); return; }
+  const lines = missing.map(it=>'• '+it.product).join('\n');
+  const text = 'StoneFlow — still missing today’s update:\n'+lines+
+    '\n\nPlease add a photo and a line for each.';
+  const who = staffPhones();
+  if(!who.length){
+    toast('Add a phone number for your staff under Buyers & logins first.',{err:true});
+    return;
+  }
+  await sb.from('bt_activity').insert({ actor_id:uid(), actor_role:'admin',
+    actor_name:(S.profile.full_name||'Owner'), action:'reminder_sent',
+    detail:missing.length+' piece'+(missing.length===1?'':'s')+' with no update today' }).catch(()=>{});
+  window.open(waLink(who[0].phone, text), '_blank');
+  toast('Sending to '+who[0].name+'.');
 }
 
 async function sendUpdateComment(itemId, updateId){
@@ -3613,7 +3927,9 @@ function mNewLogin(buyerId, kind){
     '<div class="form-grid">'+
     (role==='staff'?'<div class="field"><label for="lg-nm">Name</label><input id="lg-nm" placeholder="e.g. Kunal"></div>':'')+
     (role==='staff'
-      ? '<div class="field"><label for="lg-em">Login name</label><input id="lg-em" placeholder="kunal.tak" autocapitalize="none"></div>'
+      ? '<div class="field"><label for="lg-em">Login name</label><input id="lg-em" placeholder="kunal.tak" autocapitalize="none"></div>'+
+        '<div class="field field--full"><label for="lg-ph">WhatsApp number (optional)</label>'+
+        '<input id="lg-ph" placeholder="919876543210" inputmode="numeric"></div>'
       : '<div class="field field--full"><label for="lg-em">Email</label><input id="lg-em" type="email" placeholder="name@company.com"></div>')+
     '<div class="field'+(role==='staff'?'':' field--full')+'"><label for="lg-pw">Password</label><input id="lg-pw" value="'+pw+'"></div>'+
     '<p class="field-hint field--full">'+(role==='staff'
@@ -3628,6 +3944,13 @@ function mNewLogin(buyerId, kind){
     try{
       await adminApi({action:'create_user', email, password, role, buyer_id:buyerId||null,
         full_name: role==='staff'?(nm?nm.value.trim():null):(buyerId?(S.buyersById[buyerId]||{}).contact_name:null)});
+      const ph=$('lg-ph');
+      if(ph && ph.value.trim()){
+        // best effort: the login exists either way, so a failure here is not fatal
+        await loadData();
+        const made=(S.profilesAll||[]).find(x=>x.email===email);
+        if(made) await sb.from('bt_profiles').update({phone:ph.value.replace(/\D/g,'')}).eq('user_id', made.user_id);
+      }
       closeModal(); await loadData(); render();
       if(role==='staff'){
         toast('Staff login created.', {action:'Copy ▸', onAction:()=>copyText(
