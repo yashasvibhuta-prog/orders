@@ -1079,9 +1079,78 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .rep-link strong{display:block;font-size:14px;color:var(--ink)}
 .rep-link span{display:block;font-size:12px;color:var(--ink-faint);margin-top:2px}
 
+/* ---- Reports chrome, charts ---- */
+.rep-tabs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 16px}
+.rep-tab,.rep-win{background:var(--surface);border:1px solid var(--line);border-radius:999px;
+  padding:7px 13px;font:inherit;font-size:13px;color:var(--ink-soft);cursor:pointer;white-space:nowrap}
+.rep-tab:hover,.rep-win:hover{border-color:var(--line-strong)}
+.rep-tab.is-on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:600}
+.rep-win{font-size:12px;padding:6px 11px}
+.rep-win.is-on{background:var(--canvas);border-color:var(--line-strong);color:var(--ink);font-weight:600}
+.rep-tabs__spacer{flex:1}
+.kpi__row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.spark{width:78px;height:26px;flex:none;overflow:visible}
+.spark polyline{fill:none;stroke:var(--ink-faint);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.kpi--warn .spark polyline{stroke:var(--status-warning)}
+.rep-ex{display:grid;grid-template-columns:1fr;gap:8px;margin:0 0 16px}
+@media (min-width:900px){ .rep-ex{grid-template-columns:repeat(3,1fr)} }
+.rep-ex__item{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;padding:12px 13px;cursor:pointer}
+.rep-ex__item:hover{border-color:var(--line-strong)}
+.rep-ex__item>div{flex:1;min-width:0}
+.rep-ex__item strong{display:block;font-size:13px;color:var(--ink)}
+.rep-ex__item span{display:block;font-size:11.5px;color:var(--ink-faint);margin-top:2px;overflow-wrap:anywhere}
+.conf-row{display:grid;grid-template-columns:1fr 46px;grid-template-areas:"head head" "bar score" "why why";
+  gap:4px 10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.conf-row:last-child{border-bottom:0}
+.conf-row__head{grid-area:head;display:flex;justify-content:space-between;gap:10px}
+.conf-row__head strong{font-size:14px;color:var(--ink)}
+.conf-row__head span{font-size:11.5px;color:var(--ink-faint)}
+.conf-bar{grid-area:bar;height:9px;border-radius:999px;background:var(--canvas);overflow:hidden}
+.conf-bar i{display:block;height:100%;border-radius:999px;background:var(--ink)}
+.conf-bar i.conf-bar--1{background:var(--status-warning)}
+.conf-bar i.conf-bar--2{background:var(--status-error)}
+.conf-score{grid-area:score;text-align:right;font-size:13px;font-weight:600;color:var(--ink)}
+.conf-why{grid-area:why;margin:0;font-size:11.5px;color:var(--ink-faint);line-height:1.4}
+.flow-row{display:grid;grid-template-columns:minmax(90px,1.1fr) minmax(0,2fr) 28px;gap:10px;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.flow-row:last-child{border-bottom:0}
+.flow-name{font-size:13px;color:var(--ink);overflow-wrap:anywhere}
+.flow-bar{height:16px;border-radius:6px;background:var(--canvas);overflow:hidden}
+.flow-bar i{display:block;height:100%;background:var(--ink);border-radius:6px}
+.flow-n{font-size:13px;font-weight:600;text-align:right;color:var(--ink)}
+.flow-note{margin-top:12px;padding:11px 12px;background:var(--status-warning-soft);border-radius:10px}
+.flow-note strong{display:block;font-size:13px;color:var(--ink)}
+.flow-note p{margin:2px 0 0;font-size:12px;color:var(--ink-soft)}
+.lchart{width:100%;height:auto;max-height:180px}
+.lchart__axis,.lchart__target{stroke:var(--line-strong);stroke-width:1}
+.lchart__target{stroke-dasharray:4 4;stroke:var(--status-success)}
+.lchart__line{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.lchart__dot{fill:var(--ink)}
+.lchart__lbl{font-size:9px;fill:var(--ink-faint)}
+.donut-wrap{position:relative;width:140px;margin:0 auto}
+.donut{width:140px;height:140px;transform:rotate(-90deg)}
+.donut circle{fill:none;stroke-width:16}
+.donut__bg{stroke:var(--canvas)}
+.donut__seg--0{stroke:var(--ink)} .donut__seg--1{stroke:var(--ink-soft)}
+.donut__seg--2{stroke:var(--status-warning)} .donut__seg--3{stroke:var(--status-error)}
+.donut__mid{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.donut__mid strong{display:block;font-size:15px;color:var(--ink)}
+.donut__mid span{display:block;font-size:10px;color:var(--ink-faint)}
+.donut-key{display:grid;gap:6px;margin-top:14px}
+.donut-key div{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-soft)}
+.donut-key strong{margin-left:auto;color:var(--ink)}
+.key{width:9px;height:9px;border-radius:2px;flex:none}
+.key--0{background:var(--ink)} .key--1{background:var(--ink-soft)}
+.key--2{background:var(--status-warning)} .key--3{background:var(--status-error)}
+.def-row{padding:10px 0;border-bottom:1px solid var(--line)}
+.def-row:last-child{border-bottom:0}
+.def-row strong{display:block;font-size:13px;color:var(--ink);margin-bottom:3px}
+.def-row p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+
 </style>
 <body>
-<script>const BUILD_ID='280e1cdf2869';</script>
+<script>const BUILD_ID='835decacd0d8';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -2378,6 +2447,143 @@ function deliveryRisk(){
   return out;
 }
 
+/* ---------------------------------------------------------------------------
+   Reporting figures.
+
+   Two rules here. Nothing is invented: where a number cannot be computed from
+   rows that exist, the report says so. And nothing is dressed up as a
+   prediction — "delivery confidence" is a stated arithmetic of the exceptions
+   against an order, not a forecast, and the page says which exceptions.
+--------------------------------------------------------------------------- */
+
+function reportWindow(){ return window.__repDays||30; }
+function setReportWindow(n){ window.__repDays=n; render(); }
+
+// A day list, newest first.
+function lastDays(n, back){
+  const out=[]; const d=new Date(today()+'T00:00:00');
+  d.setDate(d.getDate()-(back||0));
+  for(let i=0;i<n;i++){ out.push(d.toISOString().slice(0,10)); d.setDate(d.getDate()-1); }
+  return out;
+}
+
+// Compliance for each of the last n days, oldest first — the series behind the chart.
+function complianceSeries(n){
+  const active=(S.items||[]).filter(it=>it.status!=='delivered'&&it.status!=='cancelled');
+  return lastDays(n).reverse().map(d=>{
+    if(!active.length) return {d, pct:null};
+    const got=active.filter(it=>(S.updByItem[it.id]||[]).some(u=>u.work_date===d)).length;
+    return {d, pct:Math.round((got/active.length)*100)};
+  });
+}
+
+// Average days a stage is running past its planned date, right now.
+function avgStageDelay(){
+  const l=[];
+  (S.items||[]).forEach(it=>(S.stByItem[it.id]||[]).forEach(r=>{
+    const d=stageDelay(it.id,r);
+    if(d && (d.state==='overdue'||d.state==='late') && d.days>0) l.push(d.days);
+  }));
+  return l.length?(l.reduce((a,b)=>a+b,0)/l.length):null;
+}
+
+// Money owed to Gujraj Impex, aged by the date the invoice was raised. There is
+// no payment-term field on an invoice, so it cannot be aged against a due date
+// and the page says as much rather than implying one.
+function receivableAgeing(){
+  const inv=(S.invoices||[]).filter(i=>i.published_at);
+  const paid=(S.payments||[]).reduce((a,p)=>a+(+p.amount||0),0);
+  const total=inv.reduce((a,i)=>a+(+i.total||0),0);
+  const buckets=[{k:'0–30 days',v:0},{k:'31–60 days',v:0},{k:'61–90 days',v:0},{k:'Over 90 days',v:0}];
+  inv.forEach(i=>{
+    const age=Math.abs(dayGap(String(i.invoice_date).slice(0,10), today())||0);
+    const b=age<=30?0:age<=60?1:age<=90?2:3;
+    buckets[b].v += (+i.total||0);
+  });
+  return { total, paid, outstanding: Math.max(0, total-paid), buckets,
+           currency:(inv[0]&&inv[0].currency)||'INR', n:inv.length };
+}
+
+// Active pieces by the stage they are sitting in, and where the queue is longest.
+function productionFlow(){
+  const active=(S.items||[]).filter(it=>it.status!=='delivered'&&it.status!=='cancelled');
+  const rows=S.stages.filter(s=>s.active).map(s=>({
+    stage:s, items:active.filter(it=>it.current_stage_id===s.id)
+  })).filter(r=>r.items.length);
+  const max=rows.reduce((m,r)=>Math.max(m,r.items.length),0);
+  rows.forEach(r=>{ r.pct=max?Math.round((r.items.length/max)*100):0; });
+  // the constraint is the busiest stage, and the longest wait inside it
+  let constraint=null;
+  rows.forEach(r=>{ if(!constraint || r.items.length>constraint.items.length) constraint=r; });
+  if(constraint){
+    let worst=0;
+    constraint.items.forEach(it=>{
+      const row=(S.stByItem[it.id]||[]).find(x=>x.stage_id===constraint.stage.id);
+      if(row && row.started_at){ const d=dayGap(row.started_at, today()); if(d>worst) worst=d; }
+    });
+    constraint.longest=worst;
+  }
+  return { rows, constraint, active:active.length };
+}
+
+// How likely an order is to land on its promised date, expressed as the
+// exceptions counted against it. Not a forecast — an arithmetic of what is wrong.
+function deliveryConfidence(){
+  return deliveryRisk().map(r=>{
+    let score=100; const why=[];
+    r.reasons.forEach(x=>{
+      if(/on hold|hold/i.test(x)){ score-=35; }
+      else if(/past its planned date/i.test(x)){ score-=25; }
+      else if(/Ship date passed/i.test(x)){ score-=30; }
+      else if(/Waiting on the buyer/i.test(x)){ score-=15; }
+      else if(/No update logged today/i.test(x)){ score-=10; }
+      else if(/Ships in/i.test(x)){ score-=5; }
+      why.push(x);
+    });
+    const items=(r.po.items||[]).length||1;
+    const done=((r.po.items||[]).reduce((a,i)=>a+i.progress,0)/items);
+    score=Math.max(5, Math.min(99, Math.round(score*0.75 + done*25)));
+    const stage=((r.po.items||[]).map(i=>S.stagesById[i.current_stage_id]).filter(Boolean)
+      .sort((a,b)=>a.sort_order-b.sort_order)[0]||{}).name||'Not started';
+    return { po:r.po, level:r.level, label:r.label, score, why, stage };
+  }).sort((a,b)=>a.score-b.score);
+}
+
+function reportKPIs(){
+  const conf=deliveryConfidence();
+  const uc=updateCompliance();
+  const ag=receivableAgeing();
+  const delay=avgStageDelay();
+  const onTime=conf.length?Math.round(conf.reduce((a,c)=>a+c.score,0)/conf.length):null;
+  return {
+    onTime, atRisk:conf.filter(c=>c.level===2).length,
+    compliance:uc.of?Math.round((uc.today/uc.of)*100):null, uc,
+    delay, ageing:ag, series:complianceSeries(14)
+  };
+}
+
+// Everything the owner should be told before being shown a chart.
+function reportExceptions(){
+  const out=[];
+  const conf=deliveryConfidence();
+  conf.filter(c=>c.level===2).slice(0,2).forEach(c=>out.push({
+    level:2, title:c.po.po_number+' may miss '+(c.po.expected_ship_date?fdate(c.po.expected_ship_date):'its date'),
+    sub:c.why[0]||'Exceptions recorded against this order', run:"go('#/po/"+c.po.id+"')" }));
+  const flow=productionFlow();
+  if(flow.constraint && flow.constraint.items.length>=3) out.push({
+    level:1, title:flow.constraint.stage.name+' is the busiest stage',
+    sub:flow.constraint.items.length+' pieces are sitting here'+
+      (flow.constraint.longest?(', the longest for '+flow.constraint.longest+' day'+(flow.constraint.longest===1?'':'s')):''),
+    run:"go('#/production')" });
+  const uc=updateCompliance();
+  if(uc.missing.length) out.push({
+    level:1, title:uc.missing.length+' workshop update'+(uc.missing.length===1?'':'s')+' missing',
+    sub:'Nothing has been logged today for '+uc.missing.slice(0,2).map(i=>i.product).join(', ')+
+      (uc.missing.length>2?' and others':''),
+    run:"go('#/production/missing')" });
+  return out.slice(0,3);
+}
+
 </script>
 <script>
 'use strict';
@@ -2951,17 +3157,20 @@ function vClients(tab){
 
 function vReports(tab){
   if(!isAdmin()) return vHome();
-  if(tab==='stages') return vStagePerf();
-  if(tab==='orders') return vOrderValue();
-  const tabs=[
-    ['overview','Overview','#/reports',0],
-    ['activity','Activity','#/reports/activity',0],
-    ['log','Workshop log','#/reports/log',0]
-  ];
-  if(tab==='log'){ withTabs(vDaily, tabs, 'log'); return; }
-  if(tab==='activity'){ withTabs(vActivity, tabs, 'activity'); return; }
-  withTabs(vReportsOverview, tabs, 'overview');
+  if(tab==='stages')     return vStagePerf();
+  if(tab==='orders')     return vOrderValue();
+  if(tab==='delivery')   return vReportsDelivery();
+  if(tab==='production') return vReportsProduction();
+  if(tab==='service')    return vReportsService();
+  if(tab==='finance')    return vReportsFinance();
+  if(tab==='log')        return vReportsLog();
+  if(tab==='activity')   return vReportsActivity();
+  vReportsOverview();
 }
+// The audit log and the workshop log already render themselves; they just need
+// the reports chrome above them.
+function vReportsActivity(){ vActivity(); $('app').innerHTML=reportChrome('activity')+$('app').innerHTML; }
+function vReportsLog(){ vDaily(); $('app').innerHTML=reportChrome('activity')+$('app').innerHTML; hydrateImages(); }
 
 function vAdmin(tab){
   if(!isAdmin()) return vHome();
@@ -5551,6 +5760,254 @@ function vOrderValue(){
     '<h1 class="display-title">Order value and costs.</h1>'+
     '<p class="lede">What each order is worth, and what has been recorded against it.</p></div>'+
     '<button class="button button--quiet" type="button" onclick="go(\'#/reports\')">Back to reports</button></div>'+body;
+}
+
+/* ---- tiny inline charts: no library, no network, and they print ---- */
+function sparkline(vals, w, h){
+  const v=vals.filter(x=>x!==null);
+  if(v.length<2) return '<svg class="spark" viewBox="0 0 '+(w||90)+' '+(h||28)+'"></svg>';
+  w=w||90; h=h||28;
+  const min=Math.min.apply(null,v), max=Math.max.apply(null,v), span=(max-min)||1;
+  const pts=vals.map((x,i)=>{
+    if(x===null) return null;
+    return [ (i/(vals.length-1))*w, h-2-((x-min)/span)*(h-4) ];
+  }).filter(Boolean);
+  return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" aria-hidden="true">'+
+    '<polyline points="'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')+'"/></svg>';
+}
+function lineChart(series, target){
+  const w=520, h=150, pad=22;
+  const vals=series.map(s=>s.pct);
+  const pts=series.map((s,i)=>{
+    if(s.pct===null) return null;
+    return [ pad+(i/Math.max(1,series.length-1))*(w-pad*2), h-pad-(s.pct/100)*(h-pad*2) ];
+  }).filter(Boolean);
+  const ty=h-pad-((target||95)/100)*(h-pad*2);
+  return '<svg class="lchart" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid meet" role="img" '+
+    'aria-label="Daily update compliance over the last '+series.length+' days">'+
+    '<line class="lchart__axis" x1="'+pad+'" y1="'+(h-pad)+'" x2="'+(w-pad)+'" y2="'+(h-pad)+'"/>'+
+    '<line class="lchart__target" x1="'+pad+'" y1="'+ty+'" x2="'+(w-pad)+'" y2="'+ty+'"/>'+
+    (pts.length>1?'<polyline class="lchart__line" points="'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')+'"/>':'')+
+    pts.map(p=>'<circle class="lchart__dot" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.5"/>').join('')+
+    '<text class="lchart__lbl" x="'+pad+'" y="'+(h-6)+'">'+esc(fdate(series[0].d))+'</text>'+
+    '<text class="lchart__lbl" x="'+(w-pad)+'" y="'+(h-6)+'" text-anchor="end">today</text>'+
+    '</svg>';
+}
+function donut(parts, total, cur){
+  const R=54, C=2*Math.PI*R;
+  let off=0;
+  const seg=parts.filter(p=>p.v>0).map((p,i)=>{
+    const frac=total?p.v/total:0;
+    const el='<circle class="donut__seg donut__seg--'+i+'" r="'+R+'" cx="70" cy="70" '+
+      'stroke-dasharray="'+(frac*C).toFixed(2)+' '+C.toFixed(2)+'" stroke-dashoffset="'+(-off*C).toFixed(2)+'"/>';
+    off+=frac; return el;
+  }).join('');
+  return '<div class="donut-wrap"><svg class="donut" viewBox="0 0 140 140" role="img" aria-label="Receivable by age">'+
+    '<circle class="donut__bg" r="'+R+'" cx="70" cy="70"/>'+seg+'</svg>'+
+    '<div class="donut__mid"><strong>'+esc(money(total,cur))+'</strong><span>invoiced</span></div></div>'+
+    '<div class="donut-key">'+parts.map((p,i)=>'<div><i class="key key--'+i+'"></i>'+esc(p.k)+
+      '<strong>'+esc(money(p.v,cur))+'</strong></div>').join('')+'</div>';
+}
+
+const REPORT_TABS=[
+  ['overview','Overview'], ['delivery','Orders & delivery'], ['production','Production'],
+  ['service','Client service'], ['finance','Finance'], ['activity','Audit log']
+];
+
+function reportChrome(active){
+  const d=reportWindow();
+  return '<div class="page-head"><div>'+eyebrow('Operational intelligence · owner view')+
+    '<h1 class="display-title">Reports.</h1>'+
+    '<p class="lede">What is drifting, why it matters, and where to act. Every figure opens the records behind it.</p></div>'+
+    '<div class="page-heading__actions">'+
+    '<button class="button button--secondary" type="button" onclick="mMetricDefs()">How these are counted</button>'+
+    '<button class="button button--secondary" type="button" onclick="exportReport()">Export CSV</button></div></div>'+
+    '<div class="rep-tabs">'+REPORT_TABS.map(t=>
+      '<button class="rep-tab'+(active===t[0]?' is-on':'')+'" type="button" onclick="go(\'#/reports'+
+      (t[0]==='overview'?'':'/'+t[0])+'\')">'+esc(t[1])+'</button>').join('')+
+    '<span class="rep-tabs__spacer"></span>'+
+    [[7,'7 days'],[30,'30 days'],[90,'Quarter']].map(x=>
+      '<button class="rep-win'+(d===x[0]?' is-on':'')+'" type="button" onclick="setReportWindow('+x[0]+')">'+x[1]+'</button>').join('')+
+    '</div>';
+}
+
+function kpiTile(label, value, note, series, warn){
+  return '<div class="kpi'+(warn?' kpi--warn':'')+'">'+
+    '<span class="kpi__label">'+esc(label)+'</span>'+
+    '<div class="kpi__row"><strong class="kpi__value">'+esc(value)+'</strong>'+(series?sparkline(series):'')+'</div>'+
+    '<span class="kpi__note">'+esc(note)+'</span></div>';
+}
+
+function vReportsOverview(){
+  if(!isAdmin()) return vHome();
+  const k=reportKPIs();
+  const ex=reportExceptions();
+  const conf=deliveryConfidence();
+  const flow=productionFlow();
+
+  let h=reportChrome('overview');
+
+  h+='<div class="kpi-grid">'+
+    kpiTile('Delivery confidence', k.onTime===null?'—':k.onTime+'%',
+      k.atRisk?(k.atRisk+' order'+(k.atRisk===1?'':'s')+' at risk'):'No order at risk',
+      null, k.atRisk>0)+
+    kpiTile('Daily update compliance', k.compliance===null?'—':k.compliance+'%',
+      k.uc.today+' of '+k.uc.of+' pieces today', k.series.map(s=>s.pct), k.compliance!==null&&k.compliance<80)+
+    kpiTile('Average stage delay', k.delay===null?'none':k.delay.toFixed(1)+' days',
+      k.delay===null?'No stage is past its planned date':'Across stages running past plan', null, k.delay!==null)+
+    kpiTile('Invoiced, unpaid', k.ageing.n?money(k.ageing.outstanding,k.ageing.currency):'—',
+      k.ageing.n?(k.ageing.n+' published invoice'+(k.ageing.n===1?'':'s')):'No invoice published yet', null, false)+
+    '</div>';
+
+  if(ex.length) h+='<div class="rep-ex">'+ex.map(x=>
+    '<article class="rep-ex__item" onclick="'+x.run+'"><span class="risk-dot risk-dot--'+x.level+'"></span>'+
+    '<div><strong>'+esc(x.title)+'</strong><span>'+esc(x.sub)+'</span></div>'+
+    '<button class="button button--quiet" type="button">Open</button></article>').join('')+'</div>';
+
+  h+='<div class="console-grid">';
+
+  h+='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Delivery confidence</h3>'+
+    '<p class="panel__description">Counted down from the exceptions recorded against each order. Not a forecast.</p></div>'+
+    badge(conf.length+' open')+'</div><div class="panel__body">'+
+    (conf.length?conf.map(c=>'<article class="conf-row" onclick="go(\'#/po/'+c.po.id+'\')">'+
+      '<div class="conf-row__head"><strong>'+esc(c.po.po_number)+'</strong>'+
+      '<span>'+esc(c.stage+(c.po.expected_ship_date?(' · '+fdate(c.po.expected_ship_date)):' · no date'))+'</span></div>'+
+      '<div class="conf-bar"><i class="conf-bar--'+c.level+'" style="width:'+c.score+'%"></i></div>'+
+      '<span class="conf-score">'+c.score+'%</span>'+
+      (c.why.length?'<p class="conf-why">'+esc(c.why.join(' · '))+'</p>':'<p class="conf-why">Nothing outstanding</p>')+
+      '</article>').join('')
+      :'<div class="empty-state">No open orders.</div>')+
+    '</div></section>';
+
+  h+='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Production flow</h3>'+
+    '<p class="panel__description">Where the '+flow.active+' active piece'+(flow.active===1?' is':'s are')+' sitting right now.</p></div>'+
+    badge(flow.active+' active')+'</div><div class="panel__body">'+
+    (flow.rows.length?flow.rows.map(r=>'<div class="flow-row" onclick="go(\'#/production\')">'+
+      '<span class="flow-name">'+esc(shortStage(r.stage.name))+'</span>'+
+      '<span class="flow-bar"><i style="width:'+r.pct+'%"></i></span>'+
+      '<span class="flow-n">'+r.items.length+'</span></div>').join('')
+      :'<div class="empty-state">Nothing in production.</div>')+
+    (flow.constraint?'<div class="flow-note"><strong>'+esc(flow.constraint.stage.name)+' is the busiest stage.</strong>'+
+      '<p>'+flow.constraint.items.length+' piece'+(flow.constraint.items.length===1?'':'s')+' here'+
+      (flow.constraint.longest?(', the longest sitting '+flow.constraint.longest+' day'+(flow.constraint.longest===1?'':'s')):'')+'.</p></div>':'')+
+    '</div></section>';
+
+  h+='</div>';
+
+  h+='<div class="console-grid space-top-16">';
+  h+='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Daily evidence compliance</h3>'+
+    '<p class="panel__description">Pieces with a workshop update, day by day. The line is the 95% target.</p></div></div>'+
+    '<div class="panel__body">'+lineChart(k.series, 95)+'</div></section>';
+
+  const ag=k.ageing;
+  h+='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Receivable ageing</h3>'+
+    '<p class="panel__description">Published invoices by age. There is no payment term on an invoice, so this ages from the invoice date.</p></div></div>'+
+    '<div class="panel__body">'+
+    (ag.n?donut(ag.buckets, ag.total, ag.currency)+
+      '<div class="side-card__rows space-top-12">'+
+      '<div class="side-row"><span>Invoiced</span><strong>'+esc(money(ag.total,ag.currency))+'</strong></div>'+
+      '<div class="side-row"><span>Payments recorded</span><strong>'+esc(money(ag.paid,ag.currency))+'</strong></div>'+
+      '<div class="side-row"><span>Outstanding</span><strong>'+esc(money(ag.outstanding,ag.currency))+'</strong></div></div>'
+      :'<div class="empty-state">No invoice has been published yet, so there is nothing to age.</div>')+
+    '</div></section>';
+  h+='</div>';
+
+  $('app').innerHTML=h;
+}
+
+function vReportsDelivery(){
+  if(!isAdmin()) return vHome();
+  const conf=deliveryConfidence();
+  let h=reportChrome('delivery');
+  h+='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Confidence by order</h3>'+
+    '<p class="panel__description">Lowest first, with every exception counted against it.</p></div></div>'+
+    '<div class="panel__body"><div class="data-table-wrap"><table class="data-table">'+
+    '<tr><th>Order</th><th>Buyer</th><th>Stage</th><th>Ships</th><th>Confidence</th><th>Why</th></tr>'+
+    conf.map(c=>{ const b=S.buyersById[c.po.buyer_id];
+      return '<tr onclick="go(\'#/po/'+c.po.id+'\')" style="cursor:pointer">'+
+      '<td>'+esc(c.po.po_number)+'</td><td>'+esc(b?b.company:'—')+'</td>'+
+      '<td>'+esc(c.stage)+'</td><td>'+esc(c.po.expected_ship_date?fdate(c.po.expected_ship_date):'—')+'</td>'+
+      '<td>'+c.score+'%</td><td>'+esc(c.why.join(' · ')||'—')+'</td></tr>'; }).join('')+
+    '</table></div></div></section>';
+  $('app').innerHTML=h;
+}
+
+function vReportsProduction(){
+  if(!isAdmin()) return vHome();
+  const flow=productionFlow(), cyc=cycleTimeByStage();
+  let h=reportChrome('production');
+  h+='<div class="console-grid">';
+  h+='<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Cycle time by stage</h3>'+
+    '<p class="panel__description">Average days from start to finish on stages that completed.</p></div></div>'+
+    '<div class="panel__body">'+(cyc.length?cyc.map(x=>'<div class="ct-row">'+
+      '<span class="ct-name">'+esc(shortStage(x.stage.name))+'</span>'+
+      '<span class="ct-bar"><i style="width:'+x.pct+'%"></i></span>'+
+      '<span class="ct-val">'+x.avg.toFixed(1)+'d</span>'+
+      '<span class="ct-note">'+(x.slip===null?'no plan set':(x.slip>0?('+'+x.slip.toFixed(1)+'d vs plan'):'on or ahead of plan'))+'</span></div>').join('')
+      :'<div class="empty-state">No stage has completed yet.</div>')+'</div></section>';
+  h+='<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Work in progress</h3>'+
+    '<p class="panel__description">Active pieces by stage.</p></div></div><div class="panel__body">'+
+    (flow.rows.length?flow.rows.map(r=>'<div class="flow-row"><span class="flow-name">'+esc(shortStage(r.stage.name))+'</span>'+
+      '<span class="flow-bar"><i style="width:'+r.pct+'%"></i></span><span class="flow-n">'+r.items.length+'</span></div>').join('')
+      :'<div class="empty-state">Nothing in production.</div>')+'</div></section>';
+  h+='</div>';
+  h+='<div class="button-row space-top-16"><button class="button button--secondary" type="button" onclick="go(\'#/reports/stages\')">Open the full stage table</button></div>';
+  $('app').innerHTML=h;
+}
+
+function vReportsService(){
+  if(!isAdmin()) return vHome();
+  const uc=updateCompliance();
+  const cmts=(S.comments||[]).filter(c=>c.author_role==='buyer');
+  const open=cmts.filter(c=>!c.resolved_at);
+  const answered=cmts.filter(c=>c.resolved_at);
+  const pubs=(S.updates||[]).filter(u=>u.published_at);
+  const edited=pubs.filter(u=>u.public_summary_original && u.public_summary_original!==u.public_summary);
+  let h=reportChrome('service');
+  h+='<div class="kpi-grid">'+
+    kpiTile('Updates published', String(pubs.length), 'Reaching buyers', null, false)+
+    kpiTile('Reworded before sending', String(edited.length),
+      pubs.length?Math.round((edited.length/pubs.length)*100)+'% of published updates':'—', null, false)+
+    kpiTile('Buyer questions open', String(open.length), open.length?'Waiting on a reply':'All answered', null, open.length>0)+
+    kpiTile('Compliance today', (uc.of?Math.round((uc.today/uc.of)*100):0)+'%', uc.today+' of '+uc.of, null, false)+
+    '</div>';
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Open client-service actions</h3>'+
+    '<p class="panel__description">Questions a buyer has left that nobody has closed off.</p></div></div>'+
+    '<div class="panel__body">'+(open.length?open.slice(0,12).map(c=>{
+      const it=S.itemsById[c.item_id];
+      return '<article class="risk-row" onclick="go(\'#/item/'+c.item_id+'\')"><span class="risk-dot risk-dot--1"></span>'+
+        '<div><strong>'+esc(it?it.product:'A piece')+'</strong><span>'+esc(c.body)+'</span></div>'+
+        '<span class="risk-when">'+esc(ftime(c.created_at))+'</span></article>';
+    }).join(''):'<div class="empty-state">Nothing waiting on a reply.</div>')+'</div></section>';
+  $('app').innerHTML=h;
+}
+
+function vReportsFinance(){
+  if(!isAdmin()) return vHome();
+  const ag=receivableAgeing();
+  let h=reportChrome('finance');
+  h+='<div class="console-grid">';
+  h+='<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Receivable ageing</h3>'+
+    '<p class="panel__description">Published invoices by age from their invoice date.</p></div></div>'+
+    '<div class="panel__body">'+(ag.n?donut(ag.buckets, ag.total, ag.currency):
+      '<div class="empty-state">No invoice published yet.</div>')+'</div></section>';
+  h+='<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Recorded against orders</h3>'+
+    '<p class="panel__description">Value, shipping and packing, and payments.</p></div></div>'+
+    '<div class="panel__body"><div class="side-card__rows">'+
+    '<div class="side-row"><span>Invoiced</span><strong>'+esc(money(ag.total,ag.currency))+'</strong></div>'+
+    '<div class="side-row"><span>Payments recorded</span><strong>'+esc(money(ag.paid,ag.currency))+'</strong></div>'+
+    '<div class="side-row"><span>Outstanding</span><strong>'+esc(money(ag.outstanding,ag.currency))+'</strong></div>'+
+    '</div><div class="button-row space-top-12">'+
+    '<button class="button button--secondary" type="button" onclick="go(\'#/reports/orders\')">Order by order</button>'+
+    '<button class="button button--quiet" type="button" onclick="go(\'#/accounts\')">Accounts</button></div></div></section>';
+  h+='</div>';
+  $('app').innerHTML=h;
 }
 
 </script>
@@ -8440,6 +8897,57 @@ async function setFinanceAccess(userId, on){
   if(error){ toast(error.message,{err:true}); return; }
   await loadData(); render();
   toast(on?'They can now see invoices and the statement':'Invoices and the statement are now hidden from them');
+}
+
+// Every metric on the Reports pages, and exactly how it is counted. If a figure
+// cannot be derived from rows that exist, it says so here rather than guessing.
+function mMetricDefs(){
+  const rows=[
+    ['Delivery confidence','Starts at 100 and counts down for each exception on the order — a hold, a stage past its planned date, a decision waiting on the buyer, a passed ship date — then blends in how far the pieces have actually progressed. It is arithmetic on what is wrong today, not a prediction.'],
+    ['Daily update compliance','Active pieces with a workshop update logged for that date, over all active pieces. A piece counts as active until it is delivered or cancelled.'],
+    ['Average stage delay','Mean days past the planned date across every stage currently running late. Stages with no planned date are not counted, so setting planned dates makes this figure sharper.'],
+    ['Cycle time by stage','Days between started_at and completed_at, averaged over stages that have actually completed. Stages still running are excluded.'],
+    ['Production flow','Active pieces grouped by the stage they are sitting in. The busiest stage is named as the constraint, with the longest time any piece has been waiting there.'],
+    ['Receivable ageing','Published invoices grouped by days since the invoice date. Invoices carry no payment term in StoneFlow, so this cannot age against a due date and does not pretend to.'],
+    ['Outstanding','Published invoice totals less payments recorded in StoneFlow. It is not a Tally balance — the buyer-facing statement is, and that comes from your books.'],
+    ['Reworded before sending','Published updates where your edited wording differs from what the workshop first submitted.']
+  ];
+  modal('<h3>How these are counted</h3><div class="sub">So a number is never acted on without knowing what it means.</div>'+
+    '<div class="side-card__rows">'+rows.map(r=>'<div class="def-row"><strong>'+esc(r[0])+'</strong><p>'+esc(r[1])+'</p></div>').join('')+'</div>'+
+    '<div class="button-row"><button class="button button--secondary" type="button" onclick="closeModal()">Close</button></div>');
+}
+
+// A plain CSV of what the current reports show, for a spreadsheet or an email.
+function exportReport(){
+  const k=reportKPIs(), conf=deliveryConfidence(), flow=productionFlow(), cyc=cycleTimeByStage();
+  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const L=[];
+  L.push(['StoneFlow report', fdate(today())].map(q).join(','));
+  L.push('');
+  L.push(['Metric','Value','Note'].map(q).join(','));
+  L.push(['Delivery confidence', k.onTime===null?'':k.onTime+'%', k.atRisk+' at risk'].map(q).join(','));
+  L.push(['Daily update compliance', (k.compliance===null?'':k.compliance+'%'), k.uc.today+' of '+k.uc.of].map(q).join(','));
+  L.push(['Average stage delay', k.delay===null?'none':k.delay.toFixed(1)+' days',''].map(q).join(','));
+  L.push(['Invoiced', money(k.ageing.total,k.ageing.currency), k.ageing.n+' invoices'].map(q).join(','));
+  L.push(['Payments recorded', money(k.ageing.paid,k.ageing.currency),''].map(q).join(','));
+  L.push(['Outstanding', money(k.ageing.outstanding,k.ageing.currency),''].map(q).join(','));
+  L.push('');
+  L.push(['Order','Buyer','Stage','Ships','Confidence','Exceptions'].map(q).join(','));
+  conf.forEach(c=>{ const b=S.buyersById[c.po.buyer_id];
+    L.push([c.po.po_number, b?b.company:'', c.stage, c.po.expected_ship_date||'', c.score+'%', c.why.join(' · ')].map(q).join(',')); });
+  L.push('');
+  L.push(['Stage','Active pieces'].map(q).join(','));
+  flow.rows.forEach(r=>L.push([r.stage.name, r.items.length].map(q).join(',')));
+  L.push('');
+  L.push(['Stage','Average days','Vs plan','Completed stages counted'].map(q).join(','));
+  cyc.forEach(x=>L.push([x.stage.name, x.avg.toFixed(1), x.slip===null?'':x.slip.toFixed(1), x.n].map(q).join(',')));
+  const blob=new Blob(["﻿"+L.join('\n')], {type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='stoneflow-report-'+today()+'.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+  toast('Report downloaded');
 }
 
 </script>
