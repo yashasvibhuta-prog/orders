@@ -693,9 +693,111 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 /* direction on every ledger line, so no amount stands there unexplained */
 .ledger-dir{display:block;margin-top:2px;font-size:12px;color:var(--ink-faint);white-space:nowrap}
 #acct-inv,#acct-ewb{min-width:820px}
+
+/* ---- the owner console --------------------------------------------------- */
+.topbar--console{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+.cmdbar{display:none;align-items:center;gap:10px;width:100%;max-width:560px;justify-self:center;
+  padding:9px 12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);
+  color:var(--ink-soft);font:inherit;font-size:14px;cursor:pointer;text-align:left}
+.cmdbar:hover{border-color:var(--action-primary)}
+.cmdbar span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cmdbar__key{font-size:11px;border:1px solid var(--line-strong);border-radius:5px;padding:2px 6px;color:var(--ink-faint)}
+@media (min-width:900px){ .cmdbar{display:flex} }
+.create-wrap{position:relative}
+.create-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:60;min-width:240px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:12px;box-shadow:var(--shadow-lg);padding:6px;display:flex;flex-direction:column}
+/* a class rule beats [hidden] at equal specificity, so say it again here or the
+   menu stays laid out off the right edge and every page scrolls sideways */
+.create-menu[hidden]{display:none}
+.create-menu__item{border:0;background:transparent;font:inherit;text-align:left;padding:10px 12px;border-radius:8px;cursor:pointer}
+.create-menu__item:hover{background:var(--surface-soft)}
+
+/* the sidebar replaces eleven top tabs */
+.side-nav{display:none}
+.side-nav__group{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin:18px 0 6px 12px}
+.side-nav__link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;border-radius:9px;
+  color:var(--ink-soft);text-decoration:none;font-size:14.5px;font-weight:600}
+.side-nav__link:hover{background:var(--surface-soft);color:var(--ink)}
+.side-nav__link--active{background:var(--action-soft);color:var(--ink)}
+.side-nav__link--sub{padding-left:30px;font-weight:500;font-size:14px}
+@media (min-width:1100px){
+  .app-shell--console{display:grid;grid-template-columns:236px minmax(0,1fr);grid-template-rows:auto 1fr}
+  .app-shell--console > .topbar{grid-column:1 / -1}
+  .app-shell--console > .side-nav{display:block;grid-row:2;border-right:1px solid var(--line);padding:8px 10px 40px;
+    position:sticky;top:0;align-self:start;max-height:calc(100vh - 64px);overflow:auto}
+  .app-shell--console > .page{grid-row:2;min-width:0}
+}
+
+.kpi-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:20px}
+.kpi{display:flex;flex-direction:column;gap:6px;padding:18px;border:1px solid var(--line);border-radius:var(--radius-lg);
+  background:var(--surface);text-align:left;font:inherit;cursor:pointer}
+.kpi:hover{border-color:var(--line-strong)}
+.kpi__head{display:flex;align-items:center;justify-content:space-between;color:var(--ink-faint)}
+.kpi__label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.kpi__value{font-family:var(--font-display);font-size:34px;line-height:1}
+.kpi__foot{font-size:13px;color:var(--ink-soft)}
+
+.console-grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:1000px){ .console-grid{grid-template-columns:minmax(0,1fr) 320px} }
+.chip-row{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 11px;font:inherit;
+  font-size:12.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;white-space:nowrap}
+.chip--on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.act-group{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:700;color:var(--ink-faint);padding:14px 0 6px;border-bottom:1px solid var(--line)}
+.act{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.act__icon{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--surface-soft);color:var(--ink-soft)}
+.act__title{font-weight:650;font-size:15px}
+.act__meta{font-size:13px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
+.act__note{font-size:12.5px;color:var(--ink-faint);margin-top:2px}
+.act__chip{display:none;font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+@media (min-width:820px){ .act{grid-template-columns:34px minmax(0,1fr) auto auto} .act__chip{display:inline} }
+.milestone{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:center;width:100%;
+  padding:12px 0;border:0;border-bottom:1px solid var(--line);background:transparent;font:inherit;text-align:left;cursor:pointer}
+.milestone__date{display:grid;place-items:center;padding:6px 0;border-radius:9px;background:var(--surface-soft);
+  font-family:var(--font-display);font-size:19px;line-height:1}
+.milestone__date em{font-style:normal;font-family:var(--font-ui);font-size:10px;letter-spacing:.08em;color:var(--ink-faint)}
+.milestone strong{display:block;font-size:14.5px}
+.milestone small{display:block;font-size:12.5px;color:var(--ink-soft)}
+
+.console-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.console-tab{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font:inherit;
+  font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer}
+.console-tab--on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.console-tab--on .badge{background:rgba(255,255,255,.22);color:#fff}
+
+.cmd{width:min(680px,92vw)}
+.cmd__input{width:100%;font-size:16px;padding:12px 14px;border:1px solid var(--line-strong);border-radius:10px}
+.cmd__list{max-height:52vh;overflow:auto;margin-top:10px}
+.cmd__row{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;align-items:baseline;width:100%;
+  padding:9px 10px;border:0;background:transparent;border-radius:8px;font:inherit;text-align:left;cursor:pointer}
+.cmd__row--on,.cmd__row:hover{background:var(--surface-soft)}
+.cmd__kind{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+.cmd__label{font-weight:600}
+.cmd__meta{grid-column:2;font-size:12.5px;color:var(--ink-soft)}
+.cmd__hint{margin-top:8px;font-size:12px;color:var(--ink-faint)}
+
+/* The console's header is a three-column grid only where there is room for the
+   search bar; below that it wraps like the old one, and the dock keeps carrying
+   navigation right up to the width where the sidebar appears. */
+@media (max-width:899px){
+  .topbar--console{display:flex;flex-wrap:wrap;gap:10px}
+  .topbar--console .topbar__tools{margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+  .topbar--console .role-chip{display:none}
+}
+.app-shell--console .mobile-dock{display:grid}
+@media (min-width:1100px){ .app-shell--console .mobile-dock{display:none} }
+
+/* the owner-actions head stacks its chips under the title rather than fighting
+   it for width */
+@media (min-width:700px){
+  .console-grid__main > .panel__head{align-items:flex-start}
+  .console-grid__main > .panel__head .chip-row{justify-content:flex-end;max-width:60%}
+}
+@media (max-width:699px){ .console-grid__main > .panel__head{flex-direction:column;gap:10px} }
 </style>
 <body>
-<script>const BUILD_ID='6fdf2b5bea50';</script>
+<script>const BUILD_ID='5679ad888fe8';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -1422,6 +1524,157 @@ function itemsWithUnread(){ return S.items.filter(it=>unreadCount(it.id)>0); }
 // Photos attached to a daily update are reviewed in Daily updates, not here —
 // approving one in isolation would publish an image without its wording.
 function pendingPhotos(){ return S.photos.filter(p=>p.status==='pending' && !p.update_id); }
+
+/* ---- the console's counters -----------------------------------------------
+   Every badge on the sidebar comes from here, so a number on the nav and the
+   number of rows on the screen it opens can never disagree. */
+function queueCounts(){
+  const approvals = pendingUpdates().length + pendingPhotos().length;
+  const missing   = itemsMissingToday().length;
+  const blocked   = blockedItems().length + heldStages().length;
+  const decisions = openDecisions().length + pendingApprovals().length;
+  const clientUpdates = (S.buyers||[]).filter(b=>b.active &&
+    updateAge(b).k==='you' && (S.pos||[]).some(p=>p.buyer_id===b.id && p.status==='open')).length;
+  const late = lateStages().length;
+  const owed = overdueBuyers();
+  return {
+    approvals, missing, blocked, decisions, clientUpdates, late,
+    workshop: approvals + missing + blocked,
+    urgent: decisions + blocked + owed.length,
+    overdue: owed.reduce((s,x)=>s+x.amount,0),
+    overdueCount: owed.length
+  };
+}
+
+// A buyer sits "overdue" when a published statement says they owe us. Nothing is
+// inferred from a PO value: money owed comes from the books or not at all.
+function overdueBuyers(){
+  return (S.buyers||[]).map(b=>{
+    const sn=latestStatement(b.id);
+    const st=statementStanding(sn);
+    if(!st || st.credit || !st.amount) return null;
+    return { buyer:b, amount:Number(st.amount)||0, as_of:st.as_of, currency:st.currency };
+  }).filter(Boolean).sort((a,b)=>b.amount-a.amount);
+}
+
+/* One prioritised list of everything waiting on Yash, drawn from the queues that
+   used to live on four separate screens. Each row knows its own urgency, which
+   filter chip it belongs to, and the single button that deals with it.
+     urgency 0 = urgent now, 1 = due today, 2 = waiting on others            */
+function ownerActions(){
+  const rows=[];
+  const push=(o)=>rows.push(o);
+
+  // Money the books say is owed. Never inferred from a PO value.
+  overdueBuyers().forEach(o=>{
+    const days=dayGap(o.as_of, today());
+    push({ urgency:0, chip:'finance', chipLabel:'Finance', icon:'stage-planning',
+      title:'Outstanding on the latest statement',
+      meta:o.buyer.company+' · '+money(o.amount,o.currency)+' · as at '+fdate(o.as_of),
+      sort:-o.amount, action:{label:'Open', go:"go('#/finance')"},
+      note:days>0?('Statement is '+days+' day'+(days===1?'':'s')+' old'):'' });
+  });
+
+  // The floor has reported a piece stuck.
+  blockedItems().forEach(b=>{
+    push({ urgency:0, chip:'blocked', chipLabel:'Blocked', icon:'stage-sealing',
+      title:b.item.product+' reported blocked',
+      meta:poRef(b.item)+' · '+(b.reason||'no reason recorded'),
+      action:{label:'Open', go:"go('#/item/"+b.item.id+"')"},
+      note:b.owner?('With '+b.owner):'' });
+  });
+
+  // A hold Yash placed himself, still not lifted.
+  heldStages().forEach(hd=>{
+    push({ urgency:0, chip:'blocked', chipLabel:'Blocked', icon:'stage-sealing',
+      title:(hd.stage?hd.stage.name:'A stage')+' on hold',
+      meta:hd.item.product+' · '+poRef(hd.item)+(hd.hold.reason?' · '+hd.hold.reason:''),
+      action:{label:'Lift hold', go:"go('#/item/"+hd.item.id+"')"} });
+  });
+
+  // Photographs and daily updates the buyer cannot see until reviewed.
+  const nu=pendingUpdates().length, np=pendingPhotos().length;
+  if(nu) push({ urgency:1, chip:'approval', chipLabel:'Approvals', icon:'i-camera',
+    title:'Review '+nu+' workshop update'+(nu===1?'':'s'),
+    meta:'Submitted by the floor and not yet published to the buyer',
+    action:{label:'Review', go:"go('#/production/review')"} });
+  if(np) push({ urgency:1, chip:'approval', chipLabel:'Approvals', icon:'i-camera',
+    title:'Approve '+np+' photograph'+(np===1?'':'s'),
+    meta:'The client cannot see them until you approve',
+    action:{label:'Review', go:"go('#/production/review')"} });
+
+  // Pieces with nothing recorded today.
+  const miss=itemsMissingToday();
+  if(miss.length) push({ urgency:1, chip:'missing', chipLabel:'Missing', icon:'stage-planning',
+    title:'Daily update missing on '+miss.length+' piece'+(miss.length===1?'':'s'),
+    meta:miss.slice(0,2).map(i=>i.product).join(', ')+(miss.length>2?' and '+(miss.length-2)+' more':''),
+    action:{label:'Remind', go:"go('#/production/missing')"} });
+
+  // Stages past the date they were planned to finish.
+  lateStages().slice(0,4).forEach(l=>{
+    push({ urgency:1, chip:'late', chipLabel:'Running late', icon:'stage-shipped',
+      title:(l.stage?l.stage.name:'A stage')+' is '+l.delay.days+' day'+(l.delay.days===1?'':'s')+' over',
+      meta:l.item.product+' · '+poRef(l.item),
+      sort:-l.delay.days, action:{label:'Re-plan', go:"go('#/item/"+l.item.id+"')"} });
+  });
+
+  // Buyers who have not had an update in a while.
+  const due=(S.buyers||[]).filter(b=>b.active && updateAge(b).k==='you' &&
+    (S.pos||[]).some(p=>p.buyer_id===b.id && p.status==='open'));
+  due.forEach(b=>push({ urgency:1, chip:'client', chipLabel:'Client updates', icon:'stage-selection',
+    title:'Approved progress not sent to '+b.company,
+    meta:updateAge(b).label,
+    action:{label:'Preview', go:"go('#/clients/updates')"} }));
+
+  // A buyer asked something and nobody has closed it.
+  openDecisions().forEach(c=>{
+    const it=S.itemsById[c.item_id];
+    push({ urgency:1, chip:'decision', chipLabel:'Questions', icon:'stage-selection',
+      title:'Question from the buyer',
+      meta:(it?it.product+' · ':'')+String(c.body||'').slice(0,90),
+      action:{label:'Open', go:"go('#/item/"+c.item_id+"')"} });
+  });
+
+  // Sent to the buyer and now his move, so it sits below Yash's own work.
+  pendingApprovals().forEach(a=>{
+    push({ urgency:2, chip:'waiting', chipLabel:'With the buyer', icon:'i-check',
+      title:'Waiting on '+(a.item.po?(S.buyersById[a.item.po.buyer_id]||{}).company||'the buyer':'the buyer'),
+      meta:a.item.product+' · '+(a.stage?a.stage.name:''),
+      action:{label:'Open', go:"go('#/item/"+a.item.id+"')"} });
+  });
+
+  return rows.sort((a,b)=>(a.urgency-b.urgency)||((a.sort||0)-(b.sort||0)));
+}
+
+function poRef(item){ return item && item.po ? item.po.po_number : ''; }
+
+// Dated commitments for the week ahead: deliveries, planned stages, nothing invented.
+function nextSevenDays(){
+  const out=[], t=today();
+  (S.pos||[]).forEach(p=>{
+    const d=p.expected_ship_date||p.delivery_date;
+    if(!d || d<t || dayGap(t,d)>7) return;
+    out.push({ date:d, title:'Planned dispatch', meta:p.po_number+' · '+(p.project||''), go:"go('#/po/"+p.id+"')" });
+  });
+  (S.items||[]).forEach(it=>{
+    (S.stByItem[it.id]||[]).forEach(r=>{
+      const int_=(S.stInternal||{})[it.id+'|'+r.stage_id];
+      if(!int_ || !int_.planned_date) return;
+      if(int_.planned_date<t || dayGap(t,int_.planned_date)>7) return;
+      if(r.status==='completed'||r.status==='skipped') return;
+      out.push({ date:int_.planned_date, title:(S.stagesById[r.stage_id]||{}).name+' planned',
+        meta:it.product+' · '+poRef(it), go:"go('#/item/"+it.id+"')" });
+    });
+  });
+  return out.sort((a,b)=>String(a.date).localeCompare(String(b.date))).slice(0,6);
+}
+
+// A sidebar entry is "on" for its own page and for anything nested under it.
+function navActive(hash){
+  const cur=(location.hash||'#/home');
+  if(hash==='#/home') return cur==='#/home' || cur==='#' || cur==='';
+  return cur===hash || cur.indexOf(hash+'/')===0;
+}
 function visiblePhotos(list){
   list=list||[];
   if(isAdmin()||isStaff()) return list;
@@ -1613,28 +1866,51 @@ function updateHeader(){
   const cur=location.hash||'#/home';
   const on=h=>cur.indexOf(h)===0?' nav-link--active':'';
   if(isAdmin()){
-    const nPend=pendingPhotos().length;
-    const nDue=S.buyers.filter(x=>x.active && updateAge(x).k==='you' && S.pos.some(p=>p.buyer_id===x.id&&p.status==='open')).length;
-    const T=[
-      ['#/home','Orders',0],
-      ['#/updates','Client updates',nDue],
-      ['#/approvals','Photo approvals',nPend],
-      ['#/review','Daily updates',pendingUpdates().length],
-      ['#/finance','Finance',0],
-      ['#/accounts','Accounts',0],
-      ['#/daily','Daily log',0],
-      ['#/buyers','Buyers &amp; logins',0],
-      ['#/activity','Activity',0],
-      ['#/import','Import',0],
-      ['#/settings','Settings',0]];
-    nav.innerHTML=T.map(t=>'<a class="nav-link'+on(t[0])+'" href="javascript:void(0)" onclick="go(\''+t[0]+'\')">'+t[1]+
-      (t[2]?' <span class="badge badge--alert">'+t[2]+'</span>':'')+'</a>').join('');
-    window.__moreNav=T.slice(3);
+    // Eleven top tabs, four of them overlapping in meaning, was too many to scan.
+    // Six groups down the side, each carrying its own count.
+    const q=queueCounts();
+    shell.className='app-shell app-shell--console';
+    topbar.className='topbar topbar--console';
+    topbar.innerHTML=
+      '<a class="wordmark" href="#/home" aria-label="StoneFlow — go to the command centre">'+
+        '<span class="wordmark__mark">'+icon('i-mark')+'</span>'+
+        '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by '+esc(S.settings.company_name||'Gujraj Impex')+'</span></span></a>'+
+      '<button class="cmdbar" type="button" onclick="openCommand()" aria-label="Search orders, products, clients or invoices">'+
+        icon('i-search')+'<span>Search orders, products, clients or invoices</span>'+
+        '<kbd class="cmdbar__key">Ctrl K</kbd></button>'+
+      '<div class="topbar__tools">'+
+        '<div class="create-wrap"><button class="button" type="button" id="create-btn" onclick="toggleCreate(event)">+ Create</button>'+
+        '<div class="create-menu" id="create-menu" hidden></div></div>'+
+        '<span class="role-chip">Owner view</span>'+
+        '<span class="avatar" title="'+esc(who)+'">'+esc(initials(who))+'</span>'+
+        '<button class="button button--quiet" type="button" onclick="signOut()">Sign out</button></div>';
+
+    const grp=(label)=>'<p class="side-nav__group">'+label+'</p>';
+    const link=(hash,label,count,sub)=>'<a class="side-nav__link'+(sub?' side-nav__link--sub':'')+
+      (navActive(hash)?' side-nav__link--active':'')+'" href="javascript:void(0)" onclick="go(\''+hash+'\')">'+
+      '<span>'+label+'</span>'+(count?'<span class="badge badge--alert">'+count+'</span>':'')+'</a>';
+    nav.className='side-nav';
+    nav.innerHTML=
+      grp('Workspace')+
+      link('#/home','Command Centre',q.urgent)+
+      link('#/orders','Orders',q.decisions)+
+      link('#/production','Production',q.workshop)+
+      link('#/production/review','Review queue',q.approvals,true)+
+      link('#/production/missing','Missing today',q.missing,true)+
+      link('#/production/blocked','Blocked',q.blocked,true)+
+      link('#/clients','Clients',q.clientUpdates)+
+      link('#/finance','Finance',q.overdueCount)+
+      link('#/reports','Reports',0)+
+      grp('Administration')+
+      link('#/admin','Admin',0);
+
+    window.__moreNav=[['#/production','Production',q.workshop],['#/clients','Clients',q.clientUpdates],
+      ['#/finance','Finance',0],['#/reports','Reports',0],['#/admin','Admin',0]];
     dock.hidden=false;
     dock.innerHTML=
-      dockItem('#/home','stage-confirmed','Orders',0,on('#/home'))+
-      dockItem('#/updates','stage-selection','Updates',nDue,on('#/updates'))+
-      dockItem('#/approvals','i-camera','Approvals',nPend,on('#/approvals'))+
+      dockItem('#/home','stage-confirmed','Today',q.urgent,navActive('#/home')?' nav-link--active':'')+
+      dockItem('#/orders','stage-planning','Orders',0,navActive('#/orders')?' nav-link--active':'')+
+      dockItem('#/production','i-camera','Workshop',q.workshop,navActive('#/production')?' nav-link--active':'')+
       '<a class="mobile-dock__item" href="javascript:void(0)" onclick="mMore()">'+icon('i-mark')+'More</a>';
   } else {
     const mine=pendingApprovals().length;
@@ -1712,7 +1988,7 @@ function attentionRows(){
   if(isAdmin()){
     const np=pendingPhotos().length;
     if(np) rows.push(attentionItem('i-camera','Photos awaiting your approval',
-      'The client cannot see them until you approve', np, "go('#/approvals')"));
+      'The client cannot see them until you approve', np, "go('#/production/photos')"));
   }
   const appr=pendingApprovals();
   if(appr.length){
@@ -1819,6 +2095,217 @@ function statementPanel(buyerId){
     '<p class="field-hint space-top-10">This is a copy of our books taken on '+esc(fdate(st.as_of))+
     '. If anything looks wrong, reply here and we will check it against Tally.</p>'+
     '</div></section>';
+}
+
+/* ---------------------------------------------------------------------------
+   The owner console
+--------------------------------------------------------------------------- */
+
+// A tile that states a number and what it is about, with a way through to it.
+function kpi(label, value, foot, go){
+  return '<button class="kpi" type="button" onclick="'+go+'">'+
+    '<span class="kpi__head"><span class="kpi__label">'+esc(label)+'</span>'+icon('i-chevron','icon--sm')+'</span>'+
+    '<span class="kpi__value">'+esc(String(value))+'</span>'+
+    '<span class="kpi__foot">'+esc(foot||'')+'</span></button>';
+}
+
+function actionRow(a){
+  return '<article class="act">'+
+    '<span class="act__icon">'+icon(a.icon||'i-check')+'</span>'+
+    '<div class="act__body"><p class="act__title">'+esc(a.title)+'</p>'+
+    '<p class="act__meta">'+esc(a.meta||'')+'</p>'+
+    (a.note?'<p class="act__note">'+esc(a.note)+'</p>':'')+'</div>'+
+    '<span class="act__chip">'+esc(a.chipLabel||'')+'</span>'+
+    '<button class="button button--secondary act__go" type="button" onclick="'+a.action.go+'">'+esc(a.action.label)+'</button>'+
+  '</article>';
+}
+
+function vCommandCentre(){
+  if(!isAdmin()) return vHome();
+  const q=queueCounts();
+  const acts=ownerActions();
+  const chip=window.__ccChip||'priority';
+  const shown=chip==='priority'?acts:acts.filter(a=>a.chip===chip);
+  const d=new Date();
+  const updTotal=activeItems().length, updGot=updTotal-q.missing;
+  const risk=lateStages().length + q.blocked;
+
+  // One sentence, so the first thing read is the shape of the day.
+  const bits=[];
+  if(q.decisions) bits.push(q.decisions+' decision'+(q.decisions===1?'':'s')+' waiting');
+  bits.push(updGot+' of '+updTotal+' updates received');
+  if(risk) bits.push(risk+' piece'+(risk===1?'':'s')+' at risk');
+  if(q.overdueCount) bits.push(q.overdueCount+' buyer'+(q.overdueCount===1?'':'s')+' outstanding');
+
+  let h='<div class="page-heading"><div>'+
+    eyebrow(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()]+
+      ', '+d.getDate()+' '+MON[d.getMonth()]+' · owner workspace')+
+    '<h1 class="display-title">Today.</h1>'+
+    '<p class="lede">'+esc(bits.join(' · '))+'.</p></div></div>';
+
+  h+='<section class="kpi-grid" aria-label="Today at a glance">'+
+    kpi('Urgent decisions', q.decisions+q.blocked, q.blocked?'Includes '+q.blocked+' blocked':'Nothing stuck', "go('#/production/blocked')")+
+    kpi('Updates today', updGot+' / '+updTotal, q.missing?q.missing+' still missing':'All in', "go('#/production/missing')")+
+    kpi('Running late', lateStages().length, 'Past their planned date', "go('#/production')")+
+    kpi('Outstanding', q.overdue?money(q.overdue,'INR'):'—', q.overdueCount?q.overdueCount+' buyer'+(q.overdueCount===1?'':'s'):'Nothing owed on the books', "go('#/finance')")+
+  '</section>';
+
+  const chips=[['priority','Priority',acts.length],['approval','Approvals',q.approvals],
+    ['missing','Missing',q.missing],['blocked','Blocked',q.blocked],
+    ['client','Client updates',q.clientUpdates],['finance','Finance',q.overdueCount]];
+
+  h+='<div class="console-grid">';
+  h+='<section class="panel console-grid__main"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Owner actions</h3>'+
+    '<p class="panel__description">Urgent first, then due today, then what is waiting on other people.</p></div>'+
+    '<div class="chip-row">'+chips.map(c=>'<button class="chip'+(chip===c[0]?' chip--on':'')+
+      '" type="button" onclick="ccChip(\''+c[0]+'\')">'+esc(c[1])+(c[2]?' · '+c[2]:'')+'</button>').join('')+
+    '</div></div><div class="panel__body">';
+
+  if(!shown.length){
+    h+='<div class="empty-state">Nothing is waiting on you.</div>';
+  } else {
+    [[0,'Urgent now'],[1,'Due today'],[2,'Waiting on others']].forEach(g=>{
+      const rows=shown.filter(a=>a.urgency===g[0]);
+      if(!rows.length) return;
+      h+='<div class="act-group"><span>'+g[1]+'</span><span>'+rows.length+'</span></div>'+
+        rows.map(actionRow).join('');
+    });
+  }
+  h+='</div></section>';
+
+  const week=nextSevenDays();
+  h+='<section class="panel console-grid__side"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Next seven days</h3>'+
+    '<p class="panel__description">Dispatch and planned stages.</p></div>'+
+    badge(week.length+' milestone'+(week.length===1?'':'s'))+'</div><div class="panel__body">'+
+    (week.length?week.map(w=>{
+      const dt=new Date(w.date+'T00:00:00');
+      return '<button class="milestone" type="button" onclick="'+w.go+'">'+
+        '<span class="milestone__date"><em>'+['SUN','MON','TUE','WED','THU','FRI','SAT'][dt.getDay()]+'</em>'+dt.getDate()+'</span>'+
+        '<span><strong>'+esc(w.title)+'</strong><small>'+esc(w.meta)+'</small></span></button>';
+    }).join(''):'<div class="empty-state">Nothing dated in the next week.</div>')+
+    '</div></section>';
+  h+='</div>';
+
+  paintPlain(h);
+}
+
+function ccChip(k){ window.__ccChip=k; render(); }
+
+/* Each console section is a small set of tabs over screens that already work.
+   The tab strip is prepended after the screen has drawn itself, so none of the
+   tested screens had to be pulled apart to gain the new navigation. */
+function tabStrip(tabs, active){
+  return '<div class="console-tabs" role="tablist">'+tabs.map(t=>
+    '<button class="console-tab'+(t[0]===active?' console-tab--on':'')+'" type="button" role="tab"'+
+    ' aria-selected="'+(t[0]===active?'true':'false')+'" onclick="go(\''+t[2]+'\')">'+esc(t[1])+
+    (t[3]?' <span class="badge badge--alert">'+t[3]+'</span>':'')+'</button>').join('')+'</div>';
+}
+function withTabs(render0, tabs, active){
+  render0();
+  const el=$('app');
+  if(el) el.insertAdjacentHTML('afterbegin', tabStrip(tabs, active));
+}
+
+function vProduction(tab){
+  if(!isAdmin()) return vHome();
+  const q=queueCounts();
+  const tabs=[
+    ['queue','Queue','#/production', pendingUpdates().length],
+    ['photos','Photographs','#/production/photos', pendingPhotos().length],
+    ['missing','Missing today','#/production/missing', q.missing],
+    ['blocked','Blocked','#/production/blocked', q.blocked]
+  ];
+  if(tab==='photos'){ withTabs(vApprovals, tabs, 'photos'); return; }
+  const active = (tab==='missing'||tab==='blocked') ? tab : 'queue';
+  withTabs(vReview, tabs, active);
+  if(tab==='missing'||tab==='blocked'){
+    const want = tab==='missing' ? 'Missing today' : 'Blocked';
+    const head=[...document.querySelectorAll('#app .panel__title')].find(e=>e.textContent.trim().indexOf(want)===0);
+    if(head) head.scrollIntoView({block:'start'});
+  }
+}
+
+function vClients(tab){
+  if(!isAdmin()) return vHome();
+  const q=queueCounts();
+  const tabs=[
+    ['logins','Buyers & logins','#/clients',0],
+    ['updates','Send an update','#/clients/updates', q.clientUpdates]
+  ];
+  if(tab==='updates'){ withTabs(vUpdates, tabs, 'updates'); return; }
+  withTabs(vBuyers, tabs, 'logins');
+}
+
+function vReports(tab){
+  if(!isAdmin()) return vHome();
+  const tabs=[
+    ['activity','Activity','#/reports',0],
+    ['log','Workshop log','#/reports/log',0]
+  ];
+  if(tab==='log'){ withTabs(vDaily, tabs, 'log'); return; }
+  withTabs(vActivity, tabs, 'activity');
+}
+
+function vAdmin(tab){
+  if(!isAdmin()) return vHome();
+  const tabs=[
+    ['settings','Settings','#/admin',0],
+    ['import','Import','#/admin/import',0]
+  ];
+  if(tab==='import'){ withTabs(vImport, tabs, 'import'); return; }
+  withTabs(vSettings, tabs, 'settings');
+}
+
+// The order book, which used to be the admin home.
+function vOrders(){
+  if(!isAdmin()) return vHome();
+  const hits=searchHits(window.__gq);
+  let h='<div class="page-heading"><div>'+eyebrow('Order book')+
+    '<h1 class="display-title">Orders.</h1>'+
+    '<p class="lede">Every purchase order, nearest ship date first.</p></div>'+
+    '<div class="search">'+icon('i-search')+
+    '<input id="gq" type="search" placeholder="Search PO, project, buyer or product" value="'+esc(window.__gq||'')+'" oninput="gSearch(this.value)"></div></div>';
+  h+='<div class="button-row" style="margin-bottom:18px">'+
+    '<select class="grow" id="buyer-filter" style="max-width:300px;min-height:44px;padding:0 12px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface)" onchange="setBuyerFilter(this.value)">'+
+    '<option value="">All buyers</option>'+
+    S.buyers.map(b=>'<option value="'+b.id+'"'+(S.buyerFilter===b.id?' selected':'')+'>'+esc(b.company)+'</option>').join('')+
+    '</select><button class="button" type="button" onclick="mNewPO()">+ New PO</button></div>';
+
+  if(hits){
+    const n=hits.pos.length+hits.items.length;
+    h+='<p class="lede">'+n+' match'+(n===1?'':'es')+' for “'+esc(hits.q)+'”</p>';
+    if(hits.pos.length) h+='<div class="order-list space-top-12">'+hits.pos.map(orderCard).join('')+'</div>';
+    if(hits.items.length) h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Products</h3></div>'+badge(hits.items.length+'')+'</div>'+
+      '<div class="panel__body product-list">'+hits.items.map(productCard).join('')+'</div></section>';
+    if(!n) h+='<div class="empty-state">Nothing matches. Try part of a PO number or a product name.</div>';
+    paint(h, null); return;
+  }
+
+  const openPos=S.pos.filter(p=>p.status==='open'||p.status==='on_hold');
+  const inProd=S.items.filter(i=>i.status==='in_production'||i.status==='on_hold').length;
+  const shippedN=S.items.filter(i=>i.status==='shipped'||i.status==='delivered'||i.status==='ready').length;
+  const nBuyers=new Set(openPos.map(p=>p.buyer_id)).size;
+  h+='<section class="summary-grid" aria-label="Order summary">'+
+    statCard('Open POs', openPos.length, 'Across '+nBuyers+' buyer'+(nBuyers===1?'':'s'))+
+    statCard('Items in production', inProd, '')+
+    statCard('Approvals pending', pendingApprovals().length, '')+
+    statCard('Ready or shipped', shippedN, '')+'</section>';
+
+  const openList=S.pos.filter(p=>p.status!=='completed'&&p.status!=='cancelled');
+  const closed=S.pos.filter(p=>p.status==='completed'||p.status==='cancelled');
+  h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Purchase orders</h3><p class="panel__description">Sorted by nearest expected ship date.</p></div>'+
+    '<button class="button button--secondary" type="button" onclick="mNewPO()">New PO</button></div>'+
+    '<div class="panel__body order-list">'+
+      (openList.length?openList.map(orderCard).join(''):'<div class="empty-state">No purchase orders yet. Create one with “New PO”.</div>')+
+    '</div>'+
+    (closed.length?'<div class="panel__head space-top-18"><div><h3 class="panel__title">Completed</h3></div></div>'+
+      '<div class="panel__body order-list">'+closed.map(orderCard).join('')+'</div>':'')+
+  '</section>';
+  paint(h, null);
 }
 
 function vHome(){
@@ -1936,6 +2423,10 @@ function activityItem(a){
 }
 
 /* wrap page content, adding the desktop PO rail for admin and buyer */
+// The command centre is about the day, not about one order, so the PO rail has
+// no business taking a quarter of the width there.
+function paintPlain(html){ $('app').innerHTML=html; hydrateImages(); }
+
 function paint(html, activePoId){
   // on phone and tablet the rail is redundant on the home screen (the order list is right there),
   // but it is the quick switcher on a PO page, so keep it there at every width
@@ -2726,9 +3217,12 @@ function vReview(){
   const blocked=blockedItems();
   const todayDone=activeItems().filter(it=>updateToday(it.id));
 
-  let h='<div class="page-heading"><div>'+eyebrow('Owner review')+
-    '<h1 class="display-title">Daily updates</h1>'+
-    '<p class="lede">Approve a day’s photographs, edit what the client reads, and see which pieces have gone quiet.</p></div></div>';
+  let h='<div class="page-heading"><div>'+eyebrow('Production workspace')+
+    '<h1 class="display-title">Today in the workshop.</h1>'+
+    '<p class="lede">Daily updates, photographs, missing submissions and blocks in one operational queue.</p></div>'+
+    '<div class="page-heading__actions">'+
+      '<button class="button button--secondary" type="button" onclick="remindAll()">Remind missing</button>'+
+      '<button class="button" type="button" onclick="pickDaily()">Add update</button></div></div>';
 
   h+='<section class="summary-grid">'+
     statCard('Awaiting review', pend.length, pend.length?'Nothing reaches the client until you publish':'Queue is clear')+
@@ -3205,17 +3699,25 @@ function render(){
   }
   if(parts[0]==='po' && parts[1]) vPO(parts[1]);
   else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
-  else if(parts[0]==='updates') vUpdates();
-  else if(parts[0]==='approvals') vApprovals();
-  else if(parts[0]==='review') vReview();
+  // the console's routes
+  else if(parts[0]==='orders') vOrders();
+  else if(parts[0]==='production') vProduction(parts[1]||'priority');
+  else if(parts[0]==='clients') vClients(parts[1]);
+  else if(parts[0]==='reports') vReports(parts[1]);
+  else if(parts[0]==='admin') vAdmin(parts[1]);
+  // the routes that existed before the console, still honoured so that a
+  // bookmark, a WhatsApp link or an old habit never lands on a blank page
+  else if(parts[0]==='updates') vClients('updates');
+  else if(parts[0]==='approvals') vProduction('review');
+  else if(parts[0]==='review') vProduction('review');
   else if(parts[0]==='finance') vFinance();
   else if(parts[0]==='accounts') vAccounts();
-  else if(parts[0]==='daily') vDaily();
-  else if(parts[0]==='buyers') vBuyers();
-  else if(parts[0]==='settings') vSettings();
-  else if(parts[0]==='activity') vActivity();
-  else if(parts[0]==='import') vImport();
-  else vHome();
+  else if(parts[0]==='daily') vReports('log');
+  else if(parts[0]==='buyers') vClients('logins');
+  else if(parts[0]==='settings') vAdmin('settings');
+  else if(parts[0]==='activity') vReports('activity');
+  else if(parts[0]==='import') vAdmin('import');
+  else vCommandCentre();
 }
 </script>
 <script>
@@ -5922,13 +6424,118 @@ async function impCommit(){
     await loadData();
     $('loading').style.display='none';
     toast('Imported '+recs.length+' items.');
-    go('#/home');
+    // land on the order book, where the thing just imported actually is
+    go('#/orders');
   }catch(e){
     $('loading').style.display='none';
     toast('Import failed: '+(e.message||e),{err:true});
   }
 }
 </script>
+
+/* ---------------------------------------------------------------------------
+   Command palette and the Create menu
+--------------------------------------------------------------------------- */
+
+// Everything the owner can jump to or start, in one list. Ctrl-K, or the search
+// bar in the header. Finding a PO quickly was one of the three frictions Yash named.
+function commandItems(q){
+  const n=_norm(q||'');
+  const out=[];
+  const add=(kind,label,meta,run)=>out.push({kind,label,meta,run});
+
+  if(!n){
+    add('Create','New purchase order','',"mNewPO()");
+    add('Create','Import a PO or spreadsheet','',"go('#/admin/import')");
+    add('Create','Add a workshop update','',"pickDaily()");
+    add('Create','New buyer','',"mBuyer()");
+    add('Go','Command Centre','',"go('#/home')");
+    add('Go','Production queue','',"go('#/production')");
+    add('Go','Finance','',"go('#/finance')");
+    add('Go','Accounts','',"go('#/accounts')");
+    return out;
+  }
+  const hit=s=>_norm(s).indexOf(n)>=0;
+  (S.pos||[]).forEach(p=>{
+    if(hit(p.po_number)||hit(p.project||'')||hit((S.buyersById[p.buyer_id]||{}).company||''))
+      add('Order', p.po_number, (p.project||'')+' · '+((S.buyersById[p.buyer_id]||{}).company||''), "go('#/po/"+p.id+"')");
+  });
+  (S.items||[]).forEach(it=>{
+    if(hit(it.product)||hit(it.stone||'')||hit(it.item_code||''))
+      add('Product', it.product, (it.stone||'')+' · '+poRef(it), "go('#/item/"+it.id+"')");
+  });
+  (S.buyers||[]).forEach(b=>{ if(hit(b.company)) add('Client', b.company, b.city||'', "go('#/clients')"); });
+  (S.invoices||[]).forEach(i=>{
+    if(hit(i.invoice_no||'')) add('Invoice', i.invoice_no,
+      ((S.buyersById[i.buyer_id]||{}).company||'')+' · '+money(i.total,i.currency), "go('#/accounts')");
+  });
+  return out.slice(0,40);
+}
+
+function openCommand(){
+  if(!isAdmin()) return;
+  modal('<div class="cmd"><input id="cmd-q" class="cmd__input" type="search" autocomplete="off" '+
+    'placeholder="Search orders, products, clients or invoices" aria-label="Search">'+
+    '<div class="cmd__list" id="cmd-list"></div>'+
+    '<p class="cmd__hint">Enter to open · Esc to close</p></div>');
+  window.__cmdSel=0;
+  renderCommand();
+  const inp=$('cmd-q');
+  inp.oninput=()=>{ window.__cmdSel=0; renderCommand(); };
+  inp.onkeydown=(e)=>{
+    const n=(window.__cmdRows||[]).length;
+    if(e.key==='ArrowDown'){ e.preventDefault(); window.__cmdSel=Math.min(n-1,(window.__cmdSel||0)+1); renderCommand(true); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); window.__cmdSel=Math.max(0,(window.__cmdSel||0)-1); renderCommand(true); }
+    else if(e.key==='Enter'){ e.preventDefault(); runCommand(window.__cmdSel||0); }
+  };
+  setTimeout(()=>inp.focus(),30);
+}
+
+function renderCommand(keepValue){
+  const inp=$('cmd-q'); if(!inp) return;
+  const rows=commandItems(inp.value);
+  window.__cmdRows=rows;
+  const sel=window.__cmdSel||0;
+  const el=$('cmd-list');
+  el.innerHTML = rows.length
+    ? rows.map((r,i)=>'<button class="cmd__row'+(i===sel?' cmd__row--on':'')+'" type="button" onclick="runCommand('+i+')">'+
+        '<span class="cmd__kind">'+esc(r.kind)+'</span>'+
+        '<span class="cmd__label">'+esc(r.label)+'</span>'+
+        '<span class="cmd__meta">'+esc(r.meta||'')+'</span></button>').join('')
+    : '<div class="empty-state">Nothing matches.</div>';
+  const on=el.querySelector('.cmd__row--on');
+  if(on && keepValue) on.scrollIntoView({block:'nearest'});
+}
+
+function runCommand(i){
+  const r=(window.__cmdRows||[])[i];
+  if(!r) return;
+  closeModal();
+  try{ eval(r.run); }catch(e){ toast('Could not open that',{err:true}); }
+}
+
+function toggleCreate(ev){
+  if(ev) ev.stopPropagation();
+  const m=$('create-menu'); if(!m) return;
+  if(!m.hidden){ m.hidden=true; return; }
+  m.innerHTML=[
+    ['New purchase order',"mNewPO()"],
+    ['Import PO or spreadsheet',"go('#/admin/import')"],
+    ['Add workshop update',"pickDaily()"],
+    ['Record payment',"go('#/finance')"],
+    ['New buyer',"mBuyer()"]
+  ].map(x=>'<button class="create-menu__item" type="button" onclick="closeMenus();'+x[1]+'">'+esc(x[0])+'</button>').join('');
+  m.hidden=false;
+  setTimeout(()=>document.addEventListener('click', closeMenus, {once:true}), 0);
+}
+function closeMenus(){ const m=$('create-menu'); if(m) m.hidden=true; }
+
+document.addEventListener('keydown', function(e){
+  if((e.ctrlKey||e.metaKey) && (e.key==='k'||e.key==='K')){
+    if(!isAdmin || !isAdmin()) return;
+    e.preventDefault(); openCommand();
+  }
+});
 <script>
 'use strict';
 async function boot(){
