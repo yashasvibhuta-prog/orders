@@ -627,6 +627,14 @@ a{color:var(--text-primary)}
   background:var(--surface-soft);color:var(--ink-soft);font-size:14px}
 .internal-strip__tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
 .internal-strip__hold{flex-basis:100%;color:var(--rust);font-weight:600}
+.field-hint--warn{color:var(--rust);font-weight:600}
+/* the import preview has nine columns; let it keep its width and scroll inside
+   its wrapper rather than squeezing every field down to four characters */
+#pi-items{min-width:1080px}
+#pi-items td .field input{min-width:88px}
+#pi-items td:nth-child(2) .field input{min-width:260px}
+#pi-charges{min-width:560px}
+#pi-items td small{display:block;color:var(--ink-faint);font-size:12px;line-height:1.35}
 </style>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -878,7 +886,7 @@ async function loadStaffData(){
 
   const shipBy={}; (sp.data||[]).forEach(p=>{ shipBy[p.po_id]={expected_ship_date:p.expected_ship_date, status:p.po_status}; });
   S.buyers=[]; S.buyersById={}; S.pos=[]; S.posById={}; S.comments=[]; S.commentsByItem={};
-  S.docsByPo={}; S.readMarks={}; S.activity=[]; S.profilesAll=[];
+  S.docsByPo={}; S.docsByItem={}; S.readMarks={}; S.activity=[]; S.profilesAll=[];
   S.payments=[]; S.charges=[]; indexFinance();
   S.updates = upd.data||[]; S.updInternal = {};
   (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
@@ -1238,8 +1246,11 @@ async function loadData(){
   S.comments = cm.data||[]; S.commentsByItem={};
   S.comments.forEach(c=>{ (S.commentsByItem[c.item_id]=S.commentsByItem[c.item_id]||[]).push(c); });
   indexPhotos(ph.data||[]);
-  S.docsByPo={};
-  (dc.data||[]).forEach(d=>{ (S.docsByPo[d.po_id]=S.docsByPo[d.po_id]||[]).push(d); });
+  S.docsByPo={}; S.docsByItem={};
+  (dc.data||[]).forEach(d=>{
+    (S.docsByPo[d.po_id]=S.docsByPo[d.po_id]||[]).push(d);
+    if(d.item_id) (S.docsByItem[d.item_id]=S.docsByItem[d.item_id]||[]).push(d);
+  });
   S.readMarks={};
   (rm.data||[]).forEach(r=>{ if(r.user_id===uid()) S.readMarks[r.item_id]=r.last_read_at; });
   S.activity = ac.data||[];
@@ -2084,20 +2095,36 @@ function vItem(id){
     h+='<div class="buyer-safe-note">'+icon('stage-sealing','icon--sm')+
       '<span>This portal shows client-ready updates. Workshop photos appear only after '+esc(S.settings.company_name||'Gujraj Impex')+' approves them.</span></div>';
 
-  /* reference media */
+  /* reference media — the drawing, the 3D model, the approved block and the
+     target product, grouped so the floor can find what it needs at a glance */
   const gen=visiblePhotos((S.photosByItem[it.id]||[]).filter(x=>!x.stage_id));
-  const drawings=staff?(S.staffDocs||[]).filter(d=>d.po_id===it.po_id):[];
-  if(gen.length||admin||staff){
+  const itemDocs=(admin?(S.docsByItem&&S.docsByItem[it.id])
+                       :(S.staffDocs||[]).filter(d=>d.item_id===it.id))||[];
+  const poDocs=staff?(S.staffDocs||[]).filter(d=>d.po_id===it.po_id && !d.item_id):[];
+  const docs=itemDocs.concat(poDocs);
+  const KIND_LABEL={drawing:'Production drawing',model:'3D model',block:'Approved block',reference:'Target product'};
+  const groupOf=p=>KIND_LABEL[p.photo_type]||'Reference';
+  if(gen.length||docs.length||admin||staff){
     h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
       '<h3 class="panel__title">Reference media</h3>'+
-      '<p class="panel__description">Product images and drawings for this piece.</p></div>'+
-      ((admin||staff)?'<button class="button'+(staff?' button--workshop':' button--secondary')+'" type="button" onclick="pickPhotos(\''+it.id+'\',null)">'+
-        icon('i-camera','icon--sm')+'Add photos</button>':'')+'</div>'+
-      '<div class="panel__body">'+
-        (gen.length?photoGridOf(gen):'<div class="empty-state">No reference photos yet.</div>')+
-        (drawings.length?'<div class="side-card__rows space-top-12">'+drawings.map(d=>
-          '<div class="side-row"><span style="cursor:pointer;text-decoration:underline" onclick="openDoc(\''+esc(d.path)+'\')">'+esc(d.name)+'</span><strong>Drawing</strong></div>').join('')+'</div>':'')+
-        (staff?'<p class="field-hint space-top-10">Your photos are checked by the office before the client sees them.</p>':'')+
+      '<p class="panel__description">The drawing, the 3D model, the approved block and what the finished piece should look like.</p></div>'+
+      ((admin||staff)?'<button class="button'+(staff?' button--workshop':' button--secondary')+'" type="button" onclick="mMedia(\''+it.id+'\')">'+
+        icon('i-camera','icon--sm')+'Add media</button>':'')+'</div>'+
+      '<div class="panel__body">';
+    if(gen.length){
+      const groups={};
+      gen.forEach(p=>{ (groups[groupOf(p)]=groups[groupOf(p)]||[]).push(p); });
+      h+=Object.keys(groups).map(g=>'<div class="space-top-12"><p class="eyebrow">'+esc(g)+'</p>'+
+        photoGridOf(groups[g])+'</div>').join('');
+    } else {
+      h+='<div class="empty-state">No reference media yet.</div>';
+    }
+    if(docs.length){
+      h+='<div class="side-card__rows space-top-12">'+docs.map(d=>
+        '<div class="side-row"><span style="cursor:pointer;text-decoration:underline" onclick="openDoc(\''+esc(d.path)+'\')">'+esc(d.name)+'</span>'+
+        '<strong>'+esc(KIND_LABEL[d.doc_type]||'File')+'</strong></div>').join('')+'</div>';
+    }
+    h+=(staff?'<p class="field-hint space-top-10">Your photos are checked by the office before the client sees them.</p>':'')+
       '</div></section>';
   }
 
@@ -2688,9 +2715,15 @@ function vActivity(){
 }
 
 function loginRow(l, label, sub){
+  const staffRow = l.role==='staff';
+  const phoneNote = staffRow ? (l.phone ? 'WhatsApp '+l.phone : 'no WhatsApp number — reminders cannot reach them') : '';
   return '<div class="login-row"><div class="grow"><strong>'+esc(label)+'</strong>'+
-    (sub?'<p class="field-hint">'+esc(sub)+'</p>':'')+'</div>'+
+    (sub?'<p class="field-hint">'+esc(sub)+'</p>':'')+
+    (phoneNote?'<p class="field-hint'+(l.phone?'':' field-hint--warn')+'">'+esc(phoneNote)+'</p>':'')+'</div>'+
     '<div class="button-row">'+
+      (staffRow
+        ? '<button class="button button--secondary" type="button" onclick="mStaffPhone(\''+l.user_id+'\')">'+
+          (l.phone?'Change number':'Add number')+'</button>' : '')+
       (l.user_id!==uid()
         ? '<button class="button button--secondary" type="button" onclick="mResetPw(\''+l.user_id+'\',\''+esc(l.email)+'\')">Reset password</button>'+
           '<button class="button button--quiet" type="button" onclick="delLogin(\''+l.user_id+'\',\''+esc(l.email)+'\')">Remove</button>'
@@ -3083,7 +3116,10 @@ async function liftHold(itemId, stageId){
   const err = await saveStageInternal(itemId, stageId,
     { hold_reason:null, hold_owner:null, hold_revised_date:null });
   if(err){ toast(err.message,{err:true}); return; }
-  await setStage(itemId, stageId, 'in_progress');
+  // A stage held before it ever started goes back to pending, not in progress —
+  // otherwise lifting a hold silently claims work has begun.
+  const row = (S.stByItem[itemId]||[]).find(r=>r.stage_id===stageId) || {};
+  await setStage(itemId, stageId, row.started_at ? 'in_progress' : 'pending');
   toast('Hold lifted.');
 }
 
@@ -3094,20 +3130,103 @@ async function skipStage(itemId, stageId){
 }
 
 // Closing a buyer's question so the "what needs you" panel empties.
-async function resolveComment(commentId){
-  const {error} = await sb.from('bt_comments')
-    .update({ resolved_at: new Date().toISOString(), resolved_by: uid() })
-    .eq('id', commentId);
-  if(error){ toast(error.message,{err:true}); return; }
+// This goes through bt_comment_resolve rather than a plain update: the UPDATE
+// policy on bt_comments is "author_id = auth.uid()", so an admin updating a
+// buyer's row matched nothing and failed silently. The RPC also means an admin
+// can close a comment but never rewrite what the buyer actually wrote.
+async function setCommentResolved(commentId, resolved){
+  const {error} = await sb.rpc('bt_comment_resolve', {p_id: commentId, p_resolved: resolved});
+  if(error){ toast(error.message,{err:true}); return false; }
   await loadData(); render();
-  toast('Marked as dealt with.');
+  return true;
+}
+async function resolveComment(commentId){
+  if(await setCommentResolved(commentId, true)) toast('Marked as dealt with.');
+}
+async function reopenComment(commentId){
+  await setCommentResolved(commentId, false);
 }
 
-async function reopenComment(commentId){
-  const {error} = await sb.from('bt_comments')
-    .update({ resolved_at: null, resolved_by: null }).eq('id', commentId);
-  if(error){ toast(error.message,{err:true}); return; }
-  await loadData(); render();
+// Reference media for a piece: the approved drawing, a 3D model, photographs of
+// the block that was signed off, and a picture of what it should end up as.
+// Images become photos (so they follow the ordinary approval rules); CAD and 3D
+// files become documents, because there is nothing to look at in a browser.
+const MEDIA_KINDS = {
+  drawing:   { label:'Production drawing', hint:'PDF or image of the approved drawing',
+               accept:'application/pdf,image/*,.pdf,.dwg,.dxf' },
+  model:     { label:'3D model', hint:'STEP, STL, OBJ, 3DM, SKP — for the workshop',
+               accept:'.step,.stp,.stl,.obj,.3dm,.skp,.igs,.iges,.fbx,.glb,.gltf,.zip' },
+  block:     { label:'Approved block', hint:'The block the buyer signed off',
+               accept:'image/*' },
+  reference: { label:'Target product', hint:'What the finished piece should look like',
+               accept:'image/*' }
+};
+const _isImage = f => /^image\//.test(f.type) || /\.(jpe?g|png|webp|heic|heif|gif)$/i.test(f.name);
+
+function mMedia(itemId){
+  const it = S.itemsById[itemId]; if(!it) return;
+  const m = modal('<h3>Reference media</h3><div class="sub">'+esc(it.product)+
+    ' — drawings, 3D models and reference photographs for this piece.</div>'+
+    '<div class="panel__body">'+
+    Object.keys(MEDIA_KINDS).map(k=>{
+      const d = MEDIA_KINDS[k];
+      return '<div class="login-row"><div class="grow"><strong>'+esc(d.label)+'</strong>'+
+        '<p class="field-hint">'+esc(d.hint)+'</p></div>'+
+        '<div class="button-row"><button class="button button--secondary" type="button" data-mk="'+k+'">Upload</button></div></div>';
+    }).join('')+'</div>'+
+    '<p class="field-hint">Files here are visible to the workshop straight away. The buyer sees an image only once you approve it, and a drawing only if you tick it for him.</p>'+
+    '<div class="button-row"><button class="button button--secondary" type="button" onclick="closeModal()">Done</button></div>');
+  m.m.querySelectorAll('[data-mk]').forEach(b=>{
+    b.onclick = ()=> pickMedia(itemId, b.getAttribute('data-mk'));
+  });
+}
+
+function pickMedia(itemId, kind){
+  const spec = MEDIA_KINDS[kind] || MEDIA_KINDS.reference;
+  const inp = document.createElement('input');
+  inp.type='file'; inp.accept=spec.accept; inp.multiple=true;
+  inp.onchange = async ()=>{
+    const files=[...inp.files]; if(!files.length) return;
+    const it = S.itemsById[itemId]; if(!it) return;
+    const buyerId = it.po && it.po.buyer_id;
+    closeModal();
+    $('loading').style.display='flex';
+    let ok=0, failed=0;
+    for(let i=0;i<files.length;i++){
+      const f = files[i];
+      try{
+        if(_isImage(f)){
+          const blob = await resizeImage(f);
+          const path = buyerId+'/items/'+itemId+'/'+kind+'-'+Date.now()+'-'+i+'.jpg';
+          const up = await sb.storage.from(CONFIG.bucket).upload(path, blob, {contentType:'image/jpeg'});
+          if(up.error) throw up.error;
+          const ins = await sb.from('bt_photos').insert({
+            item_id:itemId, po_id:it.po_id, path, uploaded_by:uid(),
+            status: isStaff()?'pending':'approved', photo_type:kind,
+            caption: MEDIA_KINDS[kind].label });
+          if(ins.error) throw ins.error;
+        } else {
+          const safe = f.name.replace(/[^A-Za-z0-9._-]/g,'_').slice(-80);
+          const path = buyerId+'/items/'+itemId+'/'+kind+'-'+Date.now()+'-'+safe;
+          const up = await sb.storage.from(CONFIG.bucket).upload(path, f, {contentType: f.type||'application/octet-stream'});
+          if(up.error) throw up.error;
+          // po_id is set as well as item_id so the existing document policy,
+          // which reasons about the order, keeps working unchanged
+          const ins = await sb.from('bt_documents').insert({
+            po_id: it.po_id, item_id: itemId, name: f.name, doc_type: kind, path,
+            uploaded_by: uid(), for_staff: true, for_buyer: kind==='drawing' });
+          if(ins.error) throw ins.error;
+        }
+        ok++;
+      }catch(e){ failed++; }
+    }
+    await loadData();
+    $('loading').style.display='none';
+    render();
+    if(ok) toast(ok+' file'+(ok===1?'':'s')+' added'+(failed?', '+failed+' failed':'')+'.', failed?{err:true}:undefined);
+    else toast('Nothing uploaded — check the connection and try again.',{err:true});
+  };
+  inp.click();
 }
 
 function pickPhotos(itemId, stageId, poId){
@@ -3739,40 +3858,84 @@ function staffPhones(){
     .map(p=>({ name: shortLogin(p.full_name||p.email||'staff'), phone: p.phone }));
 }
 
-async function remindItem(itemId){
+function remindItem(itemId){
   const it=S.itemsById[itemId];
-  await sb.from('bt_activity').insert({ item_id:itemId, po_id:it?it.po_id:null, actor_id:uid(),
-    actor_role:'admin', actor_name:(S.profile.full_name||'Owner'), action:'reminder_sent',
-    detail:'Daily update reminder — '+(it?it.product:'') }).catch(()=>{});
-  const who = staffPhones();
   const text = 'StoneFlow: today’s update is still missing for '+(it?it.product:'a piece')+
     '. Please add a photo and a line about what was done.';
-  if(who.length){
-    window.open(waLink(who[0].phone, text), '_blank');
-    toast('Reminder opened in WhatsApp for '+who[0].name+'.');
-  } else {
-    toast('Reminder logged. Add a phone number under Buyers & logins to send it on WhatsApp.');
-  }
-  await loadData(); render();
+  sendReminder(text, ()=>sb.from('bt_activity').insert({
+    item_id:itemId, po_id:it?it.po_id:null, actor_id:uid(), actor_role:'admin',
+    actor_name:(S.profile.full_name||'Owner'), action:'reminder_sent',
+    detail:'Daily update reminder — '+(it?it.product:'') }));
 }
 
 // One message listing everything still missing, rather than one tap per piece.
-async function remindAll(){
+function remindAll(){
   const missing = itemsMissingToday();
   if(!missing.length){ toast('Every active piece has today’s update.'); return; }
   const lines = missing.map(it=>'• '+it.product).join('\n');
   const text = 'StoneFlow — still missing today’s update:\n'+lines+
     '\n\nPlease add a photo and a line for each.';
+  sendReminder(text, ()=>sb.from('bt_activity').insert({
+    actor_id:uid(), actor_role:'admin', actor_name:(S.profile.full_name||'Owner'),
+    action:'reminder_sent',
+    detail:missing.length+' piece'+(missing.length===1?'':'s')+' with no update today' }));
+}
+
+// A WhatsApp deep link opens one chat, so with several people on the floor the
+// recipient has to be chosen rather than silently assumed to be the first one.
+// The window is opened synchronously in the click; the logging happens after.
+function sendReminder(text, logFn){
   const who = staffPhones();
   if(!who.length){
-    toast('Add a phone number for your staff under Buyers & logins first.',{err:true});
+    toast('No staff has a WhatsApp number yet — add one from Buyers & logins.',{err:true});
     return;
   }
-  await sb.from('bt_activity').insert({ actor_id:uid(), actor_role:'admin',
-    actor_name:(S.profile.full_name||'Owner'), action:'reminder_sent',
-    detail:missing.length+' piece'+(missing.length===1?'':'s')+' with no update today' }).catch(()=>{});
-  window.open(waLink(who[0].phone, text), '_blank');
-  toast('Sending to '+who[0].name+'.');
+  if(who.length === 1){
+    window.open(waLink(who[0].phone, text), '_blank');
+    toast('Opening WhatsApp for '+who[0].name+'.');
+    if(logFn) logFn().catch(()=>{});
+    return;
+  }
+  const m = modal('<h3>Send to whom?</h3><div class="sub">WhatsApp opens one chat at a time.</div>'+
+    '<div class="panel__body">'+who.map((w,i)=>
+      '<div class="login-row"><div class="grow"><strong>'+esc(w.name)+'</strong>'+
+      '<p class="field-hint">'+esc(w.phone)+'</p></div>'+
+      '<div class="button-row"><button class="button" type="button" data-rm="'+i+'">Send</button></div></div>'
+    ).join('')+'</div>');
+  m.m.querySelectorAll('[data-rm]').forEach(btn=>{
+    btn.onclick = ()=>{
+      const w = who[+btn.getAttribute('data-rm')];
+      window.open(waLink(w.phone, text), '_blank');
+      closeModal();
+      toast('Opening WhatsApp for '+w.name+'.');
+      if(logFn) logFn().catch(()=>{});
+    };
+  });
+}
+
+// Staff created before the phone field existed have no number, and without a way
+// to add one the reminders are unreachable for the people already on the floor.
+function mStaffPhone(userId){
+  const p = (S.profilesAll||[]).find(x=>x.user_id===userId) || {};
+  const m = modal('<h3>WhatsApp number</h3><div class="sub">'+esc(shortLogin(p.full_name||p.email||''))+
+    ' — used for daily-update reminders. Country code first, no plus sign.</div>'+
+    '<div class="form-grid"><div class="field field--full"><label for="sp-n">Number</label>'+
+    '<input id="sp-n" inputmode="numeric" placeholder="919876543210" value="'+esc(p.phone||'')+'"></div>'+
+    '<div class="button-row field--full"><button class="button" type="button" id="sp-save">Save</button>'+
+    (p.phone?'<button class="button button--quiet" type="button" id="sp-clear">Remove</button>':'')+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  const write = async (v)=>{
+    const {error} = await sb.from('bt_profiles').update({phone:v}).eq('user_id', userId);
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render();
+    toast(v?'Number saved.':'Number removed.');
+  };
+  m.m.querySelector('#sp-save').onclick = ()=>{
+    const v = $('sp-n').value.replace(/\D/g,'');
+    if(!v){ toast('Enter a number, or press Remove.',{err:true}); return; }
+    write(v);
+  };
+  const c = m.m.querySelector('#sp-clear'); if(c) c.onclick = ()=> write(null);
 }
 
 async function sendUpdateComment(itemId, updateId){
@@ -4101,79 +4264,189 @@ function _after(lines, res){
   return null;
 }
 
-function parsePoText(lines){
+// Purchase-order parsing. Developed against a real Essentia PO (ED/PO/2026-27/1146)
+// whose text is kept as a fixture in test/po-fixture.json, because the first
+// version of this read that order as zero line items and a shipping address
+// lifted out of the terms and conditions.
+
+// The terms and conditions run for pages and are full of words like "delivery",
+// "shipping" and "terms" that the field matchers would otherwise latch onto.
+function _orderPages(lines){
+  const cut = lines.findIndex(l=>/^\s*terms\s*(and|&)\s*conditions\b/i.test(l));
+  return cut > 0 ? lines.slice(0, cut) : lines;
+}
+
+// Return the first match whose extracted value actually passes `ok` — the old
+// version returned the first textual match, so "Shipping Details" won the race
+// against "Delivery Date 20/09/2026" and the delivery date came out blank.
+function _pick(lines, res, ok){
+  for(let i=0;i<lines.length;i++){
+    for(const re of res){
+      const m=lines[i].match(re);
+      if(!m) continue;
+      const tail=(m[1]||'').trim().replace(/^[:\-–—\s]+/,'').trim();
+      if(tail){ const v=ok(tail); if(v) return v; }
+      if(lines[i+1] && lines[i+1].length<90){ const v=ok(lines[i+1].trim()); if(v) return v; }
+    }
+  }
+  return null;
+}
+const _text = t => t || null;
+
+function parsePoText(rawLines){
+  const lines = _orderPages(rawLines);
   const all = lines.join('\n');
   const out = { po_number:null, po_date:null, project:null, reference:null,
                 expected_ship_date:null, amount_total:null, currency:'INR',
-                payment_terms:null, ship_to:null, items:[], lines };
+                payment_terms:null, ship_to:null, items:[], charges:[], lines:rawLines };
 
-  out.po_number = _after(lines, [
-    /\b(?:purchase\s*order|p\.?\s*o\.?)\s*(?:no\.?|number|#)\s*[:\-]?\s*(.*)$/i,
+  out.po_number = _pick(lines, [
     /\bpo\s*(?:no\.?|number|#)\s*[:\-]?\s*(.*)$/i,
-    /\border\s*(?:no\.?|number)\s*[:\-]?\s*(.*)$/i ]);
-  if(out.po_number) out.po_number = out.po_number.split(/\s{2,}|\s(?=dated|date)/i)[0].trim();
+    /\b(?:purchase\s*order)\s*(?:no\.?|number|#)\s*[:\-]?\s*(.*)$/i,
+    /\border\s*(?:no\.?|number)\s*[:\-]?\s*(.*)$/i ], t=>{
+    // "ED/PO/2026-27/1146 PO Date 25/08/2026" → stop at the next field label
+    let v = t.split(/\s+(?:po\s+)?date\b/i)[0].trim();
+    v = v.replace(/\s+po$/i,'').trim();          // a dangling "PO" from "PO Date"
+    return /[A-Za-z0-9]/.test(v) ? v : null;
+  });
   if(!out.po_number){ const m=all.match(/\b([A-Z]{2,6}[\/\-][A-Z]{0,4}[\/\-]?[0-9]{2,4}[\-\/][0-9]{2,4}[\/\-][0-9]{2,6})\b/); if(m) out.po_number=m[1]; }
 
-  out.po_date = _date(_after(lines, [/\b(?:po|order|invoice)?\s*date[d]?\s*[:\-]?\s*(.*)$/i]));
-  out.expected_ship_date = _date(_after(lines, [
-    /\b(?:delivery|despatch|dispatch|shipment|ship(?:ping)?)\s*(?:date|by|on|schedule)?\s*[:\-]?\s*(.*)$/i,
-    /\bexpected\s*(?:delivery|ship)\w*\s*[:\-]?\s*(.*)$/i ]));
+  out.po_date = _pick(lines, [/\bpo\s*date\b\s*[:\-]?\s*(.*)$/i,
+                              /\b(?:order|invoice)?\s*date[d]?\s*[:\-]?\s*(.*)$/i], _date);
+  out.expected_ship_date = _pick(lines, [
+    /\bdelivery\s*date\b\s*[:\-]?\s*(.*)$/i,
+    /\b(?:delivery|despatch|dispatch|shipment)\s*(?:date|by|on|schedule)?\s*[:\-]?\s*(.*)$/i,
+    /\bexpected\s*(?:delivery|ship)\w*\s*[:\-]?\s*(.*)$/i ], _date);
 
-  out.project   = _after(lines, [/\b(?:project|site|job)\s*(?:name)?\s*[:\-]\s*(.*)$/i]);
-  out.reference = _after(lines, [/\b(?:ref(?:erence)?|indent|enquiry|quotation|quote)\s*(?:no\.?)?\s*[:\-]\s*(.*)$/i]);
-  out.payment_terms = _after(lines, [/\b(?:payment\s*terms?|terms\s*of\s*payment|terms)\s*[:\-]\s*(.*)$/i]);
-  out.ship_to = _after(lines, [/\b(?:ship\s*to|deliver(?:y)?\s*(?:to|address)|consignee)\s*[:\-]?\s*(.*)$/i]);
+  out.project   = _pick(lines, [/\bproject\s*[:\-]\s*(.*)$/i, /\b(?:site|job)\s*(?:name)?\s*[:\-]\s*(.*)$/i],
+                        t=>t.split(/\s{2,}/)[0].trim()||null);
+  out.reference = _pick(lines, [/\b(?:ref(?:erence)?|indent\s*number|enquiry|quotation|quote)\s*(?:no\.?)?\s*[:\-]?\s*(.*)$/i],
+                        t=>t.split(/\s+indent\s*date\b/i)[0].trim()||null);
+  out.payment_terms = _pick(lines, [/\bpayment\s*terms?\s*[:\-]?\s*(.*)$/i,
+                                    /\bterms\s*of\s*payment\s*[:\-]?\s*(.*)$/i], _text);
+  // Only an explicit label counts: loose prose matching is how "buyer replacement
+  // goods." from clause 22 ended up in the shipping address.
+  out.ship_to = _pick(lines, [/\b(?:ship\s*to|consignee|delivery\s*address)\s*[:\-]\s*(.*)$/i], _text);
 
-  if(/USD|\$|US\s*Dollar/i.test(all)) out.currency='USD';
-  else if(/EUR|€/i.test(all)) out.currency='EUR';
-  else if(/GBP|£/i.test(all)) out.currency='GBP';
+  if(/\bUSD\b|\$|US\s*Dollar/i.test(all)) out.currency='USD';
+  else if(/\bEUR\b|€/i.test(all)) out.currency='EUR';
+  else if(/\bGBP\b|£/i.test(all)) out.currency='GBP';
 
-  const totLine = lines.filter(l=>/\b(grand\s*total|total\s*amount|net\s*(payable|amount)|amount\s*payable|total)\b/i.test(l)).pop();
+  const totLine = lines.filter(l=>/\b(grand\s*total|total\s*\(after\s*tax\)|po\s*amount|total\s*amount|net\s*(payable|amount)|amount\s*payable)\b/i.test(l)).pop();
   if(totLine){ const nums=(totLine.match(/[\d,]+\.?\d*/g)||[]).map(_num).filter(n=>n!==null); if(nums.length) out.amount_total=Math.max.apply(null,nums); }
 
-  out.items = parsePoItems(lines);
+  const parsed = parsePoItems(lines);
+  out.items   = parsed.items;
+  out.charges = parsed.charges;
   return out;
 }
 
+// Freight, crating and the like are money, not something the workshop makes.
+// They belong in the finance module as charges against the order.
+// A qualified stone name ("Silver Travertine") beats the bare material word,
+// which in these orders is usually part of the generic heading "MARBLE
+// HANDICRAFT ITEM" rather than the stone actually being cut.
+const _STONE_WORDS = 'travertine|marble|granite|onyx|limestone|quartzite|sandstone|slate|basalt';
+const _STONE_SKIP = /^(item|items|stone|block|blocks|the|and|of|for|no|nos|pcs|handicrfat|handicraft|handicrafts|marble|size)$/i;
+function _stoneOf(text){
+  const qualified = new RegExp('\\b([A-Za-z]{3,14})\\s+(' + _STONE_WORDS + ')\\b', 'gi');
+  let m;
+  while((m = qualified.exec(text))){
+    if(!_STONE_SKIP.test(m[1])) return (m[1] + ' ' + m[2]).replace(/\s+/g,' ').trim();
+  }
+  const bare = text.match(new RegExp('\\b(' + _STONE_WORDS + ')\\b', 'i'));
+  return bare ? bare[1] : null;
+}
+
+const _CHARGE_RE = /^(freight|packing|packaging|wooden\s*crates?|crates?|carriage|transport|transportation|insurance|loading|unloading|courier|shipping|handling|delivery\s*charges?)\b/i;
+
 function parsePoItems(lines){
-  const items=[];
-  const isHead = l => { const s=l.toLowerCase(); let n=0;
-    if(/desc|particular|product|item|material/.test(s)) n++;
-    if(/qty|quantity|nos|pcs/.test(s)) n++;
-    if(/rate|price|unit/.test(s)) n++;
-    if(/amount|value|total/.test(s)) n++;
-    return n>=2; };
-  const isEnd = l => /\b(grand\s*total|sub\s*total|amount\s*in\s*words|terms|declaration|signature|for\s+[A-Z])/i.test(l);
+  const items=[], charges=[];
+
+  // A real table header names the description column. Requiring that stops
+  // "No of Items 1 PO Amount ₹2,48,390.00" from being mistaken for the header —
+  // which is what happened, and the very next line ("Payment Terms …") then hit
+  // the end-of-table test and the table was read as empty.
+  const isHead = l => {
+    const s=l.toLowerCase();
+    if(/\bno\.?\s*of\s*items\b/.test(s)) return false;
+    if(!/\b(description|particulars?|product|material)\b/.test(s)) return false;
+    let n=0;
+    if(/\b(qty|quantity|nos|pcs)\b/.test(s)) n++;
+    if(/\b(rate|price|unit)\b/.test(s)) n++;
+    if(/\b(amount|value|total|taxable)\b/.test(s)) n++;
+    if(/\bhsn\b/.test(s)) n++;
+    return n>=1;
+  };
+  const isEnd = l => /^\s*(total\s*quantity|grand\s*total|sub\s*total|extra\s*charges|total\s*\(|total\s*tax|po\s*amount|amount\s*in\s*words|igst\b|cgst\b|payment\s*terms|for\s+[A-Z]|authorised)/i.test(l);
 
   let start = lines.findIndex(isHead);
-  if(start < 0) start = -1;
+  if(start < 0) return { items, charges };
+
+  // Rows are numbered. A row begins with its serial; everything after it, until
+  // the next serial, is continuation text belonging to the same row.
+  const rows=[];
   for(let i=start+1;i<lines.length;i++){
     const l=lines[i];
-    if(start>=0 && isEnd(l)) break;
-    // a line worth treating as an item has words and at least one number
-    const nums=(l.match(/[\d,]+\.?\d*/g)||[]).map(_num).filter(n=>n!==null && n>0);
-    const words=l.replace(/[\d,.\/×x\-]+/g,' ').replace(/\s+/g,' ').trim();
-    if(words.length<4 || !nums.length) continue;
-    if(/^(page|gst|cgst|sgst|igst|hsn|tax|invoice|bank|ifsc|account)\b/i.test(l)) continue;
-
-    const it = { product:'', item_ref:null, stone:null, qty:1, unit:'pcs',
-                 l_mm:null, w_mm:null, h_mm:null, dims_text:null, _raw:l };
-    const d = l.match(/(\d+(?:\.\d+)?)\s*[x×X]\s*(\d+(?:\.\d+)?)\s*[x×X]\s*(\d+(?:\.\d+)?)/);
-    if(d){ it.l_mm=+d[1]; it.w_mm=+d[2]; it.h_mm=+d[3]; }
-    const code = l.match(/\b([A-Z][A-Z ]{2,20}[\-\/]\s?\d{1,5})\b/);
-    if(code) it.item_ref = code[1].replace(/\s+/g,' ').trim();
-    const q = l.match(/\b(\d{1,4}(?:\.\d+)?)\s*(nos?|pcs?|pieces?|sets?|pairs?|sqft|sq\.?\s*ft|cft)\b/i);
-    if(q){ it.qty=+q[1]; it.unit=q[2].toLowerCase().replace(/\.|\s/g,''); }
-    let name = l;
-    if(d) name = name.replace(d[0],' ');
-    if(q) name = name.replace(q[0],' ');
-    name = name.replace(/[\d,]+\.\d{2}\b/g,' ')          // money
-               .replace(/^\s*\d{1,3}[.)]\s*/,'')          // leading serial
-               .replace(/\s{2,}/g,' ').replace(/\s+$/,'').trim();
-    it.product = name.slice(0,120) || 'Item';
-    items.push(it);
+    if(isEnd(l)) break;
+    const m = l.match(/^\s*(\d{1,2})\s*(?=[A-Za-z])(.*)$/);
+    if(m) rows.push({ no:+m[1], head:m[2].trim(), extra:[] });
+    else if(rows.length) rows[rows.length-1].extra.push(l.trim());
   }
-  return items.slice(0,40);
+  if(!rows.length) return { items, charges };
+
+  rows.forEach(r=>{
+    const full = [r.head].concat(r.extra).join(' ').replace(/\s+/g,' ').trim();
+    let money = (r.head.match(/(?:₹|Rs\.?|\$|€|£)\s*[\d,]+\.\d{2}/g)||[]).map(_num).filter(n=>n!==null);
+    if(!money.length) money = (r.head.match(/\b\d{1,3}(?:,\d{2,3})+\.\d{2}\b/g)||[]).map(_num).filter(n=>n!==null);
+
+    // strip the numeric tail so the name is words, not columns
+    let name = r.head
+      .replace(/₹\s*[\d,]+\.\d{2}/g,' ')
+      .replace(/\b\d{1,3}\s*%/g,' ')
+      .replace(/\b\d{6,8}\b/g,' ')                       // HSN code
+      .replace(/\b\d+(?:\.\d+)?\s*(nos?|pcs?|pieces?|sets?|pairs?|sqft|cft)\b/ig,' ')
+      .replace(/\s{2,}/g,' ').trim();
+
+    if(_CHARGE_RE.test(name)){
+      charges.push({ label: name.replace(/[\s:,-]+$/,'').slice(0,60) || 'Charge',
+                     amount: money.length ? money[0] : null, _raw: r.head });
+      return;
+    }
+
+    const it = { product:'', description:null, item_ref:null, stone:null, finish:null,
+                 qty:1, unit:'pcs', l_mm:null, w_mm:null, h_mm:null, dims_text:null,
+                 rate:null, taxable_amount:null, _raw: full };
+
+    const q = r.head.match(/\b(\d{1,4}(?:\.\d+)?)\s*(nos?|pcs?|pieces?|sets?|pairs?|sqft|sq\.?\s*ft|cft)\b/i);
+    if(q){ it.qty=+q[1]; it.unit=q[2].toLowerCase().replace(/[.\s]/g,''); }
+    if(money.length){ it.rate = money[0]; if(money.length>1) it.taxable_amount = money[1]; }
+
+    // "330MMX335MMX1240MM" as well as "1234 × 329 × 331"
+    let d = full.match(/(\d+(?:\.\d+)?)\s*MM\s*[x×X]\s*(\d+(?:\.\d+)?)\s*MM\s*[x×X]\s*(\d+(?:\.\d+)?)\s*MM/i)
+         || full.match(/(\d{2,5}(?:\.\d+)?)\s*[x×X]\s*(\d{2,5}(?:\.\d+)?)\s*[x×X]\s*(\d{2,5}(?:\.\d+)?)/);
+    if(d){ it.l_mm=+d[1]; it.w_mm=+d[2]; it.h_mm=+d[3]; }
+
+    // the label may be any case but the code itself is upper-case, and matching
+    // case-insensitively here ran the capture on into the sentence that follows
+    // tokens of two or more upper-case characters: a lone capital is the start of
+    // the next sentence ("Coffee table legs …"), not part of the code
+    const ref = full.match(/[Ii]tem\s*[Ii][Dd]\s*[:\-]?\s*([A-Z0-9][A-Z0-9\-\/]+(?:\s+[A-Z0-9][A-Z0-9\-\/]+)*)/);
+    if(ref) it.item_ref = ref[1].trim().replace(/\s{2,}/g,' ').slice(0,40);
+
+    it.stone = _stoneOf(full);
+    const fin = full.match(/\b(honed|polished|matte|matt|leather(?:ed)?|brushed|flamed|bush\s*hammered|open[- ]pore)\b/i);
+    if(fin) it.finish = fin[1];
+
+    it.product = (name.replace(/\bSIZE\s*[-:]?\s*$/i,'').replace(/[\s:,-]+$/,'').trim() || 'Item').slice(0,140);
+    // everything the head line could not hold is worth keeping as the description
+    const desc = r.extra.filter(x=>!/^item\s*id/i.test(x)).join(' ').replace(/\s+/g,' ').trim();
+    if(desc) it.description = desc.slice(0,600);
+    if(d && !it.dims_text) it.dims_text = null;
+    items.push(it);
+  });
+
+  return { items: items.slice(0,60), charges: charges.slice(0,20) };
 }
 
 /* ---- UI ---- */
@@ -4242,6 +4515,7 @@ function renderPoPreview(){
     (d.items.length ? d.items.map((it,i)=>'<tr data-i="'+i+'">'+
       '<td><input type="checkbox" class="pi-use" checked style="width:auto;min-height:0"></td>'+
       '<td><div class="field"><input class="pi-prod" value="'+esc(it.product)+'"></div>'+
+        (it.description?'<small>'+esc(it.description.slice(0,160))+'</small>':'')+
         '<small>'+esc((it._raw||'').slice(0,110))+'</small></td>'+
       '<td><div class="field"><input class="pi-ref" value="'+esc(it.item_ref||'')+'"></div></td>'+
       '<td><div class="field"><input class="pi-stone" value="'+esc(it.stone||'')+'"></div></td>'+
@@ -4251,8 +4525,22 @@ function renderPoPreview(){
       '<td><div class="field"><input class="pi-w" type="number" value="'+esc(it.w_mm==null?'':it.w_mm)+'"></div></td>'+
       '<td><div class="field"><input class="pi-h" type="number" value="'+esc(it.h_mm==null?'':it.h_mm)+'"></div></td>'+
     '</tr>').join('') : '<tr><td colspan="9"><small>No product rows recognised — add them by hand after importing the order.</small></td></tr>')+
-    '</table></div>'+
-    '<div class="button-row space-top-14">'+
+    '</table></div>';
+
+  // Freight and crating are money against the order, not something the workshop
+  // makes, so they go to the finance module rather than becoming products.
+  if(d.charges && d.charges.length){
+    h += '<p class="field-hint space-top-14">Charges — these go to Finance, not to the workshop.</p>'+
+      '<div class="data-table-wrap"><table class="data-table" id="pi-charges">'+
+      '<tr><th>Use</th><th>Charge</th><th>Amount</th></tr>'+
+      d.charges.map((c,i)=>'<tr data-c="'+i+'">'+
+        '<td><input type="checkbox" class="pc-use" checked style="width:auto;min-height:0"></td>'+
+        '<td><div class="field"><input class="pc-label" value="'+esc(c.label)+'"></div></td>'+
+        '<td><div class="field"><input class="pc-amt" type="number" step="0.01" value="'+esc(c.amount==null?'':c.amount)+'"></div></td>'+
+      '</tr>').join('')+'</table></div>';
+  }
+
+  h += '<div class="button-row space-top-14">'+
       '<button class="button" type="button" onclick="commitPoImport()">Import this order</button>'+
       '<button class="button button--secondary" type="button" onclick="pickPoPdf()">Try another PDF</button>'+
       '<button class="button button--quiet" type="button" onclick="showPoText()">Show the raw text</button>'+
@@ -4304,13 +4592,27 @@ async function commitPoImport(){
         item_ref:g('pi-ref')||null, stone:g('pi-stone')||null,
         qty:n('pi-qty')||1, unit:g('pi-unit')||'pcs',
         l_mm:n('pi-l'), w_mm:n('pi-w'), h_mm:n('pi-h'),
+        description:(d.items[+tr.getAttribute('data-i')]||{}).description||null,
+        rate:(d.items[+tr.getAttribute('data-i')]||{}).rate||null,
         target_date:rec.expected_ship_date });
       if(ins.error) throw ins.error;
+    }
+
+    const crows=[...document.querySelectorAll('#pi-charges tr[data-c]')].filter(tr=>tr.querySelector('.pc-use').checked);
+    let nCharge=0;
+    for(const tr of crows){
+      const label=tr.querySelector('.pc-label').value.trim();
+      const amt=tr.querySelector('.pc-amt').value;
+      if(!label || !amt) continue;
+      const ins=await sb.from('bt_charges').insert({ po_id:poId, label, amount:Number(amt), currency:rec.currency });
+      if(ins.error) throw ins.error;
+      nCharge++;
     }
     window.__poParse=null;
     await loadData();
     $('loading').style.display='none';
-    toast(rows.length+' product'+(rows.length===1?'':'s')+' imported into '+po_number);
+    toast(rows.length+' product'+(rows.length===1?'':'s')+
+      (nCharge?' and '+nCharge+' charge'+(nCharge===1?'':'s'):'')+' imported into '+po_number);
     go('#/po/'+poId);
   }catch(e){
     $('loading').style.display='none';
