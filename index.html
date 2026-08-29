@@ -683,9 +683,17 @@ a.wordmark{text-decoration:none;color:inherit;cursor:pointer}
 /* a focus ring that is actually visible on both light and dark grounds */
 a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   outline:2px solid var(--action-primary);outline-offset:2px;border-radius:6px}
+/* The account headline. A figure shown to a buyer needs its meaning attached:
+   on advance terms a credit balance is money we hold, not a bill. */
+.statement-headline{padding:20px;border-radius:var(--radius-lg);border:1px solid var(--line-strong);background:var(--surface-soft)}
+.statement-headline--credit{border-color:var(--sage);background:var(--sage-soft)}
+.statement-headline__label{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.statement-headline__value{margin-top:8px;font-family:var(--font-display);font-size:40px;line-height:1}
+.statement-headline__note{margin-top:8px;color:var(--ink-soft);font-size:15px}
+#acct-inv,#acct-ewb{min-width:820px}
 </style>
 <body>
-<script>const BUILD_ID='9bc016949345';</script>
+<script>const BUILD_ID='84d0f6a8a5d4';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -926,7 +934,8 @@ const S = {
   docsByPo:{}, readMarks:{}, activity:[], profilesAll:[],
   urlCache:{}, lastLoad:0, ready:false,
   payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{},
-  updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{}
+  updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{},
+  invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{}
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 function isStaff(){ return S.profile && S.profile.role==='staff'; }
@@ -964,6 +973,7 @@ async function loadStaffData(){
   S.buyers=[]; S.buyersById={}; S.pos=[]; S.posById={}; S.comments=[]; S.commentsByItem={};
   S.docsByPo={}; S.docsByItem={}; S.readMarks={}; S.activity=[]; S.profilesAll=[];
   S.payments=[]; S.charges=[]; indexFinance();
+  indexAccounts([],[],[],[]);
   S.updates = upd.data||[]; S.updInternal = {};
   (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
   indexStageInternal((sti&&sti.data)||[]);
@@ -1280,7 +1290,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -1293,7 +1303,11 @@ async function loadData(){
     admin ? sb.from('bt_charges').select('*').order('created_at') : Promise.resolve({data:[]}),
     sb.from('bt_updates').select('*').order('work_date',{ascending:false}),
     admin ? sb.from('bt_update_internal').select('*') : Promise.resolve({data:[]}),
-    admin ? sb.from('bt_stage_internal').select('*') : Promise.resolve({data:[]})
+    admin ? sb.from('bt_stage_internal').select('*') : Promise.resolve({data:[]}),
+    sb.from('bt_invoices').select('*').order('invoice_date',{ascending:false}),
+    sb.from('bt_ewaybills').select('*').order('eway_date',{ascending:false}),
+    sb.from('bt_ledger_snapshots').select('*').order('as_of',{ascending:false}),
+    sb.from('bt_ledger_lines').select('*').order('sort_order')
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -1336,8 +1350,57 @@ async function loadData(){
   S.updates = upd.data||[]; S.updInternal = {};
   (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
   indexStageInternal((sti&&sti.data)||[]);
+  indexAccounts((inv&&inv.data)||[], (ewb&&ewb.data)||[], (lsn&&lsn.data)||[], (lln&&lln.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
+}
+
+/* ---- accounting documents -------------------------------------------------
+   Copies of what Tally and the GST portal already hold. Nothing here is
+   recalculated; the buyer's own policies decide what arrives. */
+function indexAccounts(invoices, ewaybills, snapshots, lines){
+  S.invoices = invoices||[];
+  S.ewaybills = ewaybills||[];
+  S.ledgerSnaps = snapshots||[];
+  S.ledgerLines = {};
+  (lines||[]).forEach(l=>{ (S.ledgerLines[l.snapshot_id]=S.ledgerLines[l.snapshot_id]||[]).push(l); });
+  S.invByBuyer = {}; S.ewbByDoc = {};
+  S.invoices.forEach(i=>{ (S.invByBuyer[i.buyer_id]=S.invByBuyer[i.buyer_id]||[]).push(i); });
+  // an e-way bill names the invoice it dispatches, which is how a consignment
+  // finds its way onto the right order without anyone typing a reference
+  S.ewaybills.forEach(e=>{ if(e.document_no) S.ewbByDoc[e.document_no]=e; });
+}
+
+// The most recent statement for a buyer that the reader is allowed to see.
+function latestStatement(buyerId){
+  return (S.ledgerSnaps||[]).filter(s=>s.buyer_id===buyerId)
+    .sort((a,b)=>String(b.as_of).localeCompare(String(a.as_of)))[0] || null;
+}
+
+// A figure with a direction. "Balance" on its own is the ambiguity we are
+// trying to remove: on 100% advance terms a buyer is normally in credit, and
+// that money is held by us, not owed by them.
+function statementStanding(sn){
+  if(!sn || sn.closing == null) return null;
+  const credit = sn.standing === 'advance_held' || sn.closing_side === 'credit';
+  return {
+    credit,
+    amount: sn.closing,
+    currency: sn.currency || 'INR',
+    label: credit ? 'Advance held with Gujraj Impex' : 'Outstanding and payable',
+    note: credit
+      ? 'Paid in advance and not yet drawn against. Nothing is due from you.'
+      : 'This amount is payable to Gujraj Impex.',
+    as_of: sn.as_of
+  };
+}
+
+// e-way bills that belong to an order: matched through the invoices raised on it
+function ewaybillsForPo(poId){
+  const direct = (S.ewaybills||[]).filter(e=>e.po_id===poId);
+  const viaInvoice = (S.invoices||[]).filter(i=>i.po_id===poId)
+    .map(i=>S.ewbByDoc[i.invoice_no]).filter(Boolean);
+  const seen={}; return direct.concat(viaInvoice).filter(e=>!seen[e.id]&&(seen[e.id]=1));
 }
 
 function unreadCount(itemId){
@@ -1556,6 +1619,7 @@ function updateHeader(){
       ['#/approvals','Photo approvals',nPend],
       ['#/review','Daily updates',pendingUpdates().length],
       ['#/finance','Finance',0],
+      ['#/accounts','Accounts',0],
       ['#/daily','Daily log',0],
       ['#/buyers','Buyers &amp; logins',0],
       ['#/activity','Activity',0],
@@ -1721,6 +1785,33 @@ function poRail(activeId){
     '</div></aside>';
 }
 
+// What the buyer is told about money. A bare "balance" is the ambiguity we are
+// removing: on 100% advance terms the buyer is normally in credit, and that is
+// money we hold, not money they owe.
+function statementPanel(buyerId){
+  const sn = latestStatement(buyerId);
+  const st = statementStanding(sn);
+  if(!st) return '';
+  const lines = (S.ledgerLines[sn.id]||[]);
+  return '<section class="panel space-top-18"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Your account</h3>'+
+    '<p class="panel__description">From the books of Gujraj Impex, as at '+esc(fdate(st.as_of))+'.</p></div>'+
+    badge('as at '+fdate(st.as_of))+'</div><div class="panel__body">'+
+    '<div class="statement-headline'+(st.credit?' statement-headline--credit':'')+'">'+
+      '<p class="statement-headline__label">'+esc(st.label)+'</p>'+
+      '<p class="statement-headline__value">'+esc(money(st.amount, st.currency))+'</p>'+
+      '<p class="statement-headline__note">'+esc(st.note)+'</p>'+
+    '</div>'+
+    (lines.length?'<div class="data-table-wrap space-top-12"><table class="data-table">'+
+      '<tr><th>Date</th><th>Reference</th><th>Detail</th><th>Amount</th></tr>'+
+      lines.map(l=>'<tr><td>'+esc(fdate(l.entry_date))+'</td><td>'+esc(l.ref||'—')+'</td>'+
+        '<td>'+esc(l.label||'')+'</td><td>'+esc(money(l.amount,sn.currency))+'</td></tr>').join('')+
+      '</table></div>':'')+
+    '<p class="field-hint space-top-10">This is a copy of our books taken on '+esc(fdate(st.as_of))+
+    '. If anything looks wrong, reply here and we will check it against Tally.</p>'+
+    '</div></section>';
+}
+
 function vHome(){
   const admin=isAdmin();
   const hits=searchHits(window.__gq);
@@ -1815,6 +1906,8 @@ function vHome(){
       '<div class="panel__body order-list">'+closed.map(orderCard).join('')+'</div>':'')+
   '</section>';
   h+='</div>';
+  // the buyer's own account statement, when one has been published to them
+  if(!admin && S.profile.buyer_id) h+=statementPanel(S.profile.buyer_id);
 
   paint(h, null);
 }
@@ -1997,6 +2090,27 @@ function vPO(id){
 }
 function poTab(t){ window.__poTab=t; render(); }
 
+// The e-way bill answers "where is my consignment": vehicle, route and dates.
+// Only published ones reach the buyer — the policy decides, not this function.
+function ewayRows(p, compact){
+  if(compact) return '';
+  const list = ewaybillsForPo(p.id);
+  if(!list.length) return '';
+  return '<div class="space-top-12"><p class="eyebrow">Consignment</p>'+
+    list.map(e=>'<div class="side-card__rows">'+
+      sideRows([['e-Way bill', e.eway_no],
+                ['Vehicle', [e.mode, e.vehicle].filter(Boolean).join(' · ')],
+                ['Transporter', e.transporter],
+                ['Dispatched from', e.place_of_dispatch],
+                ['Delivering to', e.place_of_delivery],
+                ['Dated', fdate(e.eway_date)],
+                ['Valid until', fdate(e.valid_until)],
+                ['Distance', e.distance_km ? e.distance_km+' km' : ''],
+                ['Against invoice', e.document_no]])+
+      (e.doc_path?'<div class="button-row space-top-10"><button class="button button--secondary" type="button" onclick="openDoc(\''+esc(e.doc_path)+'\')">Open the e-way bill</button></div>':'')+
+      '</div>').join('')+'</div>';
+}
+
 // How a piece was crated is the thing a buyer asks about when it arrives, so
 // the packing and dispatch photographs belong on the shipping panel rather than
 // buried in the general gallery. Approval rules are unchanged.
@@ -2025,6 +2139,7 @@ function shipPanel(p, compact){
   const body=(any?sideRows(rows):'<p class="panel__description space-top-12">Not yet dispatched. Details appear here once the consignment ships.</p>')+
     (p.tracking_url?'<div class="button-row space-top-12"><a class="button button--secondary" href="'+esc(p.tracking_url)+'" target="_blank" rel="noopener">Track consignment ↗</a></div>':'')+
     (p.shipping_notes?'<p class="stage-note space-top-10">'+esc(p.shipping_notes)+'</p>':'')+
+    ewayRows(p, compact)+
     packingPhotos(p, compact)+
     (admin?'<div class="button-row space-top-12"><button class="button button--secondary" type="button" onclick="mShip(\''+p.id+'\')">Edit shipping</button></div>':'');
   if(compact) return '<section class="side-card"><h3 class="side-card__title">Shipping</h3>'+body+'</section>';
@@ -2928,6 +3043,80 @@ function vSettings(){
   $('app').innerHTML=h;
 }
 
+function vAccounts(){
+  if(!isAdmin()) return vHome();
+  let h='<div class="page-heading"><div>'+eyebrow('From Tally and the GST portal')+
+    '<h1 class="display-title">Accounts</h1>'+
+    '<p class="lede">Drop invoices, e-way bills and ledger statements. Tally stays the record — this keeps a dated copy the buyer can see, once you publish it.</p></div></div>'+
+  '<section class="form-card"><div class="form-card__head"><div>'+
+    '<h3 class="form-card__title">Drop the documents</h3>'+
+    '<p class="form-card__description">Each file says what it is, so there is nothing to choose. '+
+    'Invoices, e-way bills and Tally ledger statements can be dropped together.</p></div>'+badge('PDF')+'</div>'+
+    '<div class="upload-drop space-top-14" id="acct-drop" '+
+      'ondragover="event.preventDefault();this.classList.add(\'is-over\')" '+
+      'ondragleave="this.classList.remove(\'is-over\')" '+
+      'ondrop="dropAcctPdf(event)">'+
+      '<div>'+icon('stage-confirmed','icon--lg')+
+      '<strong>Drop invoices, e-way bills or a ledger here</strong>'+
+      '<p>or <button class="button button--quiet" type="button" onclick="pickAcctPdf()">choose files</button></p>'+
+      '<p class="field-hint">Export from Tally as PDF, or download an e-way bill from the GST portal.</p></div>'+
+    '</div></section>'+
+  '<div id="acct-out"></div>';
+
+  // statements, newest first, with what each one actually means
+  const snaps=(S.ledgerSnaps||[]);
+  h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Statements</h3>'+
+    '<p class="panel__description">The latest for each buyer is what they see. A buyer on advance terms is normally in credit.</p></div>'+
+    badge(snaps.length+'')+'</div><div class="panel__body">';
+  if(!snaps.length) h+='<div class="empty-state">No statement imported yet.</div>';
+  else h+=snaps.map(sn=>{
+    const b=S.buyersById[sn.buyer_id]; const st=statementStanding(sn);
+    return '<div class="login-row"><div class="grow"><strong>'+esc(b?b.company:'—')+'</strong>'+
+      '<p class="field-hint">'+esc((st?st.label:'')+' · '+money(sn.closing, sn.currency)+' · as at '+fdate(sn.as_of))+'</p>'+
+      (sn.published_at?'<p class="field-hint">'+esc('Visible to the buyer')+'</p>'
+                      :'<p class="field-hint field-hint--warn">Not published</p>')+'</div>'+
+      '<div class="button-row">'+
+      '<button class="button '+(sn.published_at?'button--secondary':'button')+'" type="button" onclick="publishAcct(\'bt_ledger_snapshots\',\''+sn.id+'\','+(sn.published_at?'false':'true')+')">'+
+        (sn.published_at?'Unpublish':'Publish to buyer')+'</button></div></div>';
+  }).join('');
+  h+='</div></section>';
+
+  const invs=(S.invoices||[]);
+  h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Invoices</h3>'+
+    '<p class="panel__description">Copies of what Tally issued.</p></div>'+badge(invs.length+'')+'</div>'+
+    '<div class="data-table-wrap"><table class="data-table" id="acct-inv">'+
+    '<tr><th>Invoice</th><th>Buyer</th><th>Dated</th><th>Total</th><th>Buyer sees</th><th></th></tr>'+
+    (invs.length?invs.map(i=>{
+      const b=S.buyersById[i.buyer_id];
+      return '<tr><td><strong>'+esc(i.invoice_no)+'</strong></td><td>'+esc(b?b.company:'—')+'</td>'+
+        '<td>'+esc(fdate(i.invoice_date))+'</td><td>'+esc(money(i.total,i.currency))+'</td>'+
+        '<td>'+(i.published_at?badge('Published','success'):badge('Private'))+'</td>'+
+        '<td><button class="button button--quiet" type="button" onclick="publishAcct(\'bt_invoices\',\''+i.id+'\','+(i.published_at?'false':'true')+')">'+
+          (i.published_at?'Hide':'Publish')+'</button>'+
+          (i.doc_path?' <button class="button button--quiet" type="button" onclick="openDoc(\''+esc(i.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>';
+    }).join(''):'<tr><td colspan="6"><small>No invoices imported yet.</small></td></tr>')+
+    '</table></div></section>';
+
+  const ewbs=(S.ewaybills||[]);
+  h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">e-Way bills</h3>'+
+    '<p class="panel__description">Vehicle, route and dates — what a buyer asks at dispatch.</p></div>'+badge(ewbs.length+'')+'</div>'+
+    '<div class="data-table-wrap"><table class="data-table" id="acct-ewb">'+
+    '<tr><th>e-Way bill</th><th>Covers invoice</th><th>Vehicle</th><th>Dated</th><th>Buyer sees</th><th></th></tr>'+
+    (ewbs.length?ewbs.map(e=>'<tr><td><strong>'+esc(e.eway_no)+'</strong></td><td>'+esc(e.document_no||'—')+'</td>'+
+      '<td>'+esc([e.mode,e.vehicle].filter(Boolean).join(' · ')||'—')+'</td><td>'+esc(fdate(e.eway_date))+'</td>'+
+      '<td>'+(e.published_at?badge('Published','success'):badge('Private'))+'</td>'+
+      '<td><button class="button button--quiet" type="button" onclick="publishAcct(\'bt_ewaybills\',\''+e.id+'\','+(e.published_at?'false':'true')+')">'+
+        (e.published_at?'Hide':'Publish')+'</button>'+
+        (e.doc_path?' <button class="button button--quiet" type="button" onclick="openDoc(\''+esc(e.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>').join('')
+      :'<tr><td colspan="6"><small>No e-way bills imported yet.</small></td></tr>')+
+    '</table></div></section>';
+
+  $('app').innerHTML=h;
+}
+
 function vImport(){
   if(!isAdmin()) return vHome();
   const h='<div class="page-heading"><div>'+eyebrow('Bulk entry')+
@@ -3011,6 +3200,7 @@ function render(){
   else if(parts[0]==='approvals') vApprovals();
   else if(parts[0]==='review') vReview();
   else if(parts[0]==='finance') vFinance();
+  else if(parts[0]==='accounts') vAccounts();
   else if(parts[0]==='daily') vDaily();
   else if(parts[0]==='buyers') vBuyers();
   else if(parts[0]==='settings') vSettings();
@@ -4367,9 +4557,11 @@ function _date(t){
   m=s.match(/(\d{1,2})\s*[\/\-.]\s*(\d{1,2})\s*[\/\-.]\s*(\d{2,4})/);
   if(m){ let y=+m[3]; if(y<100) y+=2000;
     return y+'-'+String(+m[2]).padStart(2,'0')+'-'+String(+m[1]).padStart(2,'0'); }
-  m=s.match(/(\d{1,2})\s*([A-Za-z]{3,9})\.?\,?\s*(\d{4})/);
+  m=s.match(/(\d{1,2})\s*[-\s\/]\s*([A-Za-z]{3,9})\.?\,?\s*[-\s\/]?\s*(\d{2,4})/);
   if(m){ const i=MON.findIndex(x=>m[2].toLowerCase().startsWith(x.toLowerCase()));
-    if(i>=0) return m[3]+'-'+String(i+1).padStart(2,'0')+'-'+String(+m[1]).padStart(2,'0'); }
+    // Tally prints two-digit years — "27-Aug-26"
+    if(i>=0){ let y=+m[3]; if(y<100) y+=2000;
+      return y+'-'+String(i+1).padStart(2,'0')+'-'+String(+m[1]).padStart(2,'0'); } }
   return null;
 }
 
@@ -4571,6 +4763,243 @@ function parsePoItems(lines){
   });
 
   return { items: items.slice(0,60), charges: charges.slice(0,20) };
+}
+
+/* ---------------------------------------------------------------------------
+   Accounting and dispatch documents.
+
+   Three kinds arrive as PDFs and each says what it is on the first line, so the
+   person dropping one never has to choose a type:
+
+     Tax Invoice   — what was billed
+     e-Way Bill    — how it travelled: vehicle, dates, and the invoice it covers
+     Ledger Account— Tally's statement of the account, as at a date
+
+   Tally and the GST portal stay the source of truth. StoneFlow keeps a dated
+   copy so the buyer can see it, and never recalculates it.
+--------------------------------------------------------------------------- */
+
+const _clean = t => String(t||'').replace(/\s+/g,' ').trim();
+const _gstin = t => { const m=String(t||'').toUpperCase().replace(/\s+/g,'').match(/[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]{3}/); return m?m[0]:null; };
+
+// pdf.js emits a row's amount on its own line when the columns sit at slightly
+// different heights — "FREIGHT ON SALE 68022190" then "6,500.00". A line whose
+// only content is money (with at most a quantity and a currency mark) belongs to
+// the line above it.
+const _moneyOnly = l => /[\d,]+\.\d{2}/.test(l) &&
+  /^[\d\s,.]*(nos?|pcs?|pieces?|kg|sqft|cft)?[\s₹$€£]*$/i
+    .test(String(l).replace(/[\d,]+\.\d{2}/g,'').replace(/[₹$€£]/g,'').trim()
+      ? String(l).replace(/[\d,]+\.\d{2}/g,'').replace(/[₹$€£]/g,'').trim() : '');
+
+function _joinOrphanAmounts(lines){
+  const out=[];
+  for(let i=0;i<lines.length;i++){
+    const cur=String(lines[i]||'');
+    const next=lines[i+1];
+    if(next && !/[\d,]+\.\d{2}/.test(cur) && /[A-Za-z]/.test(cur) && _moneyOnly(next)){
+      out.push(_clean(cur+' '+next)); i++;
+    } else out.push(cur);
+  }
+  return out;
+}
+
+function detectDocType(lines){
+  const head = lines.slice(0, 12).join(' ').toLowerCase();
+  if(/e-?way\s*bill/.test(head)) return 'eway';
+  if(/ledger\s*account/.test(head)) return 'ledger';
+  if(/tax\s*invoice|invoice\s*no/.test(head)) return 'invoice';
+  return null;
+}
+
+// ---- e-Way Bill -----------------------------------------------------------
+function parseEway(lines){
+  const all = lines.join('\n');
+  const grab = re => { const m = all.match(re); return m ? _clean(m[1]) : null; };
+  const out = { kind:'eway' };
+
+  // the number often wraps onto its own line, and is printed in groups of four
+  let no = grab(/E-?Way\s*Bill\s*No\.?\s*:?\s*([\d\s]{10,20})/i);
+  if(!no){ const i=lines.findIndex(l=>/E-?Way\s*Bill\s*No/i.test(l));
+           if(i>=0 && lines[i+1]) no=lines[i+1]; }
+  out.eway_no = no ? no.replace(/\D/g,'') : null;
+
+  out.eway_date   = _date(grab(/E-?Way\s*Bill\s*Date\s*:?\s*([\d\/\-.]+)/i));
+  out.valid_from  = _date(grab(/Valid\s*From\s*:?\s*([\d\/\-.]+)/i));
+  out.valid_until = _date(grab(/Valid\s*Until\s*:?\s*([\d\/\-.]+)/i));
+  const km = grab(/\[\s*(\d+)\s*Kms?\s*\]/i); out.distance_km = km?+km:null;
+
+  const sup = grab(/GSTIN\s*of\s*Supplier[ \t]*(.+)$/im) || '';
+  out.supplier_gstin = _gstin(sup);
+  const rec = grab(/GSTIN\s*of\s*Recipient[ \t]*(.+)$/im) || '';
+  out.recipient_gstin = _gstin(rec);
+  // the name follows the GSTIN after a comma
+  out.recipient_name = _clean((rec.split(',')[1]||'').replace(/\(.*?\)/g,'')) || null;
+
+  out.place_of_dispatch = grab(/Place\s*of\s*Dispatch[ \t]*(.+)$/im);
+  out.place_of_delivery = grab(/Place\s*of\s*Delivery[ \t]*(.+)$/im);
+  // the invoice this consignment covers — the join back to the billing side
+  out.document_no   = grab(/Document\s*No\.?\s*([^\s]+)/i);
+  out.document_date = _date(grab(/Document\s*Date\s*([\d\/\-.]+)/i));
+  const val = grab(/Value\s*of\s*Goods\s*([\d,]+(?:\.\d+)?)/i);
+  out.value = val ? _num(val) : null;
+  out.reason = grab(/Reason\s*for\s*Transportation[ \t]*(.+)$/im);
+
+  // Part B carries the vehicle: "Road RJ14GR1357 & 617 & 27/10/2024 Udaipur …"
+  const partB = lines.find(l=>/^\s*(Road|Rail|Air|Ship)\b/i.test(l)) || '';
+  const mode = partB.match(/^\s*(Road|Rail|Air|Ship)\b/i);
+  out.mode = mode ? mode[1] : null;
+  const veh = partB.match(/\b([A-Z]{2}\s?\d{1,2}\s?[A-Z]{1,3}\s?\d{3,4})\b/);
+  out.vehicle = veh ? veh[1].replace(/\s+/g,'') : null;
+  out.transporter = grab(/^Transporter[ \t]+(\S.*)$/im);
+  return out;
+}
+
+// ---- Tax invoice ----------------------------------------------------------
+const _INV_CHARGE = /(packag|packing|freight|carriage|transport|insurance|loading|crate)/i;
+
+function parseInvoice(rawLines){
+  const lines = _joinOrphanAmounts(rawLines);
+  const all = lines.join('\n');
+  const out = { kind:'invoice', charges:[], items:[] };
+
+  // The invoice number and date share a line with the supplier address block,
+  // so they are found by shape rather than by position.
+  const numLine = lines.find(l=>/\b\d{2}-\d{2}\/\d{1,5}\b/.test(l) && !/GSTIN/i.test(l)) || '';
+  const num = numLine.match(/\b(\d{2}-\d{2}\/\d{1,5})\b/);
+  out.invoice_no = num ? num[1] : null;
+  out.invoice_date = _date(numLine.replace(out.invoice_no||'','')) ||
+                     _date((all.match(/Dated\s*\n?\s*([0-9]{1,2}[-\/][A-Za-z0-9]{2,9}[-\/][0-9]{2,4})/i)||[])[1]);
+
+  // "Buyer (Bill to)" is the one that owes the money; the consignee may differ
+  const bIdx = lines.findIndex(l=>/Buyer\s*\(Bill\s*to\)/i.test(l));
+  if(bIdx>=0){
+    for(let i=bIdx+1;i<Math.min(bIdx+4,lines.length);i++){
+      const t=_clean(lines[i]);
+      if(t && !/^\d+$/.test(t) && !/GSTIN|State Name/i.test(t)){ out.buyer_name=t; break; }
+    }
+    out.buyer_gstin = _gstin(lines.slice(bIdx, bIdx+8).join(' '));
+  }
+  if(!out.buyer_name){
+    const cIdx = lines.findIndex(l=>/Consignee\s*\(Ship\s*to\)/i.test(l));
+    if(cIdx>=0 && lines[cIdx+1]) out.buyer_name=_clean(lines[cIdx+1]);
+  }
+  if(!out.buyer_gstin){
+    // the supplier's own GSTIN appears first; the buyer's is the other one
+    const all_g = (all.toUpperCase().replace(/\s+/g,' ').match(/[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]{3}/g)||[]);
+    const other = all_g.find(g=>g!==all_g[0]);
+    out.buyer_gstin = other || null;
+  }
+  const poRef = (all.match(/Buyer'?s?\s*Order\s*No\.?[ \t]*(?:Dated)?[ \t]*([A-Z0-9][A-Z0-9\/\-]{3,29})/i)||[])[1];
+  out.po_ref = (poRef && /\d/.test(poRef)) ? poRef : null;
+
+  // amounts
+  // there are several "Total" rows — the invoice total and the tax summary. The
+  // grand total is the largest figure across them.
+  const totals = lines.filter(l=>/^\s*Total\b/i.test(l))
+    .flatMap(l=>(l.match(/[\d,]+\.\d{2}/g)||[]).map(_num)).filter(n=>n!=null);
+  out.total = totals.length ? Math.max.apply(null, totals) : null;
+  const taxRow = lines.find(l=>/^\s*Total\s+[\d,]+\.\d{2}\s+[\d,]+\.\d{2}/.test(l));
+  if(taxRow){
+    const n=(taxRow.match(/[\d,]+\.\d{2}/g)||[]).map(_num);
+    out.taxable = n[0]!=null?n[0]:null;
+    out.tax = n[1]!=null?n[1]:null;
+  }
+  if(out.taxable==null){
+    const tv = all.match(/Taxable[\s\S]{0,80}?([\d,]+\.\d{2})/i);
+    if(tv) out.taxable=_num(tv[1]);
+  }
+  if(out.tax==null){
+    const tx = all.match(/(?:IGST|CGST|SGST)\s*(?:Payable)?[^\d]{0,20}([\d,]+\.\d{2})/i);
+    if(tx) out.tax=_num(tx[1]);
+  }
+
+  // line rows: a serial, a description, then money
+  lines.forEach(l=>{
+    const money=(l.match(/[\d,]+\.\d{2}/g)||[]).map(_num);
+    if(!money.length) return;
+    if(/^\s*(Total|Amount|HSN|Tax Amount|Company|Bank|A\/c|Branch|Declaration|IGST\s*Payable)/i.test(l)) return;
+    const name=_clean(l.replace(/[\d,]+\.\d{2}/g,' ').replace(/\b\d{6,8}\b/g,' ')
+                       .replace(/^\s*\d{1,2}\s+/,'').replace(/\b\d+\s*Nos\b/ig,' ')
+                       .replace(/\bNos\b/ig,' '));
+    if(name.length<3) return;
+    if(_INV_CHARGE.test(name)) out.charges.push({label:name, amount:money[0]});
+    else out.items.push({product:name, amount:money[money.length-1], rate:money[0]});
+  });
+  return out;
+}
+
+// ---- Tally ledger ---------------------------------------------------------
+function parseLedger(lines){
+  const out = { kind:'ledger', rows:[] };
+  const li = lines.findIndex(l=>/^Ledger\s*Account$/i.test(_clean(l)));
+  // Tally prints the account name immediately above the words "Ledger Account"
+  if(li>0) out.account = _clean(lines[li-1]);
+  const per = lines.find(l=>/\d{1,2}-[A-Za-z]{3}-\d{2,4}\s*to\s*\d{1,2}-[A-Za-z]{3}-\d{2,4}/i.test(l));
+  if(per){
+    const m = per.match(/(\d{1,2}-[A-Za-z]{3}-\d{2,4})\s*to\s*(\d{1,2}-[A-Za-z]{3}-\d{2,4})/i);
+    out.from = _date(m[1]); out.to = _date(m[2]);
+  }
+
+  // pdf.js splits a Tally row across two lines when the columns sit at slightly
+  // different heights, so a date-only line is joined to the line that follows.
+  const hdr = lines.findIndex(l=>/Date\s+Particulars/i.test(l));
+  const body = _joinOrphanAmounts(lines.slice(hdr<0?0:hdr+1));
+  const merged=[];
+  for(let i=0;i<body.length;i++){
+    const l=_clean(body[i]);
+    const isDate=/^\d{1,2}-[A-Za-z]{3}-\d{2,4}\b/.test(l);
+    const hasMoney=/[\d,]+\.\d{2}/.test(l);
+    if(isDate && !hasMoney && body[i+1]){ merged.push(l+' '+_clean(body[i+1])); i++; }
+    else merged.push(l);
+  }
+
+  merged.forEach(l=>{
+    const money=(l.match(/[\d,]+\.\d{2}/g)||[]).map(_num);
+    if(!money.length) return;
+    const d=l.match(/^(\d{1,2}-[A-Za-z]{3}-\d{2,4})/);
+    const vch=(l.match(/\b(\d{2}-\d{2}\/\d{1,5})\b/)||[])[1]||null;
+    // Tally's To/By tells us which side a balance sits on, and that is the whole
+    // meaning of the figure. On a customer account "By Opening Balance" is money
+    // they had already paid; "To Closing Balance" balancing the debit column
+    // means the account is still in credit — an advance we hold, not a bill.
+    if(/opening\s*balance/i.test(l)){
+      out.opening = money[0];
+      out.opening_side = /\bBy\b/i.test(l) ? 'credit' : 'debit';
+      return;
+    }
+    if(/closing\s*balance/i.test(l)){
+      out.closing = money[0];
+      out.closing_side = /\bTo\b/i.test(l) ? 'credit' : 'debit';
+      return;
+    }
+    if(!d) return;                       // totals rows carry no date
+    const label=_clean(l.replace(/^\d{1,2}-[A-Za-z]{3}-\d{2,4}/,'')
+                        .replace(/[\d,]+\.\d{2}/g,' ').replace(vch||'',''));
+    // Tally writes "By" for what the customer paid and "To" for what was billed;
+    // after the row merge the prefix is no longer necessarily first
+    const tidy = (label.match(/\b(To|By)\b\s*(.*)$/i) || [null,null,label]);
+    out.rows.push({ date:_date(d[1]), ref:vch,
+                    label:_clean((tidy[1]?tidy[1]+' ':'')+tidy[2]),
+                    amount:money[0],
+                    side: /\bBy\b/i.test(label) ? 'credit' : 'debit' });
+  });
+  // State it in words, because "Balance 1,24,660" read by a buyer on 100%
+  // advance terms is ambiguous in the most expensive possible way.
+  if(out.closing != null){
+    out.standing = out.closing_side === 'credit' ? 'advance_held' : 'due_from_buyer';
+    out.standing_label = out.closing_side === 'credit'
+      ? 'Advance held against future orders'
+      : 'Outstanding and payable';
+  }
+  return out;
+}
+
+function parseAccountingDoc(lines){
+  const kind = detectDocType(lines);
+  if(kind==='eway')    return parseEway(lines);
+  if(kind==='invoice') return parseInvoice(lines);
+  if(kind==='ledger')  return parseLedger(lines);
+  return { kind:null };
 }
 
 /* ---------------------------------------------------------------------------
@@ -4949,6 +5378,205 @@ function poTabKey(ev){
   else next = (i + keys[ev.key] + tabs.length) % tabs.length;
   tabs[next].focus();
   tabs[next].click();
+}
+
+/* ---- accounting document import (UI) -------------------------------------- */
+
+function pickAcctPdf(){
+  const inp=document.createElement('input');
+  inp.type='file'; inp.accept='application/pdf,.pdf'; inp.multiple=true;
+  inp.onchange=async ()=>{ const f=[...inp.files]; if(f.length) await readAcctPdfs(f); };
+  inp.click();
+}
+function dropAcctPdf(ev){
+  ev.preventDefault();
+  const el=document.getElementById('acct-drop'); if(el) el.classList.remove('is-over');
+  const f=[...(ev.dataTransfer&&ev.dataTransfer.files||[])].filter(x=>/pdf$/i.test(x.name)||x.type==='application/pdf');
+  if(!f.length){ toast('Drop a PDF — an invoice, an e-way bill or a Tally ledger',{err:true}); return; }
+  readAcctPdfs(f);
+}
+
+async function readAcctPdfs(files){
+  const out=$('acct-out');
+  if(out) out.innerHTML='<p class="field-hint">Reading '+files.length+' file'+(files.length>1?'s':'')+'…</p>';
+  const parsed=[];
+  for(const f of files){
+    try{
+      const lines = await pdfLines(f);
+      const d = parseAccountingDoc(lines);
+      d.file = f; d.fileName = f.name; d.lines = lines;
+      if(!d.kind) d.error = 'Not recognised as an invoice, e-way bill or ledger.';
+      parsed.push(d);
+    }catch(e){ parsed.push({ kind:null, fileName:f.name, error:e.message||String(e) }); }
+  }
+  window.__acct = parsed;
+  renderAcctPreview();
+}
+
+// Match the document to a buyer: GSTIN first because it cannot be mistyped,
+// then the company name.
+function matchBuyer(d){
+  const g = d.buyer_gstin || d.recipient_gstin;
+  if(g){ const byG=(S.buyers||[]).find(b=>b.gstin && b.gstin.toUpperCase().replace(/\s/g,'')===g); if(byG) return byG.id; }
+  const name = _clean(d.buyer_name || d.recipient_name || d.account || '').toLowerCase();
+  if(name){
+    const norm = t => String(t||'').toLowerCase().replace(/\b(private|pvt|limited|ltd|llp|inc|co)\b/g,'').replace(/[^a-z0-9]/g,'');
+    const n = norm(name);
+    const hit=(S.buyers||[]).find(b=>n && norm(b.company)===n);
+    if(hit) return hit.id;
+  }
+  return '';
+}
+
+function acctSet(i, field, v){
+  const d=(window.__acct||[])[i]; if(!d) return;
+  d[field]=v;
+  if(field==='buyer_id') renderAcctPreview();
+}
+
+function renderAcctPreview(){
+  const list = window.__acct||[]; if(!list.length) return;
+  const buyerSel = (d,i)=>'<select onchange="acctSet('+i+',\'buyer_id\',this.value)">'+
+    '<option value="">— choose the buyer —</option>'+
+    S.buyers.map(b=>'<option value="'+b.id+'"'+((d.buyer_id||matchBuyer(d))===b.id?' selected':'')+'>'+esc(b.company)+'</option>').join('')+
+    '</select>';
+  const poSel = (d,i)=>{
+    const bid = d.buyer_id||matchBuyer(d);
+    const pos = (S.pos||[]).filter(p=>!bid || p.buyer_id===bid);
+    return '<select onchange="acctSet('+i+',\'po_id\',this.value)">'+
+      '<option value="">— not linked to an order —</option>'+
+      pos.map(p=>'<option value="'+p.id+'"'+(d.po_id===p.id?' selected':'')+'>'+esc(p.po_number+(p.project?' · '+p.project:''))+'</option>').join('')+
+      '</select>';
+  };
+  const row=(l,v)=>'<div class="side-row"><span>'+esc(l)+'</span><strong>'+esc(v==null||v===''?'—':v)+'</strong></div>';
+
+  let h='<section class="form-card space-top-14"><div class="form-card__head"><div>'+
+    '<h3 class="form-card__title">Check before saving</h3>'+
+    '<p class="form-card__description">Read from your files. Tally and the GST portal stay the record; this is a dated copy for the buyer.</p></div>'+
+    badge(list.length+' file'+(list.length===1?'':'s'))+'</div><div class="panel__body">';
+
+  list.forEach((d,i)=>{
+    const kindName = d.kind==='invoice'?'Tax invoice' : d.kind==='eway'?'e-Way bill' : d.kind==='ledger'?'Ledger statement' : 'Not recognised';
+    h+='<article class="daily-entry"><div class="row-between">'+
+      '<div><p class="eyebrow">'+esc(kindName)+'</p><h4 class="approval-group__name">'+esc(d.fileName)+'</h4></div>'+
+      (d.kind?badge(kindName,'success'):badge('Skipped','alert'))+'</div>';
+
+    if(d.error){ h+='<div class="attn attn--warn attn--flat space-top-10"><span>'+esc(d.error)+'</span></div></article>'; return; }
+
+    h+='<div class="form-grid space-top-10">'+
+       '<div class="field field--full"><label>Buyer</label>'+buyerSel(d,i)+'</div>';
+    if(d.kind!=='ledger') h+='<div class="field field--full"><label>Against which order</label>'+poSel(d,i)+'</div>';
+    h+='</div><div class="side-card__rows space-top-10">';
+
+    if(d.kind==='invoice'){
+      h+= row('Invoice number', d.invoice_no)+row('Dated', fdate(d.invoice_date))+
+          row('Taxable', d.taxable!=null?money(d.taxable,'INR'):'')+
+          row('Tax', d.tax!=null?money(d.tax,'INR'):'')+
+          row('Total', d.total!=null?money(d.total,'INR'):'')+
+          row('Buyer on the document', d.buyer_name)+
+          (d.charges||[]).map(c=>row(c.label, money(c.amount,'INR'))).join('');
+    } else if(d.kind==='eway'){
+      h+= row('e-Way bill', d.eway_no)+row('Dated', fdate(d.eway_date))+
+          row('Valid until', fdate(d.valid_until))+
+          row('Vehicle', [d.mode, d.vehicle].filter(Boolean).join(' · '))+
+          row('Distance', d.distance_km?d.distance_km+' km':'')+
+          row('From', d.place_of_dispatch)+row('To', d.place_of_delivery)+
+          row('Covers invoice', d.document_no)+
+          row('Value of goods', d.value!=null?money(d.value,'INR'):'');
+    } else if(d.kind==='ledger'){
+      const credit = d.standing==='advance_held';
+      h+= row('Account', d.account)+
+          row('Period', [fdate(d.from), fdate(d.to)].filter(Boolean).join(' to '))+
+          row('Opening', d.opening!=null?money(d.opening,'INR')+' '+(d.opening_side||''):'')+
+          row('Entries', (d.rows||[]).length)+
+          row(credit?'Advance still held':'Outstanding and payable',
+              d.closing!=null?money(d.closing,'INR'):'');
+      h+='</div><div class="attn '+(credit?'attn--ok':'attn--warn')+' attn--flat space-top-10"><span>'+
+         (credit
+           ? '<strong>The buyer is in credit.</strong> This is money held against future orders, not a bill. It will be shown as “Advance held with Gujraj Impex”.'
+           : '<strong>The buyer owes this.</strong> It will be shown as “Outstanding and payable”.')+
+         '</span></div><div class="side-card__rows">';
+    }
+    h+='</div></article>';
+  });
+
+  const usable = list.filter(d=>d.kind && !d.error).length;
+  h+='</div><div class="button-row space-top-14">'+
+     '<button class="button" type="button" onclick="commitAcctImport()"'+(usable?'':' disabled')+'>Save '+usable+' document'+(usable===1?'':'s')+'</button>'+
+     '<button class="button button--secondary" type="button" onclick="pickAcctPdf()">Try other files</button>'+
+     '<button class="button button--quiet" type="button" onclick="window.__acct=null;$(\'acct-out\').innerHTML=\'\'">Cancel</button>'+
+     '</div><p class="field-hint space-top-10">Saved documents stay private until you publish them to the buyer.</p></section>';
+  $('acct-out').innerHTML=h;
+}
+
+async function commitAcctImport(){
+  const list=(window.__acct||[]).filter(d=>d.kind && !d.error);
+  if(!list.length) return;
+  $('loading').style.display='flex';
+  let saved=0; const failed=[];
+  try{
+    for(const d of list){
+      const buyer_id = d.buyer_id || matchBuyer(d) || null;
+      if(!buyer_id && d.kind!=='eway'){ failed.push(d.fileName+' — no buyer chosen'); continue; }
+
+      // keep the original PDF: a figure without its document is hard to trust
+      let docPath=null;
+      try{
+        const safe=d.fileName.replace(/[^A-Za-z0-9._-]/g,'_').slice(-70);
+        docPath=(buyer_id||'unassigned')+'/accounts/'+d.kind+'-'+Date.now()+'-'+safe;
+        const up=await sb.storage.from(CONFIG.bucket).upload(docPath, d.file, {contentType:'application/pdf'});
+        if(up.error) docPath=null;
+      }catch(e){ docPath=null; }
+
+      if(d.kind==='invoice'){
+        const r=await sb.from('bt_invoices').upsert({
+          buyer_id, po_id:d.po_id||null, invoice_no:d.invoice_no, invoice_date:d.invoice_date,
+          taxable:d.taxable, tax:d.tax, total:d.total, currency:'INR',
+          doc_path:docPath, source_file:d.fileName, created_by:uid()
+        }, {onConflict:'buyer_id,invoice_no'});
+        if(r.error){ failed.push(d.fileName+' — '+r.error.message); continue; }
+      } else if(d.kind==='eway'){
+        const r=await sb.from('bt_ewaybills').upsert({
+          buyer_id, po_id:d.po_id||null, eway_no:d.eway_no, eway_date:d.eway_date,
+          valid_until:d.valid_until, distance_km:d.distance_km, mode:d.mode, vehicle:d.vehicle,
+          transporter:d.transporter, place_of_dispatch:d.place_of_dispatch,
+          place_of_delivery:d.place_of_delivery, document_no:d.document_no,
+          document_date:d.document_date, value:d.value, doc_path:docPath, created_by:uid()
+        }, {onConflict:'eway_no'});
+        if(r.error){ failed.push(d.fileName+' — '+r.error.message); continue; }
+      } else if(d.kind==='ledger'){
+        const ins=await sb.from('bt_ledger_snapshots').insert({
+          buyer_id, from_date:d.from, as_of:d.to||today(),
+          opening:d.opening, opening_side:d.opening_side,
+          closing:d.closing, closing_side:d.closing_side, standing:d.standing,
+          currency:'INR', source_file:d.fileName, created_by:uid()
+        }).select().single();
+        if(ins.error){ failed.push(d.fileName+' — '+ins.error.message); continue; }
+        const rows=(d.rows||[]).map((r,ix)=>({ snapshot_id:ins.data.id, entry_date:r.date,
+          ref:r.ref, label:r.label, amount:r.amount, side:r.side, sort_order:ix }));
+        if(rows.length){ const lr=await sb.from('bt_ledger_lines').insert(rows); if(lr.error) failed.push(d.fileName+' — lines: '+lr.error.message); }
+      }
+      saved++;
+    }
+    window.__acct=null;
+    await loadData();
+    $('loading').style.display='none';
+    const el=$('acct-out'); if(el) el.innerHTML='';
+    render();
+    toast(saved+' document'+(saved===1?'':'s')+' saved'+(failed.length?', '+failed.length+' failed':'')+'.', failed.length?{err:true}:undefined);
+    if(failed.length) console.warn('Accounting import problems:', failed);
+  }catch(e){
+    $('loading').style.display='none';
+    toast('Import failed: '+(e.message||e),{err:true});
+  }
+}
+
+// Publishing is the only thing that lets a buyer see any of this.
+async function publishAcct(table, id, on){
+  const {error}=await sb.from(table).update({published_at: on?new Date().toISOString():null}).eq('id', id);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
+  toast(on?'Published to the buyer.':'Hidden from the buyer.');
 }
 
 /* ---- UI ---- */
