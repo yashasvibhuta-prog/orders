@@ -963,9 +963,50 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .comment__head span{font-size:11px;color:var(--ink-faint)}
 .comment p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.5}
 
+/* ---- the workshop workspace ---- */
+.ws-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.ws-head .display-title{margin:2px 0 6px}
+.ws-steps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.ws-step{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-faint);
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.ws-step b{width:18px;height:18px;border-radius:50%;background:var(--canvas);color:var(--ink);
+  display:grid;place-items:center;font-size:10px;font-weight:700}
+.ws-grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:900px){ .ws-grid{grid-template-columns:1fr 1fr} }
+.ws-of{display:block;font-size:11px;color:var(--ink-faint);margin-top:3px;text-align:right}
+.ws-state{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:12px;font-weight:600}
+.ws-state b{width:8px;height:8px;border-radius:50%;flex:none}
+.ws-state--hold{color:var(--status-error)} .ws-state--hold b{background:var(--status-error)}
+.ws-state--due{color:var(--status-warning)} .ws-state--due b{background:var(--status-warning)}
+.ws-state--ok{color:var(--status-success)} .ws-state--ok b{background:var(--status-success)}
+.kpi--on{border-color:var(--action-primary)}
+.wt-filter{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.wt-filter__note{margin-left:auto;font-size:12px;color:var(--ink-faint)}
+.ho{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+.ho:last-child{border-bottom:0}
+.ho__time{flex:none;font-size:11px;color:var(--ink-faint);min-width:58px;padding-top:2px}
+.ho>div{flex:1;min-width:0}
+.ho strong{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.ho p{margin:2px 0 0;font-size:13px;color:var(--ink-soft);line-height:1.45}
+.ho__who{flex:none;font-size:11px;color:var(--ink-faint)}
+
+/* The workshop home is no longer a bare list of cards: it has a heading, tiles,
+   filters and a handover panel, so it lays out in normal block flow and the
+   cards get their own grid. .staff-list stays for the item page. */
+.staff-list--page{display:block}
+.staff-list--page > .ws-head,
+.staff-list--page > .ws-steps,
+.staff-list--page > .kpi-grid,
+.staff-list--page > .wt-filter,
+.staff-list--page > .ws-grid,
+.staff-list--page > .attn,
+.staff-list--page > .panel,
+.staff-list--page > .daily-log{margin-bottom:14px}
+.staff-list--page > .ws-grid{margin-bottom:0}
+
 </style>
 <body>
-<script>const BUILD_ID='708b22f9609c';</script>
+<script>const BUILD_ID='ec5d51fc751b';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -1206,7 +1247,7 @@ const S = {
   docsByPo:{}, readMarks:{}, activity:[], profilesAll:[],
   urlCache:{}, lastLoad:0, ready:false,
   payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{},
-  updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{},
+  updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{}, handover:[],
   invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{}
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
@@ -1231,7 +1272,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, ho, pr] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -1239,7 +1280,9 @@ async function loadStaffData(){
     sb.from('bt_documents').select('*').order('created_at'),
     sb.from('bt_updates').select('*').order('work_date',{ascending:false}),
     sb.from('bt_update_internal').select('*'),
-    sb.from('bt_stage_internal').select('*')
+    sb.from('bt_stage_internal').select('*'),
+    sb.from('bt_handover').select('*').order('created_at',{ascending:false}).limit(40),
+    sb.rpc('bt_staff_names')
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -1248,7 +1291,12 @@ async function loadStaffData(){
 
   const shipBy={}; (sp.data||[]).forEach(p=>{ shipBy[p.po_id]={expected_ship_date:p.expected_ship_date, status:p.po_status}; });
   S.buyers=[]; S.buyersById={}; S.pos=[]; S.posById={}; S.comments=[]; S.commentsByItem={};
-  S.docsByPo={}; S.docsByItem={}; S.readMarks={}; S.activity=[]; S.profilesAll=[];
+  S.docsByPo={}; S.docsByItem={}; S.readMarks={}; S.activity=[];
+  // A handover note is signed, so the floor resolves colleague names through
+  // bt_staff_names() — which returns the workshop and the office and nothing else.
+  // Opening bt_profiles would also hand it every buyer login's name and company.
+  S.profilesAll=((pr&&pr.data)||[]);
+  S.handover=(ho&&ho.data)||[];
   S.payments=[]; S.charges=[]; indexFinance();
   indexAccounts([],[],[],[]);
   S.updates = upd.data||[]; S.updInternal = {};
@@ -1568,7 +1616,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, ho] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -1587,7 +1635,8 @@ async function loadData(){
     sb.from('bt_invoices').select('*').order('invoice_date',{ascending:false}),
     sb.from('bt_ewaybills').select('*').order('eway_date',{ascending:false}),
     sb.from('bt_ledger_snapshots').select('*').order('as_of',{ascending:false}),
-    sb.from('bt_ledger_lines').select('*').order('sort_order')
+    sb.from('bt_ledger_lines').select('*').order('sort_order'),
+    sb.from('bt_handover').select('*').order('created_at',{ascending:false}).limit(40)
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -1624,6 +1673,7 @@ async function loadData(){
   S.readMarks={};
   (rm.data||[]).forEach(r=>{ if(r.user_id===uid()) S.readMarks[r.item_id]=r.last_read_at; });
   S.activity = ac.data||[];
+  S.handover = (ho&&ho.data)||[];
   S.profilesAll = pr.data||[];
   S.payments = pay.data||[]; S.charges = chg.data||[];
   indexFinance();
@@ -3449,7 +3499,7 @@ function vItem(id){
   if(openGroup) h+='</div>';
   h+='</div></section><div style="height:24px"></div>';
 
-  if(staff) $('app').innerHTML=h; else paint(h, p.id);
+  if(staff){ $('app').className='staff-list'; $('app').innerHTML=h; } else paint(h, p.id);
   hydrateImages();
   if(!staff) markRead(it.id);
 }
@@ -3516,32 +3566,127 @@ function stageRow(it, st, row){
    Staff — production floor
 --------------------------------------------------------------------------- */
 
-function vStaffHome(){
+/* ---------------------------------------------------------------------------
+   The workshop.
+
+   Built from the ChatGPT WORKSHOP handoff. Missing updates and blocked work come
+   first, because that is what the office is chasing. Two differences from the
+   handoff, both deliberate: no PO number appears anywhere on a floor screen, and
+   there is no "assigned to me" — nothing in the database assigns a person to a
+   piece, so pretending otherwise would be a lie in the interface.
+--------------------------------------------------------------------------- */
+
+function staffBuckets(){
   const q=(window.__staffQ||'').toLowerCase();
-  let items=S.items.slice();
-  if(q) items=items.filter(it=>((it.product||'')+' '+(it.stone||'')+' '+(it.finish||'')+' '+(it.item_ref||'')).toLowerCase().indexOf(q)>=0);
+  let items=(S.items||[]).slice();
+  if(q) items=items.filter(it=>((it.product||'')+' '+(it.stone||'')+' '+(it.finish||'')+' '+
+    (it.item_ref||'')+' '+(it.item_code||'')).toLowerCase().indexOf(q)>=0);
   const open=items.filter(it=>it.status!=='delivered'&&it.status!=='cancelled');
+  const needs=open.filter(it=>!updateToday(it.id));
+  const blocked=open.filter(it=>(S.stByItem[it.id]||[]).some(r=>r.status==='on_hold'));
+  const ready=open.filter(it=>{
+    const rows=S.stByItem[it.id]||[];
+    return rows.some(r=>r.status==='in_progress') && !blocked.includes(it);
+  });
   const done=items.filter(it=>it.status==='delivered'||it.status==='cancelled');
-  const mine=S.photos.filter(p=>p.uploaded_by===uid());
+  return {open, needs, blocked, ready, done};
+}
+
+function setStaffFilter(k){ window.__staffFilter=k; vStaffHome(); }
+
+function vStaffHome(){
+  const b=staffBuckets();
+  const f=window.__staffFilter||'all';
+  const list = f==='needs'?b.needs : f==='blocked'?b.blocked : f==='ready'?b.ready : b.open;
+  const mine=(S.photos||[]).filter(p=>p.uploaded_by===uid());
   const pend=mine.filter(p=>p.status==='pending').length;
   const rej=mine.filter(p=>p.status==='rejected').length;
 
-  let h='';
-  if(rej) h+='<div class="attn attn--error attn--flat"><span>'+rej+' photo'+(rej>1?'s were':' was')+
-    ' sent back by the office. Please reshoot and upload again.</span></div>';
-  if(pend) h+='<div class="attn attn--warn attn--flat"><span>'+pend+' photo'+(pend>1?'s are':' is')+
-    ' waiting for approval. They reach the client only after the office approves them.</span></div>';
+  let h='<div class="ws-head"><div>'+
+    eyebrow(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()]+
+      ', '+fdate(today()))+
+    '<h1 class="display-title">Today.</h1>'+
+    '<p class="lede">Missing updates and blocked work first. Record each piece once, then again only when something changes.</p></div>'+
+    '<button class="button button--workshop" type="button" onclick="pickDaily()">'+icon('i-camera')+'Add to the log</button>'+
+    '</div>';
 
-  h+=(open.length?open.map(staffProduct).join(''):'<div class="empty-state">'+(q?'Nothing matches that search.':'No products in the workshop.')+'</div>');
-  if(done.length) h+='<p class="timeline-group__title" style="margin-top:8px">Completed</p>'+done.map(staffProduct).join('');
+  h+='<div class="ws-steps">'+
+    ['Open the piece','Add photographs and a line about the work','Submit for the office to check']
+      .map((s,i)=>'<span class="ws-step"><b>'+(i+1)+'</b>'+esc(s)+'</span>').join('')+'</div>';
+
+  if(rej) h+='<div class="attn attn--error attn--flat"><span>'+rej+' photograph'+(rej>1?'s were':' was')+
+    ' sent back by the office. Please reshoot and upload again.</span></div>';
+  if(pend) h+='<div class="attn attn--warn attn--flat"><span>'+pend+' photograph'+(pend>1?'s are':' is')+
+    ' waiting for the office. They reach the client only after the office approves them.</span></div>';
+
+  const tiles=[
+    ['In the workshop', b.open.length, 'Pieces being made', 'all'],
+    ['Still due today', b.needs.length, b.needs.length?'No update logged yet':'Every piece has today’s update', 'needs'],
+    ['Blocked', b.blocked.length, b.blocked.length?'Waiting on a decision':'Nothing held', 'blocked'],
+    ['In progress now', b.ready.length, 'Stage started, not finished', 'ready']
+  ];
+  h+='<div class="kpi-grid">'+tiles.map(t=>
+    '<button class="kpi'+(t[3]==='needs'&&t[1]?' kpi--warn':'')+(t[3]===f?' kpi--on':'')+'" type="button" onclick="setStaffFilter(\''+t[3]+'\')">'+
+    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
+    '<span class="kpi__note">'+esc(t[2])+'</span></button>').join('')+'</div>';
+
+  h+='<div class="wt-filter">'+
+    [['all','All',b.open.length],['needs','Needs update',b.needs.length],
+     ['blocked','Blocked',b.blocked.length],['ready','In progress',b.ready.length]]
+    .map(x=>'<button class="chip'+(f===x[0]?' chip--on':'')+'" type="button" onclick="setStaffFilter(\''+x[0]+'\')">'+
+      esc(x[1])+' · '+x[2]+'</button>').join('')+
+    '<span class="wt-filter__note">Showing '+list.length+' of '+b.open.length+'</span></div>';
+
+  h+='<div class="ws-grid">'+
+    (list.length?list.map(staffProduct).join('')
+      :'<div class="empty-state">'+(window.__staffQ?'Nothing matches that search.':'Nothing in this list right now.')+'</div>')+
+    '</div>';
+  if(f==='all' && b.done.length) h+='<p class="timeline-group__title" style="margin-top:14px">Finished</p>'+
+    '<div class="ws-grid">'+b.done.map(staffProduct).join('')+'</div>';
+
+  h+=staffHandover();
   h+=staffDailyLog();
+  $('app').className='staff-list staff-list--page';
   $('app').innerHTML=h;
   hydrateImages();
+}
+
+/* What the next shift needs to know before touching a piece. */
+function staffHandover(){
+  const rows=(S.handover||[]).slice(0,8);
+  return '<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Shift handover</h3>'+
+    '<p class="panel__description">Only what the next shift needs to carry on safely. The office sees this; the client never does.</p></div>'+
+    '<button class="button button--secondary" type="button" onclick="mHandover()">Add a note</button></div>'+
+    '<div class="panel__body">'+
+    (rows.length?rows.map(r=>{
+      const it=r.item_id?S.itemsById[r.item_id]:null;
+      return '<article class="ho"><span class="ho__time">'+esc(ftime(r.created_at))+'</span>'+
+        '<div><strong>'+esc(it?(it.item_ref||it.item_code||it.product):'General')+'</strong>'+
+        '<p>'+esc(r.note)+'</p></div>'+
+        '<span class="ho__who">'+esc(shortLogin(staffNameAny(r.created_by)||''))+'</span></article>';
+    }).join('')
+    :'<div class="empty-state">Nothing handed over yet today.</div>')+
+    '</div></section>';
+}
+
+// On the floor a name is a colleague, not a leak: this is never called for a buyer.
+function staffNameAny(userId){
+  if(!userId) return '';
+  const p=(S.profilesAll||[]).find(x=>x.user_id===userId);
+  if(p) return p.full_name||p.email||'';
+  return (S.profile && S.profile.user_id===userId)?(S.profile.full_name||S.profile.email||''):'';
 }
 
 function staffProduct(it){
   const st=S.stagesById[it.current_stage_id];
   const ph=(S.photosByItem[it.id]||[]);
+  const heldRow=(S.stByItem[it.id]||[]).find(r=>r.status==='on_hold');
+  const held=!!heldRow;
+  const heldInt=heldRow?stageInternal(it.id, heldRow.stage_id):null;
+  const curRow=(S.stByItem[it.id]||[]).find(r=>r.stage_id===it.current_stage_id);
+  const curInt=curRow?stageInternal(it.id, curRow.stage_id):null;
+  const planned=curInt&&curInt.planned_date;
   const ship=it.po&&it.po.expected_ship_date;
   const n=daysUntil(ship);
   const late=n!=null&&n<0&&it.status!=='delivered';
@@ -3554,17 +3699,26 @@ function staffProduct(it){
     '<div class="staff-product__top"><div>'+
       eyebrow(it.item_ref||'')+
       '<h3 class="staff-product__name" style="cursor:pointer" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</h3></div>'+
-      (st?badge(shortStage(st.name),'pending'):badge('Not started'))+'</div>'+
+      (st?badge(shortStage(st.name),held?'alert':'pending'):badge('Not started'))+
+      (st?'<span class="ws-of">Stage '+(S.stages.filter(x=>x.active).findIndex(x=>x.id===st.id)+1)+
+        ' of '+S.stages.filter(x=>x.active).length+'</span>':'')+'</div>'+
     '<div class="staff-product__spec">'+
       '<div class="staff-spec"><span>Stone</span><strong>'+esc(it.stone||'—')+'</strong></div>'+
       '<div class="staff-spec"><span>Quantity</span><strong>'+esc((+it.qty||1)+' '+(it.unit||'pcs'))+'</strong></div>'+
       (dimsOf(it)?'<div class="staff-spec field--full"><span>Finished size</span><strong>'+esc(dimsOf(it))+'</strong></div>':'')+
-      '<div class="staff-spec"><span>Ship by</span><strong'+(late?' class="ship-alert"':'')+'>'+
+      '<div class="staff-spec"><span>Stage target</span><strong>'+
+        (planned?esc(fdate(planned)+(daysUntil(planned)<0?' · overdue':'')):'—')+'</strong></div>'+
+      '<div class="staff-spec"><span>Dispatch target</span><strong'+(late?' class="ship-alert"':'')+'>'+
         esc(ship?(fdate(ship)+(late?' · overdue':(n<=7?' · '+n+'d':''))):'—')+'</strong></div>'+
-      '<div class="staff-spec"><span>Photos</span><strong>'+
+      '<div class="staff-spec"><span>Photographs</span><strong>'+
         (rej?badge(rej+' sent back','alert'):pend?badge(pend+' pending','pending'):appr?badge(appr+' approved','success'):badge(ph.length+''))+
       '</strong></div>'+
     '</div>'+
+    // the line the office is actually chasing
+    (held?'<p class="ws-state ws-state--hold"><b></b>Work on hold'+
+        (heldInt&&heldInt.hold_reason?(' · '+esc(heldInt.hold_reason)):'')+'</p>'
+      :!updateToday(it.id)?'<p class="ws-state ws-state--due"><b></b>Update required · nothing logged today</p>'
+      :'<p class="ws-state ws-state--ok"><b></b>Today’s update is in</p>')+
     '<div class="staff-product__actions">'+
       '<button class="button button--workshop" type="button" onclick="mDailyUpdate(\''+it.id+'\',null)">'+icon('i-camera')+
         (updateToday(it.id)?'Add another update':'Today’s update')+'</button>'+
@@ -7679,6 +7833,32 @@ document.addEventListener('keydown', function(e){
 });
 
 function setPoFilter(k){ window.__poFilter=k; render(); }
+
+// A handover note is short by design: what the next shift must know, nothing else.
+function mHandover(){
+  const items=(S.items||[]).filter(i=>i.status!=='delivered'&&i.status!=='cancelled');
+  const m=modal('<h3>Hand over to the next shift</h3>'+
+    '<div class="sub">The office reads this. The client never does.</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label for="ho-item">Which piece</label><select id="ho-item">'+
+      '<option value="">General — not about one piece</option>'+
+      items.map(i=>'<option value="'+i.id+'">'+esc((i.item_ref||i.item_code?((i.item_ref||i.item_code)+' · '):'')+i.product)+'</option>').join('')+
+    '</select></div>'+
+    '<div class="field field--full"><label for="ho-note">What must the next shift know?</label>'+
+      '<textarea id="ho-note" rows="3" placeholder="e.g. Do not touch the first sealing coat before 9am."></textarea></div>'+
+    '<div class="button-row field--full"><button class="button button--workshop" type="button" id="ho-save">Hand over</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#ho-save').onclick=async ()=>{
+    const note=$('ho-note').value.trim();
+    if(!note){ toast('Write the note first',{err:true}); return; }
+    const {error}=await sb.from('bt_handover').insert({
+      item_id:$('ho-item').value||null, note, created_by:uid(),
+      shift:(new Date().getHours()<14?'day':'evening') });
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast('Handed over');
+  };
+}
+
 </script>
 <script>
 'use strict';
