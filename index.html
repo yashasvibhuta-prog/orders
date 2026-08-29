@@ -670,9 +670,22 @@ a{color:var(--text-primary)}
    collapses to min-content and a long product name breaks one word per line */
 .product-card__top > div:first-child{flex:1 1 auto;min-width:0}
 .product-card__top > .badge{flex:0 0 auto}
+/* Semantics repair, 29 Aug 2026: the PO cards, section tabs and wordmark became
+   real links and buttons. They must keep their existing look while gaining the
+   focus ring and cursor a control is expected to have. */
+a.po-rail__item{display:block;text-decoration:none;color:inherit;cursor:pointer}
+button.content-tab{border:0;background:transparent;font:inherit;cursor:pointer}
+button.content-tab.content-tab--active{background:var(--umber-dark);color:#fff}
+@media (min-width:700px){ button.content-tab.content-tab--active{background:var(--graphite)} }
+a.wordmark{text-decoration:none;color:inherit;cursor:pointer}
+.breadcrumb a{text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.breadcrumb a:hover{color:var(--ink)}
+/* a focus ring that is actually visible on both light and dark grounds */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--action-primary);outline-offset:2px;border-radius:6px}
 </style>
 <body>
-<script>const BUILD_ID='a46f53664e91';</script>
+<script>const BUILD_ID='9bc016949345';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -716,7 +729,7 @@ a{color:var(--text-primary)}
 
 <div id="modal-root"></div>
 <div id="toast"></div>
-<div id="lightbox" hidden onclick="this.hidden=true"></div>
+<div id="lightbox" hidden onclick="this.hidden=true" role="dialog" aria-modal="true" aria-label="Photograph"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
@@ -847,16 +860,42 @@ function modal(html){
   const m=el('<div class="modal">'+html+'</div>');
   bg.appendChild(m);
   bg.addEventListener('click', e=>{ if(e.target===bg) bg.remove(); });
+  m.setAttribute('role','dialog');
+  m.setAttribute('aria-modal','true');
+  const heading = m.querySelector('h3');
+  if(heading){
+    if(!heading.id) heading.id = 'modal-title-'+Math.random().toString(36).slice(2,8);
+    m.setAttribute('aria-labelledby', heading.id);
+  }
   $('modal-root').innerHTML=''; $('modal-root').appendChild(bg);
+  // put the caret where the person is about to type, or on the dialog itself
+  const first = m.querySelector('input:not([type=hidden]),select,textarea,button');
+  if(first) first.focus(); else { m.tabIndex=-1; m.focus(); }
   return {bg, m, close:()=>bg.remove()};
 }
 function closeModal(){ $('modal-root').innerHTML=''; }
 
 function lightbox(url, cap){
   const lb=$('lightbox');
-  lb.innerHTML='<img src="'+esc(url)+'" alt="">'+(cap?'<div class="cap">'+esc(cap)+'</div>':'');
+  lb.innerHTML='<img src="'+esc(url)+'" alt="'+esc(cap||'Photograph')+'">'+
+    (cap?'<div class="cap">'+esc(cap)+'</div>':'');
   lb.hidden=false;
+  lb.setAttribute('role','dialog');
+  lb.setAttribute('aria-modal','true');
+  lb.setAttribute('aria-label', cap || 'Photograph');
+  lb.tabIndex = -1;
+  lb.focus();
 }
+
+// Escape closes whatever is open, and a modal takes focus when it appears —
+// without this the keyboard could be trapped behind an overlay it could not see.
+document.addEventListener('keydown', e=>{
+  if(e.key!=='Escape') return;
+  const lb=document.getElementById('lightbox');
+  if(lb && !lb.hidden){ lb.hidden=true; return; }
+  const root=document.getElementById('modal-root');
+  if(root && root.firstChild){ root.innerHTML=''; }
+});
 
 function genPassword(){
   const w=['Marble','Onyx','Bronze','Ivory','Chisel','Lathe','Kesar','Aravalli','Mewar','Agate','Quartz','Carve'];
@@ -1496,9 +1535,9 @@ function updateHeader(){
   const b=isAdmin()?null:S.buyersById[S.profile.buyer_id];
   const who=isAdmin()?(S.profile.full_name||'Owner'):(b?b.company:(S.profile.full_name||S.profile.email));
   topbar.innerHTML=
-    '<div class="wordmark" onclick="go(\'#/home\')" style="cursor:pointer">'+
+    '<a class="wordmark" href="#/home" aria-label="StoneFlow — go to orders">'+
       '<span class="wordmark__mark">'+icon('i-mark')+'</span>'+
-      '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by '+esc(S.settings.company_name||'Gujraj Impex')+'</span></span></div>'+
+      '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by '+esc(S.settings.company_name||'Gujraj Impex')+'</span></span></a>'+
     '<div class="topbar__tools">'+
       '<span class="role-chip">'+(isAdmin()?'Owner view':'Buyer view')+'</span>'+
       '<span class="avatar" title="'+esc(who)+'">'+esc(initials(who))+'</span>'+
@@ -1663,13 +1702,16 @@ function poRail(activeId){
   const done=pool.filter(p=>p.status==='completed'||p.status==='cancelled');
   const b=p=>S.buyersById[p.buyer_id];
   const cur=p=>{ const s=p.items.map(i=>S.stagesById[i.current_stage_id]).filter(Boolean).sort((a,c)=>a.sort_order-c.sort_order)[0]; return s?shortStage(s.name):'Not started'; };
-  const row=p=>'<article class="po-rail__item'+(p.id===activeId?' po-rail__item--active':'')+'" '+
-      'style="cursor:pointer" onclick="go(\'#/po/'+p.id+'\')">'+
+  // A real link, so it can be tabbed to, opened in a new tab, and announced —
+  // this was a clickable <article> with no semantics at all.
+  const row=p=>'<a class="po-rail__item'+(p.id===activeId?' po-rail__item--active':'')+'" '+
+      'href="#/po/'+p.id+'"'+(p.id===activeId?' aria-current="page"':'')+
+      ' aria-label="'+esc(p.po_number+' · '+(p.project||''))+'">'+
     '<p class="po-rail__number">'+esc(p.po_number)+'</p>'+
     '<p class="po-rail__name">'+esc(p.project||(p.items[0]?p.items[0].product:'—'))+'</p>'+
     '<p class="po-rail__meta">'+esc([isAdmin()&&b(p)?b(p).company:'', cur(p)].filter(Boolean).join(' · '))+'</p>'+
     progressBar(p.progress)+
-  '</article>';
+  '</a>';
   return '<aside class="po-rail" aria-label="Purchase order list">'+
     '<p class="po-rail__title">Purchase orders'+(isAdmin()?' · '+S.pos.length:'')+'</p>'+
     (isAdmin()?'<button class="button button--secondary button--wide space-top-10" type="button" style="margin-bottom:12px" onclick="mNewPO()">+ New PO</button>':'')+
@@ -1688,7 +1730,7 @@ function vHome(){
     const d=new Date();
     h+='<div class="page-heading"><div>'+
       eyebrow(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()]+', '+d.getDate()+' '+MON[d.getMonth()])+
-      '<h2 class="display-title">Workshop overview</h2>'+
+      '<h1 class="display-title">Workshop overview</h1>'+
       '<p class="lede">The few things that need your decision, then the wider order book.</p></div>'+
       '<div class="search">'+icon('i-search')+
       '<input id="gq" type="search" placeholder="Search PO, project, buyer or product" value="'+esc(window.__gq||'')+'" oninput="gSearch(this.value)"></div>'+
@@ -1707,7 +1749,7 @@ function vHome(){
     const totProg=S.items.length?S.items.reduce((a,i)=>a+i.progress,0)/S.items.length:0;
     const mine=pendingApprovals().length;
     h+='<section class="buyer-welcome">'+eyebrow(b?b.company:'')+
-      '<h2 class="detail-title">'+esc(greet+(first?', '+first:''))+'.</h2>'+
+      '<h1 class="detail-title">'+esc(greet+(first?', '+first:''))+'.</h1>'+
       '<p class="detail-subtitle">Live production status from '+esc(S.settings.company_name||'Gujraj Impex')+'. Only approved workshop images are shown.</p>'+
       '<div class="buyer-progress"><div>'+
         '<div class="buyer-progress__row"><span>Across your open orders</span><strong>'+Math.round(totProg*100)+'%</strong></div>'+
@@ -1853,12 +1895,17 @@ function vPO(id){
   const cur=p.items.map(i=>S.stagesById[i.current_stage_id]).filter(Boolean).sort((a,c)=>a.sort_order-c.sort_order)[0];
 
   let h='<section class="order-hero">'+
-    '<div class="breadcrumb"><span style="cursor:pointer" onclick="go(\'#/home\')">Orders</span>'+icon('i-chevron','icon--sm')+
-    '<strong>'+esc(p.po_number)+'</strong></div>'+
+    '<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#/home">Orders</a>'+icon('i-chevron','icon--sm')+
+    '<strong aria-current="page">'+esc(p.po_number)+'</strong></nav>'+
+    // The project is what the buyer recognises; the PO number is a reference and
+    // does not need to be the largest text on the page.
     '<div class="order-hero__top"><div>'+
-      eyebrow([b?b.company:'', b?b.city:'', p.project].filter(Boolean).join(' · '))+
-      '<h2 class="detail-title">'+esc(p.po_number)+'</h2>'+
-      '<p class="detail-subtitle">'+esc([p.po_date?('Dated '+fdate(p.po_date)):'', b&&b.contact_name?('contact '+b.contact_name):'', p.reference].filter(Boolean).join(' · '))+'</p></div>'+
+      eyebrow([b?b.company:'', b?b.city:''].filter(Boolean).join(' · '))+
+      '<h1 class="detail-title">'+esc(p.project||p.po_number)+'</h1>'+
+      '<p class="detail-subtitle">'+esc([(p.project?p.po_number:''),
+        p.po_date?('dated '+fdate(p.po_date)):'',
+        b&&b.contact_name?('buyer contact '+b.contact_name):'',
+        p.reference].filter(Boolean).join(' · '))+'</p></div>'+
       (admin?'<div class="page-heading__actions">'+
         '<button class="button button--secondary" type="button" onclick="mEditPO(\''+p.id+'\')">Edit PO</button>'+
         '<button class="button" type="button" onclick="mItem(\''+p.id+'\',null)">Add product</button></div>':'')+
@@ -1877,12 +1924,20 @@ function vPO(id){
 
   const tab=window.__poTab||'products';
   const nPh=visiblePhotos(S.photosByPo[p.id]||[]).length;
-  h+='<div class="content-tabs" aria-label="Purchase order sections">'+
-    [['products','Products',p.items.length],['photos','Photos',nPh],['shipping','Shipping',0],['docs','Documents',(S.docsByPo[p.id]||[]).length]]
-      .map(t=>'<span class="content-tab'+(tab===t[0]?' content-tab--active':'')+'" style="cursor:pointer" onclick="poTab(\''+t[0]+'\')">'+
-        t[1]+(t[2]?' '+badge(t[2]+''):'')+'</span>').join('')+'</div>';
+  // A real tablist: buttons, aria-selected, and arrow-key movement. These were
+  // clickable <span>s, which meant the whole section switcher was unreachable
+  // by keyboard.
+  const poTabs=[['products','Products',p.items.length],['photos','Photos',nPh],
+                ['shipping','Shipping',0],['docs','Documents',(S.docsByPo[p.id]||[]).length]];
+  h+='<div class="content-tabs" role="tablist" aria-label="Purchase order sections">'+
+    poTabs.map(t=>'<button type="button" role="tab" id="potab-'+t[0]+'"'+
+        ' class="content-tab'+(tab===t[0]?' content-tab--active':'')+'"'+
+        ' aria-selected="'+(tab===t[0]?'true':'false')+'"'+
+        ' aria-controls="po-panel" tabindex="'+(tab===t[0]?'0':'-1')+'"'+
+        ' onkeydown="poTabKey(event)" onclick="poTab(\''+t[0]+'\')">'+
+        t[1]+(t[2]?' '+badge(t[2]+''):'')+'</button>').join('')+'</div>';
 
-  h+='<div class="detail-grid">';
+  h+='<div class="detail-grid" id="po-panel" role="tabpanel" aria-labelledby="potab-'+tab+'" tabindex="-1">';
   if(tab==='products'){
     h+='<section class="panel"><div class="panel__head"><div>'+
       '<h3 class="panel__title">Products in this order</h3>'+
@@ -2121,15 +2176,15 @@ function vItem(id){
 
   let h='';
   if(!staff){
-    h+='<div class="breadcrumb"><span style="cursor:pointer" onclick="go(\'#/home\')">Orders</span>'+icon('i-chevron','icon--sm')+
-      '<span style="cursor:pointer" onclick="go(\'#/po/'+p.id+'\')">'+esc(p.po_number)+'</span>'+icon('i-chevron','icon--sm')+
-      '<strong>'+esc(it.product)+'</strong></div>';
+    h+='<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#/home">Orders</a>'+icon('i-chevron','icon--sm')+
+      '<a href="#/po/'+p.id+'">'+esc(p.po_number)+'</a>'+icon('i-chevron','icon--sm')+
+      '<strong aria-current="page">'+esc(it.product)+'</strong></nav>';
   } else {
     h+='<div class="button-row"><button class="button button--secondary" type="button" onclick="go(\'#/home\')">← Production floor</button></div>';
   }
   h+='<div class="page-heading"><div>'+
     eyebrow([it.item_ref, (+it.qty||1)+' '+(it.unit||'pcs')].filter(Boolean).join(' · '))+
-    '<h2 class="detail-title">'+esc(it.product)+'</h2>'+
+    '<h1 class="detail-title">'+esc(it.product)+'</h1>'+
     '<p class="detail-subtitle">'+esc([it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+
       (due?esc((it.target_date?' · target ':' · expected ')+fdate(due)):'')+'</p></div>'+
     (admin?'<div class="page-heading__actions">'+
@@ -2362,7 +2417,7 @@ function staffDailyLog(){
 function vDaily(){
   const dates=Object.keys(S.dailyByDate||{}).sort().reverse().slice(0,20);
   let h='<div class="page-heading"><div>'+eyebrow('Shift handover')+
-    '<h2 class="display-title">Daily log</h2>'+
+    '<h1 class="display-title">Daily log</h1>'+
     '<p class="lede">Photos of the day’s work on the floor. Internal — the client never sees these.</p></div>'+
     '<div class="page-heading__actions"><button class="button" type="button" onclick="pickDaily()">'+icon('i-camera','icon--sm')+'Add photos for today</button></div></div>';
   if(!dates.length){ $('app').innerHTML=h+'<div class="empty-state">No entries yet.</div>'; return; }
@@ -2387,7 +2442,7 @@ function vApprovals(){
   if(!isAdmin()) return vHome();
   const pend=pendingPhotos();
   let h='<div class="page-heading"><div>'+eyebrow('Quality gate')+
-    '<h2 class="display-title">Photo approvals</h2>'+
+    '<h1 class="display-title">Photo approvals</h1>'+
     '<p class="lede">Choose the clear, useful frames the buyer should see. Unapproved workshop images stay private.</p></div>'+
     (pend.length?'<div class="page-heading__actions">'+
       '<button class="button button--success" type="button" onclick="setPhotoStatus('+jsArr(pend.map(p=>p.id))+',\'approved\')">Approve all ('+pend.length+')</button></div>':'')+
@@ -2439,7 +2494,7 @@ function vUpdates(){
   if(!isAdmin()) return vHome();
   const active=S.buyers.filter(b=>b.active && S.pos.some(p=>p.buyer_id===b.id && p.status!=='cancelled'));
   let h='<div class="page-heading"><div>'+eyebrow('Push, not pull')+
-    '<h2 class="display-title">Client updates</h2>'+
+    '<h1 class="display-title">Client updates</h1>'+
     '<p class="lede">Send each buyer a short progress note. This is what stops the phone calls — they hear from you before they think to ask.</p></div></div>';
 
   if(!active.length){ $('app').innerHTML=h+'<div class="empty-state">No active buyers with open orders.</div>'; return; }
@@ -2548,7 +2603,7 @@ function vReview(){
   const todayDone=activeItems().filter(it=>updateToday(it.id));
 
   let h='<div class="page-heading"><div>'+eyebrow('Owner review')+
-    '<h2 class="display-title">Daily updates</h2>'+
+    '<h1 class="display-title">Daily updates</h1>'+
     '<p class="lede">Approve a day’s photographs, edit what the client reads, and see which pieces have gone quiet.</p></div></div>';
 
   h+='<section class="summary-grid">'+
@@ -2653,7 +2708,7 @@ function vFinance(){
   const buyers = S.buyers.filter(b=>S.pos.some(p=>p.buyer_id===b.id) || (S.payByBuyer[b.id]||[]).length);
 
   let h = '<div class="page-heading"><div>'+eyebrow('Statement of account')+
-    '<h2 class="display-title">Finance</h2>'+
+    '<h1 class="display-title">Finance</h1>'+
     '<p class="lede">What each buyer has ordered, what they have paid, and what is still owed. '+
     'Only you can see this — buyers and floor staff cannot, at the database level.</p></div></div>';
 
@@ -2755,7 +2810,7 @@ function vFinance(){
 
 function vActivity(){
   let h='<div class="page-heading"><div>'+eyebrow('Audit trail')+
-    '<h2 class="display-title">Activity</h2><p class="lede">Every change, newest first.</p></div></div>'+
+    '<h1 class="display-title">Activity</h1><p class="lede">Every change, newest first.</p></div></div>'+
     '<section class="panel"><div class="panel__body activity-log">';
   if(!S.activity.length) h+='<div class="empty-state">Nothing yet.</div>';
   else h+=S.activity.map(a=>{
@@ -2790,7 +2845,7 @@ function loginRow(l, label, sub){
 function vBuyers(){
   if(!isAdmin()) return vHome();
   let h='<div class="page-heading"><div>'+eyebrow('Access')+
-    '<h2 class="display-title">Buyers &amp; logins</h2>'+
+    '<h1 class="display-title">Buyers &amp; logins</h1>'+
     '<p class="lede">Who can sign in, and what each of them sees.</p></div>'+
     '<div class="page-heading__actions"><button class="button" type="button" onclick="mBuyer(null)">+ Add buyer</button></div></div>';
 
@@ -2835,7 +2890,7 @@ function vSettings(){
   if(!S.settings.__priv){ S.settings.__priv=1; loadPrivateSettings().then(()=>render()); }
   const s=S.settings||{};
   let h='<div class="page-heading"><div>'+eyebrow('Configuration')+
-    '<h2 class="display-title">Settings</h2><p class="lede">Company details and the production stages every new product follows.</p></div></div>';
+    '<h1 class="display-title">Settings</h1><p class="lede">Company details and the production stages every new product follows.</p></div></div>';
 
   h+='<div class="utility-grid utility-grid--wide"><div class="utility-stack">'+
     '<section class="form-card"><div class="form-card__head"><div>'+
@@ -2876,7 +2931,7 @@ function vSettings(){
 function vImport(){
   if(!isAdmin()) return vHome();
   const h='<div class="page-heading"><div>'+eyebrow('Bulk entry')+
-    '<h2 class="display-title">Import an order</h2>'+
+    '<h1 class="display-title">Import an order</h1>'+
     '<p class="lede">Drop the buyer\'s spreadsheet or purchase-order PDF and it fills itself in.</p></div></div>'+
   '<section class="form-card"><div class="form-card__head"><div>'+
     '<h3 class="form-card__title">From a PO PDF</h3>'+
@@ -4877,6 +4932,23 @@ async function commitSheetImport(){
     $('loading').style.display='none';
     toast('Import failed: '+(e.message||e),{err:true});
   }
+}
+
+// Arrow keys move between the section tabs, which is what a tablist is expected
+// to do and what a row of clickable spans could never do.
+function poTabKey(ev){
+  const keys = {ArrowLeft:-1, ArrowRight:1, Home:'first', End:'last'};
+  if(!(ev.key in keys)) return;
+  ev.preventDefault();
+  const tabs = [...document.querySelectorAll('.content-tabs [role="tab"]')];
+  if(!tabs.length) return;
+  const i = tabs.indexOf(ev.currentTarget);
+  let next;
+  if(keys[ev.key]==='first') next = 0;
+  else if(keys[ev.key]==='last') next = tabs.length-1;
+  else next = (i + keys[ev.key] + tabs.length) % tabs.length;
+  tabs[next].focus();
+  tabs[next].click();
 }
 
 /* ---- UI ---- */
