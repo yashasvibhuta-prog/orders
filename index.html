@@ -2008,16 +2008,15 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 </style>
 <style>
 /* ChatGPT's owner-console stylesheet, copied verbatim from
-   STONEFLOW-FINAL-HANDOFF-READY/STONEFLOW-ADMIN.html (415,391 bytes, the file
-   named in CLAUDE-READ-THIS-ONLY.md) and scoped to .sfa so it
+   STONEFLOW-FINAL-HANDOFF-READY/STONEFLOW-ADMIN.html (the file named in
+   CLAUDE-READ-THIS-ONLY.md) and scoped to .sfa so it
    governs the owner screens exactly as designed without touching the
    buyer portal or the workshop floor. Do not hand-edit: regenerate. */
 
 /* The console stylesheet above defines these same class names for my own
    owner screens. Inside a .sfa page ChatGPT's sheet is the authority, so the
    console's declarations are cleared first and his rules -- which follow, at
-   equal specificity -- apply as written. Nothing here changes his design; it
-   stops mine leaking into it. */
+   equal specificity -- apply as written. */
 .sfa .access-avatar,
 .sfa .access-person,
 .sfa .access-row,
@@ -2339,7 +2338,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .top-search .shortcut{display:none}
 .sfa .top-actions .icon-button:nth-of-type(2){display:none}
 .sfa .sidebar{transform:translateX(-105%);box-shadow:var(--shadow)}
-.sfa body.menu-open .sidebar{transform:none}
+body.menu-open .sfa .sidebar{transform:none}
 .sfa .shell{padding-left:0}
 .sfa .mobile-nav{display:grid}
 .sfa .content{padding:20px 14px 55px}
@@ -2411,22 +2410,22 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .path-step{border:0;background:transparent;padding:0;color:var(--muted)}
 .sfa .inspector{display:none}
 .sfa .split-shell{grid-template-columns:280px minmax(0,1fr)}
-.sfa body.order-mode .sidebar{width:68px;padding-inline:8px}
-.sfa body.order-mode .shell{padding-left:68px}
-.sfa body.order-mode .sidebar .nav-label,.sfa body.order-mode .sidebar .subnav{display:none}
-.sfa body.order-mode .sidebar .nav-item{position:relative;justify-content:center;padding:0;font-size:0}
-.sfa body.order-mode .sidebar .nav-item .nav-count{position:absolute;right:1px;top:2px;min-width:16px;height:16px;padding:0;font-size:7px}
-.sfa body.order-mode .sidebar-bottom{padding-top:8px}
-.sfa body.inspector-open .split-shell{grid-template-columns:280px minmax(0,1fr) var(--inspector)}
-.sfa body.inspector-open .inspector{display:block}
-@media(max-width:1180px){.sfa body.inspector-open .split-shell{grid-template-columns:250px minmax(0,1fr)}
-.sfa body.inspector-open .inspector{display:block;position:fixed;right:0;top:var(--topbar);bottom:0;z-index:48;width:310px;box-shadow:-20px 0 50px rgba(0,0,0,.12)}}
-@media(max-width:720px){.sfa body.order-mode .sidebar{width:var(--sidebar);padding:16px 11px}
-.sfa body.order-mode .shell{padding-left:0}
-.sfa body.order-mode .sidebar .nav-label{display:block}
-.sfa body.order-mode .sidebar .nav-item{justify-content:flex-start;padding:0 10px;font-size:inherit}
-.sfa body.order-mode .sidebar .nav-item .nav-count{position:static;min-width:22px;height:20px;margin-left:auto;padding:0 6px;font-size:9px}
-.sfa body.inspector-open .inspector{top:var(--topbar);width:min(340px,92vw)}
+body.order-mode .sfa .sidebar{width:68px;padding-inline:8px}
+body.order-mode .sfa .shell{padding-left:68px}
+body.order-mode .sfa .sidebar .nav-label,body.order-mode .sfa .sidebar .subnav{display:none}
+body.order-mode .sfa .sidebar .nav-item{position:relative;justify-content:center;padding:0;font-size:0}
+body.order-mode .sfa .sidebar .nav-item .nav-count{position:absolute;right:1px;top:2px;min-width:16px;height:16px;padding:0;font-size:7px}
+body.order-mode .sfa .sidebar-bottom{padding-top:8px}
+body.inspector-open .sfa .split-shell{grid-template-columns:280px minmax(0,1fr) var(--inspector)}
+body.inspector-open .sfa .inspector{display:block}
+@media(max-width:1180px){body.inspector-open .sfa .split-shell{grid-template-columns:250px minmax(0,1fr)}
+body.inspector-open .sfa .inspector{display:block;position:fixed;right:0;top:var(--topbar);bottom:0;z-index:48;width:310px;box-shadow:-20px 0 50px rgba(0,0,0,.12)}}
+@media(max-width:720px){body.order-mode .sfa .sidebar{width:var(--sidebar);padding:16px 11px}
+body.order-mode .sfa .shell{padding-left:0}
+body.order-mode .sfa .sidebar .nav-label{display:block}
+body.order-mode .sfa .sidebar .nav-item{justify-content:flex-start;padding:0 10px;font-size:inherit}
+body.order-mode .sfa .sidebar .nav-item .nav-count{position:static;min-width:22px;height:20px;margin-left:auto;padding:0 6px;font-size:9px}
+body.inspector-open .sfa .inspector{top:var(--topbar);width:min(340px,92vw)}
 .sfa .calendar-event{grid-template-columns:39px minmax(0,1fr)}
 .sfa .date-chip{width:39px;height:39px}}
 .sfa .top-search{background:var(--page);border-color:var(--line-strong)}
@@ -2525,11 +2524,11 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .workshop-actions .button:first-child{grid-column:1/-1}
 .sfa .handover-row{grid-template-columns:52px minmax(0,1fr)}
 .sfa .handover-person{grid-column:2;text-align:left}}
-.sfa body.product-mode .sidebar{width:68px;padding-inline:8px}
-.sfa body.product-mode .shell{padding-left:68px}
-.sfa body.product-mode .sidebar .nav-label,.sfa body.product-mode .sidebar .subnav{display:none}
-.sfa body.product-mode .sidebar .nav-item{position:relative;justify-content:center;padding:0;font-size:0}
-.sfa body.product-mode .sidebar .nav-item .nav-count{position:absolute;right:1px;top:2px;min-width:16px;height:16px;padding:0;font-size:7px}
+body.product-mode .sfa .sidebar{width:68px;padding-inline:8px}
+body.product-mode .sfa .shell{padding-left:68px}
+body.product-mode .sfa .sidebar .nav-label,body.product-mode .sfa .sidebar .subnav{display:none}
+body.product-mode .sfa .sidebar .nav-item{position:relative;justify-content:center;padding:0;font-size:0}
+body.product-mode .sfa .sidebar .nav-item .nav-count{position:absolute;right:1px;top:2px;min-width:16px;height:16px;padding:0;font-size:7px}
 .sfa .product-workspace{max-width:1480px;margin:0 auto}
 .sfa .product-crumbs{margin-bottom:14px;display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px}
 .sfa .product-crumbs a:hover{color:var(--ink)}
@@ -2634,11 +2633,11 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .product-answer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .sfa .product-answer.current{grid-column:span 2}
 .sfa .stage-action-row{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:720px){.sfa body.product-mode .sidebar{width:var(--sidebar);padding:16px 11px}
-.sfa body.product-mode .shell{padding-left:0}
-.sfa body.product-mode .sidebar .nav-label{display:block}
-.sfa body.product-mode .sidebar .nav-item{justify-content:flex-start;padding:0 10px;font-size:inherit}
-.sfa body.product-mode .sidebar .nav-item .nav-count{position:static;min-width:22px;height:20px;margin-left:auto;padding:0 6px;font-size:9px}
+@media(max-width:720px){body.product-mode .sfa .sidebar{width:var(--sidebar);padding:16px 11px}
+body.product-mode .sfa .shell{padding-left:0}
+body.product-mode .sfa .sidebar .nav-label{display:block}
+body.product-mode .sfa .sidebar .nav-item{justify-content:flex-start;padding:0 10px;font-size:inherit}
+body.product-mode .sfa .sidebar .nav-item .nav-count{position:static;min-width:22px;height:20px;margin-left:auto;padding:0 6px;font-size:9px}
 .sfa .product-hero{padding:17px}
 .sfa .product-hero-top{grid-template-columns:1fr}
 .sfa .product-hero-actions{justify-content:flex-start}
@@ -2658,7 +2657,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .media-grid{grid-template-columns:1fr 1fr;grid-template-rows:180px 100px}
 .sfa .media-tile:first-child{grid-column:1/-1;grid-row:1}
 .sfa .media-footer{align-items:flex-start;flex-direction:column}}
-.sfa body.access-mode .content{max-width:1700px}
+body.access-mode .sfa .content{max-width:1700px}
 .sfa .access-page{display:grid;gap:12px}
 .sfa .access-page-head{padding:19px 20px;border:1px solid var(--line-extra-light);border-radius:13px;background:var(--surface);display:flex;align-items:flex-end;justify-content:space-between;gap:18px}
 .sfa .access-page-head h1{margin-bottom:6px;font-size:clamp(35px,3.7vw,49px)}
@@ -2743,7 +2742,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .confirmation strong{display:block;margin-bottom:3px;color:var(--critical);font-size:9px}
 @media(max-width:1280px){.sfa .access-workspace{grid-template-columns:176px minmax(520px,1fr)}
 .sfa .access-detail-card{position:fixed;right:0;top:var(--topbar);bottom:0;z-index:55;width:315px;border-radius:0;box-shadow:-18px 0 48px rgba(29,29,31,.12);overflow:auto;transform:translateX(105%);transition:.2s}
-.sfa body.access-detail-open .access-detail-card{transform:none}
+body.access-detail-open .sfa .access-detail-card{transform:none}
 .sfa .access-row.active{box-shadow:inset 2px 0 0 var(--active-indicator)}}
 @media(max-width:900px){.sfa .access-summary{grid-template-columns:repeat(2,1fr)}
 .sfa .access-workspace{grid-template-columns:1fr}
@@ -2913,7 +2912,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .owner-evidence-layout{grid-template-columns:1fr}
 .sfa .owner-ring{margin:0 auto}
 .sfa .owner-system-grid{grid-template-columns:1fr}}
-.sfa body.reports-mode .content{max-width:1700px}
+body.reports-mode .sfa .content{max-width:1700px}
 .sfa .reports-page{display:grid;gap:12px}
 .sfa .report-head{padding:19px 20px;border:1px solid var(--line-extra-light);border-radius:13px;background:var(--surface);display:flex;align-items:flex-end;justify-content:space-between;gap:18px}
 .sfa .report-head h1{margin-bottom:6px;font-size:clamp(36px,3.9vw,51px)}
@@ -3601,6 +3600,17 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa .co-directory-list{grid-template-columns:1fr}
 .sfa .co-order-table{display:block;overflow-x:auto}}
 
+/* His sheet gives .owner-kpi-meter a height, but the element is a <span> inside
+   a <button>, so it stays inline and the height never applies. Making it a block
+   realises his own declaration; it is not a design change. */
+.sfa .owner-kpi-meter,.sfa .owner-team-row i,.sfa .owner-age-row i{display:block}
+
+/* His .split-shell uses negative margins to break out of the padding HIS shell
+   applies. Inside this console the column is already full-bleed, so the same
+   margins push it under the sidebar and off the right edge. */
+.sfa .split-shell{margin:0;min-height:calc(100vh - 150px)}
+.page--owner:has(.split-shell){padding-left:0;padding-right:0}
+
 /* His console fills the browser column; the page width my own screens use is
    not his design. Same treatment the buyer portal gets. */
 .page--owner{width:100%;max-width:none;padding-left:20px;padding-right:20px}
@@ -3608,16 +3618,9 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfa img{max-width:100%}
 .sfa .owner-primary-grid>*,.sfa .owner-secondary-grid>*{min-width:0}
 .sfa .owner-table-wrap{overflow-x:auto}
-
-/* His sheet gives .owner-kpi-meter a height, but the element is a <span> inside
-   a <button>, so it stays inline and the height never applies -- the bar renders
-   as a block the size of the tile. Making it a block is what realises his own
-   declaration; it is not a design change. Same for the two other bars he draws
-   inside buttons and rows. */
-.sfa .owner-kpi-meter,.sfa .owner-team-row i,.sfa .owner-age-row i{display:block}
 </style>
 <body>
-<script>const BUILD_ID='1e4a18f948f3';</script>
+<script>const BUILD_ID='1af8898344c4';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -3864,7 +3867,7 @@ const S = {
   payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{},
   updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{},
   invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{},
-  revisions:[], decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null
+  revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -6000,59 +6003,318 @@ function vAdmin(tab){
 }
 
 // The order book, which used to be the admin home.
+/* ------------------------------------------------------- orders workspace -- */
+/* ChatGPT's ordersView from the final handoff: .split-shell with the .split-list
+   rail of purchase orders, his .workspace record (switcher, .record-head,
+   .highlights, .po-shipment-gate, the product cards and the five .record-tabs)
+   and the .inspector on the right. Every figure comes from this order's own
+   records; nothing from another order is mixed in. */
+function sfaTab(){ return window.__recTab||'overview'; }
+function setRecordTab(t){ window.__recTab=t; render(); }
+function toggleInspector(on){
+  if(on===undefined) document.body.classList.toggle('inspector-open');
+  else document.body.classList.toggle('inspector-open', !!on);
+}
+function filterPoList(q){
+  q=String(q||'').toLowerCase().trim();
+  document.querySelectorAll('#po-list .po-item').forEach(b=>{
+    b.hidden = !!q && (b.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0;
+  });
+}
+function selectOrder(id){ S.selOrder=id; render(); }
+function setSavedView(k){ window.__poView=k; render(); }
+
+function sfaOrders(){
+  return (S.pos||[]).filter(p=>p.status!=='cancelled')
+    .slice().sort((a,b)=>String(a.expected_ship_date||'9').localeCompare(String(b.expected_ship_date||'9')));
+}
+// The five saved views his rail offers, each one a real count.
+function sfaSavedViews(){
+  const all=sfaOrders();
+  const rows={}; portfolioRows().forEach(r=>{ rows[r.po.id]=r; });
+  const att=all.filter(p=>{ const r=rows[p.id]; return r && (r.level>=1 || !r.evToday); });
+  const risk=all.filter(p=>{ const r=rows[p.id]; return r && r.level>=2; });
+  const buyer=all.filter(p=>pendingApprovals().some(a=>a.item.po_id===p.id));
+  const ship=all.filter(p=>poReadiness(p).shippable);
+  return [['all','All open',all],['attention','Needs attention',att],
+          ['risk','At risk / late',risk],['buyer','Awaiting buyer',buyer],['ship','Ready to ship',ship]];
+}
+function sfaPoListItem(p){
+  const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+  const cover=items.length?targetImage(items[0]):null;
+  const prog=Math.round((items.length?items.reduce((a,i)=>a+(i.progress||0),0)/items.length:0)*100);
+  const st=items.map(i=>curStage(i)).filter(Boolean).sort((a,b)=>a.sort_order-b.sort_order)[0];
+  const b=S.buyersById[p.buyer_id]||{};
+  const on=S.selOrder===p.id;
+  return '<button class="po-item visual-po'+(on?' active':'')+'" type="button" aria-pressed="'+on+'" '+
+    'data-search="'+esc([p.po_number,p.project,b.company].concat(items.map(i=>i.product)).filter(Boolean).join(' '))+'" '+
+    'onclick="selectOrder(\''+p.id+'\')">'+
+    '<span class="po-item-visual">'+(cover?'<img alt="" data-ph-path="'+esc(cover.path)+'">':'')+
+      '<em>'+items.length+'</em></span>'+
+    '<span class="po-item-copy"><b>'+esc(p.po_number)+'</b><strong>'+esc(p.project||b.company||'')+'</strong>'+
+      '<small><span>'+esc(st?st.name:'Not started')+'</span><span>'+prog+'%</span></small>'+
+      '<span class="mini-progress"><span style="width:'+prog+'%"></span></span></span></button>';
+}
+function sfaOrderSwitcher(p){
+  return '<nav class="order-switcher" aria-label="Switch purchase order"><span>Switch PO</span>'+
+    sfaOrders().slice(0,8).map(o=>'<button class="'+(o.id===p.id?'active':'')+'" type="button" '+
+      'aria-current="'+(o.id===p.id?'page':'false')+'" onclick="selectOrder(\''+o.id+'\')">'+
+      esc(o.po_number)+'</button>').join('')+'</nav>';
+}
+function sfaShipmentGate(p){
+  const r=poReadiness(p), fin=poFinance(p);
+  return '<div class="po-shipment-gate" aria-label="Purchase order completion and shipment readiness">'+
+    '<div><span>Products ready</span><strong>'+r.made+' of '+r.pieces+'</strong></div>'+
+    '<div><span>Production</span><strong>'+sfCompletion(p)+'% overall</strong></div>'+
+    '<div><span>Final evidence</span><strong>'+esc(r.pieces&&!r.finalMissing?'Complete':(r.made?'Part complete':'Not complete'))+'</strong></div>'+
+    '<div class="'+(fin.cleared?'':'hold')+'"><span>Payment clearance</span>'+
+      '<strong>'+esc(fin.cleared?'Cleared':'Not cleared')+'</strong></div>'+
+    '<div><span>PO shipment</span><strong>'+esc(r.stateLabel)+'</strong></div>'+
+    '</div>';
+}
+function sfaProductCards(p){
+  const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+  if(!items.length) return '<div class="empty"><h2>No products on this order yet.</h2>'+
+    '<p>Add the pieces this purchase order covers, and the workshop can start recording against them.</p></div>';
+  return items.map(it=>{
+    const img=targetImage(it);
+    const st=curStage(it);
+    const prog=Math.round((it.progress||0)*100);
+    const att=itemAttention?itemAttention(it):null;
+    const nx=(typeof nextAction==='function')?nextAction(it):null;
+    const blocked=(blockedItems()||[]).some(b=>b.item.id===it.id);
+    const status=blocked?'Reported blocked by the floor'
+      :(att&&att.label)?att.label
+      :(st?('At '+st.name):'Not started');
+    return '<article class="po-product-card">'+
+      '<button class="po-product-image" type="button" aria-label="Open '+esc(it.product)+'" '+
+        'onclick="go(\'#/item/'+it.id+'\')">'+
+        (img?'<img alt="'+esc(it.product)+' target product" data-ph-path="'+esc(img.path)+'">':'')+
+        '<span>Target product</span></button>'+
+      '<div class="po-product-copy">'+
+        '<p class="eyebrow">'+esc([it.item_code,(+it.qty||1)+' pc'].filter(Boolean).join(' · '))+'</p>'+
+        '<h3>'+esc(it.product)+'</h3>'+
+        '<p>'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · ')||'Specification not recorded')+'</p>'+
+        '<div class="po-product-facts">'+
+          '<div><span>Current stage</span><strong>'+esc(st?st.name:'Not started')+'</strong></div>'+
+          '<div><span>Progress</span><strong>'+prog+'%</strong></div></div>'+
+        '<div class="po-product-progress"><i style="width:'+prog+'%"></i></div>'+
+        '<p class="'+(blocked?'po-product-alert':'')+'" style="margin-top:8px">'+esc(status)+'</p>'+
+        '<div class="po-product-actions">'+
+          (nx?'<button class="button small" type="button" data-quick="1" '+
+            'onclick="quickAdvance(\''+it.id+'\')">'+esc(nx.short)+'</button>':'')+
+          '<button class="button secondary small" type="button" onclick="go(\'#/item/'+it.id+'\')">Open product</button>'+
+          '<button class="button quiet small" type="button" onclick="mDailyUpdate(\''+it.id+'\')">Add update</button>'+
+        '</div></div></article>';
+  }).join('');
+}
+function sfaProductSection(p){
+  const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+  return '<section class="po-product-section"><header class="po-product-section-head"><div>'+
+    '<h2>Products in this purchase order</h2>'+
+    '<p>'+items.length+' product'+(items.length===1?'':'s')+' will be completed and shipped together under '+
+      esc(p.po_number)+'.</p></div>'+
+    '<button class="button secondary small" type="button" onclick="mItem(null,\''+p.id+'\')">'+
+      icon('i-plus','icon-sm')+'Add product</button></header>'+
+    '<div class="po-product-grid">'+sfaProductCards(p)+'</div></section>';
+}
+function sfaRecordTabs(){
+  const t=sfaTab();
+  return '<div class="record-tabs" role="tablist" aria-label="Order sections">'+
+    [['overview','Overview'],['products','Products'],['timeline','Timeline'],
+     ['documents','Documents'],['finance','Finance']].map(([id,label])=>
+      '<button class="record-tab" type="button" role="tab" aria-selected="'+(t===id)+'" '+
+      'onclick="setRecordTab(\''+id+'\')">'+label+'</button>').join('')+'</div>';
+}
+function sfaOverview(p){
+  const r=poReadiness(p), fin=poFinance(p);
+  const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+  const mine=ownerActions().filter(a=>String(a.meta||'').indexOf(p.po_number)>=0 ||
+    items.some(i=>String(a.action&&a.action.go||'').indexOf(i.id)>=0));
+  const rows=mine.length?mine.slice(0,4):[{title:'Nothing is waiting on this order.',
+    meta:items.length?'Every decision and review on '+p.po_number+' is closed.':'Add the products this order covers to get started.',
+    action:{label:'Open', go:"go('#/po/"+p.id+"')"}}];
+  return '<div class="order-overview-grid">'+
+    '<section class="order-action-card"><header><h2>What needs attention</h2>'+
+      '<p>Actions for '+esc(p.po_number)+' only; nothing from another order is mixed in here.</p></header>'+
+      '<div class="order-action-list">'+
+      rows.map(a=>'<article class="order-action-row"><div><strong>'+esc(a.title)+'</strong>'+
+        '<span>'+esc(a.meta||'')+'</span></div>'+
+        '<button class="button small" type="button" onclick="'+(a.action&&a.action.go||'')+'">'+
+        esc(a.action&&a.action.label||'Open')+'</button></article>').join('')+
+      '<article class="order-action-row"><div><strong>Buyer publication</strong>'+
+        '<span>Only approved photographs, documents and edited summaries reach the buyer.</span></div>'+
+        '<button class="button secondary small" type="button" onclick="go(\'#/clients/updates\')">Preview</button></article>'+
+      '</div></section>'+
+    '<aside class="order-readiness-card"><header><h2>PO shipment readiness</h2>'+
+      '<p>One shipment gate for every product in the order.</p></header>'+
+      '<div class="order-readiness-body">'+
+        // The five things that must all be true before this order can ship, in
+        // the order they happen — each showing where it actually stands. His card
+        // draws four summary rows; an order that cannot ship has to say which
+        // gate is holding it, or the panel is decoration.
+        r.steps.map(st=>'<div class="detail-row"><span>'+esc(st.k)+'</span>'+
+          '<strong>'+esc(st.v)+(st.ok?' ✓':'')+'</strong></div>').join('')+
+        '<div class="detail-row"><span>Pieces finished</span><strong>'+
+          r.made+' of '+r.pieces+'</strong></div>'+
+        '<div class="detail-row"><span>Outstanding</span><strong>'+
+          esc(fin.outstanding>0?money(fin.outstanding,'INR'):'Nil')+'</strong></div>'+
+        '<div class="detail-row"><span>Target</span><strong>'+
+          esc(p.expected_ship_date?fdate(p.expected_ship_date):'Not set')+'</strong></div>'+
+        '<div class="notice" style="margin-top:10px"><strong>'+
+          esc(r.shippable?'Ready to ship':'Dispatch locked')+'</strong>'+
+          esc(r.blocker||'Every gate on this order is clear.')+'</div>'+
+      '</div></aside></div>';
+}
+function sfaRecordContent(p){
+  const t=sfaTab();
+  const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+  if(t==='products') return sfaProductSection(p);
+  if(t==='timeline'){
+    const feed=[];
+    items.forEach(it=>(S.updByItem[it.id]||[]).forEach(u=>feed.push({
+      d:u.work_date, t:(S.stagesById[u.stage_id]||{}).name||'Update',
+      s:it.product+' · '+(u.published_at?'published to the buyer':'not published yet'),
+      ok:!!u.published_at })));
+    feed.sort((a,b)=>String(b.d).localeCompare(String(a.d)));
+    return '<section class="card"><div class="card-head"><div>'+
+      '<h2>'+esc(p.po_number)+' timeline</h2>'+
+      '<p>Work, decisions and publications for this purchase order only.</p></div>'+
+      sfaBadge(feed.length+' entr'+(feed.length===1?'y':'ies'))+'</div><div class="card-body">'+
+      (feed.length?feed.slice(0,20).map(f=>'<div class="exception">'+
+        '<span class="status-dot'+(f.ok?' green':'')+'"></span><div>'+
+        '<strong>'+esc(f.t)+' recorded</strong><span>'+esc(fdate(f.d)+' · '+f.s)+'</span></div></div>').join('')
+       :'<div class="empty"><p>Nothing recorded against this order yet.</p></div>')+
+      '</div></section>';
+  }
+  if(t==='documents'){
+    const docs=(S.docsByPo&&S.docsByPo[p.id])||[];
+    return '<section class="card"><div class="card-head"><div>'+
+      '<h2>'+esc(p.po_number)+' documents</h2>'+
+      '<p>The PO file, current product drawings and the order’s own shipment records.</p></div>'+
+      '<button class="button secondary small" type="button" onclick="pickDoc(\''+p.id+'\')">Upload</button></div>'+
+      '<div class="card-body">'+
+      (docs.length?docs.map(d=>'<div class="detail-row"><span>'+esc(d.name||'Document')+'</span>'+
+        '<strong><button class="button quiet small" type="button" onclick="openDoc(\''+esc(d.path)+'\')">Open</button></strong></div>').join('')
+       :'<div class="empty"><p>No documents on this order yet.</p></div>')+
+      '<div class="detail-row"><span>Current drawings</span><strong>'+
+        items.filter(i=>i.drawing_path).length+' of '+items.length+'</strong></div>'+
+      '</div></section>';
+  }
+  if(t==='finance'){
+    const fin=poFinance(p);
+    return '<div class="grid-equal"><section class="card"><div class="card-head"><div>'+
+      '<h2>PO dispatch allocation</h2>'+
+      '<p>The financial source stays the buyer’s verified ledger and invoice PDFs.</p></div></div>'+
+      '<div class="card-body"><div class="aging">'+
+        '<div><span>Invoiced against this order</span><strong>'+esc(money(fin.invoiced||0,'INR'))+'</strong></div>'+
+        '<div><span>Received / allocated</span><strong>'+esc(money(fin.allocated||0,'INR'))+'</strong></div>'+
+        '<div><span>Outstanding</span><strong>'+esc(fin.outstanding>0?money(fin.outstanding,'INR'):'Nil')+'</strong></div>'+
+        '<div><span>Dispatch clearance</span><strong>'+esc(fin.cleared?'Yes':'No')+'</strong></div>'+
+      '</div></div></section>'+
+      '<aside class="notice"><strong>Tally remains authoritative</strong>'+
+      'StoneFlow shows the uploaded documents and verified allocations; it does not calculate the buyer ledger.</aside></div>';
+  }
+  return sfaOverview(p);
+}
+function sfaInspector(p){
+  const b=S.buyersById[p.buyer_id]||{};
+  const fin=poFinance(p);
+  const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+  const acts=[];
+  items.forEach(it=>(S.updByItem[it.id]||[]).forEach(u=>acts.push({d:u.work_date,
+    t:(S.stagesById[u.stage_id]||{}).name||'Update', s:it.product})));
+  acts.sort((a,b2)=>String(b2.d).localeCompare(String(a.d)));
+  return '<aside class="inspector" aria-label="Order context">'+
+    '<div class="inspector-head"><span>Context</span>'+
+    '<button class="icon-button" style="width:30px;height:30px" aria-label="Close context panel" '+
+      'onclick="toggleInspector(false)">'+icon('i-close','icon-sm')+'</button></div>'+
+    '<section class="inspector-section"><h3>Buyer</h3>'+
+      '<div class="detail-row"><span>Company</span><strong>'+esc(b.company||'Not set')+'</strong></div>'+
+      '<div class="detail-row"><span>Contact</span><strong>'+esc(b.contact_name||'Not recorded')+'</strong></div>'+
+      '<button class="button secondary small inspector-action" type="button" onclick="go(\'#/clients\')">Open client</button></section>'+
+    '<section class="inspector-section"><h3>Commercial</h3>'+
+      '<div class="detail-row"><span>Order value</span><strong>'+
+        esc(p.amount_total!=null?money(p.amount_total,'INR'):'Not recorded')+'</strong></div>'+
+      '<div class="detail-row"><span>Outstanding</span><strong>'+
+        esc(fin.outstanding>0?money(fin.outstanding,'INR'):'Nil')+'</strong></div>'+
+      '<div class="detail-row"><span>Clearance</span><strong>'+esc(fin.cleared?'Cleared':'Not cleared')+'</strong></div>'+
+      '<button class="button secondary small inspector-action" type="button" onclick="go(\'#/finance\')">Open finance</button></section>'+
+    '<section class="inspector-section"><h3>Shipping</h3>'+
+      '<div class="detail-row"><span>Destination</span><strong>'+esc(b.city||'Not recorded')+'</strong></div>'+
+      '<div class="detail-row"><span>Shipment</span><strong>'+esc(poReadiness(p).stateLabel)+'</strong></div></section>'+
+    '<section class="inspector-section"><h3>Latest activity</h3>'+
+      (acts.length?acts.slice(0,3).map(a=>'<div class="activity-mini"><strong>'+esc(a.t)+'</strong>'+
+        '<span>'+esc(fdate(a.d)+' · '+a.s)+'</span></div>').join('')
+       :'<div class="activity-mini"><strong>Nothing recorded yet</strong><span>No workshop updates on this order</span></div>')+
+      '<button class="button quiet small inspector-action" type="button" onclick="setRecordTab(\'timeline\')">Full timeline</button>'+
+    '</section></aside>';
+}
+
 function vOrders(){
   if(!isAdmin()) return vHome();
-  const hits=searchHits(window.__gq);
-  let h='<div class="page-heading"><div>'+eyebrow('Order book')+
-    '<h1 class="display-title">Orders.</h1>'+
-    '<p class="lede">Every purchase order, nearest ship date first.</p></div>'+
-    '<div class="search">'+icon('i-search')+
-    '<input id="gq" type="search" placeholder="Search PO, project, buyer or product" value="'+esc(window.__gq||'')+'" oninput="gSearch(this.value)"></div></div>';
-  h+='<div class="button-row" style="margin-bottom:18px">'+
-    '<select class="grow" id="buyer-filter" style="max-width:300px;min-height:44px;padding:0 12px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface)" onchange="setBuyerFilter(this.value)">'+
-    '<option value="">All buyers</option>'+
-    S.buyers.map(b=>'<option value="'+b.id+'"'+(S.buyerFilter===b.id?' selected':'')+'>'+esc(b.company)+'</option>').join('')+
-    '</select><button class="button" type="button" onclick="mNewPO()">+ New PO</button></div>';
-
-  if(hits){
-    const n=hits.pos.length+hits.items.length;
-    h+='<p class="lede">'+n+' match'+(n===1?'':'es')+' for “'+esc(hits.q)+'”</p>';
-    if(hits.pos.length) h+='<div class="order-list space-top-12">'+hits.pos.map(orderCard).join('')+'</div>';
-    if(hits.items.length) h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
-      '<h3 class="panel__title">Products</h3></div>'+badge(hits.items.length+'')+'</div>'+
-      '<div class="panel__body product-list">'+hits.items.map(productCard).join('')+'</div></section>';
-    if(!n) h+='<div class="empty-state">Nothing matches. Try part of a PO number or a product name.</div>';
-    paint(h, null); return;
+  const view=window.__poView||'all';
+  const views=sfaSavedViews();
+  const list=(views.find(v=>v[0]===view)||views[0])[2];
+  const all=sfaOrders();
+  if(!all.length){
+    sfaPaint(sfHead('Order workspace','Orders.','No purchase orders yet.',
+      '<button class="button" type="button" onclick="mNewPO()">+ New PO</button>')+
+      '<section class="card"><div class="empty"><h2>No purchase orders yet.</h2>'+
+      '<p>Create one and the products, evidence and shipment gate follow it.</p></div></section>');
+    return;
   }
+  const sel=list.find(p=>p.id===S.selOrder)||list[0]||all[0];
+  const b=S.buyersById[sel.buyer_id]||{};
+  const items=(sel.items&&sel.items.length)?sel.items:(S.items||[]).filter(i=>i.po_id===sel.id);
+  const st=items.map(i=>curStage(i)).filter(Boolean).sort((a,b2)=>a.sort_order-b2.sort_order)[0];
+  const r=poReadiness(sel), fin=poFinance(sel);
+  let last=null;
+  items.forEach(it=>(S.updByItem[it.id]||[]).forEach(u=>{ if(!last||String(u.work_date)>String(last)) last=u.work_date; }));
 
-  const openPos=S.pos.filter(p=>p.status==='open'||p.status==='on_hold');
-  const inProd=S.items.filter(i=>i.status==='in_production'||i.status==='on_hold').length;
-  const shippedN=S.items.filter(i=>['shipped','delivered','ready','made'].includes(i.status)).length;
-  const nBuyers=new Set(openPos.map(p=>p.buyer_id)).size;
-  h+='<section class="summary-grid" aria-label="Order summary">'+
-    statCard('Open POs', openPos.length, 'Across '+nBuyers+' buyer'+(nBuyers===1?'':'s'))+
-    statCard('Items in production', inProd, '')+
-    statCard('Approvals pending', pendingApprovals().length, '')+
-    statCard('Ready or shipped', shippedN, '')+'</section>';
+  const rail='<aside class="split-list">'+
+    '<div class="split-head"><p class="eyebrow">Order workspace</p><h1>Orders</h1>'+
+    '<input class="filter-input" type="search" placeholder="Search PO, project or product" '+
+      'aria-label="Search purchase orders" oninput="filterPoList(this.value)">'+
+    '<button class="button secondary small" type="button" style="margin-top:8px;width:100%" '+
+      'onclick="mNewPO()">+ New PO</button></div>'+
+    '<div class="saved-views">'+views.map(([k,label,rows])=>
+      '<button class="saved-view'+(view===k?' active':'')+'" type="button" onclick="setSavedView(\''+k+'\')">'+
+      esc(label)+' <span>'+rows.length+'</span></button>').join('')+'</div>'+
+    '<div class="po-list" id="po-list">'+list.map(sfaPoListItem).join('')+
+      (list.length?'':'<div class="empty"><p>Nothing in this view.</p></div>')+'</div></aside>';
 
-  const openList=S.pos.filter(p=>p.status!=='completed'&&p.status!=='cancelled');
-  const closed=S.pos.filter(p=>p.status==='completed'||p.status==='cancelled');
-  h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Purchase orders</h3><p class="panel__description">Sorted by nearest expected ship date.</p></div>'+
-    '<button class="button button--secondary" type="button" onclick="mNewPO()">New PO</button></div>'+
-    '<div class="panel__body order-list">'+
-      (openList.length?openList.map(orderCard).join(''):'<div class="empty-state">No purchase orders yet. Create one with “New PO”.</div>')+
-    '</div>'+
-    (closed.length?'<div class="panel__head space-top-18"><div><h3 class="panel__title">Completed</h3></div></div>'+
-      '<div class="panel__body order-list">'+closed.map(orderCard).join('')+'</div>':'')+
-  '</section>';
-  paint(h, null);
+  const record='<div class="workspace">'+sfaOrderSwitcher(sel)+'<div class="workspace-body">'+
+    '<section class="record-head"><div class="record-title-row"><div>'+
+      '<p class="eyebrow">'+esc([b.company,b.city].filter(Boolean).join(' · '))+'</p>'+
+      '<h1>'+esc(sel.project||sel.po_number)+'</h1>'+
+      '<p class="record-meta">'+esc(sel.po_number)+' · '+items.length+' product'+(items.length===1?'':'s')+
+        ' · '+esc(last?('last updated '+fdate(last)):'no updates yet')+'</p></div>'+
+      '<div class="button-row">'+
+        (items.length?'<button class="button secondary" type="button"  onclick="mDailyUpdate(\''+items[0].id+'\')">'+
+          icon('i-upload','icon-sm')+'Add update</button>':'')+
+        '<button class="button" type="button" onclick="go(\'#/po/'+sel.id+'\')">Review readiness</button>'+
+        '<button class="button secondary small" type="button" onclick="toggleInspector()">Details</button>'+
+        '<button class="button quiet small" type="button" onclick="mEditPO(\''+sel.id+'\')">Edit</button>'+
+        '<button class="icon-button" type="button" aria-label="More order actions" '+
+          'onclick="go(\'#/po/'+sel.id+'\')">'+icon('i-more')+'</button>'+
+      '</div></div>'+
+      '<div class="highlights">'+
+        '<div class="highlight"><span>Current position</span><strong>'+esc(st?st.name:'Not started')+'</strong></div>'+
+        '<div class="highlight"><span>PO shipment target</span><strong>'+
+          esc(sel.expected_ship_date?fdate(sel.expected_ship_date):'Not set')+'</strong></div>'+
+        '<div class="highlight"><span>Readiness</span><strong>'+esc(r.stateLabel)+'</strong></div>'+
+        '<div class="highlight"><span>Outstanding</span><strong>'+
+          esc(fin.outstanding>0?money(fin.outstanding,'INR'):'Nil')+'</strong></div>'+
+      '</div>'+sfaShipmentGate(sel)+'</section>'+
+    sfaProductSection(sel)+sfaRecordTabs()+
+    '<div class="record-content">'+sfaRecordContent(sel)+'</div>'+
+    '</div></div>';
+
+  sfaPaint('<div class="split-shell">'+rail+record+sfaInspector(sel)+'</div>');
 }
 
 
-/* The newest published workshop updates, largest thing on the buyer's home page.
-   Photographs only ever come from updatePhotos(), which returns approved images
-   attached to a published update, so nothing unreviewed can appear here. */
 function workshopToday(){
   const feed=buyerLatest(4);
   if(!feed.length){
@@ -7821,6 +8083,7 @@ function render(){
     else vBuyerHome();
     return;
   }
+  if(parts[0]!=='orders') document.body.classList.remove('inspector-open');
   if(parts[0]==='po' && parts[1]) vPO(parts[1]);
   else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
   // the console's routes
