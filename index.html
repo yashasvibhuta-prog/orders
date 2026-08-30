@@ -1452,9 +1452,549 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   .ord-row>.button{grid-column:2}
   
 }
+
+/* Buyer home, audited layout: the head carries a freshness stamp, the orders
+   read as rows with a full-width progress bar, and three cards close the page. */
+.page-head--buyer{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.page-head__stamp{flex:0 0 auto;text-align:right;max-width:280px}
+.page-head__stamp span{display:block;color:var(--muted);font-size:12px}
+.page-head__stamp strong{display:block;margin-top:5px;font-size:12.5px;line-height:1.45}
+.ord-row{display:grid;grid-template-columns:minmax(0,1fr) 150px auto;gap:18px;align-items:center;
+  padding:16px 0;border-top:1px solid var(--line)}
+.ord-row:first-child{border-top:0;padding-top:4px}
+.ord-row__main h3{margin:3px 0 5px;font-size:21px;line-height:1.1;letter-spacing:-.01em}
+.ord-row__main>p{margin:0 0 10px;color:var(--muted);font-size:12.5px}
+.ord-row__side{text-align:right}
+.ord-row__side span{display:block;color:var(--muted);font-size:11px}
+.ord-row__side strong{display:block;margin-top:4px;font-size:14px}
+.ord-row__side small{display:block;margin-top:4px;color:var(--muted);font-size:11.5px}
+.progress-note{margin:0 0 12px;color:var(--ink-soft);font-size:13px;line-height:1.55}
+.mini-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mini-shot{height:86px;padding:0;border:0;border-radius:9px;overflow:hidden;
+  background:var(--canvas);cursor:pointer;display:block}
+.mini-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.home-trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.space-top-8{margin-top:8px}
+@media (max-width:1100px){ .home-trio{grid-template-columns:1fr} }
+@media (max-width:820px){
+  .page-head--buyer{flex-direction:column;gap:12px}
+  .page-head__stamp{text-align:left;max-width:none}
+  .ord-row{grid-template-columns:1fr}
+  .ord-row__side{text-align:left}
+}
+</style>
+<style>
+/* ChatGPT's buyer-portal stylesheet, copied verbatim from
+   STONEFLOW-ROLE-HANDOFF/STONEFLOW-BUYER.html and scoped to .sfb so it
+   governs the buyer screens exactly as designed without touching the
+   owner console or the workshop floor. Do not hand-edit: regenerate. */
+
+/* The console stylesheet above defines some of these class names for the
+   owner screens. Inside the buyer portal ChatGPT's sheet is the authority, so
+   the console's layout declarations are cleared first and his rules — which
+   follow, at equal specificity — apply as written. Nothing here changes his
+   design; it stops mine leaking into it. */
+.sfb .answer,
+.sfb .answer-grid,
+.sfb .audit-source,
+.sfb .badge,
+.sfb .button-row,
+.sfb .eyebrow,
+.sfb .hold,
+.sfb .notice,
+.sfb .order-hero,
+.sfb .order-list,
+.sfb .order-row,
+.sfb .order-select,
+.sfb .order-shell,
+.sfb .page-head,
+.sfb .product-card,
+.sfb .progress,
+.sfb .card,
+.sfb .card-head,
+.sfb .card-body,
+.sfb .summary,
+.sfb .metric,
+.sfb .lead,
+.sfb .stack,
+.sfb .attention-row,
+.sfb .attention-icon{
+  display:revert; grid-template-columns:revert; grid-template-rows:revert;
+  flex-direction:revert; gap:revert; padding:revert; margin:revert;
+  border:revert; border-radius:revert; background:revert; box-shadow:revert;
+  position:revert; font-size:revert; font-weight:revert; color:revert;
+  text-transform:revert; letter-spacing:revert; line-height:revert;
+  width:revert; min-width:revert; height:revert; align-items:revert;
+  justify-content:revert; text-align:revert;
+}
+.sfb{--page:#F7F7F8;--surface:#FFF;--surface-2:#F4F4F5;--selected:#F1F1F2;--ink:#1D1D1F;--muted:#6E6E73;--faint:#8E8E93;--line:#E5E5E7;--line-strong:#D7D7DA;--action:#DCDCDD;--action-hover:#D4D4D6;--success:#68736A;--warning:#A18A5D;--critical:#A45F57;--pending:#A5A5A8;--sidebar:224px;--top:66px;--radius:13px;--shadow:0 24px 65px rgba(29,29,31,.12);--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--display:Iowan Old Style,"Palatino Linotype",Georgia,serif}
+.sfb *{box-sizing:border-box}
+.sfb{scroll-behavior:smooth}
+.sfb{margin:0;background:var(--page);color:var(--ink);font:14px/1.45 var(--sans)}
+.sfb button,.sfb input,.sfb textarea,.sfb select{font:inherit}
+.sfb button,.sfb a{cursor:pointer}
+.sfb a{color:inherit;text-decoration:none}
+.sfb svg{width:19px;height:19px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sfb h1,.sfb h2,.sfb h3,.sfb p{margin-top:0}
+.sfb h1{margin-bottom:7px;font:600 clamp(36px,4.6vw,59px)/.98 var(--display);letter-spacing:-.04em}
+.sfb h2{margin-bottom:5px;font:600 26px/1.08 var(--display);letter-spacing:-.025em}
+.sfb h3{margin-bottom:4px;font-size:13px}
+.sfb :focus-visible{outline:1px solid #9C9C9F;box-shadow:0 0 0 4px rgba(29,29,31,.08);outline-offset:2px}
+.sfb .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sfb .icon-sm{width:16px;height:16px}
+.sfb .icon-lg{width:25px;height:25px}
+.sfb .topbar{height:var(--top);position:fixed;inset:0 0 auto;z-index:40;padding:0 18px;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(18px);display:flex;align-items:center;gap:16px}
+.sfb .brand{width:calc(var(--sidebar) - 18px);display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.sfb .brand-mark{width:39px;height:39px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center}
+.sfb .brand-title{display:block;font:700 22px/.95 var(--display)}
+.sfb .brand-byline{display:block;margin-top:5px;color:var(--muted);font-size:8px;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
+.sfb .search{height:40px;max-width:560px;flex:1;padding:0 12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--page);display:flex;align-items:center;gap:9px;color:var(--muted)}
+.sfb .search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink)}
+.sfb .account{margin-left:auto;text-align:right}
+.sfb .account strong{display:block;font-size:9px}
+.sfb .account span{display:block;color:var(--muted);font-size:8px}
+.sfb .avatar{width:38px;height:38px;border:0;border-radius:50%;background:#77787D;color:#fff;font-size:10px;font-weight:800}
+.sfb .mobile-menu{display:none;width:40px;height:40px;border:0;border-radius:9px;background:var(--surface-2);place-items:center}
+.sfb .sidebar{position:fixed;left:0;top:var(--top);bottom:0;z-index:30;width:var(--sidebar);padding:15px 11px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:auto}
+.sfb .nav-label{padding:9px 10px 6px;color:var(--muted);font-size:9px;font-weight:750;letter-spacing:.1em;text-transform:uppercase}
+.sfb .nav-item{min-height:43px;padding:0 10px;border-radius:8px;color:var(--muted);display:flex;align-items:center;gap:10px;font-weight:700}
+.sfb .nav-item:hover,.sfb .nav-item.active{background:var(--selected);color:var(--ink)}
+.sfb .nav-item.active{box-shadow:inset 2px 0 0 var(--pending)}
+.sfb .count{min-width:21px;height:20px;margin-left:auto;padding:0 6px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-size:8px}
+.sfb .help-card{margin-top:auto;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.sfb .help-card strong{display:block;font-size:10px}
+.sfb .help-card span{display:block;margin-top:3px;color:var(--muted);font-size:8px}
+.sfb .shell{min-height:100vh;padding:var(--top) 0 55px var(--sidebar)}
+.sfb .content{max-width:1460px;margin:0 auto;padding:28px clamp(17px,3vw,40px)}
+.sfb .page-head{margin-bottom:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:18px}
+.sfb .eyebrow{margin:0 0 7px;color:var(--muted);font-size:9px;font-weight:750;letter-spacing:.1em;text-transform:uppercase}
+.sfb .lead{max-width:730px;margin:0;color:var(--muted);font-size:13px}
+.sfb .button{min-height:41px;padding:0 14px;border:1px solid #D2D2D4;border-radius:8px;background:var(--action);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:11px;font-weight:750}
+.sfb .button:hover{background:var(--action-hover)}
+.sfb .button.secondary{background:var(--selected);border-color:#E2E2E4;color:#343436}
+.sfb .button.quiet{min-height:34px;padding:0 8px;border-color:transparent;background:transparent;color:#4A4A4D}
+.sfb .button.small{min-height:34px;padding:0 10px;font-size:10px}
+.sfb .button-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.sfb .badge{display:inline-flex;align-items:center;min-height:22px;padding:1px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:8px;font-weight:700;white-space:nowrap}
+.sfb .badge.success{color:var(--success)}
+.sfb .badge.warning{color:var(--warning)}
+.sfb .welcome{margin-bottom:12px;padding:21px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:16px}
+.sfb .welcome h1{font-size:clamp(35px,4vw,52px)}
+.sfb .welcome p{max-width:690px;margin:0;color:var(--muted);font-size:12px}
+.sfb .welcome-meta{color:var(--muted);font-size:9px;text-align:right}
+.sfb .welcome-meta strong{display:block;margin-top:4px;color:var(--ink);font-size:10px}
+.sfb .summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:12px}
+.sfb .metric{padding:15px;border:1px solid var(--line);border-radius:11px;background:var(--surface);text-align:left;color:inherit}
+.sfb .metric:hover{border-color:var(--line-strong)}
+.sfb .metric span{display:block;color:var(--muted);font-size:8px;font-weight:750;text-transform:uppercase}
+.sfb .metric strong{display:block;margin-top:10px;font:600 27px/1 var(--display)}
+.sfb .metric small{display:block;margin-top:7px;color:var(--muted);font-size:9px}
+.sfb .metric.attention{border-left:3px solid var(--warning)}
+.sfb .grid-main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.65fr);gap:12px;align-items:start}
+.sfb .stack{display:grid;gap:12px}
+.sfb .card{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.sfb .card-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.sfb .card-head p{margin:3px 0 0;color:var(--muted);font-size:9px}
+.sfb .card-body{padding:17px}
+.sfb .order-row{padding:15px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) 145px auto;gap:14px;align-items:center}
+.sfb .order-row:first-child{padding-top:0;border-top:0}
+.sfb .order-row h3{font:600 20px var(--display)}
+.sfb .order-row p{margin:4px 0 0;color:var(--muted);font-size:9px}
+.sfb .progress{height:6px;margin-top:10px;border-radius:6px;background:#E4E4E6;overflow:hidden}
+.sfb .progress span{display:block;height:100%;background:#77777A}
+.sfb .order-progress span{display:block;color:var(--muted);font-size:8px}
+.sfb .order-progress strong{display:block;margin-top:5px;font-size:10px}
+.sfb .attention-row{padding:12px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center}
+.sfb .attention-row:first-child{padding-top:0;border-top:0}
+.sfb .attention-icon{width:34px;height:34px;border-radius:8px;background:var(--surface-2);color:var(--muted);display:grid;place-items:center}
+.sfb .attention-row strong{display:block;font-size:9px}
+.sfb .attention-row span{display:block;margin-top:2px;color:var(--muted);font-size:8px}
+.sfb .news-card{padding:15px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.sfb .news-card strong{display:block;font-size:10px}
+.sfb .news-card p{margin:5px 0 12px;color:var(--muted);font-size:9px}
+.sfb .photo-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.sfb .photo{aspect-ratio:4/3;border:1px solid var(--line);border-radius:7px;background:linear-gradient(145deg,#E7E6E2,#D3D2CE);color:var(--faint);display:grid;place-items:center;position:relative}
+.sfb .photo:nth-child(2n){background:linear-gradient(145deg,#DEDDD9,#C9C8C4)}
+.sfb .photo span{position:absolute;left:5px;bottom:4px;padding:2px 4px;border-radius:4px;background:rgba(255,255,255,.88);font-size:7px;color:var(--ink)}
+.sfb .order-shell{display:grid;grid-template-columns:245px minmax(0,1fr);gap:12px;align-items:start}
+.sfb .order-list{position:sticky;top:calc(var(--top) + 16px)}
+.sfb .order-list .card-body{padding:8px}
+.sfb .order-select{width:100%;padding:12px;border:1px solid transparent;border-radius:9px;background:transparent;text-align:left;color:var(--ink)}
+.sfb .order-select:hover,.sfb .order-select.active{background:var(--selected);border-color:var(--line)}
+.sfb .order-select b{display:block;font-size:8px}
+.sfb .order-select strong{display:block;margin-top:5px;font-size:10px}
+.sfb .order-select span{display:block;margin-top:5px;color:var(--muted);font-size:8px}
+.sfb .order-hero{padding:20px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}
+.sfb .order-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.sfb .order-hero h1{font-size:clamp(34px,4vw,52px)}
+.sfb .order-sub{margin:0;color:var(--muted);font-size:10px}
+.sfb .answer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:17px}
+.sfb .answer{padding:11px;border-radius:8px;background:var(--surface-2)}
+.sfb .answer span{display:block;color:var(--muted);font-size:7px;text-transform:uppercase;font-weight:750}
+.sfb .answer strong{display:block;margin-top:5px;font-size:9px}
+.sfb .product-card{margin-top:12px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:14px;align-items:center}
+.sfb .product-preview{height:88px;border:1px solid var(--line);border-radius:9px;background:linear-gradient(145deg,#E7E6E2,#D3D2CE);color:var(--faint);display:grid;place-items:center}
+.sfb .product-card h2{font-size:24px}
+.sfb .product-card p{margin:4px 0 0;color:var(--muted);font-size:9px}
+.sfb .product-page{max-width:1330px;margin:0 auto}
+.sfb .crumbs{margin-bottom:13px;display:flex;align-items:center;gap:7px;color:var(--muted);font-size:9px}
+.sfb .product-hero{padding:21px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.sfb .product-hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px}
+.sfb .product-hero h1{max-width:820px}
+.sfb .status-grid{display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:7px;margin-top:17px}
+.sfb .status-box{padding:11px;border-radius:8px;background:var(--surface-2)}
+.sfb .status-box.current{box-shadow:inset 2px 0 0 var(--pending)}
+.sfb .status-box span{display:block;color:var(--muted);font-size:7px;text-transform:uppercase;font-weight:750}
+.sfb .status-box strong{display:block;margin-top:5px;font-size:9px}
+.sfb .product-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;margin-top:12px;align-items:start}
+.sfb .side{display:grid;gap:12px;position:sticky;top:calc(var(--top) + 15px)}
+.sfb .gallery{padding:12px;display:grid;grid-template-columns:1.35fr repeat(2,1fr);grid-template-rows:repeat(2,145px);gap:6px}
+.sfb .gallery .photo:first-child{grid-row:1/3}
+.sfb .gallery-footer{padding:11px 16px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sfb .gallery-footer p{margin:0;color:var(--muted);font-size:8px}
+.sfb .journey{padding:17px}
+.sfb .journey-track{display:grid;grid-template-columns:repeat(12,minmax(58px,1fr));margin-top:14px;overflow:auto}
+.sfb .journey-step{min-width:64px;position:relative;border:0;background:transparent;color:var(--muted);text-align:center;font-size:7px}
+.sfb .journey-step:before{content:"";position:absolute;top:12px;left:0;right:0;height:1px;background:var(--line-strong)}
+.sfb .journey-step:first-child:before{left:50%}
+.sfb .journey-step:last-child:before{right:50%}
+.sfb .journey-step i{position:relative;z-index:1;width:25px;height:25px;margin:0 auto 5px;border:1px solid var(--line-strong);border-radius:50%;background:var(--surface);display:grid;place-items:center;font-style:normal;font-size:8px}
+.sfb .journey-step.done i{background:var(--success);border-color:var(--success);color:#fff}
+.sfb .journey-step.current{color:var(--ink);font-weight:750}
+.sfb .journey-step.current i{background:var(--pending);border-color:var(--pending);color:#fff;box-shadow:0 0 0 4px var(--selected)}
+.sfb .stage-media-row{padding:12px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;align-items:center}
+.sfb .stage-media-row:first-child{border-top:0}
+.sfb .stage-media-row strong{display:block;font-size:9px}
+.sfb .stage-media-row span{display:block;margin-top:2px;color:var(--muted);font-size:8px}
+.sfb .stage-icon{width:31px;height:31px;border-radius:8px;background:var(--surface-2);display:grid;place-items:center;color:var(--muted)}
+.sfb .detail-list{padding:14px 16px}
+.sfb .detail-row{padding:7px 0;border-top:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;font-size:8px}
+.sfb .detail-row:first-child{border-top:0}
+.sfb .detail-row span{color:var(--muted)}
+.sfb .detail-row strong{text-align:right}
+.sfb .comment{padding:12px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px}
+.sfb .comment:first-child{padding-top:0;border-top:0}
+.sfb .comment-avatar{width:34px;height:34px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-size:8px;font-weight:750}
+.sfb .comment strong{font-size:9px}
+.sfb .comment time{margin-left:5px;color:var(--muted);font-size:7px}
+.sfb .comment p{margin:4px 0 0;color:var(--muted);font-size:9px}
+.sfb .finance-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:12px}
+.sfb .table-wrap{overflow:auto}
+.sfb .table{width:100%;min-width:680px;border-collapse:collapse}
+.sfb .table th{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;color:var(--muted);font-size:8px;text-transform:uppercase}
+.sfb .table td{padding:13px 12px;border-bottom:1px solid var(--line);font-size:9px}
+.sfb .table strong{display:block}
+.sfb .table small{display:block;margin-top:3px;color:var(--muted)}
+.sfb .amount{text-align:right!important}
+.sfb .total{padding:17px;border-radius:10px;background:var(--surface-2)}
+.sfb .total span{display:block;color:var(--muted);font-size:8px}
+.sfb .total strong{display:block;margin-top:8px;font:600 30px var(--display)}
+.sfb .total small{display:block;margin-top:5px;color:var(--muted);font-size:8px}
+.sfb .empty{padding:52px 20px;text-align:center}
+.sfb .empty p{max-width:450px;margin:6px auto 0;color:var(--muted);font-size:9px}
+.sfb .modal-backdrop{position:fixed;inset:0;z-index:100;padding:18px;background:rgba(0,0,0,.48);display:grid;place-items:center}
+.sfb .modal-backdrop[hidden]{display:none}
+.sfb .modal{width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:15px;background:var(--surface);box-shadow:var(--shadow)}
+.sfb .modal-head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+.sfb .close{width:35px;height:35px;border:0;border-radius:50%;background:var(--selected);display:grid;place-items:center}
+.sfb .modal-body{padding:19px}
+.sfb .modal-footer{padding:14px 19px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sfb .notice{padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);color:var(--muted);font-size:9px}
+.sfb .notice strong{display:block;margin-bottom:3px;color:var(--ink)}
+.sfb .all-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.sfb .field{display:grid;gap:6px;margin-top:12px}
+.sfb .field label{font-size:9px;font-weight:750}
+.sfb .field textarea{width:100%;min-height:88px;padding:10px;border:1px solid var(--line-strong);border-radius:8px;resize:vertical}
+.sfb .toast{position:fixed;right:18px;bottom:18px;z-index:120;max-width:360px;padding:12px 14px;border:1px solid var(--line-strong);border-radius:9px;background:var(--surface);box-shadow:var(--shadow);font-size:10px;opacity:0;pointer-events:none;transform:translateY(10px);transition:.2s}
+.sfb .toast.show{opacity:1;transform:none}
+@media(max-width:1050px){.sfb .grid-main,.sfb .product-layout,.sfb .finance-grid{grid-template-columns:1fr}
+.sfb .side{position:static;grid-template-columns:repeat(2,1fr)}
+.sfb .order-shell{grid-template-columns:210px minmax(0,1fr)}
+.sfb .summary{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.sfb .topbar{padding:0 11px}
+.sfb .mobile-menu{display:grid}
+.sfb .brand{width:auto}
+.sfb .brand-title,.sfb .brand-byline,.sfb .account{display:none}
+.sfb .sidebar{transform:translateX(-105%);box-shadow:var(--shadow);transition:.2s}
+.sfb body.menu-open .sidebar{transform:none}
+.sfb .shell{padding-left:0}
+.sfb .content{padding:20px 13px}
+.sfb .page-head{align-items:flex-start;flex-direction:column}
+.sfb .welcome{grid-template-columns:1fr}
+.sfb .welcome-meta{text-align:left}
+.sfb .order-shell{grid-template-columns:1fr}
+.sfb .order-list{position:static}
+.sfb .order-list .card-body{display:flex;overflow:auto}
+.sfb .order-select{min-width:200px}
+.sfb .answer-grid,.sfb .status-grid{grid-template-columns:repeat(2,1fr)}
+.sfb .product-card{grid-template-columns:75px minmax(0,1fr)}
+.sfb .product-card>.button{grid-column:2;justify-self:start}
+.sfb .product-hero-top{grid-template-columns:1fr}
+.sfb .side{grid-template-columns:1fr}
+.sfb .all-photos{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sfb .avatar{display:none}
+.sfb .search{max-width:none}
+.sfb .summary{grid-template-columns:1fr 1fr}
+.sfb .order-row{grid-template-columns:1fr auto}
+.sfb .order-progress{grid-column:1}
+.sfb .gallery{grid-template-columns:1fr 1fr;grid-template-rows:180px 105px}
+.sfb .gallery .photo:first-child{grid-column:1/-1;grid-row:1}
+.sfb .gallery-footer{align-items:flex-start;flex-direction:column}
+.sfb .answer-grid,.sfb .status-grid{grid-template-columns:1fr 1fr}
+.sfb .modal-footer{align-items:stretch;flex-direction:column}
+.sfb .modal-footer .button-row{width:100%;display:grid;grid-template-columns:1fr 1fr}}
+.sfb .buyer-dashboard-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.sfb .buyer-list{display:grid}
+.sfb .buyer-list-row{padding:11px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:35px minmax(0,1fr) auto;gap:9px;align-items:start}
+.sfb .buyer-list-row:first-child{padding-top:0;border-top:0}
+.sfb .buyer-list-icon{width:34px;height:34px;border-radius:8px;background:var(--surface-2);color:var(--muted);display:grid;place-items:center}
+.sfb .buyer-list-row strong{display:block;font-size:9px}
+.sfb .buyer-list-row span{display:block;margin-top:2px;color:var(--muted);font-size:8px}
+.sfb .buyer-list-row time{color:var(--muted);font-size:7px;white-space:nowrap}
+.sfb .buyer-filterbar{margin-bottom:11px;padding:7px;border:1px solid var(--line);border-radius:10px;background:var(--surface);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sfb .buyer-filterbar button{min-height:31px;padding:0 9px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--muted);font-size:8px}
+.sfb .buyer-filterbar button.active,.sfb .buyer-filterbar button:hover{background:var(--selected);border-color:var(--line);color:var(--ink)}
+.sfb .buyer-filterbar span{margin-left:auto;color:var(--muted);font-size:8px}
+.sfb .buyer-page-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);gap:12px;align-items:start}
+.sfb .approval-card{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.sfb .approval-hero{padding:17px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px}
+.sfb .approval-hero h2{font-size:28px}
+.sfb .approval-hero p{margin:4px 0 0;color:var(--muted);font-size:9px}
+.sfb .approval-context{padding:12px 17px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.sfb .approval-context div{padding:9px;border-radius:8px;background:var(--surface-2)}
+.sfb .approval-context span{display:block;color:var(--muted);font-size:7px}
+.sfb .approval-context strong{display:block;margin-top:4px;font-size:9px}
+.sfb .approval-question{margin:0 17px 17px;padding:12px;border-left:2px solid var(--warning);background:var(--surface-2)}
+.sfb .approval-question strong{display:block;font-size:9px}
+.sfb .approval-question p{margin:4px 0 0;color:var(--muted);font-size:9px}
+.sfb .photo-group{margin-bottom:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.sfb .photo-group-head{padding:13px 15px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sfb .photo-group-head h2{font-size:22px}
+.sfb .photo-group-head p{margin:3px 0 0;color:var(--muted);font-size:8px}
+.sfb .photo-library{padding:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.sfb .photo-library .photo:first-child{grid-column:span 2;grid-row:span 2}
+.sfb .document-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:11px}
+.sfb .document-summary div{padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.sfb .document-summary span{display:block;color:var(--muted);font-size:7px}
+.sfb .document-summary strong{display:block;margin-top:5px;font-size:10px}
+.sfb .message-shell{display:grid;grid-template-columns:260px minmax(0,1fr);gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.sfb .thread-list{border-right:1px solid var(--line)}
+.sfb .thread-list-head{padding:13px;border-bottom:1px solid var(--line)}
+.sfb .thread-list-head input{width:100%;height:36px;padding:0 9px;border:1px solid var(--line-strong);border-radius:8px;background:var(--page);font-size:8px}
+.sfb .thread-select{width:100%;padding:12px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);text-align:left}
+.sfb .thread-select.active,.sfb .thread-select:hover{background:var(--selected)}
+.sfb .thread-select strong{display:block;font-size:9px}
+.sfb .thread-select span{display:block;margin-top:3px;color:var(--muted);font-size:8px}
+.sfb .thread-select small{display:flex;justify-content:space-between;margin-top:6px;color:var(--muted);font-size:7px}
+.sfb .thread-main{min-width:0}
+.sfb .thread-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sfb .thread-head h2{font-size:23px}
+.sfb .thread-head p{margin:3px 0 0;color:var(--muted);font-size:8px}
+.sfb .thread-body{padding:16px}
+.sfb .message-composer{padding:12px 16px;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.sfb .message-composer textarea{min-height:55px;padding:10px;border:1px solid var(--line-strong);border-radius:8px;resize:vertical}
+.sfb .payment-plan{display:grid}
+.sfb .payment-step{padding:10px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:8px}
+.sfb .payment-step:first-child{border-top:0}
+.sfb .payment-step i{width:8px;height:8px;margin-top:4px;border-radius:50%;background:var(--pending)}
+.sfb .payment-step i.done{background:var(--success)}
+.sfb .payment-step i.warn{background:var(--warning)}
+.sfb .payment-step strong{display:block;font-size:9px}
+.sfb .payment-step span{display:block;margin-top:2px;color:var(--muted);font-size:8px}
+.sfb .payment-step b{font-size:9px}
+.sfb .buyer-permission{padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);color:var(--muted);font-size:8px}
+.sfb .buyer-permission strong{display:block;margin-bottom:3px;color:var(--ink);font-size:9px}
+@media(max-width:1050px){.sfb .buyer-dashboard-row,.sfb .buyer-page-grid{grid-template-columns:1fr}
+.sfb .photo-library{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.sfb .approval-context,.sfb .document-summary{grid-template-columns:repeat(2,1fr)}
+.sfb .message-shell{grid-template-columns:1fr}
+.sfb .thread-list{border-right:0;border-bottom:1px solid var(--line);display:flex;overflow:auto}
+.sfb .thread-list-head{display:none}
+.sfb .thread-select{min-width:220px;border-right:1px solid var(--line)}
+.sfb .photo-library{grid-template-columns:repeat(2,1fr)}}
+.sfb .product-card{grid-template-columns:190px minmax(0,1fr) auto;gap:17px;min-height:168px}
+.sfb .product-preview{height:142px;overflow:hidden;position:relative}
+.sfb .product-preview img{width:100%;height:100%;display:block;object-fit:cover}
+.sfb .product-preview span{position:absolute;left:7px;bottom:7px;padding:4px 6px;border-radius:5px;background:rgba(255,255,255,.9);color:var(--ink);font-size:7px;font-weight:750;text-transform:uppercase}
+.sfb .product-card h2{font-size:28px}
+.sfb .product-hero-top.image-first{display:grid;grid-template-columns:220px minmax(0,1fr) auto;align-items:center}
+.sfb .buyer-product-visual{height:165px;margin:0;border:1px solid var(--line);border-radius:11px;overflow:hidden;position:relative;background:var(--surface-2)}
+.sfb .buyer-product-visual img{width:100%;height:100%;display:block;object-fit:cover}
+.sfb .buyer-product-visual figcaption{position:absolute;left:8px;bottom:8px;padding:4px 7px;border-radius:5px;background:rgba(255,255,255,.9);font-size:8px;font-weight:750}
+@media(max-width:760px){.sfb .product-card{grid-template-columns:120px minmax(0,1fr)}
+.sfb .product-preview{height:105px}
+.sfb .product-card>.button{grid-column:2}
+.sfb .product-hero-top.image-first{grid-template-columns:1fr}
+.sfb .buyer-product-visual{height:220px}}
+.sfb .po-photo-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding:7px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.sfb .po-photo-toolbar button{min-height:34px;padding:0 11px;border:0;border-radius:8px;background:transparent;color:var(--muted);font:inherit;font-size:9px;font-weight:750;cursor:pointer}
+.sfb .po-photo-toolbar button:hover,.sfb .po-photo-toolbar button.active{background:var(--surface-2);color:var(--ink)}
+.sfb .po-photo-toolbar span{margin-left:auto;color:var(--muted);font-size:8px}
+.sfb .buyer-po-gallery{display:grid;gap:13px}
+.sfb .buyer-po-photo-group{border:1px solid var(--line);border-radius:13px;background:var(--surface);overflow:hidden}
+.sfb .buyer-po-photo-group>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(280px,1fr) repeat(3,minmax(125px,.35fr)) auto;gap:14px;align-items:center;padding:16px 18px}
+.sfb .buyer-po-photo-group>summary::-webkit-details-marker{display:none}
+.sfb .buyer-po-photo-group>summary:hover{background:var(--surface-2)}
+.sfb .po-photo-title{display:flex;gap:11px;align-items:center}
+.sfb .po-photo-chevron{width:27px;height:27px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);transition:transform .18s ease}
+.sfb .buyer-po-photo-group[open] .po-photo-chevron{transform:rotate(90deg)}
+.sfb .po-photo-title p{margin:0 0 4px}
+.sfb .po-photo-title h2{margin:0;font-size:24px}
+.sfb .po-photo-title h2 span{color:var(--muted);font-family:var(--sans);font-size:8px;font-weight:650}
+.sfb .po-photo-fact span{display:block;color:var(--muted);font-size:8px}
+.sfb .po-photo-fact strong{display:block;margin-top:4px;font-size:9px}
+.sfb .po-product-gallery-list{border-top:1px solid var(--line)}
+.sfb .po-gallery-product{padding:17px 18px;border-top:1px solid var(--line)}
+.sfb .po-gallery-product:first-child{border-top:0}
+.sfb .po-gallery-product-head{display:grid;grid-template-columns:150px minmax(220px,1fr) auto;gap:16px;align-items:center}
+.sfb .po-gallery-product-image{height:104px;border-radius:10px;overflow:hidden;position:relative;background:var(--surface-2)}
+.sfb .po-gallery-product-image img{width:100%;height:100%;object-fit:cover}
+.sfb .po-gallery-product-image span{position:absolute;left:7px;bottom:7px;padding:4px 6px;border-radius:5px;background:rgba(255,255,255,.92);font-size:7px;font-weight:750}
+.sfb .po-gallery-product-copy p{margin:0 0 4px}
+.sfb .po-gallery-product-copy h3{margin:0;font-size:24px}
+.sfb .po-gallery-product-copy>span{display:block;margin-top:5px;color:var(--muted);font-size:9px}
+.sfb .product-stage-gallery{display:grid;gap:7px;margin-top:13px}
+.sfb .product-stage-photo-row{display:grid;grid-template-columns:minmax(180px,.8fr) 1fr auto;gap:12px;align-items:center;padding:10px 11px;border-radius:9px;background:var(--surface-2)}
+.sfb .stage-photo-copy strong,.sfb .stage-photo-copy span{display:block}
+.sfb .stage-photo-copy strong{font-size:9px}
+.sfb .stage-photo-copy span{margin-top:3px;color:var(--muted);font-size:8px}
+.sfb .stage-photo-thumbs{display:flex;align-items:center;gap:5px}
+.sfb .stage-photo-thumb{width:58px;height:44px;border:0;border-radius:7px;overflow:hidden;padding:0;background:var(--surface);cursor:pointer}
+.sfb .stage-photo-thumb img{width:100%;height:100%;object-fit:cover}
+.sfb .stage-photo-thumbs>span{color:var(--muted);font-size:8px}
+.sfb .po-shipment-gallery{margin:0 18px 18px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:12px;align-items:center}
+.sfb .po-shipment-gallery strong,.sfb .po-shipment-gallery span{display:block}
+.sfb .po-shipment-gallery span{margin-top:4px;color:var(--muted);font-size:8px}
+.sfb .po-gallery-empty{padding:18px;border-radius:10px;background:var(--surface-2);color:var(--muted);font-size:9px}
+.sfb .photo-structure-note{margin-top:12px}
+@media(max-width:880px){.sfb .buyer-po-photo-group>summary{grid-template-columns:1fr auto}
+.sfb .buyer-po-photo-group>summary>.po-photo-fact{display:none}
+.sfb .po-gallery-product-head{grid-template-columns:120px minmax(0,1fr)}
+.sfb .po-gallery-product-head>.button{grid-column:2}
+.sfb .product-stage-photo-row{grid-template-columns:1fr auto}
+.sfb .stage-photo-thumbs{grid-column:1/-1}
+.sfb .po-shipment-gallery{grid-template-columns:1fr}}
+@media(max-width:560px){.sfb .po-photo-toolbar span{width:100%;margin-left:4px}
+.sfb .po-gallery-product-head{grid-template-columns:1fr}
+.sfb .po-gallery-product-image{height:180px}
+.sfb .po-gallery-product-head>.button{grid-column:auto}
+.sfb .product-stage-photo-row{grid-template-columns:1fr}
+.sfb .stage-photo-thumbs{grid-column:auto}
+.sfb .stage-photo-thumb{width:52px}
+.sfb .buyer-po-photo-group>summary{padding:14px}
+.sfb .po-photo-title h2{font-size:20px}}
+.sfb .audit-source{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:var(--surface-2);color:var(--muted);font-size:9px;line-height:1.55}
+.sfb .audit-source strong{display:block;color:var(--ink);margin-bottom:2px}
+.sfb .audit-source svg{flex:0 0 auto;margin-top:1px}
+.sfb .po-readiness{display:grid;grid-template-columns:repeat(5,minmax(105px,1fr));gap:7px;margin-top:13px}
+.sfb .po-readiness div{padding:10px;border-radius:9px;background:var(--surface-2)}
+.sfb .po-readiness span,.sfb .ledger-fact span{display:block;color:var(--muted);font-size:8px}
+.sfb .po-readiness strong,.sfb .ledger-fact strong{display:block;margin-top:4px;font-size:9px}
+.sfb .po-readiness .hold strong{color:var(--danger)}
+.sfb .po-inherited-shipment{display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:12px;align-items:center;margin-top:15px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.sfb .po-inherited-shipment strong,.sfb .po-inherited-shipment span{display:block}
+.sfb .po-inherited-shipment span{margin-top:4px;color:var(--muted);font-size:8px;line-height:1.5}
+.sfb .approval-po-group{border:1px solid var(--line);border-radius:13px;background:var(--surface);overflow:hidden}
+.sfb .approval-po-header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 17px;border-bottom:1px solid var(--line)}
+.sfb .approval-po-header h2{margin:2px 0 0;font-size:24px}
+.sfb .approval-item-audited{display:grid;grid-template-columns:190px minmax(0,1fr) auto;gap:18px;align-items:center;padding:17px}
+.sfb .approval-item-audited figure{height:130px;margin:0;border-radius:10px;overflow:hidden;background:var(--surface-2);position:relative}
+.sfb .approval-item-audited img{width:100%;height:100%;object-fit:cover}
+.sfb .approval-item-audited figcaption{position:absolute;left:7px;bottom:7px;padding:4px 6px;border-radius:5px;background:rgba(255,255,255,.94);font-size:7px;font-weight:750}
+.sfb .approval-item-audited h3{margin:3px 0 5px;font-size:25px}
+.sfb .approval-item-audited p{margin:0;color:var(--muted);font-size:9px;line-height:1.5}
+.sfb .approval-meta-line{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:8px}
+.sfb .approval-meta-line strong{color:var(--ink)}
+.sfb .ledger-card{padding:17px}
+.sfb .ledger-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+.sfb .ledger-top h2{margin:3px 0 5px;font-size:27px}
+.sfb .ledger-top p{margin:0;color:var(--muted);font-size:9px}
+.sfb .ledger-balance{text-align:right}
+.sfb .ledger-balance span{display:block;color:var(--muted);font-size:8px}
+.sfb .ledger-balance strong{display:block;margin-top:4px;font-family:var(--serif);font-size:28px}
+.sfb .ledger-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:15px}
+.sfb .ledger-fact{padding:10px;border-radius:9px;background:var(--surface-2)}
+.sfb .dispatch-hold{color:var(--danger);font-weight:750}
+.sfb .dispatch-clear{color:var(--success);font-weight:750}
+.sfb .final-pack-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:15px;align-items:center;padding:16px;border:1px dashed var(--strong-line);border-radius:11px;background:var(--surface)}
+.sfb .final-pack-card h3{margin:0 0 5px;font-size:20px}
+.sfb .final-pack-card p{margin:0;color:var(--muted);font-size:9px;line-height:1.55}
+.sfb .document-kind{display:inline-block;margin-top:3px;color:var(--muted);font-size:8px}
+.sfb .audit-modal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}
+.sfb .audit-modal-grid img{width:100%;height:105px;object-fit:cover;border-radius:8px}
+.sfb .audit-field{display:grid;gap:5px;margin-top:12px}
+.sfb .audit-field label{font-size:8px;font-weight:750}
+.sfb .audit-field textarea{min-height:80px;padding:10px;border:1px solid var(--strong-line);border-radius:9px;background:var(--surface);font:inherit;resize:vertical}
+.sfb .audit-field small{color:var(--muted);font-size:8px}
+.sfb .product-page .gallery .photo{overflow:hidden;position:relative}
+.sfb .product-page .gallery .photo img,.sfb .all-photos .photo img{width:100%;height:100%;object-fit:cover}
+.sfb .product-page .gallery .photo span,.sfb .all-photos .photo span{position:absolute;left:7px;right:7px;bottom:7px;padding:5px 7px;border-radius:6px;background:rgba(255,255,255,.93);color:var(--ink);font-size:8px}
+.sfb .all-photos .photo{position:relative;overflow:hidden;min-height:150px}
+@media(max-width:900px){.sfb .po-readiness{grid-template-columns:repeat(2,1fr)}
+.sfb .approval-item-audited{grid-template-columns:150px 1fr}
+.sfb .approval-item-audited>.button{grid-column:2}
+.sfb .ledger-facts{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.sfb .po-readiness,.sfb .ledger-facts{grid-template-columns:1fr}
+.sfb .po-inherited-shipment,.sfb .final-pack-card{grid-template-columns:1fr}
+.sfb .approval-item-audited{grid-template-columns:1fr}
+.sfb .approval-item-audited figure{height:210px}
+.sfb .approval-item-audited>.button{grid-column:auto}
+.sfb .ledger-top{display:block}
+.sfb .ledger-balance{text-align:left;margin-top:13px}
+.sfb .audit-modal-grid{grid-template-columns:1fr 1fr}}
+.sfb .sf-order-row{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:13px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.sfb .sf-order-row:first-child{border-top:0}
+.sfb .sf-order-visual{height:72px;border:0;border-radius:9px;overflow:hidden;padding:0;background:var(--surface-2);cursor:pointer;position:relative}
+.sfb .sf-order-visual img{width:100%;height:100%;object-fit:cover}
+.sfb .sf-order-visual span{position:absolute;right:5px;bottom:5px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:rgba(255,255,255,.94);display:grid;place-items:center;font-size:7px;font-weight:800}
+.sfb .sf-order-row h3{margin:2px 0 4px;font-size:21px}
+.sfb .sf-order-row p{margin:0;color:var(--muted);font-size:8px}
+.sfb .sf-order-row-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:7px;color:var(--muted);font-size:8px}
+.sfb .sf-order-row-meta strong{color:var(--ink)}
+.sfb .sf-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.sfb .sf-product-card{display:grid;grid-template-columns:185px minmax(0,1fr);gap:14px;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.sfb .sf-product-image{height:150px;border:0;border-radius:9px;overflow:hidden;padding:0;background:var(--surface-2);cursor:pointer;position:relative}
+.sfb .sf-product-image img{width:100%;height:100%;object-fit:cover}
+.sfb .sf-product-image span{position:absolute;left:6px;bottom:6px;padding:4px 6px;border-radius:5px;background:rgba(255,255,255,.94);font-size:7px;font-weight:800}
+.sfb .sf-product-card h3{margin:3px 0 5px;font-size:24px;line-height:1.03}
+.sfb .sf-product-card p{margin:0;color:var(--muted);font-size:8px}
+.sfb .sf-product-facts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.sfb .sf-product-facts div{padding:8px;border-radius:8px;background:var(--surface-2)}
+.sfb .sf-product-facts span{display:block;color:var(--muted);font-size:7px}
+.sfb .sf-product-facts strong{display:block;margin-top:3px;font-size:8px}
+.sfb .sf-product-actions{display:flex;gap:6px;margin-top:10px}
+.sfb .sf-po-gate{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:12px}
+.sfb .sf-po-gate div{padding:9px;border-radius:8px;background:var(--surface-2)}
+.sfb .sf-po-gate span{display:block;color:var(--muted);font-size:7px}
+.sfb .sf-po-gate strong{display:block;margin-top:3px;font-size:8px}
+.sfb .sf-po-gate .hold strong{color:var(--danger)}
+.sfb .sf-product-hero{display:grid;grid-template-columns:230px minmax(0,1fr) auto;gap:20px;align-items:center}
+.sfb .sf-product-hero figure{height:180px;margin:0;border-radius:11px;overflow:hidden;position:relative;background:var(--surface-2)}
+.sfb .sf-product-hero img{width:100%;height:100%;object-fit:cover}
+.sfb .sf-product-hero figcaption{position:absolute;left:7px;bottom:7px;padding:4px 7px;border-radius:5px;background:rgba(255,255,255,.94);font-size:7px;font-weight:800}
+.sfb .sf-stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sfb .sf-stage-card{padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.sfb .sf-stage-card.current{border-color:var(--strong-line);background:var(--surface-2)}
+.sfb .sf-stage-card.done{background:var(--surface-2)}
+.sfb .sf-stage-card i{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:var(--surface);font-style:normal;font-size:8px;font-weight:800}
+.sfb .sf-stage-card strong,.sfb .sf-stage-card span{display:block}
+.sfb .sf-stage-card strong{margin-top:7px;font-size:9px}
+.sfb .sf-stage-card span{margin-top:3px;color:var(--muted);font-size:7px;line-height:1.4}
+.sfb .sf-stage-card button{margin-top:8px}
+.sfb .sf-thread-button.active{background:var(--surface-2)}
+@media(max-width:1100px){.sfb .sf-product-grid{grid-template-columns:1fr}
+.sfb .sf-po-gate{grid-template-columns:repeat(3,1fr)}
+.sfb .sf-product-hero{grid-template-columns:190px 1fr}
+.sfb .sf-product-hero>.button{grid-column:2}}
+@media(max-width:720px){.sfb .sf-order-row,.sfb .sf-product-card,.sfb .sf-product-hero{grid-template-columns:1fr}
+.sfb .sf-order-visual{height:160px}
+.sfb .sf-product-image,.sfb .sf-product-hero figure{height:220px}
+.sfb .sf-po-gate,.sfb .sf-stage-grid{grid-template-columns:1fr}
+.sfb .sf-product-hero>.button{grid-column:auto}}
+
 </style>
 <body>
-<script>const BUILD_ID='5d47a60f9fd2';</script>
+<script>const BUILD_ID='a07330788739';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -1527,6 +2067,10 @@ function el(html){ const d=document.createElement('div'); d.innerHTML=html.trim(
 function go(hash){ if(location.hash===hash){ render(); } else location.hash=hash; }
 
 const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+// The buyer portal dates its header in full — "Saturday, 29 August" — so the
+// long month names live beside the short ones rather than being derived twice.
+const MONF=['January','February','March','April','May','June','July','August',
+            'September','October','November','December'];
 function fdate(d){ if(!d) return ''; const t=new Date(d+(String(d).length===10?'T00:00:00':''));
   if(isNaN(t)) return String(d); return t.getDate()+' '+MON[t.getMonth()]+' '+String(t.getFullYear()).slice(2); }
 function ftime(d){ if(!d) return ''; const t=new Date(d); if(isNaN(t)) return '';
@@ -3506,10 +4050,11 @@ function updateHeader(){
       '<a class="wordmark" href="#/home" aria-label="StoneFlow — go to your orders">'+
         '<span class="wordmark__mark">'+icon('i-mark')+'</span>'+
         '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by '+esc(S.settings.company_name||'Gujraj Impex')+'</span></span></a>'+
-      '<span aria-hidden="true"></span>'+
+      '<button class="cmdbar" type="button" onclick="openCommand()" aria-label="Search your PO, product or document">'+
+        icon('i-search')+'<span>Search your PO, product or document</span></button>'+
       '<div class="topbar__tools">'+
         '<span class="buyer-who"><strong>'+esc(b?b.company:who)+'</strong>'+
-        '<small>Buyer account'+(financeVisible()?' · account access':'')+'</small></span>'+
+        '<small>Buyer account'+(financeVisible()?' · finance access enabled':'')+'</small></span>'+
         '<span class="avatar" title="'+esc(who)+'">'+esc(initials(who))+'</span>'+
         '<button class="button button--quiet" type="button" onclick="signOut()">Sign out</button></div>';
 
@@ -3525,9 +4070,9 @@ function updateHeader(){
       link('#/home','Home',0)+
       link('#/orders','My orders',c.open)+
       link('#/approvals','Approvals',c.decisions)+
-      link('#/photos','Photographs',0)+
-      link('#/documents','Documents',0)+
-      (financeVisible()?link('#/finance','Your account',0):'')+
+      link('#/photos','Photos',c.photos)+
+      link('#/documents','Documents',c.docs)+
+      (financeVisible()?link('#/finance','Finance',c.fin?1:0):'')+
       link('#/messages','Messages',c.msgs)+
       '<div class="side-help"><strong>Need help with an order?</strong>'+
       '<p>Leave a comment on the piece itself, so your question stays attached to the work.</p></div>';
@@ -5575,8 +6120,10 @@ function render(){
     return;
   }
   if(!isAdmin()){
-    // the buyer's workspace
-    if(parts[0]==='po' && parts[1]) vPO(parts[1]);
+    // The audited portal has no separate purchase-order tab page: an order is
+    // read inside My orders, and a product opens its own record. A #/po link
+    // therefore selects that order and shows it there.
+    if(parts[0]==='po' && parts[1]){ S.buyerPo=parts[1]; vBuyerOrders(); }
     else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
     else if(parts[0]==='orders') vBuyerOrders();
     else if(parts[0]==='approvals') vBuyerApprovals();
@@ -5882,183 +6429,87 @@ function buyerPage(title, eyebrowText, lede, actions, body){
 /* The buyer's home, built to the audited portal: four answers across the top,
    his orders on the left, and on the right the decision that is holding work up
    and the readiness of the order it belongs to. */
-function vBuyerHome(){
-  const b=S.buyersById[S.profile.buyer_id];
-  const c=buyerCounts();
-  const st=buyerStanding();
-  const openPos=(S.pos||[]).filter(p=>p.status!=='cancelled' && p.status!=='completed');
-  const waiting=pendingApprovals();
+/* The buyer's home, built to the audited portal: four answers across the top,
+   active orders on the left, the decision and today's released work on the
+   right, and three cards beneath that say what happens next, what has been
+   released, and whether anything can ship. */
+/* ============================================================================
+   Buyer portal views.
 
-  // the revision behind the first waiting decision, so the tile can name it
-  const first=waiting[0];
-  let firstRev=null, firstPo=null;
-  if(first){
-    firstRev=openRevision(first.item.id, first.row.stage_id);
-    firstPo=S.posById[first.item.po_id];
-  }
-  const label=firstRev?(firstRev.label||('R'+firstRev.rev_no)):'';
-  const decisionNote=first
-    ? [(firstPo?firstPo.po_number:''), (first.stage?first.stage.name:'')+(label?' '+label:'')]
-        .filter(Boolean).join(' · ')
-    : 'Nothing needs deciding';
+   These emit ChatGPT's markup from STONEFLOW-ROLE-HANDOFF/STONEFLOW-BUYER.html
+   (?audited=complete) as-is — same elements, same class names, same wording —
+   with the prototype's fixed sample values replaced by this buyer's real
+   records. The audit file names that HTML as the visual and interaction
+   reference and says no further structural design change is wanted, so nothing
+   here is redesigned. Its stylesheet is copied verbatim into parts/09-buyer.css,
+   scoped to .sfb.
 
-  let h='<div class="page-head"><div>'+
-    eyebrow((b?b.company:'Your workspace')+' · approved buyer workspace')+
-    '<h1 class="display-title">Craft in progress.</h1>'+
-    '<p class="lede">Follow every purchase order, its individual products, approved production '+
-    'evidence, buyer decisions'+(financeVisible()?', your Tally-backed balance':'')+
-    ' and order-level shipment readiness.</p></div></div>';
+   If a change is needed, it belongs in ChatGPT's file first, then here.
+   ========================================================================== */
 
-  const pieces=(S.items||[]).length;
-  const tiles=[
-    {k:'Open purchase orders', v:String(c.open),
-     s:pieces+' product'+(pieces===1?'':'s')+' tracked within them', go:"go('#/orders')"},
-    {k:'Your decisions', v:String(waiting.length), s:decisionNote,
-     go:"go('#/approvals')", warn:waiting.length>0},
-    {k:'Approved media', v:String(c.photos),
-     s:'Order → product → production stage', go:"go('#/photos')"}
-  ];
-  if(financeVisible() && st)
-    tiles.push({k:st.label, v:st.value, s:st.note, go:"go('#/finance')", credit:st.credit});
-
-  h+='<div class="kpi-grid">'+tiles.map(t=>
-    '<button class="kpi'+(t.warn?' kpi--warn':'')+(t.credit?' kpi--credit':'')+'" type="button" onclick="'+t.go+'">'+
-    '<span class="kpi__label">'+esc(t.k)+'</span>'+
-    '<strong class="kpi__value">'+esc(t.v)+'</strong>'+
-    '<span class="kpi__note">'+esc(t.s)+'</span></button>').join('')+'</div>';
-
-  h+='<div class="console-grid">';
-
-  /* ---- left: the buyer's purchase orders, each with its own thumbnail ---- */
-  h+='<section class="panel"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Your purchase orders</h3>'+
-    '<p class="panel__description">Products are built individually and become dispatchable together as one order shipment.</p></div>'+
-    '<button class="button button--quiet" type="button" onclick="go(\'#/orders\')">All orders</button></div>'+
-    '<div class="panel__body">';
-  if(!openPos.length) h+='<div class="empty-state">No open orders at the moment.</div>';
-  else h+=openPos.map(p=>{
-    const items=p.items||[];
-    const prog=items.length?Math.round(items.reduce((a,i)=>a+i.progress,0)/items.length*100):0;
-    const fin=poFinance(p), r=poReadiness(p);
-    const img=items.length?targetImage(items[0]):null;
-    return '<article class="ord-row">'+
-      '<button type="button" class="ord-row__img" onclick="go(\'#/po/'+p.id+'\')" '+
-        'aria-label="Open '+esc(p.po_number)+'">'+
-        (img?'<img alt="" data-ph-path="'+esc(img.path)+'">':'<div class="ord-row__none">'+icon('i-box')+'</div>')+
-        '<span>'+items.length+'</span></button>'+
-      '<div>'+eyebrow(p.po_number)+
-        '<h3>'+esc(p.project||p.po_number)+'</h3>'+
-        '<p>'+items.length+' product'+(items.length===1?'':'s')+' · shipment target '+
-          esc(p.expected_ship_date?fdate(p.expected_ship_date):'to be confirmed')+'</p>'+
-        '<p class="ord-row__meta">'+
-          '<span>Production <b>'+prog+'%</b></span>'+
-          (financeVisible()?'<span>Outstanding <b>'+esc(fin.outstanding>0?money(fin.outstanding,p.currency||'INR'):'Nil')+'</b></span>':'')+
-          '<span>Status <b>'+esc(r.stateLabel)+'</b></span>'+
-        '</p></div>'+
-      '<button class="button button--quiet" type="button" onclick="go(\'#/po/'+p.id+'\')">Open PO</button>'+
-      '</article>';
-  }).join('');
-  h+='</div></section>';
-
-  /* The audited portal stops here, but two things it does not carry are worth
-     keeping: the dated pictures that answer "where is my work today", and the
-     record of everything released. Both sit under the orders, so the top of the
-     page still reads exactly as designed. */
-  h+=workshopToday();
-
-  const nx=buyerNext();
-  if(nx.length){
-    h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
-      '<h3 class="panel__title">What happens next</h3>'+
-      '<p class="panel__description">The next move on each order, and whose it is.</p></div>'+
-      (nx.some(x=>x.who==='you')?badge('Needs you','pending'):badge('All with us','success'))+
-      '</div><div class="panel__body">'+nx.map(x=>
-        '<button type="button" class="next-row" onclick="go(\''+(x.href||('#/po/'+x.po.id))+'\')">'+
-        '<span class="next-row__who next-row__who--'+x.who+'">'+(x.who==='you'?'You':'Us')+'</span>'+
-        '<div><strong>'+esc(x.po.project||x.po.po_number)+'</strong>'+
-        '<span>'+esc(x.what)+'</span></div>'+
-        (x.when?'<span class="next-row__when">'+esc(x.when)+'</span>':'')+
-        '</button>').join('')+'</div></section>';
-  }
-
-  const acts=buyerActivity(10);
-  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Recent activity</h3>'+
-    '<p class="panel__description">Everything we have released to you, newest first.</p></div></div>'+
-    '<div class="panel__body">'+
-    (acts.length?acts.map(a=>
-      '<button type="button" class="act-row" onclick="go(\''+(a.href||'#/')+'\')">'+
-      '<span class="act-row__dot act-row__dot--'+a.kind+'"></span>'+
-      '<div><strong>'+esc(a.title)+'</strong>'+
-      (a.detail?'<span>'+esc(a.detail)+'</span>':'')+'</div>'+
-      '<span class="act-row__when">'+esc(fdate(a.at))+'</span>'+
-      '</button>').join('')
-     :'<div class="empty-state">Nothing released yet. Every stage we finish, photograph we check and decision you make will appear here.</div>')+
-    '</div></section>';
-
-  /* ---- right: what is waiting on him, and the readiness of that order ---- */
-  h+='<div>';
-  h+='<section class="panel"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Needs your attention</h3>'+
-    '<p class="panel__description">'+
-      (waiting.length===1
-        ? esc('One decision is holding a product at '+(first.stage?first.stage.name.toLowerCase():'a stage')+'.')
-        : waiting.length
-          ? esc(waiting.length+' decisions are holding work.')
-          : 'Nothing is waiting on you.')+
-    '</p></div>'+
-    (waiting.length?badge(dueBadge(firstRev),'pending'):badge('All clear','success'))+'</div>'+
-    '<div class="panel__body">'+
-    (waiting.length?waiting.slice(0,4).map(a=>{
-      const rev=openRevision(a.item.id, a.row.stage_id);
-      const lb=rev?(rev.label||('R'+rev.rev_no)):'';
-      const n=rev?(rev.photo_ids||[]).length
-               :visiblePhotos((S.photosByItem[a.item.id]||[]).filter(x=>x.stage_id===a.row.stage_id)).length;
-      const po=S.posById[a.item.po_id];
-      return '<article class="att"><span class="att__icon">'+icon('i-check')+'</span><div>'+
-        '<strong>'+esc(a.item.product)+'</strong>'+
-        '<span>'+esc([po?po.po_number:'', (a.stage?a.stage.name:'')+(lb?' set '+lb:''),
-          n+' photograph'+(n===1?'':'s')].filter(Boolean).join(' · '))+'</span></div>'+
-        '<button class="button button--secondary" type="button" onclick="go(\'#/item/'+a.item.id+'\')">Review</button>'+
-        '</article>';
-    }).join('')
-    :'<div class="empty-state">Nothing is waiting on you. We will tell you here the moment something is.</div>')+
-    '</div></section>';
-
-  // readiness of the order the decision belongs to, else the first open order
-  const focus=firstPo||openPos[0];
-  if(focus){
-    const r=poReadiness(focus), fin=poFinance(focus);
-    const prog=(focus.items||[]).length
-      ? Math.round(focus.items.reduce((a,i)=>a+i.progress,0)/focus.items.length*100) : 0;
-    h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
-      '<h3 class="panel__title">'+esc(focus.po_number)+' shipment readiness</h3>'+
-      '<p class="panel__description">Every gate must clear before dispatch.</p></div></div>'+
-      '<div class="panel__body">'+
-      '<div class="po-gate po-gate--tight">'+
-        '<div><span>Products final</span><strong>'+r.made+' of '+r.pieces+'</strong></div>'+
-        '<div><span>Production</span><strong>'+prog+'% overall</strong></div>'+
-        '<div><span>Buyer decisions</span><strong>'+(r.decisions?(r.decisions+' pending'):'None')+'</strong></div>'+
-        '<div'+(fin.cleared?'':' class="hold"')+'><span>Payment clearance</span><strong>'+
-          esc(fin.cleared?'Cleared':(financeVisible()?fin.label:'With your office'))+'</strong></div>'+
-        '<div'+(r.shippable?'':' class="hold"')+'><span>Order shipment</span><strong>'+
-          esc(r.shippable?'Ready':'Not ready')+'</strong></div>'+
-      '</div>'+
-      '<div class="notice space-top-12"><strong>'+
-        esc(r.shippable?'Ready for dispatch':'Dispatch is locked')+'</strong>'+
-        esc(r.shippable
-          ? 'Everything on this order is finished, packed and settled. It can leave.'
-          : (r.blocker||'This order is not ready to leave yet.'))+
-      '</div></div></section>';
-  }
-  h+='</div>';
-  h+='</div>';
-  paintPlain(h);
+// his helpers, so the markup below reads the same as his source
+function sfHead(kicker, title, copy, actions){
+  return '<header class="page-head"><div><p class="eyebrow">'+esc(kicker)+'</p>'+
+    '<h1>'+esc(title)+'</h1><p class="lead">'+esc(copy)+'</p></div>'+(actions||'')+'</header>';
+}
+function sfBadge(text, tone){
+  return '<span class="badge '+(tone||'')+'">'+esc(text)+'</span>';
+}
+function sfMoney(n){
+  return '₹'+new Intl.NumberFormat('en-IN').format(Math.round(+n||0));
+}
+function sfPaint(html){
+  $('app').innerHTML='<div class="sfb">'+html+'</div>';
   hydrateImages();
 }
+// the buyer's orders, newest first — his sfBuyerPOs
+function sfPOs(){
+  return (S.pos||[]).filter(p=>p.status!=='cancelled')
+    .slice().sort((a,b)=>String(b.po_date||'').localeCompare(String(a.po_date||'')));
+}
+function sfProductsAll(){ return S.items||[]; }
 
-// "Due today", "Overdue", or the date — the buyer should not have to work out
-// whether a decision is late.
+// his sfCompletion
+function sfCompletion(po){
+  const items=po.items||[];
+  return items.length?Math.round(items.reduce((a,i)=>a+(i.progress||0),0)/items.length*100):0;
+}
+// his sfPOGate — the five gates, with the payment one marked when it holds
+function sfPOGate(po){
+  const r=poReadiness(po), fin=poFinance(po);
+  return '<div class="sf-po-gate">'+
+    '<div><span>Products final</span><strong>'+r.made+' of '+r.pieces+'</strong></div>'+
+    '<div><span>Production</span><strong>'+sfCompletion(po)+'% overall</strong></div>'+
+    '<div><span>Buyer decisions</span><strong>'+(r.decisions?(r.decisions+' pending'):'None')+'</strong></div>'+
+    '<div class="'+(fin.cleared?'':'hold')+'"><span>Payment clearance</span><strong>'+
+      esc(fin.cleared?'Cleared':(financeVisible()?'Not cleared':'With your office'))+'</strong></div>'+
+    '<div><span>PO shipment</span><strong>'+(r.shippable?'Ready':'Not ready')+'</strong></div>'+
+    '</div>';
+}
+// his sfOrderListRow
+function sfOrderListRow(po){
+  const items=po.items||[];
+  const img=items.length?targetImage(items[0]):null;
+  const fin=poFinance(po), r=poReadiness(po);
+  return '<article class="sf-order-row">'+
+    '<button class="sf-order-visual" onclick="sfSelectBuyerPO(\''+po.id+'\')" aria-label="Open '+esc(po.po_number)+'">'+
+      (img?'<img alt="" data-ph-path="'+esc(img.path)+'">':'')+
+      '<span>'+items.length+'</span></button>'+
+    '<div><p class="eyebrow">'+esc(po.po_number)+'</p>'+
+      '<h3>'+esc(po.project||po.po_number)+'</h3>'+
+      '<p>'+items.length+' product'+(items.length===1?'':'s')+' · shipment target '+
+        esc(po.expected_ship_date?fdate(po.expected_ship_date):'to be confirmed')+'</p>'+
+      '<div class="sf-order-row-meta">'+
+        '<span>Production <strong>'+sfCompletion(po)+'%</strong></span>'+
+        (financeVisible()?'<span>Outstanding <strong>'+esc(fin.outstanding>0?sfMoney(fin.outstanding):'Nil')+'</strong></span>':'')+
+        '<span>Status <strong>'+esc(r.stateLabel)+'</strong></span>'+
+      '</div></div>'+
+    '<button class="button quiet small" onclick="sfSelectBuyerPO(\''+po.id+'\')">Open PO</button>'+
+    '</article>';
+}
+
+// "Due today", "Overdue", or the date. His prototype hard-codes "Due today";
+// with real revisions the badge has to say which of the three it actually is.
 function dueBadge(rev){
   if(!rev || !rev.due_at) return 'Please review';
   const t=today();
@@ -6067,101 +6518,178 @@ function dueBadge(rev){
   return 'Due '+fdate(rev.due_at);
 }
 
-/* My orders — master and detail, the way the buyer holds the job: pick the
-   purchase order first, then everything under it. The order is the permanent
-   parent; a product never carries its own shipment. */
-function vBuyerOrders(){
-  const pos=(S.pos||[]).slice()
-    .sort((a,b)=>String(b.po_date||'').localeCompare(String(a.po_date||'')));
-  if(!pos.length){
-    paintPlain(buyerPage('My orders.','Buyer organisation → purchase order → products',
-      'Choose a purchase order first. Every product beneath it keeps its own production record; packing and shipping remain one order-level workflow.',
-      '', '<section class="panel"><div class="panel__body"><div class="empty-state">No orders yet.</div></div></section>'));
-    return;
+/* ---------------------------------------------------------------- home ---- */
+function vBuyerHome(){
+  const b=S.buyersById[S.profile.buyer_id];
+  const pos=sfPOs();
+  const openPos=pos.filter(p=>p.status!=='completed');
+  const waiting=pendingApprovals();
+  const first=waiting[0];
+  const firstRev=first?openRevision(first.item.id, first.row.stage_id):null;
+  const firstPo=first?S.posById[first.item.po_id]:null;
+  const label=firstRev?(firstRev.label||('R'+firstRev.rev_no)):'';
+  const media=visiblePhotos((S.photos||[]).filter(p=>!p.log_date)).length;
+  const st=buyerStanding();
+
+  let h=sfHead((b?b.company:'Your')+' · approved buyer workspace','Craft in progress.',
+    'Follow every purchase order, its individual products, approved production evidence, '+
+    'buyer decisions, Tally-backed balance and PO-level shipment readiness.');
+
+  h+='<section class="summary">'+
+    '<button class="metric" onclick="go(\'#/orders\')"><span>Open purchase orders</span>'+
+      '<strong>'+openPos.length+'</strong>'+
+      '<small>'+sfProductsAll().length+' products tracked within them</small></button>'+
+    '<button class="metric'+(waiting.length?' attention':'')+'" onclick="go(\'#/approvals\')">'+
+      '<span>Your decisions</span><strong>'+waiting.length+'</strong>'+
+      '<small>'+esc(first
+        ? [(firstPo?firstPo.po_number:''),(first.stage?first.stage.name:'')+(label?' '+label:'')]
+            .filter(Boolean).join(' · ')
+        : 'Nothing needs deciding')+'</small></button>'+
+    '<button class="metric" onclick="go(\'#/photos\')"><span>Approved media</span>'+
+      '<strong>'+media+'</strong><small>PO → product → production stage</small></button>'+
+    (financeVisible()&&st
+      ? '<button class="metric" onclick="go(\'#/finance\')"><span>'+esc(st.label)+'</span>'+
+        '<strong>'+esc(st.value)+'</strong><small>'+
+        esc(st.muted?st.note:'Latest verified Tally buyer ledger')+'</small></button>'
+      : '')+
+    '</section>';
+
+  h+='<div class="grid-main">'+
+    '<section class="card"><div class="card-head"><div>'+
+      '<h2>Your purchase orders</h2>'+
+      '<p>Products are built individually and become dispatchable together as one PO shipment.</p></div>'+
+      '<button class="button quiet small" onclick="go(\'#/orders\')">All orders</button></div>'+
+    '<div class="card-body">'+
+      (pos.length?pos.map(sfOrderListRow).join('')
+                 :'<p class="lead">No orders yet.</p>')+
+    '</div></section>'+
+    '<aside class="stack">';
+
+  h+='<section class="card"><div class="card-head"><div>'+
+    '<h2>Needs your attention</h2><p>'+
+    esc(waiting.length===1
+      ? 'One decision is holding a product at '+(first.stage?first.stage.name.toLowerCase():'a stage')+'.'
+      : waiting.length ? waiting.length+' decisions are holding production.'
+      : 'Nothing is waiting on you.')+
+    '</p></div>'+
+    (waiting.length?sfBadge(dueBadge(firstRev),'warning'):sfBadge('All clear','success'))+'</div>'+
+    '<div class="card-body">'+
+    (waiting.length?waiting.slice(0,4).map(a=>{
+      const rev=openRevision(a.item.id, a.row.stage_id);
+      const lb=rev?(rev.label||('R'+rev.rev_no)):'';
+      const n=rev?(rev.photo_ids||[]).length
+               :visiblePhotos((S.photosByItem[a.item.id]||[]).filter(x=>x.stage_id===a.row.stage_id)).length;
+      const po=S.posById[a.item.po_id];
+      return '<div class="attention-row"><span class="attention-icon">'+icon('i-check','icon-sm')+'</span>'+
+        '<div><strong>'+esc(a.item.product)+'</strong>'+
+        '<span>'+esc([po?po.po_number:'', (a.stage?a.stage.name:'')+(lb?' set '+lb:''),
+          n+' photograph'+(n===1?'':'s')].filter(Boolean).join(' · '))+'</span></div>'+
+        '<button class="button small" onclick="go(\'#/item/'+a.item.id+'\')">Review</button></div>';
+    }).join('')
+    :'<p class="lead">Nothing is waiting on you. We will tell you here the moment something is.</p>')+
+    '</div></section>';
+
+  const focus=firstPo||openPos[0];
+  if(focus){
+    const r=poReadiness(focus), fin=poFinance(focus);
+    h+='<section class="card"><div class="card-head"><div>'+
+      '<h2>'+esc(focus.po_number)+' shipment readiness</h2>'+
+      '<p>Every gate must clear before dispatch.</p></div></div>'+
+      '<div class="card-body">'+sfPOGate(focus)+
+      '<div class="notice" style="margin-top:10px"><strong>'+
+        esc(r.shippable?'Ready for dispatch':'Dispatch is locked')+'</strong>'+
+        esc(r.shippable
+          ? 'Everything on this order is complete, packed and cleared.'
+          : (financeVisible() && fin.outstanding>0
+              ? (r.blocker||'')+(r.blocker?' · ':'')+sfMoney(fin.outstanding)+' remains allocated as outstanding against '+focus.po_number+'.'
+              : (r.blocker||'This order is not ready to leave yet.')))+
+      '</div></div></section>';
   }
-  const sel=pos.find(p=>p.id===S.buyerPo)||pos[0];
-  S.buyerPo=sel.id;
 
-  const rail='<aside class="panel bo-rail"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Purchase orders</h3>'+
-    '<p class="panel__description">'+pos.length+' open</p></div></div>'+
-    '<div class="panel__body bo-rail__body">'+pos.map(p=>{
-      const n=(p.items||[]).length;
-      const prog=n?Math.round(p.items.reduce((a,i)=>a+i.progress,0)/n*100):0;
-      return '<button type="button" class="order-select'+(p.id===sel.id?' is-active':'')+
-        '" onclick="pickBuyerPo(\''+p.id+'\')">'+
-        '<b>'+esc(p.po_number)+'</b><strong>'+esc(p.project||p.po_number)+'</strong>'+
-        '<span>'+n+' product'+(n===1?'':'s')+' · '+prog+'%</span></button>';
-    }).join('')+'</div></aside>';
-
-  const items=sel.items||[];
-  const prog=items.length?Math.round(items.reduce((a,i)=>a+i.progress,0)/items.length*100):0;
-  const r=poReadiness(sel);
-  const fin=poFinance(sel);
-  const owing=financeVisible()?money(fin.outstanding, sel.currency||'INR'):'—';
-
-  const tile=(k,v)=>'<div class="answer"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>';
-  const gate=(k,v,hold)=>'<div'+(hold?' class="hold"':'')+'><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>';
-
-  const hero='<section class="order-hero"><div class="order-hero__top"><div>'+
-    eyebrow(sel.po_number+(sel.po_date?' · dated '+fdate(sel.po_date):''))+
-    '<h1>'+esc(sel.project||sel.po_number)+'</h1>'+
-    '<p class="order-hero__sub">'+items.length+' product'+(items.length===1?'':'s')+
-      (sel.expected_ship_date?' · shipment target '+fdate(sel.expected_ship_date):' · shipment target to be confirmed')+
-    '</p></div>'+badge(r.stateLabel, r.shippable?'success':'')+'</div>'+
-    '<div class="answer-grid">'+
-      tile('Production position', prog+'%')+
-      tile('Products', String(items.length))+
-      tile('Shipment target', sel.expected_ship_date?fdate(sel.expected_ship_date):'—')+
-      tile(financeVisible()?'Outstanding allocation':'Payment', financeVisible()?(owing||'Nil'):'Handled by your office')+
-    '</div>'+
-    '<div class="po-gate">'+
-      gate('Products final', r.made+' of '+r.pieces)+
-      gate('Production', prog+'% overall')+
-      gate('Buyer decisions', r.decisions?(r.decisions+' pending'):'None')+
-      gate('Payment clearance', fin.cleared?'Cleared':(financeVisible()?fin.label:'With your office'), !fin.cleared)+
-      gate('Order shipment', r.shippable?'Ready':'Not ready', !r.shippable)+
-    '</div>'+
-    '<div class="audit-source space-top-12">'+icon('i-box')+'<div>'+
-      '<strong>The order owns the shipment</strong>'+
-      'Every product below is planned, finished, packed, paid for and shipped under this one purchase order. No single piece leaves on its own.'+
-    '</div></div></section>';
-
-  const cards=items.length
-    ? '<section class="product-grid">'+items.map(it=>{
-        const st=curStage(it), pct=Math.round((it.progress||0)*100);
-        const img=targetImage(it);
-        const waiting=(S.stByItem[it.id]||[]).some(x=>x.approval==='requested');
-        return '<article class="product-card2">'+
-          '<button type="button" class="product-card2__img" onclick="go(\'#/item/'+it.id+'\')" '+
-            'aria-label="Open '+esc(it.product)+'">'+
-            (img?'<img alt="" data-ph-path="'+esc(img.path)+'">'
-                :'<div class="product-card2__none">'+icon('i-box')+'</div>')+
-            '<span>Target product</span></button>'+
-          '<div>'+eyebrow([it.item_code, (it.qty>1?(+it.qty)+' pieces':'1 piece')].filter(Boolean).join(' · '))+
-            '<h3>'+esc(it.product)+'</h3>'+
-            '<p>'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · ')||'—')+'</p>'+
-            '<div class="product-card2__facts">'+
-              '<div><span>Current stage</span><strong>'+esc(st?st.name:'Not started')+'</strong></div>'+
-              '<div><span>Progress</span><strong>'+pct+'%</strong></div>'+
-            '</div>'+progressBar(it.progress||0)+
-            '<div class="product-card2__actions">'+
-              '<button class="button button--secondary" type="button" onclick="go(\'#/item/'+it.id+'\')">Open product</button>'+
-              (waiting?'<button class="button" type="button" onclick="go(\'#/approvals\')">Review approval</button>':'')+
-            '</div></div></article>';
-      }).join('')+'</section>'
-    : '<section class="panel space-top-12"><div class="panel__body"><div class="empty-state">'+
-      'We are still adding the products to this order.</div></div></section>';
-
-  paintPlain(buyerPage('My orders.','Buyer organisation → purchase order → products',
-    'Choose a purchase order first. Every product beneath it keeps its own production record; packing and shipping remain one order-level workflow.',
-    '', '<div class="order-shell">'+rail+'<main>'+hero+cards+'</main></div>'));
-  hydrateImages();
+  h+='</aside></div>';
+  sfPaint(h);
 }
 
-/* Approvals, grouped by purchase order and never as a mixed feed — the buyer
-   opens an order, recognises the piece by its picture, and decides against one
-   named revision. Overdue and production-blocking decisions come first. */
+/* ------------------------------------------------------------- my orders ---- */
+// his ordersView: the PO rail chooses, the hero answers, the product grid lists.
+function vBuyerOrders(){
+  const pos=sfPOs();
+  if(!pos.length){
+    sfPaint(sfHead('Buyer organisation → purchase order → products','My orders.',
+      'Choose a purchase order first. Every product beneath it retains its own production record; packing and shipping remain one PO-level workflow.')+
+      '<section class="card"><div class="card-body"><p class="lead">No orders yet.</p></div></section>');
+    return;
+  }
+  const po=pos.find(p=>p.id===S.buyerPo)||pos[0];
+  S.buyerPo=po.id;
+  const items=po.items||[];
+  const fin=poFinance(po), r=poReadiness(po);
+
+  let h=sfHead('Buyer organisation → purchase order → products','My orders.',
+    'Choose a purchase order first. Every product beneath it retains its own production record; packing and shipping remain one PO-level workflow.');
+
+  h+='<div class="order-shell">'+
+    '<aside class="card order-list"><div class="card-head"><div>'+
+      '<h2>Purchase orders</h2><p>'+pos.length+' open</p></div></div>'+
+    '<div class="card-body">'+pos.map(x=>
+      '<button class="order-select '+(x.id===po.id?'active':'')+'" onclick="sfSelectBuyerPO(\''+x.id+'\')">'+
+      '<b>'+esc(x.po_number)+'</b><strong>'+esc(x.project||x.po_number)+'</strong>'+
+      '<span>'+((x.items||[]).length)+' product'+((x.items||[]).length===1?'':'s')+' · '+sfCompletion(x)+'%</span>'+
+      '</button>').join('')+'</div></aside>'+
+    '<main>'+
+      '<section class="order-hero"><div class="order-hero-top"><div>'+
+        '<p class="eyebrow">'+esc(po.po_number+(po.po_date?' · dated '+fdate(po.po_date):''))+'</p>'+
+        '<h1>'+esc(po.project||po.po_number)+'</h1>'+
+        '<p class="order-sub">'+items.length+' product'+(items.length===1?'':'s')+
+          ' · PO shipment target '+esc(po.expected_ship_date?fdate(po.expected_ship_date):'to be confirmed')+'</p>'+
+      '</div>'+sfBadge(r.stateLabel, r.shippable?'success':'')+'</div>'+
+      '<div class="answer-grid">'+
+        '<div class="answer"><span>Production position</span><strong>'+sfCompletion(po)+'%</strong></div>'+
+        '<div class="answer"><span>Products</span><strong>'+items.length+'</strong></div>'+
+        '<div class="answer"><span>PO shipment target</span><strong>'+
+          esc(po.expected_ship_date?fdate(po.expected_ship_date):'—')+'</strong></div>'+
+        '<div class="answer"><span>'+(financeVisible()?'Outstanding allocation':'Payment')+'</span><strong>'+
+          esc(financeVisible()?(fin.outstanding>0?sfMoney(fin.outstanding):'Nil'):'With your office')+'</strong></div>'+
+      '</div>'+
+      sfPOGate(po)+
+      '<div class="audit-source" style="margin-top:9px">'+icon('i-box','icon-sm')+'<div>'+
+        '<strong>PO shipment supremacy</strong>All products below are planned, completed, packed, '+
+        'financed and shipped under this one purchase order. No product can create an independent shipment.'+
+      '</div></div></section>'+
+      (items.length
+        ? '<section class="sf-product-grid">'+items.map(sfProductCard).join('')+'</section>'
+        : '<section class="card" style="margin-top:12px"><div class="card-body">'+
+          '<p class="lead">We are still adding the products to this order.</p></div></section>')+
+    '</main></div>';
+
+  sfPaint(h);
+}
+
+// his sfProductCard
+function sfProductCard(it){
+  const st=curStage(it);
+  const pct=Math.round((it.progress||0)*100);
+  const img=targetImage(it);
+  const waiting=(S.stByItem[it.id]||[]).some(x=>x.approval==='requested');
+  return '<article class="sf-product-card">'+
+    '<button class="sf-product-image" onclick="sfOpenBuyerProduct(\''+it.id+'\')" '+
+      'aria-label="Open '+esc(it.product)+'">'+
+      (img?'<img alt="'+esc(it.product)+' target product" data-ph-path="'+esc(img.path)+'">':'')+
+      '<span>Target product</span></button>'+
+    '<div><p class="eyebrow">'+esc([it.item_code, (it.qty>1?(+it.qty)+' pieces':'1 piece')].filter(Boolean).join(' · '))+'</p>'+
+      '<h3>'+esc(it.product)+'</h3>'+
+      '<p>'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · ')||'—')+'</p>'+
+      '<div class="sf-product-facts">'+
+        '<div><span>Current stage</span><strong>'+esc(st?st.name:'Not started')+'</strong></div>'+
+        '<div><span>Progress</span><strong>'+pct+'%</strong></div>'+
+      '</div>'+
+      '<div class="progress" style="margin-top:9px"><span style="width:'+pct+'%"></span></div>'+
+      '<div class="sf-product-actions">'+
+        '<button class="button secondary small" onclick="sfOpenBuyerProduct(\''+it.id+'\')">Open product</button>'+
+        (waiting?'<button class="button small" onclick="go(\'#/item/'+it.id+'\')">Review approval</button>':'')+
+      '</div></div></article>';
+}
+
 function vBuyerApprovals(){
   const view=S.apprView||'pending';
 
@@ -7372,6 +7900,10 @@ async function requestApproval(itemId, stageId, on){
 
 // The buyer's orders page is master-and-detail: the rail chooses, the panel shows.
 function pickBuyerPo(id){ S.buyerPo=id; render(); }
+// his sfSelectBuyerPO: choose the order, then show it on the orders route
+function sfSelectBuyerPO(id){ S.buyerPo=id; go('#/orders'); }
+// his sfOpenBuyerProduct
+function sfOpenBuyerProduct(id){ go('#/item/'+id); }
 function setApprView(v){ S.apprView=v; render(); }
 function setPhotoFilter(f){ S.photoFilter=f||{}; render(); }
 
