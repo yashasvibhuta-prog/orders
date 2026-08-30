@@ -1148,9 +1148,97 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .def-row strong{display:block;font-size:13px;color:var(--ink);margin-bottom:3px}
 .def-row p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.5}
 
+/* ---- Command centre ---- */
+.cc-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.cc-head .display-title{margin:2px 0 6px}
+.cc-sync{font-size:11.5px;color:var(--ink-faint)}
+.cc-alerts{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:14px}
+@media (min-width:760px){ .cc-alerts{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1200px){ .cc-alerts{grid-template-columns:repeat(5,1fr)} }
+.cc-alert{display:flex;gap:9px;align-items:center;background:var(--surface);border:1px solid var(--line);
+  border-radius:11px;padding:10px 12px;cursor:pointer;font:inherit;text-align:left;min-width:0}
+.cc-alert:hover{border-color:var(--line-strong)}
+.cc-alert.is-warn{border-color:var(--status-warning);background:var(--status-warning-soft)}
+.cc-alert__dot{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);flex:none}
+.cc-alert.is-warn .cc-alert__dot{background:var(--status-warning)}
+.cc-alert>div{flex:1;min-width:0}
+.cc-alert strong{display:block;font-size:12px;color:var(--ink)}
+.cc-alert span{display:block;font-size:10.5px;color:var(--ink-faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cc-alert em{font-style:normal;font-size:15px;font-weight:700;color:var(--ink);white-space:nowrap}
+@media (min-width:1200px){ .kpi-grid--six{grid-template-columns:repeat(6,1fr)} }
+.pf-table td{vertical-align:top}
+.pf-table td small{display:block;font-size:11px;color:var(--ink-faint);margin-top:2px}
+.pf-table td strong{font-size:13px}
+.pf-bar{display:block;height:6px;border-radius:999px;background:var(--canvas);overflow:hidden;min-width:56px}
+.pf-bar i{display:block;height:100%;background:var(--ink);border-radius:999px}
+.pf-ok{color:var(--status-success);font-weight:600}
+.pf-no{color:var(--status-warning)}
+.cc-mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px}
+.cc-mini>div{background:var(--canvas);border-radius:10px;padding:10px 11px;min-width:0}
+.cc-mini>div.is-warn{background:var(--status-warning-soft)}
+.cc-mini span{display:block;font-size:11px;color:var(--ink-faint)}
+.cc-mini strong{display:block;font-size:15px;color:var(--ink);overflow-wrap:anywhere}
+.cc-stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:6px;margin-top:12px}
+.cc-stage{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:8px 6px;
+  cursor:pointer;font:inherit;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.cc-stage i{font-style:normal;font-size:10px;color:var(--ink-faint);font-weight:700}
+.cc-stage span{font-size:10px;line-height:1.2;color:var(--ink-faint);overflow-wrap:anywhere}
+.cc-stage strong{font-size:15px;color:var(--ink-faint)}
+.cc-stage.has-n{border-color:var(--line-strong)}
+.cc-stage.has-n strong{color:var(--ink)}
+.cc-three{display:grid;grid-template-columns:1fr;gap:14px;align-items:start}
+@media (min-width:1100px){ .cc-three{grid-template-columns:repeat(3,1fr)} }
+.fe-wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.fe-ring{--pct:0;width:104px;height:104px;flex:none;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--ink) calc(var(--pct)*1%), var(--canvas) 0)}
+.fe-ring>span{width:78px;height:78px;border-radius:50%;background:var(--surface);display:grid;place-content:center;text-align:center}
+.fe-ring strong{display:block;font-size:18px;color:var(--ink)}
+.fe-ring small{display:block;font-size:10px;color:var(--ink-faint)}
+.fe-people{flex:1;min-width:150px;display:grid;gap:7px}
+.fe-people>div{display:grid;grid-template-columns:minmax(60px,1fr) minmax(0,1.4fr) 22px;gap:8px;align-items:center}
+.fe-people span{font-size:12px;color:var(--ink-soft);overflow-wrap:anywhere}
+.fe-people i{height:7px;border-radius:999px;background:var(--canvas);overflow:hidden;display:block}
+.fe-people i b{display:block;height:100%;background:var(--ink);border-radius:999px}
+.fe-people em{font-style:normal;font-size:12px;font-weight:600;color:var(--ink);text-align:right}
+
+/* ---- shipment readiness ---- */
+.ready-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.ready-step{display:flex;gap:9px;align-items:flex-start;background:var(--canvas);border-radius:10px;padding:10px 11px;min-width:0}
+.ready-step.is-ok{background:var(--status-success-soft)}
+.ready-step__tick{width:17px;height:17px;flex:none;border-radius:50%;border:1.5px solid var(--line-strong);
+  display:grid;place-items:center;font-size:10px;font-weight:700;color:#fff;margin-top:1px}
+.ready-step.is-ok .ready-step__tick,.ready-step__tick.is-on{background:var(--status-success);border-color:var(--status-success)}
+.ready-step strong{display:block;font-size:12px;color:var(--ink)}
+.ready-step span{display:block;font-size:11px;color:var(--ink-faint);margin-top:1px;overflow-wrap:anywhere}
+.ready-blocker{margin:12px 0 0;font-size:13px;color:var(--status-warning);font-weight:600}
+.ready-blocker--ok{color:var(--status-success)}
+.piece-row{display:flex;gap:11px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.piece-row:last-child{border-bottom:0}
+.piece-row>div{flex:1;min-width:0}
+.piece-row strong{display:block;font-size:14px;color:var(--ink)}
+.piece-row span{display:block;font-size:12px;color:var(--ink-faint)}
+.ready-row{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.ready-row:last-child{border-bottom:0}
+.ready-row>div:first-child{flex:1;min-width:0}
+.ready-row strong{display:block;font-size:14px;color:var(--ink)}
+.ready-row span{display:block;font-size:11.5px;color:var(--ink-faint)}
+.ready-row__dots{display:flex;gap:4px;flex:none}
+.ready-row__dots i{width:9px;height:9px;border-radius:50%;background:var(--canvas);border:1px solid var(--line-strong);display:block}
+.ready-row__dots i.is-ok{background:var(--status-success);border-color:var(--status-success)}
+.ready-row__state{flex:none;font-size:11.5px;color:var(--ink-faint);max-width:210px;text-align:right}
+@media (max-width:640px){
+  .ready-row{flex-wrap:wrap}
+  .ready-row__state{text-align:left;max-width:none;width:100%}
+}
+
+.piece-row,.ready-row{width:100%;background:none;border:0;border-bottom:1px solid var(--line);
+  font:inherit;text-align:left;color:inherit}
+.piece-row:last-child,.ready-row:last-child{border-bottom:0}
+.piece-row:hover,.ready-row:hover{background:var(--canvas)}
+
 </style>
 <body>
-<script>const BUILD_ID='835decacd0d8';</script>
+<script>const BUILD_ID='350ace8b263a';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -1567,7 +1655,7 @@ function daysSinceUpdate(itemId){
 }
 // products that should have been recorded today: in the workshop, not finished
 function activeItems(){
-  return (S.items||[]).filter(it=>it.status!=='delivered' && it.status!=='cancelled' && it.status!=='shipped');
+  return (S.items||[]).filter(it=>!['delivered','cancelled','shipped','made'].includes(it.status));
 }
 function itemsMissingToday(){ return activeItems().filter(it=>!updateToday(it.id)); }
 function pendingUpdates(){ return (S.updates||[]).filter(u=>u.review_status==='pending' || u.review_status==='changes_requested'); }
@@ -1645,7 +1733,7 @@ function nextStageFor(it){
 function lateness(it){
   const due = it.target_date || (it.po && it.po.expected_ship_date);
   if(!due) return null;
-  if(it.status==='delivered'||it.status==='shipped') return null;
+  if(['delivered','shipped','made'].includes(it.status)) return null;
   const n = daysUntil(due);
   if(n===null) return null;
   if(n < 0) return {days:Math.abs(n), state:'late'};
@@ -2584,6 +2672,206 @@ function reportExceptions(){
   return out.slice(0,3);
 }
 
+/* ---------------------------------------------------------------------------
+   Command centre figures.
+--------------------------------------------------------------------------- */
+
+// Every open order with its position, promise, evidence and money in one row.
+function portfolioRows(){
+  const conf={}; deliveryConfidence().forEach(c=>{ conf[c.po.id]=c; });
+  return (S.pos||[]).filter(p=>p.status!=='cancelled'&&p.status!=='completed').map(p=>{
+    const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+    const prog=items.length?items.reduce((a,i)=>a+i.progress,0)/items.length:0;
+    const stage=items.map(i=>S.stagesById[i.current_stage_id]).filter(Boolean)
+      .sort((a,b)=>a.sort_order-b.sort_order)[0];
+    // the newest evidence on any piece of this order
+    let ev=null;
+    items.forEach(it=>{
+      (S.updByItem[it.id]||[]).forEach(u=>{ if(!ev||String(u.work_date)>String(ev.work_date)) ev=u; });
+    });
+    const evToday = items.some(it=>(S.updByItem[it.id]||[]).some(u=>u.work_date===today()));
+    const inv=(S.invoices||[]).filter(i=>i.po_id===p.id).reduce((a,i)=>a+(+i.total||0),0);
+    const pay=(S.payByPo&&S.payByPo[p.id]||[]).reduce((a,c)=>a+(+c.amount||0),0);
+    const val=(p.amount_total!=null?+p.amount_total:inv);
+    const bal=Math.max(0,(inv||val)-pay);
+    const c=conf[p.id]||{level:0,label:'On track',why:[]};
+    return { po:p, items, prog, stage, ev, evToday, val, pay, bal,
+             level:c.level, health:c.label, why:c.why,
+             days: p.expected_ship_date?daysUntil(p.expected_ship_date):null };
+  }).sort((a,b)=>b.level-a.level || String(a.po.expected_ship_date||'9').localeCompare(String(b.po.expected_ship_date||'9')));
+}
+
+// The five things the alert strip carries, each one a real count.
+function commandAlerts(){
+  const q=queueCounts();
+  const held=heldStages();
+  const uc=updateCompliance();
+  const openQ=(S.comments||[]).filter(c=>c.author_role==='buyer'&&!c.resolved_at);
+  const ag=receivableAgeing();
+  const overdue=ag.buckets.slice(1).reduce((a,b)=>a+b.v,0);
+  return [
+    { k:'Production block', v:String(held.length),
+      s:held.length?(held[0].item.product+((held[0].hold&&held[0].hold.hold_reason)?(' · '+held[0].hold.hold_reason):'')):'Nothing held',
+      warn:held.length>0, run:"go('#/production/blocked')" },
+    { k:'Floor updates', v:uc.today+' of '+uc.of,
+      s:uc.missing.length?(uc.missing.length+' still to submit'):'All logged today',
+      warn:uc.missing.length>0, run:"go('#/production/missing')" },
+    { k:'Evidence review', v:String(q.approvals+pendingPhotos().length),
+      s:'Photographs and updates waiting on you', warn:(q.approvals+pendingPhotos().length)>0,
+      run:"go('#/production/review')" },
+    { k:'Buyer response', v:String(openQ.length),
+      s:openQ.length?'Question waiting on a reply':'Nothing waiting', warn:openQ.length>0,
+      run:"go('#/clients')" },
+    { k:'Money outstanding', v:ag.n?money(ag.outstanding,ag.currency):'—',
+      s:overdue>0?(money(overdue,ag.currency)+' over 30 days'):'Nothing aged',
+      warn:overdue>0, run:"go('#/reports/finance')" }
+  ];
+}
+
+// Who logged the floor's evidence today.
+function floorEvidence(){
+  const t=today();
+  const active=(S.items||[]).filter(it=>it.status!=='delivered'&&it.status!=='cancelled');
+  const todays=(S.updates||[]).filter(u=>u.work_date===t);
+  const by={};
+  todays.forEach(u=>{ const k=u.submitted_by||'unknown'; by[k]=(by[k]||0)+1; });
+  const people=(S.profilesAll||[]).filter(p=>p.role==='staff'||p.full_name)
+    .map(p=>({ name:shortLogin(p.full_name||p.email||''), n:by[p.user_id]||0 }))
+    .filter(x=>x.name);
+  const covered=active.filter(it=>(S.updByItem[it.id]||[]).some(u=>u.work_date===t)).length;
+  const photos=(S.photos||[]).filter(p=>String(p.created_at||'').slice(0,10)===t).length;
+  const max=Math.max(1, ...people.map(p=>p.n));
+  people.forEach(p=>{ p.pct=Math.round((p.n/max)*100); });
+  return { pct: active.length?Math.round((covered/active.length)*100):0,
+           covered, of:active.length, people, photos };
+}
+
+// Invoiced, received, outstanding, and how it ages.
+function financeSnapshot(){
+  const ag=receivableAgeing();
+  const overdue=ag.buckets.slice(1).reduce((a,b)=>a+b.v,0);
+  const max=Math.max(1, ...ag.buckets.map(b=>b.v));
+  ag.buckets.forEach(b=>{ b.pct=Math.round((b.v/max)*100); });
+  return { invoiced:ag.total, received:ag.paid, outstanding:ag.outstanding,
+           overdue, buckets:ag.buckets, currency:ag.currency, n:ag.n };
+}
+
+// Where the buyer relationship needs attention.
+function clientServiceRows(){
+  const out=[];
+  const openQ=(S.comments||[]).filter(c=>c.author_role==='buyer'&&!c.resolved_at)
+    .sort((a,b)=>String(a.created_at).localeCompare(String(b.created_at)));
+  openQ.slice(0,2).forEach(c=>{
+    const it=S.itemsById[c.item_id];
+    out.push({ tag:'Answer', title:'Buyer question waiting',
+      sub:(it?it.product+' · ':'')+String(c.body).slice(0,70), run:"go('#/item/"+c.item_id+"')", warn:true });
+  });
+  const unsent=(S.updates||[]).filter(u=>
+    (u.review_status==='approved'||u.review_status==='partially_approved') && !u.published_at);
+  if(unsent.length) out.push({ tag:'Publish', title:unsent.length+' approved update'+(unsent.length===1?'':'s')+' not published',
+    sub:'The buyer cannot see them until you publish', run:"go('#/production/review')", warn:true });
+  const sent=(S.buyers||[]).filter(b=>b.last_update_sent);
+  const stale=(S.buyers||[]).filter(b=>{
+    if(!b.active) return false;
+    if(!b.last_update_sent) return (S.pos||[]).some(p=>p.buyer_id===b.id&&p.status==='open');
+    return Math.abs(dayGap(String(b.last_update_sent).slice(0,10), today())||0)>7;
+  });
+  if(stale.length) out.push({ tag:'Send', title:stale.length+' buyer'+(stale.length===1?'':'s')+' not updated this week',
+    sub:stale.map(b=>b.company).slice(0,2).join(', '), run:"go('#/clients/updates')", warn:false });
+  if(!out.length) out.push({ tag:'Clear', title:'Nothing waiting on you', sub:'Every question answered and every update sent', run:'', warn:false });
+  return out;
+}
+
+// Account readiness — the same facts the People & access page proves.
+function accessHealth(){
+  const people=(S.profilesAll||[]).length;
+  const attention=accessNeedsAttention();
+  const portals=(S.buyers||[]).filter(b=>(S.profilesAll||[]).some(p=>p.buyer_id===b.id)).length;
+  const setup=(S.buyers||[]).length-portals;
+  return { people, attention, portals, setup };
+}
+
+/* ---------------------------------------------------------------------------
+   Dispatch readiness.
+
+   Pieces are made one at a time; an order ships once every piece on it is made,
+   packed and paid for. So a piece never carries a shipping state — it carries a
+   production state — and the order carries dispatch.
+
+   This mirrors bt_po_readiness() in the database exactly. The database function
+   is the authority when dispatch is actually recorded; this one exists so the
+   screens can show readiness without a round trip per order. test/run.js asserts
+   the two agree, so they cannot drift apart quietly.
+--------------------------------------------------------------------------- */
+
+const DISPATCH_LABEL={
+  in_production:'In production', ready_to_pack:'Ready to pack', packed:'Packed',
+  dispatched:'Dispatched', delivered:'Delivered'
+};
+
+// A piece is "made" when its last active stage — Final Photographs — is complete.
+function pieceIsMade(it){
+  const active=S.stages.filter(s=>s.active);
+  const last=active[active.length-1];
+  if(!last) return false;
+  const row=(S.stByItem[it.id]||[]).find(r=>r.stage_id===last.id);
+  return !!(row && row.status==='completed');
+}
+
+function poReadiness(po){
+  const items=(po.items&&po.items.length)?po.items:(S.items||[]).filter(i=>i.po_id===po.id);
+  const active=S.stages.filter(s=>s.active);
+  const activeIds=active.map(s=>s.id);
+  const made=items.filter(pieceIsMade).length;
+
+  let pct=0;
+  if(items.length){
+    pct=Math.round(items.reduce((a,it)=>{
+      const rows=(S.stByItem[it.id]||[]).filter(r=>activeIds.includes(r.stage_id));
+      const done=rows.filter(r=>r.status==='completed'||r.status==='skipped').length;
+      return a + (rows.length?done/rows.length:0);
+    },0) / items.length * 100);
+  }
+
+  const decisions=items.reduce((a,it)=>
+    a+(S.stByItem[it.id]||[]).filter(r=>r.approval==='requested').length, 0);
+  const finalMissing=items.filter(it=>!pieceIsMade(it)).length;
+  const packed=!!po.packed_at;
+  const cleared=!!po.finance_cleared;
+  const state=po.dispatch_state||'in_production';
+
+  let blocker=null;
+  if(!items.length)            blocker='No products on this order yet';
+  else if(made<items.length)   blocker=(items.length-made)+' of '+items.length+' pieces still in production';
+  else if(decisions>0)         blocker=decisions+' decision'+(decisions===1?'':'s')+' waiting on the buyer';
+  else if(finalMissing>0)      blocker='Final photographs not done on '+finalMissing+' piece'+(finalMissing===1?'':'s');
+  else if(!packed)             blocker='Not packed yet';
+  else if(!cleared)            blocker='Payment for this order is not cleared';
+
+  // the five things that must all be true, in the order they happen
+  const steps=[
+    {k:'Production',        ok:made===items.length && items.length>0,
+     v:items.length?(made+' of '+items.length+' pieces made'):'No pieces yet'},
+    {k:'Buyer decisions',   ok:decisions===0,
+     v:decisions?(decisions+' waiting'):'None outstanding'},
+    {k:'Final photographs', ok:finalMissing===0 && items.length>0,
+     v:finalMissing?('missing on '+finalMissing):'Complete'},
+    {k:'Packing',           ok:packed, v:packed?('Packed '+fdate(po.packed_at)):'Not started'},
+    {k:'Payment cleared',   ok:cleared, v:cleared?'Cleared':'Awaiting clearance'}
+  ];
+
+  return { items, pieces:items.length, made, pct, decisions, finalMissing,
+           packed, cleared, state, stateLabel:DISPATCH_LABEL[state]||state,
+           shippable: !blocker, blocker, steps };
+}
+
+// Pieces finished since the buyer last looked — the "one piece is done" signal
+// Yash asked for, which is separate from the order being shippable.
+function piecesMadeOn(po){
+  const r=poReadiness(po);
+  return r.items.filter(pieceIsMade);
+}
+
 </script>
 <script>
 'use strict';
@@ -2925,7 +3213,7 @@ function statCard(label, value, foot){
 function orderCard(p){
   const b=S.buyersById[p.buyer_id];
   const cur=p.items.map(i=>S.stagesById[i.current_stage_id]).filter(Boolean).sort((a,c)=>a.sort_order-c.sort_order)[0];
-  const allDone=p.items.length && p.items.every(i=>i.status==='delivered');
+  const allDone=p.dispatch_state==='delivered';
   const acts=p.items.map(nextAction);
   const pri=acts.find(a=>a.k==='you')||acts.find(a=>a.k==='do')||acts.find(a=>a.k==='wait')||acts[0];
   return '<a class="order-card" href="javascript:void(0)" onclick="go(\'#/po/'+p.id+'\')">'+
@@ -3210,7 +3498,7 @@ function vOrders(){
 
   const openPos=S.pos.filter(p=>p.status==='open'||p.status==='on_hold');
   const inProd=S.items.filter(i=>i.status==='in_production'||i.status==='on_hold').length;
-  const shippedN=S.items.filter(i=>i.status==='shipped'||i.status==='delivered'||i.status==='ready').length;
+  const shippedN=S.items.filter(i=>['shipped','delivered','ready','made'].includes(i.status)).length;
   const nBuyers=new Set(openPos.map(p=>p.buyer_id)).size;
   h+='<section class="summary-grid" aria-label="Order summary">'+
     statCard('Open POs', openPos.length, 'Across '+nBuyers+' buyer'+(nBuyers===1?'':'s'))+
@@ -3349,7 +3637,7 @@ function vHome(){
   const openPos=S.pos.filter(p=>p.status==='open'||p.status==='on_hold');
   const inProd=S.items.filter(i=>i.status==='in_production'||i.status==='on_hold').length;
   const appr=pendingApprovals().length;
-  const shippedN=S.items.filter(i=>i.status==='shipped'||i.status==='delivered'||i.status==='ready').length;
+  const shippedN=S.items.filter(i=>['shipped','delivered','ready','made'].includes(i.status)).length;
   const nBuyers=new Set(openPos.map(p=>p.buyer_id)).size;
   h+='<section class="summary-grid" aria-label="Order summary">'+
     statCard('Open POs', openPos.length, admin?('Across '+nBuyers+' buyer'+(nBuyers===1?'':'s')):'') +
@@ -3510,7 +3798,7 @@ function vPO(id){
   if(!p){ paint('<div class="empty-state">Purchase order not found.</div>', null); return; }
   const b=S.buyersById[p.buyer_id];
   const admin=isAdmin();
-  const allDone=p.items.length && p.items.every(i=>i.status==='delivered');
+  const allDone=p.dispatch_state==='delivered';
   const cur=p.items.map(i=>S.stagesById[i.current_stage_id]).filter(Boolean).sort((a,c)=>a.sort_order-c.sort_order)[0];
 
   let h='<section class="order-hero">'+
@@ -3539,6 +3827,8 @@ function vPO(id){
         esc(p.expected_ship_date?countdownText(p.expected_ship_date, allDone||p.status==='completed'):'—')+'</p></article>'+
     '</div></section>';
 
+  h+=readinessStrip(p, {tight:false});
+  h+=piecesDonePanel(p);
   h+=stageStepper(p);
 
   if(p.notes && admin) h+='<p class="stage-note space-top-12"><strong>Note:</strong> '+esc(p.notes)+'</p>';
@@ -3818,7 +4108,7 @@ function vItem(id){
   const staff=isStaff();
   const admin=isAdmin();
   const due=it.target_date||(p&&p.expected_ship_date);
-  const itDone=it.status==='delivered';
+  const itDone=pieceIsMade(it);
 
   let h='';
   if(!staff){
@@ -3987,14 +4277,14 @@ function staffBuckets(){
   let items=(S.items||[]).slice();
   if(q) items=items.filter(it=>((it.product||'')+' '+(it.stone||'')+' '+(it.finish||'')+' '+
     (it.item_ref||'')+' '+(it.item_code||'')).toLowerCase().indexOf(q)>=0);
-  const open=items.filter(it=>it.status!=='delivered'&&it.status!=='cancelled');
+  const open=items.filter(it=>!['delivered','cancelled','made'].includes(it.status));
   const needs=open.filter(it=>!updateToday(it.id));
   const blocked=open.filter(it=>(S.stByItem[it.id]||[]).some(r=>r.status==='on_hold'));
   const ready=open.filter(it=>{
     const rows=S.stByItem[it.id]||[];
     return rows.some(r=>r.status==='in_progress') && !blocked.includes(it);
   });
-  const done=items.filter(it=>it.status==='delivered'||it.status==='cancelled');
+  const done=items.filter(it=>['delivered','cancelled','made'].includes(it.status));
   return {open, needs, blocked, ready, done};
 }
 
@@ -4095,7 +4385,7 @@ function staffProduct(it){
   const planned=curInt&&curInt.planned_date;
   const ship=it.po&&it.po.expected_ship_date;
   const n=daysUntil(ship);
-  const late=n!=null&&n<0&&it.status!=='delivered';
+  const late=n!=null&&n<0&&!pieceIsMade(it);
   const pend=ph.filter(p=>p.status==='pending').length;
   const rej=ph.filter(p=>p.status==='rejected').length;
   const appr=ph.filter(p=>p.status==='approved').length;
@@ -5214,7 +5504,24 @@ function vBuyerHome(){
       :'<div class="empty-state">Nothing needs your decision right now.</div>')+
     '</div></section>';
 
-  h+='</div></div>';
+  h+='</div>';
+
+  // "what is stopping each order shipping" — the question behind most of the calls
+  if(openPos.length) h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Shipment readiness</h3>'+
+    '<p class="panel__description">Goods travel per order: once every piece on it is made, packed and paid for.</p></div></div>'+
+    '<div class="panel__body">'+openPos.map(p=>{
+      const r=poReadiness(p);
+      return '<button type="button" class="ready-row" onclick="go(\'#/po/'+p.id+'\')">'+
+        '<div><strong>'+esc(p.project||p.po_number)+'</strong>'+
+        '<span>'+esc(p.po_number+' · '+r.made+' of '+r.pieces+' pieces made')+'</span></div>'+
+        '<div class="ready-row__dots">'+r.steps.map(x=>
+          '<i class="'+(x.ok?'is-ok':'')+'" title="'+esc(x.k+': '+x.v)+'"></i>').join('')+'</div>'+
+        '<span class="ready-row__state">'+esc(r.blocker||'Ready to dispatch')+'</span>'+
+        '</button>';
+    }).join('')+'</div></section>';
+
+  h+='</div>';
   paintPlain(h);
 }
 
@@ -6008,6 +6315,73 @@ function vReportsFinance(){
     '<button class="button button--quiet" type="button" onclick="go(\'#/accounts\')">Accounts</button></div></div></section>';
   h+='</div>';
   $('app').innerHTML=h;
+}
+
+/* ---------------------------------------------------------------------------
+   The shipment-readiness strip.
+
+   The same five checks for the owner and the buyer, from the same function, so
+   nobody is ever told a different story about why an order has not shipped. The
+   owner additionally gets the buttons that change it.
+--------------------------------------------------------------------------- */
+function readinessStrip(po, opts){
+  opts=opts||{};
+  const r=poReadiness(po);
+  const admin=isAdmin();
+  return '<section class="panel'+(opts.tight?'':' space-top-16')+'"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Shipment readiness</h3>'+
+    '<p class="panel__description">'+
+      (r.shippable
+        ? 'Everything on this order is done. It can be dispatched.'
+        : 'Goods ship once every piece on the order is made, packed and paid for.')+
+    '</p></div>'+
+    badge(r.stateLabel, r.state==='dispatched'||r.state==='delivered'?'success':r.shippable?'success':'pending')+
+    '</div><div class="panel__body">'+
+    '<div class="ready-steps">'+r.steps.map(s=>
+      '<div class="ready-step'+(s.ok?' is-ok':'')+'">'+
+      '<span class="ready-step__tick">'+(s.ok?'✓':'')+'</span>'+
+      '<div><strong>'+esc(s.k)+'</strong><span>'+esc(s.v)+'</span></div></div>').join('')+'</div>'+
+    (r.blocker
+      ? '<p class="ready-blocker">'+esc(r.blocker)+'</p>'
+      : '<p class="ready-blocker ready-blocker--ok">Nothing is outstanding on this order.</p>')+
+    (admin?readinessActions(po, r):'')+
+    '</div></section>';
+}
+
+function readinessActions(po, r){
+  const b=[];
+  if(!r.packed && r.made===r.pieces && r.pieces)
+    b.push('<button class="button button--secondary" type="button" onclick="mPacked(\''+po.id+'\')">Mark packed</button>');
+  if(r.packed && !r.cleared)
+    b.push('<button class="button button--secondary" type="button" onclick="mClearFinance(\''+po.id+'\')">Clear payment</button>');
+  if(po.dispatch_state!=='dispatched' && po.dispatch_state!=='delivered')
+    b.push('<button class="button'+(r.shippable?'':' button--secondary')+'" type="button" onclick="mDispatch(\''+po.id+'\')">Mark dispatched</button>');
+  if(po.dispatch_state==='dispatched')
+    b.push('<button class="button button--secondary" type="button" onclick="mDelivered(\''+po.id+'\')">Mark delivered</button>');
+  b.push('<button class="button button--quiet" type="button" onclick="mShip(\''+po.id+'\')">Shipping details</button>');
+  return '<div class="button-row space-top-12">'+b.join('')+'</div>';
+}
+
+// "Which pieces on this order are finished?" — the signal a buyer wants long
+// before the order itself can leave.
+function piecesDonePanel(po){
+  const r=poReadiness(po);
+  if(!r.pieces) return '';
+  const done=r.items.filter(pieceIsMade);
+  return '<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Pieces finished</h3>'+
+    '<p class="panel__description">Each piece is made on its own. The order travels once all of them are ready.</p></div>'+
+    badge(done.length+' of '+r.pieces, done.length===r.pieces?'success':'')+'</div>'+
+    '<div class="panel__body">'+r.items.map(it=>{
+      const madeIt=pieceIsMade(it);
+      const st=S.stagesById[it.current_stage_id];
+      return '<button type="button" class="piece-row" onclick="go(\'#/item/'+it.id+'\')">'+
+        '<span class="ready-step__tick'+(madeIt?' is-on':'')+'">'+(madeIt?'✓':'')+'</span>'+
+        '<div><strong>'+esc(it.product)+'</strong>'+
+        '<span>'+esc(madeIt?'Finished':(st?st.name:'Not started'))+'</span></div>'+
+        (madeIt?badge('Made','success'):badge(Math.round(it.progress*100)+'%'))+
+        '</button>';
+    }).join('')+'</div></section>';
 }
 
 </script>
@@ -8948,6 +9322,86 @@ function exportReport(){
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
   toast('Report downloaded');
+}
+
+async function mPacked(poId){
+  const p=S.posById[poId];
+  const m=modal('<h3>Mark packed</h3><div class="sub">'+esc(p.po_number)+'</div>'+
+    '<div class="form-grid">'+
+    '<div class="field"><label for="pk-date">Packed on</label><input id="pk-date" type="date" value="'+today()+'"></div>'+
+    '<div class="field field--full"><label for="pk-note">Note for the buyer (optional)</label>'+
+      '<input id="pk-note" placeholder="e.g. Two wooden crates, 480 kg"></div>'+
+    '<div class="button-row field--full"><button class="button" type="button" id="pk-go">Mark packed</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#pk-go').onclick=async ()=>{
+    const {error}=await sb.from('bt_purchase_orders').update({
+      packed_at:$('pk-date').value||today(), packing_note:$('pk-note').value.trim()||null,
+      dispatch_state:'packed' }).eq('id',poId);
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast('Marked packed');
+  };
+}
+
+// Clearance is the owner saying the money for this order has landed. StoneFlow
+// does not work it out — Tally is the authority — so this records a decision.
+async function mClearFinance(poId){
+  const p=S.posById[poId];
+  const m=modal('<h3>Clear payment for this order</h3><div class="sub">'+esc(p.po_number)+'</div>'+
+    '<p class="panel__description">You are recording that the amount allocated against this order has been received '+
+    'and verified in Tally. StoneFlow does not calculate this.</p>'+
+    '<div class="form-grid"><div class="button-row field--full">'+
+    '<button class="button" type="button" id="cf-go">Payment is cleared</button>'+
+    (p.finance_cleared?'<button class="button button--secondary" type="button" id="cf-undo">Withdraw clearance</button>':'')+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  const setIt=async on=>{
+    const {error}=await sb.from('bt_purchase_orders').update({
+      finance_cleared:on, finance_cleared_at:on?new Date().toISOString():null,
+      finance_cleared_by:on?uid():null }).eq('id',poId);
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast(on?'Payment cleared':'Clearance withdrawn');
+  };
+  m.m.querySelector('#cf-go').onclick=()=>setIt(true);
+  const u=m.m.querySelector('#cf-undo'); if(u) u.onclick=()=>setIt(false);
+}
+
+// Dispatch warns rather than blocks: Yash keeps the judgement, but never by
+// accident — an override has to be typed and it is recorded.
+async function mDispatch(poId){
+  const p=S.posById[poId];
+  const r=poReadiness(p);
+  const m=modal('<h3>Mark dispatched</h3><div class="sub">'+esc(p.po_number)+'</div>'+
+    (r.shippable
+      ? '<p class="panel__description">Everything on this order is done. Nothing is outstanding.</p>'
+      : '<div class="attn attn--warn attn--flat"><span><strong>This order is not ready.</strong><br>'+
+        esc(r.blocker)+'</span></div>'+
+        '<p class="panel__description">You can still dispatch it, but the reason is recorded against the order.</p>')+
+    '<div class="form-grid">'+
+    '<div class="field"><label for="dp-date">Dispatched on</label><input id="dp-date" type="date" value="'+today()+'"></div>'+
+    (r.shippable?'':'<div class="field field--full"><label for="dp-why">Why are you dispatching early? *</label>'+
+      '<input id="dp-why" placeholder="e.g. buyer collected in person, balance agreed on account"></div>')+
+    '<div class="button-row field--full"><button class="button" type="button" id="dp-go">Mark dispatched</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#dp-go').onclick=async ()=>{
+    const why=r.shippable?null:($('dp-why').value.trim());
+    if(!r.shippable && !why){ toast('Please say why — it is recorded against the order',{err:true}); return; }
+    const {error}=await sb.from('bt_purchase_orders').update({
+      dispatch_state:'dispatched', shipped_at:$('dp-date').value||today(),
+      dispatch_override_reason:why }).eq('id',poId);
+    if(error){ toast(error.message,{err:true}); return; }
+    if(why){ try{ await sb.from('bt_activity').insert({ po_id:poId, actor_id:uid(), actor_role:'admin',
+        actor_name:(S.profile.full_name||'Owner'), action:'dispatch_override',
+        detail:p.po_number+' dispatched before it was ready — '+why }); }catch(e){} }
+    closeModal(); await loadData(); render(); toast('Marked dispatched');
+  };
+}
+
+async function mDelivered(poId){
+  const p=S.posById[poId];
+  if(!confirm('Mark '+p.po_number+' as delivered?')) return;
+  const {error}=await sb.from('bt_purchase_orders').update({
+    dispatch_state:'delivered', delivered_at:today() }).eq('id',poId);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render(); toast('Marked delivered');
 }
 
 </script>
