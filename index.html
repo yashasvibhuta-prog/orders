@@ -1302,9 +1302,123 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .photo-ship{border-top:1px solid var(--line);margin-top:16px;padding-top:12px}
 .empty-state--tight{padding:14px 0;font-size:13px;text-align:left}
 .plain-list{margin:0 0 4px;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.6}
+
+/* ---- Buyer "My orders": master rail + order detail, per the audited portal ----
+   The purchase order is the permanent parent, so it gets the page: pick it on
+   the left, and everything under it reads on the right. */
+.order-shell{display:grid;grid-template-columns:255px minmax(0,1fr);gap:16px;align-items:start}
+.bo-rail{position:sticky;top:16px}
+.bo-rail .panel__head{flex-direction:column;gap:2px;padding:16px 16px 12px}
+.bo-rail .panel__title{font-size:19px}
+.bo-rail .panel__description{margin-top:2px;font-size:12px}
+.bo-rail__body{padding:8px;display:block}
+.order-select{width:100%;padding:12px;border:1px solid transparent;border-radius:9px;
+  background:transparent;text-align:left;color:var(--ink);font:inherit;cursor:pointer;display:block}
+.order-select:hover,.order-select.is-active{background:var(--canvas);border-color:var(--line)}
+.order-select b{display:block;font-size:11px;font-weight:700;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--muted)}
+.order-select strong{display:block;margin-top:5px;font-size:15px;line-height:1.25}
+.order-select span{display:block;margin-top:5px;color:var(--muted);font-size:12px}
+
+.order-hero{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.order-hero__top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.order-hero h1{margin:4px 0 0;font-size:clamp(30px,3.4vw,46px);line-height:1.02;letter-spacing:-.02em}
+.order-hero__sub{margin:8px 0 0;color:var(--muted);font-size:13px}
+.answer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:18px}
+.answer{padding:12px;border-radius:9px;background:var(--canvas)}
+.answer span{display:block;color:var(--muted);font-size:10px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase}
+.answer strong{display:block;margin-top:6px;font-size:15px}
+.po-gate{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:12px}
+.po-gate>div{padding:10px;border-radius:9px;background:var(--canvas)}
+.po-gate span{display:block;color:var(--muted);font-size:10px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase}
+.po-gate strong{display:block;margin-top:5px;font-size:13px}
+.po-gate .hold strong{color:var(--danger,#b1503a)}
+.audit-source{display:flex;align-items:flex-start;gap:10px;padding:13px 15px;
+  border:1px solid var(--line);border-radius:11px;background:var(--canvas);
+  color:var(--muted);font-size:12.5px;line-height:1.55}
+.audit-source strong{display:block;color:var(--ink);margin-bottom:3px}
+.audit-source .icon{flex:0 0 auto;margin-top:2px}
+
+.product-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}
+@media (min-width:1500px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.product-card2{display:grid;grid-template-columns:185px minmax(0,1fr);gap:15px;padding:14px;
+  border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.product-card2__img{height:155px;border:0;border-radius:9px;overflow:hidden;padding:0;
+  background:var(--canvas);cursor:pointer;position:relative;display:block}
+.product-card2__img img{width:100%;height:100%;object-fit:cover;display:block}
+.product-card2__none{width:100%;height:100%;display:grid;place-items:center;color:var(--muted)}
+.product-card2__img>span{position:absolute;left:7px;bottom:7px;padding:4px 7px;border-radius:5px;
+  background:rgba(255,255,255,.94);font-size:10px;font-weight:800;color:#222}
+.product-card2 h3{margin:4px 0 5px;font-size:22px;line-height:1.05;letter-spacing:-.01em}
+.product-card2>div>p{margin:0;color:var(--muted);font-size:12.5px}
+.product-card2__facts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+.product-card2__facts div{padding:9px;border-radius:8px;background:var(--canvas)}
+.product-card2__facts span{display:block;color:var(--muted);font-size:10px;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.product-card2__facts strong{display:block;margin-top:4px;font-size:13px}
+.product-card2__actions{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
+
+@media (max-width:1080px){
+  .product-grid{grid-template-columns:1fr}
+  .answer-grid{grid-template-columns:repeat(2,1fr)}
+  .po-gate{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:820px){
+  .order-shell{grid-template-columns:1fr}
+  .bo-rail{position:static}
+  .bo-rail__body{display:flex;gap:8px;overflow-x:auto;padding:8px}
+  .order-select{min-width:190px}
+}
+@media (max-width:560px){
+  .product-card2{grid-template-columns:1fr}
+  .product-card2__img{height:200px}
+  .po-gate,.answer-grid{grid-template-columns:1fr 1fr}
+}
+
+/* Buyer approvals: a decision row that shows the piece, names the revision and
+   says what it is holding up. */
+.filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;
+  padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.filterbar .chip{padding:6px 12px;border:1px solid transparent;border-radius:999px;
+  background:transparent;color:var(--ink-soft);font:inherit;font-size:13px;cursor:pointer}
+.filterbar .chip b{font-weight:700;margin-left:4px}
+.filterbar .chip:hover,.filterbar .chip.is-on{background:var(--canvas);border-color:var(--line);color:var(--ink)}
+.filterbar__note{margin-left:auto;color:var(--muted);font-size:11.5px}
+.appr-row{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:16px;align-items:center;
+  padding:14px 0;border-top:1px solid var(--line)}
+.appr-row:first-child{border-top:0;padding-top:2px}
+.appr-row--done{grid-template-columns:minmax(0,1fr) auto}
+.appr-row__img{height:104px;border-radius:9px;overflow:hidden;background:var(--canvas);position:relative}
+.appr-row__img img{width:100%;height:100%;object-fit:cover;display:block}
+.appr-row__none{width:100%;height:100%;display:grid;place-items:center;color:var(--muted)}
+.appr-row__img>span{position:absolute;left:6px;bottom:6px;padding:3px 6px;border-radius:5px;
+  background:rgba(255,255,255,.94);font-size:10px;font-weight:800;color:#222}
+.appr-row h3{margin:3px 0 6px;font-size:21px;line-height:1.1;letter-spacing:-.01em}
+.appr-row__ask{margin:0;font-size:13px;line-height:1.5;color:var(--ink-soft)}
+.appr-row__ask strong{color:var(--ink)}
+.appr-row__meta{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0 0;color:var(--muted);font-size:11.5px}
+.appr-row__meta b{color:var(--ink);font-weight:600}
+.appr-row__meta b.is-alert{color:var(--danger,#b1503a)}
+.appr-row__meta b.is-pending{color:#8a4b12}
+.appr-row__why{margin:7px 0 0;font-size:13px;font-style:italic;line-height:1.45}
+@media (max-width:760px){
+  .appr-row{grid-template-columns:1fr}
+  .appr-row__img{height:170px}
+  .filterbar__note{display:none}
+}
+.filterbar--wrap{gap:8px}
+.filter-sel{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.filter-sel select{padding:5px 8px;border:1px solid var(--line);border-radius:8px;
+  background:var(--surface);color:var(--ink);font:inherit;font-size:12.5px}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.data-table .num.is-due{color:var(--danger,#b1503a);font-weight:600}
+.data-table__total td{border-top:1.5px solid var(--line);font-weight:700}
+.panel__foot{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
 </style>
 <body>
-<script>const BUILD_ID='5cf42b436665';</script>
+<script>const BUILD_ID='a837fbc31b3d';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -1547,7 +1661,7 @@ const S = {
   payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{},
   updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{}, handover:[],
   invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{},
-  revisions:[], decisionByRev:{}, revByStage:{}
+  revisions:[], decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 function isStaff(){ return S.profile && S.profile.role==='staff'; }
@@ -1597,6 +1711,7 @@ async function loadStaffData(){
   S.profilesAll=((pr&&pr.data)||[]);
   S.handover=(ho&&ho.data)||[];
   indexApprovals([], []);
+  indexAllocations([]);
   S.payments=[]; S.charges=[]; indexFinance();
   indexAccounts([],[],[],[]);
   S.updates = upd.data||[]; S.updInternal = {};
@@ -1916,7 +2031,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, ho, arev, adec] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, ho, arev, adec, alloc] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -1940,7 +2055,10 @@ async function loadData(){
     // Approval history. RLS returns the owner everything and a buyer only his
     // own, so the same two queries serve both roles.
     sb.from('bt_approval_revisions').select('*').order('rev_no',{ascending:false}),
-    sb.from('bt_approval_decisions').select('*')
+    sb.from('bt_approval_decisions').select('*'),
+    // Verified Tally allocations. A buyer without the finance permission has no
+    // policy on this table, so the query simply comes back empty for him.
+    sb.from('bt_po_allocations').select('*').order('effective_date',{ascending:false})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -1979,6 +2097,7 @@ async function loadData(){
   S.activity = ac.data||[];
   S.handover = (ho&&ho.data)||[];
   indexApprovals((arev&&arev.data)||[], (adec&&adec.data)||[]);
+  indexAllocations((alloc&&alloc.data)||[]);
   S.profilesAll = pr.data||[];
   S.payments = pay.data||[]; S.charges = chg.data||[];
   indexFinance();
@@ -2420,6 +2539,40 @@ function buyerNext(){
   // the ones needing him first
   out.sort((a,b)=>(a.who==='you'?0:1)-(b.who==='you'?0:1));
   return out;
+}
+
+/* Money allocated in Tally to a specific purchase order. Finance is kept at
+   buyer level — this is the dispatch control on top of it, and the reason a
+   buyer being in credit overall does not release an unrelated order. */
+function indexAllocations(rows){
+  S.allocations=rows||[];
+  S.allocByPo={};
+  S.allocations.forEach(a=>{ (S.allocByPo[a.po_id]=S.allocByPo[a.po_id]||[]).push(a); });
+}
+
+function poFinance(po){
+  const invs=(S.invoices||[]).filter(i=>i.po_id===po.id);
+  const invoiced=invs.reduce((a,i)=>a+(+i.total||0),0);
+  const allocated=(S.allocByPo[po.id]||[]).reduce((a,x)=>a+(+x.amount||0),0);
+  const outstanding=Math.max(invoiced-allocated,0);
+  const cleared=!!po.finance_cleared;
+  let state='verification_pending';
+  if(!invs.length)                       state='not_invoiced';
+  else if(cleared && outstanding<=0)     state='cleared';
+  else if(allocated<=0)                  state='not_received';
+  else if(outstanding>0)                 state='part_paid';
+  return { invoiced, allocated, outstanding, invoices:invs.length, cleared, state,
+    label:{not_invoiced:'Not invoiced', cleared:'Completely cleared',
+           not_received:'Payment not received', part_paid:'Part paid',
+           verification_pending:'Payment received — verification pending'}[state] };
+}
+
+// The target image for a piece: what the buyer ordered, not what it looks like
+// mid-production. Falls back to the earliest released photograph.
+function targetImage(it){
+  const list=visiblePhotos((S.photosByItem[it.id]||[]));
+  const t=list.find(p=>p.photo_type==='target') || list.find(p=>!p.stage_id) || list[0];
+  return t||null;
 }
 
 function visiblePhotos(list){
@@ -5821,118 +5974,290 @@ function vBuyerHome(){
   paintPlain(h);
 }
 
+/* My orders — master and detail, the way the buyer holds the job: pick the
+   purchase order first, then everything under it. The order is the permanent
+   parent; a product never carries its own shipment. */
 function vBuyerOrders(){
-  const pos=(S.pos||[]).slice().sort((a,b)=>String(b.po_date).localeCompare(String(a.po_date)));
-  let body='<section class="panel"><div class="panel__body">';
-  if(!pos.length) body+='<div class="empty-state">No orders yet.</div>';
-  else body+=pos.map(p=>{
-    const items=(p.items||[]);
-    const prog=items.length?items.reduce((a,i)=>a+i.progress,0)/items.length:0;
-    const cur=items.map(i=>curStage(i)).filter(Boolean)
-      .sort((a,x)=>a.sort_order-x.sort_order)[0];
-    return '<article class="order-row" onclick="go(\'#/po/'+p.id+'\')">'+
-      '<div class="order-row__main">'+eyebrow(p.po_number+(p.status!=='open'?(' · '+p.status):''))+
-      '<h4>'+esc(p.project||p.po_number)+'</h4>'+
-      '<p class="order-row__sub">'+items.length+' product'+(items.length===1?'':'s')+
-        (p.expected_ship_date?' · delivery '+fdate(p.expected_ship_date):'')+'</p>'+
-      progressBar(prog)+'</div>'+
-      '<div class="order-row__side"><span>Current stage</span><strong>'+esc(cur?cur.name:'—')+'</strong>'+
-      '<small>'+Math.round(prog*100)+'% complete</small></div>'+
-      '<button class="button button--secondary" type="button">Open order</button></article>';
-  }).join('');
-  body+='</div></section>';
-  paintPlain(buyerPage('My orders.','Everything you have with us',
-    'Each order opens to its products, photographs, documents and shipping.', '', body));
+  const pos=(S.pos||[]).slice()
+    .sort((a,b)=>String(b.po_date||'').localeCompare(String(a.po_date||'')));
+  if(!pos.length){
+    paintPlain(buyerPage('My orders.','Buyer organisation → purchase order → products',
+      'Choose a purchase order first. Every product beneath it keeps its own production record; packing and shipping remain one order-level workflow.',
+      '', '<section class="panel"><div class="panel__body"><div class="empty-state">No orders yet.</div></div></section>'));
+    return;
+  }
+  const sel=pos.find(p=>p.id===S.buyerPo)||pos[0];
+  S.buyerPo=sel.id;
+
+  const rail='<aside class="panel bo-rail"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Purchase orders</h3>'+
+    '<p class="panel__description">'+pos.length+' open</p></div></div>'+
+    '<div class="panel__body bo-rail__body">'+pos.map(p=>{
+      const n=(p.items||[]).length;
+      const prog=n?Math.round(p.items.reduce((a,i)=>a+i.progress,0)/n*100):0;
+      return '<button type="button" class="order-select'+(p.id===sel.id?' is-active':'')+
+        '" onclick="pickBuyerPo(\''+p.id+'\')">'+
+        '<b>'+esc(p.po_number)+'</b><strong>'+esc(p.project||p.po_number)+'</strong>'+
+        '<span>'+n+' product'+(n===1?'':'s')+' · '+prog+'%</span></button>';
+    }).join('')+'</div></aside>';
+
+  const items=sel.items||[];
+  const prog=items.length?Math.round(items.reduce((a,i)=>a+i.progress,0)/items.length*100):0;
+  const r=poReadiness(sel);
+  const fin=poFinance(sel);
+  const owing=financeVisible()?money(fin.outstanding, sel.currency||'INR'):'—';
+
+  const tile=(k,v)=>'<div class="answer"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>';
+  const gate=(k,v,hold)=>'<div'+(hold?' class="hold"':'')+'><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>';
+
+  const hero='<section class="order-hero"><div class="order-hero__top"><div>'+
+    eyebrow(sel.po_number+(sel.po_date?' · dated '+fdate(sel.po_date):''))+
+    '<h1>'+esc(sel.project||sel.po_number)+'</h1>'+
+    '<p class="order-hero__sub">'+items.length+' product'+(items.length===1?'':'s')+
+      (sel.expected_ship_date?' · shipment target '+fdate(sel.expected_ship_date):' · shipment target to be confirmed')+
+    '</p></div>'+badge(r.stateLabel, r.shippable?'success':'')+'</div>'+
+    '<div class="answer-grid">'+
+      tile('Production position', prog+'%')+
+      tile('Products', String(items.length))+
+      tile('Shipment target', sel.expected_ship_date?fdate(sel.expected_ship_date):'—')+
+      tile(financeVisible()?'Outstanding allocation':'Payment', financeVisible()?(owing||'Nil'):'Handled by your office')+
+    '</div>'+
+    '<div class="po-gate">'+
+      gate('Products final', r.made+' of '+r.pieces)+
+      gate('Production', prog+'% overall')+
+      gate('Buyer decisions', r.decisions?(r.decisions+' pending'):'None')+
+      gate('Payment clearance', fin.cleared?'Cleared':(financeVisible()?fin.label:'With your office'), !fin.cleared)+
+      gate('Order shipment', r.shippable?'Ready':'Not ready', !r.shippable)+
+    '</div>'+
+    '<div class="audit-source space-top-12">'+icon('i-box')+'<div>'+
+      '<strong>The order owns the shipment</strong>'+
+      'Every product below is planned, finished, packed, paid for and shipped under this one purchase order. No single piece leaves on its own.'+
+    '</div></div></section>';
+
+  const cards=items.length
+    ? '<section class="product-grid">'+items.map(it=>{
+        const st=curStage(it), pct=Math.round((it.progress||0)*100);
+        const img=targetImage(it);
+        const waiting=(S.stByItem[it.id]||[]).some(x=>x.approval==='requested');
+        return '<article class="product-card2">'+
+          '<button type="button" class="product-card2__img" onclick="go(\'#/item/'+it.id+'\')" '+
+            'aria-label="Open '+esc(it.product)+'">'+
+            (img?'<img alt="" data-ph-path="'+esc(img.path)+'">'
+                :'<div class="product-card2__none">'+icon('i-box')+'</div>')+
+            '<span>Target product</span></button>'+
+          '<div>'+eyebrow([it.item_code, (it.qty>1?(+it.qty)+' pieces':'1 piece')].filter(Boolean).join(' · '))+
+            '<h3>'+esc(it.product)+'</h3>'+
+            '<p>'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · ')||'—')+'</p>'+
+            '<div class="product-card2__facts">'+
+              '<div><span>Current stage</span><strong>'+esc(st?st.name:'Not started')+'</strong></div>'+
+              '<div><span>Progress</span><strong>'+pct+'%</strong></div>'+
+            '</div>'+progressBar(it.progress||0)+
+            '<div class="product-card2__actions">'+
+              '<button class="button button--secondary" type="button" onclick="go(\'#/item/'+it.id+'\')">Open product</button>'+
+              (waiting?'<button class="button" type="button" onclick="go(\'#/approvals\')">Review approval</button>':'')+
+            '</div></div></article>';
+      }).join('')+'</section>'
+    : '<section class="panel space-top-12"><div class="panel__body"><div class="empty-state">'+
+      'We are still adding the products to this order.</div></div></section>';
+
+  paintPlain(buyerPage('My orders.','Buyer organisation → purchase order → products',
+    'Choose a purchase order first. Every product beneath it keeps its own production record; packing and shipping remain one order-level workflow.',
+    '', '<div class="order-shell">'+rail+'<main>'+hero+cards+'</main></div>'));
+  hydrateImages();
 }
 
+/* Approvals, grouped by purchase order and never as a mixed feed — the buyer
+   opens an order, recognises the piece by its picture, and decides against one
+   named revision. Overdue and production-blocking decisions come first. */
 function vBuyerApprovals(){
-  const waiting=pendingApprovals();
-  const decided=[];
-  (S.items||[]).forEach(it=>(S.stByItem[it.id]||[]).forEach(r=>{
-    if(r.approval==='approved'||r.approval==='changes_requested')
-      decided.push({item:it,row:r,stage:S.stagesById[r.stage_id]});
-  }));
-  decided.sort((a,b)=>String(b.row.approval_at).localeCompare(String(a.row.approval_at)));
+  const view=S.apprView||'pending';
 
-  let body='<section class="panel"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Awaiting your decision</h3>'+
-    '<p class="panel__description">'+(waiting.length?waiting.length+' active approval'+(waiting.length===1?'':'s'):'Nothing open')+'</p></div>'+
-    (waiting.length?badge('Please review','pending'):badge('All clear','success'))+'</div><div class="panel__body">'+
-    (waiting.length?waiting.map(a=>{
-      const pics=visiblePhotos((S.photosByItem[a.item.id]||[]).filter(x=>x.stage_id===a.row.stage_id));
-      return '<article class="approval-row"><div>'+
-        '<strong>'+esc(a.stage.name)+' · '+esc(a.item.product)+'</strong>'+
-        '<span>'+esc(a.row.approval_note||'Approval requested')+
-        (pics.length?(' · '+pics.length+' photograph'+(pics.length===1?'':'s')):'')+'</span></div>'+
-        '<button class="button" type="button" onclick="go(\'#/item/'+a.item.id+'\')">Review</button></article>';
-    }).join('')
-    :'<div class="empty-state">Nothing is waiting on you. We will tell you here the moment something is.</div>')+
-    '</div></section>';
-
-  // The permanent record. Each round is a revision the buyer decided against, and
-  // asking again makes a new one rather than overwriting what he said last time —
-  // so a piece that took three goes shows all three, oldest decision intact.
-  const rounds=[];
+  // pending: an open revision on one of his pieces
+  const pending=[];
   (S.revisions||[]).forEach(r=>{
+    if(r.superseded_at || S.decisionByRev[r.id]) return;
     const it=S.itemsById[r.item_id]; if(!it) return;
-    const d=S.decisionByRev[r.id]; if(!d) return;
-    rounds.push({item:it, stage:S.stagesById[r.stage_id], rev:r, dec:d});
+    pending.push({rev:r, item:it, stage:S.stagesById[r.stage_id], po:S.posById[it.po_id]});
   });
-  rounds.sort((a,b)=>String(b.dec.decided_at).localeCompare(String(a.dec.decided_at)));
+  // decided: every recorded round, newest first
+  const decided=[];
+  (S.revisions||[]).forEach(r=>{
+    const d=S.decisionByRev[r.id]; if(!d) return;
+    const it=S.itemsById[r.item_id]; if(!it) return;
+    decided.push({rev:r, item:it, stage:S.stagesById[r.stage_id], po:S.posById[it.po_id], dec:d});
+  });
+  decided.sort((a,b)=>String(b.dec.decided_at).localeCompare(String(a.dec.decided_at)));
 
-  if(rounds.length){
-    body+='<section class="panel space-top-16"><div class="panel__head"><div>'+
-      '<h3 class="panel__title">Already decided</h3>'+
-      '<p class="panel__description">Every decision you have made, against the photographs you saw at the time. '+
-      'Nothing here changes when we send a new version.</p></div>'+
-      badge(rounds.length+' recorded')+'</div>'+
-      '<div class="panel__body">'+rounds.slice(0,20).map(a=>{
-        const ok=a.dec.decision==='approved';
-        return '<article class="approval-row"><div>'+
-          '<strong>'+esc((a.stage?a.stage.name:'Stage')+' · '+a.item.product)+'</strong>'+
-          '<span>'+esc('Version '+a.rev.rev_no+' · '+
-            (a.dec.decided_at?fdate(a.dec.decided_at):'')+
-            ((a.rev.photo_ids||[]).length?(' · '+a.rev.photo_ids.length+' photograph'+
-              (a.rev.photo_ids.length===1?'':'s')):''))+'</span>'+
-          (a.dec.reason?'<span class="approval-row__why">'+esc('“'+a.dec.reason+'”')+'</span>':'')+
-          '</div>'+badge(ok?'Approved':'Changes asked', ok?'success':'pending')+
-          '</article>';
-      }).join('')+'</div></section>';
-  } else if(decided.length){
-    // Decisions taken before the record was kept per revision.
-    body+='<section class="panel space-top-16"><div class="panel__head"><div>'+
-      '<h3 class="panel__title">Already decided</h3>'+
-      '<p class="panel__description">Your past decisions, and what you said.</p></div></div>'+
-      '<div class="panel__body">'+decided.slice(0,10).map(a=>
-        '<article class="approval-row"><div><strong>'+esc(a.stage.name)+' · '+esc(a.item.product)+'</strong>'+
-        '<span>'+esc((a.row.approval==='approved'?'Approved':'Changes requested')+
-          (a.row.approval_at?(' · '+fdate(a.row.approval_at)):''))+
-          (a.row.approval_note?(' · '+a.row.approval_note):'')+'</span></div>'+
-        badge(a.row.approval==='approved'?'Approved':'Changes asked', a.row.approval==='approved'?'success':'pending')+
-        '</article>').join('')+'</div></section>';
+  // overdue first, then due today, then due soon, then the rest — but never at
+  // the cost of breaking the purchase-order grouping
+  const t=today();
+  const rank=x=>{
+    if(!x.rev.due_at) return 3;
+    if(x.rev.due_at < t) return 0;
+    if(x.rev.due_at === t) return 1;
+    return 2;
+  };
+  pending.sort((a,b)=>rank(a)-rank(b) ||
+    String(a.po&&a.po.po_number).localeCompare(String(b.po&&b.po.po_number)) ||
+    (a.item.sort_order||0)-(b.item.sort_order||0));
+
+  const bar='<div class="filterbar">'+
+    '<button type="button" class="chip'+(view==='pending'?' is-on':'')+'" onclick="setApprView(\'pending\')">'+
+      'Pending <b>'+pending.length+'</b></button>'+
+    '<button type="button" class="chip'+(view==='history'?' is-on':'')+'" onclick="setApprView(\'history\')">'+
+      'Decision history <b>'+decided.length+'</b></button>'+
+    '<span class="filterbar__note">Purchase order → product → exact approval revision</span>'+
+    '</div>';
+
+  const dueLabel=r=>{
+    if(!r.due_at) return null;
+    if(r.due_at < t) return {t:'Overdue', k:'alert'};
+    if(r.due_at === t) return {t:'Today', k:'pending'};
+    return {t:fdate(r.due_at), k:''};
+  };
+
+  const row=x=>{
+    const img=targetImage(x.item);
+    const d=dueLabel(x.rev);
+    const label=x.rev.label||('R'+x.rev.rev_no);
+    const n=(x.rev.photo_ids||[]).length;
+    return '<article class="appr-row">'+
+      '<div class="appr-row__img">'+
+        (img?'<img alt="" data-ph-path="'+esc(img.path)+'">':'<div class="appr-row__none">'+icon('i-box')+'</div>')+
+        '<span>Target product</span></div>'+
+      '<div>'+eyebrow([x.item.item_code, (x.item.qty>1?(+x.item.qty)+' pieces':'1 piece')].filter(Boolean).join(' · '))+
+        '<h3>'+esc(x.item.product)+'</h3>'+
+        '<p class="appr-row__ask"><strong>'+esc((x.stage?x.stage.name:'Stage')+' '+label)+'.</strong> '+
+          esc(x.rev.note||'Please review and approve.')+'</p>'+
+        '<p class="appr-row__meta">'+
+          '<span>Requested <b>'+esc(x.rev.requested_at?fdate(x.rev.requested_at):'—')+'</b></span>'+
+          (d?'<span>Due <b class="is-'+d.k+'">'+esc(d.t)+'</b></span>':'')+
+          '<span>Evidence <b>'+n+' photograph'+(n===1?'':'s')+'</b></span>'+
+          '<span>Impact <b>'+esc(x.rev.impact||'Production waits')+'</b></span>'+
+        '</p></div>'+
+      '<button class="button" type="button" onclick="go(\'#/item/'+x.item.id+'\')">Review '+esc(label)+'</button>'+
+      '</article>';
+  };
+
+  const decidedRow=x=>{
+    const ok=x.dec.decision==='approved';
+    const label=x.rev.label||('R'+x.rev.rev_no);
+    return '<article class="appr-row appr-row--done">'+
+      '<div>'+eyebrow((x.po?x.po.po_number+' · ':'')+(x.stage?x.stage.name:''))+
+        '<h3>'+esc(x.item.product)+'</h3>'+
+        '<p class="appr-row__meta"><span>Revision <b>'+esc(label)+'</b></span>'+
+        '<span>Decided <b>'+esc(x.dec.decided_at?fdate(x.dec.decided_at):'')+'</b></span></p>'+
+        (x.dec.reason?'<p class="appr-row__why">'+esc('\u201c'+x.dec.reason+'\u201d')+'</p>':'')+
+      '</div>'+badge(ok?'Approved':'Changes asked', ok?'success':'pending')+'</article>';
+  };
+
+  // group whichever list is showing under its purchase order
+  const groupBy=list=>{
+    const g={};
+    list.forEach(x=>{ (g[x.item.po_id]=g[x.item.po_id]||[]).push(x); });
+    return Object.keys(g).map(id=>({po:S.posById[id], rows:g[id]})).filter(x=>x.po);
+  };
+
+  let body=bar;
+  if(view==='pending'){
+    const groups=groupBy(pending);
+    if(!groups.length) body+='<section class="panel"><div class="panel__body"><div class="empty-state">'+
+      'Nothing is waiting on you. We will tell you here the moment something is.</div></div></section>';
+    else body+=groups.map(g=>
+      '<section class="panel space-top-12"><div class="panel__head"><div>'+
+        eyebrow(g.po.po_number+(g.po.expected_ship_date?' · shipment '+fdate(g.po.expected_ship_date):''))+
+        '<h3 class="panel__title">'+esc(g.po.project||g.po.po_number)+'</h3></div>'+
+        badge(g.rows.length+' decision'+(g.rows.length===1?'':'s')+' due','pending')+'</div>'+
+      '<div class="panel__body">'+g.rows.map(row).join('')+'</div></section>').join('');
+  } else {
+    const groups=groupBy(decided);
+    if(!groups.length) body+='<section class="panel"><div class="panel__body"><div class="empty-state">'+
+      'No decisions recorded yet.</div></div></section>';
+    else body+=groups.map(g=>
+      '<section class="panel space-top-12"><div class="panel__head"><div>'+
+        eyebrow(g.po.po_number)+
+        '<h3 class="panel__title">'+esc(g.po.project||g.po.po_number)+'</h3></div>'+
+        badge(g.rows.length+' recorded')+'</div>'+
+      '<div class="panel__body">'+g.rows.map(decidedRow).join('')+'</div></section>').join('');
   }
-  paintPlain(buyerPage('Approvals.','Decisions assigned to you',
-    'Review the photographs and the note before deciding. Every response is recorded against the exact version you saw.', '', body));
+
+  body+='<div class="audit-source space-top-12">'+icon('i-check')+'<div>'+
+    '<strong>Decision integrity</strong>'+
+    'Your approval or change request, who made it, when, the note and the exact revision form a permanent record. '+
+    'A revised item creates a new decision; it never overwrites this one.'+
+    '</div></div>';
+
+  paintPlain(buyerPage('Approvals.','Buyer decisions · grouped by purchase order',
+    'Open a purchase order, identify the product by its picture and decide on the exact revision. Nothing from another order is mixed into this queue.',
+    '', body));
+  hydrateImages();
 }
 
 /* Photographs, grouped the way a buyer holds the job in his head: the purchase
    order he raised, the piece on it, and the stage the picture was taken at.
    Grouping by piece alone made a buyer with two orders scroll a single flat run
    of products and work out for himself which order each belonged to. */
+/* The six filters the photograph rules ask for. Each one narrows the set; none
+   of them changes the order → piece → stage grouping, so a photograph never
+   loses the context that says which order and which piece it belongs to. */
+function photoFilterBar(){
+  const f=S.photoFilter||{};
+  const pos=(S.pos||[]).filter(p=>(p.items||[]).length || (S.photos||[]).some(x=>x.po_id===p.id));
+  const items=f.po?((S.posById[f.po]||{}).items||[]):[];
+  const stages=S.stages.filter(s=>s.active);
+  const chip=(on,label,js)=>'<button type="button" class="chip'+(on?' is-on':'')+'" onclick="'+js+'">'+label+'</button>';
+  const sel=(id,label,opts,val,js)=>'<label class="filter-sel"><span>'+esc(label)+'</span>'+
+    '<select id="'+id+'" onchange="'+js+'">'+opts.map(o=>
+      '<option value="'+esc(o.v)+'"'+(String(o.v)===String(val||'')?' selected':'')+'>'+esc(o.t)+'</option>').join('')+
+    '</select></label>';
+
+  return '<div class="filterbar filterbar--wrap">'+
+    chip(!f.kind && !f.po && !f.item && !f.stage,'All', "setPhotoFilter({})")+
+    chip(f.kind==='new','New this week', "setPhotoFilter({kind:'new'})")+
+    chip(f.kind==='final','Final photographs', "setPhotoFilter({kind:'final'})")+
+    chip(f.kind==='ship','Packing and shipment', "setPhotoFilter({kind:'ship'})")+
+    sel('pf-po','Order', [{v:'',t:'All orders'}].concat(pos.map(p=>({v:p.id,t:p.po_number}))), f.po,
+        "setPhotoFilter({po:this.value||null})")+
+    (f.po?sel('pf-item','Product', [{v:'',t:'All products'}].concat(items.map(i=>({v:i.id,t:i.product}))), f.item,
+        "setPhotoFilter({po:S.photoFilter.po, item:this.value||null})"):'')+
+    sel('pf-stage','Stage', [{v:'',t:'All stages'}].concat(stages.map(s=>({v:s.id,t:s.name}))), f.stage,
+        "setPhotoFilter(Object.assign({},S.photoFilter,{stage:this.value||null,kind:null}))")+
+    '</div>';
+}
+
 function vBuyerPhotos(){
+  const f=S.photoFilter||{};
+  const weekAgo=lastDays?lastDays(7)[0]:null;
+  const lastStage=(S.stages.filter(x=>x.active).slice(-1)[0]||{}).id;
+  // A filter narrows what is shown; it never flattens the order → piece → stage
+  // shape, because that shape is how the buyer knows what he is looking at.
+  const keep=p=>{
+    if(f.po && (p.item_id? (S.itemsById[p.item_id]||{}).po_id!==f.po : p.po_id!==f.po)) return false;
+    if(f.item && p.item_id!==f.item) return false;
+    if(f.stage && String(p.stage_id)!==String(f.stage)) return false;
+    if(f.kind==='new' && !(weekAgo && String(p.created_at).slice(0,10)>=weekAgo)) return false;
+    if(f.kind==='final' && String(p.stage_id)!==String(lastStage)) return false;
+    if(f.kind==='ship' && p.item_id) return false;
+    return true;
+  };
   const byItem={}, shipByPo={};
-  visiblePhotos((S.photos||[]).filter(p=>!p.log_date)).forEach(p=>{
+  visiblePhotos((S.photos||[]).filter(p=>!p.log_date)).filter(keep).forEach(p=>{
     if(p.item_id) (byItem[p.item_id]=byItem[p.item_id]||[]).push(p);
     // Packing, crates, loading and dispatch belong to the ORDER, because goods
     // ship per purchase order. Filing them under one piece would say the order
     // shipped when only that piece was photographed.
     else if(p.po_id) (shipByPo[p.po_id]=shipByPo[p.po_id]||[]).push(p);
   });
+  const bar=photoFilterBar();
   if(!Object.keys(byItem).length && !Object.keys(shipByPo).length){
-    paintPlain(buyerPage('Photographs.','Released to you',
-      'Only images we have checked and released. Nothing here is a work-in-progress shot you were not meant to see.', '',
-      '<section class="panel"><div class="panel__body"><div class="empty-state">'+
-      'No photographs have been released yet. They appear here as each stage is checked.'+
+    const filtered=!!(f.po||f.item||f.stage||f.kind);
+    paintPlain(buyerPage('Photographs.','Purchase order → product → production stage',
+      'Grouped by order, then by piece, then by the stage the picture was taken at. Only images we have checked and released.', '',
+      bar+'<section class="panel"><div class="panel__body"><div class="empty-state">'+
+      (filtered
+        ? 'No released photographs match this filter. '+
+          '<button class="button button--quiet" type="button" onclick="setPhotoFilter({})">Show all purchase orders</button>'
+        : 'No photographs have been released yet. They appear here as each stage is checked.')+
       '</div></div></section>'));
     return;
   }
@@ -6012,8 +6337,8 @@ function vBuyerPhotos(){
       shipBlock+'</div></section>';
   }).join('');
 
-  paintPlain(buyerPage('Photographs.','Released to you',
-    'Grouped by order, then by piece, then by the stage the picture was taken at. Only images we have checked and released.', '', body));
+  paintPlain(buyerPage('Photographs.','Purchase order → product → production stage',
+    'Grouped by order, then by piece, then by the stage the picture was taken at. Only images we have checked and released.', '', bar+body));
 }
 
 function vBuyerDocuments(){
@@ -6052,15 +6377,43 @@ function vBuyerFinance(){
     '<span class="kpi__label">'+esc(st.label)+'</span><strong class="kpi__value">'+esc(st.value)+'</strong>'+
     '<span class="kpi__note">'+esc(st.note)+'</span></div></div>';
   body+=panel;
-  if(inv.length) body+='<section class="panel space-top-16"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Invoices</h3>'+
-    '<p class="panel__description">As posted in our books. The original PDF is attached to each one.</p></div></div>'+
-    '<div class="panel__body"><div class="data-table-wrap"><table class="data-table">'+
-    '<tr><th>Invoice</th><th>Date</th><th>Total</th><th></th></tr>'+
-    inv.map(i=>'<tr><td>'+esc(i.invoice_no||'—')+'</td><td>'+esc(fdate(i.invoice_date))+'</td>'+
-      '<td>'+esc(money(i.total, i.currency||'INR'))+'</td>'+
-      '<td>'+(i.path?'<button class="button button--quiet" type="button" onclick="openDoc(\''+esc(i.path)+'\')">Open</button>':'')+'</td></tr>').join('')+
-    '</table></div></div></section>';
+  // Invoices, each against the order it belongs to, with what has been allocated
+  // to it in Tally and what is still outstanding. The ledger above stays the
+  // account-level truth; this table is what makes an order dispatchable.
+  if(inv.length){
+    const allocFor=i=>(S.allocations||[]).filter(a=>a.invoice_id===i.id)
+      .reduce((a,x)=>a+(+x.amount||0),0);
+    const totInv=inv.reduce((a,i)=>a+(+i.total||0),0);
+    const totAll=inv.reduce((a,i)=>a+allocFor(i),0);
+    body+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Invoices and allocations</h3>'+
+      '<p class="panel__description">As posted in our books, against the order each belongs to. '+
+      'Every figure traces to a posted document and a verified allocation — nothing is recalculated here.</p></div>'+
+      badge(inv.length+' invoice'+(inv.length===1?'':'s'))+'</div>'+
+      '<div class="panel__body"><div class="data-table-wrap"><table class="data-table">'+
+      '<tr><th>Invoice</th><th>Order</th><th>Date</th><th class="num">Invoiced</th>'+
+      '<th class="num">Allocated</th><th class="num">Outstanding</th><th></th></tr>'+
+      inv.map(i=>{
+        const po=S.posById[i.po_id];
+        const al=allocFor(i), out=Math.max((+i.total||0)-al,0);
+        return '<tr><td><strong>'+esc(i.invoice_no||'—')+'</strong></td>'+
+          '<td>'+esc(po?po.po_number:'—')+'</td>'+
+          '<td>'+esc(fdate(i.invoice_date))+'</td>'+
+          '<td class="num">'+esc(money(i.total, i.currency||'INR'))+'</td>'+
+          '<td class="num">'+esc(al?money(al, i.currency||'INR'):'—')+'</td>'+
+          '<td class="num'+(out>0?' is-due':'')+'">'+esc(out>0?money(out, i.currency||'INR'):'Nil')+'</td>'+
+          '<td>'+(i.doc_path?'<button class="button button--quiet" type="button" onclick="openDoc(\''+esc(i.doc_path)+'\')">Open</button>':'')+'</td></tr>';
+      }).join('')+
+      '<tr class="data-table__total"><td colspan="3">Total</td>'+
+        '<td class="num">'+esc(money(totInv,'INR'))+'</td>'+
+        '<td class="num">'+esc(totAll?money(totAll,'INR'):'—')+'</td>'+
+        '<td class="num'+((totInv-totAll)>0?' is-due':'')+'">'+
+          esc((totInv-totAll)>0?money(totInv-totAll,'INR'):'Nil')+'</td><td></td></tr>'+
+      '</table></div>'+
+      '<p class="panel__foot">Outstanding here is a dispatch control taken from verified Tally allocations. '+
+      'Money on your account that has not been allocated to a particular order does not release that order.</p>'+
+      '</div></section>';
+  }
   if(!st && !inv.length) body='<section class="panel"><div class="panel__body"><div class="empty-state">'+
     'Nothing has been published to your account yet.</div></div></section>';
   paintPlain(buyerPage('Your account.','Your ledger with us',
@@ -6923,6 +7276,11 @@ async function requestApproval(itemId, stageId, on){
   if(error){ toast(error.message,{err:true}); return; }
   await loadData(); render();
 }
+
+// The buyer's orders page is master-and-detail: the rail chooses, the panel shows.
+function pickBuyerPo(id){ S.buyerPo=id; render(); }
+function setApprView(v){ S.apprView=v; render(); }
+function setPhotoFilter(f){ S.photoFilter=f||{}; render(); }
 
 function gSearch(v){ window.__gq=v; render(); }
 
