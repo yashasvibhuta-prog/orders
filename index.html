@@ -3618,9 +3618,13 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa img{max-width:100%}
 .sfa .owner-primary-grid>*,.sfa .owner-secondary-grid>*{min-width:0}
 .sfa .owner-table-wrap{overflow-x:auto}
+
+/* His settings shell keeps its header and health strip; the working editor runs
+   full width beneath it rather than inside his two-column workspace. */
+.sfa .settings-body{margin-top:12px}
 </style>
 <body>
-<script>const BUILD_ID='9f976a13219f';</script>
+<script>const BUILD_ID='6d18e6ec8d19';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -3920,7 +3924,7 @@ async function loadStaffData(){
   // resolves colleague names through bt_staff_names() — the workshop and the
   // office and nothing else. Opening bt_profiles would also hand it every buyer
   // login's name and company.
-  S.profilesAll=((pr&&pr.data)||[]);
+  S.profilesAll=((pr&&pr.data)||[]); S.poScope=[];
   indexApprovals([], []);
   indexAllocations([]);
   S.payments=[]; S.charges=[]; indexFinance();
@@ -4242,7 +4246,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -4268,7 +4272,10 @@ async function loadData(){
     sb.from('bt_approval_decisions').select('*'),
     // Verified Tally allocations. A buyer without the finance permission has no
     // policy on this table, so the query simply comes back empty for him.
-    sb.from('bt_po_allocations').select('*').order('effective_date',{ascending:false})
+    sb.from('bt_po_allocations').select('*').order('effective_date',{ascending:false}),
+    // Which orders a scoped buyer person may see. Owner-only: it is how People &
+    // access shows a project user's purchase-order scope.
+    admin ? sb.from('bt_buyer_po_scope').select('*') : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -4308,6 +4315,7 @@ async function loadData(){
   indexApprovals((arev&&arev.data)||[], (adec&&adec.data)||[]);
   indexAllocations((alloc&&alloc.data)||[]);
   S.profilesAll = pr.data||[];
+  S.poScope = (scope&&scope.data)||[];
   S.payments = pay.data||[]; S.charges = chg.data||[];
   indexFinance();
   S.updates = upd.data||[]; S.updInternal = {};
@@ -5655,6 +5663,7 @@ function updateHeader(){
       link('#/production/review','Review queue',q.approvals,true)+
       link('#/production/missing','Missing today',q.missing,true)+
       link('#/production/blocked','Blocked',q.blocked,true)+
+      link('#/production/floor','Workshop',q.workshop)+
       link('#/clients','Clients',q.clientUpdates)+
       link('#/finance','Finance',q.overdueCount)+
       link('#/reports','Reports',0)+
@@ -6017,6 +6026,171 @@ function productionQueueRows(){
   }).join('');
 }
 
+/* --------------------------------------------------- workshop floor (admin) */
+/* ChatGPT's workshopView from the final handoff: the .workshop-banner, four
+   .metric tiles, his search / status tabs / PO sort, and one <details
+   class="po-group"> per purchase order holding .po-product-row cards.
+   This is the OWNER's view of the floor, so it names the buyer and the order.
+   The floor's own screens never do — that boundary is enforced in the database,
+   and the staff views are built from STONEFLOW-WORKSHOP.html instead. */
+function setWorkshopFilter(f){ window.__wsFilter=f; render(); }
+function setWorkshopSort(v){ window.__wsSort=v; render(); }
+function filterWorkshop(v){ window.__wsQuery=v; render(); }
+function wsStatusOf(it){
+  if((blockedItems()||[]).some(b=>b.item.id===it.id)) return 'blocked';
+  const t=today();
+  if(!(S.updByItem[it.id]||[]).some(u=>u.work_date===t)) return 'missing';
+  const nx=(typeof nextAction==='function')?nextAction(it):null;
+  if(nx && /advance|move|complete/i.test(nx.short||'')) return 'ready';
+  return 'active';
+}
+function wsProducts(){
+  const q=String(window.__wsQuery||'').toLowerCase().trim();
+  const f=window.__wsFilter||'all';
+  return (S.items||[]).filter(it=>it.status!=='delivered'&&it.status!=='cancelled')
+    .filter(it=>{
+      if(f!=='all' && wsStatusOf(it)!==f) return false;
+      if(!q) return true;
+      const po=S.posById[it.po_id]||{}, st=curStage(it);
+      return [it.product,it.item_code,it.stone,po.po_number,po.project,st&&st.name]
+        .filter(Boolean).join(' ').toLowerCase().indexOf(q)>=0;
+    });
+}
+function wsGroups(){
+  const sort=window.__wsSort||'po';
+  const by={};
+  wsProducts().forEach(it=>{ (by[it.po_id]=by[it.po_id]||[]).push(it); });
+  const groups=Object.keys(by).map(id=>{
+    const po=S.posById[id]||{};
+    const all=(S.items||[]).filter(i=>i.po_id===id&&i.status!=='delivered'&&i.status!=='cancelled');
+    const stones=[...new Set(by[id].map(i=>i.stone).filter(Boolean))];
+    return {po, products:by[id].sort((a,b)=>(a.sort_order||0)-(b.sort_order||0)), all, stones};
+  }).filter(g=>g.po.id);
+  if(sort==='delivery') groups.sort((a,b)=>String(a.po.expected_ship_date||'9').localeCompare(String(b.po.expected_ship_date||'9')));
+  else if(sort==='stone') groups.sort((a,b)=>String(a.stones[0]||'').localeCompare(String(b.stones[0]||'')));
+  else groups.sort((a,b)=>String(b.po.po_date||'').localeCompare(String(a.po.po_date||'')));
+  return groups;
+}
+function wsProductRow(it){
+  const st=curStage(it);
+  const active=S.stages.filter(s=>s.active);
+  const n=st?active.findIndex(s=>s.id===st.id)+1:0;
+  const img=targetImage(it);
+  const b=S.buyersById[(S.posById[it.po_id]||{}).buyer_id]||{};
+  const state=wsStatusOf(it);
+  const last=(S.updByItem[it.id]||[])[0];
+  const dot=state==='blocked'?'red':state==='missing'?'amber':'green';
+  const label=state==='blocked'?'Work stopped':state==='missing'?'No record today'
+    :state==='ready'?'Ready for the next stage':'Recorded today';
+  const blocker=(blockedItems()||[]).find(x=>x.item.id===it.id);
+  return '<article class="po-product-row '+state+'">'+
+    '<figure class="po-product-image product-record-link" onclick="go(\'#/item/'+it.id+'\')">'+
+      (img?'<img alt="'+esc(it.product)+' target product" data-ph-path="'+esc(img.path)+'">':'')+
+      '<span>Target image</span></figure>'+
+    '<div class="po-product-copy"><p class="eyebrow">'+esc(it.item_code||'')+'</p>'+
+      '<h3>'+esc(it.product)+'</h3><p>'+esc(b.company||'')+'</p>'+
+      '<div class="po-product-stage"><strong>'+esc(st?st.name:'Not started')+'</strong>'+
+        '<span>'+(n?('Stage '+n+' of '+active.length):'Not started')+'</span></div></div>'+
+    '<div><div class="po-product-facts">'+
+      '<div class="po-product-fact"><span>Stone</span><strong>'+esc(it.stone||'—')+'</strong></div>'+
+      '<div class="po-product-fact"><span>Quantity</span><strong>'+esc(String(+it.qty||1))+'</strong></div>'+
+      '<div class="po-product-fact wide"><span>Finished size</span><strong>'+esc(dimsOf(it)||'—')+'</strong></div>'+
+    '</div>'+
+    '<div class="po-product-update"><i class="status-dot '+dot+'"></i><span>'+
+      '<strong>'+esc(label)+(last?' · '+esc(fdate(last.work_date)):'')+'</strong><br>'+
+      esc(blocker?(blocker.reason||'No reason recorded'):(last?String(last.summary||last.work_done||'').slice(0,90):'Nothing recorded yet'))+
+      '</span></div></div>'+
+    '<div class="po-product-actions">'+
+      '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\')">'+icon('i-camera','icon-sm')+
+        (state==='missing'?'Record today’s work':'Add product update')+'</button>'+
+      (it.drawing_path
+        ?'<button class="button secondary" type="button" onclick="openDoc(\''+esc(it.drawing_path)+'\')">Drawing</button>'
+        :'<button class="button secondary" type="button" disabled>No drawing</button>')+
+      '<button class="button secondary" type="button" onclick="go(\'#/item/'+it.id+'\')">Stages</button>'+
+    '</div></article>';
+}
+function wsGroup(g){
+  const worst=g.products.map(wsStatusOf);
+  const tone=worst.indexOf('blocked')>=0?['Blocked','red']
+    :worst.indexOf('missing')>=0?['Records missing','amber']:['On track','green'];
+  const b=S.buyersById[g.po.buyer_id]||{};
+  return '<details class="po-group" open><summary class="po-group-summary">'+
+    '<div class="po-group-title"><span class="po-chevron">›</span><div>'+
+      '<p>'+esc(g.po.po_number+(b.company?' · '+b.company:''))+'</p>'+
+      '<h2>'+esc(g.po.project||g.po.po_number)+' <span>· '+
+        (g.products.length===g.all.length?g.all.length:(g.products.length+' of '+g.all.length))+
+        ' product'+(g.all.length===1?'':'s')+'</span></h2></div></div>'+
+    '<div class="po-group-detail"><span>PO shipment</span><strong>'+
+      esc(g.po.expected_ship_date?fdate(g.po.expected_ship_date):'Not set')+'</strong></div>'+
+    '<div class="po-group-detail"><span>Stone'+(g.stones.length>1?'s':'')+'</span>'+
+      '<strong>'+esc(g.stones.join(' · ')||'—')+'</strong></div>'+
+    '<div class="po-group-status"><small>'+g.all.length+' item'+(g.all.length===1?'':'s')+'</small>'+
+      sfaBadge(tone[0],tone[1])+'</div></summary>'+
+    '<div class="po-product-list">'+g.products.map(wsProductRow).join('')+'</div></details>';
+}
+function vWorkshopFloor(){
+  if(!isAdmin()) return vHome();
+  const f=window.__wsFilter||'all';
+  const all=(S.items||[]).filter(it=>it.status!=='delivered'&&it.status!=='cancelled');
+  const t=today();
+  const updated=all.filter(it=>(S.updByItem[it.id]||[]).some(u=>u.work_date===t)).length;
+  const missing=all.length-updated;
+  const blocked=all.filter(it=>wsStatusOf(it)==='blocked').length;
+  const ready=all.filter(it=>wsStatusOf(it)==='ready').length;
+  const groups=wsGroups();
+  const shown=wsProducts().length;
+  const active=S.stages.filter(s=>s.active);
+
+  const tab=(k,label)=>'<button type="button" data-workshop-filter="'+k+'" aria-selected="'+(f===k)+'" '+
+    'onclick="setWorkshopFilter(\''+k+'\')">'+esc(label)+'</button>';
+
+  sfaPaint('<div class="workshop-layout">'+
+    sfHead(fdate(t)+' · workshop day','Workshop floor.',
+      'Products are grouped by purchase order so delivery, stone and responsibility stay clear.',
+      '<div class="button-row">'+
+        '<button class="button secondary" type="button" onclick="go(\'#/admin/settings\')">'+
+          active.length+'-stage guide</button>'+
+        '<button class="button" type="button" onclick="setWorkshopFilter(\'missing\')">Show missing updates</button></div>')+
+    '<div class="workshop-banner"><p><strong>Purchase-order view</strong> · Open an order to see its products. '+
+      'Work is still recorded against the individual product.</p>'+sfaBadge('Internal working view')+'</div>'+
+    '<section class="summary">'+
+      sfaMetric('Active products', String(all.length),
+        'Across '+groups.length+' purchase order'+(groups.length===1?'':'s'),'',"setWorkshopFilter('all')")+
+      sfaMetric('Recorded today', updated+' / '+all.length,
+        missing+' product record'+(missing===1?'':'s')+' still required','',"setWorkshopFilter('missing')")+
+      sfaMetric('Blocked', String(blocked),
+        blocked?'Work stopped on the floor':'Nothing stopped', blocked?'alert':'',"setWorkshopFilter('blocked')")+
+      sfaMetric('Ready next', String(ready),
+        ready?'A stage decision is waiting':'Nothing waiting','money',"setWorkshopFilter('ready')")+
+    '</section>'+
+    '<div class="po-workshop-tools">'+
+      '<input class="workshop-search" id="workshop-search" type="search" '+
+        'placeholder="Search product, order, stone or stage" aria-label="Search workshop products" '+
+        'value="'+esc(window.__wsQuery||'')+'" oninput="filterWorkshop(this.value)">'+
+      '<div class="workshop-tabs" role="tablist">'+tab('all','All')+tab('missing','Missing today')+
+        tab('blocked','Blocked')+tab('ready','Ready next')+'</div>'+
+      '<label class="po-sort">Sort purchase orders by'+
+        '<select onchange="setWorkshopSort(this.value)" aria-label="Sort purchase orders">'+
+        '<option value="po"'+((window.__wsSort||'po')==='po'?' selected':'')+'>Order number · newest first</option>'+
+        '<option value="delivery"'+(window.__wsSort==='delivery'?' selected':'')+'>Delivery date · earliest first</option>'+
+        '<option value="stone"'+(window.__wsSort==='stone'?' selected':'')+'>Stone · A to Z</option>'+
+        '</select></label></div>'+
+    '<div class="po-results"><p id="po-group-count"><strong>'+shown+' product'+(shown===1?'':'s')+'</strong>'+
+      ' in '+groups.length+' purchase order'+(groups.length===1?'':'s')+'</p>'+
+      '<p>Purchase orders stay grouped in every sort.</p></div>'+
+    '<section class="workshop-grid po-grouped" id="workshop-grid">'+
+      (groups.length?groups.map(wsGroup).join('')
+        :'<section class="po-empty"><h3>No matching products.</h3>'+
+          '<p>Clear the search or choose another status.</p></section>')+'</section>'+
+    '<section class="daily-product-log"><div class="daily-product-log-head"><div>'+
+      '<h2>Today’s product update log</h2>'+
+      '<p>Generated from the product records above — there is no separate daily form.</p></div>'+
+      sfaBadge(updated+' of '+all.length+' recorded', missing?'amber':'green')+'</div>'+
+      '<div class="daily-log-rule"><strong>One source of truth</strong>'+
+      'Every photograph, measurement, blocker and no-work reason stays attached to its product and its purchase order.</div>'+
+    '</section></div>');
+}
+
 function vProduction(tab){
   if(!isAdmin()) return vHome();
   // Photographs and workshop updates are reviewed on their own screens; the
@@ -6028,7 +6202,7 @@ function vProduction(tab){
   ];
   if(tab==='photos'){ withTabs(vApprovals, tabsBack, 'photos'); return; }
   if(tab==='review'){ withTabs(vReview, tabsBack, 'review'); return; }
-  if(tab==='floor'){ return vWorkshopFloor?vWorkshopFloor():vProduction(); }
+  if(tab==='floor') return vWorkshopFloor();
   // the sub-routes the console links to preselect one of his filters
   if(tab==='missing') window.__prodFilter='missing';
   else if(tab==='blocked') window.__prodFilter='blocked';
@@ -6110,42 +6284,314 @@ function vProduction(tab){
   sfaPaint(h);
 }
 
-function vClients(tab){
-  if(!isAdmin()) return vHome();
-  const q=queueCounts();
-  const tabs=[
-    ['logins','Buyers','#/clients',0],
-    ['updates','Send an update','#/clients/updates', q.clientUpdates]
-  ];
-  if(tab==='updates'){ withTabs(vUpdates, tabs, 'updates'); return; }
-  withTabs(vBuyers, tabs, 'logins');
+/* ---------------------------------------------------- client operations -- */
+/* ChatGPT's clientsView from the final handoff: .co-head, the four .co-summary
+   figures, his .co-directory rail and the .co-account workspace — orders,
+   account actions, recent client activity and the account/contacts panel.
+   Selecting a buyer changes every panel; nothing is hard-coded to one company,
+   which §14 of the brief calls out by name. */
+function selectClientAccount(id){ window.__client=id; render(); }
+function filterClientAccounts(q){
+  q=String(q||'').toLowerCase().trim();
+  document.querySelectorAll('#co-client-list .co-client-button').forEach(b=>{
+    b.hidden = !!q && (b.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0;
+  });
+}
+function clientInitials(n){
+  const w=String(n||'').trim().split(/\s+/).filter(Boolean);
+  return ((w[0]||'?')[0]+(w[1]?w[1][0]:'')).toUpperCase();
+}
+// What is open on this buyer's account, and nothing from anyone else's.
+function clientActions(b){
+  const out=[];
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
+  const ids=pos.map(p=>p.id);
+  const mine=it=>ids.indexOf(it.po_id)>=0;
+  (S.comments||[]).filter(c=>c.author_role==='buyer'&&!c.resolved_at&&S.itemsById[c.item_id]&&mine(S.itemsById[c.item_id]))
+    .slice(0,2).forEach(c=>out.push(['warn','Question waiting on a reply',
+      String(c.body||'').slice(0,70), 'Answer', "go('#/item/"+c.item_id+"')"]));
+  const unsent=(S.updates||[]).filter(u=>(u.review_status==='approved'||u.review_status==='partially_approved')&&
+    !u.published_at && S.itemsById[u.item_id] && mine(S.itemsById[u.item_id]));
+  if(unsent.length) out.push(['warn', unsent.length+' approved update'+(unsent.length===1?'':'s')+' not published',
+    'The buyer cannot see them until you publish', 'Publish', "go('#/production/review')"]);
+  const waiting=pendingApprovals().filter(a=>mine(a.item));
+  if(waiting.length) out.push(['', waiting.length+' decision'+(waiting.length===1?'':'s')+' with the buyer',
+    waiting.map(a=>a.item.product).slice(0,2).join(', '), 'Open', "go('#/item/"+waiting[0].item.id+"')"]);
+  if(!(S.profilesAll||[]).some(p=>p.buyer_id===b.id))
+    out.push(['warn','No login for this company','They cannot sign in yet','Create login',"mNewLogin('"+b.id+"')"]);
+  const fin=(S.invByBuyer[b.id]||[]).filter(i=>i.published_at);
+  const st=statementStanding(latestStatement(b.id));
+  if(st && !st.credit && +st.amount>0) out.push(['warn','Outstanding on the latest statement',
+    money(st.amount,st.currency)+' as at '+fdate(st.as_of), 'Finance', "go('#/finance')"]);
+  else if(!fin.length) out.push(['','No invoices posted yet','Nothing has been billed to this account','Finance',"go('#/finance')"]);
+  if(!out.length) out.push(['good','Nothing open on this account','Every question answered and every update sent','Open',"go('#/clients')"]);
+  return out;
+}
+function clientActivity(b){
+  const ids=(S.pos||[]).filter(p=>p.buyer_id===b.id).map(p=>p.id);
+  const mine=id=>{ const it=S.itemsById[id]; return it && ids.indexOf(it.po_id)>=0; };
+  const out=[];
+  (S.comments||[]).filter(c=>mine(c.item_id)).forEach(c=>out.push([
+    (c.author_role==='buyer'?'Question from the buyer':'Reply sent'),
+    (S.itemsById[c.item_id]||{}).product+' · '+String(c.body||'').slice(0,60), c.created_at]));
+  (S.updates||[]).filter(u=>u.published_at&&mine(u.item_id)).forEach(u=>out.push([
+    'Progress published', (S.itemsById[u.item_id]||{}).product+' · '+
+      ((S.stagesById[u.stage_id]||{}).name||''), u.published_at]));
+  (S.revisions||[]).forEach(r=>{
+    const d=S.decisionByRev[r.id]; if(!d||!mine(r.item_id)) return;
+    out.push([d.decision==='approved'?'Approved by the buyer':'Changes requested',
+      (S.itemsById[r.item_id]||{}).product+' · '+(r.label||('R'+r.rev_no)), d.decided_at]);
+  });
+  return out.sort((a,b2)=>String(b2[2]).localeCompare(String(a[2]))).slice(0,6);
+}
+function clientDirectory(){
+  const sel=window.__client;
+  const list=(S.buyers||[]).slice().sort((a,b)=>String(a.company).localeCompare(String(b.company)));
+  return '<aside class="co-directory"><div class="co-directory-search">'+
+    '<input id="co-search" type="search" aria-label="Search clients or contacts" '+
+      'placeholder="Search clients or contacts" oninput="filterClientAccounts(this.value)"></div>'+
+    '<div class="co-directory-list" id="co-client-list">'+
+    (list.length?list.map(b=>{
+      const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id&&p.status!=='completed'&&p.status!=='cancelled');
+      const hasLogin=(S.profilesAll||[]).some(p=>p.buyer_id===b.id);
+      return '<button class="co-client-button'+(sel===b.id?' active':'')+'" type="button" '+
+        'aria-pressed="'+(sel===b.id)+'" data-search="'+esc([b.company,b.contact_name,b.email,b.city].filter(Boolean).join(' '))+'" '+
+        'onclick="selectClientAccount(\''+b.id+'\')">'+
+        '<span class="co-client-avatar">'+esc(clientInitials(b.company))+'</span>'+
+        '<span class="co-client-copy"><strong>'+esc(b.company)+'</strong>'+
+        '<span>'+esc([b.contact_name,b.city].filter(Boolean).join(' · ')||'No contact recorded')+'</span>'+
+        '<small class="'+(hasLogin?'':'attention')+'">'+
+          esc(pos.length?(pos.length+' open PO'+(pos.length===1?'':'s')):(hasLogin?'No open orders':'Setup required'))+'</small>'+
+        '</span><span class="pa-chevron">›</span></button>';
+    }).join(''):'<div class="co-directory-empty">No buyers yet.</div>')+
+    '</div></aside>';
+}
+function clientAccount(){
+  const list=(S.buyers||[]).slice().sort((a,b)=>String(a.company).localeCompare(String(b.company)));
+  const b=list.find(x=>x.id===window.__client)||list[0];
+  if(!b) return '<main class="co-account"><div class="co-empty"><strong>No buyer companies yet</strong>'+
+    '<p>Add the company first; its purchase orders, logins and finance hang off that record.</p>'+
+    '<button class="button secondary small" type="button" onclick="mBuyer(null)">Add company</button></div></main>';
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id)
+    .sort((a,c)=>String(a.expected_ship_date||'9').localeCompare(String(c.expected_ship_date||'9')));
+  const logins=(S.profilesAll||[]).filter(p=>p.buyer_id===b.id);
+  const st=statementStanding(latestStatement(b.id));
+  const portal=logins.length?(logins.some(l=>l.active!==false)?'Active':'Suspended'):'Setup required';
+  const finVis=logins.some(l=>l.finance_access)?'Enabled':'Not enabled';
+  const billing=[b.gstin,b.address,b.city].filter(Boolean).length>=2?'Billing complete':'Billing incomplete';
+
+  return '<main class="co-account"><header class="co-account-head"><div>'+
+    '<p class="eyebrow">Selected buyer account'+(b.city?' · '+esc(b.city):'')+'</p>'+
+    '<h2>'+esc(b.company)+'</h2>'+
+    '<p>'+esc([b.contact_name,b.email,b.phone].filter(Boolean).join(' · ')||'No contact details recorded')+'</p></div>'+
+    '<div class="co-account-actions">'+
+      '<span class="co-badge">Portal '+esc(portal.toLowerCase())+'</span>'+
+      '<span class="co-badge">Finance '+esc(finVis.toLowerCase())+'</span>'+
+      '<span class="co-badge">'+esc(billing)+'</span>'+
+      '<button class="button secondary small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit account</button>'+
+    '</div></header>'+
+
+    '<div class="co-account-grid"><section class="co-panel"><header class="co-panel-head"><div>'+
+      '<h2>Purchase orders and commercial position</h2>'+
+      '<p>Only this buyer’s orders are shown. Products stay inside their parent purchase order.</p></div>'+
+      '<button class="button quiet small" type="button" onclick="go(\'#/orders\')">All orders</button></header>'+
+      (pos.length?'<div style="overflow:auto"><table class="co-order-table"><thead><tr>'+
+        '<th>Purchase order</th><th>Stage</th><th>Progress</th><th>Delivery</th>'+
+        '<th>Order value</th><th>Receivable</th><th></th></tr></thead><tbody>'+
+        pos.map(p=>{
+          const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+          const stg=items.map(i=>curStage(i)).filter(Boolean).sort((x,y)=>x.sort_order-y.sort_order)[0];
+          const fin=poFinance(p);
+          return '<tr><td><strong>'+esc(p.po_number)+'</strong><span>'+
+            esc((p.project?p.project+' · ':'')+items.length+' product'+(items.length===1?'':'s'))+'</span></td>'+
+            '<td>'+esc(stg?stg.name:'Not started')+'</td><td>'+sfCompletion(p)+'%</td>'+
+            '<td>'+esc(p.expected_ship_date?fdate(p.expected_ship_date):'Not set')+'</td>'+
+            '<td>'+esc(p.amount_total!=null?money(p.amount_total,'INR'):'—')+'</td>'+
+            '<td>'+esc(fin.outstanding>0?money(fin.outstanding,'INR'):'Nil')+'</td>'+
+            '<td><button class="button quiet small" type="button" '+
+              'onclick="selectOrder(\''+p.id+'\');go(\'#/orders\')">Open PO</button></td></tr>';
+        }).join('')+'</tbody></table></div>'
+      :'<div class="co-empty"><strong>No purchase orders yet</strong>'+
+        '<p>Complete the company record before assigning a purchase order or portal access.</p>'+
+        '<button class="button secondary small" type="button" onclick="mNewPO()">Create first PO</button></div>')+
+      '</section>'+
+    '<aside class="co-panel"><header class="co-panel-head"><div><h2>Account actions</h2>'+
+      '<p>Only work belonging to '+esc(b.company)+'.</p></div></header>'+
+      '<div class="co-actions">'+clientActions(b).map(a=>'<article class="co-action">'+
+        '<i class="'+esc(a[0])+'"></i><div><strong>'+esc(a[1])+'</strong><span>'+esc(a[2])+'</span></div>'+
+        '<button class="button secondary small" type="button" onclick="'+a[4]+'">'+esc(a[3])+'</button>'+
+        '</article>').join('')+'</div></aside></div>'+
+
+    '<div class="co-account-grid"><section class="co-panel"><header class="co-panel-head"><div>'+
+      '<h2>Recent client activity</h2>'+
+      '<p>What this buyer has seen and said — never internal workshop notes.</p></div>'+
+      '<button class="button quiet small" type="button" onclick="go(\'#/reports\')">Full history</button></header>'+
+      '<div class="co-activity">'+
+      (clientActivity(b).length?clientActivity(b).map(x=>'<div class="co-activity-row">'+
+        '<span class="co-activity-icon">'+icon('i-message','icon-sm')+'</span>'+
+        '<div><strong>'+esc(x[0])+'</strong><span>'+esc(x[1])+'</span></div>'+
+        '<time>'+esc(x[2]?fdate(String(x[2]).slice(0,10)):'')+'</time></div>').join('')
+       :'<div class="co-empty"><strong>Nothing yet</strong><p>Published progress, decisions and messages appear here.</p></div>')+
+      '</div></section>'+
+    '<aside class="co-panel"><header class="co-panel-head"><div><h2>Account, contacts &amp; access</h2>'+
+      '<p>Check the buyer identity before managing its logins.</p></div>'+
+      '<button class="button quiet small" type="button" onclick="go(\'#/access\')">Manage access</button></header>'+
+      '<div class="co-detail-body">'+
+        '<div class="co-contact-card"><strong>'+esc(b.contact_name||'No contact named')+'</strong>'+
+        '<span>'+esc([b.email,b.phone].filter(Boolean).join(' · ')||'No email or phone recorded')+'</span></div>'+
+        '<div class="co-detail-row"><span>Portal</span><strong>'+esc(portal)+'</strong></div>'+
+        '<div class="co-detail-row"><span>Logins</span><strong>'+logins.length+'</strong></div>'+
+        '<div class="co-detail-row"><span>Purchase orders</span><strong>'+pos.length+'</strong></div>'+
+        '<div class="co-detail-row"><span>Buyer balance</span><strong>'+
+          esc(st?money(st.amount,st.currency)+(st.credit?' in advance':' payable'):'No statement yet')+'</strong></div>'+
+        '<div class="co-detail-row"><span>Finance visibility</span><strong>'+esc(finVis)+'</strong></div>'+
+        '<div class="co-detail-row"><span>Billing record</span><strong>'+esc(billing)+'</strong></div>'+
+      '</div></aside></div></main>';
 }
 
+function vClients(tab){
+  if(!isAdmin()) return vHome();
+  // buyer, staff and admin logins live on their own screen until the People &
+  // access rebuild folds them in; keep the route so nothing is stranded
+  if(tab==='logins'){
+    const q=queueCounts();
+    withTabs(vBuyers, [['ops','Client operations','#/clients',0],
+      ['logins','Logins','#/clients/logins',0],
+      ['updates','Send an update','#/clients/updates', q.clientUpdates]], 'logins');
+    return;
+  }
+  if(tab==='updates'){
+    const q=queueCounts();
+    withTabs(vUpdates, [['logins','Client operations','#/clients',0],
+      ['updates','Send an update','#/clients/updates', q.clientUpdates]], 'updates');
+    return;
+  }
+  const buyers=S.buyers||[];
+  const active=buyers.filter(b=>(S.profilesAll||[]).some(p=>p.buyer_id===b.id&&p.active!==false)).length;
+  const openOrders=(S.pos||[]).filter(p=>p.status!=='completed'&&p.status!=='cancelled').length;
+  const actions=buyers.reduce((a,b)=>a+clientActions(b).filter(x=>x[0]!=='good').length,0);
+  const attention=buyers.filter(b=>!(S.profilesAll||[]).some(p=>p.buyer_id===b.id)).length;
+  const unsent=(S.updates||[]).filter(u=>
+    (u.review_status==='approved'||u.review_status==='partially_approved')&&!u.published_at).length;
+
+  sfaPaint('<div class="co-page"><header class="co-head"><div>'+
+    '<p class="eyebrow">Accounts, contacts, access and communication</p>'+
+    '<h1>Client operations.</h1>'+
+    '<p>Select any buyer to review only that company’s purchase orders, actions, contacts, portal access and commercial position.</p></div>'+
+    '<div class="button-row">'+
+      '<button class="button secondary" type="button" onclick="mBuyer(null)">Add company</button>'+
+      '<button class="button" type="button" onclick="go(\'#/clients/updates\')">'+icon('i-plus','icon-sm')+'Send an update</button>'+
+    '</div></header>'+
+    '<section class="co-summary">'+
+      '<div><span>Buyer companies with access</span><strong>'+active+'</strong>'+
+        '<small>'+openOrders+' open purchase order'+(openOrders===1?'':'s')+'</small></div>'+
+      '<div><span>Account actions open</span><strong>'+actions+'</strong>'+
+        '<small>Across all buyer accounts</small></div>'+
+      '<div><span>Accounts needing setup</span><strong>'+attention+'</strong>'+
+        '<small>No login created yet</small></div>'+
+      '<div><span>Approved updates unsent</span><strong>'+unsent+'</strong>'+
+        '<small>Ready for you to publish</small></div>'+
+    '</section>'+
+    '<div class="co-workspace">'+clientDirectory()+clientAccount()+'</div></div>');
+}
+
+/* ChatGPT's reportsView shell from the final handoff: .report-head with its two
+   actions, .report-controls carrying his .report-nav and .report-period, and the
+   section itself inside #reports-body. The six sections are the six he names.
+   Every figure is derived from rows and every card states its own formula —
+   "Metric definitions" opens that list. */
+const REPORT_SECTIONS=[['overview','Overview'],['delivery','Orders & delivery'],
+  ['production','Production'],['service','Client service'],['finance','Finance'],['activity','Audit log']];
+function reportSection(){ return window.__repSec||'overview'; }
+function setReportSection(k){
+  window.__repSec=k;
+  go('#/reports'+(k==='overview'?'':'/'+k));
+}
+function reportPeriodBar(){
+  const w=reportWindow();
+  return '<div class="report-period" role="tablist" aria-label="Report period">'+
+    [[1,'Today'],[7,'7 days'],[30,'30 days'],[90,'Quarter']].map(([n,label])=>
+      '<button type="button" role="tab" aria-selected="'+(w===n)+'" onclick="setReportWindow('+n+')">'+
+      label+'</button>').join('')+'</div>';
+}
 function vReports(tab){
   if(!isAdmin()) return vHome();
-  if(tab==='stages')     return vStagePerf();
-  if(tab==='orders')     return vOrderValue();
-  if(tab==='delivery')   return vReportsDelivery();
-  if(tab==='production') return vReportsProduction();
-  if(tab==='service')    return vReportsService();
-  if(tab==='finance')    return vReportsFinance();
-  if(tab==='log')        return vReportsLog();
-  if(tab==='activity')   return vReportsActivity();
-  vReportsOverview();
+  // the two report pages that are opened from a card rather than a tab
+  if(tab==='stages') return vStagePerf();
+  if(tab==='orders') return vOrderValue();
+  if(tab==='log')    return vReportsLog();
+
+  const sec = REPORT_SECTIONS.some(x=>x[0]===tab) ? tab : 'overview';
+  window.__repSec=sec;
+  const body =
+    sec==='delivery'   ? vReportsDelivery
+  : sec==='production' ? vReportsProduction
+  : sec==='service'    ? vReportsService
+  : sec==='finance'    ? vReportsFinance
+  : sec==='activity'   ? vReportsActivity
+  :                      vReportsOverview;
+
+  // each section still renders its own content; it is wrapped in his shell
+  window.__inReportShell=1;
+  try{ body(); } finally { window.__inReportShell=0; }
+  const inner=$('app').innerHTML;
+  sfaPaint('<div class="reports-page"><header class="report-head"><div>'+
+    '<p class="eyebrow">Operational intelligence · owner view</p>'+
+    '<h1>Reports.</h1>'+
+    '<p>What is drifting, why it matters and where to act. Every figure opens the records behind it.</p></div>'+
+    '<div class="button-row">'+
+      '<button class="button secondary" type="button" onclick="mMetricDefs()">Metric definitions</button>'+
+      '<button class="button" type="button" onclick="go(\'#/reports/log\')">'+icon('i-doc','icon-sm')+'Daily log</button>'+
+    '</div></header>'+
+    '<section class="report-controls">'+
+      '<nav class="report-nav" role="tablist" aria-label="Report sections">'+
+      REPORT_SECTIONS.map(([k,label])=>'<button type="button" role="tab" aria-selected="'+(sec===k)+'" '+
+        'onclick="setReportSection(\''+k+'\')">'+esc(label)+'</button>').join('')+'</nav>'+
+      reportPeriodBar()+
+      '<span class="report-freshness">Counted from the records as they stand now</span>'+
+    '</section>'+
+    '<div id="reports-body">'+inner+'</div></div>');
 }
 // The audit log and the workshop log already render themselves; they just need
 // the reports chrome above them.
 function vReportsActivity(){ vActivity(); $('app').innerHTML=reportChrome('activity')+$('app').innerHTML; }
 function vReportsLog(){ vDaily(); $('app').innerHTML=reportChrome('activity')+$('app').innerHTML; hydrateImages(); }
 
+/* ChatGPT's adminView shell from the final handoff: .settings-head, the four
+   .settings-health figures, and .settings-workspace with his .settings-nav rail
+   beside the cards. His health strip is fixed sample text; these four figures
+   are real, and the stage count is the workflow the workshop actually runs. */
 function vAdmin(tab){
   if(!isAdmin()) return vHome();
-  const tabs=[
-    ['settings','Settings','#/admin',0],
-    ['import','Import','#/admin/import',0]
-  ];
-  if(tab==='import'){ withTabs(vImport, tabs, 'import'); return; }
-  withTabs(vSettings, tabs, 'settings');
+  const sec = tab==='import' ? 'import' : 'settings';
+  const active=S.stages.filter(s=>s.active);
+  const gates=(S.revisions||[]).length;
+  const held=pendingPhotos().length;
+
+  window.__inAdminShell=1;
+  try{ if(sec==='import') vImport(); else vSettings(); }
+  finally{ window.__inAdminShell=0; }
+  const inner=$('app').innerHTML;
+
+  sfaPaint('<div class="settings-page"><header class="settings-head"><div>'+
+    '<p class="eyebrow">Low-frequency configuration · owner administrator</p>'+
+    '<h1>Settings &amp; controls.</h1>'+
+    '<p class="lead">The company record, the production model, buyer publication and data operations — '+
+    'kept out of the daily work.</p></div>'+
+    '<button class="button secondary" type="button" onclick="go(\'#/admin/import\')">Import data</button>'+
+    '</header>'+
+    '<section class="settings-health">'+
+      '<div><span>Production model</span><strong>'+active.length+' stages · active</strong></div>'+
+      '<div><span>Approval rounds recorded</span><strong>'+gates+'</strong></div>'+
+      '<div><span>Photographs awaiting you</span><strong>'+held+'</strong></div>'+
+      '<div><span>Buyer logins</span><strong>'+
+        (S.profilesAll||[]).filter(p=>p.role==='buyer').length+' active</strong></div>'+
+    '</section>'+
+    // His shell puts a nav rail beside the cards. That rail repeats the sidebar
+    // this console already has, and its grid squeezes a working editor into a
+    // column it was not drawn for — so the header and health strip are kept and
+    // the editor runs full width beneath them.
+    '<div class="settings-body">'+inner+'</div></div>');
 }
 
 // The order book, which used to be the admin home.
@@ -7837,110 +8283,111 @@ function vReview(){
    the database refuses them the rows, not just the screen.
 --------------------------------------------------------------------------- */
 
+/* ------------------------------------------------------------- finance -- */
+/* ChatGPT's financeView from the final handoff: his page head with the two
+   actions, four .metric tiles, the Receivables .data-table with its Open /
+   Overdue / Paid segments, and the ageing panel beside it. Every balance traces
+   to a posted invoice and a recorded payment — nothing here is derived from an
+   order's value. */
+function sfaMetric(label, value, note, tone, action){
+  return '<button class="metric '+(tone||'')+'" type="button" onclick="'+(action||'')+'">'+
+    '<div class="metric-label"><span>'+esc(label)+'</span>'+icon('i-chevron','icon-sm')+'</div>'+
+    '<strong class="metric-value">'+esc(value)+'</strong>'+
+    '<span class="metric-note">'+esc(note)+'</span></button>';
+}
+function setFinSeg(k){ window.__finSeg=k; render(); }
+
 function vFinance(){
   if(!isAdmin()) return vHome();
-  const buyers = S.buyers.filter(b=>S.pos.some(p=>p.buyer_id===b.id) || (S.payByBuyer[b.id]||[]).length);
-
-  let h = '<div class="page-heading"><div>'+eyebrow('Statement of account')+
-    '<h1 class="display-title">Finance</h1>'+
-    '<p class="lede">What each buyer has ordered, what they have paid, and what is still owed. '+
-    'Only you can see this — buyers and floor staff cannot, at the database level.</p></div></div>';
-
-  if(!buyers.length){ $('app').innerHTML = h+'<div class="empty-state">No buyers with orders yet.</div>'; return; }
-
-  // headline totals across every buyer, grouped by currency
-  const all = {};
-  buyers.forEach(b=>buyerMoney(b.id).forEach(g=>{
-    const t = all[g.cur] = all[g.cur] || {cur:g.cur, due:0, paid:0};
-    t.due += g.due; t.paid += g.paid;
-  }));
-  const tot = Object.values(all);
-  if(tot.length){
-    h += '<section class="summary-grid">'+
-      tot.slice(0,2).map(t=>
-        statCard('Ordered'+(tot.length>1?' ('+t.cur+')':''), money(t.due, t.cur), 'Including freight and packing') +
-        statCard('Received'+(tot.length>1?' ('+t.cur+')':''), money(t.paid, t.cur), '') +
-        statCard('Outstanding'+(tot.length>1?' ('+t.cur+')':''), money(t.due - t.paid, t.cur),
-                 t.due - t.paid > 0 ? 'Across all buyers' : 'Nothing outstanding')
-      ).join('') + '</section>';
-  }
-
-  h += '<div class="utility-stack">';
-  buyers.forEach(b=>{
-    const groups = buyerMoney(b.id);
-    const pos = S.pos.filter(p=>p.buyer_id===b.id && p.status!=='cancelled');
-    const onAccount = (S.payByBuyer[b.id]||[]).filter(x=>!x.po_id);
-
-    h += '<section class="panel"><div class="panel__head"><div>'+
-      eyebrow(pos.length+' order'+(pos.length!==1?'s':''))+
-      '<h3 class="panel__title">'+esc(b.company)+'</h3>'+
-      '<p class="panel__description">'+
-        (groups.length
-          ? groups.map(g=>esc(money(g.balance,g.cur))+' outstanding of '+esc(money(g.due,g.cur))).join(' · ')
-          : 'No values recorded yet.')+
-      '</p></div>'+
-      '<div class="button-row">'+
-        (groups.some(g=>g.balance>0.005) ? badge('Owes you','alert')
-          : groups.some(g=>g.balance<-0.005) ? badge('In credit','pending')
-          : badge('Settled','success'))+
-        '<button class="button" type="button" onclick="mPayment(\''+b.id+'\',null)">+ Record payment</button>'+
-      '</div></div>'+
-      '<div class="panel__body">';
-
-    // per-PO breakdown
-    h += '<div class="data-table-wrap"><table class="data-table">'+
-      '<tr><th>Purchase order</th><th>Value</th><th>Freight &amp; packing</th><th>Received</th><th>Balance</th><th></th></tr>'+
-      (pos.length ? pos.map(p=>{
-        const m = poMoney(p);
-        const extras = (S.chgByPo[p.id]||[]);
-        return '<tr>'+
-          '<td><strong style="cursor:pointer;text-decoration:underline" onclick="go(\'#/po/'+p.id+'\')">'+esc(p.po_number)+'</strong>'+
-            '<small>'+esc([p.project, p.payment_terms].filter(Boolean).join(' · ')||'—')+'</small></td>'+
-          '<td>'+(m.hasValue?esc(money(m.value,m.cur)):'<small>not set</small>')+'</td>'+
-          '<td>'+(extras.length
-              ? esc(money(m.extras,m.cur))+'<small>'+esc(extras.map(c=>c.label).join(', '))+'</small>'
-              : '<small>—</small>')+'</td>'+
-          '<td>'+(m.paid?esc(money(m.paid,m.cur)):'<small>—</small>')+'</td>'+
-          '<td><strong>'+esc(money(m.balance,m.cur))+'</strong>'+
-            (m.balance>0.005?'<small style="color:var(--rust)">outstanding</small>'
-             :m.balance<-0.005?'<small>overpaid</small>':'<small>settled</small>')+'</td>'+
-          '<td class="nowrap">'+
-            '<button class="button button--quiet" type="button" onclick="mPayment(\''+b.id+'\',\''+p.id+'\')">Payment</button> '+
-            '<button class="button button--quiet" type="button" onclick="mCharge(\''+p.id+'\')">Extra</button>'+
-          '</td></tr>';
-      }).join('') : '<tr><td colspan="6"><small>No orders yet.</small></td></tr>')+
-      '</table></div>';
-
-    if(onAccount.length){
-      h += '<p class="field-hint space-top-12">On account, not tied to an order: '+
-        onAccount.map(x=>esc(money(x.amount,x.currency))+' on '+esc(fdate(x.paid_on))).join(' · ')+'</p>';
-    }
-
-    // payment history
-    const pays = (S.payByBuyer[b.id]||[]).slice().sort((x,y)=>String(y.paid_on).localeCompare(String(x.paid_on)));
-    if(pays.length){
-      h += '<div class="side-card__rows space-top-12">'+pays.map(x=>{
-        const po = x.po_id ? S.posById[x.po_id] : null;
-        return '<div class="side-row"><span>'+esc(fdate(x.paid_on))+' · '+
-          esc([x.method, x.reference, po?po.po_number:'on account'].filter(Boolean).join(' · '))+
-          (x.note?' — '+esc(x.note):'')+'</span>'+
-          '<strong>'+esc(money(x.amount,x.currency))+
-          ' <button class="button button--quiet" type="button" style="min-height:28px;padding:0 8px" '+
-          'onclick="delPayment(\''+x.id+'\')">✕</button></strong></div>';
-      }).join('')+'</div>';
-    }
-
-    h += '</div></section>';
+  const seg=window.__finSeg||'open';
+  const inv=(S.invoices||[]).filter(i=>i.published_at)
+    .sort((a,b)=>String(b.invoice_date).localeCompare(String(a.invoice_date)));
+  const allocFor=i=>(S.allocations||[]).filter(a=>a.invoice_id===i.id)
+    .reduce((a,x)=>a+(+x.amount||0),0);
+  const ag=receivableAgeing();
+  const rows=inv.map(i=>{
+    const b=S.buyersById[i.buyer_id]||{};
+    const po=S.posById[i.po_id];
+    const paid=allocFor(i);
+    const bal=Math.max((+i.total||0)-paid,0);
+    const age=dayGap(String(i.invoice_date).slice(0,10), today())||0;
+    const state=bal<=0?'paid':(age>30?'overdue':'open');
+    return {i,b,po,paid,bal,age,state};
   });
-  h += '</div>';
-  h += '<p class="field-hint space-top-12">This is a statement of account, not a ledger. '+
-       'Freight, packing and any other charge sit on their own named line — a figure with no reason beside it is what starts a telephone call. A negative amount is a discount.</p>';
-  $('app').innerHTML = h;
-}
+  const shown=rows.filter(r=>seg==='paid'?r.state==='paid':seg==='overdue'?r.state==='overdue':r.state!=='paid');
+  const overdue=rows.filter(r=>r.state==='overdue').reduce((a,r)=>a+r.bal,0);
+  const charges=(S.charges||[]).map(c=>Object.assign({}, c, {po:S.posById[c.po_id]}));
+  const chargeTotal=charges.reduce((a,c)=>a+(+c.amount||0),0);
+  const pct=ag.outstanding?Math.round((overdue/ag.outstanding)*100):0;
 
-/* ---------------------------------------------------------------------------
-   Admin utility screens
---------------------------------------------------------------------------- */
+  let h='<div>'+sfHead('Accounts receivable','Finance.',
+    'Invoices, payments, allocations and ageing — never an order-value approximation.',
+    '<div class="button-row">'+
+      '<button class="button secondary" type="button" onclick="go(\'#/accounts\')">Upload a Tally document</button>'+
+      '<button class="button" type="button" onclick="mPayment()">Record payment</button></div>');
+
+  h+='<section class="summary">'+
+    sfaMetric('Invoiced', money(ag.total,ag.currency),
+      inv.length+' posted invoice'+(inv.length===1?'':'s'),'',"setFinSeg('open')")+
+    sfaMetric('Received', money(ag.paid,ag.currency),'Verified and allocated','money',"setFinSeg('paid')")+
+    sfaMetric('Outstanding', money(ag.outstanding,ag.currency),
+      rows.filter(r=>r.state!=='paid').length+' open invoice'+(rows.filter(r=>r.state!=='paid').length===1?'':'s'),
+      '',"setFinSeg('open')")+
+    sfaMetric('Aged over 30 days', money(overdue,ag.currency),
+      overdue?(rows.filter(r=>r.state==='overdue').length+' invoice'+(rows.filter(r=>r.state==='overdue').length===1?'':'s')):'Nothing aged',
+      overdue?'alert':'',"setFinSeg('overdue')")+
+    '</section>';
+
+  h+='<div class="grid-main"><section class="card"><div class="card-head"><div>'+
+    '<h2>Receivables</h2><p>Every balance traces to a posted invoice and a recorded allocation.</p></div>'+
+    '<div class="seg-tabs">'+
+      [['open','Open'],['overdue','Overdue'],['paid','Paid']].map(([k,l])=>
+        '<button class="seg-tab" type="button" aria-selected="'+(seg===k)+'" onclick="setFinSeg(\''+k+'\')">'+l+'</button>').join('')+
+    '</div></div>'+
+    (shown.length?'<div class="table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Invoice / buyer</th><th>Order</th><th>Invoice date</th><th>Status</th>'+
+      '<th class="amount">Invoice</th><th class="amount">Balance</th><th></th></tr></thead><tbody>'+
+      shown.map(r=>'<tr><td><strong>'+esc(r.i.invoice_no||'—')+'</strong>'+
+        '<small>'+esc(r.b.company||'')+'</small></td>'+
+        '<td>'+esc(r.po?r.po.po_number:'Account level')+'</td>'+
+        '<td>'+esc(fdate(r.i.invoice_date))+'</td>'+
+        '<td>'+sfaBadge(r.state==='paid'?'Cleared':r.state==='overdue'?('Aged '+r.age+' days'):'Open',
+          r.state==='paid'?'green':r.state==='overdue'?'red':'amber')+'</td>'+
+        '<td class="amount">'+esc(money(r.i.total,r.i.currency||'INR'))+'</td>'+
+        '<td class="amount">'+esc(r.bal>0?money(r.bal,r.i.currency||'INR'):'Nil')+'</td>'+
+        '<td>'+(r.i.doc_path?'<button class="button quiet" type="button" onclick="openDoc(\''+esc(r.i.doc_path)+'\')">Open</button>':'')+
+        '</td></tr>').join('')+
+      '</tbody></table></div>'
+     :'<div class="card-body"><div class="empty"><h2>'+
+       (inv.length?'Nothing in this view.':'No invoices posted yet.')+'</h2>'+
+       '<p>'+(inv.length?'Try another segment.':'Upload the Tally invoice against the order it belongs to.')+'</p></div></div>')+
+    '</section>'+
+
+    '<aside class="stack"><section class="card"><div class="card-head"><h2>Ageing</h2></div>'+
+    '<div class="card-body"><div class="collection-total"><small>Total receivable</small>'+
+      '<strong>'+esc(money(ag.outstanding,ag.currency))+'</strong>'+
+      '<span>'+pct+'% is aged over 30 days</span></div>'+
+    '<div class="aging">'+ag.buckets.map(bk=>'<div><span>'+esc(bk.k)+'</span>'+
+      '<strong>'+esc(money(bk.v,ag.currency))+'</strong></div>').join('')+'</div></div></section>'+
+    // Freight, packing and other charges are money owed that no Tally invoice
+    // has covered yet. They belong on this page or they are simply forgotten.
+    (charges.length?'<section class="card"><div class="card-head"><div><h2>Other charges</h2>'+
+      '<p>Recorded against an order and not yet invoiced.</p></div>'+
+      sfaBadge(money(chargeTotal,'INR'),'amber')+'</div><div class="card-body">'+
+      charges.map(c=>'<div class="detail-row"><span>'+esc(c.label||'Charge')+
+        (c.po?'<small> · '+esc(c.po.po_number)+'</small>':'')+'</span>'+
+        '<strong>'+esc(money(c.amount,c.currency||'INR'))+'</strong></div>').join('')+
+      '<p class="card-copy">Ordered total including these charges: <strong>'+
+        esc(money(ag.total+chargeTotal,ag.currency))+'</strong>. '+
+        'Outstanding including them: <strong>'+esc(money(ag.outstanding+chargeTotal,ag.currency))+'</strong>. '+
+        'Tally remains the ledger of record; this is what StoneFlow has been told about.</p>'+
+      '</div></section>':'')+
+    '<div class="notice"><strong>Buyer finance permission</strong>'+
+    'Finance access is separate from production access. A buyer project user never inherits invoice visibility by default.</div>'+
+    '</aside></div></div>';
+
+  sfaPaint(h);
+}
 
 function vActivity(){
   let h='<div class="page-heading"><div>'+eyebrow('Audit trail')+
@@ -8024,8 +8471,9 @@ function vSettings(){
   if(!isAdmin()) return vHome();
   if(!S.settings.__priv){ S.settings.__priv=1; loadPrivateSettings().then(()=>render()); }
   const s=S.settings||{};
-  let h='<div class="page-heading"><div>'+eyebrow('Configuration')+
-    '<h1 class="display-title">Settings</h1><p class="lede">Company details and the production stages every new product follows.</p></div></div>';
+  // inside his .settings-page shell the header is drawn once, by the shell
+  let h=window.__inAdminShell?'':('<div class="page-heading"><div>'+eyebrow('Configuration')+
+    '<h1 class="display-title">Settings</h1><p class="lede">Company details and the production stages every new product follows.</p></div></div>');
 
   h+='<div class="utility-grid utility-grid--wide"><div class="utility-stack">'+
     '<section class="form-card"><div class="form-card__head"><div>'+
@@ -8269,29 +8717,43 @@ function vItemOwner(it){
   const answers=itemAnswers(it);
   const due=it.target_date||(p&&p.expected_ship_date);
 
-  let h='<nav class="breadcrumb" aria-label="Breadcrumb"><a href="#/orders">Orders</a>'+icon('i-chevron','icon--sm')+
-    '<a href="#/po/'+p.id+'">'+esc(p.po_number)+'</a>'+icon('i-chevron','icon--sm')+
-    '<strong aria-current="page">'+esc(it.item_ref||it.item_code||it.product)+'</strong></nav>';
+  const heroImg=targetImage(it);
+  let h='<div class="product-workspace">'+
+    '<nav class="product-crumbs" aria-label="Breadcrumb"><a href="#" onclick="event.preventDefault();go(\'#/orders\')">Orders</a>'+
+    icon('i-chevron','icon-sm')+'<a href="#" onclick="event.preventDefault();go(\'#/po/'+p.id+'\')">'+esc(p.po_number)+'</a>'+
+    icon('i-chevron','icon-sm')+'<span>'+esc(it.item_ref||it.item_code||it.product)+'</span></nav>';
 
-  /* hero */
-  h+='<section class="prod-hero"><div class="prod-hero__top"><div>'+
-    eyebrow([it.item_ref||it.item_code, (+it.qty||1)+' '+(it.unit||'pcs'), 'owner view'].filter(Boolean).join(' · '))+
-    '<h1 class="detail-title">'+esc(it.product)+'</h1>'+
-    '<p class="detail-subtitle">'+esc([it.stone, it.finish, dimsOf(it), p.project].filter(Boolean).join(' · '))+'</p></div>'+
-    '<div class="page-heading__actions">'+
-      '<button class="button button--quiet" type="button" onclick="waItem(\''+it.id+'\')">WhatsApp update</button>'+
-      '<button class="button button--secondary" type="button" onclick="mItem(\''+p.id+'\',\''+it.id+'\')">Edit product</button>'+
-      '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\','+((now&&now.stage)?now.stage.id:'null')+')">'+icon('i-camera','icon--sm')+'Add today’s update</button>'+
+  /* hero — the picture leads, because a person identifies a piece by looking at
+     it, not by reading a reference code (§16 of the brief) */
+  h+='<section class="product-hero"><div class="product-hero-top product-image-first">'+
+    '<figure class="product-hero-reference detail-image" role="button" tabindex="0" '+
+      'onclick="pickPhotos(\''+it.id+'\',null)">'+
+      (heroImg?'<img alt="'+esc(it.product)+' target product" data-ph-path="'+esc(heroImg.path)+'">':'')+
+      '<figcaption>Target product</figcaption></figure>'+
+    '<div><p class="eyebrow">'+esc([it.item_ref||it.item_code, (+it.qty||1)+' '+(it.unit||'pcs'), 'owner record'].filter(Boolean).join(' · '))+'</p>'+
+    '<h1>'+esc(it.product)+'</h1>'+
+    '<p class="product-subtitle">'+esc([it.stone, it.finish, dimsOf(it), p.project].filter(Boolean).join(' · '))+'</p></div>'+
+    '<div class="product-hero-actions">'+
+      '<button class="button secondary" type="button" onclick="mItem(\''+p.id+'\',\''+it.id+'\')">Edit product</button>'+
+      '<button class="button secondary" type="button" onclick="waItem(\''+it.id+'\')">WhatsApp update</button>'+
+      '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\','+((now&&now.stage)?now.stage.id:'null')+')">'+icon('i-camera','icon-sm')+'Add today’s update</button>'+
     '</div></div>'+
-    '<div class="answer-grid">'+answers.map(a=>
-      '<div class="answer'+(a.warn?' answer--warn':'')+'"><span>'+esc(a.q)+'</span>'+
+    '<div class="product-answer-grid" aria-label="Product status summary">'+answers.map((a,i)=>
+      '<div class="product-answer'+(i===0?' current':'')+(a.warn?' warn':'')+'"><span>'+esc(a.q)+'</span>'+
       '<strong>'+esc(a.a)+'</strong>'+(a.sub?'<small>'+esc(a.sub)+'</small>':'<small>&nbsp;</small>')+'</div>').join('')+
     '</div></section>';
 
-  h+='<div class="prod-layout">';
+  h+='<nav class="product-record-nav" aria-label="Product record sections">'+
+    [['product-current','Current stage'],['product-evidence','Latest work'],
+     ['product-journey','Production journey'],['product-controls','Stage controls'],
+     ['product-details','Details & references']].map(([id,label])=>
+      '<button type="button" onclick="scrollProductSection(\''+id+'\')">'+esc(label)+'</button>').join('')+
+    '</nav>';
+
+  h+='<div class="product-layout">';
 
   /* ---------------- main column ---------------- */
-  h+='<div class="prod-main">';
+  h+='<main class="product-main">';
 
   /* current stage */
   if(now){
@@ -8303,21 +8765,21 @@ function vItemOwner(it){
                 : badge('Not started');
     const inStage = now.row.started_at ? dayGap(now.row.started_at, today()) : null;
     const lastUpd=(S.updByItem[it.id]||[])[0];
-    h+='<section class="stage-now"><div class="stage-now__head">'+
-      '<div class="stage-now__label"><span class="stage-now__num">'+now.number+'</span>'+
+    h+='<section class="current-stage-card" id="product-current"><div class="section-heading">'+
+      '<div class="stage-label"><span class="stage-label-number">'+now.number+'</span>'+
       '<div><span>Current stage</span><strong>'+esc(st.name)+'</strong></div></div>'+state+'</div>'+
-      '<div class="stage-now__grid">'+
+      '<div class="stage-status-grid">'+
         '<div><span>Planned start</span><strong>'+(int_.planned_date?esc(fdate(int_.planned_date)):'Not planned')+'</strong></div>'+
         '<div><span>Started</span><strong>'+(now.row.started_at?esc(fdate(now.row.started_at)):'Not yet')+'</strong></div>'+
         '<div><span>Time in stage</span><strong>'+(inStage!==null?(inStage+' day'+(inStage===1?'':'s')):'—')+'</strong></div>'+
         '<div><span>Last update by</span><strong>'+esc((lastUpd&&staffName(lastUpd.submitted_by))||'—')+'</strong></div>'+
       '</div>'+
-      (st.description||int_.hold_reason?'<div class="stage-now__task"><div>'+
+      (st.description||int_.hold_reason?'<div class="stage-task"><div>'+
         '<strong>'+(now.held?'Why it is held':'What this stage must produce')+'</strong>'+
         '<p>'+esc(now.held?(int_.hold_reason||'No reason recorded'):st.description)+'</p></div>'+
         (itemPending(it).length?badge(itemPending(it).length+' photo'+(itemPending(it).length===1?'':'s')+' waiting','warn'):'')+
       '</div>':'')+
-      '<div class="stage-now__actions">'+
+      '<div class="stage-action-row">'+
         '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\','+st.id+')">'+icon('i-camera','icon--sm')+'Add today’s update</button>'+
         '<button class="button button--secondary" type="button" onclick="pickPhotos(\''+it.id+'\','+st.id+')">Add photographs</button>'+
         '<button class="button button--secondary" type="button" onclick="mHold(\''+it.id+'\','+st.id+')">'+(now.held?'Update the hold':'Report a blocker')+'</button>'+
@@ -8329,7 +8791,7 @@ function vItemOwner(it){
   const feed=(S.updByItem[it.id]||[]);
   const latest=feed[0];
   const latestPhotos=latest?((S.photosByUpdate[latest.id]||[])):[];
-  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+  h+='<section class="panel space-top-16" id="product-evidence"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Latest work</h3>'+
     '<p class="panel__description">'+(latest
       ? esc(fdate(latest.work_date)+' · '+(S.stagesById[latest.stage_id]?S.stagesById[latest.stage_id].name:'')+
@@ -8369,19 +8831,22 @@ function vItemOwner(it){
       : st==='hold' ? ('On hold'+(int_.hold_reason?' · '+int_.hold_reason:''))
       : st==='now'  ? ('Current'+(r.started_at?' · started '+fdate(r.started_at):'')+(int_.planned_date?' · planned '+fdate(int_.planned_date):''))
       : ('Pending'+(int_.planned_date?' · planned '+fdate(int_.planned_date):' · dates begin when the previous stage completes'));
-    return '<div class="jrow jrow--'+st+'" onclick="toggleStage(\''+it.id+'\','+s.id+')">'+
-      '<span class="jrow__n">'+(st==='done'?'✓':st==='skip'?'–':(o.i+1))+'</span>'+
+    return '<div class="journey-row jrow--'+st+(st==='done'?' done':st==='now'?' current':'')+
+      '" onclick="toggleStage(\''+it.id+'\','+s.id+')">'+
+      '<span class="journey-row-number">'+(st==='done'?'✓':st==='skip'?'–':(o.i+1))+'</span>'+
       '<div><strong>'+esc(s.name)+'</strong><small>'+esc(sub)+'</small></div>'+
-      (nph?'<span class="jrow__count">'+nph+' photo'+(nph===1?'':'s')+'</span>':'')+'</div>';
+      '<div class="stage-evidence-count">'+(nph?('<span class="jrow__count">'+nph+' photo'+(nph===1?'':'s')+'</span>'):'')+'</div></div>';
   };
-  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+  h+='<section class="panel space-top-16" id="product-journey"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Production journey</h3>'+
     '<p class="panel__description">One '+active.length+'-stage sequence, shared by you, the workshop and the buyer.</p></div>'+
     badge(Math.round(it.progress*100)+'% complete')+'</div><div class="panel__body">'+
-    '<div class="jnodes">'+active.map((s,i)=>
-      '<button class="jnode jnode--'+nodeState(s)+'" type="button" title="'+esc(s.name)+'" onclick="toggleStage(\''+it.id+'\','+s.id+')">'+
+    '<div class="journey-overview" aria-label="Production overview">'+active.map((s,i)=>
+      '<button class="journey-node jnode jnode--'+nodeState(s)+
+      (nodeState(s)==='done'?' done':nodeState(s)==='now'?' current':'')+
+      '" type="button" title="'+esc(s.name)+'" onclick="toggleStage(\''+it.id+'\','+s.id+')">'+
       '<i>'+(nodeState(s)==='done'?'✓':(i+1))+'</i><span>'+esc(s.name)+'</span></button>').join('')+'</div>'+
-    '<div class="space-top-12">'+shown.map(journeyRow).join('')+'</div>'+
+    '<div class="journey-list" id="product-journey-list">'+shown.map(journeyRow).join('')+'</div>'+
     (future.length?'<div class="future-stages" id="future-stages" hidden>'+future.map(journeyRow).join('')+'</div>'+
       '<div class="button-row space-top-10"><button class="button button--quiet" type="button" id="future-toggle" '+
       'onclick="var f=document.getElementById(\'future-stages\');f.hidden=!f.hidden;this.textContent=f.hidden?\'View '+future.length+' future stages\':\'Hide future stages\';">'+
@@ -8389,7 +8854,7 @@ function vItemOwner(it){
     '</div></section>';
 
   /* the full timeline, with every existing control, kept below */
-  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+  h+='<section class="panel space-top-16" id="product-controls"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Stage controls</h3>'+
     '<p class="panel__description">Dates, photographs, notes, approval gates and the buyer’s comments, stage by stage.</p></div></div></section>';
   h+='<section class="timeline-card"><div class="timeline">';
@@ -8420,53 +8885,59 @@ function vItemOwner(it){
       :'<div class="empty-state">Nothing recorded on this piece yet.</div>')+
     '</div></section>';
 
-  h+='</div>';   /* /prod-main */
+  h+='</main>';   /* /product-main */
 
   /* ---------------- side column ---------------- */
-  h+='<aside class="prod-side">';
+  h+='<aside class="product-side prod-side" id="product-details">';
 
   const att=itemAttention(it);
-  h+='<section class="panel"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Attention required</h3>'+
-    '<p class="panel__description">Only decisions that can hold this piece up.</p></div></div>'+
-    '<div class="panel__body">'+att.map(a=>
-      '<article class="att'+(a.calm?' att--calm':'')+'"><div><strong>'+esc(a.title)+'</strong>'+
+  h+='<section class="attention-card"><header class="attention-head">'+
+    '<h2>Attention required</h2>'+
+    '<p>Only decisions that can hold this piece up.</p></header>'+
+    att.map(a=>'<article class="attention-item att'+(a.calm?' att--calm':'')+'">'+
+      '<span class="status-dot'+(a.calm?' green':'')+'"></span>'+
+      '<div><strong>'+esc(a.title)+'</strong>'+
       (a.sub?'<span>'+esc(a.sub)+'</span>':'')+'</div>'+
-      (a.action?'<button class="button button--secondary" type="button" onclick="'+a.run+'">'+esc(a.action)+'</button>':'')+
-      '</article>').join('')+'</div></section>';
+      (a.action?'<button class="button small" type="button" onclick="'+a.run+'">'+esc(a.action)+'</button>':'')+
+      '</article>').join('')+'</section>';
 
-  h+='<section class="panel space-top-14"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Reference package</h3>'+
-    '<p class="panel__description">What the workshop should compare its work against.</p></div></div>'+
-    '<div class="panel__body"><div class="side-card__rows">'+
-    itemReferences(it).map(r=>'<div class="side-row"'+(r.open?' style="cursor:pointer" onclick="'+r.open+'"':'')+'>'+
+  h+='<section class="attention-card"><header class="attention-head">'+
+    '<h2>Reference package</h2>'+
+    '<p>What the workshop should compare its work against.</p></header>'+
+    '<div class="side-details side-card__rows">'+
+    itemReferences(it).map(r=>'<div class="side-detail side-row"'+(r.open?' style="cursor:pointer" onclick="'+r.open+'"':'')+'>'+
       '<span>'+esc(r.k)+'</span><strong'+(r.miss?' class="is-missing"':'')+'>'+esc(r.v)+'</strong></div>').join('')+
-    '</div><div class="button-row space-top-12">'+
-    '<button class="button button--secondary" type="button" onclick="mMedia(\''+it.id+'\')">'+icon('i-camera','icon--sm')+'Add reference media</button></div>'+
+    '<button class="button secondary small" style="width:100%;margin-top:10px" type="button" '+
+      'onclick="mMedia(\''+it.id+'\')">'+icon('i-camera','icon-sm')+'Add reference media</button>'+
     '</div></section>';
 
   const b=S.buyersById[p.buyer_id];
-  h+='<section class="panel space-top-14"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Product details</h3>'+
-    '<p class="panel__description">Kept to the side so it does not compete with the work.</p></div></div>'+
-    '<div class="panel__body"><div class="side-card__rows">'+
-    '<div class="side-row"><span>Purchase order</span><strong>'+esc(p.po_number)+'</strong></div>'+
-    '<div class="side-row"><span>Buyer</span><strong>'+esc(b?b.company:'—')+'</strong></div>'+
-    '<div class="side-row"><span>Quantity</span><strong>'+esc((+it.qty||1)+' '+(it.unit||'pcs'))+'</strong></div>'+
-    (it.item_code?'<div class="side-row"><span>Item code</span><strong>'+esc(it.item_code)+'</strong></div>':'')+
-    '<div class="side-row"><span>Dispatch target</span><strong>'+(due?esc(fdate(due)):'Not set')+'</strong></div>'+
-    '<div class="side-row"><span>Buyer sees</span><strong>Approved work only</strong></div>'+
+  h+='<section class="attention-card"><header class="attention-head">'+
+    '<h2>Product details</h2>'+
+    '<p>Identity, specification, responsibility and visibility.</p></header>'+
+    '<div class="side-details side-card__rows">'+
+    '<div class="side-detail side-row"><span>Purchase order</span><strong>'+esc(p.po_number)+'</strong></div>'+
+    '<div class="side-detail side-row"><span>Project</span><strong>'+esc(p.project||'—')+'</strong></div>'+
+    '<div class="side-detail side-row"><span>Buyer</span><strong>'+esc(b?b.company:'—')+'</strong></div>'+
+    (it.item_code?'<div class="side-detail side-row"><span>Product code</span><strong>'+esc(it.item_code)+'</strong></div>':'')+
+    '<div class="side-detail side-row"><span>Quantity</span><strong>'+esc((+it.qty||1)+' '+(it.unit||'pcs'))+'</strong></div>'+
+    '<div class="side-detail side-row"><span>Finished size</span><strong>'+esc(dimsOf(it)||'—')+'</strong></div>'+
+    '<div class="side-detail side-row"><span>Stone</span><strong>'+esc(it.stone||'—')+'</strong></div>'+
+    '<div class="side-detail side-row"><span>PO shipment</span><strong>'+(due?esc(fdate(due)):'Not set')+'</strong></div>'+
+    '<div class="side-detail side-row"><span>Buyer sees</span><strong>Approved content only</strong></div>'+
     '</div>'+
     (it.notes?'<p class="field-hint space-top-10">'+esc(it.notes)+'</p>':'')+
-    '<div class="button-row space-top-12"><button class="button button--quiet" type="button" onclick="go(\'#/po/'+p.id+'\')">Open the order</button></div>'+
-    '</div></section>';
+    '<button class="button quiet small" style="width:100%;margin-top:10px" type="button" '+
+      'onclick="go(\'#/po/'+p.id+'\')">Open the order</button>'+
+    '</section>';
 
-  h+='<p class="field-hint space-top-12">Money stays in Finance and follows its own rules. The workshop never sees this page.</p>';
-  h+='</aside></div><div style="height:24px"></div>';
+  h+='<div class="notice"><strong>Finance stays separate</strong>'+
+    'Invoices, payments and receivables are on the order and in Finance. The workshop never sees this page.</div>';
+  h+='</aside></div></div><div style="height:24px"></div>';
 
   // No purchase-order rail here: this page is about one piece and it needs the
   // width. The rail stays on the order pages, where hopping between POs is the job.
-  paintPlain(h);
+  sfaPaint(h);
   markRead(it.id);
 }
 
@@ -9598,124 +10069,274 @@ function setAccessQuery(v){ window.__accessQ=v; render();
 function selectAccess(id){ window.__accessSel=id; render(); }
 function closeAccess(){ window.__accessSel=null; render(); }
 
+/* ------------------------------------------------------- people & access -- */
+/* ChatGPT's accessView from the final handoff: .pa-head, the .pa-summary
+   figures, his .pa-tabs, and the .pa-workspace list/detail pair with
+   .pa-completeness billing readiness, role cards and PO scope.
+
+   One deliberate difference: his file has an "Invitations pending" tab, but §12
+   of the same brief says there is no invitation flow — logins are created by
+   Yash with a password he hands over. A tab that can never hold a row is a dead
+   control, which §17 forbids, so it is not built. */
+const PA_ROLES={
+  administrator:{name:'Buyer administrator',
+    copy:'All approved portal information for this company, buyer decisions and comments. Finance access stays a separate switch.',
+    permissions:['Sees approved progress on every order this company has placed',
+      'Makes buyer decisions and leaves comments',
+      'Finance is shown only if the finance switch is on for this person']},
+  project:{name:'Buyer project user',
+    copy:'Only the purchase orders named for this person. No company-wide finance information.',
+    permissions:['Sees approved progress on the orders assigned to them',
+      'Approves and comments on those orders only',
+      'No finance access unless it is separately enabled']},
+  finance:{name:'Buyer finance user',
+    copy:'Buyer-level Tally invoices, ledger PDFs and balance. Production access is optional.',
+    permissions:['Sees uploaded Tally invoices and ledger statements',
+      'Sees the buyer-level amount due to or from Gujraj Impex',
+      'No workshop access and no unpublished photographs']}
+};
+const PA_STAFF_ROLES={
+  admin:{name:'Owner administrator', scope:'Everything, including buyer names and prices'},
+  supervisor:{name:'Workshop supervisor', scope:'Every product on the floor; can move any of them along'},
+  worker:{name:'Workshop worker', scope:'Only the products assigned to them'},
+  staff:{name:'Workshop staff (legacy)', scope:'Every product on the floor'}
+};
+function paTab(){ return window.__paTab||'companies'; }
+function paSetTab(t){ window.__paTab=t; render(); }
+function paSelectCompany(id){ window.__paCompany=id; window.__paTab='companies'; render(); }
+function paSelectPerson(id){ window.__paPerson=id; window.__paTab='people'; render(); }
+function paSelectStaff(id){ window.__paStaff=id; window.__paTab='staff'; render(); }
+function paOpenPerson(id){ paSelectPerson(id); }
+function paSearch(q){
+  q=String(q||'').toLowerCase().trim();
+  document.querySelectorAll('#pa-record-list .pa-row').forEach(b=>{
+    b.hidden = !!q && (b.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0;
+  });
+}
+function paInfoRow(label, value){
+  return '<div class="pa-info-row"><span>'+esc(label)+'</span>'+
+    '<strong>'+esc(value||'Not recorded')+'</strong></div>';
+}
+function paStatus(status, label){
+  return '<span class="pa-status '+esc(status)+'"><i></i>'+esc(label||status)+'</span>';
+}
+// The thirteen fields an invoice needs before this company can be billed.
+const PA_BILLING=[['Legal name','legal_name'],['Billing name','invoice_name'],
+  ['Tally ledger name','tally_ledger_name'],['GSTIN','gstin'],['PAN','pan'],
+  ['Payment terms','payment_terms'],['Accounts contact','accounts_name'],
+  ['Accounts email','accounts_email'],['Billing address','address_line1'],
+  ['City','city'],['State','state'],['PIN code','postal_code'],['Place of supply','place_of_supply']];
+function paMissing(b){ return PA_BILLING.filter(([,k])=>!String(b[k]||'').trim()).map(([label])=>label); }
+function paComplete(b){ return Math.round((PA_BILLING.length-paMissing(b).length)/PA_BILLING.length*100); }
+
+function paBuyers(){ return (S.buyers||[]).slice().sort((a,b)=>String(a.company).localeCompare(String(b.company))); }
+function paPeople(){ return (S.profilesAll||[]).filter(p=>p.role==='buyer'); }
+function paStaffList(){ return (S.profilesAll||[]).filter(p=>p.role!=='buyer'); }
+function paScopeOf(p){
+  const rows=(S.poScope||[]).filter(x=>x.user_id===p.user_id);
+  return rows.map(x=>(S.posById[x.po_id]||{}).po_number).filter(Boolean);
+}
+
+function paCompanyRow(b){
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
+  const people=paPeople().filter(p=>p.buyer_id===b.id);
+  const missing=paMissing(b);
+  const on=(window.__paCompany||(paBuyers()[0]||{}).id)===b.id;
+  return '<button class="pa-row'+(on?' active':'')+'" type="button" '+
+    'data-search="'+esc([b.company,b.legal_name,b.gstin,b.city,b.contact_name].filter(Boolean).join(' '))+'" '+
+    'onclick="paSelectCompany(\''+b.id+'\')">'+
+    '<span class="pa-record"><span class="pa-avatar">'+esc(clientInitials(b.company))+'</span>'+
+      '<span><strong>'+esc(b.company)+'</strong><span>'+esc(b.legal_name||'Legal name not recorded')+'</span></span></span>'+
+    '<span class="pa-cell"><strong>'+pos.length+' purchase order'+(pos.length===1?'':'s')+'</strong>'+
+      '<span>'+people.length+' portal '+(people.length===1?'person':'people')+'</span></span>'+
+    '<span>'+paStatus(missing.length?'pending':'active', missing.length?'Billing incomplete':'Ready')+'</span>'+
+    '<span class="pa-chevron">›</span></button>';
+}
+function paPersonRow(p){
+  const b=S.buyersById[p.buyer_id]||{};
+  const role=PA_ROLES[p.buyer_role||'administrator']||PA_ROLES.administrator;
+  const on=(window.__paPerson||(paPeople()[0]||{}).user_id)===p.user_id;
+  return '<button class="pa-row'+(on?' active':'')+'" type="button" '+
+    'data-search="'+esc([p.full_name,p.email,b.company,role.name].filter(Boolean).join(' '))+'" '+
+    'onclick="paSelectPerson(\''+p.user_id+'\')">'+
+    '<span class="pa-record"><span class="pa-avatar">'+esc(clientInitials(p.full_name||p.email||'?'))+'</span>'+
+      '<span><strong>'+esc(p.full_name||'Name not recorded')+'</strong><span>'+esc(p.email||'')+'</span></span></span>'+
+    '<span class="pa-cell"><strong>'+esc(role.name)+'</strong><span>'+esc(b.company||'No company')+'</span></span>'+
+    '<span>'+paStatus(p.active===false?'pending':'active', p.active===false?'Suspended':'Active')+'</span>'+
+    '<span class="pa-chevron">›</span></button>';
+}
+function paStaffRow(p){
+  const r=PA_STAFF_ROLES[p.role]||{name:p.role, scope:''};
+  const on=(window.__paStaff||(paStaffList()[0]||{}).user_id)===p.user_id;
+  const needsPhone=FLOOR_ROLES.indexOf(p.role)>=0 && !p.phone;
+  return '<button class="pa-row'+(on?' active':'')+'" type="button" '+
+    'data-search="'+esc([p.full_name,p.email,r.name].filter(Boolean).join(' '))+'" '+
+    'onclick="paSelectStaff(\''+p.user_id+'\')">'+
+    '<span class="pa-record"><span class="pa-avatar">'+esc(clientInitials(p.full_name||p.email||'?'))+'</span>'+
+      '<span><strong>'+esc(p.full_name||'Name not recorded')+'</strong>'+
+      '<span>'+esc(shortLogin(p.email||''))+'</span></span></span>'+
+    '<span class="pa-cell"><strong>'+esc(r.name)+'</strong><span>'+esc(r.scope)+'</span></span>'+
+    '<span>'+paStatus(needsPhone?'pending':'active', needsPhone?'No WhatsApp number':'Active')+'</span>'+
+    '<span class="pa-chevron">›</span></button>';
+}
+
+function paCompanyDetail(){
+  const list=paBuyers();
+  const b=list.find(x=>x.id===window.__paCompany)||list[0];
+  if(!b) return '<aside class="pa-detail"><div class="pa-empty">No buyer companies yet.</div></aside>';
+  const missing=paMissing(b), pct=paComplete(b);
+  const people=paPeople().filter(p=>p.buyer_id===b.id);
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
+  return '<aside class="pa-detail"><header class="pa-detail-top"><div>'+
+    '<p class="eyebrow">Buyer company record</p><h2>'+esc(b.company)+'</h2>'+
+    '<p>'+esc(b.legal_name||'Legal name not recorded')+'</p></div>'+
+    '<div class="pa-detail-actions"><button class="button secondary small" type="button" '+
+      'onclick="mBuyer(\''+b.id+'\')">Edit billing</button></div></header>'+
+    '<div class="pa-completeness"><div><span>Billing readiness</span><strong>'+pct+'%</strong></div>'+
+      '<div class="pa-completeness-bar"><i style="width:'+pct+'%"></i></div>'+
+      (missing.length?'<p class="pa-missing">Missing: '+esc(missing.join(', '))+'</p>'
+        :'<p class="pa-missing" style="color:var(--success)">Complete for billing review</p>')+
+    '</div>'+
+    '<section class="pa-section"><div class="pa-section-head"><h3>Legal &amp; Tally identity</h3>'+
+      '<button class="button quiet small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit</button></div>'+
+      paInfoRow('Legal business name',b.legal_name)+paInfoRow('Billing name',b.invoice_name)+
+      paInfoRow('Tally ledger name',b.tally_ledger_name)+paInfoRow('Customer code',b.customer_code)+
+      paInfoRow('GSTIN',b.gstin)+paInfoRow('PAN',b.pan)+
+      paInfoRow('Tax treatment',b.tax_treatment)+paInfoRow('Place of supply',b.place_of_supply)+'</section>'+
+    '<section class="pa-section"><div class="pa-section-head"><h3>Billing contact</h3>'+
+      '<button class="button quiet small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit</button></div>'+
+      (b.accounts_name?'<div class="pa-primary-contact"><strong>'+esc(b.accounts_name)+'</strong>'+
+        '<span>'+esc([b.accounts_email,b.accounts_phone].filter(Boolean).join(' · '))+'</span></div>'
+       :'<div class="pa-note"><strong>Billing contact required</strong>'+
+         'Add the person who should receive Tally invoices and ledger statements.</div>')+
+      paInfoRow('Payment terms',b.payment_terms)+paInfoRow('Currency',b.currency||'INR')+'</section>'+
+    '<section class="pa-section"><div class="pa-section-head"><h3>Billing address</h3>'+
+      '<button class="button quiet small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit</button></div>'+
+      '<div class="pa-note"><strong>'+esc(b.address_line1||'Address not recorded')+'</strong>'+
+      esc([b.address_line2,b.city,b.state,b.postal_code,b.country].filter(Boolean).join(', ')||
+        'Complete the address before preparing this buyer for billing.')+'</div></section>'+
+    '<section class="pa-section"><div class="pa-section-head"><h3>People &amp; purchase-order access</h3>'+
+      '<button class="button quiet small" type="button" onclick="mNewLogin(\''+b.id+'\')">Add person</button></div>'+
+      (people.length?people.map(p=>'<button class="pa-primary-contact" style="width:100%;text-align:left;margin-top:6px;cursor:pointer" '+
+        'type="button" onclick="paOpenPerson(\''+p.user_id+'\')">'+
+        '<strong>'+esc(p.full_name||p.email)+' · '+esc((PA_ROLES[p.buyer_role||'administrator']||PA_ROLES.administrator).name)+'</strong>'+
+        '<span>'+esc(p.email)+' · '+esc(paScopeOf(p).length?(paScopeOf(p).length+' assigned orders'):'Every order this company placed')+'</span>'+
+        '</button>').join('')
+       :'<div class="pa-note"><strong>No login issued</strong>The company exists, but nobody here can sign in.</div>')+
+      '<div class="pa-chip-list" style="margin-top:8px">'+
+      (pos.length?pos.map(p=>'<span class="pa-chip">'+esc(p.po_number)+'</span>').join('')
+        :'<span class="pa-chip">No purchase orders assigned</span>')+'</div></section>'+
+    '<section class="pa-section">'+paInfoRow('Last record change', b.updated_at?fdate(String(b.updated_at).slice(0,10)):'')+
+      paInfoRow('Shipping address rule', b.default_ship_to||'The purchase order decides')+'</section>'+
+    '</aside>';
+}
+function paPersonDetail(){
+  const list=paPeople();
+  const p=list.find(x=>x.user_id===window.__paPerson)||list[0];
+  if(!p) return '<aside class="pa-detail"><div class="pa-empty">No buyer logins yet.</div></aside>';
+  const b=S.buyersById[p.buyer_id]||{};
+  const role=PA_ROLES[p.buyer_role||'administrator']||PA_ROLES.administrator;
+  const scope=paScopeOf(p);
+  return '<aside class="pa-detail"><header class="pa-detail-top"><div>'+
+    '<p class="eyebrow">Buyer person &amp; login</p><h2>'+esc(p.full_name||p.email)+'</h2>'+
+    '<p>'+esc(b.company||'No company')+'</p></div>'+
+    '<button class="button secondary small" type="button" onclick="mBuyerAccess(\''+p.user_id+'\')">Edit access</button>'+
+    '</header>'+
+    '<section class="pa-section"><h3>Login &amp; notifications</h3>'+
+      paInfoRow('Sign-in identity',p.email)+paInfoRow('WhatsApp / phone',p.phone)+
+      paInfoRow('Login status',p.active===false?'Suspended':'Active')+'</section>'+
+    '<section class="pa-section"><h3>Role explained</h3>'+
+      '<div class="pa-note"><strong>'+esc(role.name)+'</strong>'+esc(role.copy)+'</div>'+
+      role.permissions.map(x=>'<div class="pa-permission"><i>✓</i><span>'+esc(x)+'</span></div>').join('')+
+    '</section>'+
+    '<section class="pa-section"><div class="pa-section-head"><h3>Purchase-order scope</h3>'+
+      '<button class="button quiet small" type="button" onclick="mBuyerAccess(\''+p.user_id+'\')">Change</button></div>'+
+      '<div class="pa-chip-list">'+
+      (scope.length?scope.map(x=>'<span class="pa-chip">'+esc(x)+'</span>').join('')
+        :'<span class="pa-chip">Every order '+esc(b.company||'this company')+' has placed</span>')+'</div>'+
+      paInfoRow('Buyer-level finance', p.finance_access?'Visible':'Hidden')+'</section>'+
+    '<section class="pa-section"><div class="pa-note"><strong>Separation is enforced</strong>'+
+      'This person never sees internal notes, unapproved photographs, staff names or another buyer company. '+
+      'The rules are in the database, not in the screen.</div></section>'+
+    '<section class="pa-section"><button class="button secondary wide" type="button" '+
+      'onclick="mResetPw(\''+p.user_id+'\',\''+esc(p.email)+'\')">Reset password</button></section>'+
+    '</aside>';
+}
+function paStaffDetail(){
+  const list=paStaffList();
+  const p=list.find(x=>x.user_id===window.__paStaff)||list[0];
+  if(!p) return '<aside class="pa-detail"><div class="pa-empty">No internal logins yet.</div></aside>';
+  const r=PA_STAFF_ROLES[p.role]||{name:p.role, scope:''};
+  const floor=FLOOR_ROLES.indexOf(p.role)>=0;
+  return '<aside class="pa-detail"><header class="pa-detail-top"><div>'+
+    '<p class="eyebrow">Internal staff record</p><h2>'+esc(p.full_name||shortLogin(p.email||''))+'</h2>'+
+    '<p>'+esc(r.name)+'</p></div>'+
+    (p.user_id!==uid()?'<button class="button secondary small" type="button" '+
+      'onclick="mResetPw(\''+p.user_id+'\',\''+esc(p.email)+'\')">Reset password</button>':badge('you'))+
+    '</header>'+
+    '<section class="pa-section"><h3>Identity &amp; contact</h3>'+
+      paInfoRow('Login name',shortLogin(p.email||''))+paInfoRow('WhatsApp / phone',p.phone)+'</section>'+
+    '<section class="pa-section"><h3>Role &amp; operational scope</h3>'+
+      paInfoRow('Role',r.name)+paInfoRow('Scope',r.scope)+
+      '<div class="pa-note" style="margin-top:8px"><strong>Financial separation</strong>'+
+      (floor?'This role never sees buyer names, order numbers, prices, balances or invoices.'
+            :'This role may view buyer-level Tally files and clear orders for dispatch.')+'</div>'+
+    '</section>'+
+    (floor?'<section class="pa-section"><button class="button secondary wide" type="button" '+
+      'onclick="mStaffPhone(\''+p.user_id+'\')">'+(p.phone?'Change WhatsApp number':'Add WhatsApp number')+
+      '</button></section>':'')+
+    '</aside>';
+}
+
 function vAccess(){
   if(!isAdmin()) return vHome();
-  const people=accessPeople();
-  const g=window.__accessGroup||'all';
-  const q=(window.__accessQ||'').toLowerCase();
-  const inGroup=x=>
-    g==='all'?true:
-    g==='buyer'?(x.kind==='person'&&x.profile.role==='buyer'):
-    g==='staff'?(x.kind==='person'&&FLOOR_ROLES.indexOf(x.profile.role)>=0):
-    g==='admin'?(x.kind==='person'&&x.profile.role==='admin'):
-    g==='nologin'?(x.kind==='company'):
-    x.attention.length>0;
-  let list=people.filter(inGroup);
-  if(q) list=list.filter(x=>(x.name+' '+x.identity+' '+x.org+' '+x.role).toLowerCase().indexOf(q)>=0);
-  list.sort((a,b)=>(b.attention.length?1:0)-(a.attention.length?1:0) || a.name.localeCompare(b.name));
+  const tab=paTab();
+  const companies=paBuyers(), people=paPeople(), staff=paStaffList();
+  const incomplete=companies.filter(b=>paMissing(b).length).length;
+  const noLogin=companies.filter(b=>!people.some(p=>p.buyer_id===b.id)).length;
 
-  const counts={};
-  ACCESS_GROUPS.forEach(([k])=>{ counts[k]=people.filter(x=>{
-    const save=window.__accessGroup; window.__accessGroup=k;
-    const r=(k==='all')||(k==='buyer'&&x.kind==='person'&&x.profile.role==='buyer')||
-      (k==='staff'&&x.kind==='person'&&FLOOR_ROLES.indexOf(x.profile.role)>=0)||
-      (k==='admin'&&x.kind==='person'&&x.profile.role==='admin')||
-      (k==='nologin'&&x.kind==='company')||(k==='attention'&&x.attention.length>0);
-    window.__accessGroup=save; return r;
-  }).length; });
+  const rows = tab==='companies' ? companies.map(paCompanyRow).join('')
+    : tab==='people' ? people.map(paPersonRow).join('')
+    : staff.map(paStaffRow).join('');
+  const head = tab==='companies'
+    ? '<span>Buyer company / billing identity</span><span>Orders &amp; access</span><span>Record status</span><span></span>'
+    : tab==='people'
+    ? '<span>Person / sign-in identity</span><span>Role &amp; company</span><span>Login status</span><span></span>'
+    : '<span>Internal person</span><span>Role &amp; work scope</span><span>Status</span><span></span>';
+  const detail = tab==='companies' ? paCompanyDetail() : tab==='people' ? paPersonDetail() : paStaffDetail();
 
-  const sel=window.__accessSel?people.find(x=>x.id===window.__accessSel):null;
-
-  let h='<div class="page-head"><div>'+eyebrow('Administration · identity and permissions')+
-    '<h1 class="display-title">People &amp; access.</h1>'+
-    '<p class="lede">Every login, what it can reach, and what it cannot. Passwords are never shown here — reset one instead.</p></div>'+
-    '<div class="page-heading__actions">'+
-    '<button class="button button--secondary" type="button" onclick="mBuyer(null)">Add a buyer company</button>'+
-    '<button class="button" type="button" onclick="mNewLogin(null)">+ Add a person</button></div></div>';
-
-  h+='<div class="kpi-grid">'+[
-    ['Active people', people.filter(x=>x.kind==='person').length, 'Across the office, the floor and buyers','all'],
-    ['Buyer logins', counts.buyer, counts.buyer?'One company each':'Nobody can see their orders','buyer'],
-    ['Needs attention', counts.attention, counts.attention?'Missing contact or never used':'Nothing outstanding','attention'],
-    ['Full access', counts.admin, 'Can see prices and payments','admin']
-  ].map(t=>'<button class="kpi'+(t[0]==='Needs attention'&&t[1]?' kpi--warn':'')+(g===t[3]?' kpi--on':'')+
-    '" type="button" onclick="setAccessGroup(\''+t[3]+'\')">'+
-    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
-    '<span class="kpi__note">'+esc(t[2])+'</span></button>').join('')+'</div>';
-
-  h+='<div class="access-layout">';
-
-  h+='<aside class="panel access-groups"><div class="panel__body">'+
-    '<p class="side-nav__label">Access groups</p>'+
-    ACCESS_GROUPS.map(([k,label])=>'<button class="access-group'+(g===k?' is-on':'')+'" type="button" onclick="setAccessGroup(\''+k+'\')">'+
-      '<span>'+esc(label)+'</span><em>'+counts[k]+'</em></button>').join('')+
-    '<div class="side-help space-top-12"><strong>Roles do not overlap</strong>'+
-    '<p>The workshop, a buyer and the office each see a different database. A login gets only what its role is given — nothing is hidden by the menu alone.</p></div>'+
-    '</div></aside>';
-
-  h+='<section class="panel access-list"><div class="panel__head"><div class="access-search">'+
-    icon('i-search','icon--sm')+'<input id="access-q" type="search" placeholder="Search a name, login or company" '+
-    'value="'+esc(window.__accessQ||'')+'" oninput="setAccessQuery(this.value)"></div>'+
-    '<span class="access-count">'+list.length+' of '+people.length+'</span></div>'+
-    '<div class="panel__body">';
-  if(!list.length) h+='<div class="empty-state">Nobody in this group.</div>';
-  else h+='<div class="access-rows">'+list.map(x=>
-    '<article class="access-row'+(sel&&sel.id===x.id?' is-open':'')+(x.attention.length?' has-attn':'')+'" onclick="selectAccess(\''+x.id+'\')">'+
-      '<span class="access-avatar">'+esc(initials(x.name))+'</span>'+
-      '<div class="access-who"><strong>'+esc(x.name)+'</strong><span>'+esc(x.identity||'—')+'</span></div>'+
-      '<div class="access-role"><strong>'+esc(x.role)+'</strong><span>'+esc(x.org)+'</span></div>'+
-      '<div class="access-scope"><strong>'+esc(x.scope)+'</strong>'+
-        '<span>'+esc(x.lastAt?('Last seen '+ftime(x.lastAt)):'Not used yet')+'</span></div>'+
-      (x.attention.length?badge('Needs attention','warn'):badge('Active','success'))+
-    '</article>').join('')+'</div>';
-  h+='</div></section>';
-
-  h+='<aside class="panel access-detail">';
-  if(!sel){
-    h+='<div class="panel__body"><div class="empty-state">Pick someone to see exactly what their login reaches.</div></div>';
-  } else if(sel.kind==='company'){
-    h+='<div class="panel__head"><div><h3 class="panel__title">'+esc(sel.name)+'</h3>'+
-      '<p class="panel__description">A buyer company with nobody able to sign in.</p></div>'+
-      '<button class="button button--quiet" type="button" onclick="closeAccess()">Close</button></div>'+
-      '<div class="panel__body"><div class="empty-state">Nobody at '+esc(sel.name)+' can see their orders yet.</div>'+
-      '<div class="button-row space-top-12">'+
-      '<button class="button" type="button" onclick="mNewLogin(\''+sel.buyer.id+'\')">Create their login</button>'+
-      '<button class="button button--secondary" type="button" onclick="mBuyer(\''+sel.buyer.id+'\')">Edit the company</button></div></div>';
-  } else {
-    const p=sel.profile;
-    h+='<div class="panel__head"><div><h3 class="panel__title">Access details</h3>'+
-      '<p class="panel__description">Identity, role and what it reaches.</p></div>'+
-      '<button class="button button--quiet" type="button" onclick="closeAccess()">Close</button></div>'+
-      '<div class="panel__body">'+
-      '<div class="access-person"><span class="access-avatar access-avatar--lg">'+esc(initials(sel.name))+'</span>'+
-      '<div><strong>'+esc(sel.name)+'</strong><span>'+esc([sel.identity, sel.org].filter(Boolean).join(' · '))+'</span></div></div>'+
-      '<p class="eyebrow space-top-14">Login &amp; contact</p><div class="side-card__rows">'+
-        '<div class="side-row"><span>Signs in as</span><strong>'+esc(sel.identity||'—')+'</strong></div>'+
-        '<div class="side-row"'+(FLOOR_ROLES.indexOf(p.role)>=0?' style="cursor:pointer" onclick="mStaffPhone(\''+p.user_id+'\')"':'')+
-          '><span>WhatsApp</span><strong'+(FLOOR_ROLES.indexOf(p.role)>=0&&!p.phone?' class="is-missing"':'')+'>'+
-          esc(p.phone||(FLOOR_ROLES.indexOf(p.role)>=0?'Add a number':'Not saved'))+'</strong></div>'+
-        '<div class="side-row"><span>Last seen</span><strong>'+esc(sel.lastAt?ftime(sel.lastAt):'Never')+'</strong></div>'+
-      '</div>'+
-      '<p class="eyebrow space-top-14">Role &amp; scope</p><div class="side-card__rows">'+
-        '<div class="side-row"><span>Role</span><strong>'+esc(sel.role)+'</strong></div>'+
-        '<div class="side-row"><span>Scope</span><strong>'+esc(sel.scope)+'</strong></div>'+
-      '</div>'+
-      '<ul class="access-perms space-top-12">'+accessPermissions(p).map(x=>
-        '<li class="'+(x[0]?'yes':'no')+'"><i>'+(x[0]?'✓':'✕')+'</i>'+esc(x[1])+'</li>').join('')+'</ul>'+
-      (p.role==='buyer'?'<label class="check-row space-top-12"><input type="checkbox" id="fin-'+p.user_id+'"'+
-        (p.finance_access!==false?' checked':'')+' onchange="setFinanceAccess(\''+p.user_id+'\',this.checked)">'+
-        '<span>Can see invoices, e-way bills and the statement</span></label>'+
-        '<p class="field-hint">Turn this off for a project manager who should follow production but not the money. '+
-        'It is enforced in the database, not by hiding the menu.</p>':'')+
-      (sel.attention.length?'<div class="attn attn--warn attn--flat space-top-12"><span>'+
-        sel.attention.map(esc).join('<br>')+'</span></div>':'')+
-      '<div class="button-row space-top-14">'+
-        '<button class="button button--secondary" type="button" onclick="mResetPw(\''+p.user_id+'\',\''+esc(p.email||'')+'\')">Reset the password</button>'+
-        (p.role!=='admin'?'<button class="button button--danger" type="button" onclick="delLogin(\''+p.user_id+'\',\''+esc(p.email||'')+'\')">Remove this login</button>':'')+
-      '</div></div>';
-  }
-  h+='</aside></div>';
-  $('app').innerHTML=h;
+  sfaPaint('<div class="pa-page"><header class="pa-head"><div>'+
+    '<p class="eyebrow">Administration · companies, billing and sign-in access</p>'+
+    '<h1>People &amp; access.</h1>'+
+    '<p>Buyer companies hold the legal and billing record. People hold sign-in identities, roles and '+
+    'purchase-order scope. The two are reviewed and edited separately.</p></div>'+
+    '<div class="pa-head-actions">'+
+      '<button class="button secondary" type="button" onclick="mNewLogin(null,\'staff\')">'+
+        icon('i-plus','icon-sm')+'Add supervisor or worker</button>'+
+      '<button class="button" type="button" onclick="mBuyer(null)">'+
+        icon('i-plus','icon-sm')+'Onboard buyer company</button>'+
+    '</div></header>'+
+    '<section class="pa-summary">'+
+      '<button type="button" onclick="paSetTab(\'companies\')"><span>Buyer companies</span>'+
+        '<strong>'+companies.length+'</strong><small>'+incomplete+' billing record'+(incomplete===1?'':'s')+' incomplete</small></button>'+
+      '<button type="button" onclick="paSetTab(\'people\')"><span>Buyer portal people</span>'+
+        '<strong>'+people.length+'</strong><small>Each person has an explicit order scope</small></button>'+
+      '<button type="button" onclick="paSetTab(\'companies\')"><span>Companies with no login</span>'+
+        '<strong>'+noLogin+'</strong><small>Nobody there can sign in yet</small></button>'+
+      '<button type="button" onclick="paSetTab(\'staff\')"><span>Internal staff</span>'+
+        '<strong>'+staff.length+'</strong><small>Workshop and finance stay separated</small></button>'+
+    '</section>'+
+    '<nav class="pa-tabs" aria-label="People and access sections">'+
+      '<button class="'+(tab==='companies'?'active':'')+'" type="button" onclick="paSetTab(\'companies\')">Buyer companies · '+companies.length+'</button>'+
+      '<button class="'+(tab==='people'?'active':'')+'" type="button" onclick="paSetTab(\'people\')">Buyer people &amp; logins · '+people.length+'</button>'+
+      '<button class="'+(tab==='staff'?'active':'')+'" type="button" onclick="paSetTab(\'staff\')">Internal staff · '+staff.length+'</button>'+
+    '</nav>'+
+    '<div class="pa-workspace"><section class="pa-list"><div class="pa-toolbar">'+
+      '<input type="search" placeholder="Search names, companies, GSTIN, login or role" '+
+        'aria-label="Search access records" oninput="paSearch(this.value)"></div>'+
+      '<div id="pa-record-list"><div class="pa-list-head">'+head+'</div>'+
+      (rows||'<div class="pa-empty">No matching records.</div>')+'</div></section>'+
+      detail+'</div></div>');
 }
 
 function vReportsOverview(){
@@ -9920,6 +10541,9 @@ const REPORT_TABS=[
 ];
 
 function reportChrome(active){
+  // Inside his .reports-page shell the header and the tab row are drawn once, by
+  // the shell. A section that also drew its own would stack two of each.
+  if(window.__inReportShell) return '';
   const d=reportWindow();
   return '<div class="page-head"><div>'+eyebrow('Operational intelligence · owner view')+
     '<h1 class="display-title">Reports.</h1>'+
@@ -10328,6 +10952,11 @@ function sfOpenBuyerProduct(id){ go('#/item/'+id); }
 function setApprView(v){ S.apprView=v; render(); }
 function setPhotoFilter(f){ S.photoFilter=f||{}; render(); }
 function setDocFilter(v){ S.docFilter=v||'all'; render(); }
+// his product-record nav jumps between the sections of one long record
+function scrollProductSection(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 function gSearch(v){ window.__gq=v; render(); }
 
@@ -13198,6 +13827,63 @@ function setPoFilter(k){ window.__poFilter=k; render(); }
 
 // The buyer-side finance permission. Enforced by bt_my_finance() in the policies
 // on invoices, e-way bills and the ledger — this switch only sets the flag.
+/* One place to set what a buyer person may see: which of the three buyer roles
+   they hold, which purchase orders they are scoped to, and whether the money is
+   visible to them. Every one of these is enforced in the database as well — this
+   screen only writes the rows the policies read. */
+function mBuyerAccess(userId){
+  const p=(S.profilesAll||[]).find(x=>x.user_id===userId);
+  if(!p){ toast('That login no longer exists',{err:true}); return; }
+  const b=S.buyersById[p.buyer_id]||{};
+  const pos=(S.pos||[]).filter(x=>x.buyer_id===p.buyer_id)
+    .sort((x,y)=>String(x.po_number).localeCompare(String(y.po_number)));
+  const scoped=(S.poScope||[]).filter(x=>x.user_id===userId).map(x=>x.po_id);
+  const role=p.buyer_role||'administrator';
+  const ROLES=[['administrator','Buyer administrator','Everything this company is allowed to see, and can make decisions.'],
+               ['project','Buyer project user','Only the orders you tick below.'],
+               ['finance','Buyer finance user','Invoices, the ledger and the balance.']];
+  const m=modal('<h3>Access for '+esc(p.full_name||p.email)+'</h3>'+
+    '<div class="sub">'+esc(b.company||'')+'</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label>Role</label>'+
+      ROLES.map(([v,name,copy])=>'<label class="check-row"><input type="radio" name="ba-role" value="'+v+'"'+
+        (role===v?' checked':'')+' onchange="document.getElementById(\'ba-scope\').hidden=this.value!==\'project\'">'+
+        '<span><strong>'+esc(name)+'</strong><br><span class="field-hint">'+esc(copy)+'</span></span></label>').join('')+
+    '</div>'+
+    '<div class="field field--full" id="ba-scope"'+(role==='project'?'':' hidden')+'>'+
+      '<label>Purchase orders this person may see</label>'+
+      (pos.length?pos.map(x=>'<label class="check-row"><input type="checkbox" class="ba-po" value="'+x.id+'"'+
+        (scoped.indexOf(x.id)>=0?' checked':'')+'><span>'+esc(x.po_number+(x.project?' · '+x.project:''))+'</span></label>').join('')
+        :'<p class="field-hint">This company has no purchase orders yet.</p>')+
+      '<p class="field-hint">A project user with nothing ticked sees no orders at all.</p></div>'+
+    '<label class="check-row field--full"><input type="checkbox" id="ba-fin"'+(p.finance_access!==false?' checked':'')+'>'+
+      '<span>Can see invoices, the ledger and the balance</span></label>'+
+    '<p class="field-hint field--full">Turn this off for someone who should follow production but not the money. '+
+      'It is enforced in the database, not by hiding a menu.</p>'+
+    '<div class="button-row field--full"><button class="button" type="button" id="ba-go">Save access</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#ba-go').onclick=async ()=>{
+    const newRole=(m.m.querySelector('input[name=ba-role]:checked')||{}).value||'administrator';
+    const fin=$('ba-fin').checked;
+    const want=newRole==='project'
+      ? [...m.m.querySelectorAll('.ba-po')].filter(x=>x.checked).map(x=>x.value) : [];
+    const e1=(await sb.from('bt_profiles').update({buyer_role:newRole, finance_access:fin}).eq('user_id',userId)).error;
+    if(e1){ toast(e1.message,{err:true}); return; }
+    // rewrite the scope to exactly what was ticked
+    const del=(await sb.from('bt_buyer_po_scope').delete().eq('user_id',userId)).error;
+    if(del){ toast(del.message,{err:true}); return; }
+    if(want.length){
+      const ins=(await sb.from('bt_buyer_po_scope').insert(
+        want.map(po=>({user_id:userId, po_id:po, granted_by:uid()})))).error;
+      if(ins){ toast(ins.message,{err:true}); return; }
+    }
+    closeModal(); await loadData(); render();
+    toast(newRole==='project'
+      ? 'Saved. They can see '+want.length+' order'+(want.length===1?'':'s')+'.'
+      : 'Saved.');
+  };
+}
+
 async function setFinanceAccess(userId, on){
   const {error}=await sb.from('bt_profiles').update({finance_access:!!on}).eq('user_id', userId);
   if(error){ toast(error.message,{err:true}); return; }
