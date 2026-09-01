@@ -4,6 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- A content security policy names the only places this page may load code from
+     and, more importantly, the only places it may send data to. The whole app is
+     one inline script, so 'unsafe-inline' cannot be dropped and injected script
+     would still run; what this policy takes away is the ability to post anything
+     it found to an outside address. object/base/form are set to none because the
+     app uses none of them. frame-ancestors is deliberately absent: it only works
+     as an HTTP header, which GitHub Pages does not let us set. -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' data: https://fonts.gstatic.com;
+  img-src 'self' data: blob: https://ooetmikoyqflqajlehtc.supabase.co;
+  media-src 'self' blob: https://ooetmikoyqflqajlehtc.supabase.co;
+  connect-src 'self' blob: https://ooetmikoyqflqajlehtc.supabase.co wss://ooetmikoyqflqajlehtc.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
+  worker-src 'self' blob: https://cdnjs.cloudflare.com;
+  object-src 'none';
+  base-uri 'none';
+  form-action 'none';
+  frame-src 'none';
+">
 <meta name="theme-color" content="#20211F">
 <title>StoneFlow · Gujraj Impex</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2320211F'/><path d='M28 66 L50 30 L72 66 Z' fill='none' stroke='%23F4F4F1' stroke-width='7' stroke-linejoin='round'/></svg>">
@@ -3624,7 +3646,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .settings-body{margin-top:12px}
 </style>
 <body>
-<script>const BUILD_ID='027acbcb1574';</script>
+<script>const BUILD_ID='b0a92ca54781';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -3692,6 +3714,14 @@ function shortLogin(v){
 }
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+// esc() is for HTML text and attributes. It is the WRONG escape for a value that
+// lands inside a JavaScript string in an inline handler — onclick="f('...')" —
+// because the browser HTML-decodes the attribute first, so &#39; turns back into
+// a quote and closes the string. jsq() emits \uXXXX instead: harmless in the
+// attribute, and a plain character once JavaScript reads it. A photo called
+// "Ravi's slab.jpg" is the everyday case, not the attack.
+function jsq(s){ return String(s==null?'':s)
+  .replace(/[\\'"<>&\r\n\u2028\u2029]/g, c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0')); }
 function $(id){ return document.getElementById(id); }
 function el(html){ const d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstChild; }
 function go(hash){ if(location.hash===hash){ render(); } else location.hash=hash; }
@@ -3840,9 +3870,34 @@ document.addEventListener('keydown', e=>{
   if(root && root.firstChild){ root.innerHTML=''; }
 });
 
+// Passwords have to be typed on a workshop tablet and read out over WhatsApp, so
+// they stay as words — but two words from a list of twelve is about a million
+// possibilities, which is guessable, and Math.random() is predictable: knowing
+// roughly when a password was made narrows it much further. Three words from
+// sixty-four, drawn from the browser's cryptographic source, is about two
+// billion, and no easier to type.
+const PW_WORDS = [
+  'Marble','Onyx','Bronze','Ivory','Chisel','Lathe','Kesar','Aravalli',
+  'Mewar','Agate','Quartz','Carve','Granite','Basalt','Slate','Jasper',
+  'Amber','Copper','Silver','Cobalt','Indigo','Saffron','Cedar','Teak',
+  'Walnut','Maple','Willow','Orchid','Jasmine','Lotus','Neem','Banyan',
+  'Falcon','Heron','Panther','Ibex','Camel','Bison','Otter','Sparrow',
+  'Compass','Anvil','Mallet','Caliper','Trowel','Ladder','Beacon','Harbour',
+  'Summit','Canyon','Meadow','Delta','Monsoon','Zephyr','Ember','Lantern',
+  'Prism','Marlin','Coral','Pearl','Topaz','Garnet','Opal','Ruby'
+];
+// A plain remainder would make the first few words slightly likelier than the
+// rest; discarding the tail keeps every choice equally likely.
+function pwPick(n){
+  const a = new Uint32Array(1);
+  const limit = Math.floor(4294967296 / n) * n;
+  let v;
+  do { crypto.getRandomValues(a); v = a[0]; } while (v >= limit);
+  return v % n;
+}
 function genPassword(){
-  const w=['Marble','Onyx','Bronze','Ivory','Chisel','Lathe','Kesar','Aravalli','Mewar','Agate','Quartz','Carve'];
-  return w[Math.floor(Math.random()*w.length)]+'.'+w[Math.floor(Math.random()*w.length)]+'.'+(1000+Math.floor(Math.random()*9000));
+  const w = PW_WORDS;
+  return w[pwPick(w.length)]+'.'+w[pwPick(w.length)]+'.'+w[pwPick(w.length)]+'.'+(1000+pwPick(9000));
 }
 function waLink(phone, text){
   const p=String(phone||'').replace(/[^0-9]/g,'');
@@ -5556,7 +5611,7 @@ function photoSlot(p, opts){
   if(isAdmin()&&p.status==='pending')
     h+='<button class="ph-del ph-ok" title="Approve" onclick="event.stopPropagation();setPhotoStatus([\''+p.id+'\'],\'approved\')">✓</button>';
   if(canDel)
-    h+='<button class="ph-del" title="Delete" onclick="delPhoto(event,\''+p.id+'\',\''+esc(p.path)+'\')">✕</button>';
+    h+='<button class="ph-del" title="Delete" onclick="delPhoto(event,\''+p.id+'\',\''+jsq(p.path)+'\')">✕</button>';
   h+='</div></div>';
   return h;
 }
@@ -6104,7 +6159,7 @@ function wsProductRow(it){
       '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\')">'+icon('i-camera','icon-sm')+
         (state==='missing'?'Record today’s work':'Add product update')+'</button>'+
       (it.drawing_path
-        ?'<button class="button secondary" type="button" onclick="openDoc(\''+esc(it.drawing_path)+'\')">Drawing</button>'
+        ?'<button class="button secondary" type="button" onclick="openDoc(\''+jsq(it.drawing_path)+'\')">Drawing</button>'
         :'<button class="button secondary" type="button" disabled>No drawing</button>')+
       '<button class="button secondary" type="button" onclick="go(\'#/item/'+it.id+'\')">Stages</button>'+
     '</div></article>';
@@ -6787,7 +6842,7 @@ function sfaRecordContent(p){
       '<button class="button secondary small" type="button" onclick="pickDoc(\''+p.id+'\')">Upload</button></div>'+
       '<div class="card-body">'+
       (docs.length?docs.map(d=>'<div class="detail-row"><span>'+esc(d.name||'Document')+'</span>'+
-        '<strong><button class="button quiet small" type="button" onclick="openDoc(\''+esc(d.path)+'\')">Open</button></strong></div>').join('')
+        '<strong><button class="button quiet small" type="button" onclick="openDoc(\''+jsq(d.path)+'\')">Open</button></strong></div>').join('')
        :'<div class="empty"><p>No documents on this order yet.</p></div>')+
       '<div class="detail-row"><span>Current drawings</span><strong>'+
         items.filter(i=>i.drawing_path).length+' of '+items.length+'</strong></div>'+
@@ -6957,7 +7012,7 @@ function buyerDocsPanel(buyerId){
     '<tr><th>Date</th><th>Type</th><th>Reference</th><th>Detail</th><th></th></tr>'+
     rows.map(r=>'<tr><td>'+esc(fdate(r.date))+'</td><td>'+esc(r.kind)+'</td>'+
       '<td>'+esc(r.ref||'—')+'</td><td>'+esc(r.meta||'')+'</td>'+
-      '<td>'+(r.path?'<button class="button button--quiet" type="button" onclick="openDoc(\''+esc(r.path)+'\')">Open</button>':'')+'</td></tr>').join('')+
+      '<td>'+(r.path?'<button class="button button--quiet" type="button" onclick="openDoc(\''+jsq(r.path)+'\')">Open</button>':'')+'</td></tr>').join('')+
     '</table></div></section>';
 }
 
@@ -7457,7 +7512,7 @@ function ewayRows(p, compact){
                 ['Valid until', fdate(e.valid_until)],
                 ['Distance', e.distance_km ? e.distance_km+' km' : ''],
                 ['Against invoice', e.document_no]])+
-      (e.doc_path?'<div class="button-row space-top-10"><button class="button button--secondary" type="button" onclick="openDoc(\''+esc(e.doc_path)+'\')">Open the e-way bill</button></div>':'')+
+      (e.doc_path?'<div class="button-row space-top-10"><button class="button button--secondary" type="button" onclick="openDoc(\''+jsq(e.doc_path)+'\')">Open the e-way bill</button></div>':'')+
       '</div>').join('')+'</div>';
 }
 
@@ -7503,9 +7558,9 @@ function docsPanel(p, compact){
   const docs=S.docsByPo[p.id]||[];
   if(compact && !docs.length && !admin) return '';
   const body=(docs.length
-    ? '<div class="side-card__rows">'+docs.map(d=>'<div class="side-row"><span style="cursor:pointer;text-decoration:underline" onclick="openDoc(\''+esc(d.path)+'\')">'+esc(d.name)+'</span>'+
+    ? '<div class="side-card__rows">'+docs.map(d=>'<div class="side-row"><span style="cursor:pointer;text-decoration:underline" onclick="openDoc(\''+jsq(d.path)+'\')">'+esc(d.name)+'</span>'+
         '<strong>'+esc(d.doc_type||'')+(admin?((d.for_staff?' · floor':'')+(d.for_buyer?' · buyer':'')):'')+
-        (admin?' <button class="button button--quiet" type="button" style="min-height:28px;padding:0 8px" onclick="delDoc(\''+d.id+'\',\''+esc(d.path)+'\')">✕</button>':'')+'</strong></div>').join('')+'</div>'
+        (admin?' <button class="button button--quiet" type="button" style="min-height:28px;padding:0 8px" onclick="delDoc(\''+d.id+'\',\''+jsq(d.path)+'\')">✕</button>':'')+'</strong></div>').join('')+'</div>'
     : '<p class="panel__description space-top-12">No documents yet.</p>')+
     (admin?'<div class="button-row space-top-12"><button class="button button--secondary" type="button" onclick="pickDoc(\''+p.id+'\')">Upload document</button></div>':'');
   if(compact) return '<section class="side-card"><h3 class="side-card__title">Documents</h3>'+body+'</section>';
@@ -7870,7 +7925,7 @@ function vItem(id){
     }
     if(docs.length){
       h+='<div class="side-card__rows space-top-12">'+docs.map(d=>
-        '<div class="side-row"><span style="cursor:pointer;text-decoration:underline" onclick="openDoc(\''+esc(d.path)+'\')">'+esc(d.name)+'</span>'+
+        '<div class="side-row"><span style="cursor:pointer;text-decoration:underline" onclick="openDoc(\''+jsq(d.path)+'\')">'+esc(d.name)+'</span>'+
         '<strong>'+esc(KIND_LABEL[d.doc_type]||'File')+'</strong></div>').join('')+'</div>';
     }
     h+=(staff?'<p class="field-hint space-top-10">Your photos are checked by the office before the client sees them.</p>':'')+
@@ -8104,7 +8159,7 @@ function staffProduct(it){
     '<div class="staff-product__actions">'+
       '<button class="button button--workshop" type="button" onclick="mDailyUpdate(\''+it.id+'\',null)">'+icon('i-camera')+
         (updateToday(it.id)?'Add another update':'Today’s update')+'</button>'+
-      (drawing?'<button class="button button--secondary button--workshop" type="button" onclick="openDoc(\''+esc(drawing.path)+'\')">Drawing</button>'
+      (drawing?'<button class="button button--secondary button--workshop" type="button" onclick="openDoc(\''+jsq(drawing.path)+'\')">Drawing</button>'
               :'<button class="button button--secondary button--workshop" type="button" onclick="go(\'#/item/'+it.id+'\')">Stages</button>')+
     '</div>'+
   '</article>';
@@ -8504,7 +8559,7 @@ function vFinance(){
           r.state==='paid'?'green':r.state==='overdue'?'red':'amber')+'</td>'+
         '<td class="amount">'+esc(money(r.i.total,r.i.currency||'INR'))+'</td>'+
         '<td class="amount">'+esc(r.bal>0?money(r.bal,r.i.currency||'INR'):'Nil')+'</td>'+
-        '<td>'+(r.i.doc_path?'<button class="button quiet" type="button" onclick="openDoc(\''+esc(r.i.doc_path)+'\')">Open</button>':'')+
+        '<td>'+(r.i.doc_path?'<button class="button quiet" type="button" onclick="openDoc(\''+jsq(r.i.doc_path)+'\')">Open</button>':'')+
         '</td></tr>').join('')+
       '</tbody></table></div>'
      :'<div class="card-body"><div class="empty"><h2>'+
@@ -8566,8 +8621,8 @@ function loginRow(l, label, sub, tag){
         ? '<button class="button button--secondary" type="button" onclick="mStaffPhone(\''+l.user_id+'\')">'+
           (l.phone?'Change number':'Add number')+'</button>' : '')+
       (l.user_id!==uid()
-        ? '<button class="button button--secondary" type="button" onclick="mResetPw(\''+l.user_id+'\',\''+esc(l.email)+'\')">Reset password</button>'+
-          '<button class="button button--quiet" type="button" onclick="delLogin(\''+l.user_id+'\',\''+esc(l.email)+'\')">Remove</button>'
+        ? '<button class="button button--secondary" type="button" onclick="mResetPw(\''+l.user_id+'\',\''+jsq(l.email)+'\')">Reset password</button>'+
+          '<button class="button button--quiet" type="button" onclick="delLogin(\''+l.user_id+'\',\''+jsq(l.email)+'\')">Remove</button>'
         : badge('you'))+
     '</div></div>';
 }
@@ -8653,6 +8708,20 @@ function vSettings(){
         '<td><small>'+esc(st.key)+'</small></td></tr>').join('')+
     '</table></div></section>'+
 
+    '<section class="form-card"><div class="form-card__head"><div>'+
+      '<h3 class="form-card__title">Your sign-in</h3>'+
+      '<p class="form-card__description">Everyone else&rsquo;s password is reset for them in People &amp; access. '+
+      'Yours is the one nobody can reset for you, so it is changed here. '+
+      'You stay signed in on this device; anywhere else you will need the new one.</p></div></div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="own-pw">New password</label>'+
+        '<input id="own-pw" autocomplete="new-password" value="'+esc(genPassword())+'"></div>'+
+      '<div class="button-row field--full">'+
+        '<button class="button" type="button" onclick="changeOwnPassword()">Change my password</button>'+
+        '<button class="button button--secondary" type="button" onclick="suggestOwnPassword()">Suggest another</button>'+
+      '</div>'+
+    '</div></section>'+
+
     '<section class="form-card"><div class="form-card__head"><div><h3 class="form-card__title">Housekeeping</h3>'+
       '<p class="form-card__description">The demo buyer and its sample orders can be removed once your real data is in: '+
       'Buyers &amp; logins → Demo Buyer Co. → Edit → Delete buyer. Deleting a buyer removes its POs, products, photos and comments.</p></div></div></section>'+
@@ -8712,7 +8781,7 @@ function vAccounts(){
         '<td>'+(i.published_at?badge('Published','success'):badge('Private'))+'</td>'+
         '<td><button class="button button--quiet" type="button" onclick="publishAcct(\'bt_invoices\',\''+i.id+'\','+(i.published_at?'false':'true')+')">'+
           (i.published_at?'Hide':'Publish')+'</button>'+
-          (i.doc_path?' <button class="button button--quiet" type="button" onclick="openDoc(\''+esc(i.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>';
+          (i.doc_path?' <button class="button button--quiet" type="button" onclick="openDoc(\''+jsq(i.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>';
     }).join(''):'<tr><td colspan="6"><small>No invoices imported yet.</small></td></tr>')+
     '</table></div></section>';
 
@@ -8727,7 +8796,7 @@ function vAccounts(){
       '<td>'+(e.published_at?badge('Published','success'):badge('Private'))+'</td>'+
       '<td><button class="button button--quiet" type="button" onclick="publishAcct(\'bt_ewaybills\',\''+e.id+'\','+(e.published_at?'false':'true')+')">'+
         (e.published_at?'Hide':'Publish')+'</button>'+
-        (e.doc_path?' <button class="button button--quiet" type="button" onclick="openDoc(\''+esc(e.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>').join('')
+        (e.doc_path?' <button class="button button--quiet" type="button" onclick="openDoc(\''+jsq(e.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>').join('')
       :'<tr><td colspan="6"><small>No e-way bills imported yet.</small></td></tr>')+
     '</table></div></section>';
 
@@ -9928,7 +9997,7 @@ function vBuyerDocuments(){
         '<td>'+esc(d.type)+'</td><td>'+esc(d.related)+'</td><td>'+esc(d.revision)+'</td>'+
         '<td>'+esc(d.published?fdate(d.published):'—')+'</td>'+
         '<td>'+sfBadge(d.status, d.status==='Current'?'success':'warning')+'</td>'+
-        '<td>'+(d.path?'<button class="button quiet small" type="button" onclick="openDoc(\''+esc(d.path)+'\')">Open</button>'
+        '<td>'+(d.path?'<button class="button quiet small" type="button" onclick="openDoc(\''+jsq(d.path)+'\')">Open</button>'
                :(d.snap?'<a class="button quiet small" href="#/finance">View</a>':''))+'</td></tr>').join('')+
       '</tbody></table></div></section>'
     : '<section class="card"><div class="empty"><h2>'+
@@ -10024,7 +10093,7 @@ function vBuyerFinance(){
         '<td>'+(cleared
           ? '<span class="badge success">Cleared</span><small>Released for dispatch</small>'
           : '<span class="dispatch-hold">Not cleared</span><small>Full PO payment required</small>')+'</td>'+
-        '<td>'+(i.doc_path?'<button class="button quiet small" type="button" onclick="openDoc(\''+esc(i.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>';
+        '<td>'+(i.doc_path?'<button class="button quiet small" type="button" onclick="openDoc(\''+jsq(i.doc_path)+'\')">Open PDF</button>':'')+'</td></tr>';
     }).join('')+
     '<tr><td colspan="3"><strong>Total</strong></td>'+
       '<td class="amount"><strong>'+esc(sfMoney(totInv))+'</strong></td>'+
@@ -10410,7 +10479,7 @@ function paPersonDetail(){
       'This person never sees internal notes, unapproved photographs, staff names or another buyer company. '+
       'The rules are in the database, not in the screen.</div></section>'+
     '<section class="pa-section"><button class="button secondary wide" type="button" '+
-      'onclick="mResetPw(\''+p.user_id+'\',\''+esc(p.email)+'\')">Reset password</button></section>'+
+      'onclick="mResetPw(\''+p.user_id+'\',\''+jsq(p.email)+'\')">Reset password</button></section>'+
     '</aside>';
 }
 function paStaffDetail(){
@@ -10423,7 +10492,7 @@ function paStaffDetail(){
     '<p class="eyebrow">Internal staff record</p><h2>'+esc(p.full_name||shortLogin(p.email||''))+'</h2>'+
     '<p>'+esc(r.name)+'</p></div>'+
     (p.user_id!==uid()?'<button class="button secondary small" type="button" '+
-      'onclick="mResetPw(\''+p.user_id+'\',\''+esc(p.email)+'\')">Reset password</button>':badge('you'))+
+      'onclick="mResetPw(\''+p.user_id+'\',\''+jsq(p.email)+'\')">Reset password</button>':badge('you'))+
     '</header>'+
     '<section class="pa-section"><h3>Identity &amp; contact</h3>'+
       paInfoRow('Login name',shortLogin(p.email||''))+paInfoRow('WhatsApp / phone',p.phone)+'</section>'+
@@ -12085,7 +12154,7 @@ function duRenderPreviews(){
   el.innerHTML = !fs.length ? '' :
     '<p class="field-hint">'+fs.length+' photo'+(fs.length===1?'':'s')+' ready. Remove anything blurred or duplicated.</p>'+
     '<div class="photo-grid">'+fs.map(f=>
-      '<div class="photo-card"><div class="photo-placeholder is-loaded" style="cursor:zoom-in" onclick="lightbox(\''+f.url+'\',\''+esc(f.file.name)+'\')">'+
+      '<div class="photo-card"><div class="photo-placeholder is-loaded" style="cursor:zoom-in" onclick="lightbox(\''+f.url+'\',\''+jsq(f.file.name)+'\')">'+
       '<img alt="" src="'+f.url+'">'+
       '<button class="ph-del" type="button" title="Remove" onclick="event.stopPropagation();duRemove(\''+f.id+'\')">✕</button>'+
       '</div></div>').join('')+'</div>';
@@ -12564,6 +12633,25 @@ async function saveSettings(){
   if(error){ toast(error.message,{err:true}); return; }
   toast('Saved'); await loadCore(); render();
 }
+// Everyone else's password is reset for them from People & access, where your own
+// row deliberately shows "you" instead of a Reset button. That left the owner with
+// no way to set his own password at all — the account nobody is above. This is it.
+function suggestOwnPassword(){ const f=$('own-pw'); if(f) f.value=genPassword(); }
+
+async function changeOwnPassword(){
+  const f=$('own-pw'); if(!f) return;
+  const pw=String(f.value||'').trim();
+  if(pw.length<8){ toast('Use at least 8 characters.',{err:true}); return; }
+  const {error}=await sb.auth.updateUser({password:pw});
+  if(error){ toast(error.message,{err:true}); return; }
+  // high-risk action, so it leaves a trace in the activity log
+  try{ await sb.rpc('bt_log_password_change'); }catch(e){}
+  const who=(S.profile&&(S.profile.email||S.profile.full_name))||'';
+  toast('Password changed. Save it somewhere safe — nobody can look it up for you.',
+    {action:'Copy ▸', onAction:()=>copyText('StoneFlow: '+trackerUrl()+
+      (who?'\nLogin: '+shortLogin(who):'')+'\nPassword: '+pw)});
+}
+
 async function updStage(id, patch){
   const {error}=await sb.from('bt_stages').update(patch).eq('id',id);
   if(error){ toast(error.message,{err:true}); return; }
