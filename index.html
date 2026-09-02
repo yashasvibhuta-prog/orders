@@ -3655,8 +3655,137 @@ body.reports-mode .sfa .content{max-width:1700px}
    full width beneath it rather than inside his two-column workspace. */
 .sfa .settings-body{margin-top:12px}
 </style>
+<style>
+/* ---------------------------------------------------------------------------
+   The workshop floor.
+
+   The supervisor screens reuse the owner console's shell, tokens, panels,
+   buttons and tables — the brief is explicit that this is not a second visual
+   product, and the practical reason is that Yash and Kunal should be able to
+   stand at the same screen and recognise it. What is here is only the shapes
+   the console did not already have: a piece row, an alert raised from the
+   floor, a batch group, the pick lists in the two new forms, and the artisan's
+   task cards, which are the one place the type has to work in Hindi as well.
+--------------------------------------------------------------------------- */
+
+/* one piece, as a supervisor reads it ------------------------------------- */
+.fl-rows{ display:grid; }
+.fl-row{
+  display:grid;
+  grid-template-columns:56px minmax(160px,1.6fr) minmax(120px,1fr) minmax(120px,1fr) auto auto;
+  gap:14px; align-items:center;
+  padding:12px 0; border-bottom:1px solid var(--line, #e8e6e1);
+}
+.fl-row:last-child{ border-bottom:0; }
+.fl-row__thumb{
+  width:56px; height:56px; border-radius:8px; overflow:hidden;
+  display:grid; place-items:center; flex:0 0 56px;
+}
+.fl-row__thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.fl-row__main{ min-width:0; }
+.fl-row__name{
+  display:block; text-align:left; padding:0; border:0; background:none;
+  font:inherit; font-weight:600; color:inherit; cursor:pointer;
+  text-decoration:underline; text-decoration-color:transparent;
+  text-underline-offset:3px; transition:text-decoration-color .15s;
+}
+.fl-row__name:hover, .fl-row__name:focus-visible{ text-decoration-color:currentColor; }
+.fl-row__meta, .fl-row__said, .fl-cell-sub{
+  display:block; font-size:12px; color:var(--muted, #6b6660); margin-top:2px;
+}
+.fl-row__said{ font-style:italic; }
+.fl-row__stage{ font-size:13px; }
+.fl-row__who{ font-size:13px; min-width:0; }
+.fl-row__who span{ display:block; font-size:12px; color:var(--muted, #6b6660); }
+.fl-row__do{ display:flex; gap:6px; align-items:center; justify-content:flex-end; flex-wrap:wrap; }
+.muted{ color:var(--muted, #6b6660); }
+.link-button{
+  padding:0; border:0; background:none; font:inherit; color:inherit;
+  cursor:pointer; text-align:left; text-decoration:underline;
+  text-decoration-color:transparent; text-underline-offset:3px;
+}
+.link-button:hover, .link-button:focus-visible{ text-decoration-color:currentColor; }
+
+/* something the floor could not solve on its own -------------------------- */
+.fl-alert{
+  display:grid; grid-template-columns:minmax(180px,1.2fr) 2fr auto; gap:14px;
+  align-items:center; padding:12px 0; border-bottom:1px solid var(--line, #e8e6e1);
+}
+.fl-alert:last-child{ border-bottom:0; }
+.fl-alert__said{ margin:0; font-size:13px; }
+
+/* a batch, and the pieces waiting to become one --------------------------- */
+.fl-batch--late{ border-left:3px solid var(--danger, #a4413f); }
+.fl-batch--soon{ border-left:3px solid var(--warn, #a18a5d); }
+.fl-group + .fl-group{ margin-top:18px; padding-top:18px; border-top:1px solid var(--line, #e8e6e1); }
+.fl-group__head{
+  display:flex; gap:12px; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; margin-bottom:6px;
+}
+.fl-group__head span{ display:block; font-size:12px; color:var(--muted, #6b6660); }
+
+/* ticking pieces and people ------------------------------------------------ */
+.pick-list{
+  max-height:260px; overflow:auto; border:1px solid var(--line, #e8e6e1);
+  border-radius:10px; padding:4px;
+}
+.pick-list--tight{ max-height:170px; }
+.pick{
+  display:flex; gap:10px; align-items:flex-start; padding:9px 10px;
+  border-radius:8px; cursor:pointer; min-height:44px;
+}
+.pick:hover{ background:var(--soft, #f4f2ee); }
+.pick input{ margin-top:3px; width:18px; height:18px; flex:0 0 18px; }
+.pick small{ display:block; font-size:12px; color:var(--muted, #6b6660); }
+.pick--off{ opacity:.45; cursor:not-allowed; }
+.pick-fixed{
+  border:1px solid var(--line, #e8e6e1); border-radius:10px; padding:10px 12px;
+}
+.pick-fixed small{ display:block; font-size:12px; color:var(--muted, #6b6660); margin-top:2px; }
+
+/* the artisan's tasks ------------------------------------------------------ */
+.ws-tasks{ margin:14px 0 4px; }
+.ws-tasks__title{ font-size:15px; margin:0 0 8px; }
+.ws-task{
+  border:1px solid var(--line, #e8e6e1); border-radius:12px;
+  padding:14px; margin-bottom:10px; background:var(--paper, #fff);
+}
+.ws-task__name{
+  display:block; text-align:left; padding:0; border:0; background:none;
+  font:inherit; font-size:17px; font-weight:600; color:inherit; cursor:pointer;
+  margin:2px 0 4px;
+}
+.ws-task__stage{ margin:0 0 6px; font-size:14px; }
+.ws-task__said{ margin:0 0 6px; font-size:14px; font-style:italic; }
+.ws-task__need, .ws-task__by{ margin:0 0 4px; font-size:13px; color:var(--muted, #6b6660); }
+.ws-task__do{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+/* the floor works on a tablet with wet hands: nothing here is smaller than a
+   thumb, and the buttons wrap rather than shrink */
+.ws-task__do .button{ min-height:48px; flex:1 1 46%; justify-content:center; }
+.ws-task__done{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+.ws-task__done span{ font-size:13px; color:var(--muted, #6b6660); }
+
+/* the supervisor's search sits in the top bar rather than under it --------- */
+.search--top{ flex:1 1 320px; max-width:460px; }
+
+@media (max-width: 900px){
+  .fl-row{
+    grid-template-columns:52px 1fr auto;
+    grid-template-areas:'thumb main state' 'thumb stage stage' 'who who who' 'do do do';
+    row-gap:6px;
+  }
+  .fl-row__thumb{ grid-area:thumb; }
+  .fl-row__main{ grid-area:main; }
+  .fl-row__stage{ grid-area:stage; }
+  .fl-row__who{ grid-area:who; }
+  .fl-row__state{ grid-area:state; }
+  .fl-row__do{ grid-area:do; justify-content:flex-start; }
+  .fl-row__do .button{ min-height:44px; }
+  .fl-alert{ grid-template-columns:1fr; }
+}
+</style>
 <body>
-<script>const BUILD_ID='60a3442fb35a';</script>
+<script>const BUILD_ID='f64c104653e0';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -3936,7 +4065,8 @@ const S = {
   payments:[], charges:[], payByPo:{}, chgByPo:{}, payByBuyer:{},
   updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{},
   invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{},
-  revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null
+  revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null,
+  batches:[], batchById:{}, batchOfItem:{}, assignments:[], asgByItem:{}
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -3966,7 +4096,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti, pr] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -3975,7 +4105,12 @@ async function loadStaffData(){
     sb.from('bt_updates').select('*').order('work_date',{ascending:false}),
     sb.from('bt_update_internal').select('*'),
     sb.from('bt_stage_internal').select('*'),
-    sb.rpc('bt_staff_names')
+    sb.rpc('bt_staff_names'),
+    // Batches and assignments come through their own floor-safe functions: the
+    // tables behind them carry the purchase order, and the floor never sees it.
+    sb.rpc('bt_floor_batches'),
+    sb.rpc('bt_floor_batch_items'),
+    sb.rpc('bt_floor_assignments')
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -4012,8 +4147,87 @@ async function loadStaffData(){
     x.progress = activeStageIds.length? Math.min(1,(done+inprog)/activeStageIds.length):0;
   });
   indexPhotos(ph.data||[]);
+  indexFloor((bt&&bt.data)||[], (bi&&bi.data)||[], (asg&&asg.data)||[]);
   S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
+}
+
+/* ---- batches and assignments ----------------------------------------------
+   A batch is the floor's name for the pieces that leave together — B-2609-01
+   rather than a purchase order number. An assignment is one person, one piece,
+   one stage, one day. Superseded assignments stay in the list because they are
+   the record of who was on a piece before it changed hands; every screen that
+   shows "current" work has to say so. */
+function indexFloor(batches, alloc, asg){
+  S.batches = (batches||[]).slice().sort((a,b)=>
+    String(a.planned_ship_date||'9999').localeCompare(String(b.planned_ship_date||'9999'))
+    || String(a.code).localeCompare(String(b.code)));
+  S.batchById={}; S.batches.forEach(b=>{ S.batchById[b.id]=b; b.items=[]; });
+  S.batchOfItem={};
+  (alloc||[]).forEach(r=>{
+    S.batchOfItem[r.item_id]=r.batch_id;
+    const b=S.batchById[r.batch_id]; if(b) b.items.push(r.item_id);
+  });
+  S.assignments=(asg||[]).slice().sort((a,b)=>
+    String(b.work_date||'').localeCompare(String(a.work_date||''))
+    || String(b.created_at||'').localeCompare(String(a.created_at||'')));
+  S.asgByItem={};
+  S.assignments.forEach(a=>{ (S.asgByItem[a.item_id]=S.asgByItem[a.item_id]||[]).push(a); });
+}
+function batchOf(itemId){ return S.batchById[S.batchOfItem[itemId]] || null; }
+function batchCodeOf(itemId){ const b=batchOf(itemId); return b?b.code:''; }
+// The standing assignment for a piece: the one nobody has replaced or finished.
+function openAssignment(itemId, stageId){
+  return (S.asgByItem[itemId]||[]).find(a=>!a.superseded_by && !a.done_at &&
+    (stageId==null || a.stage_id===stageId)) || null;
+}
+function assignmentsFor(itemId){ return S.asgByItem[itemId]||[]; }
+function myOpenTasks(){
+  const me=uid();
+  return (S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at &&
+    (a.assigned_to===me || (a.support||[]).indexOf(me)>=0));
+}
+function activeStages(){ return (S.stages||[]).filter(s=>s.active); }
+// Pieces the floor can see that no batch has claimed yet. Grouped by po_id,
+// which is an opaque id on the floor — the shipment they belong to, never a
+// number anyone could quote to a buyer.
+function unbatchedGroups(){
+  const g={};
+  (S.items||[]).forEach(it=>{
+    if(S.batchOfItem[it.id]) return;
+    if(['delivered','cancelled'].includes(it.status)) return;
+    (g[it.po_id||'none']=g[it.po_id||'none']||[]).push(it);
+  });
+  return Object.keys(g).map(k=>({key:k, items:g[k],
+    ship:((S.items.find(x=>x.po_id===k)||{}).po||{}).expected_ship_date||null}))
+    .sort((a,b)=>String(a.ship||'9999').localeCompare(String(b.ship||'9999')));
+}
+// Everyone who can be given work. Names arrive through bt_staff_names(), which
+// returns the workshop and the office and no buyer at all.
+function floorPeople(){
+  // Names arrive with their role attached, because the office is on this list
+  // too — a supervisor needs Yash's name to read "posted by the office", and
+  // must not be offered him as somebody to give carving work to. The server
+  // refuses that anyway; the form should not have suggested it.
+  return (S.profilesAll||[]).filter(p=>p.user_id && p.full_name &&
+      p.active!==false && FLOOR_ROLES.indexOf(p.role)>=0)
+    .slice().sort((a,b)=>String(a.full_name).localeCompare(String(b.full_name)));
+}
+function personName(userId){
+  const p=(S.profilesAll||[]).find(x=>x.user_id===userId);
+  if(p) return p.full_name||'';
+  return (S.profile && S.profile.user_id===userId)?(S.profile.full_name||S.profile.email||''):'';
+}
+// How much work each person is carrying right now — the number a supervisor
+// needs before adding one more.
+function workloadByPerson(){
+  const n={};
+  (S.assignments||[]).forEach(a=>{
+    if(a.superseded_by || a.done_at) return;
+    n[a.assigned_to]=(n[a.assigned_to]||0)+1;
+    (a.support||[]).forEach(s=>{ n[s]=(n[s]||0)+0; });
+  });
+  return n;
 }
 
 function indexPhotos(list){
@@ -5666,6 +5880,46 @@ function updateHeader(){
   if(!S.profile){ shell.hidden=true; return; }
   shell.hidden=false;
   $('login-root').hidden=true; $('login-root').innerHTML='';
+
+  if(isSupervisor()){
+    // A supervisor runs the floor, so they get the same shape of workspace the
+    // owner has — sidebar, counts, one screen per job — not the single scrolling
+    // list a labourer needs. Same design system, floor-safe data.
+    const c=supCounts();
+    shell.className='app-shell app-shell--console';
+    topbar.className='topbar topbar--console';
+    topbar.innerHTML=
+      '<a class="wordmark" href="#/home" aria-label="StoneFlow — the floor today">'+
+        '<span class="wordmark__mark">'+icon('i-mark')+'</span>'+
+        '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">Workshop floor</span></span></a>'+
+      '<div class="search search--top">'+icon('i-search')+
+        '<input id="staff-q" type="search" placeholder="Search product, stone or reference" '+
+        'value="'+esc(window.__staffQ||'')+'" oninput="staffSearch(this.value)"></div>'+
+      '<div class="topbar__tools">'+
+        '<span class="role-chip">Supervisor</span>'+
+        '<span class="avatar" title="'+esc(S.profile.full_name||'')+'">'+esc(initials(S.profile.full_name||S.profile.email))+'</span>'+
+        '<button class="button button--quiet" type="button" onclick="signOut()">Sign out</button></div>';
+
+    const link=(hash,label,count)=>'<a class="side-nav__link'+(navActive(hash)?' side-nav__link--active':'')+
+      '" href="javascript:void(0)" onclick="go(\''+hash+'\')"><span>'+label+'</span>'+
+      (count?'<span class="badge badge--alert">'+count+'</span>':'')+'</a>';
+    nav.hidden=false;
+    nav.className='side-nav';
+    nav.innerHTML=
+      '<p class="side-nav__group">The floor</p>'+
+      link('#/home','Today',c.due)+
+      link('#/team','Work &amp; people',c.unanswered)+
+      link('#/batches','Shipment batches',0)+
+      link('#/pieces','All pieces',0);
+    app.className='page';
+    dock.hidden=false;
+    dock.innerHTML=
+      dockItem('#/home','stage-confirmed','Today',c.due,navActive('#/home')?' nav-link--active':'')+
+      dockItem('#/team','stage-planning','Work',c.unanswered,navActive('#/team')?' nav-link--active':'')+
+      dockItem('#/batches','stage-packing','Batches',0,navActive('#/batches')?' nav-link--active':'')+
+      dockItem('#/pieces','i-camera','Pieces',0,navActive('#/pieces')?' nav-link--active':'');
+    return;
+  }
 
   if(isStaff()){
     shell.className='app-shell staff-shell';
@@ -8063,6 +8317,46 @@ function staffBuckets(){
 
 function setStaffFilter(k){ window.__staffFilter=k; vStaffHome(); }
 
+/* The tasks this person has been given, and the three answers to each. English
+   and Hindi together, because the person reading it may be comfortable in only
+   one of them and the buttons have to be unambiguous in both. */
+function staffTaskStrip(){
+  const tasks=myOpenTasks();
+  if(!tasks.length) return '';
+  const me=uid();
+  return '<section class="ws-tasks"><h2 class="ws-tasks__title">Your work · आपका काम</h2>'+
+    tasks.map(a=>{
+      const it=S.itemsById[a.item_id]; if(!it) return '';
+      const stg=S.stagesById[a.stage_id];
+      const lead=a.assigned_to===me;
+      const answered=a.ack_state!=='pending';
+      const ansMap={accepted:['Accepted · स्वीकार','success'],
+                    clarify:['Question sent · सवाल भेजा','pending'],
+                    cannot_start:['Cannot start · नहीं कर सकता','alert']};
+      const ans=ansMap[a.ack_state];
+      return '<article class="ws-task">'+
+        '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · '))+'</p>'+
+        '<button class="ws-task__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
+        '<p class="ws-task__stage">'+esc(stg?stg.name:'')+
+          (lead?'':' · helping / मदद')+'</p>'+
+        (a.instruction?'<p class="ws-task__said">“'+esc(a.instruction)+'”</p>':'')+
+        (a.evidence_required?'<p class="ws-task__need">Send back · भेजें: '+esc(a.evidence_required)+'</p>':'')+
+        (a.target_date?'<p class="ws-task__by">Finish by · तक पूरा करें: '+esc(fdate(a.target_date))+'</p>':'')+
+        (answered
+          ? '<div class="ws-task__done">'+badge(ans?ans[0]:'',ans?ans[1]:'')+
+            (a.ack_note?'<span>'+esc(a.ack_note)+'</span>':'')+'</div>'
+          : (lead
+            ? '<div class="ws-task__do">'+
+              '<button class="button button--workshop" type="button" onclick="mAckTask(\''+a.id+'\',\'accepted\')">Accept · ठीक है</button>'+
+              '<button class="button button--secondary" type="button" onclick="mAckTask(\''+a.id+'\',\'clarify\')">Ask · सवाल</button>'+
+              '<button class="button button--secondary" type="button" onclick="mAckTask(\''+a.id+'\',\'cannot_start\')">Cannot start · नहीं कर सकता</button>'+
+              '</div>'
+            : '<div class="ws-task__done"><span>Waiting for '+esc(personName(a.assigned_to))+' to accept · '+
+              esc(personName(a.assigned_to))+' के स्वीकार करने का इंतज़ार</span></div>'))+
+        '</article>';
+    }).join('')+'</section>';
+}
+
 function vStaffHome(){
   const b=staffBuckets();
   const f=window.__staffFilter||'all';
@@ -8087,6 +8381,11 @@ function vStaffHome(){
     ' sent back by the office. Please reshoot and upload again.</span></div>';
   if(pend) h+='<div class="attn attn--warn attn--flat"><span>'+pend+' photograph'+(pend>1?'s are':' is')+
     ' waiting for the office. They reach the client only after the office approves them.</span></div>';
+
+  // Work given to this person. It sits above everything else because it is the
+  // only thing on the screen somebody is waiting on an answer for — a task that
+  // is never opened looks exactly like a task that was never given.
+  h+=staffTaskStrip();
 
   const newestPhoto=visiblePhotos((S.photos||[]).filter(p=>!p.log_date))
     .slice().sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)))[0];
@@ -8893,6 +9192,12 @@ function render(){
   window.scrollTo(0,0);
   if(isStaff()){
     if(parts[0]==='item' && parts[1]) vItem(parts[1]);
+    else if(isSupervisor()){
+      if(parts[0]==='batches') vSupBatches();
+      else if(parts[0]==='team') vSupTeam();
+      else if(parts[0]==='pieces') vStaffHome();
+      else vSupHome();
+    }
     else vStaffHome();
     return;
   }
@@ -11161,6 +11466,295 @@ function piecesDonePanel(po){
         (madeIt?badge('Made','success'):badge(Math.round(it.progress*100)+'%'))+
         '</button>';
     }).join('')+'</div></section>';
+}
+
+
+/* ---------------------------------------------------------------------------
+   The supervisor's floor.
+
+   Kunal and Hitesh ran the workshop from the same single scrolling list a
+   labourer sees, which meant "who is on what today" was something they held in
+   their heads. These three screens are that question written down: Today (what
+   is happening and what is missing), Work & people (who does the next piece),
+   and Shipment batches (what leaves together, and when).
+
+   Everything here is floor-safe by construction: it reads S.items, S.batches
+   and S.assignments, which arrive through bt_staff_items(), bt_floor_batches()
+   and bt_floor_assignments(). None of those return a buyer, a purchase order
+   number or a rupee. There is nothing to hide in the markup because none of it
+   ever reaches the browser.
+--------------------------------------------------------------------------- */
+
+function supCounts(){
+  const open=(S.items||[]).filter(it=>!['delivered','cancelled','made'].includes(it.status));
+  const due=open.filter(it=>!updateToday(it.id)).length;
+  const blocked=open.filter(it=>(S.stByItem[it.id]||[]).some(r=>r.status==='on_hold')).length;
+  const tasks=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at);
+  const unanswered=tasks.filter(a=>a.ack_state==='pending').length;
+  const stuck=tasks.filter(a=>a.ack_state==='cannot_start'||a.ack_state==='clarify').length;
+  const unassigned=open.filter(it=>!openAssignment(it.id)).length;
+  const unbatched=open.filter(it=>!S.batchOfItem[it.id]).length;
+  return {due, blocked, unanswered, stuck, unassigned, unbatched, open:open.length, tasks:tasks.length};
+}
+
+function supDayNote(){
+  const d=new Date();
+  return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()]+', '+fdate(today());
+}
+
+// One piece as the supervisor reads it: the photograph, what stage it is on,
+// who has it, and whether today has been reported.
+function supPieceRow(it, inBatch){
+  const st=curStage(it);
+  const a=openAssignment(it.id);
+  const who=a?personName(a.assigned_to):'';
+  const sup=(a&&a.support&&a.support.length)?a.support.map(personName).filter(Boolean):[];
+  const reported=!!updateToday(it.id);
+  const held=(S.stByItem[it.id]||[]).some(r=>r.status==='on_hold');
+  const ph=(S.photosByItem[it.id]||[]);
+  const ack=a?a.ack_state:null;
+  let state;
+  if(held) state=badge('Held','alert');
+  else if(ack==='cannot_start') state=badge('Cannot start','alert');
+  else if(ack==='clarify') state=badge('Question asked','pending');
+  else if(!a) state=badge('Nobody on it','pending');
+  else if(ack==='pending') state=badge('Not seen yet','pending');
+  else if(reported) state=badge('Reported today','success');
+  else state=badge('Update due','pending');
+
+  return '<div class="fl-row">'+
+    thumbOf(ph, it.id).replace('class="photo-placeholder','class="photo-placeholder fl-row__thumb ')+
+    '<div class="fl-row__main">'+
+      // inside a batch card the code is already the heading above these rows
+      '<p class="eyebrow">'+esc([it.item_ref, inBatch?'':batchCodeOf(it.id)].filter(Boolean).join(' · '))+'</p>'+
+      '<button class="fl-row__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
+      '<span class="fl-row__meta">'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · '))+'</span>'+
+    '</div>'+
+    '<div class="fl-row__stage">'+(st?esc(shortStage(st.name)):'<span class="muted">Not started</span>')+
+      (a&&a.instruction?'<span class="fl-row__said">“'+esc(a.instruction)+'”</span>':'')+'</div>'+
+    '<div class="fl-row__who">'+
+      (who?'<strong>'+esc(who)+'</strong>':'<span class="muted">Unassigned</span>')+
+      (sup.length?'<span>with '+esc(sup.join(', '))+'</span>':'')+
+      (a&&a.target_date?'<span>by '+esc(fdate(a.target_date))+'</span>':'')+'</div>'+
+    '<div class="fl-row__state">'+state+'</div>'+
+    '<div class="fl-row__do">'+
+      '<button class="button secondary small" type="button" onclick="mAssign(\''+it.id+'\')">'+
+        (a?'Reassign':'Assign')+'</button>'+
+      '<button class="button quiet small" type="button" onclick="go(\'#/item/'+it.id+'\')">Open</button>'+
+    '</div></div>';
+}
+
+function supBatchCard(b, opts){
+  opts=opts||{};
+  const items=(b.items||[]).map(id=>S.itemsById[id]).filter(Boolean);
+  const n=daysUntil(b.planned_ship_date);
+  const late=n!=null&&n<0;
+  const soon=n!=null&&n>=0&&n<=14;
+  return '<section class="panel fl-batch'+(late?' fl-batch--late':(soon?' fl-batch--soon':''))+'">'+
+    '<div class="panel__head"><div>'+
+      '<h3 class="panel__title">'+esc(b.code)+'</h3>'+
+      '<p class="panel__description">'+
+        esc(items.length+' piece'+(items.length===1?'':'s'))+
+        (b.planned_ship_date?' · ships '+esc(fdate(b.planned_ship_date)):' · no ship date set')+
+      '</p></div>'+
+      '<div>'+(b.planned_ship_date?countdown(b.planned_ship_date,false):'')+'</div>'+
+    '</div>'+
+    '<div class="panel__body fl-rows">'+
+      (items.length?items.map(x=>supPieceRow(x,true)).join('')
+        :'<div class="empty-state">Nothing allocated to this batch.</div>')+
+    '</div></section>';
+}
+
+function vSupHome(){
+  const c=supCounts();
+  const q=(window.__staffQ||'').toLowerCase();
+  const match=it=>!q||((it.product||'')+' '+(it.stone||'')+' '+(it.item_ref||'')+' '+
+    (batchCodeOf(it.id)||'')).toLowerCase().indexOf(q)>=0;
+
+  let h='<div class="page-heading"><div>'+eyebrow(supDayNote())+
+    '<h1 class="display-title">Today.</h1>'+
+    '<p class="lede">What is on the floor, who has it, and what has not been reported yet. '+
+    'Grouped by the shipment each piece leaves in.</p></div>'+
+    '<div class="page-heading__actions">'+
+      '<button class="button" type="button" onclick="mCreateBatch()">New shipment batch</button>'+
+      '<button class="button button--secondary" type="button" onclick="go(\'#/team\')">Assign work</button>'+
+    '</div></div>';
+
+  const tiles=[
+    ['Pieces in the workshop', c.open, 'Being made right now'],
+    ['Not reported today', c.due, c.due?'Nobody has logged these':'Every piece has today’s update'],
+    ['Nobody on it', c.unassigned, c.unassigned?'Waiting for a person':'Everything has someone'],
+    ['Needs you', c.stuck+c.unanswered, c.stuck?'A blocker was raised':(c.unanswered?'Tasks not opened yet':'Nothing waiting')]
+  ];
+  h+='<div class="kpi-grid">'+tiles.map((t,i)=>
+    '<article class="kpi'+((i===1&&t[1])||(i===3&&c.stuck)?' kpi--warn':'')+'">'+
+    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
+    '<span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+
+  // Blockers first, because they are the only thing here nobody else can clear.
+  const stuck=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at &&
+    (a.ack_state==='cannot_start'||a.ack_state==='clarify'));
+  if(stuck.length){
+    h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Raised by the floor</h3>'+
+      '<p class="panel__description">Somebody could not start, or asked a question. '+
+      'Nothing moves on these until you answer.</p></div></div><div class="panel__body fl-rows">'+
+      stuck.map(a=>{
+        const it=S.itemsById[a.item_id]; if(!it) return '';
+        const stg=S.stagesById[a.stage_id];
+        return '<div class="fl-alert">'+
+          '<div><p class="eyebrow">'+esc([it.item_ref,batchCodeOf(it.id)].filter(Boolean).join(' · '))+'</p>'+
+          '<button class="fl-row__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
+          '<span class="fl-row__meta">'+esc((stg?shortStage(stg.name):'')+' · '+personName(a.assigned_to))+'</span></div>'+
+          '<p class="fl-alert__said">'+esc(a.ack_note||'')+'</p>'+
+          '<div class="fl-row__do">'+
+            (a.ack_state==='cannot_start'?badge('Cannot start','alert'):badge('Question','pending'))+
+            '<button class="button secondary small" type="button" onclick="mAssign(\''+it.id+'\')">Reassign</button>'+
+          '</div></div>';
+      }).join('')+'</div></section>';
+  }
+
+  const batches=(S.batches||[]).filter(b=>(b.items||[]).some(id=>S.itemsById[id]&&match(S.itemsById[id])));
+  if(batches.length) h+='<div class="space-top-16">'+batches.map(b=>supBatchCard(b)).join('')+'</div>';
+
+  const loose=(S.items||[]).filter(it=>!S.batchOfItem[it.id] &&
+    !['delivered','cancelled'].includes(it.status) && match(it));
+  if(loose.length){
+    h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Not in a batch yet</h3>'+
+      '<p class="panel__description">'+loose.length+' piece'+(loose.length===1?'':'s')+
+      ' with no shipment group. Give them one so the floor knows what leaves together.</p></div>'+
+      '<button class="button secondary small" type="button" onclick="mCreateBatch()">Create a batch</button>'+
+      '</div><div class="panel__body fl-rows">'+loose.map(supPieceRow).join('')+'</div></section>';
+  }
+
+  if(!batches.length && !loose.length)
+    h+='<div class="empty-state space-top-16">'+
+      (q?'Nothing matches that search.':'No pieces on the floor yet.')+'</div>';
+
+  // sfaPaint wraps the page in .sfa, which is where the console's token system
+  // lives: the light monochrome palette, the 232px sidebar, the 64px top bar and
+  // the serif headings. Without it these screens fell back to the older button
+  // styles and came out with blue primary buttons — a different product wearing
+  // the same name, which is the one thing the brief is most explicit about.
+  sfaPaint(h);
+}
+
+function vSupBatches(){
+  const q=(window.__staffQ||'').toLowerCase();
+  let h='<div class="page-heading"><div>'+eyebrow('Shipment groups')+
+    '<h1 class="display-title">Shipment batches.</h1>'+
+    '<p class="lede">Every batch is the set of pieces that leaves together. The code is the floor’s '+
+    'reference for it — the office keeps the order number, and it never comes down here.</p></div>'+
+    '<div class="page-heading__actions">'+
+      '<button class="button" type="button" onclick="mCreateBatch()">New shipment batch</button></div></div>';
+
+  const list=(S.batches||[]).filter(b=>!q||String(b.code).toLowerCase().indexOf(q)>=0||
+    (b.items||[]).some(id=>S.itemsById[id]&&((S.itemsById[id].product||'')+' '+(S.itemsById[id].stone||'')).toLowerCase().indexOf(q)>=0));
+
+  h+=list.length?list.map(b=>supBatchCard(b)).join('')
+    :'<div class="empty-state">'+(q?'No batch matches that search.':'No batches yet. Create the first one from the pieces waiting below.')+'</div>';
+
+  const groups=unbatchedGroups();
+  if(groups.length){
+    const n=groups.reduce((t,g)=>t+g.items.length,0);
+    h+='<section class="panel space-top-18"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Waiting for a batch</h3>'+
+      '<p class="panel__description">'+n+' piece'+(n===1?'':'s')+' in '+groups.length+
+      ' shipment'+(groups.length===1?'':'s')+'. Pieces from different shipments cannot go in one batch.</p></div></div>'+
+      '<div class="panel__body">'+groups.map((g,i)=>
+        '<div class="fl-group"><div class="fl-group__head"><div>'+
+          '<strong>Shipment '+String.fromCharCode(65+i)+'</strong>'+
+          '<span>'+g.items.length+' piece'+(g.items.length===1?'':'s')+
+          (g.ship?' · expected '+esc(fdate(g.ship)):'')+'</span></div>'+
+          '<button class="button secondary small" type="button" onclick="mCreateBatch(\''+jsq(g.key)+'\')">Batch these</button>'+
+        '</div><div class="fl-rows">'+g.items.map(supPieceRow).join('')+'</div></div>').join('')+
+      '</div></section>';
+  }
+
+  // sfaPaint wraps the page in .sfa, which is where the console's token system
+  // lives: the light monochrome palette, the 232px sidebar, the 64px top bar and
+  // the serif headings. Without it these screens fell back to the older button
+  // styles and came out with blue primary buttons — a different product wearing
+  // the same name, which is the one thing the brief is most explicit about.
+  sfaPaint(h);
+}
+
+function vSupTeam(){
+  const c=supCounts();
+  const open=(S.items||[]).filter(it=>!['delivered','cancelled','made'].includes(it.status));
+  const load=workloadByPerson();
+  const people=floorPeople();
+
+  let h='<div class="page-heading"><div>'+eyebrow('Task allocation')+
+    '<h1 class="display-title">Work &amp; people.</h1>'+
+    '<p class="lede">Choose the piece and the stage, then the person. Their current load is beside '+
+    'each name so the same three people do not end up carrying the whole floor.</p></div></div>';
+
+  h+='<div class="kpi-grid">'+[
+    ['Pieces with nobody on them', c.unassigned, c.unassigned?'Pick someone for these first':'All covered'],
+    ['Tasks not opened yet', c.unanswered, 'Given out, not yet seen'],
+    ['Blockers raised', c.stuck, c.stuck?'Waiting on you':'None'],
+    ['People with work', Object.keys(load).length, 'Carrying at least one piece']
+  ].map((t,i)=>'<article class="kpi'+((i===0&&t[1])||(i===2&&t[1])?' kpi--warn':'')+'">'+
+    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
+    '<span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+
+  const waiting=open.filter(it=>!openAssignment(it.id));
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Waiting for a person</h3>'+
+    '<p class="panel__description">Each of these is at a stage with nobody standing behind it.</p></div></div>'+
+    '<div class="panel__body fl-rows">'+
+    (waiting.length?waiting.map(supPieceRow).join('')
+      :'<div class="empty-state">Every piece on the floor has somebody on it.</div>')+
+    '</div></section>';
+
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">The workshop</h3>'+
+    '<p class="panel__description">Who is carrying what. Wages and advances are not shown here '+
+    'and are not sent to this screen.</p></div></div>'+
+    '<div class="panel__body">'+
+    (people.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Name</th><th>Pieces now</th><th>Not yet opened</th><th>Blocked</th><th></th></tr></thead><tbody>'+
+      people.map(p=>{
+        const mine=(S.assignments||[]).filter(a=>!a.superseded_by&&!a.done_at&&a.assigned_to===p.user_id);
+        const unseen=mine.filter(a=>a.ack_state==='pending').length;
+        const blocked=mine.filter(a=>a.ack_state==='cannot_start').length;
+        return '<tr><td><strong>'+esc(p.full_name)+'</strong></td>'+
+          '<td>'+mine.length+'</td>'+
+          '<td>'+(unseen?'<span class="badge badge--pending">'+unseen+'</span>':'—')+'</td>'+
+          '<td>'+(blocked?'<span class="badge badge--alert">'+blocked+'</span>':'—')+'</td>'+
+          '<td><button class="button quiet small" type="button" onclick="mAssign(null,null,\''+jsq(p.user_id)+'\')">Give work</button></td></tr>';
+      }).join('')+'</tbody></table></div>'
+     :'<div class="empty-state">No workshop logins yet. The office creates them under People &amp; access.</div>')+
+    '</div></section>';
+
+  const live=(S.assignments||[]).filter(a=>!a.superseded_by&&!a.done_at);
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Work given out</h3>'+
+    '<p class="panel__description">Standing tasks and how each person answered.</p></div></div>'+
+    '<div class="panel__body">'+
+    (live.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Piece</th><th>Stage</th><th>Who</th><th>By</th><th>Answer</th><th></th></tr></thead><tbody>'+
+      live.map(a=>{
+        const it=S.itemsById[a.item_id]; if(!it) return '';
+        const stg=S.stagesById[a.stage_id];
+        const sup=(a.support||[]).map(personName).filter(Boolean);
+        const ansMap={pending:['Not opened yet','pending'],accepted:['Accepted','success'],
+                      clarify:['Question asked','pending'],cannot_start:['Cannot start','alert']};
+        const ans=ansMap[a.ack_state]||['—',''];
+        return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+it.id+'\')">'+
+            esc(it.product)+'</button><span class="fl-cell-sub">'+esc(batchCodeOf(it.id)||it.item_ref||'')+'</span></td>'+
+          '<td>'+esc(stg?shortStage(stg.name):'')+'</td>'+
+          '<td>'+esc(personName(a.assigned_to))+(sup.length?'<span class="fl-cell-sub">with '+esc(sup.join(', '))+'</span>':'')+'</td>'+
+          '<td>'+esc(a.target_date?fdate(a.target_date):'—')+'</td>'+
+          '<td>'+badge(ans[0],ans[1])+(a.ack_note?'<span class="fl-cell-sub">'+esc(a.ack_note)+'</span>':'')+'</td>'+
+          '<td><button class="button quiet small" type="button" onclick="mAssign(\''+it.id+'\')">Change</button></td></tr>';
+      }).join('')+'</tbody></table></div>'
+     :'<div class="empty-state">No work given out yet.</div>')+
+    '</div></section>';
+
+  sfaPaint(h);
 }
 
 </script>
@@ -14764,6 +15358,216 @@ async function sendThreadComment(itemId){
   await loadData(); render();
   toast('Sent. It stays attached to '+it.product+'.');
 }
+
+/* ---------------------------------------------------------------------------
+   Creating a batch, and giving work out.
+
+   Both of these are thin: the rules live in the database, where a supervisor
+   cannot get round them by reloading the page. What is here is the form, the
+   sensible default, and passing the server's own words back to the person when
+   it refuses — the messages bt_create_batch and bt_assign_work raise are written
+   to be read by whoever is standing at the tablet, not by a developer.
+--------------------------------------------------------------------------- */
+
+function mCreateBatch(groupKey){
+  const groups=unbatchedGroups();
+  if(!groups.length){
+    toast('Every piece on the floor is already in a batch.');
+    return;
+  }
+  // Pieces from two different shipments cannot share a batch — the server
+  // refuses it — so the choice of shipment comes before the choice of pieces.
+  if(!groupKey && groups.length>1){
+    const m=modal('<h3>Which shipment?</h3>'+
+      '<div class="sub">A batch holds pieces from one shipment only. Pick the one you are grouping.</div>'+
+      '<div class="button-row" style="flex-direction:column;align-items:stretch">'+
+      groups.map((g,i)=>'<button class="button button--secondary button--wide" type="button" data-k="'+esc(g.key)+'">'+
+        'Shipment '+String.fromCharCode(65+i)+' — '+g.items.length+' piece'+(g.items.length===1?'':'s')+
+        (g.ship?' · expected '+esc(fdate(g.ship)):'')+'</button>').join('')+
+      '<button class="button button--quiet" type="button" onclick="closeModal()">Cancel</button></div>');
+    m.m.querySelectorAll('[data-k]').forEach(b=>{
+      b.onclick=()=>{ const k=b.getAttribute('data-k'); closeModal(); mCreateBatch(k); };
+    });
+    return;
+  }
+  const g = groupKey ? groups.find(x=>x.key===groupKey) : groups[0];
+  if(!g){ toast('Those pieces have already been batched. Reloading.'); refresh(); return; }
+
+  const m=modal('<h3>New shipment batch</h3>'+
+    '<div class="sub">The code is issued by the system so two people cannot create the same one. '+
+    'Tick the pieces leaving together and set the date they should be ready by.</div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="bt-ship">Planned ship date</label>'+
+        '<input id="bt-ship" type="date" value="'+esc(g.ship||'')+'"></div>'+
+      '<div class="field field--full"><label for="bt-note">Note (optional)</label>'+
+        '<input id="bt-note" placeholder="e.g. going with the container on the 30th"></div>'+
+      '<div class="field field--full"><label>Pieces</label>'+
+        '<div class="pick-list" id="bt-items">'+g.items.map(it=>
+          '<label class="pick"><input type="checkbox" checked value="'+esc(it.id)+'">'+
+          '<span><strong>'+esc(it.product)+'</strong>'+
+          '<small>'+esc([it.item_ref,it.stone,(+it.qty||1)+' '+(it.unit||'pcs')].filter(Boolean).join(' · '))+'</small></span></label>').join('')+
+        '</div></div>'+
+      '<p class="field-hint field--full">The batch is what the floor sees. The order it belongs to stays in the office.</p>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="bt-go">Create batch</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#bt-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const ids=Array.from(m.m.querySelectorAll('#bt-items input:checked')).map(x=>x.value);
+    if(!ids.length){ toast('Tick at least one piece.',{err:true}); return; }
+    const ship=$('bt-ship').value||null, note=$('bt-note').value.trim()||null;
+    btn.disabled=true;
+    const {data,error}=await sb.rpc('bt_create_batch',{p_items:ids, p_ship:ship, p_note:note});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal();
+    await refresh();
+    toast((data&&data.code?data.code:'Batch')+' created with '+ids.length+' piece'+(ids.length===1?'':'s')+'.');
+  };
+}
+
+function mAssign(itemId, stageId, presetPerson){
+  const open=(S.items||[]).filter(it=>!['delivered','cancelled','made'].includes(it.status));
+  if(!open.length){ toast('There is nothing on the floor to give out.'); return; }
+  const it0 = itemId ? S.itemsById[itemId] : open[0];
+  if(!it0){ toast('That piece is no longer on the floor.',{err:true}); return; }
+  const people=floorPeople();
+  if(!people.length){ toast('No workshop logins yet — the office creates them under People & access.',{err:true}); return; }
+
+  const cur=openAssignment(it0.id);
+  const stages=activeStages();
+  const defStage = stageId!=null ? stageId
+    : (cur ? cur.stage_id : ((curStage(it0)||stages[0]||{}).id));
+  const defLead = presetPerson || (cur?cur.assigned_to:'');
+
+  const pieceField = itemId
+    ? '<div class="field field--full"><label>Piece</label>'+
+      '<div class="pick-fixed"><strong>'+esc(it0.product)+'</strong>'+
+      '<small>'+esc([it0.item_ref, batchCodeOf(it0.id), it0.stone, dimsOf(it0)].filter(Boolean).join(' · '))+'</small></div>'+
+      '<input type="hidden" id="as-item" value="'+esc(it0.id)+'"></div>'
+    : '<div class="field field--full"><label for="as-item">Piece</label><select id="as-item">'+
+      open.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.product)+
+        ' — '+esc([batchCodeOf(x.id), x.item_ref].filter(Boolean).join(' · '))+'</option>').join('')+
+      '</select></div>';
+
+  const m=modal('<h3>'+(cur?'Change who is on this':'Give out work')+'</h3>'+
+    '<div class="sub">The person answers on their own screen — accepted, a question, or cannot start. '+
+    'You will see which on the Today page.</div>'+
+    '<div class="form-grid">'+
+      pieceField+
+      '<div class="field"><label for="as-stage">Stage</label><select id="as-stage">'+
+        stages.map(s=>'<option value="'+s.id+'"'+(s.id===defStage?' selected':'')+'>'+esc(s.name)+'</option>').join('')+
+        '</select></div>'+
+      '<div class="field"><label for="as-target">Finish by</label>'+
+        '<input id="as-target" type="date" value="'+esc(cur&&cur.target_date?cur.target_date:'')+'"></div>'+
+      '<div class="field field--full"><label for="as-lead">Who does the work</label><select id="as-lead">'+
+        '<option value="">Choose a person…</option>'+
+        people.map(p=>'<option value="'+esc(p.user_id)+'"'+(p.user_id===defLead?' selected':'')+'>'+
+          esc(p.full_name)+' — '+((workloadByPerson()[p.user_id]||0))+' piece'+
+          ((workloadByPerson()[p.user_id]||0)===1?'':'s')+' now</option>').join('')+
+        '</select></div>'+
+      '<div class="field field--full"><label>Helping (optional)</label>'+
+        '<div class="pick-list pick-list--tight" id="as-support">'+people.map(p=>
+          '<label class="pick"><input type="checkbox" value="'+esc(p.user_id)+'"'+
+          ((cur&&(cur.support||[]).indexOf(p.user_id)>=0)?' checked':'')+'>'+
+          '<span><strong>'+esc(p.full_name)+'</strong></span></label>').join('')+'</div>'+
+        '<p class="field-hint">Their time is recorded separately. The same person cannot both lead and help.</p></div>'+
+      '<div class="field field--full"><label for="as-note">What to do</label>'+
+        '<textarea id="as-note" rows="2" placeholder="e.g. Flute the four legs to the drawing, 12 mm spacing">'+
+        esc(cur&&cur.instruction?cur.instruction:'')+'</textarea></div>'+
+      '<div class="field field--full"><label for="as-ev">What to send back</label>'+
+        '<input id="as-ev" placeholder="e.g. two photos and the tape measure on the width" value="'+
+        esc(cur&&cur.evidence_required?cur.evidence_required:'')+'"></div>'+
+      (cur?'<div class="field field--full"><label for="as-why">Why the change (optional)</label>'+
+        '<input id="as-why" placeholder="e.g. moved to the bench saw"></div>':'')+
+      '<div class="button-row field--full"><button class="button" type="button" id="as-go">'+
+        (cur?'Save the change':'Give out this work')+'</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+
+  m.m.querySelector('#as-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const item=$('as-item').value;
+    const lead=$('as-lead').value;
+    if(!lead){ toast('Choose the person who will do the work.',{err:true}); return; }
+    const support=Array.from(m.m.querySelectorAll('#as-support input:checked')).map(x=>x.value);
+    const why=$('as-why');
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_assign_work',{
+      p_item:item,
+      p_stage:Number($('as-stage').value),
+      p_lead:lead,
+      p_support:support.length?support:null,
+      p_work_date:null,
+      p_target_date:$('as-target').value||null,
+      p_instruction:$('as-note').value.trim()||null,
+      p_evidence:$('as-ev').value.trim()||null,
+      p_reason:why?(why.value.trim()||null):null
+    });
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal();
+    await refresh();
+    toast(personName(lead)+' has been given this work.');
+  };
+
+  // Ticking the lead as a helper is a mistake the server refuses; catch it here
+  // so the person sees it before they press Save.
+  const sync=()=>{
+    const lead=$('as-lead').value;
+    m.m.querySelectorAll('#as-support input').forEach(x=>{
+      const same = x.value===lead;
+      x.disabled = same;
+      if(same) x.checked=false;
+      x.closest('.pick').classList.toggle('pick--off', same);
+    });
+  };
+  m.m.querySelector('#as-lead').onchange=sync;
+  sync();
+}
+
+/* The artisan's answer to a task. Cannot-start reports a real blocker — the
+   server will not take it without a reason, and neither will this. */
+function mAckTask(assignmentId, state){
+  const a=(S.assignments||[]).find(x=>x.id===assignmentId);
+  if(!a){ toast('That task is no longer there.',{err:true}); return; }
+  const it=S.itemsById[a.item_id]||{};
+  const stg=S.stagesById[a.stage_id];
+  if(state==='accepted'){
+    (async()=>{
+      const {error}=await sb.rpc('bt_ack_assignment',{p_id:assignmentId,p_state:'accepted',p_note:null});
+      if(error){ toast(error.message,{err:true}); return; }
+      await refresh();
+      toast('Accepted. / स्वीकार किया।');
+    })();
+    return;
+  }
+  const cannot = state==='cannot_start';
+  const m=modal('<h3>'+(cannot?'Cannot start · शुरू नहीं कर सकता':'Ask a question · सवाल पूछें')+'</h3>'+
+    '<div class="sub">'+esc(it.product||'')+(stg?' · '+esc(stg.name):'')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="ak-note">'+
+        (cannot?'What is stopping you? / क्या रुकावट है?':'What do you need to know? / क्या जानना है?')+'</label>'+
+        '<textarea id="ak-note" rows="3" placeholder="'+
+        (cannot?'e.g. the lathe belt is broken / लेथ की बेल्ट टूटी है':'e.g. which finish on the base? / बेस पर कौन सा फिनिश?')+
+        '"></textarea></div>'+
+      '<p class="field-hint field--full">The supervisor sees this straight away. / सुपरवाइज़र को तुरंत दिखेगा।</p>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ak-go">Send · भेजें</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel · रद्द</button></div>'+
+    '</div>');
+  m.m.querySelector('#ak-go').onclick=async (e)=>{
+    const note=$('ak-note').value.trim();
+    if(!note){ toast('Please say what the problem is. / कृपया बताएं क्या दिक्कत है।',{err:true}); return; }
+    e.currentTarget.disabled=true;
+    const {error}=await sb.rpc('bt_ack_assignment',{p_id:assignmentId,p_state:state,p_note:note});
+    e.currentTarget.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal();
+    await refresh();
+    toast('Sent to the supervisor. / सुपरवाइज़र को भेज दिया।');
+  };
+}
+
 </script>
 <script>
 'use strict';
