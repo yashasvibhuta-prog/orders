@@ -3783,9 +3783,35 @@ body.reports-mode .sfa .content{max-width:1700px}
   .fl-row__do .button{ min-height:44px; }
   .fl-alert{ grid-template-columns:1fr; }
 }
+
+/* handing a login over ----------------------------------------------------
+   The password is the one line on this panel somebody has to read off a screen
+   and type on a phone, so it is set in the mono face at a size that survives a
+   workshop tablet and a bad angle. */
+.handover{
+  border:1px solid var(--line, #e8e6e1); border-radius:10px;
+  margin-top:6px; overflow:hidden;
+}
+.handover__row{
+  display:grid; grid-template-columns:96px 1fr; gap:12px; align-items:baseline;
+  padding:11px 13px; border-bottom:1px solid var(--line, #e8e6e1);
+}
+.handover__row:last-child{ border-bottom:0; }
+.handover__row span{
+  font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted, #6b6660);
+}
+.handover__row strong{ font-weight:600; word-break:break-word; }
+.handover__pw{
+  font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:16px; letter-spacing:.01em; user-select:all;
+}
+@media (max-width: 520px){
+  .handover__row{ grid-template-columns:1fr; gap:2px; }
+}
 </style>
 <body>
-<script>const BUILD_ID='f64c104653e0';</script>
+<script>const BUILD_ID='14c5f7de3326';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4038,10 +4064,22 @@ function genPassword(){
   const w = PW_WORDS;
   return w[pwPick(w.length)]+'.'+w[pwPick(w.length)]+'.'+w[pwPick(w.length)]+'.'+(1000+pwPick(9000));
 }
-function waLink(phone, text){
-  const p=String(phone||'').replace(/[^0-9]/g,'');
-  return 'https://wa.me/'+(p?p:'')+'?text='+encodeURIComponent(text);
+// Nobody in Udaipur types a country code into a form, so a bare ten-digit
+// mobile gets India's. Anything already carrying a code is left alone — the
+// buyers are abroad, and quietly prefixing 91 to a Dubai number would send the
+// message to a stranger.
+function waNumber(v){
+  const d=String(v||'').replace(/[^0-9]/g,'').replace(/^0+/,'');
+  if(!d) return '';
+  return (d.length===10 && /^[6-9]/.test(d)) ? '91'+d : d;
 }
+function waLink(phone, text){
+  const p=waNumber(phone);
+  return 'https://wa.me/'+p+'?text='+encodeURIComponent(text);
+}
+// A new tab given window.opener can navigate the page that opened it. Nothing
+// here needs to talk back, so it does not get the handle.
+function openTab(url){ window.open(url,'_blank','noopener,noreferrer'); }
 function copyText(t){ try{ navigator.clipboard.writeText(t); toast('Copied'); }catch(e){ toast('Could not copy', {err:true}); } }
 </script>
 <script>
@@ -12060,7 +12098,7 @@ async function markUpdateSent(buyerId){
 function sendBuyerUpdate(buyerId){
   const b=S.buyersById[buyerId];
   if(!b.phone){ toast('Add a WhatsApp number for this buyer first',{err:true}); go('#/buyers'); return; }
-  window.open(waLink(b.phone, buyerUpdateText(buyerId)),'_blank');
+  openTab(waLink(b.phone, buyerUpdateText(buyerId)));
   markUpdateSent(buyerId);
 }
 
@@ -12426,7 +12464,7 @@ async function openPhoto(ev, node){
 }
 async function openDoc(path){
   const u=await signedUrl(path);
-  if(u) window.open(u, '_blank');
+  if(u) openTab(u);
 }
 function pickDoc(poId){
   const inp=document.createElement('input'); inp.type='file';
@@ -12469,18 +12507,18 @@ function waMsgApproval(it, st){
 }
 function offerWhatsApp(it, text){
   const b=it&&it.po?S.buyersById[it.po.buyer_id]:null;
-  toast('Updated.', {action:'WhatsApp ▸', onAction:()=>window.open(waLink(b&&b.phone, text),'_blank')});
+  toast('Updated.', {action:'WhatsApp ▸', onAction:()=>openTab(waLink(b&&b.phone, text))});
 }
 function waItem(itemId){
   const it=S.itemsById[itemId]; const st=curStage(it)||{name:''};
   const b=S.buyersById[it.po.buyer_id];
-  window.open(waLink(b&&b.phone, waMsgStage(it, st, false)),'_blank');
+  openTab(waLink(b&&b.phone, waMsgStage(it, st, false)));
 }
 function waPO(poId){
   const p=S.posById[poId]; const b=S.buyersById[p.buyer_id];
   let lines=p.items.map(it=>{ const st=curStage(it); return '• '+it.product+(it.qty>1?' ×'+(+it.qty):'')+' — '+(st?st.name:''); });
   const text=(S.settings.company_name||'Gujraj Impex')+' — status of '+p.po_number+' ('+fdate(today())+')\n'+lines.join('\n')+'\nDetails: '+trackerUrl();
-  window.open(waLink(b&&b.phone, text),'_blank');
+  openTab(waLink(b&&b.phone, text));
 }
 
 /* ---------- PO / item CRUD ---------- */
@@ -12679,7 +12717,7 @@ function mShip(poId){
     const b=S.buyersById[p.buyer_id];
     toast('Shipping saved.', {action:'WhatsApp ▸', onAction:()=>{
       const text=(S.settings.company_name||'Gujraj Impex')+' — dispatch update\nShipping details for '+p.po_number+' are updated on your tracker.\nSee: '+trackerUrl();
-      window.open(waLink(b&&b.phone, text),'_blank'); }});
+      openTab(waLink(b&&b.phone, text)); }});
   };
 }
 function mItem(poId, itemId){
@@ -12768,7 +12806,7 @@ function mBulk(poId){
     toast(ids.length+' items updated.', {action:'WhatsApp ▸', onAction:()=>{
       const text=(S.settings.company_name||'Gujraj Impex')+' — order update ('+fdate(today())+')\n'+
         ids.map(id=>'• '+S.itemsById[id].product).join('\n')+'\nNow at: '+st.name+'\nTrack: '+trackerUrl();
-      window.open(waLink(b&&b.phone,text),'_blank'); }});
+      openTab(waLink(b&&b.phone,text)); }});
   };
 }
 
@@ -13085,7 +13123,7 @@ function sendReminder(text, logFn){
     return;
   }
   if(who.length === 1){
-    window.open(waLink(who[0].phone, text), '_blank');
+    openTab(waLink(who[0].phone, text));
     toast('Opening WhatsApp for '+who[0].name+'.');
     if(logFn) Promise.resolve(logFn()).catch(()=>{});
     return;
@@ -13099,7 +13137,7 @@ function sendReminder(text, logFn){
   m.m.querySelectorAll('[data-rm]').forEach(btn=>{
     btn.onclick = ()=>{
       const w = who[+btn.getAttribute('data-rm')];
-      window.open(waLink(w.phone, text), '_blank');
+      openTab(waLink(w.phone, text));
       closeModal();
       toast('Opening WhatsApp for '+w.name+'.');
       if(logFn) Promise.resolve(logFn()).catch(()=>{});
@@ -13489,7 +13527,10 @@ function mNewLogin(buyerId, kind){
         '</select></div>'+
         '<div class="field field--full"><label for="lg-ph">WhatsApp number (optional)</label>'+
         '<input id="lg-ph" placeholder="919876543210" inputmode="numeric"></div>'
-      : '<div class="field field--full"><label for="lg-em">Email</label><input id="lg-em" type="email" placeholder="name@company.com"></div>')+
+      : '<div class="field"><label for="lg-em">Email</label><input id="lg-em" type="email" placeholder="name@company.com"></div>'+
+        '<div class="field"><label for="lg-ph">WhatsApp number</label>'+
+        '<input id="lg-ph" placeholder="9876543210" inputmode="numeric" value="'+
+        esc((S.buyersById[buyerId]||{}).phone||'')+'"></div>')+
     '<div class="field'+(floor?'':' field--full')+'"><label for="lg-pw">Password</label><input id="lg-pw" value="'+pw+'"></div>'+
     '<p class="field-hint field--full">'+(floor
       ?'Use a simple name like <strong>kunal.tak</strong> — no email address needed. That is exactly what they type to sign in. One login per person, so you can see who took which photo.'
@@ -13506,22 +13547,26 @@ function mNewLogin(buyerId, kind){
       await adminApi({action:'create_user', email, password, role, buyer_id:buyerId||null,
         full_name: floor?(nm?nm.value.trim():null):(buyerId?(S.buyersById[buyerId]||{}).contact_name:null)});
       const ph=$('lg-ph');
-      if(ph && ph.value.trim()){
+      const phone = waNumber(ph?ph.value:'');
+      if(phone){
         // best effort: the login exists either way, so a failure here is not fatal
         await loadData();
-        const made=(S.profilesAll||[]).find(x=>x.email===email);
-        if(made) await sb.from('bt_profiles').update({phone:ph.value.replace(/\D/g,'')}).eq('user_id', made.user_id);
+        const who=(S.profilesAll||[]).find(x=>x.email===email);
+        if(who) await sb.from('bt_profiles').update({phone}).eq('user_id', who.user_id);
       }
       closeModal(); await loadData(); render();
-      if(floor){
-        toast((role==='worker'?'Worker':'Supervisor')+' login created.', {action:'Copy ▸', onAction:()=>copyText(
-          'StoneFlow — production floor\n'+trackerUrl()+'\nLogin name: '+shortLogin(email)+'\nPassword: '+password)});
-        return;
-      }
-      const b=buyerId?S.buyersById[buyerId]:null;
-      toast('Login created.', {action:'Send on WhatsApp ▸', onAction:()=>{
-        const text='Your '+(S.settings.company_name||'Gujraj Impex')+' order tracker access:\n'+trackerUrl()+'\nEmail: '+email+'\nPassword: '+password;
-        window.open(waLink(b&&b.phone, text),'_blank'); }});
+      const made=(S.profilesAll||[]).find(x=>x.email===email);
+      mHandover({
+        heading: floor ? ((role==='worker'?'Worker':'Supervisor')+' login created')
+                       : 'Buyer login created',
+        who: floor ? ((nm&&nm.value.trim())||shortLogin(email))
+                   : ((S.buyersById[buyerId]||{}).company||''),
+        floor: floor,
+        login: shortLogin(email),
+        password: password,
+        phone: phone,
+        userId: made ? made.user_id : null
+      });
     }catch(e){ toast(e.message,{err:true}); }
   };
 }
@@ -13537,8 +13582,16 @@ function mResetPw(userId, email){
       await adminApi({action:'set_password', user_id:userId, password:npw});
       try{ await sb.rpc('bt_mark_password_set',{p_user:userId}); await loadData(); }catch(e){}
       closeModal();
-      toast('Password reset.', {action:'Copy ▸', onAction:()=>copyText('StoneFlow: '+trackerUrl()+'\n'+
-        (shortLogin(email)===email?'Email: ':'Login name: ')+shortLogin(email)+'\nNew password: '+npw)});
+      const who=(S.profilesAll||[]).find(x=>x.user_id===userId);
+      mHandover({
+        heading:'Password reset',
+        who:(who&&who.full_name)||shortLogin(email),
+        floor: shortLogin(email)!==email,
+        login: shortLogin(email),
+        password: npw,
+        phone:(who&&who.phone)||'',
+        userId: userId
+      });
     }catch(e){ toast(e.message,{err:true}); }
   };
 }
@@ -15565,6 +15618,67 @@ function mAckTask(assignmentId, state){
     closeModal();
     await refresh();
     toast('Sent to the supervisor. / सुपरवाइज़र को भेज दिया।');
+  };
+}
+
+
+/* ---------------------------------------------------------------------------
+   Handing a login over.
+
+   A password exists in exactly one place for about a minute: the screen it was
+   made on. The old flow put it in a toast that cleared itself after twelve
+   seconds, which is a countdown nobody knows is running — and the WhatsApp
+   button underneath it sent to whatever number happened to be on the buyer's
+   company record, which for a new account is usually nothing.
+   
+   This panel waits instead of vanishing, shows the details in full, and takes
+   the number of the person who actually needs them. A number typed here is kept
+   on that person, so the next reset already knows where to send it.
+--------------------------------------------------------------------------- */
+function handoverText(o){
+  return (o.floor
+      ? (S.settings.company_name||'Gujraj Impex')+' — workshop'
+      : 'Your '+(S.settings.company_name||'Gujraj Impex')+' order tracker')
+    + '\n' + trackerUrl()
+    + '\n' + (o.floor?'Login name: ':'Email: ') + o.login
+    + '\nPassword: ' + o.password;
+}
+
+function mHandover(o){
+  const m=modal('<h3>'+esc(o.heading)+'</h3>'+
+    (o.who?'<div class="sub">'+esc(o.who)+'</div>':'')+
+    '<div class="handover">'+
+      '<div class="handover__row"><span>Where</span><strong>'+esc(trackerUrl())+'</strong></div>'+
+      '<div class="handover__row"><span>'+(o.floor?'Login name':'Email')+'</span>'+
+        '<strong>'+esc(o.login)+'</strong></div>'+
+      '<div class="handover__row"><span>Password</span><strong class="handover__pw">'+esc(o.password)+'</strong></div>'+
+    '</div>'+
+    '<p class="field-hint">Nobody can look this password up again — not you, not '+
+      esc(o.floor?'the workshop':'the buyer')+'. If it goes missing, reset it from this screen and send a new one. '+
+      'There is no harm in doing that.</p>'+
+    '<div class="form-grid" style="margin-top:12px">'+
+      '<div class="field field--full"><label for="ho-ph">Send it on WhatsApp to</label>'+
+        '<input id="ho-ph" inputmode="numeric" placeholder="9876543210" value="'+esc(o.phone||'')+'">'+
+        '<p class="field-hint">A ten-digit Indian mobile is enough. For a number abroad, put the country code in front.</p></div>'+
+      '<div class="button-row field--full">'+
+        '<button class="button" type="button" id="ho-wa">Send on WhatsApp</button>'+
+        '<button class="button button--secondary" type="button" id="ho-copy">Copy the details</button>'+
+        '<button class="button button--quiet" type="button" onclick="closeModal()">Done</button>'+
+      '</div></div>');
+
+  const text=handoverText(o);
+  m.m.querySelector('#ho-copy').onclick=()=>copyText(text);
+  m.m.querySelector('#ho-wa').onclick=async ()=>{
+    const raw=$('ho-ph').value;
+    const num=waNumber(raw);
+    if(raw.trim() && !num){ toast('That does not look like a phone number.',{err:true}); return; }
+    // remember it, so a reset months from now already knows where this goes
+    if(num && o.userId && num!==waNumber(o.phone)){
+      try{ await sb.from('bt_profiles').update({phone:num}).eq('user_id', o.userId); await loadData(); }
+      catch(e){ /* the message still goes; the number just is not kept */ }
+    }
+    openTab(waLink(num, text));
+    if(!num) toast('No number given — WhatsApp will ask you which chat.');
   };
 }
 
