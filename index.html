@@ -4006,6 +4006,17 @@ body.reports-mode .sfa .content{max-width:1700px}
 @media (max-width: 700px){
   .modal-bg.sfa .modal{ max-height:96vh; border-radius:14px 14px 0 0; padding:15px; }
 }
+/* attendance */
+.att-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.att-grid div{ padding:10px; border-radius:8px; background:var(--surface-2, #f3f3f4); min-width:0; }
+.att-grid span{ display:block; color:var(--muted, #6e6e73); font-size:10px; }
+.att-grid strong{ display:block; margin-top:5px; font-size:14px; overflow-wrap:anywhere; }
+.att-row{ padding:12px 0; border-bottom:1px solid var(--line, #e5e5e7); }
+.att-row:last-child{ border-bottom:0; }
+.att-row strong{ font-size:13px; }
+.att-row p{ margin:4px 0 0; color:var(--muted, #6e6e73); font-size:12px; }
+@media (max-width: 520px){ .att-grid{ grid-template-columns:1fr 1fr; } }
+
 .sfa .button--big{ min-height:50px; font-size:13px; }
 .sfa .field--big select{ min-height:52px; font-size:15px; }
 .modal--artisan .form-grid{ margin-top:10px; }
@@ -4033,7 +4044,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='48593c3a6951';</script>
+<script>const BUILD_ID='0d46bb49bbe8';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4343,7 +4354,8 @@ const S = {
   invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{},
   revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null,
   batches:[], batchById:{}, batchOfItem:{}, assignments:[], asgByItem:{},
-  rework:[], rwByItem:{}, holds:[], hdByItem:{}, meas:[], msByItem:{}, apprFilter:'pending'
+  rework:[], rwByItem:{}, holds:[], hdByItem:{}, meas:[], msByItem:{}, apprFilter:'pending',
+  contributors:[], attDay:[], attMine:[], attCorrections:[], sites:[], policy:{}
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -4373,7 +4385,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -4393,7 +4405,16 @@ async function loadStaffData(){
     // file, because a filter written here would be a suggestion.
     sb.rpc('bt_floor_rework'),
     sb.rpc('bt_floor_holds'),
-    sb.rpc('bt_floor_measurements')
+    sb.rpc('bt_floor_measurements'),
+    sb.rpc('bt_floor_contributors'),
+    // Attendance: the day as the floor may see it (a labourer gets one row, their
+    // own), their own history, the factory sites, and the policy values the
+    // office can change without a deploy.
+    sb.rpc('bt_attendance_day'),
+    sb.rpc('bt_my_attendance', {p_days:30}),
+    sb.from('bt_factory_sites').select('*').eq('active', true),
+    sb.from('bt_floor_policy').select('*'),
+    sb.from('bt_attendance_corrections').select('*').order('proposed_at',{ascending:false})
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -4432,6 +4453,8 @@ async function loadStaffData(){
   indexPhotos(ph.data||[]);
   indexFloor((bt&&bt.data)||[], (bi&&bi.data)||[], (asg&&asg.data)||[]);
   indexReview((rw&&rw.data)||[], (hd&&hd.data)||[], (ms&&ms.data)||[]);
+  S.contributors=(ctb&&ctb.data)||[];
+  indexAttendance((atd&&atd.data)||[], (atm&&atm.data)||[], (sites&&sites.data)||[], (pol&&pol.data)||[], (atc&&atc.data)||[]);
   S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
 }
@@ -4471,6 +4494,31 @@ function indexReview(rework, holds, meas){
   S.hdByItem={}; S.holds.forEach(r=>{ (S.hdByItem[r.item_id]=S.hdByItem[r.item_id]||[]).push(r); });
   S.meas=(meas||[]).slice();
   S.msByItem={}; S.meas.forEach(r=>{ (S.msByItem[r.item_id]=S.msByItem[r.item_id]||[]).push(r); });
+}
+/* ---- attendance ------------------------------------------------------------
+   The day is a list of people with a first in, a last out, minutes and flags,
+   computed on the server so the same arithmetic serves the phone, the
+   supervisor's table and the owner's summary. Policy values arrive as rows and
+   are read through policyVal(), so nothing here knows the working day is nine
+   to six until the office says so. */
+function indexAttendance(day, mine, sites, policy, corrections){
+  S.attDay=(day||[]).slice();
+  S.attMine=(mine||[]).slice();
+  S.sites=(sites||[]).slice();
+  S.policy={}; (policy||[]).forEach(r=>{ S.policy[r.key]=r.value; });
+  S.attCorrections=(corrections||[]).slice();
+}
+function policyVal(key, fallback){ const v=S.policy[key]; return (v===undefined||v===null)?fallback:v; }
+function contributorsOf(updateId){ return (S.contributors||[]).filter(c=>c.update_id===updateId).map(c=>c.user_id); }
+function myAttendanceToday(){ return (S.attDay||[]).find(r=>r.user_id===uid())||null; }
+function fmins(m){ m=Math.max(0,Math.round(m||0)); return Math.floor(m/60)+'h '+String(m%60).padStart(2,'0')+'m'; }
+function fclock(ts){ if(!ts) return '—'; const d=new Date(ts); if(isNaN(d)) return '—';
+  let h=d.getHours(), mi=String(d.getMinutes()).padStart(2,'0'); const ap=h>=12?'pm':'am'; h=h%12||12; return h+':'+mi+' '+ap; }
+// a stable id for this phone, so the server can tell "clocked in here" from
+// "clocked in on another phone"; nothing personal, nothing that leaves the device
+function deviceId(){
+  try{ let d=localStorage.getItem('sf_device'); if(!d){ d='d'+Math.random().toString(36).slice(2,10)+Date.now().toString(36); localStorage.setItem('sf_device', d); } return d; }
+  catch(e){ return null; }
 }
 function reworkFor(itemId, stageId){
   return (S.rwByItem[itemId]||[]).filter(r=>stageId==null||r.stage_id===stageId);
@@ -4876,7 +4924,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -4915,7 +4963,14 @@ async function loadData(){
     // empty for him rather than needing a branch here.
     sb.rpc('bt_floor_rework'),
     sb.rpc('bt_floor_holds'),
-    sb.rpc('bt_floor_measurements')
+    sb.rpc('bt_floor_measurements'),
+    sb.rpc('bt_floor_contributors'),
+    // Attendance reaches the office as the day's presence and the corrections
+    // waiting on it. A buyer has no policy on any of these and gets nothing.
+    admin ? sb.rpc('bt_attendance_day') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_factory_sites').select('*').order('created_at') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_floor_policy').select('*') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_attendance_corrections').select('*').order('proposed_at',{ascending:false}) : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -4965,6 +5020,8 @@ async function loadData(){
   indexStageInternal((sti&&sti.data)||[]);
   indexAccounts((inv&&inv.data)||[], (ewb&&ewb.data)||[], (lsn&&lsn.data)||[], (lln&&lln.data)||[]);
   indexReview((rw&&rw.data)||[], (hd&&hd.data)||[], (ms&&ms.data)||[]);
+  S.contributors=(ctb&&ctb.data)||[];
+  indexAttendance((atd&&atd.data)||[], [], (sites&&sites.data)||[], (pol&&pol.data)||[], (atc&&atc.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
 }
@@ -5128,6 +5185,16 @@ function ownerActions(){
         note:r.due_date?('Due back '+fdate(r.due_date)):'',
         action:{label:'Open', go:"go('#/item/"+it.id+"')"} });
     });
+
+  // A supervisor says an attendance record is wrong. Only the office can agree,
+  // and hours — and so wages — follow whatever it decides.
+  (S.attCorrections||[]).filter(c=>c.decision==='pending').forEach(c=>{
+    push({ urgency:1, chip:'approval', chipLabel:'Attendance', icon:'stage-confirmed',
+      type:'people', title:'Attendance correction for '+(personName(c.user_id)||'a worker'),
+      meta:fdate(c.work_date)+' · '+fclock(c.proposed_in)+' – '+fclock(c.proposed_out)+' · '+c.reason,
+      note:'Proposed by '+(personName(c.proposed_by)||'a supervisor'),
+      action:{label:'Decide', go:"mDecideCorrection('"+c.id+"')"} });
+  });
 
   // Photographs and daily updates the buyer cannot see until reviewed.
   const nu=pendingUpdates().length, np=pendingPhotos().length;
@@ -5988,6 +6055,9 @@ function commandAlerts(){
   const asked=(S.holds||[]).filter(h=>h.decision==='pending');
   const repeats=(S.rework||[]).filter(r=>!r.resolved_at && (r.attempt_no||0)>=2)
     .slice().sort((a,b)=>(b.attempt_no||0)-(a.attempt_no||0));
+  const floorDay=(S.attDay||[]).filter(r=>r.role==='worker'||r.role==='supervisor'||r.role==='staff');
+  const present=floorDay.filter(r=>r.first_in).length, people=floorDay.length, late=floorDay.filter(r=>r.late).length;
+  const corr=(S.attCorrections||[]).filter(c=>c.decision==='pending');
   const ag=receivableAgeing();
   const overdue=ag.buckets.slice(1).reduce((a,b)=>a+b.v,0);
   return [
@@ -6009,6 +6079,9 @@ function commandAlerts(){
                         repeats[0].attempt_no+' attempts · '+repeats[0].defect_category)
                      :'Nothing going back twice',
       warn:repeats.length>0, run:"go('#/production/quality')" },
+    { k:'Attendance', v:String(present)+' / '+String(people),
+      s:corr.length?(corr.length+' correction'+(corr.length===1?'':'s')+' to decide'):(late?(late+' late today'):'Nothing to decide'),
+      warn:corr.length>0, run:"go('#/production/people')" },
     { k:'Evidence review', v:String(q.approvals+pendingPhotos().length),
       s:'Photographs and updates waiting on you', warn:(q.approvals+pendingPhotos().length)>0,
       run:"go('#/production/review')" },
@@ -6312,6 +6385,7 @@ function updateHeader(){
       link('#/approvals','Check work',c.toReview)+
       link('#/team','Work &amp; people',c.unanswered)+
       link('#/batches','Shipment batches',0)+
+      link('#/attendance','Attendance',c.attExceptions)+
       link('#/pieces','All pieces',0);
     app.className='page';
     dock.hidden=false;
@@ -6320,6 +6394,7 @@ function updateHeader(){
       dockItem('#/approvals','i-check','Check',c.toReview,navActive('#/approvals')?' nav-link--active':'')+
       dockItem('#/team','stage-planning','Work',c.unanswered,navActive('#/team')?' nav-link--active':'')+
       dockItem('#/batches','stage-packing','Batches',0,navActive('#/batches')?' nav-link--active':'')+
+      dockItem('#/attendance','stage-confirmed','Attend.',c.attExceptions,navActive('#/attendance')?' nav-link--active':'')+
       dockItem('#/pieces','i-camera','Pieces',0,navActive('#/pieces')?' nav-link--active':'');
     return;
   }
@@ -6699,9 +6774,9 @@ function withTabs(render0, tabs, active){
    four-step .prod-logic strip. Every row is a real decision from ownerActions();
    the routine floor work stays on the Workshop screens. */
 const PROD_TYPES=[['all','All decisions'],['blocked','Work stopped'],['quality','Quality'],
-                  ['review','Review evidence'],
+                  ['review','Review evidence'],['people','People'],
                   ['missing','Missing records'],['stage','Stage decisions'],['publish','Publish to buyer']];
-const PROD_LABEL={blocked:'Work stopped',quality:'Quality',review:'Review evidence',missing:'Missing record',
+const PROD_LABEL={blocked:'Work stopped',quality:'Quality',review:'Review evidence',people:'People',missing:'Missing record',
                   stage:'Stage decision',publish:'Publish to buyer',waiting:'With the buyer',
                   finance:'Finance',other:'Decision'};
 function prodRows(){
@@ -6944,6 +7019,7 @@ function vProduction(tab){
   if(tab==='missing') window.__prodFilter='missing';
   else if(tab==='blocked') window.__prodFilter='blocked';
   else if(tab==='quality') window.__prodFilter='quality';
+  else if(tab==='people') window.__prodFilter='people';
   const rows=prodRows();
   const n=t=>rows.filter(r=>r.type===t).length;
   const first=t=>{ const r=rows.find(x=>x.type===t); return r?String(r.meta||r.title).slice(0,70):'Nothing outstanding'; };
@@ -9486,6 +9562,8 @@ function vSettings(){
         '<td><small>'+esc(st.key)+'</small></td></tr>').join('')+
     '</table></div></section>'+
 
+    settingsAttendanceCard()+
+
     '<section class="form-card"><div class="form-card__head"><div>'+
       '<h3 class="form-card__title">Your sign-in</h3>'+
       '<p class="form-card__description">Everyone else&rsquo;s password is reset for them in People &amp; access. '+
@@ -9505,6 +9583,44 @@ function vSettings(){
       'Buyers &amp; logins → Demo Buyer Co. → Edit → Delete buyer. Deleting a buyer removes its POs, products, photos and comments.</p></div></div></section>'+
   '</div></div>';
   $('app').innerHTML=h;
+}
+
+// Where the factory is and what the working day is. Both are numbers the
+// office owns; neither is written into code anywhere.
+function settingsAttendanceCard(){
+  const sites=(S.sites||[]).filter(x=>x.active!==false);
+  const site=sites[0]||{};
+  const p=k=>policyVal(k, {work_start:'09:00',work_end:'18:00',late_grace_min:15,report_threshold_hours:5,
+    geofence_default_m:100,selfie_on_exception:true,paid_leave:false,weekly_off:null}[k]);
+  return '<section class="form-card"><div class="form-card__head"><div>'+
+      '<h3 class="form-card__title">Factory &amp; attendance</h3>'+
+      '<p class="form-card__description">The place a phone has to be to clock in, and the working day the floor is measured against. '+
+      'Stand at the factory gate and press “Use where I am” to fill the position in.</p></div></div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="site-name">Factory site</label><input id="site-name" value="'+esc(site.name||'Gujraj Impex, Udaipur')+'"></div>'+
+      '<div class="field"><label for="site-lat">Latitude</label><input id="site-lat" inputmode="decimal" value="'+esc(site.lat!=null?String(site.lat):'')+'" placeholder="24.5854"></div>'+
+      '<div class="field"><label for="site-lng">Longitude</label><input id="site-lng" inputmode="decimal" value="'+esc(site.lng!=null?String(site.lng):'')+'" placeholder="73.7125"></div>'+
+      '<div class="field"><label for="site-radius">Fence radius (metres)</label><input id="site-radius" inputmode="numeric" value="'+esc(String(site.radius_m||p('geofence_default_m')))+'"></div>'+
+      '<div class="button-row field--full">'+
+        '<button class="button" type="button" onclick="saveSite('+(site.id?"'"+jsq(site.id)+"'":'null')+')">'+(site.id?'Save site':'Set the factory location')+'</button>'+
+        '<button class="button button--secondary" type="button" onclick="useHereForSite()">Use where I am</button>'+
+        (site.id?'<button class="button button--quiet" type="button" onclick="retireSite(\''+jsq(site.id)+'\')">Retire this site</button>':'')+
+      '</div>'+
+      (sites.length>1?'<p class="field-hint field--full">'+sites.length+' sites are active; the nearest one is used. Only the first is edited here.</p>':'')+
+    '</div>'+
+    '<div class="form-grid space-top-14">'+
+      '<div class="field"><label for="pol-start">Working day starts</label><input id="pol-start" type="time" value="'+esc(p('work_start'))+'"></div>'+
+      '<div class="field"><label for="pol-end">Working day ends</label><input id="pol-end" type="time" value="'+esc(p('work_end'))+'"></div>'+
+      '<div class="field"><label for="pol-grace">Late after (minutes)</label><input id="pol-grace" inputmode="numeric" value="'+esc(String(p('late_grace_min')))+'"></div>'+
+      '<div class="field"><label for="pol-threshold">Reporting threshold (hours)</label><input id="pol-threshold" inputmode="decimal" value="'+esc(String(p('report_threshold_hours')))+'">'+
+        '<p class="field-hint">A reporting line only. Wages are actual hours × rate; there is no half-day.</p></div>'+
+      '<div class="field"><label for="pol-fence">Default fence (metres)</label><input id="pol-fence" inputmode="numeric" value="'+esc(String(p('geofence_default_m')))+'"></div>'+
+      '<div class="field"><label for="pol-off">Weekly off</label><select id="pol-off"><option value="">None (current policy)</option>'+
+        ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].map(d=>'<option'+(p('weekly_off')===d?' selected':'')+'>'+d+'</option>').join('')+'</select></div>'+
+      '<label class="check-row field--full"><input type="checkbox" id="pol-selfie" '+(p('selfie_on_exception')?'checked':'')+'><span>Ask for a selfie when clocking away from the factory</span></label>'+
+      '<label class="check-row field--full"><input type="checkbox" id="pol-paid" '+(p('paid_leave')?'checked':'')+'><span>Paid leave (off under current policy)</span></label>'+
+      '<div class="button-row field--full"><button class="button" type="button" onclick="savePolicy()">Save policy</button></div>'+
+    '</div></section>';
 }
 
 function vAccounts(){
@@ -9659,10 +9775,14 @@ function render(){
       if(parts[0]==='batches') vSupBatches();
       else if(parts[0]==='team') vSupTeam();
       else if(parts[0]==='approvals'||parts[0]==='review') vSupApprovals(parts[1]);
+      else if(parts[0]==='attendance') vSupAttendance();
       else if(parts[0]==='pieces') vStaffHome();
       else vSupHome();
     }
-    else if(isWorker()) vArtisanHome();
+    else if(isWorker()){
+      if(parts[0]==='attendance') vArtisanAttendance();
+      else vArtisanHome();
+    }
     else vStaffHome();
     return;
   }
@@ -11881,8 +12001,12 @@ function supCounts(){
   const repeats=(S.rework||[]).filter(r=>!r.resolved_at && (r.attempt_no||0)>=2).length;
   const heldNow=(S.holds||[]).filter(h=>h.decision==='granted').length;
   const askedFor=(S.holds||[]).filter(h=>h.decision==='pending').length;
+  const people=(S.attDay||[]).filter(r=>r.role==='worker'||r.role==='supervisor'||r.role==='staff');
+  const present=people.filter(r=>r.first_in).length;
+  const attExceptions=people.filter(r=>r.exception_pending).length;
+  const late=people.filter(r=>r.late).length;
   return {due, blocked, unanswered, stuck, unassigned, unbatched, open:open.length, tasks:tasks.length,
-          toReview, openRw, repeats, heldNow, askedFor};
+          toReview, openRw, repeats, heldNow, askedFor, present, people:people.length, attExceptions, late};
 }
 
 function supDayNote(){
@@ -12204,6 +12328,66 @@ function vSupApprovals(sub){
     (rows.length>120?'<p class="muted space-top-12">Showing the newest 120 of '+rows.length+'.</p>':'')+
     '</div>';
 
+  sfaPaint(h);
+}
+
+/* ------------------------------------------------------------- attendance --
+   Who is in, since when, for how long, and whether the phone was where it said.
+   A supervisor accepts a clock made away from the factory and proposes a
+   correction when a phone died or somebody forgot; the office decides the
+   correction and is told either way. Nothing about pay is on this screen and
+   nothing about pay is sent to it. */
+function vSupAttendance(){
+  const c=supCounts();
+  const rows=(S.attDay||[]).filter(r=>r.role==='worker'||r.role==='supervisor'||r.role==='staff');
+  const pendingC=(S.attCorrections||[]).filter(x=>x.decision==='pending');
+  const ws=policyVal('work_start','09:00'), we=policyVal('work_end','18:00'), grace=policyVal('late_grace_min',15);
+  const site=(S.sites||[])[0];
+
+  let h='<div class="page-heading"><div>'+eyebrow('Factory attendance')+
+    '<h1 class="display-title">Attendance.</h1>'+
+    '<p class="lede">Geofenced clock records, exceptions and corrections. A correction you propose goes to the office, '+
+    'and the office is told about it whichever way it is decided.</p></div>'+
+    '<div class="page-heading__actions"><button class="button" type="button" onclick="mCorrection()">Correct a record</button></div></div>';
+
+  h+='<div class="kpi-grid">'+[
+    ['Present today', c.present+' / '+c.people, c.people-c.present?((c.people-c.present)+' not in'):'Everyone is in', ''],
+    ['Late', c.late, c.late?'After '+ws+' + '+grace+' min':'Nobody late', c.late?'warn':''],
+    ['Clocked away from the factory', c.attExceptions, c.attExceptions?'Waiting on you':'None', c.attExceptions?'warn':''],
+    ['Corrections with the office', pendingC.length, pendingC.length?'Awaiting a decision':'None open', '']
+  ].map(t=>'<article class="kpi'+(t[3]?' kpi--'+t[3]:'')+'"><span class="kpi__label">'+esc(t[0])+'</span>'+
+    '<strong class="kpi__value">'+esc(String(t[1]))+'</strong><span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Today · '+esc(fdate(today()))+'</h3>'+
+    '<p class="panel__description">Factory hours '+esc(ws)+'–'+esc(we)+' · '+esc(String(grace))+'-minute grace · '+
+      esc(String(policyVal('report_threshold_hours',5)))+' hours is a reporting threshold only.</p></div>'+
+    (site?badge('Geofence active · '+(site.radius_m||policyVal('geofence_default_m',100))+' m','success')
+         :badge('No factory location set','pending'))+'</div>'+
+    '<div class="panel__body">'+(rows.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Name</th><th>Status</th><th>Clock in</th><th>Hours</th><th>Location</th><th></th></tr></thead><tbody>'+
+      rows.map(r=>{
+        const st=r.exception_pending?badge('Away · needs you','alert')
+               : r.open?badge('Working','success')
+               : r.first_in?badge('Clocked out','pending'):badge('Absent','pending');
+        return '<tr><td><strong>'+esc(r.full_name||'')+'</strong>'+(r.late?'<span class="fl-cell-sub">Late</span>':'')+'</td>'+
+          '<td>'+st+'</td><td>'+esc(fclock(r.first_in))+'</td><td>'+esc(r.first_in?fmins(r.minutes):'—')+'</td>'+
+          '<td>'+(r.first_in?(r.within?'Factory':'Away from the factory'):'—')+'</td>'+
+          '<td class="nowrap">'+(r.exception_pending?'<button class="button small" type="button" onclick="approveClocks(\''+r.user_id+'\')">Accept</button> ':'')+
+            '<button class="button quiet small" type="button" onclick="mCorrection(\''+r.user_id+'\')">Correct</button></td></tr>';
+      }).join('')+'</tbody></table></div>'
+      :'<div class="empty-state">No workshop logins yet.</div>')+'</div></section>';
+
+  if((S.attCorrections||[]).length){
+    h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Corrections</h3>'+
+      '<p class="panel__description">Proposed here, decided by the office. Every one is audited.</p></div></div>'+
+      '<div class="panel__body"><div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Person</th><th>Day</th><th>Proposed</th><th>Reason</th><th>Decision</th></tr></thead><tbody>'+
+      (S.attCorrections||[]).slice(0,30).map(x=>'<tr><td>'+esc(personName(x.user_id))+'</td><td>'+esc(fdate(x.work_date))+'</td>'+
+        '<td>'+esc(fclock(x.proposed_in))+' – '+esc(fclock(x.proposed_out))+'</td><td>'+esc(x.reason)+'</td>'+
+        '<td>'+badge(x.decision==='pending'?'With the office':x.decision, x.decision==='approved'?'success':x.decision==='rejected'?'alert':'pending')+'</td></tr>').join('')+
+      '</tbody></table></div></div></section>';
+  }
   sfaPaint(h);
 }
 
@@ -16104,9 +16288,9 @@ function mAckTask(assignmentId, state){
   m.m.querySelector('#ak-go').onclick=async (e)=>{
     const note=$('ak-note').value.trim();
     if(!note){ toast('Please say what the problem is. / कृपया बताएं क्या दिक्कत है।',{err:true}); return; }
-    e.currentTarget.disabled=true;
+    const btn=e.currentTarget; btn.disabled=true;
     const {error}=await sb.rpc('bt_ack_assignment',{p_id:assignmentId,p_state:state,p_note:note});
-    e.currentTarget.disabled=false;
+    btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal();
     await refresh();
@@ -16150,10 +16334,10 @@ function mReviewRecord(updateId, kind){
         '<div class="button-row field--full"><button class="button" type="button" id="rv-go">Accept</button>'+
         '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
     m.m.querySelector('#rv-go').onclick=async (e)=>{
-      e.currentTarget.disabled=true;
+      const btn=e.currentTarget; btn.disabled=true;
       const {error}=await sb.rpc('bt_review_record',
         {p_update:updateId, p_decision:'approved', p_note:$('rv-note').value.trim()||null});
-      e.currentTarget.disabled=false;
+      btn.disabled=false;
       if(error){ toast(error.message,{err:true}); return; }
       closeModal(); await refresh(); toast('Accepted.');
     };
@@ -16186,7 +16370,7 @@ function mReviewRecord(updateId, kind){
   m.m.querySelector('#rw-go').onclick=async (e)=>{
     const fix=$('rw-fix').value.trim();
     if(!fix){ toast('Say what has to be put right.',{err:true}); return; }
-    e.currentTarget.disabled=true;
+    const btn=e.currentTarget; btn.disabled=true;
     const {data,error}=await sb.rpc('bt_review_record',{
       p_update:updateId, p_decision:'changes_requested',
       p_note:$('rw-note').value.trim()||null,
@@ -16194,7 +16378,7 @@ function mReviewRecord(updateId, kind){
       p_correction:fix,
       p_due:$('rw-due').value||null,
       p_responsible:$('rw-who').value||null});
-    e.currentTarget.disabled=false;
+    btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await refresh();
     toast(data&&data.repeat
@@ -16219,10 +16403,10 @@ function mApproveStage(itemId, stageId){
       '<div class="button-row field--full"><button class="button" type="button" id="sg-go">Sign it off</button>'+
       '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
   m.m.querySelector('#sg-go').onclick=async (e)=>{
-    e.currentTarget.disabled=true;
+    const btn=e.currentTarget; btn.disabled=true;
     const {data,error}=await sb.rpc('bt_supervisor_approve_stage',
       {p_item:itemId, p_stage:stageId, p_note:$('sg-note').value.trim()||null});
-    e.currentTarget.disabled=false;
+    btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await refresh();
     const nx=data&&data.next_stage?S.stagesById[data.next_stage]:null;
@@ -16248,10 +16432,10 @@ function mRequestHold(itemId, stageId){
   m.m.querySelector('#hl-go').onclick=async (e)=>{
     const why=$('hl-why').value.trim();
     if(!why){ toast('Say why the work should stop.',{err:true}); return; }
-    e.currentTarget.disabled=true;
+    const btn=e.currentTarget; btn.disabled=true;
     const {error}=await sb.rpc('bt_request_hold',
       {p_item:itemId, p_stage:stageId, p_reason:why, p_evidence:$('hl-ev').value.trim()||null});
-    e.currentTarget.disabled=false;
+    btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await refresh(); toast('Sent to the office.');
   };
@@ -16298,6 +16482,130 @@ function mDecideHold(holdId, preset){
     const b=m.m.querySelector('#hd-'+id);
     if(b) b.onclick=e=>decide(decision, e.currentTarget);
   });
+}
+
+
+/* ---------------------------------------------------------------------------
+   Attendance: the supervisor's half and the office's half.
+--------------------------------------------------------------------------- */
+
+// Every clock this person made away from the factory today, accepted in one go.
+async function approveClocks(userId){
+  const day=today();
+  const {data,error}=await sb.from('bt_attendance_events').select('id')
+    .eq('user_id', userId).eq('work_date', day).eq('within_fence', false).is('approved_at', null);
+  if(error){ toast(error.message,{err:true}); return; }
+  let n=0;
+  for(const e of (data||[])){
+    const r=await sb.rpc('bt_approve_clock',{p_event:e.id, p_note:null});
+    if(r.error){ toast(r.error.message,{err:true}); return; }
+    n++;
+  }
+  await refresh();
+  toast(n?('Accepted '+n+' clock record'+(n===1?'':'s')+'.'):'Nothing was waiting.');
+}
+
+function mCorrection(userId){
+  const people=floorPeople();
+  const m=modal('<h3>Correct an attendance record</h3>'+
+    '<div class="sub">For a phone that died or a forgotten clock. The office decides it, and is told either way.</div>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="ac-who">Who</label><select id="ac-who">'+
+        people.map(p=>'<option value="'+esc(p.user_id)+'"'+(p.user_id===userId?' selected':'')+'>'+esc(p.full_name)+'</option>').join('')+
+      '</select></div>'+
+      '<div class="field"><label for="ac-date">Day</label><input id="ac-date" type="date" value="'+esc(today())+'"></div>'+
+      '<div class="field"><label for="ac-in">Clock in</label><input id="ac-in" type="time" value="'+esc(policyVal('work_start','09:00'))+'"></div>'+
+      '<div class="field"><label for="ac-out">Clock out</label><input id="ac-out" type="time" value="'+esc(policyVal('work_end','18:00'))+'"></div>'+
+      '<div class="field field--full"><label for="ac-why">Why</label>'+
+        '<input id="ac-why" placeholder="e.g. phone battery was dead, he was here all day"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ac-go">Send to the office</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#ac-go').onclick=async e=>{
+    const why=$('ac-why').value.trim();
+    if(!why){ toast('Say why the record needs correcting.',{err:true}); return; }
+    const d=$('ac-date').value; const ti=$('ac-in').value, to=$('ac-out').value;
+    if(!d || (!ti && !to)){ toast('Give the day and the corrected times.',{err:true}); return; }
+    const iso=t=>t?new Date(d+'T'+t+':00').toISOString():null;
+    if(ti && to && iso(to)<=iso(ti)){ toast('The out time has to be after the in time.',{err:true}); return; }
+    const btn=e.currentTarget; btn.disabled=true;
+    const {error}=await sb.rpc('bt_propose_correction',{p_user:$('ac-who').value, p_date:d, p_in:iso(ti), p_out:iso(to), p_reason:why});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Sent to the office.');
+  };
+}
+
+// The office decides. A supervisor never reaches this and the server refuses
+// them regardless.
+function mDecideCorrection(id){
+  const c=(S.attCorrections||[]).find(x=>x.id===id);
+  if(!c){ toast('That correction is no longer there.',{err:true}); return; }
+  const m=modal('<h3>Attendance correction</h3>'+
+    '<div class="sub">Proposed by '+esc(personName(c.proposed_by)||'a supervisor')+' · '+esc(ftime(c.proposed_at))+'</div>'+
+    '<div class="handover">'+
+      '<div class="handover__row"><span>Person</span><strong>'+esc(personName(c.user_id))+'</strong></div>'+
+      '<div class="handover__row"><span>Day</span><strong>'+esc(fdate(c.work_date))+'</strong></div>'+
+      '<div class="handover__row"><span>Proposed</span><strong>'+esc(fclock(c.proposed_in))+' – '+esc(fclock(c.proposed_out))+'</strong></div>'+
+      '<div class="handover__row"><span>Reason</span><strong>'+esc(c.reason)+'</strong></div></div>'+
+    '<div class="form-grid" style="margin-top:12px">'+
+      '<div class="field field--full"><label for="dc-note">Note (optional)</label><input id="dc-note"></div>'+
+      '<div class="button-row field--full">'+
+        '<button class="button" type="button" id="dc-yes">Approve</button>'+
+        '<button class="button button--secondary" type="button" id="dc-no">Reject</button>'+
+        '<button class="button button--quiet" type="button" onclick="closeModal()">Close</button></div></div>');
+  const decide=async (decision, btn)=>{
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_decide_correction',{p_id:id, p_decision:decision, p_note:$('dc-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh();
+    toast(decision==='approved'?'Approved. The hours for that day now follow the correction.':'Rejected.');
+  };
+  m.m.querySelector('#dc-yes').onclick=e=>decide('approved', e.currentTarget);
+  m.m.querySelector('#dc-no').onclick=e=>decide('rejected', e.currentTarget);
+}
+
+// Factory sites and policy, from Settings. Numbers only; the office decides them.
+async function saveSite(id){
+  const name=$('site-name').value.trim(), lat=parseFloat($('site-lat').value), lng=parseFloat($('site-lng').value);
+  const radius=parseInt($('site-radius').value,10);
+  if(!name){ toast('Give the site a name.',{err:true}); return; }
+  if(!isFinite(lat)||!isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180){ toast('Latitude and longitude do not look right.',{err:true}); return; }
+  if(!isFinite(radius)||radius<20||radius>2000){ toast('The fence should be between 20 and 2000 metres.',{err:true}); return; }
+  const row={name, lat, lng, radius_m:radius, active:true};
+  const r= id ? await sb.from('bt_factory_sites').update(row).eq('id', id)
+              : await sb.from('bt_factory_sites').insert(Object.assign({created_by:uid()}, row));
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Factory location saved.');
+}
+async function useHereForSite(){
+  const pos=await locate();
+  if(!pos){ toast('Could not read this device’s location.',{err:true}); return; }
+  $('site-lat').value=pos.lat.toFixed(6); $('site-lng').value=pos.lng.toFixed(6);
+  toast('Filled in from where you are standing. Save to keep it.');
+}
+async function retireSite(id){
+  const r=await sb.from('bt_factory_sites').update({active:false}).eq('id', id);
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Site retired. Its old clock records are kept.');
+}
+async function savePolicy(){
+  const rows=[
+    ['work_start', JSON.stringify($('pol-start').value||'09:00')],
+    ['work_end', JSON.stringify($('pol-end').value||'18:00')],
+    ['late_grace_min', String(parseInt($('pol-grace').value,10)||0)],
+    ['report_threshold_hours', String(parseFloat($('pol-threshold').value)||0)],
+    ['geofence_default_m', String(parseInt($('pol-fence').value,10)||100)],
+    ['selfie_on_exception', $('pol-selfie').checked?'true':'false'],
+    ['paid_leave', $('pol-paid').checked?'true':'false'],
+    ['weekly_off', $('pol-off').value?JSON.stringify($('pol-off').value):'null']
+  ];
+  for(const [key,value] of rows){
+    const r=await sb.from('bt_floor_policy').upsert({key, value:JSON.parse(value), updated_by:uid(), updated_at:new Date().toISOString()},{onConflict:'key'});
+    if(r.error){ toast(r.error.message,{err:true}); return; }
+  }
+  await refresh(); toast('Policy saved. It applies from the next clock.');
 }
 
 
@@ -16441,7 +16749,8 @@ function artisanNav(){
   // a screen that does not exist yet is a dead button, and the brief is explicit
   // that every control drawn has to work
   return [
-    ['#/home','My work','मेरा काम','stage-planning',c.due.length+c.back.length]
+    ['#/home','My work','मेरा काम','stage-planning',c.due.length+c.back.length],
+    ['#/attendance','Attendance','हाज़िरी','stage-confirmed',0]
   ];
 }
 function artisanHeader(topbar, nav, app, dock, shell){
@@ -16568,7 +16877,12 @@ function vArtisanHome(){
              icon('i-camera','icon--sm')+bi('Record work','काम दर्ज करें')+'</button>':'')+
     '</div></div>';
 
+  const att=myAttendanceToday();
+  const clocked=!!(att&&att.open);
   h+='<section class="kpi-grid kpi-grid--artisan" aria-label="Today’s shortcuts · आज के शॉर्टकट">'+
+    artisanMetric('Attendance','हाज़िरी', att?fmins(att.minutes):'0h 00m',
+      clocked?'Working · open attendance':'Open attendance', clocked?'काम जारी':'हाज़िरी खोलें',
+      "go('#/attendance')", clocked?'good':'')+
     artisanMetric('Assigned products','सौंपे उत्पाद', c.mine.length, 'See today’s work','आज का काम देखें',
       "document.getElementById('assigned-work').scrollIntoView({behavior:'smooth'})")+
     artisanMetric('Update due','अपडेट बाकी', c.due.length,
@@ -16597,6 +16911,143 @@ function vArtisanHome(){
     :(c.mine.length?'':'<div class="empty-state">'+bi('No work has been given to you yet. Ask your supervisor.','अभी आपको कोई काम नहीं दिया गया है। सुपरवाइज़र से पूछें।')+'</div>');
 
   sfaPaint(h);
+}
+
+/* ---- attendance ------------------------------------------------------------
+   Clocking is one large button whose label is the thing that happens next. The
+   phone's position goes to the server, which measures it against the factory
+   and stamps its own time. Away from the factory the same button asks for a
+   reason and a photograph of the person, and the record waits for a supervisor. */
+function vArtisanAttendance(){
+  const att=myAttendanceToday();
+  const clocked=!!(att&&att.open);
+  const week=(S.attMine||[]).filter(r=>daysUntil(r.work_date)>-7).reduce((t,r)=>t+(r.minutes||0),0);
+  const site=(S.sites||[])[0];
+
+  let h='<div class="page-heading"><div>'+
+    '<p class="eyebrow">'+bi('Your attendance','आपकी हाज़िरी')+'</p>'+
+    '<h1 class="display-title">'+bi('Time & attendance','समय और हाज़िरी')+'.</h1>'+
+    '<p class="lede">'+esc('Actual worked hours decide your wages. Clock in and out at the factory.')+' / '+
+      esc('असली काम के घंटे से वेतन तय होगा। फैक्ट्री में हाज़िरी लगाएँ।')+'</p></div>'+
+    '<div class="page-heading__actions">'+
+      '<button class="button button--big" type="button" id="clock-btn" onclick="doClock(\''+(clocked?'clock_out':'clock_in')+'\')">'+
+        (clocked?bi('Clock out','बाहर जाने का समय'):bi('Clock in','हाज़िरी लगाएँ'))+'</button>'+
+    '</div></div>';
+
+  h+='<div class="utility-grid"><section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">'+bi('Today','आज')+'</h3>'+
+    '<p class="panel__description">'+(att&&att.first_in
+      ? bi('Clocked in '+fclock(att.first_in),(att.within?'फैक्ट्री स्थान सत्यापित':'स्थान की जाँच बाकी'))
+      : bi('Not clocked in yet','अभी हाज़िरी नहीं लगी'))+'</p></div>'+
+    (clocked?badge('Working · काम जारी','success'):(att&&att.last_out?badge('Clocked out · बाहर','pending'):badge('Not in · नहीं आए','pending')))+
+    '</div><div class="panel__body">'+
+    '<div class="att-grid">'+
+      '<div><span>'+bi('Hours today','आज के घंटे')+'</span><strong>'+esc(fmins(att?att.minutes:0))+'</strong></div>'+
+      '<div><span>'+bi('This week','इस सप्ताह')+'</span><strong>'+esc(fmins(week))+'</strong></div>'+
+      '<div><span>'+bi('Location','स्थान')+'</span><strong>'+
+        (att&&att.first_in?(att.within?bi('Factory','फैक्ट्री'):bi('Away · pending','बाहर · जाँच बाकी')):'—')+'</strong></div>'+
+    '</div>'+
+    (att&&att.exception_pending?'<div class="wk-notice wk-notice--back"><strong>'+bi('Waiting for the supervisor','सुपरवाइज़र की मंज़ूरी बाकी')+'</strong>'+
+      esc('A clock made away from the factory counts once the supervisor accepts it.')+'</div>':'')+
+    '<div class="wk-notice"><strong>'+bi('Hourly wages','घंटे का वेतन')+'</strong>'+
+      esc('No full-day or half-day wage calculation. Actual hours are counted.')+' / '+
+      esc('पूरा या आधा दिन नहीं, असली घंटे गिने जाएँगे।')+'</div>'+
+    (site?'<p class="field-hint space-top-10">'+bi('Factory','फैक्ट्री')+': '+esc(site.name)+' · '+
+      esc(String(site.radius_m||policyVal('geofence_default_m',100)))+' m</p>':
+      '<p class="field-hint space-top-10">'+bi('No factory location set yet — the office sets it under Settings.','फैक्ट्री का स्थान अभी सेट नहीं है।')+'</p>')+
+    '</div></section>';
+
+  h+='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">'+bi('Recent attendance','पिछली हाज़िरी')+'</h3>'+
+    '<p class="panel__description">'+bi('Personal record','निजी रिकॉर्ड')+'</p></div></div>'+
+    '<div class="panel__body">'+
+    ((S.attMine||[]).length
+      ? (S.attMine||[]).slice(0,14).map(r=>'<div class="att-row"><strong>'+esc(fdate(r.work_date))+' · '+esc(fmins(r.minutes))+'</strong>'+
+          '<p>'+esc(fclock(r.first_in))+(r.last_out?'–'+esc(fclock(r.last_out)):' · '+bi('still in','अभी अंदर'))+
+          ' · '+(r.within?bi('Factory','फैक्ट्री'):bi('Away','बाहर'))+(r.corrected?' · '+bi('corrected by the office','कार्यालय द्वारा सुधार'):'')+'</p></div>').join('')
+      : '<div class="empty-state">'+bi('No attendance recorded yet.','अभी कोई हाज़िरी दर्ज नहीं।')+'</div>')+
+    '</div></section></div>';
+  sfaPaint(h);
+}
+
+function locate(){
+  return new Promise((res)=>{
+    if(!navigator.geolocation){ res(null); return; }
+    navigator.geolocation.getCurrentPosition(
+      p=>res({lat:p.coords.latitude, lng:p.coords.longitude}),
+      // always a fresh fix: a clock-out five minutes after a clock-in must not
+      // reuse the position the phone had at the gate
+      ()=>res(null), {enableHighAccuracy:true, timeout:10000, maximumAge:0});
+  });
+}
+async function doClock(kind, extra){
+  const btn=$('clock-btn'); if(btn){ btn.disabled=true; }
+  const pos=await locate();
+  const args={p_kind:kind, p_lat:pos?pos.lat:null, p_lng:pos?pos.lng:null, p_device:deviceId(),
+              p_exception:(extra&&extra.reason)||null, p_selfie:(extra&&extra.selfie)||null};
+  const {data,error}=await sb.rpc('bt_clock', args);
+  if(btn) btn.disabled=false;
+  if(error){
+    // away from the factory: the server says so and asks for a reason
+    if(/not at the factory|photo of yourself/i.test(error.message) && !extra){
+      mClockAway(kind, error.message); return;
+    }
+    toast(error.message,{err:true}); return;
+  }
+  closeModal();
+  await loadData(); render();
+  toast(kind==='clock_in'
+    ? (data&&data.within ? 'Clocked in · हाज़िरी लग गई' : 'Clocked in away from the factory · waits for the supervisor · सुपरवाइज़र की मंज़ूरी बाकी')
+    : 'Clocked out · बाहर का समय दर्ज');
+}
+// The reason list is the same idea as everywhere else on this screen: pick,
+// do not type. A selfie is asked for because the policy says so; the office
+// can turn that off in Settings without anyone touching this file.
+const AWAY_REASONS=[['Sent to the stone yard','पत्थर के यार्ड पर भेजा गया'],['Site visit or delivery','साइट या डिलीवरी'],
+  ['Phone location not working','फोन का स्थान काम नहीं कर रहा'],['Working from another site','दूसरी जगह काम'],['Other','अन्य']];
+function mClockAway(kind, why){
+  const needSelfie=policyVal('selfie_on_exception', true)===true;
+  window.__selfie=null;
+  const m=modal('<h3>'+bi('You are not at the factory','आप फैक्ट्री में नहीं हैं')+'</h3>'+
+    '<div class="wk-notice">'+esc(why)+'</div>'+
+    '<div class="field field--full"><label for="aw-why">'+bi('Why are you clocking from here?','यहाँ से हाज़िरी क्यों?')+'</label>'+
+      '<select id="aw-why" onchange="$(\'aw-other\').hidden=this.value!==\'Other\'">'+
+      AWAY_REASONS.map(([en,hi])=>'<option value="'+esc(en)+'">'+bi(en,hi)+'</option>').join('')+'</select>'+
+      '<input id="aw-other" class="space-top-10" placeholder="'+bi('Say what','बताएं क्या')+'" hidden></div>'+
+    (needSelfie?'<div class="upload-drop field--full"><div>'+icon('i-camera','icon--lg')+
+      '<strong>'+bi('A photo of yourself','अपनी एक फोटो')+'</strong>'+
+      '<p>'+bi('So the supervisor knows it is you.','ताकि सुपरवाइज़र को पता हो कि आप ही हैं।')+'</p>'+
+      '<button class="button" type="button" id="aw-cam">'+icon('i-camera','icon--sm')+bi('Take photo','फोटो लें')+'</button>'+
+      '<input id="aw-cam-input" type="file" accept="image/*" capture="user" hidden>'+
+      '<p class="field-hint" id="aw-cam-state"></p></div></div>':'')+
+    '<p class="field-hint">'+bi('This clock waits for the supervisor to accept it.','यह हाज़िरी सुपरवाइज़र की मंज़ूरी के बाद गिनी जाएगी।')+'</p>'+
+    '<div class="button-row field--full wk-submit"><button class="button button--big" type="button" id="aw-go">'+
+      (kind==='clock_in'?bi('Clock in anyway','फिर भी हाज़िरी लगाएँ'):bi('Clock out anyway','फिर भी बाहर का समय'))+'</button>'+
+      '<button class="button secondary" type="button" onclick="closeModal()">'+bi('Cancel','रद्द करें')+'</button></div>');
+  m.m.classList.add('modal--artisan');
+  if(needSelfie){
+    $('aw-cam').onclick=e=>{ e.preventDefault(); const i=$('aw-cam-input'); i.value=''; i.click(); };
+    $('aw-cam-input').onchange=ev=>{ const f=ev.target.files[0]; if(!f) return; window.__selfie=f;
+      $('aw-cam-state').textContent='Photo ready · फोटो तैयार'; };
+  }
+  $('aw-go').onclick=async e=>{
+    const btn=e.currentTarget;   // taken before any await: currentTarget is gone afterwards
+    const sel=$('aw-why').value; const other=($('aw-other').value||'').trim();
+    if(sel==='Other' && !other){ toast('Say why · कारण बताएं',{err:true}); return; }
+    if(needSelfie && !window.__selfie){ toast('Take a photo of yourself first · पहले अपनी फोटो लें',{err:true}); return; }
+    btn.disabled=true;
+    let selfiePath=null;
+    if(window.__selfie){
+      try{
+        const blob=await resizeImage(window.__selfie);
+        selfiePath='staff/selfies/'+uid()+'/'+Date.now()+'.jpg';
+        const up=await sb.storage.from(CONFIG.bucket).upload(selfiePath, blob, {contentType:'image/jpeg'});
+        if(up.error) throw up.error;
+      }catch(err){ btn.disabled=false; toast('Photo did not upload · फोटो अपलोड नहीं हुई: '+(err.message||err),{err:true}); return; }
+    }
+    await doClock(kind, {reason: sel==='Other'?other:sel, selfie:selfiePath});
+    if(btn.isConnected) btn.disabled=false;
+  };
 }
 
 /* ---- recording work -------------------------------------------------------
