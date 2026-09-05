@@ -3905,8 +3905,135 @@ body.reports-mode .sfa .content{max-width:1700px}
   .fl-check__do{ grid-template-columns:1fr; }
 }
 </style>
+<style>
+/* The artisan's screens. ------------------------------------------------------
+   Same token system as the console, held under .sfa. The prototype's work card
+   is reproduced at its own proportions — a tall photograph, the name in the
+   serif, a two-by-two grid of facts, one dominant button — with the type set
+   at the shared system's sizes rather than the mock's 8px labels, because the
+   person reading it is on a phone in a dusty shed and the brief asks for the
+   owner console's metric cards and buttons, not a smaller version of them. */
+
+/* two-line dock labels: English over Hindi */
+.dock-bi{ display:flex; flex-direction:column; align-items:center; line-height:1.1; }
+.dock-bi small{ font-size:9px; font-weight:650; color:inherit; opacity:.85; }
+.app-shell--artisan .mobile-dock{ grid-template-columns:repeat(auto-fit, minmax(0,1fr)); }
+.app-shell--artisan .mobile-dock__item{ font-size:11px; min-height:66px; }
+
+/* summary cards are controls, not statistics */
+.sfa .kpi--go{
+  cursor:pointer; text-align:left; font:inherit; color:var(--ink);
+  transition:background .15s, border-color .15s, transform .15s;
+}
+.sfa .kpi--go:hover{ background:var(--surface-2, #f1f1f2); border-color:var(--strong, #d7d7da); transform:translateY(-1px); }
+.sfa .kpi--go:focus-visible{ outline:2px solid #9c9c9f; outline-offset:2px; }
+.sfa .kpi--go:active{ transform:translateY(0); }
+.sfa .kpi--alert .kpi__value{ color:var(--danger, #a45f57); }
+.kpi-grid--artisan{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+
+.sfa .section-title{ margin:22px 0 10px; display:flex; justify-content:space-between; align-items:flex-end; gap:12px; }
+.sfa .section-title h2{ margin:0; font-size:25px; }
+.sfa .section-title p{ margin:4px 0 0; color:var(--muted, #6e6e73); font-size:12px; }
+
+.wk-cards{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
+.wk-card{
+  border:1px solid var(--line-light, #ececef); border-radius:12px; background:#fff;
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.wk-img{
+  position:relative; display:block; width:100%; height:195px; padding:0; border:0;
+  background:#e6e5e2; cursor:pointer; overflow:hidden;
+}
+.wk-img img{ width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .25s; }
+.wk-img.is-loaded img{ opacity:1; }
+.wk-img__none{
+  position:absolute; inset:0; display:grid; place-items:center;
+  color:var(--muted, #6e6e73); font-size:12px;
+}
+.wk-img b{
+  position:absolute; left:9px; bottom:9px; padding:5px 8px;
+  border:1px solid var(--line, #e5e5e7); border-radius:6px; background:#fffe;
+  font-size:10px; font-weight:700; color:var(--ink);
+}
+.wk-body{ padding:15px; flex:1; }
+.wk-ref{ margin:0 0 5px; color:var(--muted, #6e6e73); font-size:11px; font-weight:750; letter-spacing:.05em; }
+.wk-body h2{ margin:0 0 8px; font-size:22px; }
+.wk-specs{ display:grid; grid-template-columns:1fr 1fr; gap:7px; margin:12px 0; }
+.wk-spec{ padding:9px; border-radius:8px; background:var(--surface-2, #f3f3f4); min-width:0; }
+.wk-spec span{ display:block; color:var(--muted, #6e6e73); font-size:10px; }
+.wk-spec strong{ display:block; margin-top:4px; font-size:12px; overflow-wrap:anywhere; }
+.wk-spec .link-button{ font:inherit; font-weight:600; padding:0; }
+.wk-notice{
+  padding:13px; border:1px solid var(--line, #e5e5e7); border-radius:10px;
+  background:var(--surface-2, #f3f3f4); color:var(--muted, #6e6e73); font-size:12px; line-height:1.5;
+  margin-top:10px;
+}
+.wk-notice strong{ display:block; margin-bottom:4px; color:var(--ink); }
+.wk-notice--back{ border-left:3px solid var(--danger, #a45f57); }
+.wk-notice--back strong{ color:var(--danger, #a45f57); }
+.wk-notice--product{ display:grid; grid-template-columns:74px 1fr; gap:11px; align-items:center; margin-top:8px; }
+.wk-notice--product img{ width:74px; height:64px; object-fit:cover; border-radius:8px; display:block; }
+.wk-notice--product .wk-img__none{ position:static; width:74px; height:64px; border-radius:8px; background:#e6e5e2; }
+.wk-ack{ margin-top:12px; padding:10px; border:1px solid var(--line, #e5e5e7); border-radius:9px; }
+.wk-ack p{ margin:0 0 8px; font-size:12px; color:var(--muted, #6e6e73); }
+.wk-ack p strong{ display:block; color:var(--ink); }
+.wk-ack--done{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.wk-ack--done span{ font-size:12px; color:var(--muted, #6e6e73); }
+.wk-mini{ display:flex; gap:6px; flex-wrap:wrap; }
+.sfa .wk-mini .button{ min-height:48px; flex:1 1 30%; font-size:12px; }
+.wk-foot{
+  padding:11px 15px; border-top:1px solid var(--line-light, #ececef);
+  display:grid; grid-template-columns:1.25fr .75fr; gap:7px;
+}
+.wk-foot .button{ width:100%; justify-content:center; }
+
+/* a floor dialog carries the token system on its backdrop; the page-wrapper
+   rules that come with .sfa (an opaque page background, a 1660px cap) are
+   undone here so the scrim stays a scrim */
+.modal-bg.sfa{ background:rgba(32,33,31,.42); max-width:none; overflow:visible; }
+.modal-bg.sfa .modal{ padding:20px; }
+.modal-bg.sfa .modal h3{ font-family:var(--display); font-size:26px; font-weight:400; margin:0 0 4px; }
+.modal-bg.sfa .modal .eyebrow{ margin:0 0 6px; }
+.modal-bg.sfa .modal label{ display:block; font-size:12px; font-weight:750; margin-bottom:6px; }
+.modal-bg.sfa .modal input:not([type=file]):not([type=checkbox]), .modal-bg.sfa .modal select, .modal-bg.sfa .modal textarea{
+  width:100%; border:1px solid var(--line-strong); border-radius:9px; background:#fff; min-height:43px; padding:0 11px;
+}
+.modal-bg.sfa .modal textarea{ min-height:95px; padding:11px; }
+.modal-bg.sfa .upload-drop{ margin-top:13px; padding:20px; border:1px dashed #aaa; border-radius:11px; background:var(--page); text-align:center; }
+.modal-bg.sfa .upload-drop p{ color:var(--muted); font-size:12px; }
+.modal-bg.sfa .upload-drop .icon--lg{ width:34px; height:34px; display:block; margin:0 auto 8px; }
+.modal-bg.sfa .upload-drop .button{ min-height:48px; }
+@media (max-width: 700px){
+  .modal-bg.sfa .modal{ max-height:96vh; border-radius:14px 14px 0 0; padding:15px; }
+}
+.sfa .button--big{ min-height:50px; font-size:13px; }
+.sfa .field--big select{ min-height:52px; font-size:15px; }
+.modal--artisan .form-grid{ margin-top:10px; }
+.modal--artisan .wk-submit{ margin-top:14px; }
+.modal--artisan .wk-submit .button{ min-height:50px; }
+
+/* a phone: one card wide, taller picture, full-width buttons, 48px targets */
+@media (max-width: 900px){
+  .wk-cards{ grid-template-columns:1fr; }
+  .kpi-grid--artisan{ grid-template-columns:1fr 1fr; gap:7px; }
+  .wk-img{ height:245px; }
+  .wk-body{ padding:14px; }
+  .wk-body h2{ font-size:25px; }
+  .wk-foot{ padding:10px; grid-template-columns:1fr; }
+  .sfa .wk-foot .button, .sfa .wk-mini .button{ min-height:51px; font-size:13px; }
+  .sfa .wk-mini .button{ flex:1 1 100%; }
+  .sfa .page-heading__actions, .sfa .page-heading__actions .button{ width:100%; }
+  .modal--artisan .form-grid{ grid-template-columns:1fr; }
+  .modal--artisan .wk-submit{ flex-direction:column; align-items:stretch; }
+  .modal--artisan .wk-submit .button{ width:100%; }
+}
+@media (max-width: 420px){
+  .kpi-grid--artisan{ grid-template-columns:1fr 1fr; }
+  .kpi-grid--artisan .kpi:first-child{ grid-column:1 / -1; }
+}
+</style>
 <body>
-<script>const BUILD_ID='0a052aa160c6';</script>
+<script>const BUILD_ID='48593c3a6951';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4101,6 +4228,12 @@ function toast(msg, opts){
 function modal(html){
   const bg=el('<div class="modal-bg"></div>');
   const m=el('<div class="modal">'+html+'</div>');
+  // #modal-root sits outside the .sfa wrapper the console pages are painted in,
+  // so a dialog falls back to the older palette and comes up with blue buttons
+  // over a monochrome page. The floor's dialogs are new and the brief forbids a
+  // blue CTA on those routes, so they carry the token system themselves. The
+  // office's dialogs are left as they were: that change is ChatGPT's to make.
+  if(typeof isStaff==='function' && isStaff()) bg.classList.add('sfa');
   bg.appendChild(m);
   bg.addEventListener('click', e=>{ if(e.target===bg) bg.remove(); });
   m.setAttribute('role','dialog');
@@ -6188,6 +6321,14 @@ function updateHeader(){
       dockItem('#/team','stage-planning','Work',c.unanswered,navActive('#/team')?' nav-link--active':'')+
       dockItem('#/batches','stage-packing','Batches',0,navActive('#/batches')?' nav-link--active':'')+
       dockItem('#/pieces','i-camera','Pieces',0,navActive('#/pieces')?' nav-link--active':'');
+    return;
+  }
+
+  if(isWorker()){
+    // Same console shell as the supervisor, so the two floor roles share one
+    // visual language, but a different set of screens: an artisan's work, not
+    // the workshop's. Sidebar on a tablet, a bilingual dock on a phone.
+    artisanHeader(topbar, nav, app, dock, shell);
     return;
   }
 
@@ -8687,7 +8828,6 @@ function vStaffHome(){
       ', '+fdate(today()))+
     '<h1 class="display-title">Today.</h1>'+
     '<p class="lede">Missing updates and blocked work first. Record each piece once, then again only when something changes.</p></div>'+
-    '<button class="button button--workshop" type="button" onclick="pickDaily()">'+icon('i-camera')+'Add to the log</button>'+
     '</div>';
 
   h+='<div class="ws-steps">'+
@@ -8818,8 +8958,10 @@ function staffDailyLog(){
     '<p class="panel__description">Photographs of today\u2019s work on the floor. Product updates stay attached to each item above.</p>'+
     '<div class="daily-log__grid">'+
       (list.length?photoGridOf(list):'<p class="panel__description">No photos logged today yet.</p>')+
-      '<div class="button-row"><button class="button button--workshop" type="button" onclick="pickDaily()">'+icon('i-camera')+'Add today’s photos</button>'+
-      (list.length?badge(list.length+' logged today','success'):'')+'</div>';
+      // A photograph on the floor belongs to a piece and a process, or it is
+      // refused. The loose "add to the log" button went with that rule; the
+      // per-piece Record work button is where the camera lives now.
+      (list.length?'<div class="button-row">'+badge(list.length+' logged today','success')+'</div>':'');
   dates.filter(d=>d!==t).slice(0,5).forEach(d=>{
     const l=S.dailyByDate[d];
     const notes=[...new Set(l.map(x=>x.note).filter(Boolean))];
@@ -9520,6 +9662,7 @@ function render(){
       else if(parts[0]==='pieces') vStaffHome();
       else vSupHome();
     }
+    else if(isWorker()) vArtisanHome();
     else vStaffHome();
     return;
   }
@@ -13168,6 +13311,10 @@ function mBulk(poId){
 window.__du = { files: [], itemId: null, stageId: null };
 
 function mDailyUpdate(itemId, stageId){
+  // The floor records through the bilingual form, which also asks a supervisor
+  // who did the work — the database now refuses a floor record that does not
+  // say. The office keeps this form: its records carry no attribution.
+  if(isStaff()) return mRecordWork(itemId, stageId);
   const it = S.itemsById[itemId];
   if(!it) return;
   const stage = (stageId?S.stagesById[stageId]:curStage(it));
@@ -16214,6 +16361,417 @@ function mHandover(o){
   };
 }
 
+</script>
+<script>
+'use strict';
+/* ---------------------------------------------------------------------------
+   The artisan's screens. My work / मेरा काम.
+
+   Built for a phone held in one hand on a workshop floor, by somebody who did
+   not grow up with forms. Every label is English and Hindi together, every
+   decision is a choice from a short list rather than a sentence to type, and
+   the photograph is the thing on the card, not a thumbnail beside it — an
+   artisan recognises the piece by its picture long before its reference number.
+
+   It reads what the floor functions return and nothing else. There is no price,
+   no buyer and no purchase-order number anywhere in S for this role, so there is
+   nothing here to remember not to show.
+--------------------------------------------------------------------------- */
+
+// The nine stages in the brief's Hindi, keyed by bt_stages.key so a rename of
+// the English name in the database does not silently strand the translation.
+const STAGE_HI={
+  production_drawing:'उत्पादन ड्रॉइंग', stone_selection:'पत्थर चयन', dressing_sizing:'ब्लॉक ड्रेसिंग',
+  prod_sizing:'उत्पादन — साइज़िंग', moulding:'उत्पादन — मोल्डिंग', finishing:'उत्पादन — फिनिशिंग',
+  internal_qc:'आंतरिक गुणवत्ता जाँच', sealing:'उत्पादन — सीलिंग', final_photos:'अंतिम फोटो'
+};
+function stageBi(st){ return st?(esc(st.name)+(STAGE_HI[st.key]?' · '+esc(STAGE_HI[st.key]):'')):''; }
+function bi(en, hi){ return esc(en)+' · '+esc(hi); }
+
+// What was done, what stopped it, why there was no work: fixed lists, so the
+// person picks instead of types. The English half is what gets stored.
+const ACTIVITIES=[
+  ['Cutting or sizing','कटिंग या साइज़िंग'],['Shaping or carving','आकार या नक्काशी'],
+  ['Surface finishing','सतह फिनिशिंग'],['Sealing coat','सीलिंग कोट'],
+  ['Measurement check','माप जाँच'],['Photos only','केवल फोटो'],['Other work','अन्य काम']
+];
+const BLOCKERS=[
+  ['Waiting for stone','पत्थर का इंतज़ार'],['Waiting for tool or machine','औज़ार या मशीन का इंतज़ार'],
+  ['Drawing not clear','ड्रॉइंग साफ़ नहीं'],['Previous process incomplete','पिछला काम अधूरा'],
+  ['Power interruption','बिजली बंद'],['Waiting for supervisor','सुपरवाइज़र का इंतज़ार'],['Other','अन्य']
+];
+const NO_WORK=[
+  ['Curing / drying time','सूखने का समय'],['Waiting for buyer approval','खरीदार की मंज़ूरी बाकी'],
+  ['Waiting for material','सामान का इंतज़ार'],['Planned workshop pause','तय रुकावट'],
+  ['Holiday / non-working day','छुट्टी का दिन'],['Other','अन्य']
+];
+
+// The drawing that governs a piece: its own if it has one, else the order's.
+function drawingFor(it){
+  const docs=(S.staffDocs||[]);
+  const isDraw=d=>/drawing/i.test(d.doc_type||'');
+  return docs.filter(d=>d.item_id===it.id && isDraw(d)).slice(-1)[0]
+      || docs.filter(d=>d.po_id===it.po_id && !d.item_id && isDraw(d)).slice(-1)[0] || null;
+}
+
+// The pieces this artisan is standing over, in the order the shipments leave.
+function myPieces(){
+  const me=uid();
+  const ids={};
+  (S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at &&
+    (a.assigned_to===me || (a.support||[]).indexOf(me)>=0)).forEach(a=>{ ids[a.item_id]=1; });
+  return (S.items||[]).filter(it=>ids[it.id] && !['delivered','cancelled','made'].includes(it.status))
+    .slice().sort((a,b)=>{
+      const sa=(batchOf(a.id)||{}).planned_ship_date||(a.po||{}).expected_ship_date||'9999';
+      const sb_=(batchOf(b.id)||{}).planned_ship_date||(b.po||{}).expected_ship_date||'9999';
+      return String(sa).localeCompare(String(sb_)) || String(a.item_ref||'').localeCompare(String(b.item_ref||''));
+    });
+}
+function artisanCounts(){
+  const mine=myPieces();
+  const due=mine.filter(it=>!updateToday(it.id));
+  const back=(S.rework||[]).filter(r=>!r.resolved_at && S.itemsById[r.item_id]);
+  return {mine, due, back};
+}
+
+/* ---- the shell: sidebar on a tablet, dock on a phone ---------------------- */
+function artisanNav(){
+  const c=artisanCounts();
+  // grows by one line per screen as attendance, leave and pay arrive; a link to
+  // a screen that does not exist yet is a dead button, and the brief is explicit
+  // that every control drawn has to work
+  return [
+    ['#/home','My work','मेरा काम','stage-planning',c.due.length+c.back.length]
+  ];
+}
+function artisanHeader(topbar, nav, app, dock, shell){
+  const c=artisanCounts();
+  shell.className='app-shell app-shell--console app-shell--artisan';
+  topbar.className='topbar topbar--console';
+  topbar.innerHTML=
+    '<a class="wordmark" href="#/home" aria-label="StoneFlow — my work">'+
+      '<span class="wordmark__mark">'+icon('i-mark')+'</span>'+
+      '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">'+
+        bi('Workshop','कारखाना')+'</span></span></a>'+
+    '<div class="topbar__tools">'+
+      '<span class="role-chip">'+bi('Artisan','कारीगर')+'</span>'+
+      '<span class="avatar" title="'+esc(S.profile.full_name||'')+'">'+esc(initials(S.profile.full_name||S.profile.email))+'</span>'+
+      '<button class="button button--quiet" type="button" onclick="signOut()">'+bi('Sign out','बाहर निकलें')+'</button></div>';
+  const items=artisanNav();
+  nav.hidden=false; nav.className='side-nav';
+  nav.innerHTML='<p class="side-nav__group">'+bi('The floor','कारखाना')+'</p>'+
+    items.map(x=>'<a class="side-nav__link'+(navActive(x[0])?' side-nav__link--active':'')+
+      '" href="javascript:void(0)" onclick="go(\''+x[0]+'\')"><span>'+bi(x[1],x[2])+'</span>'+
+      (x[4]?'<span class="badge badge--alert">'+x[4]+'</span>':'')+'</a>').join('');
+  app.className='page';
+  dock.hidden=false;
+  dock.innerHTML=items.map(x=>
+    '<a class="mobile-dock__item'+(navActive(x[0])?' mobile-dock__item--active':'')+
+    '" href="javascript:void(0)" onclick="go(\''+x[0]+'\')">'+icon(x[3])+
+    '<span class="dock-bi"><span>'+esc(x[1])+'</span><small>'+esc(x[2])+'</small></span>'+
+    (x[4]?' <span class="badge badge--alert">'+x[4]+'</span>':'')+'</a>').join('');
+}
+
+/* ---- one assigned piece ---------------------------------------------------- */
+function artisanStatus(it){
+  const held=(S.stByItem[it.id]||[]).some(r=>r.status==='on_hold');
+  const rw=openRework(it.id);
+  const u=updateToday(it.id);
+  if(held) return badge('Stopped · रोका गया','alert');
+  if(rw) return badge('Sent back · वापस भेजा','alert');
+  if(u) return badge(u.review_status==='approved'?'Checked · जाँच हो गई':'Recorded today · आज दर्ज','success');
+  return badge('Update due · अपडेट बाकी','pending');
+}
+function artisanCard(it){
+  const st=curStage(it);
+  const a=openAssignment(it.id);
+  const me=uid();
+  const lead=a && a.assigned_to===me;
+  const b=batchOf(it.id);
+  const ship=(b&&b.planned_ship_date)||((it.po||{}).expected_ship_date)||null;
+  const img=targetImage(it)||(S.photosByItem[it.id]||[])[0]||null;
+  const dr=drawingFor(it);
+  const rw=openRework(it.id);
+  const ans={accepted:['Accepted · स्वीकार','success'], clarify:['Question sent · सवाल भेजा','pending'],
+             cannot_start:['Cannot start · शुरू नहीं','alert']}[a&&a.ack_state];
+
+  let respond='';
+  if(a && lead && a.ack_state==='pending'){
+    respond='<div class="wk-ack"><p><strong>'+bi('New task','नया काम')+'</strong>'+
+      esc('Read the process and instruction, then respond.')+' / '+esc('प्रक्रिया और निर्देश देखकर जवाब दें।')+'</p>'+
+      '<div class="wk-mini">'+
+        '<button class="button" type="button" onclick="mAckTask(\''+a.id+'\',\'accepted\')">'+bi('Accept','स्वीकार')+'</button>'+
+        '<button class="button secondary" type="button" onclick="mAckTask(\''+a.id+'\',\'clarify\')">'+bi('Need clarification','समझना है')+'</button>'+
+        '<button class="button secondary" type="button" onclick="mAckTask(\''+a.id+'\',\'cannot_start\')">'+bi('Cannot start','शुरू नहीं')+'</button>'+
+      '</div></div>';
+  } else if(a && !lead){
+    respond='<div class="wk-ack"><p>'+bi('Helping','मदद')+' · '+esc(personName(a.assigned_to))+'</p></div>';
+  } else if(a && ans){
+    respond='<div class="wk-ack wk-ack--done">'+badge(ans[0],ans[1])+
+      (a.ack_note?'<span>'+esc(a.ack_note)+'</span>':'')+'</div>';
+  }
+
+  return '<article class="wk-card" data-item="'+it.id+'">'+
+    '<button class="wk-img" type="button" onclick="go(\'#/item/'+it.id+'\')" aria-label="'+esc(it.product)+'">'+
+      (img?'<img alt="" data-ph-path="'+esc(img.path)+'" onload="this.parentNode.classList.add(\'is-loaded\')">'
+          :'<span class="wk-img__none">'+bi('No photo yet','अभी फोटो नहीं')+'</span>')+
+      '<b>'+bi('Target product','तैयार करना है')+'</b></button>'+
+    '<div class="wk-body">'+
+      '<p class="wk-ref">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · ')||'—')+'</p>'+
+      '<h2>'+esc(it.product)+'</h2>'+
+      artisanStatus(it)+
+      '<div class="wk-specs">'+
+        '<div class="wk-spec"><span>'+bi('Current process','वर्तमान प्रक्रिया')+'</span><strong>'+(st?stageBi(st):'—')+'</strong></div>'+
+        '<div class="wk-spec"><span>'+bi('Ship by','भेजने की तारीख')+'</span><strong>'+(ship?esc(fdate(ship)):'—')+'</strong></div>'+
+        '<div class="wk-spec"><span>'+bi('Finished size','अंतिम माप')+'</span><strong>'+(dimsOf(it)?esc(dimsOf(it)):'—')+'</strong></div>'+
+        '<div class="wk-spec"><span>'+bi('Drawing','ड्रॉइंग')+'</span><strong>'+
+          (dr?'<button class="link-button" type="button" onclick="openDoc(\''+jsq(dr.path)+'\')">'+esc(dr.name||'Open')+'</button>'
+             :'<span class="muted">'+bi('None on file','उपलब्ध नहीं')+'</span>')+'</strong></div>'+
+      '</div>'+
+      (a&&a.instruction
+        ?'<div class="wk-notice"><strong>'+bi('Today’s instruction','आज का निर्देश')+'</strong>'+esc(a.instruction)+
+          (a.evidence_required?'<br>'+bi('Send back','भेजें')+': '+esc(a.evidence_required):'')+
+          (a.target_date?'<br>'+bi('Finish by','तक पूरा करें')+': '+esc(fdate(a.target_date)):'')+'</div>'
+        :'')+
+      (rw?'<div class="wk-notice wk-notice--back"><strong>'+bi('Sent back','वापस भेजा गया')+
+            (rw.attempt_no>1?' · '+rw.attempt_no+ordSuffix(rw.attempt_no)+' time':'')+'</strong>'+
+            esc(rw.defect_category)+(rw.defect_note?' — '+esc(rw.defect_note):'')+'<br>'+
+            bi('Do this','यह करें')+': '+esc(rw.correction_required)+
+            (rw.due_date?'<br>'+bi('By','तक')+': '+esc(fdate(rw.due_date)):'')+'</div>':'')+
+      respond+
+    '</div>'+
+    '<footer class="wk-foot">'+
+      '<button class="button" type="button" onclick="mRecordWork(\''+it.id+'\''+(rw?','+rw.stage_id:'')+')">'+
+        icon('i-camera','icon--sm')+bi('Record work','काम दर्ज करें')+'</button>'+
+      '<button class="button secondary" type="button" onclick="go(\'#/item/'+it.id+'\')">'+bi('Open details','विवरण')+'</button>'+
+    '</footer></article>';
+}
+
+/* ---- the home ------------------------------------------------------------- */
+function artisanMetric(label, hi, value, cue, cueHi, action, tone){
+  return '<button class="kpi kpi--go'+(tone?' kpi--'+tone:'')+'" type="button" onclick="'+action+'">'+
+    '<span class="kpi__label">'+bi(label,hi)+'</span><strong class="kpi__value">'+esc(String(value))+'</strong>'+
+    '<span class="kpi__note">'+bi(cue,cueHi)+'</span></button>';
+}
+function vArtisanHome(){
+  const c=artisanCounts();
+  const due=c.due[0]||c.mine[0]||null;
+  const name=S.profile.full_name||shortLogin(S.profile.email||'');
+
+  let h='<div class="page-heading"><div>'+
+    '<p class="eyebrow">'+esc(name)+' · सुरक्षित कारीगर लॉगिन</p>'+
+    '<h1 class="display-title">'+bi('My work','मेरा काम')+'.</h1>'+
+    '<p class="lede">'+esc('Everything needed today: assigned products, due updates and anything sent back.')+
+      ' / '+esc('आज के लिए सब कुछ: सौंपे उत्पाद, बाकी अपडेट और वापस आया काम।')+'</p></div>'+
+    '<div class="page-heading__actions">'+
+      (due?'<button class="button button--big" type="button" onclick="mRecordWork(\''+due.id+'\')">'+
+             icon('i-camera','icon--sm')+bi('Record work','काम दर्ज करें')+'</button>':'')+
+    '</div></div>';
+
+  h+='<section class="kpi-grid kpi-grid--artisan" aria-label="Today’s shortcuts · आज के शॉर्टकट">'+
+    artisanMetric('Assigned products','सौंपे उत्पाद', c.mine.length, 'See today’s work','आज का काम देखें',
+      "document.getElementById('assigned-work').scrollIntoView({behavior:'smooth'})")+
+    artisanMetric('Update due','अपडेट बाकी', c.due.length,
+      c.due.length?'Record now':'All recorded', c.due.length?'अभी दर्ज करें':'सब दर्ज',
+      c.due.length?"mRecordWork('"+c.due[0].id+"')":"document.getElementById('assigned-work').scrollIntoView({behavior:'smooth'})",
+      c.due.length?'warn':'')+
+    artisanMetric('Returned work','दोबारा काम', c.back.length,
+      c.back.length?'Fix it now':'No correction waiting', c.back.length?'अभी सुधारें':'कुछ बाकी नहीं',
+      c.back.length?"document.getElementById('sent-back').scrollIntoView({behavior:'smooth'})":"toast('No returned work · कोई दोबारा काम बाकी नहीं।')",
+      c.back.length?'alert':'')+
+    '</section>';
+
+  if(c.back.length){
+    h+='<div class="section-title" id="sent-back"><div><h2>'+bi('Sent back','वापस भेजा गया')+'</h2>'+
+      '<p>'+esc('Put these right first. The fault and what to do are on each card.')+' / '+
+      esc('पहले इन्हें ठीक करें। हर कार्ड पर खराबी और करने का काम लिखा है।')+'</p></div></div>'+
+      '<section class="wk-cards">'+c.back.map(r=>S.itemsById[r.item_id]).filter(Boolean)
+        .filter((it,i,l)=>l.indexOf(it)===i).map(artisanCard).join('')+'</section>';
+  }
+
+  h+='<div class="section-title" id="assigned-work"><div><h2>'+bi('Assigned products','सौंपे उत्पाद')+'</h2>'+
+    '<p>'+esc('Recognise the product image, then record work against its production process.')+' / '+
+    esc('उत्पाद का फोटो पहचानें, फिर उसकी प्रक्रिया पर काम दर्ज करें।')+'</p></div></div>';
+  const rest=c.mine.filter(it=>!c.back.some(r=>r.item_id===it.id));
+  h+=rest.length?'<section class="wk-cards">'+rest.map(artisanCard).join('')+'</section>'
+    :(c.mine.length?'':'<div class="empty-state">'+bi('No work has been given to you yet. Ask your supervisor.','अभी आपको कोई काम नहीं दिया गया है। सुपरवाइज़र से पूछें।')+'</div>');
+
+  sfaPaint(h);
+}
+
+/* ---- recording work -------------------------------------------------------
+   One flow for the whole floor. An artisan is credited automatically and the
+   screen says so; a supervisor recording for somebody has to pick who did it.
+   The process is chosen deliberately every time, defaulting to where the piece
+   is now, because photographs of earlier or corrective work belong to the
+   process they show, not the one the piece happens to be on today. */
+function mRecordWork(itemId, stageId){
+  const it=S.itemsById[itemId]; if(!it) return;
+  const cur=curStage(it);
+  const stage=stageId?S.stagesById[stageId]:cur;
+  const worker=isWorker();
+  const img=targetImage(it)||(S.photosByItem[it.id]||[])[0]||null;
+  const a=openAssignment(it.id);
+  const people=floorPeople();
+  window.__du={files:[], itemId, stageId:stage?stage.id:null};
+
+  const opt=(list, sel)=>list.map(([en,hi])=>'<option value="'+esc(en)+'"'+(sel===en?' selected':'')+'>'+bi(en,hi)+'</option>').join('');
+  const who = worker
+    ? '<div class="wk-notice wk-notice--who"><strong>'+bi('Work recorded as you','काम आपके नाम से दर्ज होगा')+'</strong>'+
+        esc(S.profile.full_name||'')+' · '+bi('authenticated artisan','सत्यापित कारीगर')+'</div>'
+    : '<div class="wk-notice wk-notice--who"><strong>'+bi('Who did the work','काम किसने किया')+'</strong>'+
+        esc('This credits the record. It does not change who the piece is assigned to.')+'</div>'+
+      '<div class="form-grid">'+
+        '<div class="field"><label for="rw-lead">'+bi('Primary worker','मुख्य कारीगर')+'</label><select id="rw-lead">'+
+          '<option value="">'+bi('Choose','चुनें')+'</option>'+
+          people.map(p=>'<option value="'+esc(p.user_id)+'"'+(a&&a.assigned_to===p.user_id?' selected':'')+'>'+esc(p.full_name)+'</option>').join('')+
+        '</select></div>'+
+        '<div class="field"><label for="rw-support">'+bi('Supporting worker','सहायक कारीगर')+' <span class="muted">(optional)</span></label><select id="rw-support">'+
+          '<option value="">'+bi('None','कोई नहीं')+'</option>'+
+          people.map(p=>'<option value="'+esc(p.user_id)+'">'+esc(p.full_name)+'</option>').join('')+
+        '</select></div></div>';
+
+  const m=modal(
+    '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · ')||'')+'</p>'+
+    '<h3>'+bi('Record work','काम दर्ज करें')+'</h3>'+
+    '<div class="wk-notice wk-notice--product">'+
+      (img?'<img alt="" data-ph-path="'+esc(img.path)+'">':'<span class="wk-img__none"></span>')+
+      '<div><strong>'+esc(it.product)+'</strong>'+esc([dimsOf(it), it.stone].filter(Boolean).join(' · '))+'</div></div>'+
+    who+
+    '<div class="field field--full field--big"><label for="rw-stage">'+bi('Production process','उत्पादन प्रक्रिया चुनें')+'</label>'+
+      '<select id="rw-stage">'+activeStages().map((s,i)=>'<option value="'+s.id+'"'+(stage&&s.id===stage.id?' selected':'')+'>'+
+        (i+1)+'. '+stageBi(s)+(cur&&s.id===cur.id?' — Current / वर्तमान':'')+'</option>').join('')+'</select></div>'+
+    '<div class="upload-drop field--full" id="du-drop"><div>'+icon('i-camera','icon--lg')+
+      '<strong>'+bi('Add photos for this process','इस प्रक्रिया के फोटो जोड़ें')+'</strong>'+
+      '<p>'+bi('Complete product, work detail and measurement.','पूरा उत्पाद, काम का विवरण और माप।')+'</p>'+
+      '<div class="button-row" style="justify-content:center">'+
+        '<button class="button" type="button" id="du-cam">'+icon('i-camera','icon--sm')+bi('Take photos','फोटो लें')+'</button>'+
+        '<button class="button secondary" type="button" id="du-pick">'+bi('Choose from phone','फोन से चुनें')+'</button></div>'+
+      '<input id="du-cam-input" type="file" accept="image/*" capture="environment" multiple hidden>'+
+      '<input id="du-file-input" type="file" accept="image/*" multiple hidden>'+
+    '</div></div>'+
+    '<div class="field--full" id="du-previews"></div>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="rw-status">'+bi('Work status','काम की स्थिति')+'</label><select id="rw-status" onchange="rwToggle()">'+
+        '<option value="complete">'+bi('Completed today','आज पूरा हुआ')+'</option>'+
+        '<option value="continuing">'+bi('Work continuing','काम जारी है')+'</option>'+
+        '<option value="no_work">'+bi('No work today','आज काम नहीं हुआ')+'</option>'+
+        '<option value="blocked">'+bi('Blocked','काम रुका है')+'</option></select></div>'+
+      '<div class="field" id="rw-act-wrap"><label for="rw-act">'+bi('What was done?','क्या काम हुआ?')+'</label><select id="rw-act" onchange="rwToggle()">'+
+        opt(ACTIVITIES)+'</select></div>'+
+      '<div class="field field--full" id="rw-other-wrap" hidden><label for="rw-other">'+bi('Other work','अन्य काम लिखें')+'</label>'+
+        '<input id="rw-other" placeholder="'+bi('Short detail','छोटा विवरण')+'"></div>'+
+      '<div class="field field--full" id="rw-block-wrap" hidden><label for="rw-block">'+bi('What is stopping the work?','काम क्यों रुका है?')+'</label>'+
+        '<select id="rw-block" onchange="rwToggle()">'+opt(BLOCKERS)+'</select>'+
+        '<input id="rw-block-other" class="space-top-10" placeholder="'+bi('Say what','बताएं क्या')+'" hidden></div>'+
+      '<div class="field field--full" id="rw-nowork-wrap" hidden><label for="rw-nowork">'+bi('Why no work?','काम क्यों नहीं हुआ?')+'</label>'+
+        '<select id="rw-nowork">'+opt(NO_WORK)+'</select></div>'+
+      '<div class="field field--full" id="rw-meas-wrap"><label for="rw-meas">'+bi('Measurement','माप')+' <span class="muted">(optional / वैकल्पिक)</span></label>'+
+        '<input id="rw-meas" inputmode="numeric" placeholder="1500 × 350 × 160 mm"></div>'+
+    '</div>'+
+    '<div class="wk-notice"><strong>'+bi('Supervisor review','सुपरवाइज़र जाँच')+'</strong>'+
+      esc('The product, process and credited worker are saved with every photo.')+' / '+
+      esc('हर फोटो के साथ उत्पाद, प्रक्रिया और कारीगर सेव होंगे।')+'</div>'+
+    '<div class="button-row field--full wk-submit">'+
+      '<button class="button button--big" type="button" id="du-save">'+bi('Submit','जमा करें')+'</button>'+
+      '<button class="button secondary" type="button" onclick="closeModal()">'+bi('Cancel','रद्द करें')+'</button></div>');
+
+  m.m.classList.add('modal--artisan');
+  hydrateImages(m.m);
+  const pick=cap=>{ const i=$(cap?'du-cam-input':'du-file-input'); i.value=''; i.click(); };
+  $('du-cam').onclick=e=>{ e.preventDefault(); pick(true); };
+  $('du-pick').onclick=e=>{ e.preventDefault(); pick(false); };
+  ['du-cam-input','du-file-input'].forEach(id=>{ $(id).onchange=ev=>duAdd(ev.target.files); });
+  $('du-save').onclick=rwSubmit;
+}
+function rwToggle(){
+  const s=$('rw-status').value;
+  $('rw-act-wrap').hidden = s==='no_work';
+  $('rw-other-wrap').hidden = !($('rw-act').value==='Other work' && s!=='no_work');
+  $('rw-block-wrap').hidden = s!=='blocked';
+  $('rw-block-other').hidden = $('rw-block').value!=='Other';
+  $('rw-nowork-wrap').hidden = s!=='no_work';
+  $('rw-meas-wrap').hidden = s==='no_work';
+  $('du-drop').hidden = s==='no_work';
+}
+async function rwSubmit(){
+  const d=window.__du;
+  const status=$('rw-status').value;
+  const noWork=status==='no_work', blocked=status==='blocked';
+  const stageId=Number($('rw-stage').value)||null;
+  const act=$('rw-act').value;
+  const other=($('rw-other').value||'').trim();
+  const meas=($('rw-meas').value||'').trim();
+  const lead=isWorker()?uid():($('rw-lead')?$('rw-lead').value:'');
+  const support=!isWorker()&&$('rw-support')?$('rw-support').value:'';
+
+  const say=(en,hi)=>toast(en+' · '+hi,{err:true});
+  if(!stageId) return say('Choose the production process','उत्पादन प्रक्रिया चुनें');
+  if(!lead) return say('Say who did the work','बताएं काम किसने किया');
+  if(support && support===lead) return say('The same person cannot be lead and support','एक ही व्यक्ति मुख्य और सहायक नहीं हो सकता');
+  if(!noWork && !d.files.length) return say('Add at least one photo of the work','काम की कम से कम एक फोटो जोड़ें');
+  if(!noWork && act==='Other work' && !other) return say('Say what other work was done','बताएं और क्या काम हुआ');
+  if(blocked && $('rw-block').value==='Other' && !($('rw-block-other').value||'').trim())
+    return say('Say what is stopping the work','बताएं काम क्यों रुका है');
+
+  const btn=$('du-save'); btn.disabled=true; btn.textContent='Saving… · सेव हो रहा है';
+  try{
+    const summary = noWork ? null
+      : (act==='Other work' ? other : act) + (status==='complete' ? ' — completed today.' : '');
+    const ins=await sb.from('bt_updates').insert({
+      item_id:d.itemId, stage_id:stageId, work_date:today(),
+      work_status: noWork?'no_work':(blocked?'blocked':'worked'),
+      public_summary: summary,
+      no_work_reason: noWork?$('rw-nowork').value:null,
+      review_status:'pending', submitted_by:uid(), worked_by:lead
+    }).select().single();
+    if(ins.error) throw ins.error;
+    const updateId=ins.data.id;
+
+    if(support){
+      const c=await sb.from('bt_update_contributors').insert({update_id:updateId, user_id:support, added_by:uid()});
+      if(c.error) throw c.error;
+    }
+    if(blocked){
+      const why=$('rw-block').value==='Other'?$('rw-block-other').value.trim():$('rw-block').value;
+      await sb.from('bt_update_internal').insert({update_id:updateId, blocker_reason:why});
+    }
+    if(meas && !noWork){
+      const mr=await sb.from('bt_measurements').insert({item_id:d.itemId, stage_id:stageId, update_id:updateId,
+        name:'Recorded size', actual_value:meas, recorded_by:uid()});
+      if(mr.error) throw mr.error;
+    }
+
+    let done=0, failed=0;
+    for(let i=0;i<d.files.length;i++){
+      btn.textContent='Uploading '+(i+1)+' of '+d.files.length+' · अपलोड';
+      try{
+        const blob=await resizeImage(d.files[i].file);
+        const path='staff/daily/'+d.itemId+'/'+updateId+'-'+i+'.jpg';
+        const up=await sb.storage.from(CONFIG.bucket).upload(path, blob, {contentType:'image/jpeg'});
+        if(up.error) throw up.error;
+        const pi=await sb.from('bt_photos').insert({item_id:d.itemId, stage_id:stageId, update_id:updateId,
+          path, uploaded_by:uid(), status:'pending', display_order:i});
+        if(pi.error) throw pi.error;
+        done++;
+      }catch(e){ failed++; }
+    }
+    if(failed && !done){
+      btn.disabled=false; btn.textContent='Retry upload · फिर कोशिश करें';
+      toast('No photos uploaded — check the connection and try again · फोटो अपलोड नहीं हुए, नेट देखकर फिर कोशिश करें',{err:true});
+      return;
+    }
+    d.files.forEach(f=>URL.revokeObjectURL(f.url));
+    window.__du={files:[],itemId:null,stageId:null};
+    closeModal();
+    await loadData(); render();
+    toast(noWork ? 'Recorded: no work today · दर्ज: आज काम नहीं हुआ'
+        : 'Sent for checking · जाँच के लिए भेज दिया'+(failed?' ('+failed+' photo failed)':''));
+  }catch(e){
+    btn.disabled=false; btn.textContent='Submit · जमा करें';
+    toast((e.message||String(e)),{err:true});
+  }
+}
 </script>
 <script>
 'use strict';
