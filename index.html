@@ -809,6 +809,18 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 }
 .app-shell--console .mobile-dock{display:grid}
 @media (min-width:1100px){ .app-shell--console .mobile-dock{display:none} }
+/* The dock is a four-column grid everywhere else. The supervisor carries five
+   screens, and the fifth wrapped onto a second row that sat across the middle
+   of the page. Five columns instead, with the labels tightened just enough to
+   fit "Batches" at 390px — the alternative was hiding a screen behind a "More"
+   sheet, and on a floor tablet that is one tap too many for something used
+   every hour. */
+.app-shell--console .mobile-dock{grid-template-columns:repeat(5,1fr)}
+.app-shell--console .mobile-dock__item{font-size:11px;gap:3px;padding:0 2px;text-align:center}
+.app-shell--console .mobile-dock__item .icon{width:20px;height:20px}
+@media (max-width:359px){
+  .app-shell--console .mobile-dock__item{font-size:10px}
+}
 
 /* the owner-actions head stacks its chips under the title rather than fighting
    it for width */
@@ -3765,6 +3777,17 @@ body.reports-mode .sfa .content{max-width:1700px}
 .ws-task__done{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:8px; }
 .ws-task__done span{ font-size:13px; color:var(--muted, #6b6660); }
 
+/* work that came back ------------------------------------------------------
+   Marked, not shouted: a red edge and the fault set in the same size as
+   everything else. A card that screams gets ignored by the third week. */
+.ws-back .ws-tasks__title{ color:var(--danger, #b4442e); }
+.ws-task--back{ border-left:4px solid var(--danger, #b4442e); }
+.ws-task__fault{
+  margin:0 0 6px; font-size:14px; font-weight:650; color:var(--danger, #b4442e);
+}
+.ws-task__fix{ margin:0 0 6px; font-size:15px; line-height:1.5; }
+.ws-task__by--late{ color:var(--danger, #b4442e); font-weight:650; }
+
 /* the supervisor's search sits in the top bar rather than under it --------- */
 .search--top{ flex:1 1 320px; max-width:460px; }
 
@@ -3809,9 +3832,81 @@ body.reports-mode .sfa .content{max-width:1700px}
 @media (max-width: 520px){
   .handover__row{ grid-template-columns:1fr; gap:2px; }
 }
+
+/* checking work -----------------------------------------------------------
+   A review row is read in the order the eye moves: the photograph first,
+   because that is what the judgement is actually about, then what was written,
+   then the two buttons. Anything flagged gets a red rule down the left edge so
+   a supervisor scrolling a long list can see trouble without reading. */
+.fl-tabs{ display:flex; flex-wrap:wrap; gap:6px; }
+.fl-tab{
+  appearance:none; background:transparent; cursor:pointer;
+  border:1px solid var(--line, #e8e6e1); border-radius:999px;
+  padding:7px 14px; font:inherit; font-size:13px; color:var(--muted, #6b6660);
+  display:inline-flex; align-items:center; gap:7px; min-height:36px;
+}
+.fl-tab:hover{ border-color:var(--ink, #1c1a17); color:var(--ink, #1c1a17); }
+.fl-tab--on{
+  background:var(--ink, #1c1a17); border-color:var(--ink, #1c1a17); color:#fff;
+}
+.fl-tab__n{
+  font-size:11px; font-variant-numeric:tabular-nums;
+  background:rgba(0,0,0,.08); border-radius:999px; padding:1px 7px;
+}
+.fl-tab--on .fl-tab__n{ background:rgba(255,255,255,.2); }
+
+.fl-checks{ display:grid; gap:10px; }
+.fl-check{
+  display:grid; grid-template-columns:104px 1fr 236px; gap:16px;
+  align-items:start; padding:14px;
+  border:1px solid var(--line, #e8e6e1); border-left:3px solid transparent;
+  border-radius:12px; background:var(--surface, #fff);
+}
+.fl-check--flag{ border-left-color:var(--danger, #b4442e); }
+.fl-check__shot{ position:relative; }
+.fl-check__shot img, .fl-check__shot .photo-placeholder{
+  width:104px; height:104px; object-fit:cover; border-radius:9px; display:block;
+}
+.fl-check__more{
+  position:absolute; left:6px; bottom:6px;
+  background:rgba(0,0,0,.66); color:#fff; border-radius:5px;
+  font-size:10px; letter-spacing:.03em; padding:2px 6px;
+}
+.fl-check__main{ min-width:0; }
+.fl-check__by{ font-size:12px; color:var(--muted, #6b6660); margin:3px 0 0; }
+.fl-check__said{ margin:8px 0 0; line-height:1.5; }
+.fl-check__told, .fl-check__missing, .fl-check__flagline{
+  margin:6px 0 0; font-size:12.5px; line-height:1.45;
+}
+.fl-check__told{ color:var(--muted, #6b6660); }
+.fl-check__missing{ color:var(--warn, #8a6d1f); }
+.fl-check__flagline{ color:var(--danger, #b4442e); }
+.fl-check__side{ display:flex; flex-direction:column; align-items:flex-end; gap:9px; }
+/* A fixed two-up grid rather than a wrapping row: with four buttons of unequal
+   width, flex-wrap left "Open" stranded on a line of its own and the block read
+   as three ragged rows. Equal cells give the same four controls in the same two
+   places on every card, which is what makes a long list scannable. */
+.fl-check__do{
+  display:grid; grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:6px; width:100%;
+}
+.fl-check__do .button{ width:100%; justify-content:center; text-align:center; }
+.fl-check__do .button:only-child{ grid-column:1 / -1; }
+
+@media (max-width: 900px){
+  .fl-check{ grid-template-columns:72px 1fr; }
+  .fl-check__shot img, .fl-check__shot .photo-placeholder{ width:72px; height:72px; }
+  /* the buttons go full width on a phone, but the state badge is a label and
+     stretching it turned "Waiting to be checked" into an empty-looking box */
+  .fl-check__side{ grid-column:1 / -1; align-items:flex-start; }
+  .fl-check__do .button{ min-height:44px; }
+}
+@media (max-width: 460px){
+  .fl-check__do{ grid-template-columns:1fr; }
+}
 </style>
 <body>
-<script>const BUILD_ID='3dcdbc769792';</script>
+<script>const BUILD_ID='0a052aa160c6';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -3905,6 +4000,16 @@ function ftime(d){ if(!d) return ''; const t=new Date(d); if(isNaN(t)) return ''
   if(diff<86400 && now.getDate()===t.getDate()) { let h=t.getHours(), m=String(t.getMinutes()).padStart(2,'0'), ap=h>=12?'pm':'am'; h=h%12||12; return 'today '+h+':'+m+' '+ap; }
   return fdate(t.toISOString().slice(0,10)); }
 function today(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+// Dates are handled as YYYY-MM-DD strings everywhere, so this walks the calendar
+// through a Date and comes back out as a string. Built from the local parts, not
+// toISOString(), which would hand back yesterday for anyone east of Greenwich —
+// and everyone using this is in Udaipur.
+function addDays(d, n){
+  const t=new Date(String(d||today())+'T00:00:00');
+  if(isNaN(t)) return '';
+  t.setDate(t.getDate()+Number(n||0));
+  return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
+}
 
 const FRACS = {0:'',1:'⅛',2:'¼',3:'⅜',4:'½',5:'⅝',6:'¾',7:'⅞'};
 function mmToIn(mm){
@@ -4104,7 +4209,8 @@ const S = {
   updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{},
   invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{},
   revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null,
-  batches:[], batchById:{}, batchOfItem:{}, assignments:[], asgByItem:{}
+  batches:[], batchById:{}, batchOfItem:{}, assignments:[], asgByItem:{},
+  rework:[], rwByItem:{}, holds:[], hdByItem:{}, meas:[], msByItem:{}, apprFilter:'pending'
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -4134,7 +4240,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -4148,7 +4254,13 @@ async function loadStaffData(){
     // tables behind them carry the purchase order, and the floor never sees it.
     sb.rpc('bt_floor_batches'),
     sb.rpc('bt_floor_batch_items'),
-    sb.rpc('bt_floor_assignments')
+    sb.rpc('bt_floor_assignments'),
+    // Rework, holds and measurements. A labourer gets only the rows on pieces
+    // they are actually standing over — the function decides that, not this
+    // file, because a filter written here would be a suggestion.
+    sb.rpc('bt_floor_rework'),
+    sb.rpc('bt_floor_holds'),
+    sb.rpc('bt_floor_measurements')
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -4186,6 +4298,7 @@ async function loadStaffData(){
   });
   indexPhotos(ph.data||[]);
   indexFloor((bt&&bt.data)||[], (bi&&bi.data)||[], (asg&&asg.data)||[]);
+  indexReview((rw&&rw.data)||[], (hd&&hd.data)||[], (ms&&ms.data)||[]);
   S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
 }
@@ -4211,6 +4324,73 @@ function indexFloor(batches, alloc, asg){
     || String(b.created_at||'').localeCompare(String(a.created_at||'')));
   S.asgByItem={};
   S.assignments.forEach(a=>{ (S.asgByItem[a.item_id]=S.asgByItem[a.item_id]||[]).push(a); });
+}
+/* ---- review, rework and holds ---------------------------------------------
+   Three records that only ever get written by a function, so nothing in this
+   file has to decide who may create one. What it does decide is how a screen
+   reads them: an open rework is one nobody has closed, and a live hold is one
+   the office granted and has not lifted. Both of those are questions a floor
+   supervisor asks fifty times a day, so they get a name. */
+function indexReview(rework, holds, meas){
+  S.rework=(rework||[]).slice().sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||'')));
+  S.rwByItem={}; S.rework.forEach(r=>{ (S.rwByItem[r.item_id]=S.rwByItem[r.item_id]||[]).push(r); });
+  S.holds=(holds||[]).slice().sort((a,b)=>String(b.requested_at||'').localeCompare(String(a.requested_at||'')));
+  S.hdByItem={}; S.holds.forEach(r=>{ (S.hdByItem[r.item_id]=S.hdByItem[r.item_id]||[]).push(r); });
+  S.meas=(meas||[]).slice();
+  S.msByItem={}; S.meas.forEach(r=>{ (S.msByItem[r.item_id]=S.msByItem[r.item_id]||[]).push(r); });
+}
+function reworkFor(itemId, stageId){
+  return (S.rwByItem[itemId]||[]).filter(r=>stageId==null||r.stage_id===stageId);
+}
+function openRework(itemId, stageId){
+  return reworkFor(itemId, stageId).find(r=>!r.resolved_at) || null;
+}
+function holdsFor(itemId, stageId){
+  return (S.hdByItem[itemId]||[]).filter(r=>stageId==null||r.stage_id===stageId);
+}
+// A hold the office has granted and not lifted. 'pending' is a request, not a
+// stoppage: the work carries on until the office says otherwise.
+function liveHold(itemId, stageId){
+  return holdsFor(itemId, stageId).find(r=>r.decision==='granted') || null;
+}
+function pendingHold(itemId, stageId){
+  return holdsFor(itemId, stageId).find(r=>r.decision==='pending') || null;
+}
+function measFor(itemId, stageId){
+  return (S.msByItem[itemId]||[]).filter(r=>stageId==null||r.stage_id===stageId);
+}
+// How many times this stage has already been sent back. Two is the number that
+// matters — it is the point at which the office wants to hear about it.
+function reworkAttempts(itemId, stageId){
+  return reworkFor(itemId, stageId).reduce((m,r)=>Math.max(m, r.attempt_no||0), 0);
+}
+const DIMENSIONAL_STAGES=['prod_sizing','internal_qc','final_photos'];
+// The same list bt_stage_evidence() builds, computed here so a row can say what
+// is missing without a round trip per piece. The server is still the authority
+// and refuses on its own reading; this only decides what the button says.
+function stageEvidence(itemId, stageId){
+  const stg=S.stagesById[stageId];
+  const recs=(S.updates||[]).filter(u=>u.item_id===itemId && u.stage_id===stageId);
+  const missing=[];
+  if(!recs.length) missing.push('a record of the work');
+  else if(!(S.photosByItem[itemId]||[]).some(p=>p.stage_id===stageId)) missing.push('a photograph');
+  else if(!recs.some(u=>String(u.public_summary||'').trim().length>=10)) missing.push('a line saying what was done');
+  else if(stg && DIMENSIONAL_STAGES.indexOf(stg.key)>=0 && !measFor(itemId, stageId).length)
+    missing.push('a measurement against the drawing');
+  return missing;
+}
+// Everything waiting for a supervisor to look at it. One row per submitted
+// daily record, newest first, with the piece and stage resolved.
+function reviewQueue(status){
+  return (S.updates||[]).filter(u=>{
+      if(!S.itemsById[u.item_id]) return false;
+      if(status==='pending')  return u.review_status==='pending';
+      if(status==='approved') return u.review_status==='approved';
+      if(status==='returned') return u.review_status==='changes_requested';
+      return true;
+    })
+    .slice().sort((a,b)=>String(b.submitted_at||b.work_date||'')
+      .localeCompare(String(a.submitted_at||a.work_date||'')));
 }
 function batchOf(itemId){ return S.batchById[S.batchOfItem[itemId]] || null; }
 function batchCodeOf(itemId){ const b=batchOf(itemId); return b?b.code:''; }
@@ -4563,7 +4743,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -4595,7 +4775,14 @@ async function loadData(){
     admin ? sb.from('bt_buyer_po_scope').select('*') : Promise.resolve({data:[]}),
     // Company details the buyer has filled in for himself. He may write these
     // but never into the billing record — they wait here until released.
-    sb.from('bt_buyer_submissions').select('*').order('submitted_at',{ascending:false})
+    sb.from('bt_buyer_submissions').select('*').order('submitted_at',{ascending:false}),
+    // Rework and holds are the owner's business too — a hold is his decision to
+    // make, and a stage sent back twice is the thing he wants told about. A
+    // buyer has no policy on any of these three, so the same calls come back
+    // empty for him rather than needing a branch here.
+    sb.rpc('bt_floor_rework'),
+    sb.rpc('bt_floor_holds'),
+    sb.rpc('bt_floor_measurements')
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -4644,6 +4831,7 @@ async function loadData(){
   (updi.data||[]).forEach(x=>{ S.updInternal[x.update_id]=x; });
   indexStageInternal((sti&&sti.data)||[]);
   indexAccounts((inv&&inv.data)||[], (ewb&&ewb.data)||[], (lsn&&lsn.data)||[], (lln&&lln.data)||[]);
+  indexReview((rw&&rw.data)||[], (hd&&hd.data)||[], (ms&&ms.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
 }
@@ -4780,6 +4968,33 @@ function ownerActions(){
       meta:hd.item.product+' · '+poRef(hd.item)+(hd.hold.hold_reason?' · '+hd.hold.hold_reason:''),
       action:{label:'Lift hold', go:"go('#/item/"+hd.item.id+"')"} });
   });
+
+  // A supervisor has asked for a stage to be stopped. Only the office can
+  // answer, and until it does the floor carries on cutting stone — which is
+  // exactly the situation the request exists to prevent.
+  (S.holds||[]).filter(h=>h.decision==='pending' && S.itemsById[h.item_id]).forEach(h=>{
+    const it=S.itemsById[h.item_id], st=S.stagesById[h.stage_id];
+    push({ urgency:0, chip:'blocked', chipLabel:'Hold asked for', icon:'stage-sealing',
+      type:'quality', item:it, stage:st,
+      title:'The floor wants to stop '+(st?st.name:'a stage'),
+      meta:it.product+' · '+poRef(it)+' · '+h.reason,
+      note:(personName(h.requested_by)?('Asked by '+personName(h.requested_by)):''),
+      action:{label:'Decide', go:"mDecideHold('"+h.id+"')"} });
+  });
+
+  // A stage that has come back more than once. Twice is the number that stops
+  // being one artisan's bad day and starts being a drawing, a tool or a block.
+  (S.rework||[]).filter(r=>!r.resolved_at && (r.attempt_no||0)>=2 && S.itemsById[r.item_id])
+    .forEach(r=>{
+      const it=S.itemsById[r.item_id], st=S.stagesById[r.stage_id];
+      push({ urgency:1, chip:'late', chipLabel:'Repeat rework', icon:'stage-finishing',
+        type:'quality', item:it, stage:st,
+        title:(st?st.name:'A stage')+' has been sent back '+r.attempt_no+' times',
+        meta:it.product+' · '+poRef(it)+' · '+r.defect_category,
+        sort:-(r.attempt_no||0),
+        note:r.due_date?('Due back '+fdate(r.due_date)):'',
+        action:{label:'Open', go:"go('#/item/"+it.id+"')"} });
+    });
 
   // Photographs and daily updates the buyer cannot see until reviewed.
   const nu=pendingUpdates().length, np=pendingPhotos().length;
@@ -5637,6 +5852,9 @@ function commandAlerts(){
   const held=heldStages();
   const uc=updateCompliance();
   const openQ=(S.comments||[]).filter(c=>c.author_role==='buyer'&&!c.resolved_at);
+  const asked=(S.holds||[]).filter(h=>h.decision==='pending');
+  const repeats=(S.rework||[]).filter(r=>!r.resolved_at && (r.attempt_no||0)>=2)
+    .slice().sort((a,b)=>(b.attempt_no||0)-(a.attempt_no||0));
   const ag=receivableAgeing();
   const overdue=ag.buckets.slice(1).reduce((a,b)=>a+b.v,0);
   return [
@@ -5646,6 +5864,18 @@ function commandAlerts(){
     { k:'Floor updates', v:uc.today+' of '+uc.of,
       s:uc.missing.length?(uc.missing.length+' still to submit'):'All logged today',
       warn:uc.missing.length>0, run:"go('#/production/missing')" },
+    // Two things only the office can answer, and both of them stop being cheap
+    // the longer they sit: a hold the floor asked for, and a stage that has now
+    // come back twice.
+    { k:'Hold decision', v:String(asked.length),
+      s:asked.length?(((S.itemsById[asked[0].item_id]||{}).product||'A piece')+' · '+asked[0].reason)
+                    :'Nothing asked for',
+      warn:asked.length>0, run:"go('#/production/quality')" },
+    { k:'Repeat rework', v:String(repeats.length),
+      s:repeats.length?(((S.itemsById[repeats[0].item_id]||{}).product||'A piece')+' · '+
+                        repeats[0].attempt_no+' attempts · '+repeats[0].defect_category)
+                     :'Nothing going back twice',
+      warn:repeats.length>0, run:"go('#/production/quality')" },
     { k:'Evidence review', v:String(q.approvals+pendingPhotos().length),
       s:'Photographs and updates waiting on you', warn:(q.approvals+pendingPhotos().length)>0,
       run:"go('#/production/review')" },
@@ -5946,6 +6176,7 @@ function updateHeader(){
     nav.innerHTML=
       '<p class="side-nav__group">The floor</p>'+
       link('#/home','Today',c.due)+
+      link('#/approvals','Check work',c.toReview)+
       link('#/team','Work &amp; people',c.unanswered)+
       link('#/batches','Shipment batches',0)+
       link('#/pieces','All pieces',0);
@@ -5953,6 +6184,7 @@ function updateHeader(){
     dock.hidden=false;
     dock.innerHTML=
       dockItem('#/home','stage-confirmed','Today',c.due,navActive('#/home')?' nav-link--active':'')+
+      dockItem('#/approvals','i-check','Check',c.toReview,navActive('#/approvals')?' nav-link--active':'')+
       dockItem('#/team','stage-planning','Work',c.unanswered,navActive('#/team')?' nav-link--active':'')+
       dockItem('#/batches','stage-packing','Batches',0,navActive('#/batches')?' nav-link--active':'')+
       dockItem('#/pieces','i-camera','Pieces',0,navActive('#/pieces')?' nav-link--active':'');
@@ -6325,9 +6557,10 @@ function withTabs(render0, tabs, active){
    decisions, the .prod-side floor position and delivery commitments, and the
    four-step .prod-logic strip. Every row is a real decision from ownerActions();
    the routine floor work stays on the Workshop screens. */
-const PROD_TYPES=[['all','All decisions'],['blocked','Work stopped'],['review','Review evidence'],
+const PROD_TYPES=[['all','All decisions'],['blocked','Work stopped'],['quality','Quality'],
+                  ['review','Review evidence'],
                   ['missing','Missing records'],['stage','Stage decisions'],['publish','Publish to buyer']];
-const PROD_LABEL={blocked:'Work stopped',review:'Review evidence',missing:'Missing record',
+const PROD_LABEL={blocked:'Work stopped',quality:'Quality',review:'Review evidence',missing:'Missing record',
                   stage:'Stage decision',publish:'Publish to buyer',waiting:'With the buyer',
                   finance:'Finance',other:'Decision'};
 function prodRows(){
@@ -6569,6 +6802,7 @@ function vProduction(tab){
   // the sub-routes the console links to preselect one of his filters
   if(tab==='missing') window.__prodFilter='missing';
   else if(tab==='blocked') window.__prodFilter='blocked';
+  else if(tab==='quality') window.__prodFilter='quality';
   const rows=prodRows();
   const n=t=>rows.filter(r=>r.type===t).length;
   const first=t=>{ const r=rows.find(x=>x.type===t); return r?String(r.meta||r.title).slice(0,70):'Nothing outstanding'; };
@@ -6590,6 +6824,7 @@ function vProduction(tab){
 
   h+='<section class="prod-metrics" aria-label="Production decision summary">'+
     prodMetric('blocked','Work stopped',n('blocked'),first('blocked'),n('blocked')?'critical':'')+
+    prodMetric('quality','Quality',n('quality'),first('quality'),n('quality')?'critical':'good')+
     prodMetric('review','Reviews due',n('review'),
       (pendingPhotos().length+' photograph'+(pendingPhotos().length===1?'':'s')+' and '+
        pendingUpdates().length+' update'+(pendingUpdates().length===1?'':'s')),n('review')?'warn':'')+
@@ -8358,6 +8593,50 @@ function setStaffFilter(k){ window.__staffFilter=k; vStaffHome(); }
 /* The tasks this person has been given, and the three answers to each. English
    and Hindi together, because the person reading it may be comfortable in only
    one of them and the buttons have to be unambiguous in both. */
+/* Work that came back.
+   Above everything else on the artisan's screen, because a piece sent back is
+   the one thing on the floor that is actively going wrong: the stone is cut,
+   the day is spent, and until it is put right nothing downstream can move. It
+   names the fault, what has to be done, and by when — in both languages, like
+   the rest of this screen — and the button goes straight to the log entry, so
+   nobody has to find the piece again to report the correction. */
+function staffReworkStrip(){
+  const me=uid();
+  const open=(S.rework||[]).filter(r=>!r.resolved_at && S.itemsById[r.item_id])
+    // a labourer sees only their own pieces anyway; this puts the ones they were
+    // personally asked to correct at the top of that list
+    .sort((a,b)=>(b.responsible_user===me)-(a.responsible_user===me) ||
+      String(a.due_date||'9999').localeCompare(String(b.due_date||'9999')));
+  if(!open.length) return '';
+  return '<section class="ws-tasks ws-back"><h2 class="ws-tasks__title">'+
+    'Sent back · वापस भेजा गया</h2>'+
+    open.map(r=>{
+      const it=S.itemsById[r.item_id];
+      const stg=S.stagesById[r.stage_id];
+      const late=r.due_date && daysUntil(r.due_date)<0;
+      return '<article class="ws-task ws-task--back">'+
+        '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · '))+
+          (r.attempt_no>1?' · '+r.attempt_no+ordSuffix(r.attempt_no)+' time':'')+'</p>'+
+        '<button class="ws-task__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+
+          esc(it.product)+'</button>'+
+        '<p class="ws-task__stage">'+esc(stg?stg.name:'')+'</p>'+
+        '<p class="ws-task__fault">'+esc(r.defect_category)+
+          (r.defect_note?' — '+esc(r.defect_note):'')+'</p>'+
+        '<p class="ws-task__fix">Do this · यह करें: '+esc(r.correction_required)+'</p>'+
+        (r.due_date?'<p class="ws-task__by'+(late?' ws-task__by--late':'')+'">'+
+          (late?'Was due · देना था: ':'Finish by · तक पूरा करें: ')+esc(fdate(r.due_date))+'</p>':'')+
+        '<div class="ws-task__do">'+
+          '<button class="button button--workshop" type="button" onclick="mDailyUpdate(\''+
+            it.id+'\','+r.stage_id+')">Report the fix · सुधार भेजें</button>'+
+        '</div></article>';
+    }).join('')+'</section>';
+}
+function ordSuffix(n){
+  const v=Number(n)||0;
+  if(v%100>=11 && v%100<=13) return 'th';
+  return ({1:'st',2:'nd',3:'rd'})[v%10]||'th';
+}
+
 function staffTaskStrip(){
   const tasks=myOpenTasks();
   if(!tasks.length) return '';
@@ -8420,6 +8699,10 @@ function vStaffHome(){
   if(pend) h+='<div class="attn attn--warn attn--flat"><span>'+pend+' photograph'+(pend>1?'s are':' is')+
     ' waiting for the office. They reach the client only after the office approves them.</span></div>';
 
+  // Work sent back first, then work given out. A returned piece outranks a new
+  // task: the stone is already cut and the day already spent, and nothing behind
+  // it in the shop moves until it is put right.
+  h+=staffReworkStrip();
   // Work given to this person. It sits above everything else because it is the
   // only thing on the screen somebody is waiting on an answer for — a task that
   // is never opened looks exactly like a task that was never given.
@@ -9233,6 +9516,7 @@ function render(){
     else if(isSupervisor()){
       if(parts[0]==='batches') vSupBatches();
       else if(parts[0]==='team') vSupTeam();
+      else if(parts[0]==='approvals'||parts[0]==='review') vSupApprovals(parts[1]);
       else if(parts[0]==='pieces') vStaffHome();
       else vSupHome();
     }
@@ -11449,7 +11733,13 @@ function supCounts(){
   const stuck=tasks.filter(a=>a.ack_state==='cannot_start'||a.ack_state==='clarify').length;
   const unassigned=open.filter(it=>!openAssignment(it.id)).length;
   const unbatched=open.filter(it=>!S.batchOfItem[it.id]).length;
-  return {due, blocked, unanswered, stuck, unassigned, unbatched, open:open.length, tasks:tasks.length};
+  const toReview=reviewQueue('pending').length;
+  const openRw=(S.rework||[]).filter(r=>!r.resolved_at).length;
+  const repeats=(S.rework||[]).filter(r=>!r.resolved_at && (r.attempt_no||0)>=2).length;
+  const heldNow=(S.holds||[]).filter(h=>h.decision==='granted').length;
+  const askedFor=(S.holds||[]).filter(h=>h.decision==='pending').length;
+  return {due, blocked, unanswered, stuck, unassigned, unbatched, open:open.length, tasks:tasks.length,
+          toReview, openRw, repeats, heldNow, askedFor};
 }
 
 function supDayNote(){
@@ -11632,6 +11922,145 @@ function vSupBatches(){
   // the serif headings. Without it these screens fell back to the older button
   // styles and came out with blue primary buttons — a different product wearing
   // the same name, which is the one thing the brief is most explicit about.
+  sfaPaint(h);
+}
+
+/* ------------------------------------------------------------ checking work --
+   The loop that closes the floor. A labourer reports what they did; a
+   supervisor looks at it and either accepts it, sends it back with the defect
+   named, or asks the office to stop the stage altogether. Nothing here decides
+   what a buyer sees — approving a record marks it checked, and publishing it
+   stays the office's separate decision, which is the one boundary Yash has
+   been most explicit about.
+
+   Rows are daily records, not pieces, because that is the unit a supervisor
+   actually looks at: one person, one piece, one day, one set of photographs. */
+
+function apprTab(key, label, n){
+  const on=(S.apprFilter||'pending')===key;
+  return '<button class="fl-tab'+(on?' fl-tab--on':'')+'" type="button" aria-pressed="'+on+
+    '" onclick="setApprFilter(\''+key+'\')">'+esc(label)+
+    (n?'<span class="fl-tab__n">'+n+'</span>':'')+'</button>';
+}
+
+// One submitted record, with everything the supervisor needs to judge it
+// without opening another screen: what was photographed, what was written, who
+// wrote it, what they were told to do, and what the stage is still missing.
+function apprRow(u){
+  const it=S.itemsById[u.item_id]; if(!it) return '';
+  const stg=S.stagesById[u.stage_id];
+  const a=openAssignment(it.id, u.stage_id) || openAssignment(it.id);
+  const who=personName(u.worked_by||u.submitted_by)||'Somebody on the floor';
+  const shots=(S.photosByItem[it.id]||[]).filter(p=>p.stage_id===u.stage_id);
+  const rw=openRework(it.id, u.stage_id);
+  const held=liveHold(it.id, u.stage_id);
+  const asked=pendingHold(it.id, u.stage_id);
+  const tries=reworkAttempts(it.id, u.stage_id);
+  const missing=stageEvidence(it.id, u.stage_id);
+  const ready=!missing.length && !rw && !held;
+
+  let state;
+  if(held) state=badge('Stopped by the office','alert');
+  else if(rw) state=badge('Sent back'+(rw.attempt_no>1?' · '+rw.attempt_no+'th time':''),'alert');
+  else if(asked) state=badge('Hold asked for','pending');
+  else if(u.review_status==='approved') state=badge('Checked','success');
+  else if(u.review_status==='changes_requested') state=badge('Sent back','alert');
+  else state=badge('Waiting to be checked','pending');
+
+  const said=String(u.public_summary||'').trim();
+  return '<article class="fl-check'+(rw||held?' fl-check--flag':'')+'">'+
+    '<div class="fl-check__shot">'+
+      thumbOf(shots.length?shots:(S.photosByItem[it.id]||[]), it.id, u.stage_id)+
+      (shots.length>1?'<span class="fl-check__more">'+shots.length+' photos</span>':'')+
+    '</div>'+
+    '<div class="fl-check__main">'+
+      '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref, stg?shortStage(stg.name):'']
+        .filter(Boolean).join(' · '))+'</p>'+
+      '<button class="fl-row__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
+      '<p class="fl-check__by">'+esc(who)+' · '+esc(fdate(u.work_date))+
+        (u.submitted_at?' · sent '+esc(ftime(u.submitted_at)):'')+'</p>'+
+      (said?'<p class="fl-check__said">“'+esc(said)+'”</p>'
+           :'<p class="fl-check__said muted">Nothing written against this record.</p>')+
+      (a&&a.instruction?'<p class="fl-check__told">Told to: '+esc(a.instruction)+'</p>':'')+
+      (rw?'<p class="fl-check__flagline">Sent back — '+esc(rw.defect_category)+
+          '. Put right: '+esc(rw.correction_required)+
+          (rw.due_date?' (by '+esc(fdate(rw.due_date))+')':'')+'</p>':'')+
+      (held?'<p class="fl-check__flagline">The office stopped this stage — '+esc(held.reason)+'</p>':'')+
+      (asked?'<p class="fl-check__told">Hold asked for — '+esc(asked.reason)+
+             '. Waiting on the office.</p>':'')+
+      (missing.length?'<p class="fl-check__missing">Stage still needs '+esc(missing.join(', '))+
+        ' before it can be signed off.</p>':'')+
+      (tries>=2?'<p class="fl-check__flagline">This stage has gone back '+tries+' times.</p>':'')+
+    '</div>'+
+    '<div class="fl-check__side">'+state+
+      '<div class="fl-check__do">'+
+        (u.review_status==='pending'
+          ? '<button class="button small" type="button" onclick="mReviewRecord(\''+u.id+'\',\'approved\')">Accept</button>'+
+            '<button class="button secondary small" type="button" onclick="mReviewRecord(\''+u.id+'\',\'returned\')">Send back</button>'
+          : '')+
+        (ready?'<button class="button'+(u.review_status==='pending'?' secondary':'')+
+               ' small" type="button" onclick="mApproveStage(\''+it.id+'\','+u.stage_id+
+               ')">Sign off stage</button>':'')+
+        (!held&&!asked?'<button class="button quiet small" type="button" onclick="mRequestHold(\''+
+            it.id+'\','+u.stage_id+')">Ask to stop</button>':'')+
+        (held&&isAdmin()?'<button class="button quiet small" type="button" onclick="mDecideHold(\''+
+            held.id+'\',\'lifted\')">Lift the hold</button>':'')+
+        (asked&&isAdmin()?'<button class="button quiet small" type="button" onclick="mDecideHold(\''+
+            asked.id+'\')">Answer the request</button>':'')+
+      '</div>'+
+    '</div></article>';
+}
+
+function vSupApprovals(sub){
+  if(sub && ['pending','approved','returned','all'].indexOf(sub)>=0) S.apprFilter=sub;
+  const f=S.apprFilter||'pending';
+  const c=supCounts();
+  const q=(window.__staffQ||'').toLowerCase();
+
+  let h='<div class="page-heading"><div>'+eyebrow('Quality')+
+    '<h1 class="display-title">Check work.</h1>'+
+    '<p class="lede">What the floor reported, waiting for you to look at it. Accept it, send it back '+
+    'with the fault named, or ask the office to stop the stage. Accepting is not the same as showing '+
+    'it to the buyer — that stays with the office.</p></div></div>';
+
+  h+='<div class="kpi-grid">'+[
+    ['Waiting to be checked', c.toReview, c.toReview?'Nobody has looked at these yet':'Nothing waiting'],
+    ['Sent back, still open', c.openRw, c.repeats?c.repeats+' on a second attempt':'None outstanding'],
+    ['Stopped by the office', c.heldNow, c.heldNow?'Work cannot go on':'Nothing stopped'],
+    ['Holds asked for', c.askedFor, c.askedFor?'Waiting on the office':'None asked for']
+  ].map((t,i)=>'<article class="kpi'+((i===1&&c.repeats)||(i===2&&t[1])?' kpi--warn':'')+'">'+
+    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
+    '<span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+
+  h+='<div class="fl-tabs space-top-16">'+
+    apprTab('pending','Waiting to be checked',c.toReview)+
+    apprTab('returned','Sent back or stopped',c.openRw+c.heldNow)+
+    apprTab('approved','Checked',0)+
+    apprTab('all','Everything',0)+'</div>';
+
+  let rows=reviewQueue(f);
+  // "Sent back or stopped" is a question about the piece, not the record: a
+  // stage the office has stopped may have no returned record at all.
+  if(f==='returned') rows=rows.concat((S.updates||[]).filter(u=>
+      S.itemsById[u.item_id] && u.review_status!=='changes_requested' &&
+      (openRework(u.item_id,u.stage_id) || liveHold(u.item_id,u.stage_id))))
+    .filter((u,i,l)=>l.indexOf(u)===i);
+  if(q) rows=rows.filter(u=>{
+    const it=S.itemsById[u.item_id];
+    return ((it.product||'')+' '+(it.stone||'')+' '+(it.item_ref||'')+' '+(batchCodeOf(it.id)||'')+' '+
+            personName(u.worked_by||u.submitted_by)).toLowerCase().indexOf(q)>=0;
+  });
+
+  const empty={pending:'Nothing is waiting to be checked.',
+               returned:'Nothing has been sent back and nothing is stopped.',
+               approved:'Nothing has been checked yet.',
+               all:'The floor has not reported anything yet.'}[f];
+  h+='<div class="fl-checks space-top-16">'+
+    (rows.length?rows.slice(0,120).map(apprRow).join('')
+      :'<div class="empty-state">'+esc(q?'Nothing matches that search.':empty)+'</div>')+
+    (rows.length>120?'<p class="muted space-top-12">Showing the newest 120 of '+rows.length+'.</p>':'')+
+    '</div>';
+
   sfaPaint(h);
 }
 
@@ -15536,6 +15965,192 @@ function mAckTask(assignmentId, state){
     await refresh();
     toast('Sent to the supervisor. / सुपरवाइज़र को भेज दिया।');
   };
+}
+
+
+/* ---------------------------------------------------------------------------
+   Checking work: accept, send back, stop.
+
+   Three separate decisions that people talk about as one. Accepting a record
+   says a supervisor looked at it — it does not put a photograph in front of a
+   buyer, and the server deliberately leaves published_at alone. Sending it back
+   needs the fault named and the correction named, because "do it again" is what
+   produces the same piece twice. Stopping a stage is only ever a request: the
+   office decides, and the supervisor is told so on the button.
+--------------------------------------------------------------------------- */
+
+function setApprFilter(f){ S.apprFilter=f; render(); }
+
+const DEFECTS=['Chipped or cracked','Wrong size','Uneven surface','Wrong profile or carving',
+               'Colour or vein mismatch','Poor polish','Wrong material','Damaged in handling','Something else'];
+
+function mReviewRecord(updateId, kind){
+  const u=(S.updates||[]).find(x=>x.id===updateId);
+  if(!u){ toast('That record is no longer there.',{err:true}); return; }
+  const it=S.itemsById[u.item_id]||{};
+  const stg=S.stagesById[u.stage_id];
+  const line=esc(it.product||'')+(stg?' · '+esc(shortStage(stg.name)):'')+' · '+esc(fdate(u.work_date));
+
+  if(kind==='approved'){
+    const m=modal('<h3>Accept this work</h3><div class="sub">'+line+'</div>'+
+      '<p class="field-hint">This records that you have looked at it. It does not show anything '+
+      'to the buyer — the office decides that separately.</p>'+
+      (openRework(u.item_id,u.stage_id)
+        ? '<p class="field-hint">This also closes the correction that was outstanding on this stage.</p>'
+        : '')+
+      '<div class="form-grid"><div class="field field--full"><label for="rv-note">Anything to note (optional)</label>'+
+        '<input id="rv-note" placeholder="e.g. flutes match the drawing now"></div>'+
+        '<div class="button-row field--full"><button class="button" type="button" id="rv-go">Accept</button>'+
+        '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+    m.m.querySelector('#rv-go').onclick=async (e)=>{
+      e.currentTarget.disabled=true;
+      const {error}=await sb.rpc('bt_review_record',
+        {p_update:updateId, p_decision:'approved', p_note:$('rv-note').value.trim()||null});
+      e.currentTarget.disabled=false;
+      if(error){ toast(error.message,{err:true}); return; }
+      closeModal(); await refresh(); toast('Accepted.');
+    };
+    return;
+  }
+
+  const tries=reworkAttempts(u.item_id, u.stage_id);
+  const people=floorPeople();
+  const blamed=u.worked_by||u.submitted_by;
+  const m=modal('<h3>Send this back</h3><div class="sub">'+line+'</div>'+
+    (tries?'<p class="field-hint"><strong>This stage has already gone back '+tries+
+       ' time'+(tries===1?'':'s')+'.</strong> Sending it back again tells the office.</p>':'')+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="rw-cat">What is wrong</label><select id="rw-cat">'+
+        DEFECTS.map(d=>'<option>'+esc(d)+'</option>').join('')+'</select></div>'+
+      '<div class="field"><label for="rw-due">Put right by</label>'+
+        '<input id="rw-due" type="date" value="'+esc(addDays(today(),2))+'"></div>'+
+      '<div class="field field--full"><label for="rw-note">Say exactly what you saw</label>'+
+        '<input id="rw-note" placeholder="e.g. chip on the top-left corner, about 8 mm"></div>'+
+      '<div class="field field--full"><label for="rw-fix">What has to be done about it</label>'+
+        '<textarea id="rw-fix" rows="2" placeholder="e.g. re-cut ribs 3 and 4 to the drawing, then re-photograph"></textarea>'+
+        '<p class="field-hint">This is what the person reads on their phone. Without it they repeat the same piece.</p></div>'+
+      '<div class="field field--full"><label for="rw-who">Who puts it right</label><select id="rw-who">'+
+        '<option value="">The person who did it</option>'+
+        people.map(p=>'<option value="'+esc(p.user_id)+'"'+(p.user_id===blamed?' selected':'')+'>'+
+          esc(p.full_name)+'</option>').join('')+'</select></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="rw-go">Send it back</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#rw-go').onclick=async (e)=>{
+    const fix=$('rw-fix').value.trim();
+    if(!fix){ toast('Say what has to be put right.',{err:true}); return; }
+    e.currentTarget.disabled=true;
+    const {data,error}=await sb.rpc('bt_review_record',{
+      p_update:updateId, p_decision:'changes_requested',
+      p_note:$('rw-note').value.trim()||null,
+      p_defect:$('rw-cat').value,
+      p_correction:fix,
+      p_due:$('rw-due').value||null,
+      p_responsible:$('rw-who').value||null});
+    e.currentTarget.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh();
+    toast(data&&data.repeat
+      ? 'Sent back — attempt '+data.attempt+'. The office has been told.'
+      : 'Sent back.');
+  };
+}
+
+function mApproveStage(itemId, stageId){
+  const it=S.itemsById[itemId]||{};
+  const stg=S.stagesById[stageId];
+  const missing=stageEvidence(itemId, stageId);
+  const m=modal('<h3>Sign off this stage</h3>'+
+    '<div class="sub">'+esc(it.product||'')+(stg?' · '+esc(shortStage(stg.name)):'')+'</div>'+
+    (missing.length
+      ? '<p class="field-hint">This stage is still missing '+esc(missing.join(', '))+
+        '. The office will refuse it until that is there.</p>'
+      : '<p class="field-hint">The stage will be marked finished and the piece moves to the next one. '+
+        'Nothing is shown to the buyer by doing this.</p>')+
+    '<div class="form-grid"><div class="field field--full"><label for="sg-note">Anything to note (optional)</label>'+
+      '<input id="sg-note" placeholder="e.g. finished a day early"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="sg-go">Sign it off</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#sg-go').onclick=async (e)=>{
+    e.currentTarget.disabled=true;
+    const {data,error}=await sb.rpc('bt_supervisor_approve_stage',
+      {p_item:itemId, p_stage:stageId, p_note:$('sg-note').value.trim()||null});
+    e.currentTarget.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh();
+    const nx=data&&data.next_stage?S.stagesById[data.next_stage]:null;
+    toast(data&&data.finished ? 'Signed off. The piece is made.'
+        : 'Signed off.'+(nx?' Now on '+shortStage(nx.name)+'.':''));
+  };
+}
+
+function mRequestHold(itemId, stageId){
+  const it=S.itemsById[itemId]||{};
+  const stg=S.stagesById[stageId];
+  const m=modal('<h3>Ask the office to stop this stage</h3>'+
+    '<div class="sub">'+esc(it.product||'')+(stg?' · '+esc(shortStage(stg.name)):'')+'</div>'+
+    '<p class="field-hint">The work carries on until the office answers. Only they can actually stop it.</p>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="hl-why">Why should it stop</label>'+
+        '<textarea id="hl-why" rows="2" placeholder="e.g. hairline crack running through the fluting"></textarea></div>'+
+      '<div class="field field--full"><label for="hl-ev">Where they can see it (optional)</label>'+
+        '<input id="hl-ev" placeholder="e.g. photos 3 and 4 of today"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="hl-go">Send the request</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#hl-go').onclick=async (e)=>{
+    const why=$('hl-why').value.trim();
+    if(!why){ toast('Say why the work should stop.',{err:true}); return; }
+    e.currentTarget.disabled=true;
+    const {error}=await sb.rpc('bt_request_hold',
+      {p_item:itemId, p_stage:stageId, p_reason:why, p_evidence:$('hl-ev').value.trim()||null});
+    e.currentTarget.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Sent to the office.');
+  };
+}
+
+// The office's half. A supervisor never reaches this — the server refuses them
+// regardless, but the button is not drawn for them either.
+function mDecideHold(holdId, preset){
+  const hd=(S.holds||[]).find(h=>h.id===holdId);
+  if(!hd){ toast('That request is no longer there.',{err:true}); return; }
+  const it=S.itemsById[hd.item_id]||{};
+  const stg=S.stagesById[hd.stage_id];
+  const lifting=preset==='lifted'||hd.decision==='granted';
+  const m=modal('<h3>'+(lifting?'Let the work go on':'A hold has been asked for')+'</h3>'+
+    '<div class="sub">'+esc(it.product||'')+(stg?' · '+esc(shortStage(stg.name)):'')+'</div>'+
+    '<div class="handover"><div class="handover__row"><span>Asked by</span><strong>'+
+      esc(personName(hd.requested_by)||'The floor')+'</strong></div>'+
+      '<div class="handover__row"><span>Reason</span><strong>'+esc(hd.reason)+'</strong></div>'+
+      (hd.evidence_note?'<div class="handover__row"><span>Evidence</span><strong>'+
+        esc(hd.evidence_note)+'</strong></div>':'')+'</div>'+
+    '<div class="form-grid" style="margin-top:12px">'+
+      '<div class="field field--full"><label for="hd-note">What you are telling the floor</label>'+
+        '<input id="hd-note" placeholder="'+(lifting?'e.g. new block cut, carry on':'e.g. stop, get a new block from the yard')+'"></div>'+
+      '<div class="button-row field--full">'+
+        (lifting
+          ? '<button class="button" type="button" id="hd-lift">Lift the hold</button>'
+          : '<button class="button" type="button" id="hd-grant">Stop the work</button>'+
+            '<button class="button button--secondary" type="button" id="hd-decline">Carry on anyway</button>')+
+        '<button class="button button--quiet" type="button" onclick="closeModal()">Close</button>'+
+      '</div></div>');
+  const decide=async (decision, btn)=>{
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_decide_hold',
+      {p_hold:holdId, p_decision:decision, p_note:$('hd-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh();
+    toast({granted:'Stopped. The floor has been told.',
+           declined:'The floor has been told to carry on.',
+           lifted:'Lifted. The work can go on.'}[decision]);
+  };
+  ['grant:granted','decline:declined','lift:lifted'].forEach(pair=>{
+    const [id,decision]=pair.split(':');
+    const b=m.m.querySelector('#hd-'+id);
+    if(b) b.onclick=e=>decide(decision, e.currentTarget);
+  });
 }
 
 
