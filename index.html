@@ -4024,6 +4024,15 @@ body.reports-mode .sfa .content{max-width:1700px}
 .att-row p{ margin:4px 0 0; color:var(--muted, #6e6e73); font-size:12px; }
 @media (max-width: 520px){ .att-grid{ grid-template-columns:1fr 1fr; } }
 
+/* the product timer on a card: the prototype's strip at the system's sizes */
+.timer-strip{ margin-top:12px; padding:10px 12px; border:1px solid var(--line, #e5e5e7); border-radius:9px; background:var(--surface-2, #f3f3f4); }
+.timer-strip>div:first-child{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:8px; }
+.timer-strip span{ color:var(--muted, #6e6e73); font-size:11px; }
+.timer-strip strong{ font-size:20px; font-variant-numeric:tabular-nums; }
+.timer-strip .timer-live{ color:var(--success, #3c7d5a); }
+.timer-strip .field-hint{ margin:8px 0 0; }
+.wk-notice--time span{ display:block; color:var(--ink); font-weight:700; margin-bottom:4px; }
+
 /* pay: the statement's lines, the manual breakdown, the amount presets */
 .pay-lines{ margin-top:10px; border:1px solid var(--line, #e5e5e7); border-radius:10px; overflow:hidden; }
 .pay-lines div{ display:flex; justify-content:space-between; gap:10px; padding:9px 12px; border-top:1px solid var(--line-light, #ececef); font-size:12px; }
@@ -4065,7 +4074,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='917f944ba49c';</script>
+<script>const BUILD_ID='fb567609059f';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4380,7 +4389,9 @@ const S = {
   contributors:[], attDay:[], attMine:[], attCorrections:[], sites:[], policy:{}, absences:[], myLeave:[],
   // pay: what the policies let this login read — the office everything, a
   // person their own, a supervisor other people's overtime and nothing else
-  payRates:[], statements:[], advances:[], overtime:[]
+  payRates:[], statements:[], advances:[], overtime:[],
+  // time and tools: hours only, no money anywhere in these
+  equipment:[], eqEvents:[], timeEntries:[], indirect:[], timeRegister:[], timeCorrections:[]
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -4410,7 +4421,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv, ws, adv, ot] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv, ws, adv, ot, eq, eqe, wte, ite, reg] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -4450,7 +4461,15 @@ async function loadStaffData(){
     // money: a supervisor sees the proposals they made.
     sb.from('bt_wage_statements').select('*').order('period_end',{ascending:false}),
     sb.from('bt_advance_requests').select('*').order('requested_at',{ascending:false}),
-    sb.from('bt_overtime_requests').select('*').order('work_date',{ascending:false})
+    sb.from('bt_overtime_requests').select('*').order('work_date',{ascending:false}),
+    // Time and tools. The equipment list is the floor's; time entries come back
+    // as the person's own or, for a supervisor, everyone's; the register is
+    // planned-versus-actual per product and comes back empty for an artisan.
+    sb.from('bt_equipment').select('*').eq('active', true).order('name'),
+    sb.from('bt_equipment_events').select('*').order('reported_at',{ascending:false}),
+    sb.from('bt_work_time_entries').select('*').order('started_at',{ascending:false}),
+    sb.from('bt_indirect_time_entries').select('*').order('started_at',{ascending:false}),
+    sb.rpc('bt_floor_time_register')
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -4493,6 +4512,7 @@ async function loadStaffData(){
   indexAttendance((atd&&atd.data)||[], (atm&&atm.data)||[], (sites&&sites.data)||[], (pol&&pol.data)||[], (atc&&atc.data)||[]);
   S.absences=(abs&&abs.data)||[]; S.myLeave=(lv&&lv.data)||[];
   indexPay([], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
+  indexTime((eq&&eq.data)||[], (eqe&&eqe.data)||[], (wte&&wte.data)||[], (ite&&ite.data)||[], (reg&&reg.data)||[], []);
   S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
 }
@@ -4968,7 +4988,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -5020,7 +5040,14 @@ async function loadData(){
     admin ? sb.from('bt_pay_rates').select('*').order('effective_from',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_wage_statements').select('*').order('period_end',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_advance_requests').select('*').order('requested_at',{ascending:false}) : Promise.resolve({data:[]}),
-    admin ? sb.from('bt_overtime_requests').select('*').order('work_date',{ascending:false}) : Promise.resolve({data:[]})
+    admin ? sb.from('bt_overtime_requests').select('*').order('work_date',{ascending:false}) : Promise.resolve({data:[]}),
+    // Time and tools, the office's view. A buyer has no policy on any of these.
+    admin ? sb.from('bt_equipment').select('*').order('name') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_equipment_events').select('*').order('reported_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_work_time_entries').select('*').order('started_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_indirect_time_entries').select('*').order('started_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.rpc('bt_floor_time_register') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_work_time_corrections').select('*').order('changed_at',{ascending:false}) : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -5074,9 +5101,52 @@ async function loadData(){
   indexAttendance((atd&&atd.data)||[], [], (sites&&sites.data)||[], (pol&&pol.data)||[], (atc&&atc.data)||[]);
   S.myLeave=(lv&&lv.data)||[]; S.absences=S.myLeave;   // the office reads the full table
   indexPay((rates&&rates.data)||[], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
+  indexTime((eq&&eq.data)||[], (eqe&&eqe.data)||[], (wte&&wte.data)||[], (ite&&ite.data)||[], (reg&&reg.data)||[], (wtc&&wtc.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
 }
+
+/* ---- time and tools -----------------------------------------------------------
+   Productive time is a person on a product on a process with a start and an
+   end; a pause is indirect time with a reason; rework time is productive time
+   on a stage that has been sent back. The register comes from the server so
+   the supervisor's table, the owner's report and the card on a phone agree. */
+function indexTime(equipment, events, entries, indirect, register, corrections){
+  S.equipment=(equipment||[]).slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
+  S.equipmentById={}; S.equipment.forEach(e=>{ S.equipmentById[e.id]=e; });
+  S.eqEvents=(events||[]).slice();
+  S.timeEntries=(entries||[]).slice();
+  S.indirect=(indirect||[]).slice();
+  S.timeRegister=(register||[]).slice();
+  S.timeCorrections=(corrections||[]).slice();
+}
+const PAUSE_REASONS=[
+  ['meal_break','Meal / personal break','खाना / निजी ब्रेक'],['waiting_material','Waiting for stone','पत्थर का इंतज़ार'],
+  ['waiting_tool','Waiting for tool','औज़ार का इंतज़ार'],['machine_breakdown','Machine breakdown','मशीन खराब'],
+  ['power_interruption','Power interruption','बिजली बंद'],['supervisor_decision','Supervisor decision','सुपरवाइज़र का फैसला'],
+  ['cleaning','Cleaning','सफ़ाई'],['setup','Setting up','सेटअप'],['tool_maintenance','Tool maintenance','औज़ार की मरम्मत'],
+  ['training','Training','प्रशिक्षण'],['meeting','Meeting','मीटिंग'],['other','Other','अन्य']];
+function pauseLabel(code, hindi){ const r=PAUSE_REASONS.find(x=>x[0]===code); return r?(hindi?r[1]+' · '+r[2]:r[1]):(code||''); }
+const ROOT_CAUSES=[['process','Process / method'],['training','Training required'],['material','Material / stone'],
+  ['drawing','Drawing / office decision'],['equipment','Equipment'],['handling','Handling'],['unconfirmed','Unconfirmed']];
+function rootLabel(code){ const r=ROOT_CAUSES.find(x=>x[0]===code); return r?r[1]:(code||''); }
+const EQUIPMENT_ISSUES=[['breakdown','Breakdown'],['tool_wear','Blade / tool wear'],['safety','Safety guard'],['electrical','Electrical'],['service_due','Routine service due'],['other','Other']];
+const EQUIPMENT_STATUS={available:['Available','success'], reduced:['Reduced capacity','pending'], unavailable:['Unavailable','alert']};
+function equipmentName(id){ const e=S.equipmentById&&S.equipmentById[id]; return e?e.name:''; }
+// the person's own running timer, if any
+function runningTimer(){ return (S.timeEntries||[]).find(e=>e.user_id===uid() && !e.ended_at)||null; }
+// the person's own open pause, if any
+function openPause(){ return (S.indirect||[]).find(e=>e.user_id===uid() && !e.ended_at)||null; }
+// ended, unattached timer entries of one person on one product and process
+function unattachedMinutes(userId, itemId, stageId){
+  return (S.timeEntries||[]).filter(e=>e.user_id===userId && e.item_id===itemId && e.stage_id===stageId && !e.update_id && e.ended_at)
+    .reduce((t,e)=>t+(e.minutes||0),0);
+}
+function timeFor(itemId, stageId){ return (S.timeRegister||[]).find(r=>r.item_id===itemId && r.stage_id===stageId)||null; }
+function elapsedMinutes(ts){ return Math.max(0, Math.floor((Date.now()-new Date(ts).getTime())/60000)); }
+function fclockspan(m){ m=Math.max(0,Math.round(m||0)); return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
+// the standing assignment names a machine that has since been taken away (test 53)
+function assignmentEquipmentDown(a){ const e=a&&a.equipment_id?S.equipmentById[a.equipment_id]:null; return !!(e && e.status==='unavailable'); }
 
 /* ---- pay -------------------------------------------------------------------
    Money never leaves this file for a floor screen except as the person's own
@@ -5262,6 +5332,16 @@ function ownerActions(){
       type:'blocked', item:hd.item, stage:hd.stage, title:(hd.stage?hd.stage.name:'A stage')+' on hold',
       meta:hd.item.product+' · '+poRef(hd.item)+(hd.hold.hold_reason?' · '+hd.hold.hold_reason:''),
       action:{label:'Lift hold', go:"go('#/item/"+hd.item.id+"')"} });
+  });
+
+  // A machine the floor has taken out of service. Every standing task that
+  // named it is flagged on the floor; the office sees the count here.
+  (S.equipment||[]).filter(e=>e.active!==false && e.status==='unavailable').forEach(e=>{
+    const n=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at && a.equipment_id===e.id).length;
+    push({ urgency:0, chip:'blocked', chipLabel:'Equipment', icon:'stage-sizing',
+      type:'blocked', title:e.name+' is out of service',
+      meta:(e.area?e.area+' · ':'')+(e.status_note||'no note')+(n?' · '+n+' task'+(n===1?'':'s')+' on it':''),
+      action:{label:'Open', go:"go('#/admin/settings')"} });
   });
 
   // A supervisor has asked for a stage to be stopped. Only the office can
@@ -6199,10 +6279,12 @@ function commandAlerts(){
   const ot=(S.overtime||[]).filter(o=>o.status==='pending');
   const ag=receivableAgeing();
   const overdue=ag.buckets.slice(1).reduce((a,b)=>a+b.v,0);
+  const down=(S.equipment||[]).filter(e=>e.active!==false && e.status==='unavailable');
   return [
-    { k:'Production block', v:String(held.length),
-      s:held.length?(held[0].item.product+((held[0].hold&&held[0].hold.hold_reason)?(' · '+held[0].hold.hold_reason):'')):'Nothing held',
-      warn:held.length>0, run:"go('#/production/blocked')" },
+    { k:'Production block', v:String(held.length+down.length),
+      s:held.length?(held[0].item.product+((held[0].hold&&held[0].hold.hold_reason)?(' · '+held[0].hold.hold_reason):''))
+        :down.length?(down[0].name+' out of service'):'Nothing held',
+      warn:held.length>0||down.length>0, run:"go('#/production/blocked')" },
     { k:'Floor updates', v:uc.today+' of '+uc.of,
       s:uc.missing.length?(uc.missing.length+' still to submit'):'All logged today',
       warn:uc.missing.length>0, run:"go('#/production/missing')" },
@@ -6529,6 +6611,7 @@ function updateHeader(){
       link('#/team','Work &amp; people',c.unanswered)+
       link('#/batches','Shipment batches',0)+
       link('#/attendance','Attendance',c.attExceptions)+
+      link('#/resources','Time &amp; tools',c.equipmentDown)+
       link('#/pieces','All pieces',0)+
       // The supervisor's own wages and advances: theirs as a person, under the
       // same policy as an artisan's, and nobody else's. Not on the dock — six
@@ -6543,7 +6626,7 @@ function updateHeader(){
       dockItem('#/team','stage-planning','Work',c.unanswered,navActive('#/team')?' nav-link--active':'')+
       dockItem('#/batches','stage-packing','Batches',0,navActive('#/batches')?' nav-link--active':'')+
       dockItem('#/attendance','stage-confirmed','Attend.',c.attExceptions,navActive('#/attendance')?' nav-link--active':'')+
-      dockItem('#/pieces','i-camera','Pieces',0,navActive('#/pieces')?' nav-link--active':'');
+      dockItem('#/resources','stage-sizing','Tools',c.equipmentDown,navActive('#/resources')?' nav-link--active':'');
     return;
   }
 
@@ -7468,7 +7551,7 @@ function vClients(tab){
    Every figure is derived from rows and every card states its own formula —
    "Metric definitions" opens that list. */
 const REPORT_SECTIONS=[['overview','Overview'],['delivery','Orders & delivery'],
-  ['production','Production'],['service','Client service'],['finance','Finance'],['activity','Audit log']];
+  ['production','Production'],['hours','Hours & tools'],['service','Client service'],['finance','Finance'],['activity','Audit log']];
 function reportSection(){ return window.__repSec||'overview'; }
 function setReportSection(k){
   window.__repSec=k;
@@ -7493,6 +7576,7 @@ function vReports(tab){
   const body =
     sec==='delivery'   ? vReportsDelivery
   : sec==='production' ? vReportsProduction
+  : sec==='hours'      ? vReportsHours
   : sec==='service'    ? vReportsService
   : sec==='finance'    ? vReportsFinance
   : sec==='activity'   ? vReportsActivity
@@ -9715,6 +9799,7 @@ function vSettings(){
     '</table></div></section>'+
 
     settingsAttendanceCard()+
+    settingsEquipmentCard()+
 
     '<section class="form-card"><div class="form-card__head"><div>'+
       '<h3 class="form-card__title">Your sign-in</h3>'+
@@ -9773,6 +9858,76 @@ function settingsAttendanceCard(){
       '<label class="check-row field--full"><input type="checkbox" id="pol-paid" '+(p('paid_leave')?'checked':'')+'><span>Paid leave (off under current policy)</span></label>'+
       '<div class="button-row field--full"><button class="button" type="button" onclick="savePolicy()">Save policy</button></div>'+
     '</div></section>';
+}
+
+// The machines the floor may name on a task. Availability is the floor's to
+// change (a breakdown is reported there); the list itself is the office's.
+function settingsEquipmentCard(){
+  const list=(S.equipment||[]).filter(e=>e.active!==false);
+  return '<section class="form-card"><div class="form-card__head"><div>'+
+      '<h3 class="form-card__title">Equipment &amp; work centres</h3>'+
+      '<p class="form-card__description">A supervisor plans a task onto one of these and reports when one breaks. '+
+      'A machine marked unavailable cannot be chosen for new work, and every standing task on it is flagged on the floor.</p></div></div>'+
+    (list.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Equipment</th><th>Area</th><th>Status</th><th>Next service</th><th></th></tr></thead><tbody>'+
+      list.map(e=>{ const st=EQUIPMENT_STATUS[e.status]||[e.status,'']; return '<tr><td><strong>'+esc(e.name)+'</strong>'+(e.status_note?'<span class="fl-cell-sub">'+esc(e.status_note)+'</span>':'')+'</td>'+
+        '<td>'+esc(e.area||'—')+'</td><td>'+badge(st[0],st[1])+'</td><td>'+esc(e.next_service?fdate(e.next_service):'—')+'</td>'+
+        '<td class="nowrap">'+(e.status!=='available'?'<button class="button small" type="button" onclick="restoreEquipment(\''+e.id+'\')">Available again</button> ':'')+
+          '<button class="button quiet small" type="button" onclick="retireEquipment(\''+e.id+'\')">Retire</button></td></tr>'; }).join('')+
+      '</tbody></table></div>':'<p class="field-hint">No equipment listed yet.</p>')+
+    '<div class="form-grid space-top-14">'+
+      '<div class="field"><label for="eq-name">Equipment</label><input id="eq-name" placeholder="e.g. Bridge saw 02"></div>'+
+      '<div class="field"><label for="eq-area">Area / work centre</label><input id="eq-area" placeholder="e.g. Dressing bay 1"></div>'+
+      '<div class="field"><label for="eq-service">Next service (optional)</label><input id="eq-service" type="date"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" onclick="saveEquipment()">Add equipment</button></div>'+
+    '</div></section>';
+}
+
+// Hours and tools: planned against actual by product, the reconciliation for
+// the period, pauses by reason, rework by cause. Hours, never money — the
+// costing that puts a rate on these is task #105 and lives on its own page.
+function vReportsHours(){
+  if(!isAdmin()) return vHome();
+  const w=reportWindow();
+  const from=addDays(today(), -(w-1)), to=today();
+  const inWin=ts=>{ const d=String(ts||'').slice(0,10); return d>=from && d<=to; };
+  const reg=(S.timeRegister||[]).filter(r=>S.itemsById[r.item_id]);
+  const byCat={}; (S.indirect||[]).filter(e=>inWin(e.started_at)).forEach(e=>{ byCat[e.category]=(byCat[e.category]||0)+(e.minutes||0); });
+  const cats=Object.keys(byCat).map(k=>({k, m:byCat[k]})).sort((a,b)=>b.m-a.m);
+  const byCause={}; (S.timeEntries||[]).filter(e=>e.is_rework && inWin(e.started_at)).forEach(e=>{
+    const rw=(S.rework||[]).find(r=>r.id===e.rework_id); const k=rw?(rw.root_responsibility?rootLabel(rw.root_responsibility):rw.defect_category):'unclassified';
+    byCause[k]=(byCause[k]||0)+(e.minutes||0); });
+  const causes=Object.keys(byCause).map(k=>({k, m:byCause[k]})).sort((a,b)=>b.m-a.m);
+  const maxCat=Math.max(1,...cats.map(c=>c.m)), maxCause=Math.max(1,...causes.map(c=>c.m));
+  let h=reportChrome('hours');
+  h+='<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Planned against actual, by product</h3>'+
+    '<p class="panel__description">Every standing task and every product with time on it. Variance is productive time against the supervisor’s plan.</p></div></div>'+
+    '<div class="panel__body">'+(reg.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Product</th><th>Order</th><th>Process</th><th>Planned</th><th>Actual</th><th>Variance</th><th>Rework</th><th>Pauses</th><th>Work centre</th></tr></thead><tbody>'+
+      reg.map(r=>{ const it=S.itemsById[r.item_id], po=S.posById[it.po_id]||{}, stg=S.stagesById[r.stage_id];
+        const plannedMin=r.planned_hours!=null?Number(r.planned_hours)*60:null; const v=plannedMin!=null?(r.productive_minutes||0)-plannedMin:null;
+        return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button></td><td>'+esc(po.po_number||'')+'</td>'+
+          '<td>'+esc(stg?shortStage(stg.name):'')+'</td><td>'+(plannedMin!=null?esc(Number(r.planned_hours).toFixed(1))+' h':'—')+'</td>'+
+          '<td>'+esc(fmins(r.productive_minutes))+'</td><td>'+(v==null?'—':(v>0?'+':'−')+esc(fmins(Math.abs(v))))+'</td>'+
+          '<td>'+(r.rework_minutes?esc(fmins(r.rework_minutes)):'—')+'</td><td>'+(r.indirect_minutes?esc(fmins(r.indirect_minutes)):'—')+'</td>'+
+          '<td>'+esc(r.equipment_id?equipmentName(r.equipment_id):(r.work_centre||'—'))+'</td></tr>'; }).join('')+
+      '</tbody></table></div>':'<div class="empty-state">No planned hours and no timer time yet.</div>')+'</div></section>';
+  h+='<div class="console-grid space-top-16">';
+  h+='<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Pauses by reason</h3>'+
+    '<p class="panel__description">Indirect time in the period. This reconciles attendance; it is not product time unless you allocate it.</p></div></div>'+
+    '<div class="panel__body">'+(cats.length?cats.map(c=>'<div class="ct-row"><span class="ct-name">'+esc(pauseLabel(c.k))+'</span>'+
+      '<span class="ct-bar"><i style="width:'+Math.round(c.m/maxCat*100)+'%"></i></span><span class="ct-val">'+esc(fmins(c.m))+'</span></div>').join('')
+      :'<div class="empty-state">No pauses recorded in this period.</div>')+'</div></section>';
+  h+='<section class="panel"><div class="panel__head"><div><h3 class="panel__title">Rework time by cause</h3>'+
+    '<p class="panel__description">Time on stages that were sent back, by the root responsibility the supervisor recorded.</p></div></div>'+
+    '<div class="panel__body">'+(causes.length?causes.map(c=>'<div class="ct-row"><span class="ct-name">'+esc(c.k)+'</span>'+
+      '<span class="ct-bar"><i style="width:'+Math.round(c.m/maxCause*100)+'%"></i></span><span class="ct-val">'+esc(fmins(c.m))+'</span></div>').join('')
+      :'<div class="empty-state">No rework time in this period.</div>')+'</div></section>';
+  h+='</div>';
+  h+='<section class="panel space-top-16" id="recon-panel"><div class="panel__head"><div><h3 class="panel__title">Attendance against recorded time</h3>'+
+    '<p class="panel__description">'+esc(fdate(from)+' – '+fdate(to))+' · attendance − productive − rework − pauses = unaccounted. Nothing here is double counted.</p></div></div>'+
+    '<div class="panel__body" id="recon-body"><div class="empty-state">Loading…</div></div></section>';
+  $('app').innerHTML=h;
+  loadReconciliation(from, to, 'recon-body');
 }
 
 function vAccounts(){
@@ -9929,6 +10084,7 @@ function render(){
       else if(parts[0]==='approvals'||parts[0]==='review') vSupApprovals(parts[1]);
       else if(parts[0]==='attendance') vSupAttendance();
       else if(parts[0]==='pay') vPay();
+      else if(parts[0]==='resources') vSupResources();
       else if(parts[0]==='pieces') vStaffHome();
       else vSupHome();
     }
@@ -12205,8 +12361,107 @@ function supCounts(){
   const present=people.filter(r=>r.first_in).length;
   const attExceptions=people.filter(r=>r.exception_pending).length;
   const late=people.filter(r=>r.late).length;
+  const equipmentDown=(S.equipment||[]).filter(e=>e.active!==false && e.status==='unavailable').length;
+  const flagged=tasks.filter(assignmentEquipmentDown).length;
   return {due, blocked, unanswered, stuck, unassigned, unbatched, open:open.length, tasks:tasks.length,
-          toReview, openRw, repeats, heldNow, askedFor, present, people:people.length, attExceptions, late};
+          toReview, openRw, repeats, heldNow, askedFor, present, people:people.length, attExceptions, late, equipmentDown, flagged};
+}
+
+/* ---- time, material and tools --------------------------------------------------
+   ChatGPT's resourcesView: planned hours against recorded productive time,
+   rework time apart, the machines and whether they may be used. Quantities and
+   hours only; what an hour or a stone is worth is the office's, on its own
+   screen, from records this one never carries. Material is task #104. */
+function vSupResources(){
+  const c=supCounts();
+  const reg=(S.timeRegister||[]).filter(r=>S.itemsById[r.item_id]);
+  const planned=reg.reduce((t,r)=>t+(Number(r.planned_hours)||0),0);
+  const actual=reg.reduce((t,r)=>t+(r.productive_minutes||0),0);
+  const rework=reg.reduce((t,r)=>t+(r.rework_minutes||0),0);
+  const running=reg.filter(r=>r.running).length;
+  const down=(S.equipment||[]).filter(e=>e.status==='unavailable');
+
+  let h='<div class="page-heading"><div>'+eyebrow('Operational hours, stone yield and equipment')+
+    '<h1 class="display-title">Time &amp; tools.</h1>'+
+    '<p class="lede">Hours, pauses and machines against each product. Wage rates, money and profitability stay with the office.</p></div>'+
+    '<div class="page-heading__actions">'+
+      '<button class="button" type="button" onclick="mReportEquipment()">Report equipment issue</button></div></div>';
+
+  h+='<div class="kpi-grid">'+[
+    ['Planned product hours', planned.toFixed(1)+' h', 'Across the standing tasks', ''],
+    ['Recorded productive time', fmins(actual), running?(running+' timer'+(running===1?'':'s')+' running now'):'Worker · product · process entries', running?'good':''],
+    ['Rework time', fmins(rework), rework?'On stages that were sent back':'None recorded', rework?'warn':''],
+    ['Equipment unavailable', String(down.length), down.length?(down[0].name+(down.length>1?' and more':'')):'Everything in service', down.length?'alert':'']
+  ].map(t=>'<article class="kpi'+(t[3]?' kpi--'+t[3]:'')+'"><span class="kpi__label">'+esc(t[0])+'</span>'+
+    '<strong class="kpi__value">'+esc(String(t[1]))+'</strong><span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+
+  // the register: one row per product and process that has a task or any time on it
+  const rows=reg.slice().sort((a,b)=>String((S.itemsById[a.item_id]||{}).product||'').localeCompare(String((S.itemsById[b.item_id]||{}).product||'')));
+  h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Product time register</h3>'+
+    '<p class="panel__description">Productive time is separate from attendance and from pauses. A stage sent back keeps its time as rework.</p></div>'+
+    badge(running?running+' running':'No timer running', running?'success':'')+'</div>'+
+    '<div class="panel__body">'+(rows.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Product / batch</th><th>Process</th><th>Worker</th><th>Planned</th><th>Actual</th><th>Variance</th><th>Rework</th><th>Pauses</th><th>Work centre</th></tr></thead><tbody>'+
+      rows.map(r=>{
+        const it=S.itemsById[r.item_id]||{}, stg=S.stagesById[r.stage_id];
+        const plannedMin=r.planned_hours!=null?Number(r.planned_hours)*60:null;
+        const varMin=plannedMin!=null?(r.productive_minutes||0)-plannedMin:null;
+        const eq=r.equipment_id?S.equipmentById[r.equipment_id]:null;
+        return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+r.item_id+'\')">'+esc(it.product||'')+'</button>'+
+            '<span class="fl-cell-sub">'+esc([batchCodeOf(r.item_id), it.item_ref].filter(Boolean).join(' · '))+'</span></td>'+
+          '<td>'+esc(stg?shortStage(stg.name):'')+(r.running?'<span class="fl-cell-sub">Timer running</span>':'')+'</td>'+
+          '<td>'+esc(personName(r.lead)||'—')+'</td>'+
+          '<td>'+(plannedMin!=null?esc(Number(r.planned_hours).toFixed(1))+' h':'—')+'</td>'+
+          '<td>'+esc(fmins(r.productive_minutes))+'</td>'+
+          '<td>'+(varMin==null?'—':'<span class="'+(varMin>120?'text-danger':varMin>0?'text-warn':'')+'">'+(varMin>0?'+':'−')+esc(fmins(Math.abs(varMin)))+'</span>')+'</td>'+
+          '<td>'+(r.rework_minutes?esc(fmins(r.rework_minutes)):'—')+'</td>'+
+          '<td>'+(r.indirect_minutes?esc(fmins(r.indirect_minutes)):'—')+'</td>'+
+          '<td>'+esc(eq?eq.name:(r.work_centre||'—'))+(eq&&eq.status!=='available'?'<span class="fl-cell-sub">'+esc(EQUIPMENT_STATUS[eq.status][0])+'</span>':'')+
+            '<span class="fl-cell-sub"><button class="link-button" type="button" onclick="mTimeEntries(\''+r.item_id+'\','+r.stage_id+')">Entries</button></span></td></tr>';
+      }).join('')+'</tbody></table></div>':'<div class="empty-state">No task carries planned hours yet, and no timer has run.</div>')+
+    '</div></section>';
+
+  // the machines: availability decides what a task may name
+  h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Equipment availability</h3>'+
+    '<p class="panel__description">A machine marked unavailable cannot be chosen for a task, and every standing task on it is flagged.</p></div></div>'+
+    '<div class="panel__body">'+((S.equipment||[]).length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Equipment</th><th>Area</th><th>Status</th><th>Tasks on it</th><th>Next service</th><th></th></tr></thead><tbody>'+
+      (S.equipment||[]).map(e=>{
+        const st=EQUIPMENT_STATUS[e.status]||[e.status,''];
+        const n=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at && a.equipment_id===e.id).length;
+        return '<tr><td><strong>'+esc(e.name)+'</strong>'+(e.status_note?'<span class="fl-cell-sub">'+esc(e.status_note)+'</span>':'')+'</td>'+
+          '<td>'+esc(e.area||'—')+'</td><td>'+badge(st[0], st[1])+'</td>'+
+          '<td>'+(n?(e.status==='unavailable'?'<span class="badge badge--alert">'+n+' flagged</span>':String(n)):'—')+'</td>'+
+          '<td>'+esc(e.next_service?fdate(e.next_service):'—')+'</td>'+
+          '<td class="nowrap">'+(e.status==='available'
+            ?'<button class="button quiet small" type="button" onclick="mReportEquipment(\''+e.id+'\')">Report issue</button>'
+            :'<button class="button small" type="button" onclick="restoreEquipment(\''+e.id+'\')">Available again</button> '+
+             '<button class="button quiet small" type="button" onclick="mReportEquipment(\''+e.id+'\')">Report</button>')+'</td></tr>';
+      }).join('')+'</tbody></table></div>':'<div class="empty-state">No equipment listed yet. The office adds machines under Settings.</div>')+
+    '</div></section>';
+
+  // today: what the gate says against what the timers say, person by person
+  h+='<section class="panel space-top-16" id="recon-panel"><div class="panel__head"><div><h3 class="panel__title">Today’s hours, reconciled</h3>'+
+    '<p class="panel__description">Attendance, productive time, rework time and pauses for each person. What is left is time on the clock with nothing recorded against it.</p></div></div>'+
+    '<div class="panel__body" id="recon-body"><div class="empty-state">Loading…</div></div></section>';
+
+  h+='<div class="wk-notice space-top-16"><strong>Office costing boundary</strong>This screen shows hours and quantities only. '+
+    'The office combines approved hours, private rates, material valuation and rework to cost a product; none of that is sent here.</div>';
+  sfaPaint(h);
+  loadReconciliation(today(), today(), 'recon-body');
+}
+async function loadReconciliation(from, to, targetId){
+  const {data,error}=await sb.rpc('bt_time_reconciliation',{p_from:from, p_to:to});
+  const el=$(targetId); if(!el) return;
+  if(error){ el.innerHTML='<div class="empty-state">'+esc(error.message)+'</div>'; return; }
+  const rows=(data||[]);
+  el.innerHTML=rows.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+    '<th>Person</th><th>Attendance</th><th>Productive</th><th>Rework</th><th>Pauses</th><th>Unaccounted</th></tr></thead><tbody>'+
+    rows.map(r=>'<tr><td><strong>'+esc(r.full_name)+'</strong></td><td>'+esc(fmins(r.attendance_minutes))+'</td>'+
+      '<td>'+esc(fmins(r.productive_minutes))+'</td><td>'+(r.rework_minutes?esc(fmins(r.rework_minutes)):'—')+'</td>'+
+      '<td>'+(r.indirect_minutes?esc(fmins(r.indirect_minutes)):'—')+'</td>'+
+      '<td>'+(r.unaccounted_minutes>0?'<span class="text-warn">'+esc(fmins(r.unaccounted_minutes))+'</span>':r.unaccounted_minutes<0?'<span class="text-danger">−'+esc(fmins(-r.unaccounted_minutes))+' over the clock</span>':'—')+'</td></tr>').join('')+
+    '</tbody></table></div>':'<div class="empty-state">Nobody on the floor today.</div>';
 }
 
 function supDayNote(){
@@ -12693,8 +12948,9 @@ function vSupTeam(){
             esc(it.product)+'</button><span class="fl-cell-sub">'+esc(batchCodeOf(it.id)||it.item_ref||'')+'</span></td>'+
           '<td>'+esc(stg?shortStage(stg.name):'')+'</td>'+
           '<td>'+esc(personName(a.assigned_to))+(sup.length?'<span class="fl-cell-sub">with '+esc(sup.join(', '))+'</span>':'')+'</td>'+
-          '<td>'+esc(a.target_date?fdate(a.target_date):'—')+'</td>'+
-          '<td>'+badge(ans[0],ans[1])+(a.ack_note?'<span class="fl-cell-sub">'+esc(a.ack_note)+'</span>':'')+'</td>'+
+          '<td>'+esc(a.target_date?fdate(a.target_date):'—')+(a.planned_hours!=null?'<span class="fl-cell-sub">'+esc(Number(a.planned_hours).toFixed(1))+' h planned</span>':'')+'</td>'+
+          '<td>'+badge(ans[0],ans[1])+(a.ack_note?'<span class="fl-cell-sub">'+esc(a.ack_note)+'</span>':'')+
+            (assignmentEquipmentDown(a)?'<span class="fl-cell-sub"><span class="badge badge--alert">Equipment unavailable · '+esc(equipmentName(a.equipment_id))+'</span></span>':'')+'</td>'+
           '<td><button class="button quiet small" type="button" onclick="mAssign(\''+it.id+'\')">Change</button></td></tr>';
       }).join('')+'</tbody></table></div>'
      :'<div class="empty-state">No work given out yet.</div>')+
@@ -16443,6 +16699,16 @@ function mAssign(itemId, stageId, presetPerson){
       '<div class="field field--full"><label for="as-ev">What to send back</label>'+
         '<input id="as-ev" placeholder="e.g. two photos and the tape measure on the width" value="'+
         esc(cur&&cur.evidence_required?cur.evidence_required:'')+'"></div>'+
+      // the plan in hours and the machine it needs; an unavailable machine is
+      // shown and disabled, and the server refuses it regardless (test 48)
+      '<div class="field"><label for="as-hours">Planned productive hours</label>'+
+        '<input id="as-hours" inputmode="decimal" placeholder="e.g. 6" value="'+esc(cur&&cur.planned_hours!=null?String(Number(cur.planned_hours)):'')+'"></div>'+
+      '<div class="field"><label for="as-eq">Work centre / equipment</label><select id="as-eq">'+
+        '<option value="">Hand tools · shared benches</option>'+
+        (S.equipment||[]).map(e=>'<option value="'+esc(e.id)+'"'+(cur&&cur.equipment_id===e.id&&e.status!=='unavailable'?' selected':'')+
+          (e.status==='unavailable'?' disabled':'')+'>'+esc(e.name)+(e.area?' · '+esc(e.area):'')+(e.status==='unavailable'?' · unavailable':e.status==='reduced'?' · reduced capacity':'')+'</option>').join('')+
+        '</select></div>'+
+      '<p class="field-hint field--full">Planned hours guide workload and later variance. No wage rate or cost is attached to them.</p>'+
       (cur?'<div class="field field--full"><label for="as-why">Why the change (optional)</label>'+
         '<input id="as-why" placeholder="e.g. moved to the bench saw"></div>':'')+
       '<div class="button-row field--full"><button class="button" type="button" id="as-go">'+
@@ -16457,6 +16723,11 @@ function mAssign(itemId, stageId, presetPerson){
     if(!lead){ toast('Choose the person who will do the work.',{err:true}); return; }
     const support=Array.from(m.m.querySelectorAll('#as-support input:checked')).map(x=>x.value);
     const why=$('as-why');
+    const hoursRaw=$('as-hours').value.trim(); const hours=hoursRaw?parseFloat(hoursRaw):null;
+    if(hoursRaw && !(hours>0 && hours<=500)){ toast('Planned hours have to be between a quarter of an hour and 500.',{err:true}); return; }
+    const eqId=$('as-eq').value||null;
+    const eq=eqId?S.equipmentById[eqId]:null;
+    if(eq && eq.status==='unavailable'){ toast('That equipment is marked unavailable. Choose another, or hand tools.',{err:true}); return; }
     btn.disabled=true;
     const {error}=await sb.rpc('bt_assign_work',{
       p_item:item,
@@ -16467,7 +16738,10 @@ function mAssign(itemId, stageId, presetPerson){
       p_target_date:$('as-target').value||null,
       p_instruction:$('as-note').value.trim()||null,
       p_evidence:$('as-ev').value.trim()||null,
-      p_reason:why?(why.value.trim()||null):null
+      p_reason:why?(why.value.trim()||null):null,
+      p_planned_hours:hours,
+      p_equipment:eqId,
+      p_work_centre:eqId?null:'Hand tools'
     });
     btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
@@ -16599,12 +16873,21 @@ function mReviewRecord(updateId, kind){
         '<option value="">The person who did it</option>'+
         people.map(p=>'<option value="'+esc(p.user_id)+'"'+(p.user_id===blamed?' selected':'')+'>'+
           esc(p.full_name)+'</option>').join('')+'</select></div>'+
+      // where the fault lies and what putting it right will cost in hours and
+      // stone — the office's rework figures start here (test 51)
+      '<div class="field"><label for="rw-root">Root responsibility</label><select id="rw-root">'+
+        ROOT_CAUSES.map(r=>'<option value="'+esc(r[0])+'"'+(r[0]==='unconfirmed'?' selected':'')+'>'+esc(r[1])+'</option>').join('')+'</select></div>'+
+      '<div class="field"><label for="rw-est">Estimated rework hours</label><input id="rw-est" inputmode="decimal" placeholder="e.g. 2"></div>'+
+      '<div class="field field--full"><label for="rw-mat">Extra stone / consumable (if any)</label><input id="rw-mat" placeholder="Quantity and lot, if any"></div>'+
+      '<p class="field-hint field--full">Time spent on this stage from now on is recorded as rework, apart from productive time.</p>'+
       '<div class="button-row field--full"><button class="button" type="button" id="rw-go">Send it back</button>'+
       '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
     '</div>');
   m.m.querySelector('#rw-go').onclick=async (e)=>{
     const fix=$('rw-fix').value.trim();
     if(!fix){ toast('Say what has to be put right.',{err:true}); return; }
+    const estRaw=$('rw-est').value.trim(); const est=estRaw?parseFloat(estRaw):null;
+    if(estRaw && !(est>=0 && est<=500)){ toast('Estimated rework hours do not look right.',{err:true}); return; }
     const btn=e.currentTarget; btn.disabled=true;
     const {data,error}=await sb.rpc('bt_review_record',{
       p_update:updateId, p_decision:'changes_requested',
@@ -16612,7 +16895,10 @@ function mReviewRecord(updateId, kind){
       p_defect:$('rw-cat').value,
       p_correction:fix,
       p_due:$('rw-due').value||null,
-      p_responsible:$('rw-who').value||null});
+      p_responsible:$('rw-who').value||null,
+      p_root:$('rw-root').value||null,
+      p_est_hours:est,
+      p_extra_material:$('rw-mat').value.trim()||null});
     btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await refresh();
@@ -16843,6 +17129,102 @@ function mDecideLeave(id){
   };
   m.m.querySelector('#dl-yes').onclick=e=>decide('approved', e.currentTarget);
   m.m.querySelector('#dl-no').onclick=e=>decide('rejected', e.currentTarget);
+}
+
+/* ---- equipment and time --------------------------------------------------------
+   A breakdown is reported by whoever is standing next to it; a supervisor or the
+   office. Stopping a machine takes it out of the allocation list at once and
+   flags every standing task on it. The list of machines is the office's. */
+function mReportEquipment(equipmentId){
+  const list=(S.equipment||[]).filter(e=>e.active!==false);
+  if(!list.length){ toast('No equipment listed yet. The office adds machines under Settings.',{err:true}); return; }
+  const m=modal('<h3>Report an equipment issue</h3>'+
+    '<div class="sub">Unavailable equipment is removed from new task allocation at once, and the tasks already on it are flagged.</div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="eqr-what">Equipment</label><select id="eqr-what">'+
+        list.map(e=>'<option value="'+esc(e.id)+'"'+(e.id===equipmentId?' selected':'')+'>'+esc(e.name)+(e.area?' · '+esc(e.area):'')+'</option>').join('')+'</select></div>'+
+      '<div class="field"><label for="eqr-sev">Can work continue?</label><select id="eqr-sev">'+
+        '<option value="continue">Work can continue safely</option><option value="reduced">Reduced capacity</option><option value="stop">Stop using immediately</option></select></div>'+
+      '<div class="field"><label for="eqr-kind">Issue</label><select id="eqr-kind" onchange="$(\'eqr-note\').placeholder=this.value===\'other\'?\'Say what happened\':\'Short factual description (optional)\'">'+
+        EQUIPMENT_ISSUES.map(k=>'<option value="'+esc(k[0])+'">'+esc(k[1])+'</option>').join('')+'</select></div>'+
+      '<div class="field field--full"><label for="eqr-note">What happened?</label><input id="eqr-note" placeholder="Short factual description (optional)"></div>'+
+      '<p class="field-hint field--full">Do not operate damaged equipment for a photograph. The office is told either way.</p>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="eqr-go">Report</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#eqr-go').onclick=async e=>{
+    const btn=e.currentTarget;
+    const kind=$('eqr-kind').value, note=$('eqr-note').value.trim();
+    if(kind==='other' && !note){ toast('Say what happened.',{err:true}); return; }
+    btn.disabled=true;
+    const {data,error}=await sb.rpc('bt_report_equipment',{p_equipment:$('eqr-what').value, p_kind:kind, p_severity:$('eqr-sev').value, p_note:note||null, p_photo:null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh();
+    toast(data&&data.status==='unavailable'
+      ? 'Marked unavailable.'+(data.affected_tasks?' '+data.affected_tasks+' task'+(data.affected_tasks===1?'':'s')+' on it flagged.':'')
+      : data&&data.status==='reduced' ? 'Marked as reduced capacity.' : 'Reported.');
+  };
+}
+async function restoreEquipment(id){
+  const {error}=await sb.rpc('bt_restore_equipment',{p_equipment:id, p_note:null});
+  if(error){ toast(error.message,{err:true}); return; }
+  await refresh(); toast('Available again.');
+}
+async function saveEquipment(){
+  const name=$('eq-name').value.trim(), area=$('eq-area').value.trim(), svc=$('eq-service').value||null;
+  if(!name){ toast('Give the equipment a name.',{err:true}); return; }
+  const r=await sb.from('bt_equipment').insert({name, area:area||null, next_service:svc, created_by:uid()});
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Added.');
+}
+async function retireEquipment(id){
+  const r=await sb.from('bt_equipment').update({active:false, updated_at:new Date().toISOString()}).eq('id', id);
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Retired. Its old time entries are kept.');
+}
+// The entries behind one line of the register, each with its own Correct.
+function mTimeEntries(itemId, stageId){
+  const it=S.itemsById[itemId]||{}, stg=S.stagesById[stageId];
+  const rows=(S.timeEntries||[]).filter(e=>e.item_id===itemId && e.stage_id===stageId)
+    .slice().sort((a,b)=>String(b.started_at).localeCompare(String(a.started_at)));
+  const pauses=(S.indirect||[]).filter(e=>e.item_id===itemId && e.stage_id===stageId);
+  modal('<h3>Time on '+esc(it.product||'this product')+'</h3>'+
+    '<div class="sub">'+(stg?esc(shortStage(stg.name))+' · ':'')+rows.length+' entr'+(rows.length===1?'y':'ies')+(pauses.length?' · '+pauses.length+' pause'+(pauses.length===1?'':'s'):'')+'</div>'+
+    (rows.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Who</th><th>When</th><th>Minutes</th><th>Kind</th><th></th></tr></thead><tbody>'+
+      rows.map(e=>'<tr><td>'+esc(personName(e.user_id))+'</td><td>'+esc(ftime(e.started_at))+(e.ended_at?' – '+esc(fclock(e.ended_at)):' · running')+'</td>'+
+        '<td>'+(e.ended_at?esc(fmins(e.minutes)):'—')+'</td><td>'+(e.is_rework?'Rework':'Productive')+(e.source==='manual'?' · by hand':'')+(e.note?'<span class="fl-cell-sub">'+esc(e.note)+'</span>':'')+'</td>'+
+        '<td>'+(e.ended_at?'<button class="button quiet small" type="button" onclick="closeModal();mCorrectTime(\''+e.id+'\')">Correct</button>':'')+'</td></tr>').join('')+
+      '</tbody></table></div>':'<div class="empty-state">No time recorded on this process yet.</div>')+
+    '<div class="button-row space-top-12"><button class="button button--secondary" type="button" onclick="closeModal()">Close</button></div>');
+}
+// A supervisor or the office corrects a time entry. The old row is kept by the
+// server; this only asks what it should say now and why.
+function mCorrectTime(entryId){
+  const e=(S.timeEntries||[]).find(x=>x.id===entryId);
+  if(!e){ toast('That entry is no longer there.',{err:true}); return; }
+  const it=S.itemsById[e.item_id]||{}, stg=S.stagesById[e.stage_id];
+  const local=ts=>{ const d=new Date(ts); const p=n=>String(n).padStart(2,'0'); return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes()); };
+  const m=modal('<h3>Correct a time entry</h3>'+
+    '<div class="sub">'+esc(personName(e.user_id))+' · '+esc(it.product||'')+(stg?' · '+esc(shortStage(stg.name)):'')+' · now '+esc(fmins(e.minutes))+(e.is_rework?' · rework':'')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="ct-start">Started</label><input id="ct-start" type="datetime-local" value="'+esc(local(e.started_at))+'"></div>'+
+      '<div class="field"><label for="ct-end">Ended</label><input id="ct-end" type="datetime-local" value="'+esc(local(e.ended_at||e.started_at))+'"></div>'+
+      '<div class="field field--full"><label for="ct-why">Why</label><input id="ct-why" placeholder="e.g. timer left running over lunch"></div>'+
+      '<p class="field-hint field--full">The entry as it was is kept, with your name and the reason, and the office is told.</p>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ct-go">Save correction</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#ct-go').onclick=async ev=>{
+    const btn=ev.currentTarget;
+    const why=$('ct-why').value.trim(); if(!why){ toast('Say why the time is being corrected.',{err:true}); return; }
+    const a=new Date($('ct-start').value), b=new Date($('ct-end').value);
+    if(isNaN(a)||isNaN(b)||b<a){ toast('The end has to be after the start.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_correct_time_entry',{p_entry:entryId, p_started:a.toISOString(), p_ended:b.toISOString(), p_reason:why});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Corrected. The old entry is kept.');
+  };
 }
 
 /* ---- pay & advances ----------------------------------------------------------
@@ -17371,23 +17753,99 @@ function artisanCard(it){
           (dr?'<button class="link-button" type="button" onclick="openDoc(\''+jsq(dr.path)+'\')">'+esc(dr.name||'Open')+'</button>'
              :'<span class="muted">'+bi('None on file','उपलब्ध नहीं')+'</span>')+'</strong></div>'+
       '</div>'+
-      (a&&a.instruction
-        ?'<div class="wk-notice"><strong>'+bi('Today’s instruction','आज का निर्देश')+'</strong>'+esc(a.instruction)+
+      (a&&(a.instruction||a.planned_hours!=null||a.equipment_id||a.work_centre)
+        ?'<div class="wk-notice"><strong>'+bi('Today’s instruction','आज का निर्देश')+'</strong>'+esc(a.instruction||'')+
           (a.evidence_required?'<br>'+bi('Send back','भेजें')+': '+esc(a.evidence_required):'')+
-          (a.target_date?'<br>'+bi('Finish by','तक पूरा करें')+': '+esc(fdate(a.target_date)):'')+'</div>'
+          (a.target_date?'<br>'+bi('Finish by','तक पूरा करें')+': '+esc(fdate(a.target_date)):'')+
+          (a.planned_hours!=null?'<br>'+bi('Planned','योजना')+': '+esc(Number(a.planned_hours).toFixed(1))+' h':'')+
+          ((a.equipment_id||a.work_centre)?'<br>'+bi('Work centre','काम की जगह')+': '+esc(a.equipment_id?equipmentName(a.equipment_id):a.work_centre):'')+'</div>'
         :'')+
       (rw?'<div class="wk-notice wk-notice--back"><strong>'+bi('Sent back','वापस भेजा गया')+
             (rw.attempt_no>1?' · '+rw.attempt_no+ordSuffix(rw.attempt_no)+' time':'')+'</strong>'+
             esc(rw.defect_category)+(rw.defect_note?' — '+esc(rw.defect_note):'')+'<br>'+
             bi('Do this','यह करें')+': '+esc(rw.correction_required)+
             (rw.due_date?'<br>'+bi('By','तक')+': '+esc(fdate(rw.due_date)):'')+'</div>':'')+
+      (assignmentEquipmentDown(a)?'<div class="wk-notice wk-notice--back"><strong>'+bi('Equipment unavailable','मशीन उपलब्ध नहीं')+'</strong>'+
+            esc(equipmentName(a.equipment_id))+' · '+bi('ask the supervisor before starting','शुरू करने से पहले सुपरवाइज़र से पूछें')+'</div>':'')+
       respond+
+      (a && (a.ack_state==='accepted' || !lead) ? timerStrip(it, a) : '')+
     '</div>'+
     '<footer class="wk-foot">'+
       '<button class="button" type="button" onclick="mRecordWork(\''+it.id+'\''+(rw?','+rw.stage_id:'')+')">'+
         icon('i-camera','icon--sm')+bi('Record work','काम दर्ज करें')+'</button>'+
       '<button class="button secondary" type="button" onclick="go(\'#/item/'+it.id+'\')">'+bi('Open details','विवरण')+'</button>'+
     '</footer></article>';
+}
+
+/* ---- the product timer -------------------------------------------------------
+   One running timer per person, kept by the server. Start on the piece being
+   worked, Pause with a reason (that time is indirect, not product time), Finish
+   to open the daily record with the minutes already on it. A timer on a stage
+   that was sent back is rework time, marked so by the server, not by the
+   person. Clocking out ends whatever is running. */
+function timerStrip(it, a){
+  const run=runningTimer();
+  const st=curStage(it);
+  const stageId=(a&&a.stage_id)||(st&&st.id);
+  if(!stageId) return '';
+  const mine=!!(run && run.item_id===it.id);
+  const elsewhere=!!(run && !mine);
+  const shown=mine ? elapsedMinutes(run.started_at) : unattachedMinutes(uid(), it.id, stageId);
+  return '<div class="timer-strip"><div><span>'+
+      (mine?bi('Work timer running','काम का समय चल रहा है'):bi('Product work time','उत्पाद का समय'))+
+      (mine&&run.is_rework?' · '+bi('rework','दोबारा काम'):'')+'</span>'+
+      '<strong'+(mine?' class="timer-live" data-timer-start="'+esc(run.started_at)+'"':'')+'>'+esc(fclockspan(shown))+'</strong></div>'+
+    '<div class="wk-mini">'+
+      (mine?'<button class="button secondary" type="button" onclick="mPauseTimer()">'+bi('Pause','रोकें')+'</button>'+
+            '<button class="button" type="button" onclick="finishTimer()">'+bi('Finish','पूरा')+'</button>'
+           :'<button class="button" type="button" onclick="startTimer(\''+it.id+'\','+stageId+')">'+bi('Start','शुरू')+'</button>')+
+    '</div>'+
+    (elsewhere?'<p class="field-hint">'+bi('Timer running on '+((S.itemsById[run.item_id]||{}).product||'another product'),'दूसरे उत्पाद पर समय चल रहा है')+'</p>':'')+
+    '</div>';
+}
+async function startTimer(itemId, stageId){
+  const {error}=await sb.rpc('bt_start_timer',{p_item:itemId, p_stage:stageId});
+  if(error){ toast(error.message+(isWorker()?' · पहले दूसरा टाइमर रोकें या पूरा करें':''),{err:true}); return; }
+  await loadData(); render();
+  toast(isWorker()?'Product timer started · उत्पाद का समय शुरू':'Timer started.');
+}
+function mPauseTimer(){
+  const run=runningTimer(); if(!run){ toast('No timer is running · कोई टाइमर नहीं चल रहा',{err:true}); return; }
+  const it=S.itemsById[run.item_id]||{};
+  const m=modal('<p class="eyebrow">'+bi('Product time','उत्पाद समय')+'</p><h3>'+bi('Pause work','काम रोकें')+'</h3>'+
+    '<div class="wk-notice"><strong>'+esc(it.product||'')+'</strong>'+
+      esc('Choose why productive work stopped. Attendance continues separately.')+' / '+esc('उत्पाद का काम क्यों रुका, चुनें।')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full field--big"><label for="pt-why">'+bi('Pause reason','रुकने का कारण')+'</label><select id="pt-why" onchange="$(\'pt-note-wrap\').hidden=this.value!==\'other\'">'+
+        PAUSE_REASONS.map(r=>'<option value="'+esc(r[0])+'">'+bi(r[1],r[2])+'</option>').join('')+'</select></div>'+
+      '<div class="field field--full" id="pt-note-wrap" hidden><label for="pt-note">'+bi('Say what','बताएं क्या')+'</label><input id="pt-note"></div>'+
+      '<p class="field-hint field--full">'+esc('Pause time is indirect, not product time.')+' / '+esc('यह उत्पाद समय नहीं है।')+'</p>'+
+      '<div class="button-row field--full wk-submit"><button class="button button--big" type="button" id="pt-go">'+bi('Pause','रोकें')+'</button>'+
+      '<button class="button secondary" type="button" onclick="closeModal()">'+bi('Cancel','रद्द')+'</button></div></div>');
+  m.m.classList.add('modal--artisan');
+  $('pt-go').onclick=async e=>{
+    const btn=e.currentTarget;
+    const why=$('pt-why').value, note=($('pt-note').value||'').trim();
+    if(why==='other' && !note){ toast('Say why the work stopped · काम क्यों रुका, बताएं',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_pause_timer',{p_category:why, p_note:note||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render();
+    toast('Paused separately from product time · समय अलग दर्ज हुआ');
+  };
+}
+async function finishTimer(){
+  const {data,error}=await sb.rpc('bt_finish_timer');
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render();
+  mRecordWork(data.item_id, data.stage_id);
+}
+// the live figure on a running strip, without a re-render
+if(typeof window!=='undefined' && !window.__timerTick){
+  window.__timerTick=setInterval(()=>{
+    document.querySelectorAll('[data-timer-start]').forEach(el=>{ el.textContent=fclockspan(elapsedMinutes(el.getAttribute('data-timer-start'))); });
+  }, 15000);
 }
 
 /* ---- the home ------------------------------------------------------------- */
@@ -17816,6 +18274,10 @@ function mRecordWork(itemId, stageId){
   const a=openAssignment(it.id);
   const people=floorPeople();
   window.__du={files:[], itemId, stageId:stage?stage.id:null};
+  // the credited person's timer time waiting for a record on this product and process
+  const timerWho=worker?uid():((a&&a.assigned_to)||'');
+  const timerMin=unattachedMinutes(timerWho, it.id, stage?stage.id:null);
+  const timerEntries=(S.timeEntries||[]).filter(e=>e.user_id===timerWho && e.item_id===it.id && e.stage_id===(stage?stage.id:null) && !e.update_id && e.ended_at).length;
 
   const opt=(list, sel)=>list.map(([en,hi])=>'<option value="'+esc(en)+'"'+(sel===en?' selected':'')+'>'+bi(en,hi)+'</option>').join('');
   const who = worker
@@ -17843,6 +18305,24 @@ function mRecordWork(itemId, stageId){
     '<div class="field field--full field--big"><label for="rw-stage">'+bi('Production process','उत्पादन प्रक्रिया चुनें')+'</label>'+
       '<select id="rw-stage">'+activeStages().map((s,i)=>'<option value="'+s.id+'"'+(stage&&s.id===stage.id?' selected':'')+'>'+
         (i+1)+'. '+stageBi(s)+(cur&&s.id===cur.id?' — Current / वर्तमान':'')+'</option>').join('')+'</select></div>'+
+    // productive time: what the timer kept, plus anything done off the timer.
+    // Only time on this product and process belongs here; attendance is separate.
+    '<div class="wk-notice wk-notice--time" id="rw-time-wrap"><strong>'+bi('Productive time','उत्पाद का समय')+'</strong>'+
+      '<span id="rw-timer">'+(timerMin?esc(fmins(timerMin))+' '+bi('from the timer','टाइमर से')
+        :timerEntries?bi('Less than a minute on the timer','टाइमर पर एक मिनट से कम'):bi('Nothing on the timer yet','टाइमर पर अभी समय नहीं'))+'</span>'+
+      '<br>'+esc('Only time spent on this product and process belongs here. Attendance is separate.')+' / '+esc('केवल इस उत्पाद और प्रक्रिया पर लगा समय। हाज़िरी अलग है।')+'</div>'+
+    '<div class="form-grid" id="rw-time-fields">'+
+      // selection first: the hours field appears only once the person says there was time off the timer
+      '<div class="field"><label for="rw-extra-choice">'+bi('Work time not on the timer?','टाइमर के बिना काम हुआ?')+'</label>'+
+        '<select id="rw-extra-choice" onchange="$(\'rw-extra-wrap\').hidden=this.value!==\'yes\'">'+
+          '<option value="no">'+bi('No','नहीं')+'</option><option value="yes">'+bi('Yes, add hours','हाँ, घंटे जोड़ें')+'</option></select></div>'+
+      '<div class="field" id="rw-extra-wrap" hidden><label for="rw-extra">'+bi('Hours not on the timer','टाइमर के बिना घंटे')+'</label>'+
+        '<input id="rw-extra" inputmode="decimal" placeholder="e.g. 1.5"></div>'+
+      '<div class="field"><label for="rw-centre">'+bi('Work centre','काम की जगह')+'</label><select id="rw-centre">'+
+        '<option value="">'+bi('Hand tools / shared benches','हाथ के औज़ार')+'</option>'+
+        (S.equipment||[]).map(e=>'<option value="'+esc(e.id)+'"'+(a&&a.equipment_id===e.id&&e.status!=='unavailable'?' selected':'')+(e.status==='unavailable'?' disabled':'')+'>'+
+          esc(e.name)+(e.area?' · '+esc(e.area):'')+(e.status==='unavailable'?' · '+bi('unavailable','उपलब्ध नहीं'):'')+'</option>').join('')+
+      '</select></div></div>'+
     '<div class="upload-drop field--full" id="du-drop"><div>'+icon('i-camera','icon--lg')+
       '<strong>'+bi('Add photos for this process','इस प्रक्रिया के फोटो जोड़ें')+'</strong>'+
       '<p>'+bi('Complete product, work detail and measurement.','पूरा उत्पाद, काम का विवरण और माप।')+'</p>'+
@@ -17895,6 +18375,8 @@ function rwToggle(){
   $('rw-nowork-wrap').hidden = s!=='no_work';
   $('rw-meas-wrap').hidden = s==='no_work';
   $('du-drop').hidden = s==='no_work';
+  $('rw-time-wrap').hidden = s==='no_work';
+  $('rw-time-fields').hidden = s==='no_work';
 }
 async function rwSubmit(){
   const d=window.__du;
@@ -17915,6 +18397,9 @@ async function rwSubmit(){
   if(!noWork && act==='Other work' && !other) return say('Say what other work was done','बताएं और क्या काम हुआ');
   if(blocked && $('rw-block').value==='Other' && !($('rw-block-other').value||'').trim())
     return say('Say what is stopping the work','बताएं काम क्यों रुका है');
+  const extraH=$('rw-extra-choice').value==='yes' ? (parseFloat($('rw-extra').value)||0) : 0;
+  if($('rw-extra-choice').value==='yes' && !(extraH>0 && extraH<=16)) return say('Give the hours not on the timer, up to sixteen','टाइमर के बिना घंटे बताएं, सोलह तक');
+  const eqId=$('rw-centre').value||null;
 
   const btn=$('du-save'); btn.disabled=true; btn.textContent='Saving… · सेव हो रहा है';
   try{
@@ -17942,6 +18427,13 @@ async function rwSubmit(){
       const mr=await sb.from('bt_measurements').insert({item_id:d.itemId, stage_id:stageId, update_id:updateId,
         name:'Recorded size', actual_value:meas, recorded_by:uid()});
       if(mr.error) throw mr.error;
+    }
+    // the time kept for this product and process goes on the record, with the
+    // machine or bench it was done on; nothing about money travels with it
+    if(!noWork){
+      const at=await sb.rpc('bt_attach_time',{p_update:updateId, p_manual_minutes: extraH>0?Math.round(extraH*60):null,
+        p_equipment:eqId, p_work_centre: eqId?null:'Hand tools'});
+      if(at.error) throw at.error;
     }
 
     let done=0, failed=0;
