@@ -3521,6 +3521,13 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .pa-permission i{width:16px;height:16px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-style:normal;font-size:7px}
 .sfa .pa-note{padding:10px;border-radius:8px;background:var(--surface-2);color:var(--muted);font-size:8px;line-height:1.45}
 .sfa .pa-note strong{display:block;color:var(--ink);margin-bottom:3px}
+/* pay: rate, statements, advances and overtime for one internal person */
+.sfa .pa-section h4{margin:0;font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.sfa .pa-pay-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.sfa .pa-pay-row strong{display:block;font-size:8px}
+.sfa .pa-pay-row>div>span{display:block;margin-top:2px;color:var(--muted);font-size:7px;line-height:1.4}
+.sfa .pa-pay-row .button-row{gap:4px;margin:0}
+.sfa .pa-pay .space-top-10{margin-top:10px}
 .sfa .pa-primary-contact{padding:10px;border:1px solid var(--line);border-radius:8px}
 .sfa .pa-primary-contact strong,.sfa .pa-primary-contact span{display:block}
 .sfa .pa-primary-contact strong{font-size:9px}
@@ -4017,6 +4024,20 @@ body.reports-mode .sfa .content{max-width:1700px}
 .att-row p{ margin:4px 0 0; color:var(--muted, #6e6e73); font-size:12px; }
 @media (max-width: 520px){ .att-grid{ grid-template-columns:1fr 1fr; } }
 
+/* pay: the statement's lines, the manual breakdown, the amount presets */
+.pay-lines{ margin-top:10px; border:1px solid var(--line, #e5e5e7); border-radius:10px; overflow:hidden; }
+.pay-lines div{ display:flex; justify-content:space-between; gap:10px; padding:9px 12px; border-top:1px solid var(--line-light, #ececef); font-size:12px; }
+.pay-lines div:first-child{ border-top:0; }
+.pay-lines span{ color:var(--muted, #6e6e73); }
+.pay-lines .pay-lines__net{ background:var(--surface-2, #f3f3f4); font-size:13px; }
+.pay-lines .pay-lines__net span{ color:var(--ink); font-weight:750; }
+.pay-breakdown{ margin:10px 0 0; padding:11px 12px; border-radius:9px; background:var(--surface-2, #f3f3f4); font:12px/1.5 var(--mono, ui-monospace, monospace); white-space:pre-wrap; overflow-wrap:anywhere; color:var(--ink); }
+.preset-row{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:6px; margin-bottom:8px; }
+.sfa .preset-row .button{ min-height:48px; padding:0 4px; font-size:12px; }
+.sfa .preset-row .button.is-on{ background:var(--primary-action-pressed, #cacacc); border-color:var(--ink, #1d1d1f); box-shadow:inset 0 0 0 1px var(--ink, #1d1d1f); }
+.modal-bg.sfa .modal #adv-amount{ min-height:52px; font-size:18px; }
+@media (max-width: 520px){ .preset-row{ grid-template-columns:1fr 1fr; } }
+
 .sfa .button--big{ min-height:50px; font-size:13px; }
 .sfa .field--big select{ min-height:52px; font-size:15px; }
 .modal--artisan .form-grid{ margin-top:10px; }
@@ -4044,7 +4065,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='ce4374a9b0ce';</script>
+<script>const BUILD_ID='917f944ba49c';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4064,6 +4085,7 @@ body.reports-mode .sfa .content{max-width:1700px}
     <symbol id="stage-packing" viewBox="0 0 24 24"><path d="m4 8 8-4 8 4-8 4zM4 8v9l8 4 8-4V8M12 12v9"/><path d="m8 6 8 4"/></symbol>
     <symbol id="stage-shipped" viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
     <symbol id="stage-delivered" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/><path d="m8 14 2.5 2.5L16 11"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 6h16v14H3Z"/><path d="M3 6V4h13M15 11h6v5h-6Z"/></symbol>
   </svg>
 <div id="loading"><div class="spin"></div><div>Loading…</div></div>
 
@@ -4355,7 +4377,10 @@ const S = {
   revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null,
   batches:[], batchById:{}, batchOfItem:{}, assignments:[], asgByItem:{},
   rework:[], rwByItem:{}, holds:[], hdByItem:{}, meas:[], msByItem:{}, apprFilter:'pending',
-  contributors:[], attDay:[], attMine:[], attCorrections:[], sites:[], policy:{}, absences:[], myLeave:[]
+  contributors:[], attDay:[], attMine:[], attCorrections:[], sites:[], policy:{}, absences:[], myLeave:[],
+  // pay: what the policies let this login read — the office everything, a
+  // person their own, a supervisor other people's overtime and nothing else
+  payRates:[], statements:[], advances:[], overtime:[]
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -4385,7 +4410,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv, ws, adv, ot] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -4418,7 +4443,14 @@ async function loadStaffData(){
     // Leave: the floor's view of who is away carries no reason; the person's own
     // requests, reason included, come off the table under their own policy.
     sb.rpc('bt_floor_absences'),
-    sb.from('bt_leave_requests').select('*').order('from_date',{ascending:false})
+    sb.from('bt_leave_requests').select('*').order('from_date',{ascending:false}),
+    // Pay. The person's own published statements and own advance requests come
+    // off the tables under their own policy; a supervisor gets nothing from
+    // either, because there is no policy that gives it. Overtime is hours, not
+    // money: a supervisor sees the proposals they made.
+    sb.from('bt_wage_statements').select('*').order('period_end',{ascending:false}),
+    sb.from('bt_advance_requests').select('*').order('requested_at',{ascending:false}),
+    sb.from('bt_overtime_requests').select('*').order('work_date',{ascending:false})
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -4460,6 +4492,7 @@ async function loadStaffData(){
   S.contributors=(ctb&&ctb.data)||[];
   indexAttendance((atd&&atd.data)||[], (atm&&atm.data)||[], (sites&&sites.data)||[], (pol&&pol.data)||[], (atc&&atc.data)||[]);
   S.absences=(abs&&abs.data)||[]; S.myLeave=(lv&&lv.data)||[];
+  indexPay([], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
   S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
 }
@@ -4935,7 +4968,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -4982,7 +5015,12 @@ async function loadData(){
     admin ? sb.from('bt_factory_sites').select('*').order('created_at') : Promise.resolve({data:[]}),
     admin ? sb.from('bt_floor_policy').select('*') : Promise.resolve({data:[]}),
     admin ? sb.from('bt_attendance_corrections').select('*').order('proposed_at',{ascending:false}) : Promise.resolve({data:[]}),
-    admin ? sb.from('bt_leave_requests').select('*').order('from_date',{ascending:false}) : Promise.resolve({data:[]})
+    admin ? sb.from('bt_leave_requests').select('*').order('from_date',{ascending:false}) : Promise.resolve({data:[]}),
+    // Pay is the office's alone. A buyer has no policy on any of the four.
+    admin ? sb.from('bt_pay_rates').select('*').order('effective_from',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_wage_statements').select('*').order('period_end',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_advance_requests').select('*').order('requested_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_overtime_requests').select('*').order('work_date',{ascending:false}) : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -5035,8 +5073,62 @@ async function loadData(){
   S.contributors=(ctb&&ctb.data)||[];
   indexAttendance((atd&&atd.data)||[], [], (sites&&sites.data)||[], (pol&&pol.data)||[], (atc&&atc.data)||[]);
   S.myLeave=(lv&&lv.data)||[]; S.absences=S.myLeave;   // the office reads the full table
+  indexPay((rates&&rates.data)||[], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
+}
+
+/* ---- pay -------------------------------------------------------------------
+   Money never leaves this file for a floor screen except as the person's own
+   published statement. Rates are versioned and effective-dated; the rate on a
+   day is the latest one starting on or before it, the same rule as
+   bt_pay_rate_on() in the database. */
+function indexPay(rates, statements, advances, overtime){
+  S.payRates=(rates||[]).slice().sort((a,b)=>String(b.effective_from).localeCompare(String(a.effective_from)));
+  S.statements=(statements||[]).slice().sort((a,b)=>String(b.period_end).localeCompare(String(a.period_end)));
+  S.advances=(advances||[]).slice().sort((a,b)=>String(b.requested_at||'').localeCompare(String(a.requested_at||'')));
+  S.overtime=(overtime||[]).slice().sort((a,b)=>String(b.work_date||'').localeCompare(String(a.work_date||'')));
+}
+const ADVANCE_REASONS=[
+  ['medical','Medical expense','इलाज का खर्च'],['family_event','Wedding or family function','शादी या पारिवारिक कार्यक्रम'],
+  ['school_fees','School fees','स्कूल फीस'],['rent','House rent','मकान किराया'],['village','Travel to village','गाँव जाना'],
+  ['festival','Festival expense','त्योहार का खर्च'],['other','Other','अन्य']];
+const RECOVERY_PLANS=[
+  ['next_wages','From the next wages','अगले वेतन से'],['two_months','Over 2 months','2 महीनों में'],
+  ['three_months','Over 3 months','3 महीनों में'],['six_months','Over 6 months','6 महीनों में'],
+  ['discuss','Decide with the office','कार्यालय से तय करें']];
+const ADVANCE_PRESETS=[2000,5000,10000,20000];
+function advanceReasonLabel(code, hindi){ const r=ADVANCE_REASONS.find(x=>x[0]===code); return r?(hindi?r[1]+' · '+r[2]:r[1]):(code||''); }
+function recoveryLabel(code, hindi){ const r=RECOVERY_PLANS.find(x=>x[0]===code); return r?(hindi?r[1]+' · '+r[2]:r[1]):(code||''); }
+function payRateOn(userId, date){
+  const d=date||today();
+  return (S.payRates||[]).filter(r=>r.user_id===userId && r.effective_from<=d)
+    .sort((a,b)=>String(b.effective_from).localeCompare(String(a.effective_from)))[0] || null;
+}
+function statementsOf(userId){ return (S.statements||[]).filter(s=>s.user_id===userId); }
+function advancesOf(userId){ return (S.advances||[]).filter(a=>a.user_id===userId); }
+function overtimeOf(userId){ return (S.overtime||[]).filter(o=>o.user_id===userId); }
+// The period a statement covers, as a person would say it: "August 2026" when
+// it is a calendar month, the two dates otherwise.
+function periodLabel(s, hindi){
+  const a=new Date(s.period_start+'T00:00:00'), b=new Date(s.period_end+'T00:00:00');
+  const wholeMonth=a.getDate()===1 && b.getMonth()===a.getMonth() && b.getFullYear()===a.getFullYear() &&
+    new Date(b.getFullYear(), b.getMonth()+1, 0).getDate()===b.getDate();
+  if(wholeMonth){
+    const en=a.toLocaleDateString('en-IN',{month:'long', year:'numeric'});
+    return hindi ? en+' · '+MONTH_HI[a.getMonth()]+' '+a.getFullYear() : en;
+  }
+  return fdate(s.period_start)+' – '+fdate(s.period_end);
+}
+const MONTH_HI=['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'];
+// Hours with two decimals as the database stores them, shown as a person reads
+// them: 226.5 → "226h 30m".
+function fhours(h){ const m=Math.round((Number(h)||0)*60); return fmins(m); }
+// last full calendar month: the period a statement is most often for
+function lastMonthRange(){
+  const d=new Date(); const first=new Date(d.getFullYear(), d.getMonth()-1, 1), last=new Date(d.getFullYear(), d.getMonth(), 0);
+  const iso=x=>x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');
+  return [iso(first), iso(last)];
 }
 
 /* ---- accounting documents -------------------------------------------------
@@ -5219,6 +5311,25 @@ function ownerActions(){
            (l.emergency?' · taken already':''),
       note:l.supervisor_note?('Supervisor: '+l.supervisor_note):'',
       action:{label:'Decide', go:"mDecideLeave('"+l.id+"')"} });
+  });
+
+  // Somebody on the floor has asked for money against wages. Private: this row
+  // exists on the owner's screen and nowhere else.
+  (S.advances||[]).filter(a=>a.status==='pending').forEach(a=>{
+    push({ urgency:1, chip:'approval', chipLabel:'Advance', icon:'i-wallet',
+      type:'people', title:(personName(a.user_id)||'A worker')+' asks for an advance of '+money(a.amount,'INR'),
+      meta:advanceReasonLabel(a.reason_code)+(a.reason_text?' — '+a.reason_text:'')+' · needed by '+fdate(a.needed_by)+' · '+recoveryLabel(a.recovery_plan),
+      sort:-(Number(a.amount)||0),
+      action:{label:'Decide', go:"mDecideAdvance('"+a.id+"')"} });
+  });
+
+  // A supervisor wants somebody to work past the day. Hours, not money — but
+  // hours become money on the statement, so the office says yes or no.
+  (S.overtime||[]).filter(o=>o.status==='pending').forEach(o=>{
+    push({ urgency:1, chip:'approval', chipLabel:'Overtime', icon:'stage-confirmed',
+      type:'people', title:'Overtime for '+(personName(o.user_id)||'a worker')+' · '+Number(o.hours)+' h on '+fdate(o.work_date),
+      meta:o.reason, note:'Proposed by '+(personName(o.proposed_by)||'a supervisor'),
+      action:{label:'Decide', go:"mDecideOvertime('"+o.id+"')"} });
   });
 
   // Photographs and daily updates the buyer cannot see until reviewed.
@@ -6084,6 +6195,8 @@ function commandAlerts(){
   const present=floorDay.filter(r=>r.first_in).length, people=floorDay.length, late=floorDay.filter(r=>r.late).length;
   const corr=(S.attCorrections||[]).filter(c=>c.decision==='pending');
   const leave=(S.myLeave||[]).filter(l=>l.status==='pending');
+  const adv=(S.advances||[]).filter(a=>a.status==='pending');
+  const ot=(S.overtime||[]).filter(o=>o.status==='pending');
   const ag=receivableAgeing();
   const overdue=ag.buckets.slice(1).reduce((a,b)=>a+b.v,0);
   return [
@@ -6107,9 +6220,11 @@ function commandAlerts(){
       warn:repeats.length>0, run:"go('#/production/quality')" },
     { k:'People', v:String(present)+' / '+String(people),
       s:[corr.length?(corr.length+' correction'+(corr.length===1?'':'s')+' to decide'):'',
-         leave.length?(leave.length+' leave request'+(leave.length===1?'':'s')):''].filter(Boolean).join(' · ')
+         leave.length?(leave.length+' leave request'+(leave.length===1?'':'s')):'',
+         adv.length?(adv.length+' advance request'+(adv.length===1?'':'s')):'',
+         ot.length?(ot.length+' overtime proposal'+(ot.length===1?'':'s')):''].filter(Boolean).join(' · ')
         || (late?(late+' late today'):'Nothing to decide'),
-      warn:corr.length>0||leave.length>0, run:"go('#/production/people')" },
+      warn:corr.length>0||leave.length>0||adv.length>0||ot.length>0, run:"go('#/production/people')" },
     { k:'Evidence review', v:String(q.approvals+pendingPhotos().length),
       s:'Photographs and updates waiting on you', warn:(q.approvals+pendingPhotos().length)>0,
       run:"go('#/production/review')" },
@@ -6414,7 +6529,12 @@ function updateHeader(){
       link('#/team','Work &amp; people',c.unanswered)+
       link('#/batches','Shipment batches',0)+
       link('#/attendance','Attendance',c.attExceptions)+
-      link('#/pieces','All pieces',0);
+      link('#/pieces','All pieces',0)+
+      // The supervisor's own wages and advances: theirs as a person, under the
+      // same policy as an artisan's, and nobody else's. Not on the dock — six
+      // items is already the width of a phone.
+      '<p class="side-nav__group">Personal</p>'+
+      link('#/pay','My pay &amp; advances',(S.advances||[]).filter(a=>a.status==='pending'&&a.user_id===uid()).length);
     app.className='page';
     dock.hidden=false;
     dock.innerHTML=
@@ -9808,12 +9928,14 @@ function render(){
       else if(parts[0]==='team') vSupTeam();
       else if(parts[0]==='approvals'||parts[0]==='review') vSupApprovals(parts[1]);
       else if(parts[0]==='attendance') vSupAttendance();
+      else if(parts[0]==='pay') vPay();
       else if(parts[0]==='pieces') vStaffHome();
       else vSupHome();
     }
     else if(isWorker()){
       if(parts[0]==='attendance') vArtisanAttendance();
       else if(parts[0]==='leave') vArtisanLeave();
+      else if(parts[0]==='pay') vPay();
       else vArtisanHome();
     }
     else vStaffHome();
@@ -11553,7 +11675,52 @@ function paStaffDetail(){
     (floor?'<section class="pa-section"><button class="button secondary wide" type="button" '+
       'onclick="mStaffPhone(\''+p.user_id+'\')">'+(p.phone?'Change WhatsApp number':'Add WhatsApp number')+
       '</button></section>':'')+
+    (floor?paPaySection(p):'')+
     '</aside>';
+}
+
+// The office's side of pay: the rate in force, the statements it has drafted
+// or published, the advances asked for, the overtime proposed. Only this panel
+// ever renders a rate; the floor's own screens print the figure a published
+// statement carries and nothing else.
+function paPaySection(p){
+  const rate=payRateOn(p.user_id);
+  const sts=statementsOf(p.user_id), advs=advancesOf(p.user_id), ots=overtimeOf(p.user_id);
+  const stRow=s=>'<div class="pa-pay-row"><div><strong>'+esc(periodLabel(s))+'</strong>'+
+      '<span>'+esc(fhours(s.approved_hours))+' × '+esc(money(s.hourly_rate,'INR'))+' → net '+esc(money(s.net_payable,'INR'))+
+      (s.file_path?' · PDF':'')+'</span></div>'+
+      badge(s.status==='published'?'Published':'Draft', s.status==='published'?'success':'pending')+
+      '<div class="button-row">'+
+        '<button class="button quiet small" type="button" onclick="mWageStatement(\''+p.user_id+'\',\''+s.id+'\')">Open</button>'+
+        (s.status==='draft'?'<button class="button small" type="button" onclick="publishStatement(\''+s.id+'\')">Publish</button>':'')+
+      '</div></div>';
+  const advRow=a=>'<div class="pa-pay-row"><div><strong>'+esc(money(a.amount,'INR'))+' · '+esc(advanceReasonLabel(a.reason_code))+'</strong>'+
+      '<span>'+esc('asked '+fdate(String(a.requested_at).slice(0,10))+' · needed by '+fdate(a.needed_by)+' · '+recoveryLabel(a.recovery_plan))+
+      (a.reason_text?' · '+esc(a.reason_text):'')+
+      (a.status==='approved'&&Number(a.approved_amount)!==Number(a.amount)?' · approved '+esc(money(a.approved_amount,'INR')):'')+'</span></div>'+
+      badge(a.status==='pending'?'To decide':a.status, a.status==='approved'?'success':a.status==='recovered'?'success':a.status==='rejected'?'alert':'pending')+
+      '<div class="button-row">'+
+        (a.status==='pending'?'<button class="button small" type="button" onclick="mDecideAdvance(\''+a.id+'\')">Decide</button>':'')+
+        (a.status==='approved'?'<button class="button quiet small" type="button" onclick="mCloseAdvance(\''+a.id+'\')">Mark recovered</button>':'')+
+      '</div></div>';
+  const otRow=o=>'<div class="pa-pay-row"><div><strong>'+esc(fdate(o.work_date))+' · '+esc(String(Number(o.hours)))+' h</strong>'+
+      '<span>'+esc(o.reason)+' · proposed by '+esc(personName(o.proposed_by)||'a supervisor')+'</span></div>'+
+      badge(o.status==='pending'?'To decide':o.status, o.status==='approved'?'success':o.status==='rejected'?'alert':'pending')+
+      '<div class="button-row">'+(o.status==='pending'?'<button class="button small" type="button" onclick="mDecideOvertime(\''+o.id+'\')">Decide</button>':'')+'</div></div>';
+  return '<section class="pa-section pa-pay"><div class="pa-section-head"><h3>Pay &amp; advances</h3>'+
+      '<button class="button quiet small" type="button" onclick="mSetRate(\''+p.user_id+'\')">'+(rate?'Change rate':'Set rate')+'</button></div>'+
+    paInfoRow('Hourly rate', rate?(money(rate.hourly_rate,'INR')+' per hour · from '+fdate(rate.effective_from)):'')+
+    (rate?'':'<div class="pa-note"><strong>No rate yet</strong>A statement needs an hourly rate. Set one before preparing the first statement.</div>')+
+    '<div class="pa-section-head space-top-10"><h4>Statements</h4>'+
+      '<button class="button secondary small" type="button" onclick="mWageStatement(\''+p.user_id+'\')">Prepare statement</button></div>'+
+    (sts.length?sts.map(stRow).join(''):'<p class="field-hint">None yet.</p>')+
+    '<div class="pa-section-head space-top-10"><h4>Advances</h4></div>'+
+    (advs.length?advs.map(advRow).join(''):'<p class="field-hint">None asked for.</p>')+
+    '<div class="pa-section-head space-top-10"><h4>Overtime</h4></div>'+
+    (ots.length?ots.slice(0,10).map(otRow).join(''):'<p class="field-hint">None proposed.</p>')+
+    '<div class="pa-note" style="margin-top:8px"><strong>Private</strong>Rates, statements and advances are readable by this person '+
+    '(statements once published) and by you. The supervisor has no policy on any of them.</div>'+
+    '</section>';
 }
 
 function vAccess(){
@@ -12381,7 +12548,11 @@ function vSupAttendance(){
     '<h1 class="display-title">Attendance.</h1>'+
     '<p class="lede">Geofenced clock records, exceptions and corrections. A correction you propose goes to the office, '+
     'and the office is told about it whichever way it is decided.</p></div>'+
-    '<div class="page-heading__actions"><button class="button" type="button" onclick="mCorrection()">Correct a record</button></div></div>';
+    '<div class="page-heading__actions">'+
+      '<button class="button secondary" type="button" onclick="mProposeOvertime()">Propose overtime</button>'+
+      '<button class="button" type="button" onclick="mCorrection()">Correct a record</button>'+
+      // a phone has no sidebar, so the personal screen needs a way in from here
+      '<button class="button button--quiet" type="button" onclick="go(\'#/pay\')">My pay &amp; advances</button></div></div>';
 
   h+='<div class="kpi-grid">'+[
     ['Present today', c.present+' / '+c.people, c.people-c.present?((c.people-c.present)+' not in'):'Everyone is in', ''],
@@ -12407,7 +12578,8 @@ function vSupAttendance(){
           '<td>'+st+'</td><td>'+esc(fclock(r.first_in))+'</td><td>'+esc(r.first_in?fmins(r.minutes):'—')+'</td>'+
           '<td>'+(r.first_in?(r.within?'Factory':'Away from the factory'):'—')+'</td>'+
           '<td class="nowrap">'+(r.exception_pending?'<button class="button small" type="button" onclick="approveClocks(\''+r.user_id+'\')">Accept</button> ':'')+
-            '<button class="button quiet small" type="button" onclick="mCorrection(\''+r.user_id+'\')">Correct</button></td></tr>';
+            '<button class="button quiet small" type="button" onclick="mCorrection(\''+r.user_id+'\')">Correct</button> '+
+            '<button class="button quiet small" type="button" onclick="mProposeOvertime(\''+r.user_id+'\')">Overtime</button></td></tr>';
       }).join('')+'</tbody></table></div>'
       :'<div class="empty-state">No workshop logins yet.</div>')+'</div></section>';
 
@@ -12425,6 +12597,21 @@ function vSupAttendance(){
         '<td>'+esc(a.supervisor_note||'—')+'</td>'+
         '<td><button class="button quiet small" type="button" onclick="mStaffingNote(\''+a.id+'\')">Note</button></td></tr>').join('')+
       '</tbody></table></div>':'<div class="empty-state">Nobody has asked for leave.</div>')+'</div></section>';
+
+  // Overtime: proposed here, decided by the office. Hours only — what an hour
+  // is worth to the person is not on this screen or in the rows behind it.
+  const ot=(S.overtime||[]).slice(0,30);
+  h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Overtime</h3>'+
+    '<p class="panel__description">You propose the hours and the reason; the office approves them. Approved overtime is '+
+    'counted on the person’s statement.</p></div>'+
+    '<button class="button secondary small" type="button" onclick="mProposeOvertime()">Propose</button></div>'+
+    '<div class="panel__body">'+(ot.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Person</th><th>Day</th><th>Hours</th><th>Reason</th><th>Decision</th></tr></thead><tbody>'+
+      ot.map(o=>'<tr><td><strong>'+esc(personName(o.user_id))+'</strong></td><td>'+esc(fdate(o.work_date))+'</td>'+
+        '<td>'+esc(String(Number(o.hours)))+' h</td><td>'+esc(o.reason)+'</td>'+
+        '<td>'+badge(o.status==='pending'?'With the office':o.status, o.status==='approved'?'success':o.status==='rejected'?'alert':'pending')+
+        (o.decision_note?'<span class="fl-cell-sub">'+esc(o.decision_note)+'</span>':'')+'</td></tr>').join('')+
+      '</tbody></table></div>':'<div class="empty-state">No overtime proposed.</div>')+'</div></section>';
 
   if((S.attCorrections||[]).length){
     h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Corrections</h3>'+
@@ -16658,6 +16845,259 @@ function mDecideLeave(id){
   m.m.querySelector('#dl-no').onclick=e=>decide('rejected', e.currentTarget);
 }
 
+/* ---- pay & advances ----------------------------------------------------------
+   Every write here goes through a function that checks the caller's role
+   again, so a button reached by editing a URL still gets refused by the
+   database. The dialogs decide what to ask for; they do not decide who may. */
+
+// A supervisor proposes; the office decides. Hours and a reason, nothing about money.
+function mProposeOvertime(userId){
+  const people=floorPeople();
+  const m=modal('<h3>Propose overtime</h3>'+
+    '<div class="sub">Hours beyond the working day, for one person on one day. The office approves them, and only then do they count on the statement.</div>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="ot-who">Who</label><select id="ot-who">'+
+        people.map(p=>'<option value="'+esc(p.user_id)+'"'+(p.user_id===userId?' selected':'')+'>'+esc(p.full_name)+'</option>').join('')+
+      '</select></div>'+
+      '<div class="field"><label for="ot-date">Day</label><input id="ot-date" type="date" value="'+esc(today())+'"></div>'+
+      '<div class="field"><label for="ot-hours">Hours</label><input id="ot-hours" inputmode="decimal" value="2" placeholder="e.g. 2"></div>'+
+      '<div class="field field--full"><label for="ot-why">Why</label>'+
+        '<input id="ot-why" placeholder="e.g. crate for B-2609-01 leaves tomorrow morning"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ot-go">Send to the office</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#ot-go').onclick=async e=>{
+    const btn=e.currentTarget;   // before any await
+    const hours=parseFloat($('ot-hours').value), why=$('ot-why').value.trim(), d=$('ot-date').value;
+    if(!d){ toast('Give the day.',{err:true}); return; }
+    if(!(hours>0) || hours>12){ toast('Give the overtime hours (up to 12).',{err:true}); return; }
+    if(!why){ toast('Say why the overtime is needed.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_propose_overtime',{p_user:$('ot-who').value, p_date:d, p_hours:hours, p_reason:why});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Sent to the office.');
+  };
+}
+function mDecideOvertime(id){
+  const o=(S.overtime||[]).find(x=>x.id===id);
+  if(!o){ toast('That proposal is no longer there.',{err:true}); return; }
+  const m=modal('<h3>Overtime proposal</h3>'+
+    '<div class="sub">Proposed by '+esc(personName(o.proposed_by)||'a supervisor')+' · '+esc(ftime(o.proposed_at))+'</div>'+
+    '<div class="handover">'+
+      '<div class="handover__row"><span>Person</span><strong>'+esc(personName(o.user_id))+'</strong></div>'+
+      '<div class="handover__row"><span>Day</span><strong>'+esc(fdate(o.work_date))+'</strong></div>'+
+      '<div class="handover__row"><span>Hours</span><strong>'+esc(String(Number(o.hours)))+' h</strong></div>'+
+      '<div class="handover__row"><span>Reason</span><strong>'+esc(o.reason)+'</strong></div></div>'+
+    '<p class="field-hint">Approved hours are counted on the person’s next statement at their hourly rate.</p>'+
+    '<div class="form-grid" style="margin-top:12px"><div class="field field--full"><label for="do-note">Note (optional)</label><input id="do-note"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="do-yes">Approve</button>'+
+      '<button class="button button--secondary" type="button" id="do-no">Reject</button>'+
+      '<button class="button button--quiet" type="button" onclick="closeModal()">Close</button></div></div>');
+  const decide=async (decision, btn)=>{
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_decide_overtime',{p_id:id, p_decision:decision, p_note:$('do-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast(decision==='approved'?'Overtime approved.':'Overtime not approved.');
+  };
+  m.m.querySelector('#do-yes').onclick=e=>decide('approved', e.currentTarget);
+  m.m.querySelector('#do-no').onclick=e=>decide('rejected', e.currentTarget);
+}
+
+// An advance is the office's decision alone. The amount may be trimmed; the
+// request itself stays as the person wrote it.
+function mDecideAdvance(id){
+  const a=(S.advances||[]).find(x=>x.id===id);
+  if(!a){ toast('That request is no longer there.',{err:true}); return; }
+  const m=modal('<h3>Advance request</h3>'+
+    '<div class="sub">'+esc(personName(a.user_id))+' · asked '+esc(ftime(a.requested_at))+'</div>'+
+    '<div class="handover">'+
+      '<div class="handover__row"><span>Amount asked</span><strong>'+esc(money(a.amount,'INR'))+'</strong></div>'+
+      '<div class="handover__row"><span>Reason</span><strong>'+esc(advanceReasonLabel(a.reason_code))+(a.reason_text?' — '+esc(a.reason_text):'')+'</strong></div>'+
+      '<div class="handover__row"><span>Needed by</span><strong>'+esc(fdate(a.needed_by))+'</strong></div>'+
+      '<div class="handover__row"><span>Recovery</span><strong>'+esc(recoveryLabel(a.recovery_plan))+'</strong></div></div>'+
+    '<p class="field-hint">Payment and the books stay manual. Approving records the decision; recovery is entered on the wage statement.</p>'+
+    '<div class="form-grid" style="margin-top:12px">'+
+      '<div class="field"><label for="da-amount">Amount approved</label><input id="da-amount" inputmode="numeric" value="'+esc(String(Number(a.amount)))+'"></div>'+
+      '<div class="field"><label for="da-note">Note to the person (optional)</label><input id="da-note"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="da-yes">Approve</button>'+
+      '<button class="button button--secondary" type="button" id="da-no">Reject</button>'+
+      '<button class="button button--quiet" type="button" onclick="closeModal()">Close</button></div></div>');
+  const decide=async (decision, btn)=>{
+    const amt=decision==='approved'?Number(String($('da-amount').value).replace(/[^0-9.]/g,'')):null;
+    if(decision==='approved' && !(amt>0)){ toast('Give the amount approved.',{err:true}); return; }
+    if(decision==='approved' && amt>Number(a.amount)){ toast('That is more than was asked for.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_decide_advance',{p_id:id, p_decision:decision, p_amount:amt, p_note:$('da-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast(decision==='approved'?'Advance approved.':'Advance not approved.');
+  };
+  m.m.querySelector('#da-yes').onclick=e=>decide('approved', e.currentTarget);
+  m.m.querySelector('#da-no').onclick=e=>decide('rejected', e.currentTarget);
+}
+function mCloseAdvance(id){
+  const a=(S.advances||[]).find(x=>x.id===id); if(!a) return;
+  const m=modal('<h3>Mark the advance recovered</h3>'+
+    '<div class="sub">'+esc(personName(a.user_id))+' · '+esc(money(a.approved_amount||a.amount,'INR'))+'</div>'+
+    '<div class="form-grid"><div class="field field--full"><label for="ca-note">How it was recovered (optional)</label>'+
+      '<input id="ca-note" placeholder="e.g. deducted on the August and September statements"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ca-go">Mark recovered</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#ca-go').onclick=async e=>{
+    const btn=e.currentTarget; btn.disabled=true;
+    const {error}=await sb.rpc('bt_close_advance',{p_id:id, p_note:$('ca-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Advance closed.');
+  };
+}
+
+// The hourly rate: a new version from a day, never an edit of the old one.
+function mSetRate(userId){
+  const cur=payRateOn(userId);
+  const hist=(S.payRates||[]).filter(r=>r.user_id===userId);
+  const m=modal('<h3>Hourly rate</h3>'+
+    '<div class="sub">'+esc(personName(userId))+(cur?' · now '+esc(money(cur.hourly_rate,'INR'))+' per hour from '+esc(fdate(cur.effective_from)):' · no rate yet')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="pr-rate">Rate per hour (₹)</label><input id="pr-rate" inputmode="decimal" value="'+esc(cur?String(Number(cur.hourly_rate)):'')+'"></div>'+
+      '<div class="field"><label for="pr-from">Applies from</label><input id="pr-from" type="date" value="'+esc(today())+'"></div>'+
+      '<div class="field field--full"><label for="pr-note">Note (optional)</label><input id="pr-note" placeholder="e.g. annual revision"></div>'+
+      '<p class="field-hint field--full">Statements use the rate in force on the last day of their period. Earlier rates are kept, so an old statement can always be reproduced.</p>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="pr-go">Save rate</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+      (hist.length?'<div class="field--full"><p class="field-hint">History</p>'+hist.map(r=>'<div class="handover__row"><span>'+esc(fdate(r.effective_from))+'</span><strong>'+esc(money(r.hourly_rate,'INR'))+(r.note?' · '+esc(r.note):'')+'</strong></div>').join('')+'</div>':'')+
+    '</div>');
+  m.m.querySelector('#pr-go').onclick=async e=>{
+    const btn=e.currentTarget;
+    const rate=parseFloat($('pr-rate').value), from=$('pr-from').value;
+    if(!(rate>0)){ toast('Give an hourly rate.',{err:true}); return; }
+    if(!from){ toast('Say from which day the rate applies.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_set_pay_rate',{p_user:userId, p_rate:rate, p_from:from, p_note:$('pr-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Rate saved.');
+  };
+}
+
+// The statement. The form starts from what the clock and the rate table say
+// and the office edits from there; the database recomputes gross and net from
+// the figures saved, so the numbers on the person's phone are never the ones
+// this form displayed while somebody was still typing.
+function mWageStatement(userId, id){
+  const s=id?(S.statements||[]).find(x=>x.id===id):null;
+  const [lmFrom, lmTo]=lastMonthRange();
+  const from=s?s.period_start:lmFrom, to=s?s.period_end:lmTo;
+  const rate=s?Number(s.hourly_rate):(payRateOn(userId, to)||{}).hourly_rate;
+  window.__wsFile=null;
+  const m=modal('<h3>'+(s?'Wage statement':'Prepare a wage statement')+'</h3>'+
+    '<div class="sub">'+esc(personName(userId))+(s?' · '+esc(periodLabel(s))+' · '+(s.status==='published'?'published '+esc(fdate(String(s.published_at).slice(0,10))):'draft'):'')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="ws-from">Period from</label><input id="ws-from" type="date" value="'+esc(from)+'"'+(s?' disabled':'')+'></div>'+
+      '<div class="field"><label for="ws-to">to</label><input id="ws-to" type="date" value="'+esc(to)+'"'+(s?' disabled':'')+'></div>'+
+      '<div class="field--full"><button class="button button--secondary" type="button" id="ws-load">Read the clock for this period</button>'+
+        '<p class="field-hint" id="ws-clock">'+(s?esc(fmins(s.attendance_minutes)+' on the clock when prepared'+(Number(s.overtime_hours)?' · '+fhours(s.overtime_hours)+' approved overtime':'')):'Fills in the hours from attendance and the rate in force.')+'</p></div>'+
+      '<div class="field"><label for="ws-hours">Approved hours</label><input id="ws-hours" inputmode="decimal" value="'+esc(s?String(Number(s.approved_hours)):'')+'" oninput="wsCalc()"></div>'+
+      '<div class="field"><label for="ws-rate">Hourly rate (₹)</label><input id="ws-rate" inputmode="decimal" value="'+esc(rate!=null?String(Number(rate)):'')+'" oninput="wsCalc()"></div>'+
+      '<div class="field"><label for="ws-adv">Advances recovered (₹)</label><input id="ws-adv" inputmode="decimal" value="'+esc(s?String(Number(s.advances_recovered)):'0')+'" oninput="wsCalc()">'+
+        '<p class="field-hint" id="ws-open"></p></div>'+
+      '<div class="field"><label for="ws-ded">Other deductions (₹)</label><input id="ws-ded" inputmode="decimal" value="'+esc(s?String(Number(s.deductions)):'0')+'" oninput="wsCalc()"></div>'+
+      '<div class="field field--full"><label for="ws-dednote">What the deduction is for</label><input id="ws-dednote" value="'+esc(s?s.deduction_note||'':'')+'" placeholder="e.g. safety shoes"></div>'+
+      '<div class="handover field--full" id="ws-calc"></div>'+
+      '<div class="field field--full"><label for="ws-break">Calculation, as the person will read it (optional)</label>'+
+        '<textarea id="ws-break" rows="4" placeholder="One line per item, in plain words">'+esc(s?s.breakdown||'':'')+'</textarea></div>'+
+      '<div class="field field--full"><label>Statement PDF (optional)</label>'+
+        '<div class="button-row"><button class="button button--secondary" type="button" id="ws-pick">'+(s&&s.file_path?'Replace the PDF':'Attach a PDF')+'</button>'+
+        '<span class="field-hint" id="ws-file">'+esc(s&&s.source_file?s.source_file:'')+'</span></div>'+
+        '<input id="ws-file-input" type="file" accept="application/pdf" hidden></div>'+
+      '<div class="button-row field--full">'+
+        '<button class="button" type="button" id="ws-save">'+(s?'Save changes':'Save draft')+'</button>'+
+        (s&&s.status==='published'?'':'<button class="button button--secondary" type="button" id="ws-pub">'+(s?'Publish':'Save and publish')+'</button>')+
+        '<button class="button button--quiet" type="button" onclick="closeModal()">Close</button></div>'+
+      '<p class="field-hint field--full">A draft is yours alone. Once published the person sees it on their phone; later changes are kept as revisions.</p>'+
+    '</div>');
+  const openAdv=advancesOf(userId).filter(a=>a.status==='approved');
+  $('ws-open').textContent=openAdv.length?('Open: '+openAdv.map(a=>money(a.approved_amount||a.amount,'INR')+' ('+recoveryLabel(a.recovery_plan)+')').join(', ')):'No approved advance open.';
+  wsCalc();
+  $('ws-pick').onclick=e=>{ e.preventDefault(); const i=$('ws-file-input'); i.value=''; i.click(); };
+  $('ws-file-input').onchange=ev=>{ const f=ev.target.files[0]; if(!f) return;
+    if(!/pdf$/i.test(f.type||'') && !/\.pdf$/i.test(f.name)){ toast('The statement has to be a PDF.',{err:true}); return; }
+    window.__wsFile=f; $('ws-file').textContent=f.name; };
+  $('ws-load').onclick=async e=>{
+    const btn=e.currentTarget; btn.disabled=true;
+    const {data,error}=await sb.rpc('bt_prepare_wage_statement',{p_user:userId, p_from:$('ws-from').value, p_to:$('ws-to').value});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    $('ws-hours').value=String(data.hours||0);
+    if(data.hourly_rate!=null) $('ws-rate').value=String(Number(data.hourly_rate));
+    $('ws-clock').textContent=fmins(data.minutes)+' on the clock over '+data.days+' day'+(data.days===1?'':'s')+
+      (Number(data.overtime_hours)?' · '+fhours(data.overtime_hours)+' approved overtime':'')+
+      (data.pending_exceptions?' · '+data.pending_exceptions+' clock'+(data.pending_exceptions===1?'':'s')+' away from the factory still unapproved':'');
+    if(data.hourly_rate==null) toast('No rate is in force for this person on the last day of the period. Set one first.',{err:true});
+    wsCalc();
+  };
+  const save=async (btn, publish)=>{
+    const hours=parseFloat($('ws-hours').value), r=parseFloat($('ws-rate').value);
+    const adv=parseFloat($('ws-adv').value)||0, ded=parseFloat($('ws-ded').value)||0;
+    if(!(hours>=0)){ toast('Give the approved hours.',{err:true}); return; }
+    if(!(r>0)){ toast('Give the hourly rate.',{err:true}); return; }
+    if(hours*r-adv-ded<0){ toast('Advances and deductions come to more than the gross pay.',{err:true}); return; }
+    btn.disabled=true;
+    let filePath=null, sourceFile=null;
+    try{
+      let sid=s?s.id:null;
+      if(window.__wsFile){
+        // the PDF goes under wages/{person}/, where only the office may write and
+        // only the person may read once the statement is published
+        const stamp=Date.now();
+        filePath='wages/'+userId+'/'+(sid||stamp)+'-'+stamp+'.pdf'; sourceFile=window.__wsFile.name;
+        const up=await sb.storage.from(CONFIG.bucket).upload(filePath, window.__wsFile, {contentType:'application/pdf'});
+        if(up.error) throw up.error;
+      }
+      const {data,error}=await sb.rpc('bt_save_wage_statement',{p_id:sid, p_user:userId, p_from:$('ws-from').value, p_to:$('ws-to').value,
+        p_approved_hours:hours, p_hourly_rate:r, p_advances_recovered:adv, p_deductions:ded, p_deduction_note:$('ws-dednote').value.trim()||null,
+        p_breakdown:$('ws-break').value.trim()||null, p_file_path:filePath, p_source_file:sourceFile});
+      if(error) throw error;
+      sid=data;
+      if(publish){
+        const p=await sb.rpc('bt_publish_wage_statement',{p_id:sid});
+        if(p.error) throw p.error;
+      }
+      closeModal(); await refresh();
+      toast(publish?'Published. The person can now see it.':'Saved as a draft. Nobody but you can see it.');
+    }catch(err){ btn.disabled=false; toast(err.message||String(err),{err:true}); }
+  };
+  $('ws-save').onclick=e=>save(e.currentTarget, false);
+  if($('ws-pub')) $('ws-pub').onclick=e=>save(e.currentTarget, true);
+}
+function wsCalc(){
+  const hours=parseFloat($('ws-hours').value)||0, r=parseFloat($('ws-rate').value)||0;
+  const adv=parseFloat($('ws-adv').value)||0, ded=parseFloat($('ws-ded').value)||0;
+  const gross=Math.round(hours*r*100)/100, net=gross-adv-ded;
+  const el=$('ws-calc'); if(!el) return;
+  el.innerHTML='<div class="handover__row"><span>Gross</span><strong>'+esc(fhours(hours))+' × '+esc(money(r,'INR'))+' = '+esc(money(gross,'INR'))+'</strong></div>'+
+    '<div class="handover__row"><span>Less advances</span><strong>− '+esc(money(adv,'INR'))+'</strong></div>'+
+    '<div class="handover__row"><span>Less deductions</span><strong>− '+esc(money(ded,'INR'))+'</strong></div>'+
+    '<div class="handover__row"><span>Net payable</span><strong'+(net<0?' style="color:var(--danger)"':'')+'>'+esc(money(net,'INR'))+'</strong></div>';
+}
+function publishStatement(id){
+  const s=(S.statements||[]).find(x=>x.id===id); if(!s) return;
+  const m=modal('<h3>Publish this statement?</h3>'+
+    '<div class="sub">'+esc(personName(s.user_id))+' · '+esc(periodLabel(s))+' · net '+esc(money(s.net_payable,'INR'))+'</div>'+
+    '<p class="field-hint">They will see it on their phone straight away. Changes after this are kept as revisions.</p>'+
+    '<div class="button-row"><button class="button" type="button" id="ps-go">Publish</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Not yet</button></div>');
+  m.m.querySelector('#ps-go').onclick=async e=>{
+    const btn=e.currentTarget; btn.disabled=true;
+    const {error}=await sb.rpc('bt_publish_wage_statement',{p_id:id});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Published.');
+  };
+}
+
 // Factory sites and policy, from Settings. Numbers only; the office decides them.
 async function saveSite(id){
   const name=$('site-name').value.trim(), lat=parseFloat($('site-lat').value), lng=parseFloat($('site-lng').value);
@@ -16843,7 +17283,8 @@ function artisanNav(){
   return [
     ['#/home','My work','मेरा काम','stage-planning',c.due.length+c.back.length],
     ['#/attendance','Attendance','हाज़िरी','stage-confirmed',0],
-    ['#/leave','Leave','छुट्टी','stage-photos',(S.myLeave||[]).filter(l=>l.status==='pending').length]
+    ['#/leave','Leave','छुट्टी','stage-photos',(S.myLeave||[]).filter(l=>l.status==='pending').length],
+    ['#/pay','Pay & advances','वेतन','i-wallet',(S.advances||[]).filter(a=>a.status==='pending').length]
   ];
 }
 function artisanHeader(topbar, nav, app, dock, shell){
@@ -17238,6 +17679,126 @@ function lvSync(){
   $('lv-text-wrap').hidden=!(other||em);
   $('lv-text-label').innerHTML=em?bi('What happened','क्या हुआ'):bi('Say what','बताएं क्या');
   if($('lv-to').value<$('lv-from').value) $('lv-to').value=$('lv-from').value;
+}
+
+/* ---- pay & advances ----------------------------------------------------------
+   Two panels, as the prototype draws them: the latest statement the office has
+   published, and the person's own advance requests. Everything on this screen
+   came off a table whose policy is "the person or the office"; a supervisor
+   reaches the same screen for their own records and gets the same two panels,
+   in English, since their console is. */
+function payL(){ return isWorker() ? bi : (en)=>esc(en); }
+function advanceStatus(a, L){
+  return a.status==='approved'?badge(L('Approved','मंज़ूर'),'success')
+       : a.status==='recovered'?badge(L('Closed','पूरा'),'success')
+       : a.status==='rejected'?badge(L('Not approved','मंज़ूर नहीं'),'alert')
+       : badge(L('Pending','बाकी'),'pending');
+}
+function advanceRow(a, L){
+  const hindi=isWorker();
+  const sub = a.status==='pending' ? L('Admin decision pending','मंज़ूरी बाकी')
+    : a.status==='approved' ? L('Approved'+(Number(a.approved_amount)!==Number(a.amount)?' for '+money(a.approved_amount,'INR'):''),'मंज़ूर')
+    : a.status==='recovered' ? L('Approved and recovered','मंज़ूर और वापस कटा')
+    : L('Not approved','मंज़ूर नहीं');
+  return '<div class="att-row lv-row"><div><strong>'+esc(money(a.amount,'INR'))+' · '+esc(fdate(String(a.requested_at).slice(0,10)))+'</strong>'+
+    '<p>'+esc(advanceReasonLabel(a.reason_code, hindi))+(a.reason_text?' — '+esc(a.reason_text):'')+' · '+esc(recoveryLabel(a.recovery_plan, hindi))+
+    '<br>'+sub+(a.decision_note?'<br>'+L('Office','कार्यालय')+': '+esc(a.decision_note):'')+'</p></div>'+advanceStatus(a, L)+'</div>';
+}
+function wagePanel(L){
+  const mine=statementsOf(uid()).filter(s=>s.status==='published');
+  const s=mine[0];
+  let h='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">'+(s?esc(periodLabel(s, isWorker()))+' '+L('wage statement','वेतन विवरण'):L('Wage statement','वेतन विवरण'))+'</h3>'+
+    '<p class="panel__description">'+(s?L('Published by Admin '+fdate(String(s.published_at).slice(0,10)),'एडमिन द्वारा जारी'):L('Nothing published yet','अभी कुछ जारी नहीं'))+'</p></div>'+
+    (s?badge(L('Published','जारी'),'success'):'')+'</div><div class="panel__body">';
+  if(!s){
+    h+='<div class="empty-state">'+L('No wage statement has been published for you yet. The office publishes one for each period.','अभी आपके लिए कोई वेतन विवरण जारी नहीं हुआ है। कार्यालय हर अवधि का विवरण जारी करता है।')+'</div>';
+  } else {
+    h+='<div class="att-grid">'+
+      '<div><span>'+L('Approved hours','मंज़ूर घंटे')+'</span><strong>'+esc(fhours(s.approved_hours))+'</strong></div>'+
+      '<div><span>'+L('Hourly rate','प्रति घंटा दर')+'</span><strong>'+esc(money(s.hourly_rate,'INR'))+'</strong></div>'+
+      '<div><span>'+L('Net payable','कुल देय')+'</span><strong>'+esc(money(s.net_payable,'INR'))+'</strong></div></div>'+
+      '<div class="pay-lines">'+
+        '<div><span>'+L('Gross','कुल वेतन')+'</span><strong>'+esc(money(s.gross_pay,'INR'))+'</strong></div>'+
+        (Number(s.overtime_hours)>0?'<div><span>'+L('Approved overtime, included','मंज़ूर ओवरटाइम, शामिल')+'</span><strong>'+esc(fhours(s.overtime_hours))+'</strong></div>':'')+
+        '<div><span>'+L('Advances recovered','एडवांस वापस कटा')+'</span><strong>− '+esc(money(s.advances_recovered,'INR'))+'</strong></div>'+
+        '<div><span>'+L('Deductions','कटौती')+(s.deduction_note?' · '+esc(s.deduction_note):'')+'</span><strong>− '+esc(money(s.deductions,'INR'))+'</strong></div>'+
+        '<div class="pay-lines__net"><span>'+L('Net payable','कुल देय')+'</span><strong>'+esc(money(s.net_payable,'INR'))+'</strong></div></div>'+
+      (s.breakdown?'<pre class="pay-breakdown">'+esc(s.breakdown)+'</pre>':'')+
+      '<div class="wk-notice"><strong>'+L('Calculation','गणना')+'</strong>'+
+        esc('Approved hours × hourly rate, less advances and deductions.')+(isWorker()?' / '+esc('मंज़ूर घंटे × प्रति घंटा दर, फिर एडवांस और कटौती।'):'')+'</div>'+
+      '<div class="button-row space-top-12">'+
+        (s.file_path?'<button class="button secondary" type="button" onclick="openDoc(\''+jsq(s.file_path)+'\')">'+L('Download','डाउनलोड')+'</button>'
+                    :'<span class="field-hint">'+L('No PDF attached to this statement.','इस विवरण के साथ कोई PDF नहीं है।')+'</span>')+'</div>';
+    if(mine.length>1){
+      h+='<div class="section-title space-top-14"><div><h2>'+L('Earlier statements','पिछले विवरण')+'</h2></div></div>'+
+        mine.slice(1).map(x=>'<div class="att-row"><strong>'+esc(periodLabel(x, isWorker()))+'</strong>'+
+          '<p>'+esc(fhours(x.approved_hours))+' · '+esc(money(x.net_payable,'INR'))+
+          (x.file_path?' · <button class="link-button" type="button" onclick="openDoc(\''+jsq(x.file_path)+'\')">'+L('Download','डाउनलोड')+'</button>':'')+'</p></div>').join('');
+    }
+  }
+  return h+'</div></section>';
+}
+function vPay(){
+  const L=payL();
+  const mine=advancesOf(uid());
+  let h='<div class="page-heading"><div>'+
+    '<p class="eyebrow">'+L('Private personal records','निजी रिकॉर्ड')+'</p>'+
+    '<h1 class="display-title">'+L('Pay & advances','वेतन और एडवांस')+'.</h1>'+
+    '<p class="lede">'+esc('Only you and Admin can see this information.')+(isWorker()?' / '+esc('यह जानकारी केवल आपको और एडमिन को दिखेगी।'):'')+'</p></div></div>';
+  h+='<div class="utility-grid">'+wagePanel(L)+
+    '<section class="panel"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">'+L('Advance requests','एडवांस अनुरोध')+'</h3>'+
+      '<p class="panel__description">'+L('Your requests only','केवल आपके अनुरोध')+'</p></div>'+
+      '<button class="button" type="button" id="adv-open" onclick="mRequestAdvance()">'+L('Request advance','एडवांस माँगें')+'</button></div>'+
+    '<div class="panel__body">'+(mine.length?mine.map(a=>advanceRow(a, L)).join('')
+      :'<div class="empty-state">'+L('No advance requested yet.','अभी कोई एडवांस नहीं माँगा।')+'</div>')+'</div></section></div>';
+  sfaPaint(h);
+}
+function mRequestAdvance(){
+  const L=payL(), hindi=isWorker();
+  const pending=advancesOf(uid()).find(a=>a.status==='pending');
+  if(pending){ toast(hindi?'One request is already with the office · एक अनुरोध पहले से कार्यालय के पास है':'One request is already with the office.',{err:true}); return; }
+  const m=modal('<p class="eyebrow">'+L('Private request','निजी अनुरोध')+'</p>'+
+    '<h3>'+L('Request advance','एडवांस माँगें')+'</h3>'+
+    '<div class="wk-notice"><strong>'+L('Supervisor cannot see this','सुपरवाइज़र नहीं देखेगा')+'</strong>'+
+      esc('Payment and accounting remain manual.')+(hindi?' / '+esc('भुगतान और हिसाब हाथ से होगा।'):'')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full field--big"><label for="adv-amount">'+L('Amount','रकम')+'</label>'+
+        '<div class="preset-row">'+ADVANCE_PRESETS.map(v=>'<button class="button secondary preset" type="button" onclick="$(\'adv-amount\').value=\''+v+'\';advSyncPresets()">'+esc(money(v,'INR'))+'</button>').join('')+'</div>'+
+        '<input id="adv-amount" inputmode="numeric" placeholder="₹" oninput="advSyncPresets()"></div>'+
+      '<div class="field field--full field--big"><label for="adv-why">'+L('Reason','कारण')+'</label><select id="adv-why" onchange="advSync()">'+
+        ADVANCE_REASONS.map(r=>'<option value="'+esc(r[0])+'">'+(hindi?bi(r[1],r[2]):esc(r[1]))+'</option>').join('')+'</select></div>'+
+      '<div class="field field--full" id="adv-text-wrap" hidden><label for="adv-text">'+L('Say what','बताएं क्या')+'</label>'+
+        '<input id="adv-text" placeholder="'+L('One line is enough','एक लाइन काफ़ी है')+'"></div>'+
+      '<div class="field"><label for="adv-by">'+L('Needed by','कब तक चाहिए')+'</label><input id="adv-by" type="date" value="'+esc(addDays(today(),3))+'"></div>'+
+      '<div class="field"><label for="adv-plan">'+L('Recovery plan','वापस कटौती')+'</label><select id="adv-plan">'+
+        RECOVERY_PLANS.map(r=>'<option value="'+esc(r[0])+'">'+(hindi?bi(r[1],r[2]):esc(r[1]))+'</option>').join('')+'</select></div>'+
+      '<p class="field-hint field--full">'+L('Admin decision. Payment stays manual.','एडमिन मंज़ूरी। भुगतान हाथ से होगा।')+'</p>'+
+      '<div class="button-row field--full wk-submit"><button class="button button--big" type="button" id="adv-go">'+L('Submit','भेजें')+'</button>'+
+      '<button class="button secondary" type="button" onclick="closeModal()">'+L('Cancel','रद्द करें')+'</button></div>'+
+    '</div>');
+  m.m.classList.add('modal--artisan');
+  $('adv-go').onclick=async e=>{
+    const btn=e.currentTarget;   // before any await
+    const amount=Number(String($('adv-amount').value||'').replace(/[^0-9.]/g,''));
+    const why=$('adv-why').value, text=($('adv-text').value||'').trim(), by=$('adv-by').value, plan=$('adv-plan').value;
+    const say=(en,hi)=>toast(hindi?en+' · '+hi:en,{err:true});
+    if(!(amount>0)) return say('Give the amount','रकम बताएं');
+    if(why==='other' && !text) return say('Say what the advance is for','एडवांस किस लिए है, बताएं');
+    if(!by) return say('Say by when you need it','कब तक चाहिए, बताएं');
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_request_advance',{p_amount:amount, p_reason_code:why, p_reason_text:text||null, p_needed_by:by, p_recovery:plan});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render();
+    toast(hindi?'Advance request sent · एडवांस अनुरोध भेजा गया':'Advance request sent to the office.');
+  };
+}
+function advSync(){ $('adv-text-wrap').hidden = $('adv-why').value!=='other'; }
+function advSyncPresets(){
+  const v=Number(String($('adv-amount').value||'').replace(/[^0-9.]/g,''));
+  document.querySelectorAll('.preset-row .preset').forEach(b=>b.classList.toggle('is-on', Number(String(b.textContent).replace(/[^0-9.]/g,''))===v));
 }
 
 /* ---- recording work -------------------------------------------------------
