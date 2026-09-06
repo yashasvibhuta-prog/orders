@@ -580,6 +580,14 @@ a{color:var(--text-primary)}
   font-family:var(--font-ui);font-size:15px}
 .check-row{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:14px}
 .check-row input{width:auto;min-height:0}
+/* the quality checklist inside the sign-off dialog: the lines are the gate, so
+   they read as a list to work down rather than as ordinary form fields */
+.qc-list{margin-top:14px;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);
+  background:var(--surface-secondary)}
+.qc-list__head{margin:0;font-size:12px;font-weight:750;color:var(--text-secondary)}
+.qc-list .check-row{align-items:flex-start;gap:10px;line-height:1.45}
+.qc-list .check-row input{margin-top:3px;flex:0 0 auto}
+.qc-list em{font-style:normal;font-size:12px}
 .button-row{display:flex;gap:9px;flex-wrap:wrap}
 
 /* phone: the top bar has one more control than the static handoff (Sign out),
@@ -2051,6 +2059,16 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfb .grid-main>*,.sfb .stack>*{min-width:0}
 </style>
 <style>
+/* the checklist as the office edits it: one line, its gate, and a way out */
+.qc-admin-row{display:flex;align-items:center;gap:10px;padding:9px 0;
+  border-bottom:1px solid var(--border-subtle,#ececef);font-size:13px}
+.qc-admin-row:last-child{border-bottom:0}
+.qc-admin-row span{flex:1;min-width:0}
+.form-card__group{margin:0 0 2px;font-size:11px;font-weight:750;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--text-secondary)}
+/* the checklist as it was actually ticked, on the product record */
+.qc-said{margin:6px 0 0;padding:0;list-style:none;font-size:12px;color:var(--text-secondary)}
+.qc-said li{padding:1px 0}
 /* ChatGPT's owner-console stylesheet, copied verbatim from
    STONEFLOW-FINAL-HANDOFF-READY/STONEFLOW-ADMIN.html (the file named in
    CLAUDE-READ-THIS-ONLY.md) and scoped to .sfa so it
@@ -4074,7 +4092,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='fb567609059f';</script>
+<script>const BUILD_ID='981d67ce00d5';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4391,7 +4409,9 @@ const S = {
   // person their own, a supervisor other people's overtime and nothing else
   payRates:[], statements:[], advances:[], overtime:[],
   // time and tools: hours only, no money anywhere in these
-  equipment:[], eqEvents:[], timeEntries:[], indirect:[], timeRegister:[], timeCorrections:[]
+  equipment:[], eqEvents:[], timeEntries:[], indirect:[], timeRegister:[], timeCorrections:[],
+  // material and quality: quantities and ticks, never a rate
+  lots:[], movements:[], matRegister:[], checklist:[], quality:[]
 };
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -4421,7 +4441,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv, ws, adv, ot, eq, eqe, wte, ite, reg] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv, ws, adv, ot, eq, eqe, wte, ite, reg, lots, mm, mreg, qcl, qd] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -4469,7 +4489,15 @@ async function loadStaffData(){
     sb.from('bt_equipment_events').select('*').order('reported_at',{ascending:false}),
     sb.from('bt_work_time_entries').select('*').order('started_at',{ascending:false}),
     sb.from('bt_indirect_time_entries').select('*').order('started_at',{ascending:false}),
-    sb.rpc('bt_floor_time_register')
+    sb.rpc('bt_floor_time_register'),
+    // material and quality. The lots are the floor's list; the movements are the
+    // ones on pieces this login may see; the register is the same arithmetic the
+    // office reads, computed on the server.
+    sb.from('bt_material_lots').select('*').eq('active', true).order('code'),
+    sb.from('bt_material_movements').select('*').order('recorded_at',{ascending:false}),
+    sb.rpc('bt_floor_material_register'),
+    sb.from('bt_quality_checklists').select('*').eq('active', true).order('sort_order'),
+    sb.rpc('bt_floor_quality')
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -4513,6 +4541,7 @@ async function loadStaffData(){
   S.absences=(abs&&abs.data)||[]; S.myLeave=(lv&&lv.data)||[];
   indexPay([], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
   indexTime((eq&&eq.data)||[], (eqe&&eqe.data)||[], (wte&&wte.data)||[], (ite&&ite.data)||[], (reg&&reg.data)||[], []);
+  indexMaterial((lots&&lots.data)||[], (mm&&mm.data)||[], (mreg&&mreg.data)||[], (qcl&&qcl.data)||[], (qd&&qd.data)||[]);
   S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
 }
@@ -4988,7 +5017,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -5047,7 +5076,13 @@ async function loadData(){
     admin ? sb.from('bt_work_time_entries').select('*').order('started_at',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_indirect_time_entries').select('*').order('started_at',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.rpc('bt_floor_time_register') : Promise.resolve({data:[]}),
-    admin ? sb.from('bt_work_time_corrections').select('*').order('changed_at',{ascending:false}) : Promise.resolve({data:[]})
+    admin ? sb.from('bt_work_time_corrections').select('*').order('changed_at',{ascending:false}) : Promise.resolve({data:[]}),
+    // material and quality, the office's view. A buyer has no policy on any of these.
+    admin ? sb.from('bt_material_lots').select('*').order('code') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_material_movements').select('*').order('recorded_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.rpc('bt_floor_material_register') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_quality_checklists').select('*').order('sort_order') : Promise.resolve({data:[]}),
+    admin ? sb.rpc('bt_floor_quality') : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -5102,6 +5137,7 @@ async function loadData(){
   S.myLeave=(lv&&lv.data)||[]; S.absences=S.myLeave;   // the office reads the full table
   indexPay((rates&&rates.data)||[], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
   indexTime((eq&&eq.data)||[], (eqe&&eqe.data)||[], (wte&&wte.data)||[], (ite&&ite.data)||[], (reg&&reg.data)||[], (wtc&&wtc.data)||[]);
+  indexMaterial((lots&&lots.data)||[], (mm&&mm.data)||[], (mreg&&mreg.data)||[], (qcl&&qcl.data)||[], (qd&&qd.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
 }
@@ -5120,6 +5156,51 @@ function indexTime(equipment, events, entries, indirect, register, corrections){
   S.timeRegister=(register||[]).slice();
   S.timeCorrections=(corrections||[]).slice();
 }
+/* ---- material and quality -------------------------------------------------
+   A movement is a physical quantity against a lot, a product and a process.
+   Nothing here carries a value; the office prices it from its own rates. */
+function indexMaterial(lots, movements, register, checklist, quality){
+  S.lots=(lots||[]).slice().sort((a,b)=>String(a.code).localeCompare(String(b.code)));
+  S.lotsById={}; S.lots.forEach(l=>{ S.lotsById[l.id]=l; });
+  S.movements=(movements||[]).slice();
+  S.matRegister=(register||[]).slice();
+  S.checklist=(checklist||[]).slice().sort((a,b)=>(a.sort_order-b.sort_order)||(a.id-b.id));
+  S.quality=(quality||[]).slice().sort((a,b)=>String(b.decided_at||'').localeCompare(String(a.decided_at||'')));
+}
+const MOVEMENTS=[
+  ['issued','Stone issued to product','उत्पाद को पत्थर दिया'],
+  ['consumed','Stone consumed','पत्थर इस्तेमाल हुआ'],
+  ['offcut_returned','Reusable offcut returned','बचा टुकड़ा वापस'],
+  ['scrap','Scrap recorded','बेकार दर्ज'],
+  ['consumable','Consumable used','सामग्री इस्तेमाल']];
+const UNITS=[['m3','m³'],['kg','kg'],['piece','piece'],['litre','litre'],['metre','metre']];
+function movementLabel(kind, hindi){ const m=MOVEMENTS.find(x=>x[0]===kind); return m?(hindi?m[1]+' · '+m[2]:m[1]):(kind||''); }
+function unitLabel(u){ const x=UNITS.find(y=>y[0]===u); return x?x[1]:(u||''); }
+function lotName(id){ const l=S.lotsById&&S.lotsById[id]; return l?l.code:''; }
+// what a piece has taken and returned, from the server's own arithmetic
+function materialFor(itemId){ return (S.matRegister||[]).filter(r=>r.item_id===itemId); }
+function movementsFor(itemId, stageId){
+  return (S.movements||[]).filter(m=>m.item_id===itemId && (stageId==null||m.stage_id===stageId));
+}
+// the yield on a piece: what went in against what came out
+function materialYield(itemId){
+  const rows=materialFor(itemId);
+  const t=rows.reduce((a,r)=>({issued:a.issued+Number(r.issued||0), used:a.used+Number(r.used||0),
+    offcut:a.offcut+Number(r.offcut||0), scrap:a.scrap+Number(r.scrap||0)}), {issued:0,used:0,offcut:0,scrap:0});
+  t.pct = t.issued>0 ? Math.round(t.used/t.issued*100) : null;
+  t.unit = rows.length?rows[0].unit:'';
+  return t;
+}
+// the checklist that applies to one process: the general items and that stage's
+function checklistFor(stageId){
+  return (S.checklist||[]).filter(c=>c.active!==false && (c.stage_id==null || c.stage_id===stageId))
+    .slice().sort((a,b)=>(a.sort_order-b.sort_order)||(a.id-b.id));
+}
+function qualityFor(itemId, stageId){
+  return (S.quality||[]).filter(q=>q.item_id===itemId && (stageId==null||q.stage_id===stageId));
+}
+function fqty(n, unit){ const v=Number(n||0); return (Math.round(v*1000)/1000)+(unit?' '+unitLabel(unit):''); }
+
 const PAUSE_REASONS=[
   ['meal_break','Meal / personal break','खाना / निजी ब्रेक'],['waiting_material','Waiting for stone','पत्थर का इंतज़ार'],
   ['waiting_tool','Waiting for tool','औज़ार का इंतज़ार'],['machine_breakdown','Machine breakdown','मशीन खराब'],
@@ -5429,6 +5510,20 @@ function ownerActions(){
     type:'missing', item:miss[0], title:'Daily update missing on '+miss.length+' piece'+(miss.length===1?'':'s'),
     meta:miss.slice(0,2).map(i=>i.product).join(', ')+(miss.length>2?' and '+(miss.length-2)+' more':''),
     action:{label:'Remind', go:"go('#/production/missing')"} });
+
+  // A piece the workshop calls finished with stone still on its name. Not a
+  // judgement about waste — the register simply does not add up, and only the
+  // office can ask the floor to close it.
+  const openStone=(S.items||[]).filter(it=>pieceIsMade(it)).map(it=>{
+    const y=materialYield(it.id);
+    return {it, left:y.issued-y.used-y.offcut-y.scrap, unit:y.unit};
+  }).filter(x=>x.left>0.0005);
+  if(openStone.length) push({ urgency:1, chip:'missing', chipLabel:'Stone', icon:'stage-selection',
+    type:'material', item:openStone[0].it,
+    title:'Stone unaccounted for on '+openStone.length+' finished piece'+(openStone.length===1?'':'s'),
+    meta:openStone.slice(0,2).map(x=>x.it.product+' · '+fqty(x.left, x.unit)).join(', ')+
+      (openStone.length>2?' and '+(openStone.length-2)+' more':''),
+    action:{label:'Open', go:"go('#/item/"+openStone[0].it.id+"')"} });
 
   // Stages past the date they were planned to finish.
   lateStages().slice(0,4).forEach(l=>{
@@ -9800,6 +9895,8 @@ function vSettings(){
 
     settingsAttendanceCard()+
     settingsEquipmentCard()+
+    settingsLotsCard()+
+    settingsChecklistCard()+
 
     '<section class="form-card"><div class="form-card__head"><div>'+
       '<h3 class="form-card__title">Your sign-in</h3>'+
@@ -9882,6 +9979,74 @@ function settingsEquipmentCard(){
     '</div></section>';
 }
 
+// The stone lots the floor may draw on. A lot is a quantity and a source note;
+// what it cost is priced by the office against its own versioned rates (#105),
+// so there is no rate column here for a supervisor to read.
+function settingsLotsCard(){
+  const list=(S.lots||[]).filter(l=>l.active!==false);
+  return '<section class="form-card"><div class="form-card__head"><div>'+
+      '<h3 class="form-card__title">Stone lots &amp; consumables</h3>'+
+      '<p class="form-card__description">What the floor may issue to a piece. A movement has to name a lot, '+
+      'and the quantity has to be in that lot’s unit. No rate is shown to the workshop.</p></div></div>'+
+    (list.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Code</th><th>Material</th><th>Kind</th><th>Unit</th><th>Opening</th><th>Issued so far</th><th>Source</th><th></th></tr></thead><tbody>'+
+      list.map(l=>{ const used=(S.matRegister||[]).filter(r=>r.lot_id===l.id)
+          .reduce((t,r)=>t+Number(r.issued||0),0);
+        return '<tr><td><strong>'+esc(l.code)+'</strong></td><td>'+esc(l.material)+'</td>'+
+          '<td>'+esc(l.kind==='consumable'?'Consumable':'Stone')+'</td><td>'+esc(unitLabel(l.unit))+'</td>'+
+          '<td>'+(l.opening_qty!=null?esc(fqty(l.opening_qty,l.unit)):'—')+'</td>'+
+          '<td>'+(used?esc(fqty(used,l.unit)):'—')+'</td>'+
+          '<td>'+esc(l.source_note||'—')+'</td>'+
+          '<td class="nowrap"><button class="button quiet small" type="button" onclick="retireLot(\''+l.id+'\')">Retire</button></td></tr>'; }).join('')+
+      '</tbody></table></div>':'<p class="field-hint">No lot listed yet. The floor cannot record stone until one is here.</p>')+
+    '<div class="form-grid space-top-14">'+
+      '<div class="field"><label for="lot-code">Lot code</label><input id="lot-code" placeholder="e.g. MK-2026-014"></div>'+
+      '<div class="field"><label for="lot-mat">Material</label><input id="lot-mat" placeholder="e.g. Makrana white"></div>'+
+      '<div class="field"><label for="lot-kind">Kind</label><select id="lot-kind">'+
+        '<option value="stone">Stone</option><option value="consumable">Consumable</option></select></div>'+
+      '<div class="field"><label for="lot-unit">Unit</label><select id="lot-unit">'+
+        UNITS.map(u=>'<option value="'+u[0]+'">'+esc(u[1])+'</option>').join('')+'</select></div>'+
+      '<div class="field"><label for="lot-qty">Opening quantity (optional)</label>'+
+        '<input id="lot-qty" type="number" min="0" step="0.001" inputmode="decimal"></div>'+
+      '<div class="field"><label for="lot-src">Source note (optional)</label>'+
+        '<input id="lot-src" placeholder="e.g. Ambaji quarry, challan 812"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" onclick="saveLot()">Add lot</button></div>'+
+    '</div></section>';
+}
+
+// The checklist a supervisor works down before a stage can be signed off. An
+// item with no stage applies to every stage. Required items are the gate: the
+// server refuses the sign-off until each one is ticked.
+function settingsChecklistCard(){
+  const list=(S.checklist||[]).filter(c=>c.active!==false);
+  const byStage={}; list.forEach(c=>{ const k=c.stage_id==null?'all':String(c.stage_id); (byStage[k]=byStage[k]||[]).push(c); });
+  const order=['all'].concat((S.stages||[]).filter(s=>s.active).map(s=>String(s.id)));
+  return '<section class="form-card"><div class="form-card__head"><div>'+
+      '<h3 class="form-card__title">Quality checklist</h3>'+
+      '<p class="form-card__description">What a supervisor must confirm before a stage is signed off. '+
+      'An item with no process applies to every one. Required items are refused by the database, not only by the screen.</p></div></div>'+
+    (list.length?order.filter(k=>byStage[k]).map(k=>{
+      const stg=k==='all'?null:S.stagesById[Number(k)];
+      return '<div class="space-top-12"><p class="form-card__group">'+esc(stg?shortStage(stg.name):'Every stage')+'</p>'+
+        byStage[k].slice().sort((a,b)=>(a.sort_order-b.sort_order)||(a.id-b.id))
+          .map(c=>'<div class="qc-admin-row"><span>'+esc(c.label)+'</span>'+
+            badge(c.required?'Required':'Optional','')+
+            '<button class="button quiet small" type="button" onclick="retireChecklist('+c.id+')">Remove</button></div>').join('')+
+        '</div>'; }).join('')
+      :'<p class="field-hint">No checklist item yet. Sign-off will not ask for anything.</p>')+
+    '<div class="form-grid space-top-14">'+
+      '<div class="field field--full"><label for="qc-label">Checklist line</label>'+
+        '<input id="qc-label" placeholder="e.g. Edges chamfered to the drawing"></div>'+
+      '<div class="field"><label for="qc-stage">Process</label><select id="qc-stage">'+
+        '<option value="">Every stage</option>'+
+        (S.stages||[]).filter(s=>s.active).map(s=>'<option value="'+s.id+'">'+esc(shortStage(s.name))+'</option>').join('')+
+        '</select></div>'+
+      '<div class="field"><label for="qc-req">Required</label><select id="qc-req">'+
+        '<option value="1">Yes — blocks sign-off</option><option value="0">No — advisory</option></select></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" onclick="saveChecklist()">Add to the checklist</button></div>'+
+    '</div></section>';
+}
+
 // Hours and tools: planned against actual by product, the reconciliation for
 // the period, pauses by reason, rework by cause. Hours, never money — the
 // costing that puts a rate on these is task #105 and lives on its own page.
@@ -9926,8 +10091,44 @@ function vReportsHours(){
   h+='<section class="panel space-top-16" id="recon-panel"><div class="panel__head"><div><h3 class="panel__title">Attendance against recorded time</h3>'+
     '<p class="panel__description">'+esc(fdate(from)+' – '+fdate(to))+' · attendance − productive − rework − pauses = unaccounted. Nothing here is double counted.</p></div></div>'+
     '<div class="panel__body" id="recon-body"><div class="empty-state">Loading…</div></div></section>';
+  h+=reportMaterialPanel();
   $('app').innerHTML=h;
   loadReconciliation(from, to, 'recon-body');
+}
+
+// Stone across every product: what was issued, what became the piece, what was
+// lost. Yield is the number an owner argues a price from; the price itself is
+// #105 and is not computed here.
+function reportMaterialPanel(){
+  const reg=(S.matRegister||[]).filter(r=>S.itemsById[r.item_id]);
+  const byLot={};
+  reg.forEach(r=>{ const k=r.lot_id||'none';
+    const b=byLot[k]||(byLot[k]={code:r.lot_code||'Consumables', material:r.material||'', unit:r.unit,
+      issued:0, used:0, offcut:0, scrap:0, pieces:new Set()});
+    b.issued+=Number(r.issued||0); b.used+=Number(r.used||0);
+    b.offcut+=Number(r.offcut||0); b.scrap+=Number(r.scrap||0); b.pieces.add(r.item_id); });
+  const lots=Object.keys(byLot).map(k=>byLot[k]).sort((a,b)=>b.issued-a.issued);
+  const worst=reg.map(r=>({r, pct:Number(r.issued||0)>0?Number(r.used||0)/Number(r.issued):null}))
+    .filter(x=>x.pct!=null).sort((a,b)=>a.pct-b.pct).slice(0,6);
+  return '<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Stone yield and scrap</h3>'+
+    '<p class="panel__description">By lot, across every piece it went to. Quantities only — the rate that '+
+    'values them is set in Finance and never leaves it.</p></div></div><div class="panel__body">'+
+    (lots.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Lot</th><th>Material</th><th>Pieces</th><th>Issued</th><th>Used</th><th>Returned</th>'+
+      '<th>Scrap</th><th>Yield</th></tr></thead><tbody>'+
+      lots.map(b=>{ const pct=b.issued>0?Math.round(b.used/b.issued*100):null;
+        return '<tr><td><strong>'+esc(b.code)+'</strong></td><td>'+esc(b.material||'—')+'</td>'+
+          '<td>'+b.pieces.size+'</td><td>'+esc(fqty(b.issued,b.unit))+'</td>'+
+          '<td>'+esc(fqty(b.used,b.unit))+'</td><td>'+(b.offcut?esc(fqty(b.offcut,b.unit)):'—')+'</td>'+
+          '<td>'+(b.scrap?'<span class="text-warn">'+esc(fqty(b.scrap,b.unit))+'</span>':'—')+'</td>'+
+          '<td>'+(pct==null?'—':esc(pct+'%'))+'</td></tr>'; }).join('')+
+      '</tbody></table></div>'
+      :'<div class="empty-state">No material recorded yet.</div>')+
+    (worst.length?'<p class="field-hint">Lowest yield: '+
+      worst.map(x=>esc(((S.itemsById[x.r.item_id]||{}).product||'')+' '+Math.round(x.pct*100)+'%')).join(' · ')+
+      '</p>':'')+
+    '</div></section>';
 }
 
 function vAccounts(){
@@ -10147,6 +10348,67 @@ function render(){
    where they do not compete with the work.
 --------------------------------------------------------------------------- */
 
+// The office's view of one piece's stone: the yield, every movement, and the
+// checklist as it was actually ticked at each sign-off. This is the evidence
+// behind a cost, not the cost — rates and values are #105 and stay in Finance.
+function itemMaterialPanel(it){
+  const reg=materialFor(it.id);
+  const mv=movementsFor(it.id).slice()
+    .sort((a,b)=>String(b.recorded_at||'').localeCompare(String(a.recorded_at||'')));
+  const y=materialYield(it.id);
+  const decisions=qualityFor(it.id).slice()
+    .sort((a,b)=>String(b.decided_at||'').localeCompare(String(a.decided_at||'')));
+  if(!reg.length && !mv.length && !decisions.length){
+    return '<section class="panel space-top-16" id="product-material"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Stone and quality</h3>'+
+      '<p class="panel__description">Material issued to this piece and the checklist ticked at each sign-off.</p></div></div>'+
+      '<div class="panel__body"><div class="empty-state">No stone recorded and no stage signed off yet.</div></div></section>';
+  }
+  let h='<section class="panel space-top-16" id="product-material"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Stone and quality</h3>'+
+    '<p class="panel__description">Material issued to this piece and the checklist ticked at each sign-off. '+
+    'Quantities only; the rates that value them are in Finance.</p></div>'+
+    (y.pct!=null?badge(y.pct+'% yield', y.pct>=80?'success':y.pct>=60?'':'alert'):'')+'</div><div class="panel__body">';
+
+  if(reg.length){
+    h+='<div class="att-grid">'+[
+      ['Issued', fqty(y.issued, y.unit)], ['Used', fqty(y.used, y.unit)],
+      ['Offcut returned', fqty(y.offcut, y.unit)], ['Scrap', fqty(y.scrap, y.unit)],
+      ['Unaccounted', fqty(Math.max(0, y.issued-y.used-y.offcut-y.scrap), y.unit)],
+      ['Lots', String(new Set(reg.map(r=>r.lot_id).filter(Boolean)).size)]
+    ].map(t=>'<div><span>'+esc(t[0])+'</span><strong>'+esc(t[1])+'</strong></div>').join('')+'</div>';
+  }
+  if(mv.length){
+    h+='<div class="data-table-wrap space-top-12"><table class="data-table"><thead><tr>'+
+      '<th>When</th><th>Movement</th><th>Lot / item</th><th>Process</th><th>Quantity</th><th>Note</th></tr></thead><tbody>'+
+      mv.slice(0,25).map(r=>{ const stg=S.stagesById[r.stage_id];
+        return '<tr><td class="nowrap">'+esc(fdate(r.recorded_at))+'</td>'+
+          '<td>'+esc(movementLabel(r.kind))+'</td>'+
+          '<td>'+esc(lotName(r.lot_id)||r.description||'—')+'</td>'+
+          '<td>'+esc(stg?shortStage(stg.name):'—')+'</td>'+
+          '<td class="nowrap">'+esc(fqty(r.qty, r.unit))+'</td>'+
+          '<td>'+esc(r.note||'—')+'</td></tr>'; }).join('')+
+      '</tbody></table></div>'+
+      (mv.length>25?'<p class="field-hint">Showing the last 25 of '+mv.length+' movements.</p>':'');
+  }
+  if(decisions.length){
+    h+='<p class="form-card__group space-top-16">Checked at sign-off</p>';
+    h+=decisions.map(d=>{ const stg=S.stagesById[d.stage_id];
+      const items=(d.items||[]);
+      const off=items.filter(x=>!x.checked).length;
+      return '<article class="activity-item"><span class="activity-item__dot"></span><div>'+
+        '<p class="activity-item__title">'+esc(stg?shortStage(stg.name):'Stage')+' · '+
+          esc(personName(d.decided_by)||'Supervisor')+'</p>'+
+        '<p class="activity-item__meta">'+esc(ftime(d.decided_at))+
+          (off?' · '+off+' left unticked':'')+'</p>'+
+        (items.length?'<ul class="qc-said">'+items.map(x=>'<li>'+(x.checked?'✓':'·')+' '+
+          esc(x.label)+'</li>').join('')+'</ul>':'')+
+        (d.note?'<p class="activity-item__meta">'+esc(d.note)+'</p>':'')+
+      '</div></article>'; }).join('');
+  }
+  return h+'</div></section>';
+}
+
 function vItemOwner(it){
   const p=it.po;
   const now=stageNow(it);
@@ -10306,6 +10568,9 @@ function vItemOwner(it){
   });
   if(openGroup) h+='</div>';
   h+='</div></section>';
+
+  /* stone, consumables and what was checked at each sign-off */
+  h+=itemMaterialPanel(it);
 
   /* meaningful activity */
   const acts=itemActivity(it, 8);
@@ -12421,6 +12686,10 @@ function vSupResources(){
       }).join('')+'</tbody></table></div>':'<div class="empty-state">No task carries planned hours yet, and no timer has run.</div>')+
     '</div></section>';
 
+  // the stone: what a lot gave a piece against what the piece gave back. The
+  // arithmetic is the server's (bt_floor_material_register); this only reads it.
+  h+=materialPanel();
+
   // the machines: availability decides what a task may name
   h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Equipment availability</h3>'+
     '<p class="panel__description">A machine marked unavailable cannot be chosen for a task, and every standing task on it is flagged.</p></div></div>'+
@@ -12450,6 +12719,51 @@ function vSupResources(){
   sfaPaint(h);
   loadReconciliation(today(), today(), 'recon-body');
 }
+// The stone register: one line per piece and lot, with what is still to be
+// accounted for. Quantities only — the office prices these.
+function materialPanel(){
+  const reg=(S.matRegister||[]).filter(r=>S.itemsById[r.item_id]);
+  const open=(S.items||[]).filter(it=>!['delivered','cancelled'].includes(it.status));
+  const withStone=open.filter(it=>materialFor(it.id).length);
+  const noStone=open.filter(it=>!materialFor(it.id).length && it.status!=='made');
+  const rows=reg.slice().sort((a,b)=>
+    String((S.itemsById[a.item_id]||{}).product||'').localeCompare(String((S.itemsById[b.item_id]||{}).product||''))
+    || String(a.lot_code||'').localeCompare(String(b.lot_code||'')));
+  return '<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Stone and material</h3>'+
+    '<p class="panel__description">What each lot gave a piece, what the piece used, and what came back. '+
+    'Quantities only — the office values them against its own rates.</p></div>'+
+    badge(withStone.length+' piece'+(withStone.length===1?'':'s')+' with stone on them','')+'</div>'+
+    '<div class="panel__body">'+(rows.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Product / batch</th><th>Lot</th><th>Issued</th><th>Used</th><th>Returned</th><th>Scrap</th>'+
+      '<th>Unaccounted</th><th>Yield</th><th></th></tr></thead><tbody>'+
+      rows.map(r=>{
+        const it=S.itemsById[r.item_id]||{};
+        const left=Number(r.issued||0)-Number(r.used||0)-Number(r.offcut||0)-Number(r.scrap||0);
+        const pct=Number(r.issued||0)>0?Math.round(Number(r.used||0)/Number(r.issued)*100):null;
+        const stg=curStage(it);
+        return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+r.item_id+'\')">'+
+            esc(it.product||'')+'</button><span class="fl-cell-sub">'+
+            esc([batchCodeOf(r.item_id), it.item_ref].filter(Boolean).join(' · '))+'</span></td>'+
+          '<td>'+esc(r.lot_code||'—')+(r.material?'<span class="fl-cell-sub">'+esc(r.material)+'</span>':'')+'</td>'+
+          '<td>'+esc(fqty(r.issued, r.unit))+'</td><td>'+esc(fqty(r.used, r.unit))+'</td>'+
+          '<td>'+(Number(r.offcut)?esc(fqty(r.offcut, r.unit)):'—')+'</td>'+
+          '<td>'+(Number(r.scrap)?'<span class="text-warn">'+esc(fqty(r.scrap, r.unit))+'</span>':'—')+'</td>'+
+          '<td>'+(left>0.0005?'<span class="text-warn">'+esc(fqty(left, r.unit))+'</span>':'—')+'</td>'+
+          '<td>'+(pct==null?'—':esc(pct+'%'))+'</td>'+
+          '<td class="nowrap"><button class="button quiet small" type="button" onclick="mLogMaterial(\''+
+            r.item_id+'\','+(stg?stg.id:'null')+')">Record</button></td></tr>';
+      }).join('')+'</tbody></table></div>'
+      :'<div class="empty-state">No stone has been recorded against a piece yet.</div>')+
+    (noStone.length?'<p class="field-hint">'+noStone.length+' piece'+(noStone.length===1?'':'s')+
+      ' in production with no stone recorded: '+
+      esc(noStone.slice(0,4).map(i=>i.product).join(', '))+(noStone.length>4?' and more':'')+'. '+
+      noStone.slice(0,6).map(i=>{ const s=curStage(i);
+        return '<button class="link-button" type="button" onclick="mLogMaterial(\''+i.id+'\','+
+          (s?s.id:'null')+')">Record for '+esc(i.product||'')+'</button>'; }).join(' · ')+'</p>':'')+
+    '</div></section>';
+}
+
 async function loadReconciliation(from, to, targetId){
   const {data,error}=await sb.rpc('bt_time_reconciliation',{p_from:from, p_to:to});
   const el=$(targetId); if(!el) return;
@@ -14675,6 +14989,34 @@ function mPickBuyerForLogin(){
   m.m.querySelector('#pk-go').onclick=()=>{ const v=$('pk-co').value; closeModal(); mNewLogin(v); };
 }
 
+// What a new buyer person may see, asked on the dialog that makes the login
+// rather than on a second screen. The same three roles and the same PO ticks as
+// the access dialog, writing the same rows the database policies read.
+function newLoginAccessBlock(buyerId){
+  const pos=(S.pos||[]).filter(x=>x.buyer_id===buyerId)
+    .sort((x,y)=>String(x.po_number).localeCompare(String(y.po_number)));
+  const ROLES=[['administrator','Buyer administrator','Every order this company has placed, and can approve.'],
+               ['project','Buyer project user','Only the purchase orders you tick below.'],
+               ['finance','Buyer finance user','Invoices, the ledger and the balance.']];
+  return '<div class="field field--full"><label>What may this person see?</label>'+
+    ROLES.map(([v,name,copy])=>'<label class="check-row"><input type="radio" name="lg-brole-r" value="'+v+'"'+
+      (v==='administrator'?' checked':'')+' onchange="lgRoleSync(this.value)">'+
+      '<span><strong>'+esc(name)+'</strong><br><span class="field-hint">'+esc(copy)+'</span></span></label>').join('')+
+    '<input type="hidden" id="lg-brole" value="administrator"></div>'+
+    '<div class="field field--full" id="lg-scope" hidden>'+
+      '<label>Purchase orders this person may see</label>'+
+      (pos.length?pos.map(x=>'<label class="check-row"><input type="checkbox" class="lg-po" value="'+x.id+'">'+
+        '<span>'+esc(x.po_number+(x.project?' · '+x.project:''))+'</span></label>').join('')
+       :'<p class="field-hint">This company has no purchase orders yet, so there is nothing to tick. '+
+        'Make them a buyer administrator for now and narrow it once the orders are in.</p>')+
+      '<p class="field-hint">They see these orders and nothing else — products, photographs, '+
+      'approvals and comments all follow the same list.</p></div>';
+}
+function lgRoleSync(v){
+  const h=$('lg-brole'); if(h) h.value=v;
+  const sc=$('lg-scope'); if(sc) sc.hidden = v!=='project';
+}
+
 function mNewLogin(buyerId, kind){
   // A floor login is a supervisor (office / admin staff) or a worker (artisan).
   // 'staff' is the old single role; new floor logins pick one of the two.
@@ -14700,6 +15042,7 @@ function mNewLogin(buyerId, kind){
         '<input id="lg-ph" placeholder="9876543210" inputmode="numeric" value="'+
         esc((S.buyersById[buyerId]||{}).phone||'')+'"></div>')+
     '<div class="field'+(floor?'':' field--full')+'"><label for="lg-pw">Password</label><input id="lg-pw" value="'+pw+'"></div>'+
+    (buyerId?newLoginAccessBlock(buyerId):'')+
     '<p class="field-hint field--full">'+(floor
       ?'Use a simple name like <strong>kunal.tak</strong> — no email address needed. That is exactly what they type to sign in. One login per person, so you can see who took which photo.'
       :'Share these by WhatsApp once created. The buyer cannot reset the password himself — you can, from this screen.')+'</p>'+
@@ -14711,16 +15054,35 @@ function mNewLogin(buyerId, kind){
     const rs=$('lg-role');
     const role = floor ? ((rs&&rs.value)||role0) : role0;
     const nm=$('lg-nm');
+    // what this buyer person may see, chosen on this dialog
+    const brSel=$('lg-brole');
+    const buyerRole = buyerId ? ((brSel&&brSel.value)||'administrator') : null;
+    const wantPos = buyerId && buyerRole==='project'
+      ? [...m.m.querySelectorAll('.lg-po')].filter(x=>x.checked).map(x=>x.value) : [];
+    // a project user with nothing ticked would sign in to an empty portal
+    if(buyerId && buyerRole==='project' && !wantPos.length){
+      toast('Tick at least one purchase order, or make them a buyer administrator.',{err:true}); return; }
     try{
       await adminApi({action:'create_user', email, password, role, buyer_id:buyerId||null,
         full_name: floor?(nm?nm.value.trim():null):(buyerId?(S.buyersById[buyerId]||{}).contact_name:null)});
       const ph=$('lg-ph');
       const phone = waNumber(ph?ph.value:'');
-      if(phone){
+      await loadData();
+      const who=(S.profilesAll||[]).find(x=>x.email===email);
+      if(phone && who){
         // best effort: the login exists either way, so a failure here is not fatal
-        await loadData();
-        const who=(S.profilesAll||[]).find(x=>x.email===email);
-        if(who) await sb.from('bt_profiles').update({phone}).eq('user_id', who.user_id);
+        await sb.from('bt_profiles').update({phone}).eq('user_id', who.user_id);
+      }
+      // the access choice, written to the same rows the policies read
+      if(buyerId && who){
+        const e1=(await sb.from('bt_profiles').update({buyer_role:buyerRole,
+          finance_access: buyerRole!=='project'}).eq('user_id', who.user_id)).error;
+        if(e1) toast('Login made, but the access could not be saved: '+e1.message,{err:true});
+        else if(wantPos.length){
+          const e2=(await sb.from('bt_buyer_po_scope').insert(
+            wantPos.map(po=>({user_id:who.user_id, po_id:po, granted_by:uid()})))).error;
+          if(e2) toast('Login made, but the orders could not be assigned: '+e2.message,{err:true});
+        }
       }
       closeModal(); await loadData(); render();
       const made=(S.profilesAll||[]).find(x=>x.email===email);
@@ -16396,6 +16758,10 @@ function mBuyerAccess(userId){
     const fin=$('ba-fin').checked;
     const want=newRole==='project'
       ? [...m.m.querySelectorAll('.ba-po')].filter(x=>x.checked).map(x=>x.value) : [];
+    // a project user with nothing ticked can sign in and see an empty portal —
+    // which reads to the buyer as the tracker being broken
+    if(newRole==='project' && !want.length){
+      toast('Tick at least one purchase order, or make them a buyer administrator.',{err:true}); return; }
     const e1=(await sb.from('bt_profiles').update({buyer_role:newRole, finance_access:fin}).eq('user_id',userId)).error;
     if(e1){ toast(e1.message,{err:true}); return; }
     // rewrite the scope to exactly what was ticked
@@ -16908,10 +17274,16 @@ function mReviewRecord(updateId, kind){
   };
 }
 
+// Signing off is the quality checklist. The list is what the office configured
+// for that process (the general items plus the stage's own); every required
+// line has to be ticked, and what was ticked is stored in the wording it
+// carried. The server refuses an incomplete list too — this dialog only saves
+// the person a round trip.
 function mApproveStage(itemId, stageId){
   const it=S.itemsById[itemId]||{};
   const stg=S.stagesById[stageId];
   const missing=stageEvidence(itemId, stageId);
+  const list=checklistFor(stageId);
   const m=modal('<h3>Sign off this stage</h3>'+
     '<div class="sub">'+esc(it.product||'')+(stg?' · '+esc(shortStage(stg.name)):'')+'</div>'+
     (missing.length
@@ -16919,20 +17291,115 @@ function mApproveStage(itemId, stageId){
         '. The office will refuse it until that is there.</p>'
       : '<p class="field-hint">The stage will be marked finished and the piece moves to the next one. '+
         'Nothing is shown to the buyer by doing this.</p>')+
+    (list.length
+      ? '<div class="qc-list" id="sg-list"><p class="qc-list__head">Check each one before signing</p>'+
+        list.map(c=>'<label class="check-row"><input type="checkbox" class="qc-tick" value="'+c.id+'"'+
+          (c.required?' data-required="1"':'')+' onchange="sgSync()"><span>'+esc(c.label)+
+          (c.required?'':' <em class="muted">(optional)</em>')+'</span></label>').join('')+
+        '</div>'
+      : '<p class="field-hint">No checklist is configured for this stage.</p>')+
     '<div class="form-grid"><div class="field field--full"><label for="sg-note">Anything to note (optional)</label>'+
       '<input id="sg-note" placeholder="e.g. finished a day early"></div>'+
       '<div class="button-row field--full"><button class="button" type="button" id="sg-go">Sign it off</button>'+
       '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  const sgSync=()=>{
+    const go=$('sg-go'); if(!go) return;
+    const left=Array.prototype.filter.call(m.m.querySelectorAll('.qc-tick[data-required]'), c=>!c.checked);
+    go.disabled=left.length>0;
+    go.textContent=left.length ? left.length+' still to check' : 'Sign it off';
+  };
+  window.sgSync=sgSync; sgSync();
   m.m.querySelector('#sg-go').onclick=async (e)=>{
-    const btn=e.currentTarget; btn.disabled=true;
+    const btn=e.currentTarget;
+    const ticked=Array.prototype.filter.call(m.m.querySelectorAll('.qc-tick'), c=>c.checked)
+      .map(c=>Number(c.value));
+    const left=Array.prototype.filter.call(m.m.querySelectorAll('.qc-tick[data-required]'), c=>!c.checked);
+    if(left.length){ toast('The quality checklist is not complete.',{err:true}); return; }
+    btn.disabled=true;
     const {data,error}=await sb.rpc('bt_supervisor_approve_stage',
-      {p_item:itemId, p_stage:stageId, p_note:$('sg-note').value.trim()||null});
+      {p_item:itemId, p_stage:stageId, p_note:$('sg-note').value.trim()||null, p_checked:ticked});
     btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await refresh();
     const nx=data&&data.next_stage?S.stagesById[data.next_stage]:null;
     toast(data&&data.finished ? 'Signed off. The piece is made.'
         : 'Signed off.'+(nx?' Now on '+shortStage(nx.name)+'.':''));
+  };
+}
+
+// Material against a piece: what a lot gave it, what it used, what came back.
+// Quantities only — no rate and no value anywhere on this form.
+function mLogMaterial(itemId, stageId){
+  const it=S.itemsById[itemId]||{};
+  const stg=S.stagesById[stageId];
+  const lots=(S.lots||[]).filter(l=>l.active!==false);
+  const m=modal('<h3>Record material</h3>'+
+    '<div class="sub">'+esc(it.product||'')+(stg?' · '+esc(shortStage(stg.name)):'')+'</div>'+
+    '<p class="field-hint">Quantities only. The office prices these against its own rates.</p>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="ml-kind">What happened</label><select id="ml-kind" onchange="mlSync()">'+
+        '<option value="">Choose…</option>'+
+        MOVEMENTS.map(k=>'<option value="'+k[0]+'">'+esc(k[1])+'</option>').join('')+'</select></div>'+
+      '<div id="ml-rest" hidden>'+
+        '<div class="form-grid">'+
+        '<div class="field field--full"><label for="ml-lot">Stone lot</label><select id="ml-lot" onchange="mlSync()">'+
+          '<option value="">Choose the lot…</option>'+
+          lots.map(l=>'<option value="'+l.id+'" data-unit="'+esc(l.unit)+'">'+esc(l.code)+' — '+
+            esc(l.material)+' ('+esc(unitLabel(l.unit))+')</option>').join('')+'</select>'+
+          '<p class="field-hint" id="ml-bal"></p></div>'+
+        '<div class="field field--full" id="ml-descw" hidden><label for="ml-desc">Which consumable</label>'+
+          '<input id="ml-desc" placeholder="e.g. polishing compound"></div>'+
+        '<div class="field"><label for="ml-qty">Quantity</label>'+
+          '<input id="ml-qty" type="number" min="0" step="0.001" inputmode="decimal"></div>'+
+        '<div class="field"><label for="ml-unit">Unit</label><select id="ml-unit">'+
+          UNITS.map(u=>'<option value="'+u[0]+'">'+esc(u[1])+'</option>').join('')+'</select></div>'+
+        '<div class="field field--full"><label for="ml-note" id="ml-notelab">Note (optional)</label>'+
+          '<input id="ml-note" placeholder="e.g. vein ran out at the corner"></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ml-go" disabled>Record it</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  const mlSync=()=>{
+    const kind=$('ml-kind').value, lotSel=$('ml-lot'), lot=lotSel?lotSel.value:'';
+    const rest=$('ml-rest'); if(rest) rest.hidden=!kind;
+    if(!kind){ $('ml-go').disabled=true; return; }
+    const consumable=kind==='consumable';
+    // a stone movement has to name its lot; a consumable may be described instead
+    $('ml-descw').hidden=!consumable;
+    $('ml-notelab').textContent=(kind==='scrap'||kind==='offcut_returned')
+      ? 'Why it came back or was scrapped' : 'Note (optional)';
+    const opt=lot?$('ml-lot').querySelector('option[value="'+lot+'"]'):null;
+    if(opt){ $('ml-unit').value=opt.getAttribute('data-unit')||$('ml-unit').value; }
+    // what the server already counted against this piece and lot
+    const reg=(materialFor(itemId)||[]).filter(r=>!lot||r.lot_id===lot);
+    const t=reg.reduce((a,r)=>({i:a.i+Number(r.issued||0), u:a.u+Number(r.used||0),
+      o:a.o+Number(r.offcut||0), s:a.s+Number(r.scrap||0)}), {i:0,u:0,o:0,s:0});
+    const un=reg.length?reg[0].unit:(opt?opt.getAttribute('data-unit'):'');
+    $('ml-bal').textContent = reg.length
+      ? 'On this piece: '+fqty(t.i,un)+' issued · '+fqty(t.u,un)+' used · '+
+        fqty(t.o,un)+' returned · '+fqty(t.s,un)+' scrap'
+      : 'Nothing recorded against this piece yet.';
+    $('ml-go').disabled = !(consumable ? true : !!lot);
+  };
+  window.mlSync=mlSync; mlSync();
+  m.m.querySelector('#ml-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const kind=$('ml-kind').value, qty=Number($('ml-qty').value);
+    const note=$('ml-note').value.trim(), desc=$('ml-desc').value.trim();
+    if(!kind){ toast('Say what happened.',{err:true}); return; }
+    if(!(qty>0)){ toast('Give the quantity.',{err:true}); return; }
+    if(kind!=='consumable' && !$('ml-lot').value){ toast('Choose the stone lot.',{err:true}); return; }
+    if(kind==='consumable' && !$('ml-lot').value && !desc){ toast('Say which consumable it was.',{err:true}); return; }
+    if((kind==='scrap'||kind==='offcut_returned') && !note){
+      toast('Say why the stone came back or was scrapped.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_record_material',{
+      p_item:itemId, p_stage:stageId, p_kind:kind, p_lot:$('ml-lot').value||null,
+      p_qty:qty, p_unit:$('ml-unit').value, p_description:desc||null, p_note:note||null, p_update:null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Recorded.');
   };
 }
 
@@ -17183,6 +17650,38 @@ async function retireEquipment(id){
   if(r.error){ toast(r.error.message,{err:true}); return; }
   await refresh(); toast('Retired. Its old time entries are kept.');
 }
+async function saveLot(){
+  const code=$('lot-code').value.trim(), material=$('lot-mat').value.trim();
+  const qty=$('lot-qty').value.trim();
+  if(!code){ toast('Give the lot a code.',{err:true}); return; }
+  if(!material){ toast('Say what the material is.',{err:true}); return; }
+  const r=await sb.from('bt_material_lots').insert({code, material, kind:$('lot-kind').value,
+    unit:$('lot-unit').value, opening_qty:qty===''?null:Number(qty),
+    source_note:$('lot-src').value.trim()||null, created_by:uid()});
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Lot added.');
+}
+async function retireLot(id){
+  const r=await sb.from('bt_material_lots').update({active:false}).eq('id', id);
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Retired. What it already gave a piece is kept.');
+}
+async function saveChecklist(){
+  const label=$('qc-label').value.trim();
+  if(!label){ toast('Write the line the supervisor will read.',{err:true}); return; }
+  const stage=$('qc-stage').value;
+  const r=await sb.from('bt_quality_checklists').insert({label, stage_id:stage?Number(stage):null,
+    required:$('qc-req').value==='1', sort_order:(S.checklist||[]).length?
+      Math.max.apply(null,(S.checklist||[]).map(c=>c.sort_order||0))+10:10, created_by:uid()});
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Added to the checklist.');
+}
+async function retireChecklist(id){
+  const r=await sb.from('bt_quality_checklists').update({active:false}).eq('id', id);
+  if(r.error){ toast(r.error.message,{err:true}); return; }
+  await refresh(); toast('Removed. Past sign-offs keep the line as it was ticked.');
+}
+
 // The entries behind one line of the register, each with its own Correct.
 function mTimeEntries(itemId, stageId){
   const it=S.itemsById[itemId]||{}, stg=S.stagesById[stageId];
@@ -17769,12 +18268,28 @@ function artisanCard(it){
             esc(equipmentName(a.equipment_id))+' · '+bi('ask the supervisor before starting','शुरू करने से पहले सुपरवाइज़र से पूछें')+'</div>':'')+
       respond+
       (a && (a.ack_state==='accepted' || !lead) ? timerStrip(it, a) : '')+
+      stoneStrip(it)+
     '</div>'+
     '<footer class="wk-foot">'+
       '<button class="button" type="button" onclick="mRecordWork(\''+it.id+'\''+(rw?','+rw.stage_id:'')+')">'+
         icon('i-camera','icon--sm')+bi('Record work','काम दर्ज करें')+'</button>'+
       '<button class="button secondary" type="button" onclick="go(\'#/item/'+it.id+'\')">'+bi('Open details','विवरण')+'</button>'+
     '</footer></article>';
+}
+
+// what stone this piece has been given and what is still to be accounted for.
+// A fact for the person holding the chisel, not a cost — no rate is loaded.
+function stoneStrip(it){
+  const rows=materialFor(it.id);
+  if(!rows.length) return '';
+  const y=materialYield(it.id);
+  const left=y.issued-y.used-y.offcut-y.scrap;
+  const lots=rows.map(r=>r.lot_code).filter(Boolean);
+  return '<div class="wk-notice"><strong>'+bi('Stone on this piece','इस पर लगा पत्थर')+'</strong>'+
+    (lots.length?esc(lots.join(', '))+' · ':'')+
+    bi('Given','दिया')+' '+esc(fqty(y.issued, y.unit))+' · '+
+    bi('used','लगा')+' '+esc(fqty(y.used, y.unit))+
+    (left>0.0005?' · '+bi('still to account for','बाकी हिसाब')+' '+esc(fqty(left, y.unit)):'')+'</div>';
 }
 
 /* ---- the product timer -------------------------------------------------------
@@ -18323,6 +18838,28 @@ function mRecordWork(itemId, stageId){
         (S.equipment||[]).map(e=>'<option value="'+esc(e.id)+'"'+(a&&a.equipment_id===e.id&&e.status!=='unavailable'?' selected':'')+(e.status==='unavailable'?' disabled':'')+'>'+
           esc(e.name)+(e.area?' · '+esc(e.area):'')+(e.status==='unavailable'?' · '+bi('unavailable','उपलब्ध नहीं'):'')+'</option>').join('')+
       '</select></div></div>'+
+    // stone and consumables: selection first, so nothing free-text appears
+    // until the person says there was material. Quantities only.
+    '<div class="form-grid" id="rw-mat-fields">'+
+      '<div class="field"><label for="rw-mat-choice">'+bi('Stone or material used?','पत्थर या सामग्री लगी?')+'</label>'+
+        '<select id="rw-mat-choice" onchange="rwMatSync()">'+
+          '<option value="no">'+bi('No','नहीं')+'</option><option value="yes">'+bi('Yes, record it','हाँ, दर्ज करें')+'</option></select></div>'+
+      '<div class="field" id="rw-mkind-wrap" hidden><label for="rw-mkind">'+bi('What happened','क्या हुआ')+'</label>'+
+        '<select id="rw-mkind" onchange="rwMatSync()">'+
+          MOVEMENTS.map(k=>'<option value="'+k[0]+'"'+(k[0]==='consumed'?' selected':'')+'>'+
+            esc(k[1])+' · '+esc(k[2])+'</option>').join('')+'</select></div>'+
+      '<div class="field field--full" id="rw-mlot-wrap" hidden><label for="rw-mlot">'+bi('Stone lot','पत्थर का लॉट')+'</label>'+
+        '<select id="rw-mlot" onchange="rwMatSync()"><option value="">'+bi('Choose the lot','लॉट चुनें')+'</option>'+
+          (S.lots||[]).filter(l=>l.active!==false).map(l=>'<option value="'+esc(l.id)+'" data-unit="'+esc(l.unit)+'">'+
+            esc(l.code)+' — '+esc(l.material)+'</option>').join('')+'</select></div>'+
+      '<div class="field" id="rw-mqty-wrap" hidden><label for="rw-mqty">'+bi('Quantity','मात्रा')+'</label>'+
+        '<input id="rw-mqty" inputmode="decimal" placeholder="e.g. 0.25"></div>'+
+      '<div class="field" id="rw-munit-wrap" hidden><label for="rw-munit">'+bi('Unit','इकाई')+'</label>'+
+        '<select id="rw-munit">'+UNITS.map(u=>'<option value="'+u[0]+'">'+esc(u[1])+'</option>').join('')+'</select></div>'+
+      '<div class="field field--full" id="rw-mnote-wrap" hidden><label for="rw-mnote" id="rw-mnote-lab">'+
+        bi('Why it came back or was scrapped','क्यों वापस आया या बेकार हुआ')+'</label>'+
+        '<input id="rw-mnote" placeholder="'+bi('Short detail','छोटा विवरण')+'"></div>'+
+    '</div>'+
     '<div class="upload-drop field--full" id="du-drop"><div>'+icon('i-camera','icon--lg')+
       '<strong>'+bi('Add photos for this process','इस प्रक्रिया के फोटो जोड़ें')+'</strong>'+
       '<p>'+bi('Complete product, work detail and measurement.','पूरा उत्पाद, काम का विवरण और माप।')+'</p>'+
@@ -18377,6 +18914,20 @@ function rwToggle(){
   $('du-drop').hidden = s==='no_work';
   $('rw-time-wrap').hidden = s==='no_work';
   $('rw-time-fields').hidden = s==='no_work';
+  $('rw-mat-fields').hidden = s==='no_work';
+}
+// the material line opens only once the person says there was material, and
+// then asks for exactly what that kind of movement needs
+function rwMatSync(){
+  const on=$('rw-mat-choice').value==='yes';
+  const kind=$('rw-mkind').value;
+  $('rw-mkind-wrap').hidden=!on;
+  $('rw-mlot-wrap').hidden=!on;
+  $('rw-mqty-wrap').hidden=!on;
+  $('rw-munit-wrap').hidden=!on;
+  $('rw-mnote-wrap').hidden=!(on && (kind==='scrap' || kind==='offcut_returned'));
+  const opt=$('rw-mlot').value?$('rw-mlot').querySelector('option[value="'+$('rw-mlot').value+'"]'):null;
+  if(opt && opt.getAttribute('data-unit')) $('rw-munit').value=opt.getAttribute('data-unit');
 }
 async function rwSubmit(){
   const d=window.__du;
@@ -18400,6 +18951,21 @@ async function rwSubmit(){
   const extraH=$('rw-extra-choice').value==='yes' ? (parseFloat($('rw-extra').value)||0) : 0;
   if($('rw-extra-choice').value==='yes' && !(extraH>0 && extraH<=16)) return say('Give the hours not on the timer, up to sixteen','टाइमर के बिना घंटे बताएं, सोलह तक');
   const eqId=$('rw-centre').value||null;
+
+  // material is optional; when the person says there was some, it has to be
+  // complete before the record is sent, so nothing half-recorded reaches the
+  // register. The server checks the same things again.
+  const matOn=$('rw-mat-choice').value==='yes';
+  const mKind=matOn?$('rw-mkind').value:null;
+  const mLot=matOn?($('rw-mlot').value||null):null;
+  const mQty=matOn?(parseFloat($('rw-mqty').value)||0):0;
+  const mNote=matOn?($('rw-mnote').value||'').trim():'';
+  if(matOn){
+    if(!(mQty>0)) return say('Give the quantity of material','सामग्री की मात्रा बताएं');
+    if(mKind!=='consumable' && !mLot) return say('Choose the stone lot','पत्थर का लॉट चुनें');
+    if((mKind==='scrap'||mKind==='offcut_returned') && !mNote)
+      return say('Say why the stone came back or was scrapped','बताएं पत्थर क्यों वापस आया या बेकार हुआ');
+  }
 
   const btn=$('du-save'); btn.disabled=true; btn.textContent='Saving… · सेव हो रहा है';
   try{
@@ -18434,6 +19000,12 @@ async function rwSubmit(){
       const at=await sb.rpc('bt_attach_time',{p_update:updateId, p_manual_minutes: extraH>0?Math.round(extraH*60):null,
         p_equipment:eqId, p_work_centre: eqId?null:'Hand tools'});
       if(at.error) throw at.error;
+    }
+    if(matOn){
+      const mm=await sb.rpc('bt_record_material',{p_item:d.itemId, p_stage:stageId, p_kind:mKind,
+        p_lot:mLot, p_qty:mQty, p_unit:$('rw-munit').value,
+        p_description:null, p_note:mNote||null, p_update:updateId});
+      if(mm.error) throw mm.error;
     }
 
     let done=0, failed=0;
