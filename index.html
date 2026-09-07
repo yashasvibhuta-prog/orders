@@ -4042,7 +4042,9 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 /* a tick box on a phone: the label row is the target, but the box itself has to
    be big enough to read and to aim at over a bench */
-.sfa .check-row input[type=checkbox]{ width:22px; height:22px; flex:0 0 auto; }
+/* A tick box on the floor is pressed with a stone-dusty thumb, sometimes through
+   a glove. 22px was under the 32px a control on a phone screen should be. */
+.sfa .check-row input[type=checkbox]{ width:32px; height:32px; flex:0 0 auto; }
 .sfa .check-row{ min-height:44px; align-items:center; }
 
 /* attendance */
@@ -4106,7 +4108,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='423d33853af3';</script>
+<script>const BUILD_ID='72344e448ead';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4152,7 +4154,15 @@ body.reports-mode .sfa .content{max-width:1700px}
 <div id="modal-root"></div>
 <div id="toast"></div>
 <div id="lightbox" hidden onclick="this.hidden=true" role="dialog" aria-modal="true" aria-label="Photograph"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js"></script>
+<!-- Pinned by its bytes, not just by its version number. If the CDN ever serves
+     something other than this exact file the browser refuses to run it, and
+     StoneFlow says so instead of starting up around a library it cannot vouch
+     for. Verified against what cdn.jsdelivr.net actually served on 7 Sep 2026
+     (212,718 bytes). If this ever has to change, take the hash from the file the
+     CDN serves and say in the commit why. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js"
+        integrity="sha384-yiVMs0R/Jyz7OhoXa/DsEMUSBLjEhr/QJta2ONO+zB6I8/GmNg/7AUFrZmAJV7KV"
+        crossorigin="anonymous"></script>
 <script>
 'use strict';
 const CONFIG = {
@@ -4289,6 +4299,55 @@ function csvParse(text){
   return rows;
 }
 
+// ---- writing a CSV a spreadsheet will not execute --------------------------
+// A spreadsheet decides a cell is a formula from its FIRST character, and it
+// does that after the CSV quoting has been taken off again. So "=1+1" quoted is
+// still =1+1 to Excel: quoting is about commas and newlines, not about what the
+// cell means. Anything that starts with = + - @ is a formula, and whitespace in
+// front does not save you: a reader skips leading spaces, tabs and newlines
+// before it decides, so " =1+1" is a formula too. That is also why a leading
+// space is the WRONG way to defuse one. The dangerous shape is not arithmetic —
+// it is =cmd|'/C calc'!A0, which asks the reader's machine to run something.
+//
+// csvText() puts an apostrophe in front of such a value. Every spreadsheet we
+// care about reads the rest as text after that. The apostrophe is visible in
+// some readers, which is the price of the value being inert; it is only added
+// to a value that would otherwise have been executed.
+//
+// Numbers must NOT go through csvText — a negative number legitimately starts
+// with '-'. csvNum() writes them bare and unquoted so money and quantities stay
+// numbers in the sheet, which is also what makes the '-' rule safe for text.
+const CSV_TRIGGER = /^\s*[=+\-@]/;   // \s covers space, tab, newline and NBSP
+function csvText(v){
+  let s = String(v==null ? '' : v);
+  // Control characters other than tab/newline have no meaning in a cell and can
+  // confuse whatever re-parses the file. Newlines survive inside the quotes.
+  s = s.replace(/\r\n?/g, '\n').replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+  if(CSV_TRIGGER.test(s)) s = "'" + s;
+  return '"' + s.replace(/"/g, '""') + '"';
+}
+function csvNum(v){
+  if(v==null || v==='') return '';
+  const n = Number(v);
+  return isFinite(n) ? String(n) : '';
+}
+function csvRow(cells){
+  return cells.map(c => (c && typeof c==='object' && 'num' in c) ? csvNum(c.num) : csvText(c)).join(',');
+}
+// Mark a cell as a number: csvRow(['Invoiced', csvN(125000)]).
+function csvN(v){ return {num:v}; }
+
+// A link the office typed, rendered for the buyer to click. Only http and https
+// go in an href: `javascript:` in a tracking link would run in whoever opened it.
+function safeUrl(u){
+  const v=String(u==null?'':u).trim();
+  if(!v) return '';
+  try{
+    const parsed=new URL(v, location.href);
+    return (parsed.protocol==='http:'||parsed.protocol==='https:') ? parsed.href : '';
+  }catch(e){ return ''; }
+}
+
 function toast(msg, opts){
   opts=opts||{};
   const t=el('<div class="toast'+(opts.err?' err':'')+'"><div style="flex:1">'+esc(msg)+'</div></div>');
@@ -4392,7 +4451,12 @@ function waLink(phone, text){
 // A new tab given window.opener can navigate the page that opened it. Nothing
 // here needs to talk back, so it does not get the handle.
 function openTab(url){ window.open(url,'_blank','noopener,noreferrer'); }
-function copyText(t){ try{ navigator.clipboard.writeText(t); toast('Copied'); }catch(e){ toast('Could not copy', {err:true}); } }
+// opts.quiet: copy without announcing it, for when the caller says something
+// more useful of its own.
+function copyText(t, opts){
+  try{ navigator.clipboard.writeText(t); if(!(opts&&opts.quiet)) toast('Copied'); }
+  catch(e){ toast('Could not copy', {err:true}); }
+}
 </script>
 <script>
 'use strict';
@@ -4426,7 +4490,9 @@ const S = {
   equipment:[], eqEvents:[], timeEntries:[], indirect:[], timeRegister:[], timeCorrections:[],
   // material and quality: quantities and ticks, never a rate
   lots:[], movements:[], matRegister:[], checklist:[], quality:[],
-  costRates:[], indirectAlloc:[], outside:[], costSnaps:[], snapByItem:{}
+  costRates:[], indirectAlloc:[], outside:[], costSnaps:[], snapByItem:{},
+  // people's own particulars: what they sent, and what the office accepted
+  staffDetails:[], staffDetailsById:{}, staffSubs:[], staffSubPending:{}, myDetails:null, mySub:null
 };
 
 // Signing out has to empty what this login was allowed to load, not only end
@@ -4436,10 +4502,41 @@ const S = {
 // line away. Emptying is by key, so a key added later without being listed here
 // keeps whatever it held — hence the loop over everything, with the handful of
 // things that legitimately outlive a session named.
-// `ready` is the application's boot state, not the session's data — clearing it
-// would leave render() returning early and the page frozen on Loading.
-const S_KEEP=['settings','stages','stagesById','urlCache','ready'];
+// What survives a sign-out. `ready` is the application's boot state, not the
+// session's data — clearing it would leave render() returning early and the page
+// frozen on Loading. `stages` is the workflow's own shape, the same for everyone.
+//
+// `settings` and `urlCache` used to be on this list and are not any more.
+// loadPrivateSettings() merges the whole bt_settings row — the office's WhatsApp
+// number among it — into S.settings; and urlCache holds signed storage links,
+// which are bearer URLs for private documents. Keeping either across a sign-out
+// hands the next person at the same machine something that was not theirs.
+const S_KEEP=['stages','stagesById','ready'];
+
+// A session generation. Every load stamps the generation it began under, and a
+// response that comes back after a sign-out or an account change is dropped
+// instead of repopulating state for a session that has ended. Without this, a
+// slow request started by the office lands in the supervisor's tab.
+let S_GEN = 0;
+function sessionGen(){ return S_GEN; }
+function sessionStale(g){ return g !== S_GEN; }
+
+// The scratch globals wiped when the session changes. Kept in step with the
+// code by a check in build.sh; the two deliberate exceptions are named there.
+const SESSION_GLOBALS = [
+  '__accessGroup','__accessQ','__accessSel','__acct','__ccChip','__client',
+  '__cmdRows','__cmdSel','__cmtAttach','__cost','__du','__finSeg','__gq',
+  '__impRecs','__inAdminShell','__inReportShell','__moreNav','__openStages',
+  '__paCompany','__paPerson','__paStaff','__paTab','__pdfjsLoading','__poFiles',
+  '__poFilter','__poParse','__poTab','__poView','__prodFilter','__prodSearch',
+  '__recTab','__repDays','__repSec','__selfie','__sheet','__staffFilter',
+  '__staffQ','__wsFile','__wsFilter','__wsQuery','__wsSort',
+  // built by name in _loadScript, so the build check cannot see it in the source
+  '__loading_JSZip'
+];
+
 function clearSession(){
+  S_GEN++;
   Object.keys(S).forEach(k=>{
     if(S_KEEP.indexOf(k)>=0) return;
     const v=S[k];
@@ -4453,8 +4550,35 @@ function clearSession(){
   // empty object is truthy, which would let a signed-out tab keep drawing the
   // console for a moment
   S.session=null; S.profile=null; S.buyerPo=null; S.selOrder=null; S.thread=null;
+  S.settings={}; S.urlCache={};
   S.buyerFilter=''; S.apprView='pending'; S.apprFilter='pending'; S.docFilter='all';
-  ['__du','__cost','__staffQ','__repSec','__paPerson'].forEach(k=>{ try{ delete window[k]; }catch(e){ window[k]=undefined; } });
+  // Every scratch global the app parks on window: an imported workbook
+  // (__sheet), an accounting import (__acct), a half-written daily record with
+  // its photographs (__du), a selfie (__selfie) — all of it is the last
+  // person's and none of it may survive into the next person's session.
+  //
+  // This is a named list rather than "delete everything starting with __",
+  // because two of those globals must NOT be deleted: __sbOverride is how the
+  // database client is supplied, and __timerTick holds a running interval whose
+  // handle is the only way to stop it — dropping that handle leaks the timer and
+  // starts a second one at the next sign-in. build.sh checks this list still
+  // covers every global the code sets, so adding one and forgetting this line
+  // fails the build instead of leaking quietly.
+  SESSION_GLOBALS.forEach(k=>{
+    try{ delete window[k]; }catch(e){ try{ window[k]=undefined; }catch(e2){} }
+  });
+  // object URLs for previews are handles onto the last person's files
+  try{
+    (window.__objectUrls||[]).forEach(u=>{ try{ URL.revokeObjectURL(u); }catch(e){} });
+  }catch(e){}
+  window.__objectUrls=[];
+  // and nothing of theirs may be left drawn on the screen
+  try{ if(typeof closeModal==='function') closeModal(); }catch(e){}
+  try{
+    const t=document.getElementById('toast'); if(t) t.innerHTML='';
+    const a=document.getElementById('app'); if(a) a.innerHTML='';
+    const i=document.getElementById('inspector'); if(i) i.innerHTML='';
+  }catch(e){}
 }
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
@@ -4484,7 +4608,7 @@ async function loadStaffData(){
   // Pieces come through bt_staff_items() rather than the table, because the row
   // carries rate, taxable_amount, tax and line_total and the floor must never
   // read those. Stage rows are fetched separately since the embed is gone.
-  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv, ws, adv, ot, eq, eqe, wte, ite, reg, lots, mm, mreg, qcl, qd] = await Promise.all([
+  const [it, ist, ph, sp, dc, upd, updi, sti, pr, bt, bi, asg, rw, hd, ms, ctb, atd, atm, sites, pol, atc, abs, lv, ws, adv, ot, eq, eqe, wte, ite, reg, lots, mm, mreg, qcl, qd, mydet, mysub] = await Promise.all([
     sb.rpc('bt_staff_items'),
     sb.from('bt_item_stages').select('*'),
     sb.from('bt_photos').select('*').order('created_at'),
@@ -4540,7 +4664,10 @@ async function loadStaffData(){
     sb.from('bt_material_movements').select('*').order('recorded_at',{ascending:false}),
     sb.rpc('bt_floor_material_register'),
     sb.from('bt_quality_checklists').select('*').eq('active', true).order('sort_order'),
-    sb.rpc('bt_floor_quality')
+    sb.rpc('bt_floor_quality'),
+    // a person's own particulars, and whatever they last sent in
+    sb.rpc('bt_my_staff_details'),
+    sb.from('bt_staff_submissions').select('*').order('submitted_at',{ascending:false}).limit(1)
   ]);
   const err=[it,ist,ph,sp].find(r=>r.error);
   if(err) throw err.error;
@@ -4585,6 +4712,8 @@ async function loadStaffData(){
   indexPay([], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
   indexTime((eq&&eq.data)||[], (eqe&&eqe.data)||[], (wte&&wte.data)||[], (ite&&ite.data)||[], (reg&&reg.data)||[], []);
   indexMaterial((lots&&lots.data)||[], (mm&&mm.data)||[], (mreg&&mreg.data)||[], (qcl&&qcl.data)||[], (qd&&qd.data)||[]);
+  S.myDetails=(mydet&&mydet.data)||null;
+  S.mySub=((mysub&&mysub.data)||[])[0]||null;
   S.staffDocs = (dc&&dc.data)||[];
   S.lastLoad=Date.now();
 }
@@ -5060,7 +5189,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd, crv, ial, outp, snap] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd, crv, ial, outp, snap, sdet, ssub] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -5131,7 +5260,9 @@ async function loadData(){
     admin ? sb.from('bt_cost_rate_versions').select('*').order('effective_from',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_indirect_allocations').select('*').order('allocated_at',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_outside_processing').select('*').order('created_at',{ascending:false}) : Promise.resolve({data:[]}),
-    admin ? sb.from('bt_product_cost_snapshots').select('*').order('computed_at',{ascending:false}) : Promise.resolve({data:[]})
+    admin ? sb.from('bt_product_cost_snapshots').select('*').order('computed_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_staff_details').select('*') : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_staff_submissions').select('*').order('submitted_at',{ascending:false}) : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -5188,6 +5319,7 @@ async function loadData(){
   indexTime((eq&&eq.data)||[], (eqe&&eqe.data)||[], (wte&&wte.data)||[], (ite&&ite.data)||[], (reg&&reg.data)||[], (wtc&&wtc.data)||[]);
   indexMaterial((lots&&lots.data)||[], (mm&&mm.data)||[], (mreg&&mreg.data)||[], (qcl&&qcl.data)||[], (qd&&qd.data)||[]);
   indexCosting((crv&&crv.data)||[], (ial&&ial.data)||[], (outp&&outp.data)||[], (snap&&snap.data)||[]);
+  indexStaffDetails((sdet&&sdet.data)||[], (ssub&&ssub.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
 }
@@ -5212,6 +5344,54 @@ function indexTime(equipment, events, entries, indirect, register, corrections){
 // §13A 7. Rates, allocations, outside work and saved cost snapshots. None of
 // this is loaded for the floor — there is no policy that would return a row —
 // and no helper here is called from a floor screen.
+// Particulars a person fills in about themselves, and what the office accepted.
+// The office sees everyone's; a person sees only their own, loaded separately in
+// loadStaffData through bt_my_staff_details().
+function indexStaffDetails(details, subs){
+  S.staffDetails=(details||[]).slice();
+  S.staffDetailsById={}; S.staffDetails.forEach(d=>{ S.staffDetailsById[d.user_id]=d; });
+  S.staffSubs=(subs||[]).slice();
+  S.staffSubPending={};
+  S.staffSubs.forEach(x=>{ if(x.status==='pending' && !S.staffSubPending[x.user_id]) S.staffSubPending[x.user_id]=x; });
+}
+// The particulars a person may assert about themselves. The office's own fields
+// — joining date, employee code, department — are not in this list, and the
+// database drops them if a client sends them anyway.
+const STAFF_OWN_FIELDS=[
+  {k:'display_name', label:'Full name as it should appear on records', hi:'रिकॉर्ड में नाम', full:true},
+  {k:'guardian_name', label:'Father’s or husband’s name', hi:'पिता / पति का नाम', full:true},
+  {k:'date_of_birth', label:'Date of birth', hi:'जन्म तिथि', type:'date'},
+  {k:'personal_phone', label:'Your phone number', hi:'आपका फ़ोन नंबर', mode:'numeric'},
+  {k:'home_address', label:'Where you live now', hi:'अभी कहाँ रहते हैं', area:true, full:true},
+  {k:'home_town', label:'Home town or village', hi:'गाँव / शहर'},
+  {k:'home_district', label:'District', hi:'ज़िला'},
+  {k:'home_state', label:'State', hi:'राज्य', full:true},
+  {k:'emergency_name', label:'Who to call in an emergency', hi:'आपात स्थिति में किसे बुलाएँ'},
+  {k:'emergency_relation', label:'How they are related to you', hi:'आपसे रिश्ता'},
+  {k:'emergency_phone', label:'Their phone number', hi:'उनका फ़ोन नंबर', mode:'numeric', full:true},
+  {k:'trade', label:'Your trade', hi:'आपका काम',
+   opts:['Carving','Lathe','CNC','Dressing and sizing','Moulding','Finishing','Polishing','Sealing','Packing','Helper','Other']},
+  {k:'experience_years', label:'Years of experience', hi:'कितने साल का अनुभव', mode:'decimal'}
+];
+const STAFF_OFFICE_FIELDS=[
+  {k:'joined_on', label:'Joining date', type:'date'},
+  {k:'employee_code', label:'Employee code'},
+  {k:'department', label:'Department or section'},
+  {k:'office_note', label:'Office note (never shown to them)', area:true, full:true}
+];
+function staffFieldLabel(k){
+  const f=STAFF_OWN_FIELDS.concat(STAFF_OFFICE_FIELDS).find(x=>x.k===k);
+  return f?f.label:k.replace(/_/g,' ');
+}
+function detailsOf(userId){ return (S.staffDetailsById||{})[userId]||null; }
+function pendingDetailsFor(userId){ return (S.staffSubPending||{})[userId]||null; }
+function staffDetailsWaiting(){ return Object.keys(S.staffSubPending||{}).length; }
+// what is still blank on a person's record — the basis of the nudge on their own screen
+function myDetailsMissing(){
+  const d=S.myDetails||{};
+  return STAFF_OWN_FIELDS.filter(f=>!String(d[f.k]==null?'':d[f.k]).trim()).map(f=>f.label);
+}
+
 function indexCosting(rates, allocations, outside, snapshots){
   S.costRates=(rates||[]).slice().sort((a,b)=>
     String(b.effective_from||'').localeCompare(String(a.effective_from||'')));
@@ -5552,6 +5732,17 @@ function ownerActions(){
         note:r.due_date?('Due back '+fdate(r.due_date)):'',
         action:{label:'Open', go:"go('#/item/"+it.id+"')"} });
     });
+
+  // Somebody has filled in their own particulars and is waiting to be believed.
+  // Left unchecked it looks to them like the office never read it.
+  Object.keys(S.staffSubPending||{}).forEach(uid2=>{
+    const sub=S.staffSubPending[uid2];
+    push({ urgency:1, chip:'approval', chipLabel:'Details', icon:'stage-selection',
+      type:'staff_details',
+      title:(personName(uid2)||'Someone')+' sent their details',
+      meta:Object.keys(sub.payload||{}).length+' field(s) · sent '+fdate(String(sub.submitted_at).slice(0,10)),
+      action:{label:'Check', go:"mReviewStaffDetails('"+uid2+"')"} });
+  });
 
   // A supervisor says an attendance record is wrong. Only the office can agree,
   // and hours — and so wages — follow whatever it decides.
@@ -5951,12 +6142,24 @@ function visiblePhotos(list){
   return list.filter(p=>p.status==='approved' && (!p.update_id || published[p.update_id]));
 }
 
+// A signed storage link is a bearer URL: anyone holding it can fetch the file
+// until it expires, signed in or not. So the cache is keyed by who asked as well
+// as by path — a path-only key would serve the office's invoice link to whoever
+// signed in next — and both the link and the cache entry are short-lived.
+// Clearing the cache does not revoke links already handed out; that is why the
+// lifetime is ten minutes rather than an hour.
+const SIGNED_URL_SECONDS = 600;
 async function signedUrl(path){
-  const c=S.urlCache[path];
+  const who = (S.session && S.session.user && S.session.user.id) || 'anon';
+  const key = who + '|' + path;
+  const c=S.urlCache[key];
   if(c && c.exp>Date.now()) return c.url;
-  const {data,error} = await sb.storage.from(CONFIG.bucket).createSignedUrl(path, 3600);
+  const gen = sessionGen();
+  const {data,error} = await sb.storage.from(CONFIG.bucket).createSignedUrl(path, SIGNED_URL_SECONDS);
   if(error||!data) return '';
-  S.urlCache[path]={url:data.signedUrl, exp:Date.now()+50*60*1000};
+  // the session may have ended while the signer was working
+  if(sessionStale(gen)) return '';
+  S.urlCache[key]={url:data.signedUrl, exp:Date.now()+(SIGNED_URL_SECONDS-60)*1000};
   return data.signedUrl;
 }
 async function hydrateImages(root){
@@ -6813,7 +7016,10 @@ function updateHeader(){
       // same policy as an artisan's, and nobody else's. Not on the dock — six
       // items is already the width of a phone.
       '<p class="side-nav__group">Personal</p>'+
-      link('#/pay','My pay &amp; advances',(S.advances||[]).filter(a=>a.status==='pending'&&a.user_id===uid()).length);
+      link('#/pay','My pay &amp; advances',(S.advances||[]).filter(a=>a.status==='pending'&&a.user_id===uid()).length)+
+      link('#/details','My details',
+        (S.mySub&&S.mySub.status==='rejected') ? 1
+          : (myDetailsMissing().length && !(S.mySub&&S.mySub.status==='pending') ? 1 : 0));
     app.className='page';
     dock.hidden=false;
     dock.innerHTML=
@@ -8736,7 +8942,8 @@ function shipPanel(p, compact){
   const any=rows.some(r=>r[1])||p.tracking_url||p.shipping_notes;
   if(compact && !any && !admin) return '';
   const body=(any?sideRows(rows):'<p class="panel__description space-top-12">Not yet dispatched. Details appear here once the consignment ships.</p>')+
-    (p.tracking_url?'<div class="button-row space-top-12"><a class="button button--secondary" href="'+esc(p.tracking_url)+'" target="_blank" rel="noopener">Track consignment ↗</a></div>':'')+
+    (safeUrl(p.tracking_url)?'<div class="button-row space-top-12"><a class="button button--secondary" href="'+
+      esc(safeUrl(p.tracking_url))+'" target="_blank" rel="noopener noreferrer">Track consignment ↗</a></div>':'')+
     (p.shipping_notes?'<p class="stage-note space-top-10">'+esc(p.shipping_notes)+'</p>':'')+
     ewayRows(p, compact)+
     packingPhotos(p, compact)+
@@ -10440,6 +10647,36 @@ function vImport(){
    Router
 --------------------------------------------------------------------------- */
 
+// The only screen someone sees while they still hold a password the office
+// issued. No navigation, no sidebar, nothing to click past — the point is that
+// the password they were sent stops being usable the moment they are in.
+// Bilingual, because most of the people who meet this screen are on the floor.
+function vChoosePassword(){
+  $('shell').hidden=true;
+  const root=$('login-root'); root.hidden=false;
+  root.innerHTML='<div class="login-screen"><aside class="login-story"><div class="login-story__content">'+
+    '<div class="wordmark"><span class="wordmark__mark wordmark__mark--inverse">'+icon('i-mark','icon--lg')+'</span>'+
+    '<span><span class="wordmark__title">StoneFlow</span><span class="wordmark__byline">by Gujraj Impex</span></span></div>'+
+    '<p class="login-story__quote">Craft in progress.</p></div></aside>'+
+    '<main class="login-form-wrap"><div class="login-form">'+
+    '<h2>Choose your own password</h2>'+
+    '<p class="login-form__tagline">The password you were sent was typed by the office and '+
+      'travelled through a phone. Choose one only you know — it takes a moment and then you '+
+      'are in.<br><span lang="hi">अपना पासवर्ड चुनें। जो भेजा गया था वह अब काम नहीं करेगा।</span></p>'+
+    '<div class="field"><label for="cp-pw">New password · नया पासवर्ड</label>'+
+      '<input id="cp-pw" type="password" autocomplete="new-password" autofocus></div>'+
+    '<div class="field"><label for="cp-pw2">Type it again · दोबारा लिखें</label>'+
+      '<input id="cp-pw2" type="password" autocomplete="new-password"></div>'+
+    '<p class="field-hint">At least eight characters. Nobody can look it up for you afterwards, '+
+      'so pick something you will remember — the office can always issue a new one.</p>'+
+    '<div class="button-row">'+
+      '<button class="button" type="button" onclick="saveChosenPassword()">Save and continue</button>'+
+      '<button class="button button--quiet" type="button" onclick="signOut()">Sign out</button>'+
+    '</div></div></main></div>';
+  const go=()=>saveChosenPassword();
+  ['cp-pw','cp-pw2'].forEach(id=>{ const el=$(id); if(el) el.onkeydown=e=>{ if(e.key==='Enter') go(); }; });
+}
+
 function render(){
   if(!S.ready) return;
   if(!S.session){ vLogin(); return; }
@@ -10455,6 +10692,11 @@ function render(){
       '<div class="button-row"><button class="button" type="button" onclick="signOut()">Sign out</button></div></div></main></div>';
     return;
   }
+  // A password the office typed and sent over WhatsApp is a way in, not a
+  // password: it has travelled through a phone, and more than one person has
+  // seen it. It gets them in once and then this screen is all there is until
+  // they choose their own.
+  if(S.profile.must_change_password){ vChoosePassword(); return; }
   updateHeader();
   const hash=location.hash||'#/home';
   const parts=hash.slice(2).split('/');
@@ -10467,6 +10709,7 @@ function render(){
       else if(parts[0]==='approvals'||parts[0]==='review') vSupApprovals(parts[1]);
       else if(parts[0]==='attendance') vSupAttendance();
       else if(parts[0]==='pay') vPay();
+      else if(parts[0]==='details') vMyDetails();
       else if(parts[0]==='resources') vSupResources();
       else if(parts[0]==='pieces') vStaffHome();
       else vSupHome();
@@ -10475,6 +10718,7 @@ function render(){
       if(parts[0]==='attendance') vArtisanAttendance();
       else if(parts[0]==='leave') vArtisanLeave();
       else if(parts[0]==='pay') vPay();
+      else if(parts[0]==='details') vMyDetails();
       else vArtisanHome();
     }
     else vStaffHome();
@@ -12324,8 +12568,35 @@ function paStaffDetail(){
     (floor?'<section class="pa-section"><button class="button secondary wide" type="button" '+
       'onclick="mStaffPhone(\''+p.user_id+'\')">'+(p.phone?'Change WhatsApp number':'Add WhatsApp number')+
       '</button></section>':'')+
+    (floor?paDetailsSection(p):'')+
     (floor?paPaySection(p):'')+
     '</aside>';
+}
+
+// Their own particulars: what they sent, what is on record, and the office's own
+// fields. Anything waiting is the first thing on the panel, because a submission
+// sitting unchecked is a person who thinks they have told you something.
+function paDetailsSection(p){
+  const sub=pendingDetailsFor(p.user_id);
+  const d=detailsOf(p.user_id)||{};
+  const known=STAFF_OWN_FIELDS.filter(f=>String(d[f.k]==null?'':d[f.k]).trim());
+  const office=[['Joining date', d.joined_on?fdate(d.joined_on):null],
+    ['Employee code', d.employee_code],['Department', d.department]].filter(x=>x[1]);
+  return '<section class="pa-section"><div class="pa-section-head"><h3>Their details</h3>'+
+      '<button class="button quiet small" type="button" onclick="mStaffOfficeFields(\''+p.user_id+'\')">Employment record</button></div>'+
+    (sub?'<div class="pa-note"><strong>'+Object.keys(sub.payload||{}).length+
+        ' detail(s) waiting to be checked</strong>Sent '+esc(fdate(String(sub.submitted_at).slice(0,10)))+
+        '. Nothing goes on the record until you accept it.</div>'+
+      '<button class="button wide space-top-8" type="button" onclick="mReviewStaffDetails(\''+p.user_id+'\')">'+
+        'Check what they sent</button>':'')+
+    (known.length
+      ? known.map(f=>paInfoRow(f.label, f.k==='date_of_birth'?fdate(String(d[f.k])):String(d[f.k]))).join('')
+      : (sub?'':'<div class="pa-note"><strong>Nothing on record</strong>They have not sent their details yet. '+
+         'They fill these in themselves under <em>My details</em>, and you check each line.</div>'))+
+    (office.length?'<div class="pa-note" style="margin-top:8px"><strong>Set by you</strong>'+
+      esc(office.map(x=>x[0]+': '+x[1]).join(' · '))+'</div>':'')+
+    (d.office_note?'<div class="pa-note" style="margin-top:8px"><strong>Your note</strong>'+esc(d.office_note)+'</div>':'')+
+    '</section>';
 }
 
 // The office's side of pay: the rate in force, the statements it has drafted
@@ -12338,10 +12609,15 @@ function paPaySection(p){
   const stRow=s=>'<div class="pa-pay-row"><div><strong>'+esc(periodLabel(s))+'</strong>'+
       '<span>'+esc(fhours(s.approved_hours))+' × '+esc(money(s.hourly_rate,'INR'))+' → net '+esc(money(s.net_payable,'INR'))+
       (s.file_path?' · PDF':'')+'</span></div>'+
-      badge(s.status==='published'?'Published':'Draft', s.status==='published'?'success':'pending')+
+      badge(s.status==='published'?'Published':s.status==='superseded'?'Superseded':'Draft',
+            s.status==='published'?'success':s.status==='superseded'?'alert':'pending')+
       '<div class="button-row">'+
         '<button class="button quiet small" type="button" onclick="mWageStatement(\''+p.user_id+'\',\''+s.id+'\')">Open</button>'+
         (s.status==='draft'?'<button class="button small" type="button" onclick="publishStatement(\''+s.id+'\')">Publish</button>':'')+
+        // A published statement is what the person was handed. It cannot be
+        // edited; a correction is a new statement, and this one stays on the
+        // record saying it was replaced and why.
+        (s.status==='published'?'<button class="button quiet small" type="button" onclick="mSupersedeStatement(\''+s.id+'\')">Correct</button>':'')+
       '</div></div>';
   const advRow=a=>'<div class="pa-pay-row"><div><strong>'+esc(money(a.amount,'INR'))+' · '+esc(advanceReasonLabel(a.reason_code))+'</strong>'+
       '<span>'+esc('asked '+fdate(String(a.requested_at).slice(0,10))+' · needed by '+fdate(a.needed_by)+' · '+recoveryLabel(a.recovery_plan))+
@@ -14408,11 +14684,17 @@ function mShip(poId){
     '<div class="button-row field--full"><button class="button" type="button" id="sh-save">Save</button>'+
     '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
   m.m.querySelector('#sh-save').onclick=async ()=>{
+    // a tracking link is rendered as an href for the buyer to click, so only
+    // http and https are saved in the first place
+    const typed=$('sh-tr').value.trim();
+    const trackUrl=safeUrl(typed);
+    if(typed && !trackUrl){ toast('A tracking link has to start with http:// or https://',{err:true}); return; }
+
     const {error}=await sb.from('bt_purchase_orders').update({
       ship_mode:$('sh-mode').value||null, forwarder:$('sh-fw').value.trim()||null, container_no:$('sh-cn').value.trim()||null,
       vessel:$('sh-vs').value.trim()||null, port_loading:$('sh-pl').value.trim()||null, port_discharge:$('sh-pd').value.trim()||null,
       etd:$('sh-etd').value||null, eta:$('sh-eta').value||null, shipped_at:$('sh-sa').value||null, delivered_at:$('sh-da').value||null,
-      tracking_url:$('sh-tr').value.trim()||null, shipping_notes:$('sh-nt').value.trim()||null}).eq('id',poId);
+      tracking_url:trackUrl||null, shipping_notes:$('sh-nt').value.trim()||null}).eq('id',poId);
     if(error){ toast(error.message,{err:true}); return; }
     // Dispatch belongs to the purchase order now, not to each product — the
     // 'shipped' product stage was retired precisely so two pieces on one order
@@ -15319,21 +15601,39 @@ function mNewLogin(buyerId, kind){
       const phone = waNumber(ph?ph.value:'');
       await loadData();
       const who=(S.profilesAll||[]).find(x=>x.email===email);
-      if(phone && who){
-        // best effort: the login exists either way, so a failure here is not fatal
-        await sb.from('bt_profiles').update({phone}).eq('user_id', who.user_id);
-      }
-      // the access choice, written to the same rows the policies read
-      if(buyerId && who){
-        const e1=(await sb.from('bt_profiles').update({buyer_role:buyerRole,
-          finance_access: buyerRole!=='project'}).eq('user_id', who.user_id)).error;
-        if(e1) toast('Login made, but the access could not be saved: '+e1.message,{err:true});
-        else if(wantPos.length){
-          const e2=(await sb.from('bt_buyer_po_scope').insert(
-            wantPos.map(po=>({user_id:who.user_id, po_id:po, granted_by:uid()})))).error;
-          if(e2) toast('Login made, but the orders could not be assigned: '+e2.message,{err:true});
+      // The login now exists in Auth. What it may SEE lives in this database,
+      // and no transaction spans both — so the access is set before the password
+      // is ever shown, and if that fails the login is shut rather than left open
+      // on whatever the defaults happen to give it.
+      if(buyerId){
+        if(!who){
+          toast('The login was created but StoneFlow cannot find it to set its access. '+
+                'Open People & access and finish it there before sharing anything.',{err:true});
+          closeModal(); await loadData(); render(); return;
+        }
+        try{
+          const {error:accErr} = await sb.rpc('bt_set_buyer_access',{
+            p_user: who.user_id, p_role: buyerRole,
+            p_finance: buyerRole!=='project', p_pos: wantPos});
+          if(accErr) throw new Error(accErr.message);
+        }catch(accE){
+          let shut=false;
+          try{ const r=await sb.rpc('bt_set_login_active',{p_user:who.user_id, p_active:false});
+               shut = !r.error; }catch(e2){}
+          closeModal(); await loadData(); render();
+          toast('The login was made but its access could not be set, so it has been '+
+                (shut?'closed':'left unusable')+' and the password NOT shared. '+
+                (shut?'':'Close it from People & access. ')+'Reason: '+(accE.message||accE),{err:true});
+          return;
         }
       }
+      if(phone && who){
+        // cosmetic: the login works either way, so a failure here is not fatal
+        await sb.from('bt_profiles').update({phone}).eq('user_id', who.user_id);
+      }
+      // the password below was typed by the office, so it is a way in once and
+      // then must be replaced by one only they know
+      if(who){ try{ await sb.rpc('bt_office_issued_password',{p_user:who.user_id}); }catch(e){} }
       closeModal(); await loadData(); render();
       const made=(S.profilesAll||[]).find(x=>x.email===email);
       mHandover({
@@ -15360,7 +15660,9 @@ function mResetPw(userId, email){
     const npw=$('rp-pw').value;
     try{
       await adminApi({action:'set_password', user_id:userId, password:npw});
-      try{ await sb.rpc('bt_mark_password_set',{p_user:userId}); await loadData(); }catch(e){}
+      // the office chose this one, so it is a way in and not their password:
+      // they must replace it before StoneFlow gives them anything
+      try{ await sb.rpc('bt_office_issued_password',{p_user:userId}); await loadData(); }catch(e){}
       closeModal();
       const who=(S.profilesAll||[]).find(x=>x.user_id===userId);
       mHandover({
@@ -15397,6 +15699,24 @@ async function saveSettings(){
 // row deliberately shows "you" instead of a Reset button. That left the owner with
 // no way to set his own password at all — the account nobody is above. This is it.
 function suggestOwnPassword(){ const f=$('own-pw'); if(f) f.value=genPassword(); }
+
+// The first-sign-in screen. The requirement is only lifted once Auth has
+// actually accepted the new password, so a failure here leaves them where they
+// were rather than letting them past with the issued one still live.
+async function saveChosenPassword(){
+  const a=$('cp-pw'), b=$('cp-pw2'); if(!a||!b) return;
+  const pw=String(a.value||''), pw2=String(b.value||'');
+  if(pw.length<8){ toast('Use at least 8 characters. · कम से कम आठ अक्षर।',{err:true}); return; }
+  if(pw!==pw2){ toast('The two do not match. · दोनों एक जैसे नहीं हैं।',{err:true}); return; }
+  const {error}=await sb.auth.updateUser({password:pw});
+  if(error){ toast(error.message,{err:true}); return; }
+  const {error:mErr}=await sb.rpc('bt_mark_password_set',{p_user:null});
+  if(mErr){ toast('Your password was changed, but StoneFlow could not record it. '+
+                  'Sign in again with the new one.',{err:true}); return; }
+  try{ await sb.rpc('bt_log_password_change'); }catch(e){}
+  await loadCore(); await loadData(); render();
+  toast('Saved. This is your password now — the one you were sent no longer works.');
+}
 
 async function changeOwnPassword(){
   const f=$('own-pw'); if(!f) return;
@@ -15447,42 +15767,92 @@ async function addStage(){
    rather than silently importing nothing.
 --------------------------------------------------------------------------- */
 
-const PDFJS_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-const PDFJS_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+// The reader is pinned to a current supported release. 3.11.174 sat inside the
+// range of CVE-2024-4367, where a number taken from the PDF's OWN font metadata
+// was pasted into a JavaScript Function body — so opening a doctored purchase
+// order could run whatever the sender put there. Mozilla fixed it in 4.2.67.
+//
+// Three separate things stop that path here, because one is not a plan:
+//   · the version below is past the fix;
+//   · isEvalSupported:false switches off the compile-a-glyph-into-a-function
+//     route altogether — it is Mozilla's own documented workaround;
+//   · the page's CSP carries no 'unsafe-eval', so the browser refuses to build
+//     a function from a string at all.
+// Everything from 4.x on ships as an ES module only, which is why this loads
+// with import() instead of a <script> tag.
+const PDFJS_VER = '6.3.289';
+const PDFJS_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/'+PDFJS_VER+'/pdf.min.mjs';
+const PDFJS_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/'+PDFJS_VER+'/pdf.worker.min.mjs';
+
+// A purchase order is a few pages. These are the walls, not the expectation:
+// a file that blows past them is either wrong or hostile, and either way the
+// office should get a sentence rather than a frozen tab.
+const PDF_MAX_BYTES = 25*1024*1024;
+const PDF_MAX_PAGES = 60;
+const PDF_MAX_ITEMS = 200000;
+const PDF_TIMEOUT_MS = 60000;
 
 function loadPdfJs(){
   if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
   if(window.__pdfjsLoading) return window.__pdfjsLoading;
-  window.__pdfjsLoading = new Promise((res, rej)=>{
-    const s=document.createElement('script');
-    s.src=PDFJS_SRC;
-    s.onload=()=>{ try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS_WORKER; }catch(e){}
-      res(window.pdfjsLib); };
-    s.onerror=()=>rej(new Error('Could not load the PDF reader. Check your internet connection.'));
-    document.head.appendChild(s);
+  window.__pdfjsLoading = import(PDFJS_SRC).then(mod=>{
+    const lib = (mod && mod.getDocument) ? mod : (mod && mod.default);
+    if(!lib || typeof lib.getDocument!=='function')
+      throw new Error('The PDF reader loaded but is not the one expected.');
+    try{ lib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER; }catch(e){}
+    window.pdfjsLib = lib;
+    return lib;
+  }).catch(e=>{
+    window.__pdfjsLoading = null;   // let the next attempt try again
+    throw new Error('Could not load the PDF reader. Check your internet connection.');
   });
   return window.__pdfjsLoading;
 }
 
+// Races a promise against the clock so a file that never finishes parsing does
+// not leave the office staring at "Reading…" forever.
+function withTimeout(p, ms, message){
+  let t;
+  return Promise.race([
+    Promise.resolve(p),
+    new Promise((_r, rej)=>{ t=setTimeout(()=>rej(new Error(message)), ms); })
+  ]).then(v=>{ clearTimeout(t); return v; }, e=>{ clearTimeout(t); throw e; });
+}
+
 async function pdfLines(file){
+  if(file && file.size > PDF_MAX_BYTES)
+    throw new Error('That PDF is larger than '+Math.round(PDF_MAX_BYTES/1048576)+' MB. Send a smaller file, or split it.');
   const lib = await loadPdfJs();
   const buf = await file.arrayBuffer();
-  const pdf = await lib.getDocument({data:buf}).promise;
-  const lines=[];
-  for(let i=1;i<=pdf.numPages;i++){
-    const page = await pdf.getPage(i);
-    const tc = await page.getTextContent();
-    const rows={};
-    tc.items.forEach(it=>{
-      const y=it.transform[5], key=Math.round(y/3);
-      (rows[key]=rows[key]||[]).push({x:it.transform[4], s:it.str});
-    });
-    Object.keys(rows).map(Number).sort((a,b)=>b-a).forEach(k=>{
-      const t=rows[k].sort((a,b)=>a.x-b.x).map(o=>o.s).join(' ').replace(/\s+/g,' ').trim();
-      if(t) lines.push(t);
-    });
+  const deadline = Date.now() + PDF_TIMEOUT_MS;
+  const task = lib.getDocument({data:buf, isEvalSupported:false});
+  const pdf = await withTimeout(task.promise, PDF_TIMEOUT_MS, 'That PDF took too long to open; nothing was imported.');
+  try{
+    const lines=[]; let items=0;
+    const pages = Math.min(pdf.numPages, PDF_MAX_PAGES);
+    for(let i=1;i<=pages;i++){
+      if(Date.now() > deadline) throw new Error('That PDF took too long to read; nothing was imported.');
+      const page = await pdf.getPage(i);
+      const tc = await page.getTextContent();
+      items += tc.items.length;
+      if(items > PDF_MAX_ITEMS) throw new Error('That PDF carries more text than the importer can take in one go.');
+      const rows={};
+      tc.items.forEach(it=>{
+        const y=it.transform[5], key=Math.round(y/3);
+        (rows[key]=rows[key]||[]).push({x:it.transform[4], s:it.str});
+      });
+      Object.keys(rows).map(Number).sort((a,b)=>b-a).forEach(k=>{
+        const t=rows[k].sort((a,b)=>a.x-b.x).map(o=>o.s).join(' ').replace(/\s+/g,' ').trim();
+        if(t) lines.push(t);
+      });
+      try{ page.cleanup(); }catch(e){}
+    }
+    if(pdf.numPages > PDF_MAX_PAGES)
+      toast('Only the first '+PDF_MAX_PAGES+' pages were read — check nothing is missing.', {err:true});
+    return lines;
+  } finally {
+    try{ await pdf.destroy(); }catch(e){}
   }
-  return lines;
 }
 
 const _num = t => { const n=Number(String(t).replace(/[^0-9.\-]/g,'')); return isFinite(n)?n:null; };
@@ -15954,24 +16324,122 @@ function parseAccountingDoc(lines){
    is anchored to.
 --------------------------------------------------------------------------- */
 
+/* --- reading someone else's workbook without trusting it -------------------
+
+   The spreadsheet reader is SheetJS 0.18.5. That is the newest build on the
+   only CDN this page is allowed to load from — the vendor stopped publishing
+   there — and it carries two known faults: a crafted workbook can write onto
+   Object.prototype (CVE-2023-30533), and a crafted string can make one of its
+   patterns run for a very long time (CVE-2024-22363).
+
+   So the workbook is parsed inside a throwaway Web Worker instead. A worker is
+   its own JavaScript world: anything a hostile file writes onto its prototypes
+   dies when the worker is terminated, and only plain strings are copied back.
+   A parse that will not finish is killed by the clock rather than freezing the
+   office's tab. The caps below are walls, not expectations — a real purchase
+   order is a few hundred rows.
+
+   The library's bytes are checked against a pinned hash before any of it runs,
+   so a CDN that served something else would be refused rather than executed.
+--------------------------------------------------------------------------- */
+
 const XLSX_SRC  = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
 const JSZIP_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+// stamped by build.sh from the copies in node_modules, which are the same files
+// the CDN mirrors; see test/sri.js
+const XLSX_SRI  = 'sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw';
+const JSZIP_SRI = 'sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG';
 
-function _loadScript(src, global, label){
+const SHEET_MAX_BYTES  = 25*1024*1024;
+const SHEET_MAX_ROWS   = 20000;
+const SHEET_MAX_COLS   = 200;
+const SHEET_TIMEOUT_MS = 60000;
+const SHEET_MAX_IMAGES = 400;
+const SHEET_MAX_IMAGE_BYTES = 8*1024*1024;
+
+function _loadScript(src, global, label, sri){
   if(window[global]) return Promise.resolve(window[global]);
   const key='__loading_'+global;
   if(window[key]) return window[key];
   window[key]=new Promise((res,rej)=>{
     const el=document.createElement('script');
     el.src=src;
+    if(sri){ el.integrity=sri; el.crossOrigin='anonymous'; }
     el.onload=()=>res(window[global]);
     el.onerror=()=>rej(new Error('Could not load the '+label+'. Check your internet connection.'));
     document.head.appendChild(el);
   });
   return window[key];
 }
-const loadXlsx  = ()=>_loadScript(XLSX_SRC,'XLSX','spreadsheet reader');
-const loadJsZip = ()=>_loadScript(JSZIP_SRC,'JSZip','file reader');
+const loadJsZip = ()=>_loadScript(JSZIP_SRC,'JSZip','file reader',JSZIP_SRI);
+
+// Fetches a pinned library and checks its bytes before a line of it runs.
+const _libSrc = {};
+async function fetchLib(src, sri, label){
+  if(_libSrc[src]) return _libSrc[src];
+  let buf;
+  try{
+    const res = await fetch(src, {credentials:'omit'});
+    if(!res.ok) throw new Error('status '+res.status);
+    buf = await res.arrayBuffer();
+  }catch(e){ throw new Error('Could not load the '+label+'. Check your internet connection.'); }
+  const digest = await crypto.subtle.digest('SHA-384', buf);
+  const got = 'sha384-'+btoa(String.fromCharCode.apply(null, new Uint8Array(digest)));
+  if(got !== sri)
+    throw new Error('The '+label+' that arrived is not the version StoneFlow pinned, so it was not run.');
+  _libSrc[src] = new TextDecoder().decode(buf);
+  return _libSrc[src];
+}
+
+// Runs inside the worker, after the library source. Everything it sends back is
+// rebuilt as plain strings in fresh arrays, so nothing with a doctored
+// prototype travels with it.
+const SHEET_WORKER_GLUE = [
+  'self.onmessage = function(e){',
+  '  var d = e.data || {};',
+  '  try{',
+  '    var wb = XLSX.read(d.buf, {type:"array", cellDates:true});',
+  '    var names = (wb.SheetNames || []).slice(0, 50).map(String);',
+  '    var name = names[0];',
+  '    if(!name) throw new Error("That file has no sheets in it.");',
+  '    var rows = XLSX.utils.sheet_to_json(wb.Sheets[name], {header:1, raw:false, defval:""});',
+  '    var cut = rows.length > d.maxRows;',
+  '    if(cut) rows = rows.slice(0, d.maxRows);',
+  '    var out = [];',
+  '    for(var i=0;i<rows.length;i++){',
+  '      var r = rows[i] || [], line = [], n = Math.min(r.length, d.maxCols);',
+  '      for(var j=0;j<n;j++) line.push(r[j]==null ? "" : String(r[j]));',
+  '      out.push(line);',
+  '    }',
+  '    self.postMessage({ok:true, sheetNames:names, sheetName:name, rows:out, truncatedRows:cut});',
+  '  }catch(err){',
+  '    self.postMessage({ok:false, message:String((err && err.message) || err)});',
+  '  }',
+  '};'
+].join('\n');
+
+async function readWorkbookSafely(buf){
+  const lib = await fetchLib(XLSX_SRC, XLSX_SRI, 'spreadsheet reader');
+  const url = URL.createObjectURL(new Blob([lib, '\n;\n', SHEET_WORKER_GLUE], {type:'text/javascript'}));
+  const w = new Worker(url);
+  try{
+    return await new Promise((resolve, reject)=>{
+      const timer = setTimeout(()=>reject(
+        new Error('That spreadsheet took too long to read; nothing was imported.')), SHEET_TIMEOUT_MS);
+      w.onmessage = ev=>{
+        clearTimeout(timer);
+        const d = ev.data || {};
+        if(d.ok) resolve(d);
+        else reject(new Error(d.message || 'Could not read that spreadsheet.'));
+      };
+      w.onerror = ()=>{ clearTimeout(timer); reject(new Error('Could not read that spreadsheet.')); };
+      w.postMessage({buf, maxRows:SHEET_MAX_ROWS, maxCols:SHEET_MAX_COLS}, [buf]);
+    });
+  } finally {
+    w.terminate();               // the worker's world goes with it
+    URL.revokeObjectURL(url);
+  }
+}
 
 // The fields StoneFlow can fill from a column. product is the only one required.
 const SHEET_FIELDS = [
@@ -16069,6 +16537,7 @@ function _dimsFromText(txt){
 // row index (0-based, as the sheet counts it) -> [{name, blob}]
 async function sheetImages(file){
   const out={};
+  let taken=0, skipped=0;
   try{
     const JSZipLib = await loadJsZip();
     const zip = await JSZipLib.loadAsync(file);
@@ -16102,11 +16571,24 @@ async function sheetImages(file){
                    blip.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','embed');
         const path = rels[id];
         if(!path || !zip.files[path]) continue;
-        const blob = await zip.file(path).async('blob');
+        // A zip entry declares how big it will be once unpacked. Believing that
+        // number costs nothing; unpacking a file that claims to be a gigabyte
+        // costs the office its browser. Both the per-picture size and the count
+        // are capped, and a workbook that trips either says so rather than
+        // silently dropping pictures.
+        const entry = zip.files[path];
+        const size = (entry._data && entry._data.uncompressedSize) || 0;
+        if(size > SHEET_MAX_IMAGE_BYTES){ skipped++; continue; }
+        if(taken >= SHEET_MAX_IMAGES){ skipped++; continue; }
+        const blob = await entry.async('blob');
+        if(blob.size > SHEET_MAX_IMAGE_BYTES){ skipped++; continue; }
+        taken++;
         (out[row]=out[row]||[]).push({ name: path.split('/').pop(), blob });
       }
     }
   }catch(e){ /* a workbook with no pictures is perfectly normal */ }
+  if(skipped) toast(skipped+' picture'+(skipped===1?' was':'s were')+
+    ' skipped — too large, or more than this screen takes at once.', {err:true});
   return out;
 }
 
@@ -16130,12 +16612,16 @@ async function readSheetFile(file){
   const out=$('imp-out');
   if(out) out.innerHTML='<p class="field-hint">Reading '+esc(file.name)+'…</p>';
   try{
-    const X = await loadXlsx();
+    if(file.size > SHEET_MAX_BYTES)
+      throw new Error('That file is larger than '+Math.round(SHEET_MAX_BYTES/1048576)+
+                      ' MB. Send the sheet on its own, without the photographs.');
     const buf = await file.arrayBuffer();
-    const wb = X.read(buf, {type:'array', cellDates:true});
-    const sheetName = wb.SheetNames[0];
-    const rows = X.utils.sheet_to_json(wb.Sheets[sheetName], {header:1, raw:false, defval:''});
+    const parsed = await readWorkbookSafely(buf);
+    const sheetName = parsed.sheetName;
+    const rows = parsed.rows;
     if(!rows.length){ if(out) out.innerHTML='<div class="attn attn--warn attn--flat"><span>That sheet is empty.</span></div>'; return; }
+    if(parsed.truncatedRows)
+      toast('Only the first '+SHEET_MAX_ROWS+' rows were read — check nothing is missing.', {err:true});
 
     const images = /\.(xlsx|xlsm)$/i.test(file.name) ? await sheetImages(file) : {};
     const headerRow = _guessHeaderRow(rows);
@@ -16150,7 +16636,7 @@ async function readSheetFile(file){
     const saved = (S.buyersById[buyerId]||{}).import_map;
 
     window.__sheet = {
-      fileName:file.name, sheetName, sheetNames:wb.SheetNames, rows, images,
+      fileName:file.name, sheetName, sheetNames:parsed.sheetNames, rows, images,
       headerRow: headerRow<0?0:headerRow,
       map: (saved && saved.map) ? Object.assign({}, saved.map) : null,
       head, buyerId
@@ -16933,11 +17419,40 @@ function renderCommand(keepValue){
   if(on && keepValue) on.scrollIntoView({block:'nearest'});
 }
 
+// The command palette used to eval() the string a row carried. Two things were
+// wrong with that: it needs the very `unsafe-eval` the CSP refuses, and the
+// strings interpolate database ids, so an id containing a quote would have been
+// executable. Only two commands are ever issued, so the string is parsed against
+// an allowlist and dispatched — never executed.
+const COMMANDS = {
+  go:          a => go(String(a[0]||'')),
+  toggleStage: a => toggleStage(String(a[0]||''), Number(a[1]))
+};
+// name('literal', 123) — nothing else parses, and nothing else runs
+function parseCommand(src){
+  const m = /^\s*([a-zA-Z_$][\w$]*)\s*\((.*)\)\s*;?\s*$/.exec(String(src||''));
+  if(!m || !Object.prototype.hasOwnProperty.call(COMMANDS, m[1])) return null;
+  const args=[]; const body=m[2].trim();
+  if(body){
+    const re=/\s*(?:'([^']*)'|"([^"]*)"|(-?\d+(?:\.\d+)?))\s*(?:,|$)/g;
+    let seen=0, at=0, x;
+    while((x=re.exec(body))){
+      if(x.index!==at) return null;          // anything unquoted or nested: refuse
+      at=re.lastIndex; seen++;
+      args.push(x[1]!==undefined?x[1] : x[2]!==undefined?x[2] : Number(x[3]));
+      if(at>=body.length) break;
+    }
+    if(at!==body.length || !seen) return null;
+  }
+  return {fn:m[1], args:args};
+}
 function runCommand(i){
   const r=(window.__cmdRows||[])[i];
   if(!r) return;
   closeModal();
-  try{ eval(r.run); }catch(e){ toast('Could not open that',{err:true}); }
+  const c=parseCommand(r.run);
+  if(!c){ toast('Could not open that',{err:true}); return; }
+  try{ COMMANDS[c.fn](c.args); }catch(e){ toast('Could not open that',{err:true}); }
 }
 
 function toggleCreate(ev){
@@ -17012,20 +17527,15 @@ function mBuyerAccess(userId){
     // which reads to the buyer as the tracker being broken
     if(newRole==='project' && !want.length){
       toast('Tick at least one purchase order, or make them a buyer administrator.',{err:true}); return; }
-    const e1=(await sb.from('bt_profiles').update({buyer_role:newRole, finance_access:fin}).eq('user_id',userId)).error;
-    if(e1){ toast(e1.message,{err:true}); return; }
-    // rewrite the scope to exactly what was ticked
-    const del=(await sb.from('bt_buyer_po_scope').delete().eq('user_id',userId)).error;
-    if(del){ toast(del.message,{err:true}); return; }
-    if(want.length){
-      const ins=(await sb.from('bt_buyer_po_scope').insert(
-        want.map(po=>({user_id:userId, po_id:po, granted_by:uid()})))).error;
-      if(ins){ toast(ins.message,{err:true}); return; }
-    }
+    // One call, one transaction. This used to be three writes — set the role,
+    // delete the scope, insert the new scope — and a failure between the delete
+    // and the insert left the person with no scope rows at all, which is the
+    // widest setting there is. Either the whole policy lands now, or none of it.
+    const {data:said, error:accErr} = await sb.rpc('bt_set_buyer_access',{
+      p_user: userId, p_role: newRole, p_finance: fin, p_pos: want});
+    if(accErr){ toast(accErr.message,{err:true}); return; }
     closeModal(); await loadData(); render();
-    toast(newRole==='project'
-      ? 'Saved. They can see '+want.length+' order'+(want.length===1?'':'s')+'.'
-      : 'Saved.');
+    toast('Saved. '+(said||''));
   };
 }
 
@@ -17055,30 +17565,34 @@ function mMetricDefs(){
 }
 
 // A plain CSV of what the current reports show, for a spreadsheet or an email.
+// Every cell goes through csvText() or csvNum() — see the note above them in
+// 04-util.js. Money, counts and percentages are written bare so they arrive as
+// numbers you can total; the unit sits in its own column instead of inside the
+// value, which is what used to make them text.
 function exportReport(){
   const k=reportKPIs(), conf=deliveryConfidence(), flow=productionFlow(), cyc=cycleTimeByStage();
-  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const cur=k.ageing.currency||'INR';
   const L=[];
-  L.push(['StoneFlow report', fdate(today())].map(q).join(','));
+  L.push(csvRow(['StoneFlow report', fdate(today())]));
   L.push('');
-  L.push(['Metric','Value','Note'].map(q).join(','));
-  L.push(['Delivery confidence', k.onTime===null?'':k.onTime+'%', k.atRisk+' at risk'].map(q).join(','));
-  L.push(['Daily update compliance', (k.compliance===null?'':k.compliance+'%'), k.uc.today+' of '+k.uc.of].map(q).join(','));
-  L.push(['Average stage delay', k.delay===null?'none':k.delay.toFixed(1)+' days',''].map(q).join(','));
-  L.push(['Invoiced', money(k.ageing.total,k.ageing.currency), k.ageing.n+' invoices'].map(q).join(','));
-  L.push(['Payments recorded', money(k.ageing.paid,k.ageing.currency),''].map(q).join(','));
-  L.push(['Outstanding', money(k.ageing.outstanding,k.ageing.currency),''].map(q).join(','));
+  L.push(csvRow(['Metric','Value','Unit','Note']));
+  L.push(csvRow(['Delivery confidence', csvN(k.onTime), k.onTime===null?'':'%', k.atRisk+' at risk']));
+  L.push(csvRow(['Daily update compliance', csvN(k.compliance), k.compliance===null?'':'%', k.uc.today+' of '+k.uc.of]));
+  L.push(csvRow(['Average stage delay', csvN(k.delay===null?null:Number(k.delay.toFixed(1))), k.delay===null?'':'days', k.delay===null?'none':'']));
+  L.push(csvRow(['Invoiced', csvN(k.ageing.total), cur, k.ageing.n+' invoices']));
+  L.push(csvRow(['Payments recorded', csvN(k.ageing.paid), cur, '']));
+  L.push(csvRow(['Outstanding', csvN(k.ageing.outstanding), cur, '']));
   L.push('');
-  L.push(['Order','Buyer','Stage','Ships','Confidence','Exceptions'].map(q).join(','));
+  L.push(csvRow(['Order','Buyer','Stage','Ships','Confidence %','Exceptions']));
   conf.forEach(c=>{ const b=S.buyersById[c.po.buyer_id];
-    L.push([c.po.po_number, b?b.company:'', c.stage, c.po.expected_ship_date||'', c.score+'%', c.why.join(' · ')].map(q).join(',')); });
+    L.push(csvRow([c.po.po_number, b?b.company:'', c.stage, c.po.expected_ship_date||'', csvN(c.score), c.why.join(' · ')])); });
   L.push('');
-  L.push(['Stage','Active pieces'].map(q).join(','));
-  flow.rows.forEach(r=>L.push([r.stage.name, r.items.length].map(q).join(',')));
+  L.push(csvRow(['Stage','Active pieces']));
+  flow.rows.forEach(r=>L.push(csvRow([r.stage.name, csvN(r.items.length)])));
   L.push('');
-  L.push(['Stage','Average days','Vs plan','Completed stages counted'].map(q).join(','));
-  cyc.forEach(x=>L.push([x.stage.name, x.avg.toFixed(1), x.slip===null?'':x.slip.toFixed(1), x.n].map(q).join(',')));
-  const blob=new Blob(["﻿"+L.join('\n')], {type:'text/csv;charset=utf-8'});
+  L.push(csvRow(['Stage','Average days','Vs plan','Completed stages counted']));
+  cyc.forEach(x=>L.push(csvRow([x.stage.name, csvN(Number(x.avg.toFixed(1))), x.slip===null?'':csvN(Number(x.slip.toFixed(1))), csvN(x.n)])));
+  const blob=new Blob(["﻿"+L.join('\r\n')], {type:'text/csv;charset=utf-8'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
   a.download='stoneflow-report-'+today()+'.csv';
@@ -17887,10 +18401,32 @@ function mReportEquipment(equipmentId){
       : data&&data.status==='reduced' ? 'Marked as reduced capacity.' : 'Reported.');
   };
 }
-async function restoreEquipment(id){
-  const {error}=await sb.rpc('bt_restore_equipment',{p_equipment:id, p_note:null});
-  if(error){ toast(error.message,{err:true}); return; }
-  await refresh(); toast('Available again.');
+// A machine goes back into service on somebody's word, not on a button press.
+// What was done and who checked it is written into the equipment's history and
+// cannot be edited afterwards — so if the same fault comes back in March, the
+// record of what was done in September is still there.
+function restoreEquipment(id){
+  const e=(S.equipment||[]).find(x=>x.id===id)||{};
+  const m=modal('<h3>Put this back in use</h3>'+
+    '<div class="sub">'+esc(e.name||'Equipment')+
+      (e.status_note?' · '+esc(e.status_note):'')+'</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label for="re-note">What was done, and who checked it</label>'+
+      '<textarea id="re-note" rows="3" placeholder="Belt replaced and guard refitted. Checked by Kunal."></textarea>'+
+      '<p class="field-hint">This is kept with the machine and cannot be changed later. '+
+        'StoneFlow does not replace the physical check — it records that one was made.</p></div>'+
+    '<label class="check-row field--full"><input type="checkbox" id="re-ok">'+
+      '<span>I have checked this machine is safe to use</span></label>'+
+    '<div class="button-row field--full"><button class="button" type="button" id="re-go">Put back in use</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#re-go').onclick=async ()=>{
+    const note=$('re-note').value.trim();
+    if(!$('re-ok').checked){ toast('Tick the box to confirm you have checked it.',{err:true}); return; }
+    if(note.length<8){ toast('Say what was done and who checked it.',{err:true}); return; }
+    const {error}=await sb.rpc('bt_restore_equipment',{p_equipment:id, p_note:note});
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Back in use, and the check is on its record.');
+  };
 }
 async function saveEquipment(){
   const name=$('eq-name').value.trim(), area=$('eq-area').value.trim(), svc=$('eq-service').value||null;
@@ -18114,6 +18650,113 @@ function mAllocateIndirect(itemId){
     btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await loadData(); render(); toast('Allocated.');
+  };
+}
+
+/* ---- a person's own particulars, checked by the office ----------------------
+   The same shape as the buyer's company submission: every field they sent shown
+   beside what is on record, each one tickable and editable, so a typo is fixed
+   on the way through rather than after. Accepting writes only the fields ticked.
+   The office's own fields are a separate form — a person does not assert their
+   own joining date, and the database drops it if a client sends one. */
+function mReviewStaffDetails(userId){
+  const sub = pendingDetailsFor(userId);
+  const p = (S.profilesAll||[]).find(x=>x.user_id===userId) || {};
+  if(!sub){ toast('Nothing waiting from this person.'); return; }
+  const d = detailsOf(userId) || {};
+  const rows = STAFF_OWN_FIELDS.filter(f=>String((sub.payload||{})[f.k]||'').trim());
+
+  const m=modal('<h3>Details sent by '+esc(p.full_name||p.email||'this person')+'</h3>'+
+    '<div class="sub">'+esc((p.role==='worker'?'Artisan':'Supervisor'))+' · sent '+
+      esc(fdate(String(sub.submitted_at).slice(0,10)))+' · '+rows.length+' field'+(rows.length===1?'':'s')+'</div>'+
+    '<div class="attn attn--warn attn--flat"><span>Check these against whatever they showed you. '+
+      'Only the ticked fields are saved, and you can correct any of them here first. '+
+      'Joining date, employee code and department are set separately — nothing sent here can change them.</span></div>'+
+    '<div class="form-grid" style="max-height:60vh;overflow:auto">'+
+    rows.map(f=>{
+      const now=String(d[f.k]==null?'':d[f.k]);
+      const sent=String((sub.payload||{})[f.k]||'');
+      const same=now===sent;
+      return '<div class="field field--full">'+
+        '<label class="check-row" style="margin-bottom:4px"><input type="checkbox" id="sv-on-'+f.k+'"'+
+          (same?'':' checked')+'><span><strong>'+esc(f.label)+'</strong>'+
+          (same?' — already matches':'')+'</span></label>'+
+        (now?'<p class="field-hint">On record now: '+esc(f.k==='date_of_birth'?fdate(now):now)+'</p>'
+            :'<p class="field-hint">Nothing on record yet.</p>')+
+        (f.area?'<textarea id="sv-'+f.k+'" rows="2">'+esc(sent)+'</textarea>'
+               :'<input id="sv-'+f.k+'"'+(f.type==='date'?' type="date"':'')+' value="'+esc(sent)+'">')+
+      '</div>';
+    }).join('')+
+    '</div>'+
+    '<div class="button-row field--full">'+
+      '<button class="button" type="button" id="sv-accept">Accept selected</button>'+
+      '<button class="button button--secondary" type="button" id="sv-decline">Send back</button>'+
+      '<button class="button button--quiet" type="button" onclick="closeModal()">Close</button></div>');
+
+  m.m.querySelector('#sv-accept').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const fields={};
+    rows.forEach(f=>{ const t=$('sv-on-'+f.k); if(t&&t.checked) fields[f.k]=$('sv-'+f.k).value.trim(); });
+    const n=Object.keys(fields).length;
+    if(!n){ toast('Tick at least one field.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_accept_staff_submission',{p_id:sub.id, p_fields:fields});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render();
+    toast(n+' field'+(n===1?'':'s')+' accepted onto their record.');
+  };
+  m.m.querySelector('#sv-decline').onclick=()=>{
+    closeModal();
+    const m2=modal('<h3>Send these back</h3>'+
+      '<div class="sub">'+esc(p.full_name||p.email||'')+'</div>'+
+      '<p class="field-hint">They see this line on their own screen, so say what to change.</p>'+
+      '<div class="form-grid"><div class="field field--full"><label for="sd-why">What needs correcting</label>'+
+        '<input id="sd-why" placeholder="e.g. the emergency number is only nine digits"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="sd-go">Send back</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+    m2.m.querySelector('#sd-go').onclick=async (e)=>{
+      const btn=e.currentTarget, why=$('sd-why').value.trim();
+      if(!why){ toast('Say what needs correcting.',{err:true}); return; }
+      btn.disabled=true;
+      const {error}=await sb.rpc('bt_decline_staff_submission',{p_id:sub.id, p_note:why});
+      btn.disabled=false;
+      if(error){ toast(error.message,{err:true}); return; }
+      closeModal(); await loadData(); render(); toast('Sent back.');
+    };
+  };
+}
+
+// The office's own fields on a person's record. A joining date is a fact the
+// business owns, not something a person tells you.
+function mStaffOfficeFields(userId){
+  const p=(S.profilesAll||[]).find(x=>x.user_id===userId)||{};
+  const d=detailsOf(userId)||{};
+  const v=k=>{ const x=d[k]; return x==null?'':String(x); };
+  const m=modal('<h3>Employment record</h3>'+
+    '<div class="sub">'+esc(p.full_name||p.email||'')+'</div>'+
+    '<p class="field-hint">These are yours to set. They are shown to the person read-only, except the note, which is never shown.</p>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="so-joined">Joining date</label>'+
+        '<input id="so-joined" type="date" value="'+esc(v('joined_on'))+'"></div>'+
+      '<div class="field"><label for="so-code">Employee code</label>'+
+        '<input id="so-code" value="'+esc(v('employee_code'))+'" placeholder="e.g. GI-014"></div>'+
+      '<div class="field field--full"><label for="so-dept">Department or section</label>'+
+        '<input id="so-dept" value="'+esc(v('department'))+'" placeholder="e.g. Carving"></div>'+
+      '<div class="field field--full"><label for="so-note">Office note (never shown to them)</label>'+
+        '<textarea id="so-note" rows="2">'+esc(v('office_note'))+'</textarea></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="so-go">Save</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#so-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_set_staff_office_fields',{p_user:userId,
+      p_joined:$('so-joined').value||null, p_code:$('so-code').value.trim()||null,
+      p_dept:$('so-dept').value.trim()||null, p_note:$('so-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast('Saved.');
   };
 }
 
@@ -18420,6 +19063,31 @@ function mWageStatement(userId, id){
   $('ws-save').onclick=e=>save(e.currentTarget, false);
   if($('ws-pub')) $('ws-pub').onclick=e=>save(e.currentTarget, true);
 }
+// A published wage statement is what the person was handed, so it does not get
+// quietly rewritten. Correcting one leaves the original exactly as it was,
+// marked as replaced and carrying the reason, and the corrected figures go in a
+// new statement for the same period.
+function mSupersedeStatement(id){
+  const s=(S.statements||[]).find(x=>x.id===id)||{};
+  const m=modal('<h3>Correct a published statement</h3>'+
+    '<div class="sub">'+esc(periodLabel(s))+' · net '+esc(money(s.net_payable,'INR'))+'</div>'+
+    '<div class="form-grid">'+
+    '<div class="field field--full"><label for="sp-why">What was wrong with it</label>'+
+      '<textarea id="sp-why" rows="3" placeholder="Overtime hours were counted twice."></textarea>'+
+      '<p class="field-hint">This statement stays on the record exactly as it was published, marked as '+
+        'replaced and carrying this reason. You then write the corrected one for the same period.</p></div>'+
+    '<div class="button-row field--full"><button class="button" type="button" id="sp-go">Mark it replaced</button>'+
+    '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div></div>');
+  m.m.querySelector('#sp-go').onclick=async ()=>{
+    const why=$('sp-why').value.trim();
+    if(why.length<8){ toast('Say what was wrong with it.',{err:true}); return; }
+    const {error}=await sb.rpc('bt_supersede_wage_statement',{p_id:id, p_reason:why});
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh();
+    toast('Marked as replaced. Write the corrected statement for the same period now.');
+  };
+}
+
 function wsCalc(){
   const hours=parseFloat($('ws-hours').value)||0, r=parseFloat($('ws-rate').value)||0;
   const adv=parseFloat($('ws-adv').value)||0, ded=parseFloat($('ws-ded').value)||0;
@@ -18502,13 +19170,27 @@ async function savePolicy(){
    the number of the person who actually needs them. A number typed here is kept
    on that person, so the next reset already knows where to send it.
 --------------------------------------------------------------------------- */
+// Two texts, deliberately.
+//
+// handoverText is what goes on the CLIPBOARD: the whole thing, password
+// included, for Yash to paste wherever he likes.
+//
+// handoverInviteText is what goes in the WhatsApp LINK, and it carries no
+// password. A wa.me link is a URL: it is kept in browser history, it is handed
+// to WhatsApp, and it goes wherever URLs go. A password that lives there is a
+// password written down in half a dozen places nobody thinks about. So the
+// invitation travels in the link and the password follows as a second message
+// — which is better practice anyway, and is why the password is copied to the
+// clipboard at the same moment.
 function handoverText(o){
+  return handoverInviteText(o) + '\nPassword: ' + o.password;
+}
+function handoverInviteText(o){
   return (o.floor
       ? (S.settings.company_name||'Gujraj Impex')+' — workshop'
       : 'Your '+(S.settings.company_name||'Gujraj Impex')+' order tracker')
     + '\n' + trackerUrl()
-    + '\n' + (o.floor?'Login name: ':'Email: ') + o.login
-    + '\nPassword: ' + o.password;
+    + '\n' + (o.floor?'Login name: ':'Email: ') + o.login;
 }
 
 function mHandover(o){
@@ -18518,11 +19200,17 @@ function mHandover(o){
       '<div class="handover__row"><span>Where</span><strong>'+esc(trackerUrl())+'</strong></div>'+
       '<div class="handover__row"><span>'+(o.floor?'Login name':'Email')+'</span>'+
         '<strong>'+esc(o.login)+'</strong></div>'+
-      '<div class="handover__row"><span>Password</span><strong class="handover__pw">'+esc(o.password)+'</strong></div>'+
+      '<div class="handover__row"><span>Password (this once)</span><strong class="handover__pw">'+esc(o.password)+'</strong></div>'+
     '</div>'+
-    '<p class="field-hint">Nobody can look this password up again — not you, not '+
-      esc(o.floor?'the workshop':'the buyer')+'. If it goes missing, reset it from this screen and send a new one. '+
+    '<p class="field-hint">This password gets them in once. StoneFlow then asks them to '+
+      'choose their own before they can do anything, and this one stops working. '+
+      'Nobody can look it up again — not you, not '+esc(o.floor?'the workshop':'the buyer')+
+      '. If it goes missing, reset it from this screen and send a new one. '+
       'There is no harm in doing that.</p>'+
+    '<p class="field-hint"><strong>WhatsApp sends this in two messages.</strong> The link and '+
+      'login name go in the first; the password is put on your clipboard so you paste it into '+
+      'the second. A password inside a link ends up in browser history, which is why it is '+
+      'not put there.</p>'+
     '<div class="form-grid" style="margin-top:12px">'+
       '<div class="field field--full"><label for="ho-ph">Send it on WhatsApp to</label>'+
         '<input id="ho-ph" inputmode="numeric" placeholder="9876543210" value="'+esc(o.phone||'')+'">'+
@@ -18544,8 +19232,12 @@ function mHandover(o){
       try{ await sb.from('bt_profiles').update({phone:num}).eq('user_id', o.userId); await loadData(); }
       catch(e){ /* the message still goes; the number just is not kept */ }
     }
-    openTab(waLink(num, text));
-    if(!num) toast('No number given — WhatsApp will ask you which chat.');
+    // the link carries no password; the password goes on the clipboard so it can
+    // be pasted as the next message in the same chat
+    copyText(o.password, {quiet:true});
+    openTab(waLink(num, handoverInviteText(o)));
+    toast((num?'':'No number given — WhatsApp will ask you which chat. ')+
+          'The password is on your clipboard: paste it as the next message.');
   };
 }
 
@@ -18623,6 +19315,100 @@ function artisanCounts(){
 }
 
 /* ---- the shell: sidebar on a tablet, dock on a phone ---------------------- */
+/* ---- my details -------------------------------------------------------------
+   A person fills in their own particulars once, the office checks each field and
+   accepts it. Nothing here is believed until the office says so: the screen
+   shows what is on record, what is waiting, and what came back for correction.
+   The office's own fields — joining date, employee code, department — are shown
+   read-only, because a person does not assert their own start date. */
+function vMyDetails(){
+  const d=S.myDetails||{};
+  const sub=S.mySub;
+  const waiting=sub && sub.status==='pending';
+  const returned=sub && sub.status==='rejected';
+  const missing=myDetailsMissing();
+  const on=(k)=>{ const v=d[k]; return v==null||String(v).trim()===''?null:String(v); };
+
+  let h='<div class="section-title"><div><h2>'+bi('My details','मेरा विवरण')+'</h2>'+
+    '<p>'+bi('Fill these in once. The office checks them before they go on your record.',
+             'एक बार भरें। ऑफिस जाँच कर रिकॉर्ड में डालेगा।')+'</p></div></div>';
+
+  if(waiting){
+    h+='<div class="wk-notice"><strong>'+bi('Waiting to be checked','जाँच का इंतज़ार')+'</strong>'+
+      esc(Object.keys(sub.payload||{}).length+' detail(s) sent '+fdate(String(sub.submitted_at).slice(0,10))+
+      '. The office will accept or send them back.')+' / '+
+      esc('ऑफिस स्वीकार करेगा या वापस भेजेगा।')+'</div>';
+  }
+  if(returned && sub.review_note){
+    h+='<div class="wk-notice wk-notice--back"><strong>'+bi('Sent back for correction','सुधार के लिए वापस')+'</strong>'+
+      esc(sub.review_note)+'</div>';
+  }
+  if(!waiting && missing.length){
+    h+='<div class="wk-notice"><strong>'+bi('Still blank','अभी खाली')+'</strong>'+
+      esc(missing.slice(0,4).join(' · ')+(missing.length>4?' and '+(missing.length-4)+' more':''))+'</div>';
+  }
+
+  // what the office has accepted so far
+  const known=STAFF_OWN_FIELDS.filter(f=>on(f.k));
+  h+='<article class="wk-card"><div class="wk-body">'+
+    '<p class="wk-ref">'+bi('ON YOUR RECORD','आपके रिकॉर्ड में')+'</p>'+
+    (known.length
+      ? '<div class="att-grid">'+known.map(f=>'<div><span>'+esc(f.label)+'</span><strong>'+
+          esc(f.k==='date_of_birth'?fdate(on(f.k)):on(f.k))+'</strong></div>').join('')+'</div>'
+      : '<p class="wk-notice">'+bi('Nothing on your record yet.','अभी रिकॉर्ड में कुछ नहीं।')+'</p>')+
+    // the office's own fields, read-only
+    ((d.joined_on||d.employee_code||d.department)
+      ? '<p class="wk-ref space-top-14">'+bi('SET BY THE OFFICE','ऑफिस द्वारा')+'</p><div class="att-grid">'+
+        [['Joining date', d.joined_on?fdate(d.joined_on):null],['Employee code', d.employee_code],
+         ['Department', d.department]].filter(x=>x[1]).map(x=>'<div><span>'+esc(x[0])+
+          '</span><strong>'+esc(x[1])+'</strong></div>').join('')+'</div>' : '')+
+    '</div><footer class="wk-foot"><button class="button" type="button" onclick="mMyDetails()"'+
+      (waiting?' disabled':'')+'>'+icon('i-doc','icon--sm')+
+      (waiting?bi('Waiting to be checked','जाँच का इंतज़ार'):bi('Fill in my details','मेरा विवरण भरें'))+'</button></footer></article>';
+  sfaPaint(h);
+}
+
+// The form itself. Everything is optional — a person fills in what they can and
+// sends the rest later — but nothing is sent blank.
+function mMyDetails(){
+  const d=S.myDetails||{};
+  const val=k=>{ const v=d[k]; return v==null?'':String(v); };
+  const m=modal('<p class="eyebrow">'+bi('My details','मेरा विवरण')+'</p>'+
+    '<h3>'+bi('Fill in your details','अपना विवरण भरें')+'</h3>'+
+    '<div class="wk-notice">'+bi('The office checks each line before it goes on your record. Fill in what you can now and the rest later.',
+      'ऑफिस हर लाइन जाँचेगा। जो अभी भर सकते हैं भरें, बाकी बाद में।')+'</div>'+
+    '<div class="form-grid">'+
+    STAFF_OWN_FIELDS.map(f=>{
+      const id='md-'+f.k;
+      const lab='<label for="'+id+'">'+bi(f.label, f.hi)+'</label>';
+      const cls='field'+(f.full?' field--full':'');
+      if(f.opts) return '<div class="'+cls+'">'+lab+'<select id="'+id+'"><option value="">—</option>'+
+        f.opts.map(o=>'<option'+(val(f.k)===o?' selected':'')+'>'+esc(o)+'</option>').join('')+'</select></div>';
+      if(f.area) return '<div class="'+cls+'">'+lab+'<textarea id="'+id+'" rows="2">'+esc(val(f.k))+'</textarea></div>';
+      return '<div class="'+cls+'">'+lab+'<input id="'+id+'"'+
+        (f.type==='date'?' type="date"':'')+(f.mode?' inputmode="'+f.mode+'"':'')+
+        ' value="'+esc(val(f.k))+'"></div>';
+    }).join('')+
+    '<div class="button-row field--full wk-submit"><button class="button button--big" type="button" id="md-go">'+
+      bi('Send to the office','ऑफिस को भेजें')+'</button>'+
+      '<button class="button button--secondary button--big" type="button" onclick="closeModal()">'+
+      bi('Cancel','रद्द')+'</button></div></div>', {cls:'modal--artisan'});
+  m.m.querySelector('#md-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const payload={};
+    STAFF_OWN_FIELDS.forEach(f=>{ const el=$('md-'+f.k); const v=el?String(el.value||'').trim():'';
+      if(v) payload[f.k]=v; });
+    if(!Object.keys(payload).length){
+      toast(bi('Fill in at least one detail','कम से कम एक विवरण भरें'),{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_submit_my_details',{p_payload:payload});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadStaffData(); render();
+    toast(bi('Sent. The office will check these.','भेज दिया। ऑफिस जाँच करेगा।'));
+  };
+}
+
 function artisanNav(){
   const c=artisanCounts();
   // grows by one line per screen as attendance, leave and pay arrive; a link to
@@ -18632,7 +19418,10 @@ function artisanNav(){
     ['#/home','My work','मेरा काम','stage-planning',c.due.length+c.back.length],
     ['#/attendance','Attendance','हाज़िरी','stage-confirmed',0],
     ['#/leave','Leave','छुट्टी','stage-photos',(S.myLeave||[]).filter(l=>l.status==='pending').length],
-    ['#/pay','Pay & advances','वेतन','i-wallet',(S.advances||[]).filter(a=>a.status==='pending').length]
+    ['#/pay','Pay & advances','वेतन','i-wallet',(S.advances||[]).filter(a=>a.status==='pending').length],
+    ['#/details','My details','मेरा विवरण','stage-selection',
+      // a badge only while something is genuinely outstanding for them
+      (S.mySub&&S.mySub.status==='rejected') ? 1 : (myDetailsMissing().length && !(S.mySub&&S.mySub.status==='pending') ? 1 : 0)]
   ];
 }
 function artisanHeader(topbar, nav, app, dock, shell){
@@ -19508,8 +20297,56 @@ async function rwSubmit(){
 </script>
 <script>
 'use strict';
+
+// Clickjacking: somebody puts StoneFlow in an invisible frame under their own
+// page, and a person who thinks they are pressing "Play" is actually pressing
+// "Approve" in here. The proper defence is a frame-ancestors header, which only
+// works as an HTTP header and which GitHub Pages will not let us set — see the
+// note above the policy in the page head, and the hosting decision that goes
+// with it. Until that is settled, this is what can be done from inside the page:
+// if StoneFlow finds itself framed, it draws nothing and does not sign anyone
+// in. It is weaker than the header, because a sandboxed frame can stop the
+// escape, but it removes the ordinary case rather than leaving it open.
+const IN_A_FRAME = (function(){
+  try{ return window.top !== window.self; }
+  catch(e){ return true; }   // a cross-origin top throws, which means we are in one
+})();
+
+function refuseToBeFramed(){
+  try{ const l=$('loading'); if(l) l.style.display='none'; }catch(e){}
+  try{
+    document.body.innerHTML =
+      '<main style="font:16px/1.6 system-ui,sans-serif;max-width:34rem;margin:18vh auto;padding:0 6vw">'+
+      '<h1 style="font-size:1.3rem;margin:0 0 .6rem">StoneFlow will not open inside another page</h1>'+
+      '<p style="margin:0 0 1rem">Somebody has put this tracker inside a frame on a different website. '+
+      'That is how people are tricked into pressing buttons they cannot see, so it does not run here.</p>'+
+      '<p style="margin:0"><a href="https://stoneflow.live/" target="_top" rel="noopener">'+
+      'Open StoneFlow properly</a></p></main>';
+  }catch(e){}
+  try{ window.top.location = window.location.href; }catch(e){}
+}
+
 async function boot(){
-  if(!sb) return;
+  if(IN_A_FRAME){ refuseToBeFramed(); return; }
+  // The database client is pinned by its bytes, so if the CDN served anything
+  // else the browser refused to run it and there is nothing here. Silently
+  // returning left a page stuck on "Loading…" with no idea why.
+  if(!sb){
+    try{ const l=$('loading'); if(l) l.style.display='none'; }catch(e){}
+    try{
+      document.body.innerHTML =
+        '<main style="font:16px/1.6 system-ui,sans-serif;max-width:34rem;margin:18vh auto;padding:0 6vw">'+
+        '<h1 style="font-size:1.3rem;margin:0 0 .6rem">StoneFlow could not start</h1>'+
+        '<p style="margin:0 0 1rem">The database library did not load. Either the connection dropped '+
+        'while the page was opening, or what arrived was not the file StoneFlow expects, in which '+
+        'case it was refused on purpose.</p>'+
+        '<p style="margin:0 0 1rem">Reload the page. If it keeps happening, tell Yash — the browser '+
+        'console will say which it was.</p>'+
+        '<p style="margin:0"><button type="button" onclick="location.reload()" '+
+        'style="font:inherit;padding:.5rem 1rem">Reload</button></p></main>';
+    }catch(e){}
+    return;
+  }
   const {data:{session}} = await sb.auth.getSession();
   S.session=session;
   if(session){
@@ -19520,16 +20357,42 @@ async function boot(){
   $('loading').style.display='none';
   render();
 
+  // Sign-out and account change both have to empty this tab, not tidy a few
+  // fields. A workshop machine is shared: the office signs out (here, or in
+  // another tab, or by the session simply expiring) and the next person signs
+  // in on the same page. Two things were wrong before — SIGNED_OUT cleared only
+  // the profile and two arrays, and SIGNED_IN reloaded only when there was no
+  // profile at all, so a different user arriving kept the previous one's.
   sb.auth.onAuthStateChange(async (event, sess)=>{
-    const had=!!S.session;
+    const prevUser = S.session && S.session.user && S.session.user.id;
+    const nextUser = sess && sess.user && sess.user.id;
+
+    if(event==='SIGNED_OUT' || !sess){
+      clearSession();
+      render();                       // the signed-out screen, before any network
+      return;
+    }
+
+    if(nextUser && nextUser !== prevUser){
+      // a different person is now signed in on this tab: nothing of the last
+      // one may survive, including a profile that happens to already be loaded
+      clearSession();
+    }
     S.session=sess;
-    if(event==='SIGNED_IN' && sess && !S.profile){
-      try{ await loadCore(); if(S.profile) await loadData(); }
+
+    if(event==='SIGNED_IN' || event==='INITIAL_SESSION' || nextUser !== prevUser || !S.profile){
+      const gen = sessionGen();
+      $('loading').style.display='flex';
+      try{
+        await loadCore();
+        if(sessionStale(gen)) return;   // they left while this was in flight
+        if(S.profile) await loadData();
+        if(sessionStale(gen)) return;
+      }
       catch(e){ console.error(e); }
       $('loading').style.display='none';
-      render();
+      if(!sessionStale(gen)) render();
     }
-    if(event==='SIGNED_OUT'){ S.profile=null; S.pos=[]; S.items=[]; render(); }
   });
 
   window.addEventListener('hashchange', render);
