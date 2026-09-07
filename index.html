@@ -2066,6 +2066,9 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .qc-admin-row span{flex:1;min-width:0}
 .form-card__group{margin:0 0 2px;font-size:11px;font-weight:750;letter-spacing:.05em;
   text-transform:uppercase;color:var(--text-secondary)}
+/* the cost breakdown: group rows lead, the total closes it */
+.cost-group td{background:var(--surface-secondary);border-top:1px solid var(--border)}
+.cost-total td{border-top:2px solid var(--border-strong);font-size:15px}
 /* the checklist as it was actually ticked, on the product record */
 .qc-said{margin:6px 0 0;padding:0;list-style:none;font-size:12px;color:var(--text-secondary)}
 .qc-said li{padding:1px 0}
@@ -4092,7 +4095,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='981d67ce00d5';</script>
+<script>const BUILD_ID='5cd17508e229';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4411,8 +4414,37 @@ const S = {
   // time and tools: hours only, no money anywhere in these
   equipment:[], eqEvents:[], timeEntries:[], indirect:[], timeRegister:[], timeCorrections:[],
   // material and quality: quantities and ticks, never a rate
-  lots:[], movements:[], matRegister:[], checklist:[], quality:[]
+  lots:[], movements:[], matRegister:[], checklist:[], quality:[],
+  costRates:[], indirectAlloc:[], outside:[], costSnaps:[], snapByItem:{}
 };
+
+// Signing out has to empty what this login was allowed to load, not only end
+// the session. A workshop machine is shared: the office signs out, a supervisor
+// signs in on the same tab, and until the page is reloaded every rate, wage
+// statement and cost snapshot the office had is still sitting in S, one console
+// line away. Emptying is by key, so a key added later without being listed here
+// keeps whatever it held — hence the loop over everything, with the handful of
+// things that legitimately outlive a session named.
+// `ready` is the application's boot state, not the session's data — clearing it
+// would leave render() returning early and the page frozen on Loading.
+const S_KEEP=['settings','stages','stagesById','urlCache','ready'];
+function clearSession(){
+  Object.keys(S).forEach(k=>{
+    if(S_KEEP.indexOf(k)>=0) return;
+    const v=S[k];
+    if(Array.isArray(v)) S[k]=[];
+    else if(v && typeof v==='object') S[k]={};
+    else if(typeof v==='number') S[k]=0;
+    else if(typeof v==='boolean') S[k]=false;
+    else S[k]=null;
+  });
+  // identity has to be absent, not empty: render() tests `!S.session`, and an
+  // empty object is truthy, which would let a signed-out tab keep drawing the
+  // console for a moment
+  S.session=null; S.profile=null; S.buyerPo=null; S.selOrder=null; S.thread=null;
+  S.buyerFilter=''; S.apprView='pending'; S.apprFilter='pending'; S.docFilter='all';
+  ['__du','__cost','__staffQ','__repSec','__paPerson'].forEach(k=>{ try{ delete window[k]; }catch(e){ window[k]=undefined; } });
+}
 function isAdmin(){ return S.profile && S.profile.role==='admin'; }
 // Four roles now: admin, supervisor, worker, buyer — with 'staff' still valid
 // for accounts created before the split. isStaff() means "anyone on the floor",
@@ -5017,7 +5049,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd, crv, ial, outp, snap] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -5082,7 +5114,13 @@ async function loadData(){
     admin ? sb.from('bt_material_movements').select('*').order('recorded_at',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.rpc('bt_floor_material_register') : Promise.resolve({data:[]}),
     admin ? sb.from('bt_quality_checklists').select('*').order('sort_order') : Promise.resolve({data:[]}),
-    admin ? sb.rpc('bt_floor_quality') : Promise.resolve({data:[]})
+    admin ? sb.rpc('bt_floor_quality') : Promise.resolve({data:[]}),
+    // §13A 7. Admin only, every one of them — the floor has no policy on these
+    // tables at all, so a non-admin load would come back empty anyway.
+    admin ? sb.from('bt_cost_rate_versions').select('*').order('effective_from',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_indirect_allocations').select('*').order('allocated_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_outside_processing').select('*').order('created_at',{ascending:false}) : Promise.resolve({data:[]}),
+    admin ? sb.from('bt_product_cost_snapshots').select('*').order('computed_at',{ascending:false}) : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -5138,6 +5176,7 @@ async function loadData(){
   indexPay((rates&&rates.data)||[], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
   indexTime((eq&&eq.data)||[], (eqe&&eqe.data)||[], (wte&&wte.data)||[], (ite&&ite.data)||[], (reg&&reg.data)||[], (wtc&&wtc.data)||[]);
   indexMaterial((lots&&lots.data)||[], (mm&&mm.data)||[], (mreg&&mreg.data)||[], (qcl&&qcl.data)||[], (qd&&qd.data)||[]);
+  indexCosting((crv&&crv.data)||[], (ial&&ial.data)||[], (outp&&outp.data)||[], (snap&&snap.data)||[]);
   indexUpdates();
   S.lastLoad = Date.now();
 }
@@ -5159,6 +5198,57 @@ function indexTime(equipment, events, entries, indirect, register, corrections){
 /* ---- material and quality -------------------------------------------------
    A movement is a physical quantity against a lot, a product and a process.
    Nothing here carries a value; the office prices it from its own rates. */
+// §13A 7. Rates, allocations, outside work and saved cost snapshots. None of
+// this is loaded for the floor — there is no policy that would return a row —
+// and no helper here is called from a floor screen.
+function indexCosting(rates, allocations, outside, snapshots){
+  S.costRates=(rates||[]).slice().sort((a,b)=>
+    String(b.effective_from||'').localeCompare(String(a.effective_from||'')));
+  S.indirectAlloc=(allocations||[]).slice();
+  S.outside=(outside||[]).slice();
+  S.costSnaps=(snapshots||[]).slice().sort((a,b)=>
+    String(b.computed_at||'').localeCompare(String(a.computed_at||'')));
+  S.snapByItem={}; S.costSnaps.forEach(x=>{ if(!S.snapByItem[x.item_id]) S.snapByItem[x.item_id]=x; });
+}
+const RATE_KINDS=[['labour','Labour','An hour of a person’s time'],
+  ['indirect','Indirect labour','An hour of allocated factory time'],
+  ['material','Material','A unit of stone or consumable'],
+  ['equipment','Equipment','An hour on a machine'],
+  ['overhead','Factory overhead','A percentage on everything else']];
+const COST_GROUPS=[['labour','Productive labour'],['indirect','Allocated indirect'],
+  ['material','Material'],['consumable','Consumables'],['equipment','Equipment'],
+  ['outside','Outside processing'],['rework','Rework'],['scrap','Scrap'],
+  ['overhead','Factory overhead']];
+function rateKindLabel(k){ const r=RATE_KINDS.find(x=>x[0]===k); return r?r[1]:(k||''); }
+function costGroupLabel(g){ const r=COST_GROUPS.find(x=>x[0]===g); return r?r[1]:(g||''); }
+// what a rate version is aimed at, in words
+function rateTarget(r){
+  if(r.kind==='labour') return r.user_id?(personName(r.user_id)||'a person'):(r.role?('Every '+r.role):'Everyone');
+  if(r.kind==='material') return r.lot_id?(lotName(r.lot_id)||'a lot'):(r.material||'Any material');
+  if(r.kind==='equipment') return r.equipment_id?equipmentName(r.equipment_id):'Any machine';
+  return 'The factory';
+}
+function ratesOfKind(kind){ return (S.costRates||[]).filter(r=>r.kind===kind && r.active!==false); }
+function outsideFor(itemId){ return (S.outside||[]).filter(o=>o.item_id===itemId); }
+function allocationsFor(itemId){ return (S.indirectAlloc||[]).filter(a=>a.item_id===itemId); }
+function latestSnapshot(itemId){ return (S.snapByItem||{})[itemId]||null; }
+// unallocated indirect time the office could still put on a product
+function unallocatedIndirect(){
+  const used={}; (S.indirectAlloc||[]).forEach(a=>{ used[a.entry_id]=(used[a.entry_id]||0)+(a.minutes||0); });
+  return (S.indirect||[]).filter(e=>e.ended_at && (e.minutes||0)>(used[e.id]||0))
+    .map(e=>({entry:e, left:(e.minutes||0)-(used[e.id]||0)}));
+}
+// a cost snapshot's lines grouped the way the brief's formula reads
+function snapshotGroups(snap){
+  const by={};
+  ((snap&&snap.lines)||[]).forEach(l=>{ (by[l.group]=by[l.group]||[]).push(l); });
+  return COST_GROUPS.filter(g=>by[g[0]]).map(g=>({key:g[0], label:g[1], lines:by[g[0]],
+    total:by[g[0]].reduce((t,l)=>t+Number(l.amount||0),0)}));
+}
+function snapshotMissingRates(snap){
+  return ((snap&&snap.lines)||[]).filter(l=>l.missing_rate).length;
+}
+
 function indexMaterial(lots, movements, register, checklist, quality){
   S.lots=(lots||[]).slice().sort((a,b)=>String(a.code).localeCompare(String(b.code)));
   S.lotsById={}; S.lots.forEach(l=>{ S.lotsById[l.id]=l; });
@@ -7646,7 +7736,8 @@ function vClients(tab){
    Every figure is derived from rows and every card states its own formula —
    "Metric definitions" opens that list. */
 const REPORT_SECTIONS=[['overview','Overview'],['delivery','Orders & delivery'],
-  ['production','Production'],['hours','Hours & tools'],['service','Client service'],['finance','Finance'],['activity','Audit log']];
+  ['production','Production'],['hours','Hours & tools'],['costing','Product cost'],
+  ['service','Client service'],['finance','Finance'],['activity','Audit log']];
 function reportSection(){ return window.__repSec||'overview'; }
 function setReportSection(k){
   window.__repSec=k;
@@ -7672,6 +7763,7 @@ function vReports(tab){
     sec==='delivery'   ? vReportsDelivery
   : sec==='production' ? vReportsProduction
   : sec==='hours'      ? vReportsHours
+  : sec==='costing'    ? vReportsCosting
   : sec==='service'    ? vReportsService
   : sec==='finance'    ? vReportsFinance
   : sec==='activity'   ? vReportsActivity
@@ -10047,6 +10139,83 @@ function settingsChecklistCard(){
     '</div></section>';
 }
 
+// Product cost: the office's own view, and the only screen in the application
+// where an internal rate or a cost appears. §13A is explicit that none of this
+// reaches a supervisor or an artisan, and none of it is loaded for them either.
+function vReportsCosting(){
+  if(!isAdmin()) return vHome();
+  const snaps=(S.costSnaps||[]).filter(x=>S.itemsById[x.item_id]);
+  const open=(S.items||[]).filter(it=>!['delivered','cancelled'].includes(it.status));
+  const priced=open.filter(it=>latestSnapshot(it.id));
+  const unpriced=open.filter(it=>!latestSnapshot(it.id));
+  const totalSaved=snaps.reduce((t,x)=>t+Number(x.total||0),0);
+  const gaps=snaps.filter(x=>snapshotMissingRates(x)>0).length;
+  const rates=(S.costRates||[]).filter(r=>r.active!==false);
+
+  let h='<section class="panel"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">What a piece actually cost</h3>'+
+    '<p class="panel__description">Approved labour, allocated indirect time, material less reusable offcut, '+
+    'consumables, outside work, machine hours, rework and overhead — against private rates that never leave this screen.</p></div>'+
+    '<button class="button" type="button" onclick="mSetCostRate()">Set a rate</button></div>'+
+    '<div class="panel__body">'+
+    '<div class="kpi-grid">'+[
+      ['Pieces costed', String(priced.length), priced.length?'Latest snapshot each':'None yet', ''],
+      ['Not costed yet', String(unpriced.length), unpriced.length?'In production, no snapshot':'All current', unpriced.length?'warn':''],
+      ['Saved snapshots', String(snaps.length), snaps.length?money(totalSaved,'INR')+' in total':'—', ''],
+      ['Snapshots with a missing rate', String(gaps), gaps?'Those lines counted as zero':'Every line had a rate', gaps?'alert':'']
+    ].map(t=>'<article class="kpi'+(t[3]?' kpi--'+t[3]:'')+'"><span class="kpi__label">'+esc(t[0])+'</span>'+
+      '<strong class="kpi__value">'+esc(t[1])+'</strong><span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>'+
+    '</div></section>';
+
+  // the rate card itself
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Internal rates</h3>'+
+    '<p class="panel__description">Effective-dated. An older version is kept, so a cost computed for an earlier '+
+    'date still uses the rate that was in force then.</p></div></div><div class="panel__body">'+
+    (rates.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Kind</th><th>Applies to</th><th>Rate</th><th>Per</th><th>In force from</th><th>Note</th><th></th></tr></thead><tbody>'+
+      rates.map(r=>'<tr><td><strong>'+esc(rateKindLabel(r.kind))+'</strong></td>'+
+        '<td>'+esc(rateTarget(r))+'</td>'+
+        '<td class="nowrap">'+esc(r.unit==='percent'?(Number(r.rate)+'%'):money(r.rate,'INR'))+'</td>'+
+        '<td>'+esc(r.unit==='hour'?'hour':(r.unit==='percent'?'of the rest':unitLabel(r.unit)))+'</td>'+
+        '<td class="nowrap">'+esc(fdate(r.effective_from))+'</td>'+
+        '<td>'+esc(r.note||'—')+'</td>'+
+        '<td class="nowrap"><button class="button quiet small" type="button" onclick="retireCostRate(\''+r.id+'\')">Retire</button></td></tr>').join('')+
+      '</tbody></table></div>'
+      :'<div class="empty-state">No rate set yet. Until one is, every cost line comes back as zero and says so.</div>')+
+    '<div class="button-row space-top-12">'+
+      RATE_KINDS.map(k=>'<button class="button button--quiet" type="button" onclick="mSetCostRate(\''+k[0]+'\')">'+
+        esc(k[1])+'</button>').join('')+'</div>'+
+    '</div></section>';
+
+  // the pieces, costed and not
+  h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Cost by product</h3>'+
+    '<p class="panel__description">The latest saved snapshot for each piece. Open one to recompute it against '+
+    'today’s rates and save a new one.</p></div></div><div class="panel__body">'+
+    (open.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>Product</th><th>Order</th><th>Stage</th><th>Latest cost</th><th>Computed</th><th>Gaps</th><th></th></tr></thead><tbody>'+
+      open.map(it=>{ const sn=latestSnapshot(it.id), po=S.posById[it.po_id]||{}, stg=curStage(it);
+        const miss=sn?snapshotMissingRates(sn):0;
+        return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+it.id+'\')">'+
+            esc(it.product||'')+'</button></td>'+
+          '<td>'+esc(po.po_number||'')+'</td>'+
+          '<td>'+esc(stg?shortStage(stg.name):'—')+'</td>'+
+          '<td class="nowrap">'+(sn?'<strong>'+esc(money(sn.total,'INR'))+'</strong>':'—')+'</td>'+
+          '<td class="nowrap">'+(sn?esc(fdate(sn.computed_at)):'—')+'</td>'+
+          '<td>'+(miss?'<span class="badge badge--alert">'+miss+' no rate</span>':(sn?'—':''))+'</td>'+
+          '<td class="nowrap"><button class="button quiet small" type="button" onclick="mCostBreakdown(\''+it.id+'\')">'+
+            (sn?'Recompute':'Cost it')+'</button></td></tr>'; }).join('')+
+      '</tbody></table></div>'
+      :'<div class="empty-state">Nothing in production.</div>')+
+    '</div></section>';
+
+  h+='<div class="notice space-top-16"><strong>This is not Tally</strong>'+
+    'Operational product costing is an internal management view. Invoices, buyer ledgers, receivables and '+
+    'statutory accounting stay sourced from Tally and are untouched by anything on this screen.</div>';
+  $('app').innerHTML=h;
+}
+
 // Hours and tools: planned against actual by product, the reconciliation for
 // the period, pauses by reason, rework by cause. Hours, never money — the
 // costing that puts a rate on these is task #105 and lives on its own page.
@@ -10409,6 +10578,49 @@ function itemMaterialPanel(it){
   return h+'</div></section>';
 }
 
+// The cost of one piece as the office reads it: the last saved snapshot, the
+// outside work and the indirect time deliberately put on it, and the actions to
+// change any of those. Nothing here exists on a floor or buyer screen.
+function itemCostPanel(it){
+  const sn=latestSnapshot(it.id);
+  const out=outsideFor(it.id);
+  const alloc=allocationsFor(it.id);
+  const miss=sn?snapshotMissingRates(sn):0;
+  const groups=sn?snapshotGroups(sn):[];
+  return '<section class="panel space-top-16" id="product-cost"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">What it cost</h3>'+
+    '<p class="panel__description">Built from the same records the workshop already files, priced against '+
+    'private rates. Never shown to a supervisor, an artisan or the buyer.</p></div>'+
+    (sn?badge(money(sn.total,'INR'), miss?'alert':'success'):'')+'</div><div class="panel__body">'+
+    (sn
+      ? '<p class="field-hint">Last computed '+esc(ftime(sn.computed_at))+' against rates as at '+
+        esc(fdate(sn.as_of))+(sn.note?' · '+esc(sn.note):'')+'.'+
+        (miss?' <strong>'+miss+' line'+(miss===1?'':'s')+' had no rate and counted as zero.</strong>':'')+'</p>'+
+        '<div class="att-grid">'+groups.map(g=>'<div><span>'+esc(g.label)+'</span><strong>'+
+          esc(money(g.total,'INR'))+'</strong></div>').join('')+'</div>'
+      : '<div class="empty-state">No cost saved for this piece yet.</div>')+
+    (out.length?'<p class="form-card__group space-top-16">Sent outside</p>'+
+      '<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Vendor</th><th>What they did</th>'+
+      '<th>Out</th><th>Back</th><th class="nowrap">Amount</th></tr></thead><tbody>'+
+      out.map(o=>'<tr><td><strong>'+esc(o.vendor)+'</strong>'+
+        (o.invoice_ref?'<span class="fl-cell-sub">'+esc(o.invoice_ref)+'</span>':'')+'</td>'+
+        '<td>'+esc(o.description||'—')+'</td>'+
+        '<td class="nowrap">'+esc(o.sent_on?fdate(o.sent_on):'—')+'</td>'+
+        '<td class="nowrap">'+esc(o.returned_on?fdate(o.returned_on):'—')+'</td>'+
+        '<td class="nowrap">'+esc(money(o.amount,'INR'))+'</td></tr>').join('')+
+      '</tbody></table></div>':'')+
+    (alloc.length?'<p class="form-card__group space-top-16">Indirect time you put on this piece</p>'+
+      alloc.map(a=>{ const e=(S.indirect||[]).find(x=>x.id===a.entry_id)||{};
+        return '<div class="qc-admin-row"><span>'+esc(pauseLabel(e.category)||'Indirect')+' · '+
+          a.minutes+' min<span class="fl-cell-sub">'+esc(a.reason||'')+'</span></span></div>'; }).join(''):'')+
+    '<div class="button-row space-top-12">'+
+      '<button class="button" type="button" onclick="mCostBreakdown(\''+it.id+'\')">'+
+        (sn?'Recompute the cost':'Work out the cost')+'</button>'+
+      '<button class="button button--secondary" type="button" onclick="mOutsideProcessing(\''+it.id+'\')">Work sent outside</button>'+
+      '<button class="button button--quiet" type="button" onclick="mAllocateIndirect(\''+it.id+'\')">Allocate indirect time</button>'+
+    '</div></div></section>';
+}
+
 function vItemOwner(it){
   const p=it.po;
   const now=stageNow(it);
@@ -10571,6 +10783,9 @@ function vItemOwner(it){
 
   /* stone, consumables and what was checked at each sign-off */
   h+=itemMaterialPanel(it);
+
+  /* what it cost — office only, and the only place a rate is ever rendered */
+  h+=itemCostPanel(it);
 
   /* meaningful activity */
   const acts=itemActivity(it, 8);
@@ -13290,7 +13505,11 @@ async function doLogin(){
   const {error} = await sb.auth.signInWithPassword({email, password:pass});
   if(error){ $('loading').style.display='none'; vLogin(error.message==='Invalid login credentials'?'Incorrect email or password.':error.message); return; }
 }
-async function signOut(){ await sb.auth.signOut(); location.hash='#/home'; }
+async function signOut(){
+  // empty first: if the network call hangs, the data is already gone from memory
+  clearSession();
+  try{ await sb.auth.signOut(); }finally{ location.hash='#/home'; }
+}
 
 function setBuyerFilter(v){ S.buyerFilter=v; refreshHard(); }
 async function refreshHard(){ $('loading').style.display='flex'; try{ await loadData(); }catch(e){ toast('Could not refresh: '+(e.message||e), {err:true}); }
@@ -17650,6 +17869,219 @@ async function retireEquipment(id){
   if(r.error){ toast(r.error.message,{err:true}); return; }
   await refresh(); toast('Retired. Its old time entries are kept.');
 }
+/* ---- §13A 7: internal rates and product cost -------------------------------
+   Every function below is reachable only from the office's own screens, and
+   every one of them is refused by the database for anybody else. Rates and
+   totals never travel to a floor screen — there is no state key the floor
+   loads, and no policy that would fill one. */
+
+function mSetCostRate(kind){
+  const k=kind||'labour';
+  const people=(S.profilesAll||[]).filter(p=>['worker','supervisor','staff'].includes(p.role) && p.active!==false);
+  const lots=(S.lots||[]).filter(l=>l.active!==false);
+  const eq=(S.equipment||[]).filter(e=>e.active!==false);
+  const m=modal('<h3>Set an internal rate</h3>'+
+    '<div class="sub">Effective-dated. An older rate is kept, so a cost computed for an earlier date still uses what was in force then.</div>'+
+    '<p class="field-hint">Nothing here is ever shown to a supervisor or an artisan.</p>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="cr-kind">What kind of rate</label><select id="cr-kind" onchange="crSync()">'+
+        RATE_KINDS.map(x=>'<option value="'+x[0]+'"'+(x[0]===k?' selected':'')+'>'+esc(x[1])+' — '+esc(x[2])+'</option>').join('')+
+        '</select></div>'+
+      '<div class="field field--full" id="cr-who-wrap"><label for="cr-who">Whose hour</label><select id="cr-who">'+
+        '<option value="">Everyone on this role</option>'+
+        people.map(p=>'<option value="'+esc(p.user_id)+'">'+esc(p.full_name||p.email)+'</option>').join('')+
+        '</select></div>'+
+      '<div class="field" id="cr-role-wrap"><label for="cr-role">Or a whole role</label><select id="cr-role">'+
+        '<option value="">—</option><option value="worker">Every worker</option>'+
+        '<option value="supervisor">Every supervisor</option><option value="staff">Every staff member</option></select></div>'+
+      '<div class="field field--full" id="cr-lot-wrap" hidden><label for="cr-lot">Which lot</label><select id="cr-lot">'+
+        '<option value="">Any lot of the material named below</option>'+
+        lots.map(l=>'<option value="'+esc(l.id)+'" data-unit="'+esc(l.unit)+'">'+esc(l.code)+' — '+esc(l.material)+'</option>').join('')+
+        '</select></div>'+
+      '<div class="field" id="cr-mat-wrap" hidden><label for="cr-mat">Or a material by name</label>'+
+        '<input id="cr-mat" placeholder="e.g. Makrana white"></div>'+
+      '<div class="field field--full" id="cr-eq-wrap" hidden><label for="cr-eq">Which machine</label><select id="cr-eq">'+
+        '<option value="">Choose…</option>'+
+        eq.map(e=>'<option value="'+esc(e.id)+'">'+esc(e.name)+(e.area?' · '+esc(e.area):'')+'</option>').join('')+
+        '</select></div>'+
+      '<div class="field"><label for="cr-rate" id="cr-rate-lab">Rate</label>'+
+        '<input id="cr-rate" type="number" min="0" step="0.01" inputmode="decimal"></div>'+
+      '<div class="field"><label for="cr-unit">Per</label><select id="cr-unit">'+
+        '<option value="hour">hour</option>'+UNITS.map(u=>'<option value="'+u[0]+'">'+esc(u[1])+'</option>').join('')+
+        '<option value="percent">percent</option></select></div>'+
+      '<div class="field"><label for="cr-from">In force from</label><input id="cr-from" type="date" value="'+today()+'"></div>'+
+      '<div class="field field--full"><label for="cr-note">Note (optional)</label>'+
+        '<input id="cr-note" placeholder="e.g. after the March revision"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="cr-go">Save the rate</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  const crSync=()=>{
+    const v=$('cr-kind').value;
+    $('cr-who-wrap').hidden = v!=='labour';
+    $('cr-role-wrap').hidden = v!=='labour';
+    $('cr-lot-wrap').hidden = v!=='material';
+    $('cr-mat-wrap').hidden = v!=='material';
+    $('cr-eq-wrap').hidden = v!=='equipment';
+    $('cr-rate-lab').textContent = v==='overhead' ? 'Percentage' : 'Rate';
+    $('cr-unit').value = v==='overhead' ? 'percent' : (v==='material' ? 'm3' : 'hour');
+  };
+  window.crSync=crSync; crSync();
+  m.m.querySelector('#cr-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const kindv=$('cr-kind').value, rate=Number($('cr-rate').value), from=$('cr-from').value;
+    const who=$('cr-who').value||null, role=$('cr-role').value||null;
+    const lot=$('cr-lot').value||null, mat=$('cr-mat').value.trim()||null, eqv=$('cr-eq').value||null;
+    if(!(rate>=0) || $('cr-rate').value===''){ toast('Give the rate.',{err:true}); return; }
+    if(!from){ toast('Say from which date it applies.',{err:true}); return; }
+    if(kindv==='labour' && !who && !role){ toast('A labour rate is for a person or for a role.',{err:true}); return; }
+    if(kindv==='material' && !lot && !mat){ toast('A material rate is for a lot or for a material.',{err:true}); return; }
+    if(kindv==='equipment' && !eqv){ toast('Choose the equipment.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_set_cost_rate',{p_kind:kindv, p_rate:rate, p_from:from,
+      p_user:kindv==='labour'?who:null, p_role:kindv==='labour'?role:null,
+      p_lot:kindv==='material'?lot:null, p_material:kindv==='material'?mat:null,
+      p_equipment:kindv==='equipment'?eqv:null, p_unit:$('cr-unit').value,
+      p_note:$('cr-note').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast('Rate saved.');
+  };
+}
+async function retireCostRate(id){
+  const {error}=await sb.from('bt_cost_rate_versions').update({active:false}).eq('id', id);
+  if(error){ toast(error.message,{err:true}); return; }
+  await loadData(); render(); toast('Retired. Costs already saved keep the rate they used.');
+}
+
+// The cost of one piece, computed live from the records and shown line by line
+// before anything is saved. Saving keeps the lines and the rate version ids, so
+// the number can be read back later exactly as it was made.
+async function mCostBreakdown(itemId){
+  const it=S.itemsById[itemId]||{};
+  const asOf=today();
+  const m=modal('<h3>Product cost</h3>'+
+    '<div class="sub">'+esc(it.product||'')+' · rates as at '+esc(fdate(asOf))+'</div>'+
+    '<div id="cb-body"><div class="empty-state">Working it out…</div></div>');
+  const {data,error}=await sb.rpc('bt_compute_product_cost',{p_item:itemId, p_as_of:asOf});
+  const body=m.m.querySelector('#cb-body'); if(!body) return;
+  if(error){ body.innerHTML='<div class="empty-state">'+esc(error.message)+'</div>'; return; }
+  window.__cost=data;
+  const groups=snapshotGroups(data);
+  const missing=snapshotMissingRates(data);
+  body.innerHTML=(missing?'<p class="field-hint"><strong>'+missing+' line'+(missing===1?'':'s')+
+      ' had no rate behind '+(missing===1?'it':'them')+'.</strong> Those are counted as zero. '+
+      'Set the rate and compute again before treating this as the cost.</p>':'')+
+    '<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+      '<th>What</th><th>Quantity</th><th>Rate</th><th class="nowrap">Amount</th></tr></thead><tbody>'+
+      groups.map(g=>'<tr class="cost-group"><td colspan="3"><strong>'+esc(g.label)+'</strong></td>'+
+        '<td class="nowrap"><strong>'+esc(money(g.total,'INR'))+'</strong></td></tr>'+
+        g.lines.map(l=>'<tr><td>'+esc(l.label)+
+          (l.missing_rate?' <span class="badge badge--alert">no rate</span>':'')+
+          (l.note?'<span class="fl-cell-sub">'+esc(l.note)+'</span>':'')+'</td>'+
+          '<td>'+esc(String(l.quantity))+' '+esc(l.unit==='hour'?'h':unitLabel(l.unit))+'</td>'+
+          '<td>'+esc(money(l.rate,'INR'))+'</td>'+
+          '<td class="nowrap">'+esc(money(l.amount,'INR'))+'</td></tr>').join('')).join('')+
+      '<tr class="cost-total"><td colspan="3"><strong>Total</strong></td>'+
+      '<td class="nowrap"><strong>'+esc(money(data.total,'INR'))+'</strong></td></tr>'+
+      '</tbody></table></div>'+
+    '<div class="form-grid space-top-12">'+
+      '<div class="field field--full"><label for="cb-note">Note on this snapshot (optional)</label>'+
+        '<input id="cb-note" placeholder="e.g. before the second polish"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="cb-save">Save this snapshot</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Close</button></div>'+
+    '</div>'+
+    '<p class="field-hint">A snapshot keeps every line and the id of the rate version each one used, '+
+    'so changing a rate later never rewrites a cost you already saved.</p>';
+  const saveBtn=body.querySelector('#cb-save');
+  if(!saveBtn) return;
+  saveBtn.onclick=async (e)=>{
+    const btn=e.currentTarget; btn.disabled=true;
+    const {error:e2}=await sb.rpc('bt_save_cost_snapshot',
+      {p_item:itemId, p_as_of:asOf, p_note:$('cb-note').value.trim()||null});
+    btn.disabled=false;
+    if(e2){ toast(e2.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast('Snapshot saved.');
+  };
+}
+
+function mOutsideProcessing(itemId){
+  const it=S.itemsById[itemId]||{};
+  const m=modal('<h3>Work sent outside</h3>'+
+    '<div class="sub">'+esc(it.product||'')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label for="op-vendor">Vendor</label><input id="op-vendor" placeholder="e.g. Shreeji Polishing"></div>'+
+      '<div class="field"><label for="op-amount">What it cost</label>'+
+        '<input id="op-amount" type="number" min="0" step="0.01" inputmode="decimal"></div>'+
+      '<div class="field field--full"><label for="op-desc">What they did (optional)</label>'+
+        '<input id="op-desc" placeholder="e.g. mirror polish on two faces"></div>'+
+      '<div class="field"><label for="op-sent">Sent on</label><input id="op-sent" type="date"></div>'+
+      '<div class="field"><label for="op-back">Came back</label><input id="op-back" type="date"></div>'+
+      '<div class="field field--full"><label for="op-inv">Their invoice reference (optional)</label>'+
+        '<input id="op-inv" placeholder="e.g. SP/26/114"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="op-go">Record it</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#op-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const vendor=$('op-vendor').value.trim(), amount=Number($('op-amount').value);
+    if(!vendor){ toast('Name the vendor.',{err:true}); return; }
+    if(!(amount>=0) || $('op-amount').value===''){ toast('Give the amount.',{err:true}); return; }
+    const sent=$('op-sent').value||null, back=$('op-back').value||null;
+    if(sent && back && back<sent){ toast('It cannot have come back before it went out.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_record_outside_processing',{p_item:itemId, p_vendor:vendor,
+      p_amount:amount, p_stage:null, p_description:$('op-desc').value.trim()||null,
+      p_sent:sent, p_returned:back, p_invoice:$('op-inv').value.trim()||null});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast('Recorded.');
+  };
+}
+
+// §13A 3: indirect time is never automatically a product cost. This is the
+// office deliberately deciding that a particular pause belongs to a piece.
+function mAllocateIndirect(itemId){
+  const it=S.itemsById[itemId]||{};
+  const open=unallocatedIndirect().slice(0, 40);
+  const m=modal('<h3>Put indirect time on this product</h3>'+
+    '<div class="sub">'+esc(it.product||'')+'</div>'+
+    '<p class="field-hint">Waiting, setup and breakdown time is not product cost until you say it is. '+
+    'Only the minutes you allocate here reach the cost.</p>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="ai-entry">Which entry</label><select id="ai-entry" onchange="aiSync()">'+
+        '<option value="">Choose…</option>'+
+        open.map(x=>'<option value="'+esc(x.entry.id)+'" data-left="'+x.left+'">'+
+          esc(pauseLabel(x.entry.category))+' · '+esc(personName(x.entry.user_id)||'')+' · '+
+          esc(fdate(x.entry.started_at))+' · '+x.left+' min left</option>').join('')+
+        '</select></div>'+
+      '<div class="field"><label for="ai-min">Minutes to allocate</label>'+
+        '<input id="ai-min" type="number" min="1" step="1" inputmode="numeric"></div>'+
+      '<div class="field field--full"><label for="ai-why">Why it belongs to this product</label>'+
+        '<input id="ai-why" placeholder="e.g. the stone for this piece was late"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ai-go">Allocate</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>'+
+    (open.length?'':'<p class="field-hint">Nothing is waiting to be allocated.</p>'));
+  const aiSync=()=>{
+    const sel=$('ai-entry'), o=sel.value?sel.querySelector('option[value="'+sel.value+'"]'):null;
+    if(o) $('ai-min').value=o.getAttribute('data-left');
+  };
+  window.aiSync=aiSync;
+  m.m.querySelector('#ai-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const entry=$('ai-entry').value, mins=Number($('ai-min').value), why=$('ai-why').value.trim();
+    if(!entry){ toast('Choose the entry.',{err:true}); return; }
+    if(!(mins>0)){ toast('Give the minutes.',{err:true}); return; }
+    if(!why){ toast('Say why this time belongs to that product.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_allocate_indirect',{p_entry:entry, p_item:itemId,
+      p_minutes:mins, p_stage:null, p_reason:why});
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await loadData(); render(); toast('Allocated.');
+  };
+}
+
 async function saveLot(){
   const code=$('lot-code').value.trim(), material=$('lot-mat').value.trim();
   const qty=$('lot-qty').value.trim();
