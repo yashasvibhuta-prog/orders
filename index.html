@@ -3716,6 +3716,16 @@ body.reports-mode .sfa .content{max-width:1700px}
 
 /* one piece, as a supervisor reads it ------------------------------------- */
 .fl-rows{ display:grid; }
+
+/* The line that appears when a supervisor presses a tile and the lists below
+   narrow. It has to say what is being hidden, or the screen looks broken. */
+.fl-focus{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap; margin-top:12px; padding:10px 14px;
+  border:1px solid var(--line, #e8e6e1); border-radius:10px;
+  background:var(--faint, #f7f6f3); font-size:14px;
+}
+.fl-focus span{ color:var(--muted, #6b6660); }
 .fl-row{
   display:grid;
   grid-template-columns:56px minmax(160px,1.6fr) minmax(120px,1fr) minmax(120px,1fr) auto auto;
@@ -4108,7 +4118,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='72344e448ead';</script>
+<script>const BUILD_ID='bde38a876cfa';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4384,6 +4394,102 @@ function modal(html){
 }
 function closeModal(){ $('modal-root').innerHTML=''; }
 
+// The browser's own confirm() box is grey, says "stoneflow.live says" above the
+// question, and on a phone it lands exactly where a thumb is already moving. It
+// also cannot say what is about to be lost — a delete and a "did you mean to?"
+// look identical in it. This asks the same question in StoneFlow's own voice.
+//
+// Three deliberate differences from confirm():
+//   · the consequence is written out under the question, not squeezed into it;
+//   · Cancel holds the focus, so Enter never destroys anything;
+//   · Escape and a click outside both mean no.
+//
+// Returns a promise for true or false, so a caller reads almost the same as it
+// did before:  if(!await ask({...})) return;
+function ask(o){
+  o = o || {};
+  return new Promise(resolve => {
+    let done = false;
+    const finish = v => { if(done) return; done = true; try{ bg.remove(); }catch(e){} resolve(v); };
+    const m = modal(
+      '<h3>'+esc(o.title||'Are you sure?')+'</h3>'+
+      (o.body ? '<p class="field-hint" style="margin:.35rem 0 0">'+esc(o.body)+'</p>' : '')+
+      '<div class="button-row" style="margin-top:16px">'+
+        '<button class="button button--secondary" type="button" id="ask-no">'+
+          esc(o.cancelLabel||'Cancel')+'</button>'+
+        '<button class="button'+(o.danger===false?'':' button--danger')+'" type="button" id="ask-yes">'+
+          esc(o.confirmLabel||'Yes, go ahead')+'</button>'+
+      '</div>');
+    const bg = m.bg;
+    m.m.querySelector('#ask-yes').onclick = () => finish(true);
+    m.m.querySelector('#ask-no').onclick  = () => finish(false);
+    // a click on the backdrop is already wired to remove it; catch that too
+    bg.addEventListener('click', e => { if(e.target===bg) finish(false); });
+    const onKey = e => {
+      if(e.key === 'Escape'){ e.preventDefault(); document.removeEventListener('keydown', onKey); finish(false); }
+    };
+    document.addEventListener('keydown', onKey);
+    // Cancel keeps the focus: pressing Enter out of habit must not delete a buyer
+    const no = m.m.querySelector('#ask-no'); if(no) no.focus();
+  });
+}
+
+// The same again for a line of text. The browser's prompt() box is worse than
+// its confirm(): it is one line however long the answer needs to be, it cannot
+// say what the text is for, and on a phone tapping outside it loses everything
+// typed. Resolves to the string, or null if they backed out.
+//
+// opts: title, body, label, value, placeholder, multiline, required, choices
+function askText(o){
+  o = o || {};
+  const id = 'at-' + Math.random().toString(36).slice(2,8);
+  const listId = id + '-list';
+  return new Promise(resolve => {
+    let done = false;
+    const finish = v => { if(done) return; done = true;
+      document.removeEventListener('keydown', onKey);
+      try{ bg.remove(); }catch(e){} resolve(v); };
+    const field = o.multiline
+      ? '<textarea id="'+id+'" rows="3" placeholder="'+esc(o.placeholder||'')+'">'+esc(o.value||'')+'</textarea>'
+      : '<input id="'+id+'" value="'+esc(o.value||'')+'" placeholder="'+esc(o.placeholder||'')+'"'+
+        (o.choices&&o.choices.length ? ' list="'+listId+'"' : '')+'>';
+    const list = (o.choices&&o.choices.length)
+      ? '<datalist id="'+listId+'">'+o.choices.map(c=>'<option value="'+esc(c)+'">').join('')+'</datalist>'
+      : '';
+    const m = modal(
+      '<h3>'+esc(o.title||'')+'</h3>'+
+      (o.body ? '<div class="sub">'+esc(o.body)+'</div>' : '')+
+      '<div class="form-grid"><div class="field field--full">'+
+        (o.label ? '<label for="'+id+'">'+esc(o.label)+'</label>' : '')+
+        field + list +
+        (o.hint ? '<p class="field-hint">'+esc(o.hint)+'</p>' : '')+
+      '</div>'+
+      '<div class="button-row field--full">'+
+        '<button class="button" type="button" id="'+id+'-go">'+esc(o.confirmLabel||'Save')+'</button>'+
+        '<button class="button button--secondary" type="button" id="'+id+'-no">'+
+          esc(o.cancelLabel||'Cancel')+'</button>'+
+      '</div></div>');
+    const bg = m.bg;
+    const take = () => {
+      const v = String((m.m.querySelector('#'+id)||{}).value || '').trim();
+      if(o.required && !v){ toast(o.requiredMessage||'Fill this in first.', {err:true}); return; }
+      finish(v);
+    };
+    m.m.querySelector('#'+id+'-go').onclick = take;
+    m.m.querySelector('#'+id+'-no').onclick = () => finish(null);
+    bg.addEventListener('click', e => { if(e.target===bg) finish(null); });
+    const onKey = e => {
+      if(e.key === 'Escape'){ e.preventDefault(); finish(null); }
+      // Enter saves from a single-line box, the way prompt() behaved
+      else if(e.key === 'Enter' && !o.multiline && e.target && e.target.id === id){
+        e.preventDefault(); take();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    const f = m.m.querySelector('#'+id); if(f){ f.focus(); try{ f.select(); }catch(e){} }
+  });
+}
+
 function lightbox(url, cap){
   const lb=$('lightbox');
   lb.innerHTML='<img src="'+esc(url)+'" alt="'+esc(cap||'Photograph')+'">'+
@@ -4482,6 +4588,8 @@ const S = {
   revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null,
   batches:[], batchById:{}, batchOfItem:{}, assignments:[], asgByItem:{},
   rework:[], rwByItem:{}, holds:[], hdByItem:{}, meas:[], msByItem:{}, apprFilter:'pending',
+  // which supervisor tile is pressed on each of the five floor screens
+  supFocus:'all', apprFocus:'all', attFocus:'all', teamFocus:'all', resFocus:'all',
   contributors:[], attDay:[], attMine:[], attCorrections:[], sites:[], policy:{}, absences:[], myLeave:[],
   // pay: what the policies let this login read — the office everything, a
   // person their own, a supervisor other people's overtime and nothing else
@@ -4552,6 +4660,7 @@ function clearSession(){
   S.session=null; S.profile=null; S.buyerPo=null; S.selOrder=null; S.thread=null;
   S.settings={}; S.urlCache={};
   S.buyerFilter=''; S.apprView='pending'; S.apprFilter='pending'; S.docFilter='all';
+  S.supFocus='all'; S.apprFocus='all'; S.attFocus='all'; S.teamFocus='all'; S.resFocus='all';
   // Every scratch global the app parks on window: an imported workbook
   // (__sheet), an accounting import (__acct), a half-written daily record with
   // its photographs (__du), a selfie (__selfie) — all of it is the last
@@ -9448,6 +9557,52 @@ function staffBuckets(){
 
 function setStaffFilter(k){ window.__staffFilter=k; vStaffHome(); }
 
+// Pressing a tile on the supervisor's Today screen narrows the lists under it.
+// Pressing the same tile again, or "Show everything", clears it. It lives in S
+// rather than on window so a sign-out wipes it with the rest of the session,
+// instead of following the next person onto the screen.
+/* ---- tiles that do something ----------------------------------------------
+   A number on a screen that cannot be pressed makes somebody read it and then
+   hunt through the list underneath for the four pieces it counted. Every
+   supervisor tile is a button: pressing it narrows what follows to exactly the
+   rows it counted, so the number and the list can never disagree, and a line
+   underneath says what is being shown with a way back to everything.
+   One slot per screen, all cleared by clearSession. */
+const SUP_FOCUS_SLOTS = {supFocus:1, apprFocus:1, attFocus:1, teamFocus:1, resFocus:1};
+
+function supFocusOf(slot){ return S[slot] || 'all'; }
+
+function supSetFocus(slot, k){
+  if(!Object.prototype.hasOwnProperty.call(SUP_FOCUS_SLOTS, slot)) return;
+  S[slot] = (S[slot]===k || k==='all') ? 'all' : k;
+  // The approvals tiles count records that live inside one of the tabs, so
+  // pressing a tile opens that tab as well — otherwise the tile would narrow a
+  // list that is not the list it counted.
+  if(slot==='apprFocus' && S[slot]!=='all') S.apprFilter = (k==='review') ? 'pending' : 'returned';
+  render();
+}
+function supFocus(k){ supSetFocus('supFocus', k); }
+
+// tiles: [key, label, value, note, modifier]  — modifier '' | 'warn' | 'good' | 'alert'
+function supTileGrid(slot, tiles){
+  const cur = supFocusOf(slot);
+  return '<div class="kpi-grid">'+tiles.map(t=>
+    '<button class="kpi'+(t[4]?' kpi--'+t[4]:'')+(cur===t[0]?' kpi--on':'')+
+    '" type="button" aria-pressed="'+(cur===t[0])+
+    '" onclick="supSetFocus(\''+jsq(slot)+'\',\''+jsq(t[0])+'\')">'+
+    '<span class="kpi__label">'+esc(t[1])+'</span>'+
+    '<strong class="kpi__value">'+esc(String(t[2]))+'</strong>'+
+    '<span class="kpi__note">'+esc(t[3])+'</span></button>').join('')+'</div>';
+}
+
+function supFocusNote(slot, sayings){
+  const cur = supFocusOf(slot);
+  if(cur==='all') return '';
+  return '<div class="fl-focus"><span>Showing '+esc(sayings[cur]||'a narrowed list')+'.</span>'+
+    '<button class="button button--quiet small" type="button" onclick="supSetFocus(\''+jsq(slot)+'\',\'all\')">'+
+    'Show everything</button></div>';
+}
+
 /* The tasks this person has been given, and the three answers to each. English
    and Hindi together, because the person reading it may be comfortable in only
    one of them and the buttons have to be unambiguous in both. */
@@ -13156,16 +13311,29 @@ function vSupResources(){
     '<div class="page-heading__actions">'+
       '<button class="button" type="button" onclick="mReportEquipment()">Report equipment issue</button></div></div>';
 
-  h+='<div class="kpi-grid">'+[
-    ['Planned product hours', planned.toFixed(1)+' h', 'Across the standing tasks', ''],
-    ['Recorded productive time', fmins(actual), running?(running+' timer'+(running===1?'':'s')+' running now'):'Worker · product · process entries', running?'good':''],
-    ['Rework time', fmins(rework), rework?'On stages that were sent back':'None recorded', rework?'warn':''],
-    ['Equipment unavailable', String(down.length), down.length?(down[0].name+(down.length>1?' and more':'')):'Everything in service', down.length?'alert':'']
-  ].map(t=>'<article class="kpi'+(t[3]?' kpi--'+t[3]:'')+'"><span class="kpi__label">'+esc(t[0])+'</span>'+
-    '<strong class="kpi__value">'+esc(String(t[1]))+'</strong><span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+  h+=supTileGrid('resFocus',[
+    ['planned','Planned product hours', planned.toFixed(1)+' h', 'Across the standing tasks', ''],
+    ['time','Recorded productive time', fmins(actual),
+      running?(running+' timer'+(running===1?'':'s')+' running now'):'Worker · product · process entries',
+      running?'good':''],
+    ['rework','Rework time', fmins(rework), rework?'On stages that were sent back':'None recorded', rework?'warn':''],
+    ['down','Equipment unavailable', String(down.length),
+      down.length?(down[0].name+(down.length>1?' and more':'')):'Everything in service', down.length?'alert':'']
+  ]);
+  h+=supFocusNote('resFocus',{planned:'the tasks that carry planned hours',
+                              time:'the entries productive time was recorded against',
+                              rework:'the entries with rework time on them',
+                              down:'the machines that are not available'});
+  const rFocus=supFocusOf('resFocus');
 
   // the register: one row per product and process that has a task or any time on it
-  const rows=reg.slice().sort((a,b)=>String((S.itemsById[a.item_id]||{}).product||'').localeCompare(String((S.itemsById[b.item_id]||{}).product||'')));
+  // Under a tile it holds exactly the rows that made that tile's number: the
+  // hours, the minutes and the rework each come from a different subset of it.
+  let rows=reg.slice().sort((a,b)=>String((S.itemsById[a.item_id]||{}).product||'').localeCompare(String((S.itemsById[b.item_id]||{}).product||'')));
+  if(rFocus==='planned')     rows=rows.filter(r=>Number(r.planned_hours)>0);
+  else if(rFocus==='time')   rows=rows.filter(r=>Number(r.productive_minutes)>0);
+  else if(rFocus==='rework') rows=rows.filter(r=>Number(r.rework_minutes)>0);
+  if(rFocus==='all' || rFocus==='planned' || rFocus==='time' || rFocus==='rework')
   h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Product time register</h3>'+
     '<p class="panel__description">Productive time is separate from attendance and from pauses. A stage sent back keeps its time as rework.</p></div>'+
     badge(running?running+' running':'No timer running', running?'success':'')+'</div>'+
@@ -13192,14 +13360,16 @@ function vSupResources(){
 
   // the stone: what a lot gave a piece against what the piece gave back. The
   // arithmetic is the server's (bt_floor_material_register); this only reads it.
-  h+=materialPanel();
+  if(rFocus==='all') h+=materialPanel();
 
   // the machines: availability decides what a task may name
+  const eqRows = rFocus==='down' ? down : (S.equipment||[]);
+  if(rFocus==='all' || rFocus==='down')
   h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Equipment availability</h3>'+
     '<p class="panel__description">A machine marked unavailable cannot be chosen for a task, and every standing task on it is flagged.</p></div></div>'+
-    '<div class="panel__body">'+((S.equipment||[]).length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+    '<div class="panel__body">'+(eqRows.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
       '<th>Equipment</th><th>Area</th><th>Status</th><th>Tasks on it</th><th>Next service</th><th></th></tr></thead><tbody>'+
-      (S.equipment||[]).map(e=>{
+      eqRows.map(e=>{
         const st=EQUIPMENT_STATUS[e.status]||[e.status,''];
         const n=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at && a.equipment_id===e.id).length;
         return '<tr><td><strong>'+esc(e.name)+'</strong>'+(e.status_note?'<span class="fl-cell-sub">'+esc(e.status_note)+'</span>':'')+'</td>'+
@@ -13214,6 +13384,7 @@ function vSupResources(){
     '</div></section>';
 
   // today: what the gate says against what the timers say, person by person
+  if(rFocus==='all')
   h+='<section class="panel space-top-16" id="recon-panel"><div class="panel__head"><div><h3 class="panel__title">Today’s hours, reconciled</h3>'+
     '<p class="panel__description">Attendance, productive time, rework time and pauses for each person. What is left is time on the clock with nothing recorded against it.</p></div></div>'+
     '<div class="panel__body" id="recon-body"><div class="empty-state">Loading…</div></div></section>';
@@ -13221,7 +13392,8 @@ function vSupResources(){
   h+='<div class="wk-notice space-top-16"><strong>Office costing boundary</strong>This screen shows hours and quantities only. '+
     'The office combines approved hours, private rates, material valuation and rework to cost a product; none of that is sent here.</div>';
   sfaPaint(h);
-  loadReconciliation(today(), today(), 'recon-body');
+  // the reconciliation is fetched, so it is only asked for when its panel exists
+  if(rFocus==='all') loadReconciliation(today(), today(), 'recon-body');
 }
 // The stone register: one line per piece and lot, with what is still to be
 // accounted for. Quantities only — the office prices these.
@@ -13353,8 +13525,19 @@ function supBatchCard(b, opts){
 function vSupHome(){
   const c=supCounts();
   const q=(window.__staffQ||'').toLowerCase();
-  const match=it=>!q||((it.product||'')+' '+(it.stone||'')+' '+(it.item_ref||'')+' '+
-    (batchCodeOf(it.id)||'')).toLowerCase().indexOf(q)>=0;
+  const focus=S.supFocus||'all';
+  // Pressing a tile narrows the lists below it to exactly the pieces it counted,
+  // so the number and the list can never disagree.
+  const inFocus=it=>{
+    if(focus==='due')        return !updateToday(it.id);
+    if(focus==='unassigned') return !openAssignment(it.id);
+    if(focus==='needs')      return (S.assignments||[]).some(a=>a.item_id===it.id &&
+      !a.superseded_by && !a.done_at &&
+      ['cannot_start','clarify','pending'].indexOf(a.ack_state)>=0);
+    return true;
+  };
+  const match=it=>inFocus(it) && (!q||((it.product||'')+' '+(it.stone||'')+' '+(it.item_ref||'')+' '+
+    (batchCodeOf(it.id)||'')).toLowerCase().indexOf(q)>=0);
 
   let h='<div class="page-heading"><div>'+eyebrow(supDayNote())+
     '<h1 class="display-title">Today.</h1>'+
@@ -13365,16 +13548,22 @@ function vSupHome(){
       '<button class="button button--secondary" type="button" onclick="go(\'#/team\')">Assign work</button>'+
     '</div></div>';
 
-  const tiles=[
-    ['Pieces in the workshop', c.open, 'Being made right now'],
-    ['Not reported today', c.due, c.due?'Nobody has logged these':'Every piece has today’s update'],
-    ['Nobody on it', c.unassigned, c.unassigned?'Waiting for a person':'Everything has someone'],
-    ['Needs you', c.stuck+c.unanswered, c.stuck?'A blocker was raised':(c.unanswered?'Tasks not opened yet':'Nothing waiting')]
-  ];
-  h+='<div class="kpi-grid">'+tiles.map((t,i)=>
-    '<article class="kpi'+((i===1&&t[1])||(i===3&&c.stuck)?' kpi--warn':'')+'">'+
-    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
-    '<span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+  // Every other role's tiles open the thing they count — the owner's, the
+  // artisan's. The supervisor's were <article>: a number you could read and not
+  // press. On a floor screen that is worse than useless, because the number is
+  // the reason you looked. Each one now goes where the answer is.
+  h+=supTileGrid('supFocus',[
+    ['all',        'Pieces in the workshop', c.open, 'Being made right now', ''],
+    ['due',        'Not reported today', c.due,
+      c.due?'Nobody has logged these':'Every piece has today’s update', c.due?'warn':''],
+    ['unassigned', 'Nobody on it', c.unassigned,
+      c.unassigned?'Waiting for a person':'Everything has someone', ''],
+    ['needs',      'Needs you', c.stuck+c.unanswered,
+      c.stuck?'A blocker was raised':(c.unanswered?'Tasks not opened yet':'Nothing waiting'), c.stuck?'warn':'']
+  ]);
+  h+=supFocusNote('supFocus',{due:'pieces nobody has reported today',
+                              unassigned:'pieces with nobody on them',
+                              needs:'pieces where somebody is waiting on you'});
 
   // Blockers first, because they are the only thing here nobody else can clear.
   const stuck=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at &&
@@ -13415,7 +13604,9 @@ function vSupHome(){
 
   if(!batches.length && !loose.length)
     h+='<div class="empty-state space-top-16">'+
-      (q?'Nothing matches that search.':'No pieces on the floor yet.')+'</div>';
+      (q?'Nothing matches that search.'
+        : focus!=='all'?'Nothing in that list — press the tile again to show everything.'
+        : 'No pieces on the floor yet.')+'</div>';
 
   // sfaPaint wraps the page in .sfa, which is where the console's token system
   // lives: the light monochrome palette, the 232px sidebar, the 64px top bar and
@@ -13563,14 +13754,31 @@ function vSupApprovals(sub){
     'with the fault named, or ask the office to stop the stage. Accepting is not the same as showing '+
     'it to the buyer — that stays with the office.</p></div></div>';
 
-  h+='<div class="kpi-grid">'+[
-    ['Waiting to be checked', c.toReview, c.toReview?'Nobody has looked at these yet':'Nothing waiting'],
-    ['Sent back, still open', c.openRw, c.repeats?c.repeats+' on a second attempt':'None outstanding'],
-    ['Stopped by the office', c.heldNow, c.heldNow?'Work cannot go on':'Nothing stopped'],
-    ['Holds asked for', c.askedFor, c.askedFor?'Waiting on the office':'None asked for']
-  ].map((t,i)=>'<article class="kpi'+((i===1&&c.repeats)||(i===2&&t[1])?' kpi--warn':'')+'">'+
-    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
-    '<span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+  // The four numbers and the four lists behind them are the same four sets,
+  // built once here. A tile can then only ever show the length of what pressing
+  // it opens — the counts and the rows cannot drift apart the way they could
+  // when the tiles counted holds and rework rows while the list showed records.
+  const universe=(S.updates||[]).filter(u=>S.itemsById[u.item_id]);
+  const focusSets={
+    review: universe.filter(u=>u.review_status==='pending'),
+    rework: universe.filter(u=>!!openRework(u.item_id,u.stage_id)),
+    held:   universe.filter(u=>!!liveHold(u.item_id,u.stage_id)),
+    asked:  universe.filter(u=>!!pendingHold(u.item_id,u.stage_id))
+  };
+  h+=supTileGrid('apprFocus',[
+    ['review','Waiting to be checked', focusSets.review.length,
+      focusSets.review.length?'Nobody has looked at these yet':'Nothing waiting', ''],
+    ['rework','Sent back, still open', focusSets.rework.length,
+      c.repeats?c.repeats+' on a second attempt':'None outstanding', c.repeats?'warn':''],
+    ['held','Stopped by the office', focusSets.held.length,
+      focusSets.held.length?'Work cannot go on':'Nothing stopped', focusSets.held.length?'warn':''],
+    ['asked','Holds asked for', focusSets.asked.length,
+      focusSets.asked.length?'Waiting on the office':'None asked for', '']
+  ]);
+  h+=supFocusNote('apprFocus',{review:'records nobody has checked yet',
+                               rework:'records on a stage that was sent back',
+                               held:'records on a stage the office has stopped',
+                               asked:'records on a stage a hold was asked for'});
 
   h+='<div class="fl-tabs space-top-16">'+
     apprTab('pending','Waiting to be checked',c.toReview)+
@@ -13578,10 +13786,14 @@ function vSupApprovals(sub){
     apprTab('approved','Checked',0)+
     apprTab('all','Everything',0)+'</div>';
 
-  let rows=reviewQueue(f);
+  const aFocus=supFocusOf('apprFocus');
+  let rows = aFocus!=='all'
+    ? focusSets[aFocus].slice().sort((a,b)=>String(b.submitted_at||b.work_date||'')
+        .localeCompare(String(a.submitted_at||a.work_date||'')))
+    : reviewQueue(f);
   // "Sent back or stopped" is a question about the piece, not the record: a
   // stage the office has stopped may have no returned record at all.
-  if(f==='returned') rows=rows.concat((S.updates||[]).filter(u=>
+  if(aFocus==='all' && f==='returned') rows=rows.concat((S.updates||[]).filter(u=>
       S.itemsById[u.item_id] && u.review_status!=='changes_requested' &&
       (openRework(u.item_id,u.stage_id) || liveHold(u.item_id,u.stage_id))))
     .filter((u,i,l)=>l.indexOf(u)===i);
@@ -13591,10 +13803,15 @@ function vSupApprovals(sub){
             personName(u.worked_by||u.submitted_by)).toLowerCase().indexOf(q)>=0;
   });
 
-  const empty={pending:'Nothing is waiting to be checked.',
-               returned:'Nothing has been sent back and nothing is stopped.',
-               approved:'Nothing has been checked yet.',
-               all:'The floor has not reported anything yet.'}[f];
+  const empty = aFocus!=='all'
+    ? {review:'Nothing is waiting to be checked.',
+       rework:'Nothing has been sent back.',
+       held:'Nothing is stopped.',
+       asked:'No hold has been asked for.'}[aFocus]
+    : {pending:'Nothing is waiting to be checked.',
+       returned:'Nothing has been sent back and nothing is stopped.',
+       approved:'Nothing has been checked yet.',
+       all:'The floor has not reported anything yet.'}[f];
   h+='<div class="fl-checks space-top-16">'+
     (rows.length?rows.slice(0,120).map(apprRow).join('')
       :'<div class="empty-state">'+esc(q?'Nothing matches that search.':empty)+'</div>')+
@@ -13612,7 +13829,7 @@ function vSupApprovals(sub){
    nothing about pay is sent to it. */
 function vSupAttendance(){
   const c=supCounts();
-  const rows=(S.attDay||[]).filter(r=>r.role==='worker'||r.role==='supervisor'||r.role==='staff');
+  let rows=(S.attDay||[]).filter(r=>r.role==='worker'||r.role==='supervisor'||r.role==='staff');
   const pendingC=(S.attCorrections||[]).filter(x=>x.decision==='pending');
   const ws=policyVal('work_start','09:00'), we=policyVal('work_end','18:00'), grace=policyVal('late_grace_min',15);
   const site=(S.sites||[])[0];
@@ -13627,14 +13844,29 @@ function vSupAttendance(){
       // a phone has no sidebar, so the personal screen needs a way in from here
       '<button class="button button--quiet" type="button" onclick="go(\'#/pay\')">My pay &amp; advances</button></div></div>';
 
-  h+='<div class="kpi-grid">'+[
-    ['Present today', c.present+' / '+c.people, c.people-c.present?((c.people-c.present)+' not in'):'Everyone is in', ''],
-    ['Late', c.late, c.late?'After '+ws+' + '+grace+' min':'Nobody late', c.late?'warn':''],
-    ['Clocked away from the factory', c.attExceptions, c.attExceptions?'Waiting on you':'None', c.attExceptions?'warn':''],
-    ['Corrections with the office', pendingC.length, pendingC.length?'Awaiting a decision':'None open', '']
-  ].map(t=>'<article class="kpi'+(t[3]?' kpi--'+t[3]:'')+'"><span class="kpi__label">'+esc(t[0])+'</span>'+
-    '<strong class="kpi__value">'+esc(String(t[1]))+'</strong><span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+  h+=supTileGrid('attFocus',[
+    ['present','Present today', c.present+' / '+c.people,
+      c.people-c.present?((c.people-c.present)+' not in'):'Everyone is in', ''],
+    ['late','Late', c.late, c.late?'After '+ws+' + '+grace+' min':'Nobody late', c.late?'warn':''],
+    ['away','Clocked away from the factory', c.attExceptions,
+      c.attExceptions?'Waiting on you':'None', c.attExceptions?'warn':''],
+    ['corrections','Corrections with the office', pendingC.length,
+      pendingC.length?'Awaiting a decision':'None open', '']
+  ]);
+  h+=supFocusNote('attFocus',{present:'the people who have clocked in today',
+                              late:'the people who clocked in late',
+                              away:'clock records made away from the factory',
+                              corrections:'corrections the office has not decided'});
 
+  // Pressing a tile narrows today's table to exactly the people it counted;
+  // the corrections tile counts records in a different table, so that one swaps
+  // the panels over rather than filtering rows that never held the number.
+  const atFocus=supFocusOf('attFocus');
+  if(atFocus==='present')      rows=rows.filter(r=>r.first_in);
+  else if(atFocus==='late')    rows=rows.filter(r=>r.late);
+  else if(atFocus==='away')    rows=rows.filter(r=>r.exception_pending);
+
+  if(atFocus!=='corrections')
   h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Today · '+esc(fdate(today()))+'</h3>'+
     '<p class="panel__description">Factory hours '+esc(ws)+'–'+esc(we)+' · '+esc(String(grace))+'-minute grace · '+
@@ -13659,6 +13891,7 @@ function vSupAttendance(){
   // Who will be away. The reason never reaches this screen: the function that
   // feeds it has no such column.
   const away=(S.absences||[]).filter(a=>a.status!=='rejected' && a.to_date>=today());
+  if(atFocus==='all')
   h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Absences</h3>'+
     '<p class="panel__description">Leave asked for or granted, for planning the floor. Reasons stay with the office. '+
     'You can add a staffing note the office will see.</p></div></div>'+
@@ -13674,6 +13907,7 @@ function vSupAttendance(){
   // Overtime: proposed here, decided by the office. Hours only — what an hour
   // is worth to the person is not on this screen or in the rows behind it.
   const ot=(S.overtime||[]).slice(0,30);
+  if(atFocus==='all')
   h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Overtime</h3>'+
     '<p class="panel__description">You propose the hours and the reason; the office approves them. Approved overtime is '+
     'counted on the person’s statement.</p></div>'+
@@ -13686,12 +13920,23 @@ function vSupAttendance(){
         (o.decision_note?'<span class="fl-cell-sub">'+esc(o.decision_note)+'</span>':'')+'</td></tr>').join('')+
       '</tbody></table></div>':'<div class="empty-state">No overtime proposed.</div>')+'</div></section>';
 
-  if((S.attCorrections||[]).length){
+  // Under the corrections tile this is the only panel, and it holds exactly the
+  // pending ones the tile counted; with no tile pressed it is the whole record.
+  const corrRows = atFocus==='corrections' ? pendingC : (S.attCorrections||[]);
+  // Under the tile this is the only panel left, so it has to appear even when
+  // it is empty — a screen with nothing on it below a banner saying what it is
+  // showing reads as broken rather than as "none".
+  if(atFocus==='corrections' && !corrRows.length)
+    h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Corrections</h3></div></div>'+
+      '<div class="panel__body"><div class="empty-state">No correction is waiting on the office.</div>'+
+      '</div></section>';
+  if(corrRows.length && (atFocus==='all' || atFocus==='corrections')){
     h+='<section class="panel space-top-16"><div class="panel__head"><div><h3 class="panel__title">Corrections</h3>'+
       '<p class="panel__description">Proposed here, decided by the office. Every one is audited.</p></div></div>'+
       '<div class="panel__body"><div class="data-table-wrap"><table class="data-table"><thead><tr>'+
       '<th>Person</th><th>Day</th><th>Proposed</th><th>Reason</th><th>Decision</th></tr></thead><tbody>'+
-      (S.attCorrections||[]).slice(0,30).map(x=>'<tr><td>'+esc(personName(x.user_id))+'</td><td>'+esc(fdate(x.work_date))+'</td>'+
+      corrRows.slice(0,30).map(x=>'<tr><td>'+esc(personName(x.user_id))+'</td><td>'+esc(fdate(x.work_date))+'</td>'+
         '<td>'+esc(fclock(x.proposed_in))+' – '+esc(fclock(x.proposed_out))+'</td><td>'+esc(x.reason)+'</td>'+
         '<td>'+badge(x.decision==='pending'?'With the office':x.decision, x.decision==='approved'?'success':x.decision==='rejected'?'alert':'pending')+'</td></tr>').join('')+
       '</tbody></table></div></div></section>';
@@ -13710,16 +13955,33 @@ function vSupTeam(){
     '<p class="lede">Choose the piece and the stage, then the person. Their current load is beside '+
     'each name so the same three people do not end up carrying the whole floor.</p></div></div>';
 
-  h+='<div class="kpi-grid">'+[
-    ['Pieces with nobody on them', c.unassigned, c.unassigned?'Pick someone for these first':'All covered'],
-    ['Tasks not opened yet', c.unanswered, 'Given out, not yet seen'],
-    ['Blockers raised', c.stuck, c.stuck?'Waiting on you':'None'],
-    ['People with work', Object.keys(load).length, 'Carrying at least one piece']
-  ].map((t,i)=>'<article class="kpi'+((i===0&&t[1])||(i===2&&t[1])?' kpi--warn':'')+'">'+
-    '<span class="kpi__label">'+esc(t[0])+'</span><strong class="kpi__value">'+t[1]+'</strong>'+
-    '<span class="kpi__note">'+esc(t[2])+'</span></article>').join('')+'</div>';
+  // Each tile is the length of the list it opens. "People with work" used to
+  // read Object.keys(workloadByPerson()).length, which also counts anyone named
+  // as support on a task — workloadByPerson adds them with a load of zero — so
+  // the tile said "carrying at least one piece" about people carrying none.
+  // It is now the same array the table renders under that tile.
+  // The tasks table below drops any row whose piece this login cannot see, so
+  // the two task tiles count that same array rather than S.assignments raw —
+  // otherwise the number could stand above a shorter list.
+  const liveAll=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at && S.itemsById[a.item_id]);
+  const nUnanswered=liveAll.filter(a=>a.ack_state==='pending').length;
+  const nStuck=liveAll.filter(a=>a.ack_state==='cannot_start'||a.ack_state==='clarify').length;
+  const withWork=people.filter(p=>liveAll.some(a=>a.assigned_to===p.user_id));
+  h+=supTileGrid('teamFocus',[
+    ['unassigned','Pieces with nobody on them', c.unassigned,
+      c.unassigned?'Pick someone for these first':'All covered', c.unassigned?'warn':''],
+    ['unanswered','Tasks not opened yet', nUnanswered, 'Given out, not yet seen', ''],
+    ['stuck','Blockers raised', nStuck, nStuck?'Waiting on you':'None', nStuck?'warn':''],
+    ['people','People with work', withWork.length, 'Carrying at least one piece', '']
+  ]);
+  h+=supFocusNote('teamFocus',{unassigned:'pieces with nobody on them',
+                               unanswered:'tasks nobody has opened yet',
+                               stuck:'tasks somebody has raised a blocker on',
+                               people:'the people carrying at least one piece'});
+  const tFocus=supFocusOf('teamFocus');
 
   const waiting=open.filter(it=>!openAssignment(it.id));
+  if(tFocus==='all' || tFocus==='unassigned')
   h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Waiting for a person</h3>'+
     '<p class="panel__description">Each of these is at a stage with nobody standing behind it.</p></div></div>'+
@@ -13728,15 +13990,17 @@ function vSupTeam(){
       :'<div class="empty-state">Every piece on the floor has somebody on it.</div>')+
     '</div></section>';
 
+  const shopRows = tFocus==='people' ? withWork : people;
+  if(tFocus==='all' || tFocus==='people')
   h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
     '<h3 class="panel__title">The workshop</h3>'+
     '<p class="panel__description">Who is carrying what. Wages and advances are not shown here '+
     'and are not sent to this screen.</p></div></div>'+
     '<div class="panel__body">'+
-    (people.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
+    (shopRows.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
       '<th>Name</th><th>Pieces now</th><th>Not yet opened</th><th>Blocked</th><th></th></tr></thead><tbody>'+
-      people.map(p=>{
-        const mine=(S.assignments||[]).filter(a=>!a.superseded_by&&!a.done_at&&a.assigned_to===p.user_id);
+      shopRows.map(p=>{
+        const mine=liveAll.filter(a=>a.assigned_to===p.user_id);
         const unseen=mine.filter(a=>a.ack_state==='pending').length;
         const blocked=mine.filter(a=>a.ack_state==='cannot_start').length;
         return '<tr><td><strong>'+esc(p.full_name)+'</strong></td>'+
@@ -13745,10 +14009,15 @@ function vSupTeam(){
           '<td>'+(blocked?'<span class="badge badge--alert">'+blocked+'</span>':'—')+'</td>'+
           '<td><button class="button quiet small" type="button" onclick="mAssign(null,null,\''+jsq(p.user_id)+'\')">Give work</button></td></tr>';
       }).join('')+'</tbody></table></div>'
-     :'<div class="empty-state">No workshop logins yet. The office creates them under People &amp; access.</div>')+
+     :'<div class="empty-state">'+(tFocus==='people'
+        ?'Nobody is carrying a piece at the moment.'
+        :'No workshop logins yet. The office creates them under People &amp; access.')+'</div>')+
     '</div></section>';
 
-  const live=(S.assignments||[]).filter(a=>!a.superseded_by&&!a.done_at);
+  let live=liveAll;
+  if(tFocus==='unanswered')  live=live.filter(a=>a.ack_state==='pending');
+  else if(tFocus==='stuck')  live=live.filter(a=>a.ack_state==='cannot_start'||a.ack_state==='clarify');
+  if(tFocus==='all' || tFocus==='unanswered' || tFocus==='stuck')
   h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Work given out</h3>'+
     '<p class="panel__description">Standing tasks and how each person answered.</p></div></div>'+
@@ -14167,7 +14436,13 @@ function pickDaily(){
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.multiple=true;
   inp.onchange=async ()=>{
     const files=[...inp.files]; if(!files.length) return;
-    const note=prompt('What is this? (optional, e.g. "Moulding bay — 3 blocks dressed")')||null;
+    const note=await askText({
+      title:'What are these photographs of?',
+      label:'A line for the daily log', multiline:true,
+      placeholder:'Moulding bay \u2014 3 blocks dressed',
+      hint:'Optional. Leave it empty and they go up without a caption.',
+      confirmLabel:'Upload '+files.length+' photograph'+(files.length>1?'s':'')});
+    if(note===null) return;
     toast('Uploading '+files.length+' photo'+(files.length>1?'s':'')+'…');
     const d=today(); let ok=0;
     for(let i=0;i<files.length;i++){
@@ -14418,7 +14693,10 @@ function pickPhotos(itemId, stageId, poId){
 
 async function setPhotoStatus(ids, status){
   if(!isAdmin()) return;
-  if(status==='rejected' && !confirm('Send these photos back to the staff? The client will not see them.')) return;
+  if(status==='rejected' && !await ask({
+      title:'Send these photographs back to the workshop?',
+      body:'They go off the client\u2019s screen straight away and the workshop is asked to shoot them again.',
+      confirmLabel:'Send them back', danger:false})) return;
   const {error}=await sb.from('bt_photos').update({status}).in('id', ids);
   if(error){ toast(error.message,{err:true}); return; }
   await loadData(); render();
@@ -14431,7 +14709,9 @@ async function setPhotoStatus(ids, status){
 }
 async function delPhoto(ev, id, path){
   ev.stopPropagation();
-  if(!confirm('Delete this photo?')) return;
+  if(!await ask({title:'Delete this photograph?',
+      body:'The image file goes with it. It cannot be brought back.',
+      confirmLabel:'Delete it'})) return;
   // The file goes first, then the row. Storage permission for a staff member is
   // granted by the photo row still being there and still unapproved, so deleting
   // the row first would leave the image stranded in the bucket for ever.
@@ -14462,17 +14742,31 @@ function pickDoc(poId){
     const path=p.buyer_id+'/po/'+poId+'/'+Date.now()+'-'+clean;
     const up=await sb.storage.from(CONFIG.bucket).upload(path, f, {contentType:f.type||'application/octet-stream'});
     if(up.error){ toast('Upload failed: '+up.error.message,{err:true}); return; }
-    const type=prompt('Document type (e.g. PO copy, Drawing, Packing list, Invoice, BL/LR):','')||null;
+    const type=await askText({
+      title:'What kind of document is this?', body:f.name,
+      label:'Document type',
+      choices:['PO copy','Drawing','Packing list','Invoice','BL/LR','Quotation',
+               'Test certificate','Insurance','Photograph sheet'],
+      placeholder:'Start typing, or pick one',
+      hint:'It is only a label, so anything sensible is fine.',
+      confirmLabel:'Next'});
+    if(type===null){ await sb.storage.from(CONFIG.bucket).remove([path]); return; }
     const isDwg=/draw/i.test(type||'');
     await sb.from('bt_documents').insert({po_id:poId, name:f.name, doc_type:type, path, uploaded_by:uid(),
-      for_staff:isDwg||confirm('Show this document to the production staff?'),
-      for_buyer:confirm('Show this document to the buyer?')});
+      for_staff:isDwg||await ask({title:'Show this to the workshop?',
+        body:'Anyone on the floor with a login will be able to open '+f.name+'.',
+        confirmLabel:'Yes, show them', cancelLabel:'Keep it in the office', danger:false}),
+      for_buyer:await ask({title:'Show this to the buyer?',
+        body:'The buyer will be able to open '+f.name+' from his order page.',
+        confirmLabel:'Yes, show the buyer', cancelLabel:'Keep it internal', danger:false})});
     await loadData(); render();
   };
   inp.click();
 }
 async function delDoc(id, path){
-  if(!confirm('Remove this document?')) return;
+  if(!await ask({title:'Remove this document?',
+      body:'The file is deleted as well, for everyone who could see it.',
+      confirmLabel:'Remove it'})) return;
   await sb.from('bt_documents').delete().eq('id', id);
   await sb.storage.from(CONFIG.bucket).remove([path]);
   await loadData(); render();
@@ -14638,9 +14932,11 @@ function mEditPO(poId){
     if(moved){
       const from=(S.buyersById[p.buyer_id]||{}).company||'its current buyer';
       const to=(S.buyersById[newBuyer]||{}).company||'the new buyer';
-      if(!confirm('Move '+p.po_number+' from '+from+' to '+to+'?\n\n'+
-        from+' will immediately stop seeing this order, its photos and its comments. '+
-        to+' will start seeing them.')) return;
+      if(!await ask({
+        title:'Move '+p.po_number+' from '+from+' to '+to+'?',
+        body:from+' stops seeing this order, its photographs and its comments the moment you '+
+             'save. '+to+' starts seeing all of it.',
+        confirmLabel:'Move the order'})) return;
     }
     rec.buyer_id=newBuyer;
     const {error}=await sb.from('bt_purchase_orders').update(rec).eq('id',poId);
@@ -14657,7 +14953,9 @@ function mEditPO(poId){
     closeModal(); await loadData(); render();
   };
   m.m.querySelector('#po-del').onclick=async ()=>{
-    if(!confirm('Delete this PO and all its items, photos and comments?')) return;
+    if(!await ask({title:'Delete '+(p&&p.po_number?p.po_number:'this order')+'?',
+        body:'Every product on it, every photograph and every comment goes too. This cannot be undone.',
+        confirmLabel:'Delete the order'})) return;
     const {error}=await sb.from('bt_purchase_orders').delete().eq('id',poId);
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await loadData(); go('#/home');
@@ -14768,7 +15066,10 @@ function mItem(poId, itemId){
     closeModal(); await loadData(); render();
   };
   if(itemId) m.m.querySelector('#it-del').onclick=async ()=>{
-    if(!confirm('Delete this item and its history?')) return;
+    if(!await ask({title:'Delete this product?',
+        body:'Its stages, photographs, comments and the whole history of the piece go with it. '+
+             'This cannot be undone.',
+        confirmLabel:'Delete the product'})) return;
     const {error}=await sb.from('bt_order_items').delete().eq('id',itemId);
     if(error){ toast(error.message,{err:true}); return; }
     closeModal(); await loadData(); go('#/po/'+poId);
@@ -15083,7 +15384,13 @@ async function ruPublish(updateId){
 }
 
 async function ruChanges(updateId){
-  const why=prompt('What should the workshop reshoot?','Please retake the full view — it is out of focus.');
+  const why=await askText({
+    title:'What should the workshop reshoot?',
+    body:'This goes to the floor, in their own words, beside the piece.',
+    label:'What to correct', multiline:true, required:true,
+    requiredMessage:'Say what needs reshooting, so they know what to change.',
+    value:'Please retake the full view \u2014 it is out of focus.',
+    confirmLabel:'Send it back'});
   if(why===null) return;
   try{
     const ids=(S.photosByUpdate[updateId]||[]).map(p=>p.id);
@@ -15272,7 +15579,9 @@ function mCharge(poId){
 }
 
 async function delPayment(id){
-  if(!confirm('Remove this payment from the account?')) return;
+  if(!await ask({title:'Remove this payment from the account?',
+      body:'The buyer\u2019s outstanding balance goes up by this amount straight away, and he can see it.',
+      confirmLabel:'Remove the payment'})) return;
   const {error} = await sb.from('bt_payments').delete().eq('id', id);
   if(error){ toast(error.message,{err:true}); return; }
   await loadData(); render();
@@ -15408,7 +15717,10 @@ function mBuyer(id, section){
   };
 
   if(id&&!one) m.m.querySelector('#by-del').onclick=async ()=>{
-    if(!confirm('Delete this buyer with ALL its POs, items, photos and comments? This cannot be undone.')) return;
+    if(!await ask({title:'Delete this buyer and everything of theirs?',
+        body:'Every purchase order, product, photograph, comment and login belonging to them is '+
+             'deleted. Nothing about this can be undone.',
+        confirmLabel:'Delete the buyer and all of it'})) return;
     const logins=S.profilesAll.filter(x=>x.buyer_id===id);
     for(const l of logins){ await adminApi({action:'delete_user', user_id:l.user_id}); }
     const {error}=await sb.from('bt_buyers').delete().eq('id',id);
@@ -15498,7 +15810,12 @@ function mReviewSubmission(buyerId){
     toast(Object.keys(fields).length+' field'+(Object.keys(fields).length===1?'':'s')+' accepted.');
   };
   m.m.querySelector('#rv-decline').onclick=async ()=>{
-    const why=prompt('What should they correct? This is sent back to them.');
+    const why=await askText({
+      title:'What should they correct?',
+      body:'The buyer sees this, so say which detail is wrong.',
+      label:'What to correct', multiline:true, required:true,
+      requiredMessage:'Say what needs correcting, so they know what to change.',
+      confirmLabel:'Send it back'});
     if(why===null) return;
     const {error}=await sb.rpc('bt_decline_buyer_submission',{p_id:s.id, p_note:why});
     if(error){ toast(error.message,{err:true}); return; }
@@ -15678,7 +15995,9 @@ function mResetPw(userId, email){
   };
 }
 async function delLogin(userId, email){
-  if(!confirm('Remove login '+email+'?')) return;
+  if(!await ask({title:'Remove the login '+shortLogin(email)+'?',
+      body:'They cannot sign in again. What they have already done stays on the record.',
+      confirmLabel:'Remove the login'})) return;
   try{ await adminApi({action:'delete_user', user_id:userId}); await loadData(); render(); }
   catch(e){ toast(e.message,{err:true}); }
 }
@@ -15747,7 +16066,13 @@ async function moveStage(id, dir){
   await loadCore(); await loadData(); render();
 }
 async function addStage(){
-  const name=prompt('Stage name:'); if(!name) return;
+  const name=await askText({
+    title:'Add a production stage',
+    body:'It goes at the end of the list. You can drag it into place afterwards.',
+    label:'Stage name', placeholder:'Polishing', required:true,
+    requiredMessage:'Give the stage a name.',
+    confirmLabel:'Add the stage'});
+  if(!name) return;
   const key=name.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')+'_'+Math.floor(Math.random()*90+10);
   const maxSort=S.stages.reduce((m,s)=>Math.max(m,s.sort_order),0);
   const {error}=await sb.from('bt_stages').insert({key, name, grp:'Production', sort_order:maxSort+10, active:true});
@@ -16836,7 +17161,11 @@ async function commitSheetImport(){
   $('loading').style.display='flex';
   try{
     const dup=S.pos.find(p=>p.buyer_id===buyer_id && p.po_number===po_number);
-    if(dup && !confirm(po_number+' already exists for this buyer. Add these products to it?')){
+    if(dup && !await ask({
+        title:po_number+' already exists for this buyer',
+        body:'Adding these products puts them on the order that is already there, alongside what '+
+             'is on it now. Nothing on it is replaced.',
+        confirmLabel:'Add them to it', cancelLabel:'Stop, let me check', danger:false})){
       $('loading').style.display='none'; return; }
     let poId;
     if(dup) poId=dup.id;
@@ -17241,7 +17570,11 @@ async function commitPoImport(){
   $('loading').style.display='flex';
   try{
     const dup=S.pos.find(p=>p.buyer_id===buyer_id && p.po_number===po_number);
-    if(dup && !confirm(po_number+' already exists for this buyer. Add these products to it?')){
+    if(dup && !await ask({
+        title:po_number+' already exists for this buyer',
+        body:'Adding these products puts them on the order that is already there, alongside what '+
+             'is on it now. Nothing on it is replaced.',
+        confirmLabel:'Add them to it', cancelLabel:'Stop, let me check', danger:false})){
       $('loading').style.display='none'; return; }
     let poId;
     if(dup){ poId=dup.id; }
@@ -17674,7 +18007,9 @@ async function mDispatch(poId){
 
 async function mDelivered(poId){
   const p=S.posById[poId];
-  if(!confirm('Mark '+p.po_number+' as delivered?')) return;
+  if(!await ask({title:'Mark '+p.po_number+' as delivered?',
+      body:'The buyer sees it as delivered from now on, and it drops out of the open orders.',
+      confirmLabel:'Mark it delivered', danger:false})) return;
   const {error}=await sb.from('bt_purchase_orders').update({
     dispatch_state:'delivered', delivered_at:today() }).eq('id',poId);
   if(error){ toast(error.message,{err:true}); return; }
@@ -17953,7 +18288,10 @@ function mAckTask(assignmentId, state){
    office decides, and the supervisor is told so on the button.
 --------------------------------------------------------------------------- */
 
-function setApprFilter(f){ S.apprFilter=f; render(); }
+// Choosing a tab is choosing a broader list than any tile narrowed to, so the
+// tile's focus comes off — otherwise the tab would light up over rows it did
+// not choose.
+function setApprFilter(f){ S.apprFilter=f; S.apprFocus='all'; render(); }
 
 const DEFECTS=['Chipped or cracked','Wrong size','Uneven surface','Wrong profile or carving',
                'Colour or vein mismatch','Poor polish','Wrong material','Damaged in handling','Something else'];
