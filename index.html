@@ -4044,6 +4044,16 @@ body.reports-mode .sfa .content{max-width:1700px}
   .day-reminder__do .button, .day-reminder__do a.button{ flex:1 1 auto; text-align:center; }
   .day-reminder__text{ white-space:normal; }
 }
+
+/* --------------------------------------------------------- the month report */
+.mo-table td{ vertical-align:top; }
+.mo-table td strong{ display:block; }
+.mo-sub{ display:block; color:var(--muted); font-size:11.5px; margin-top:1px; }
+.mo-bad{ color:var(--danger); font-weight:700; }
+.mo-row--behind td:first-child{ box-shadow:inset 3px 0 0 var(--danger); padding-left:11px; }
+@media (max-width: 640px){
+  .mo-sub{ font-size:12px; }
+}
 </style>
 <style>
 /* The artisan's screens. ------------------------------------------------------
@@ -4335,7 +4345,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='efa80d69c9cc';</script>
+<script>const BUILD_ID='ada0cfec4f07';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4718,8 +4728,17 @@ function askText(o){
 
 function lightbox(url, cap){
   const lb=$('lightbox');
-  lb.innerHTML='<img src="'+esc(url)+'" alt="'+esc(cap||'Photograph')+'">'+
+  // The address is set afterwards rather than written into the markup string.
+  // An image tag carrying its address as an attribute is a literal in this file
+  // and therefore a literal in the built page, and Chrome's speculative preload
+  // scanner reads raw bytes: at certain file sizes it finds one inside a script
+  // and fetches the uninterpolated source text as a URL. Every other image on
+  // the page already goes through data-ph-path for the same reason.
+  // build.sh refuses the pattern anywhere in these files, comments included --
+  // the scanner does not know what a comment is. See test/preload.js.
+  lb.innerHTML='<img alt="'+esc(cap||'Photograph')+'">'+
     (cap?'<div class="cap">'+esc(cap)+'</div>':'');
+  const im=lb.querySelector('img'); if(im) im.src=url;
   lb.hidden=false;
   lb.setAttribute('role','dialog');
   lb.setAttribute('aria-modal','true');
@@ -4812,7 +4831,7 @@ const S = {
   updates:[], updInternal:{}, updByItem:{}, photosByUpdate:{},
   invoices:[], ewaybills:[], ledgerSnaps:[], ledgerLines:{}, invByBuyer:{}, ewbByDoc:{},
   revisions:[], selOrder:null, decisionByRev:{}, revByStage:{}, allocations:[], allocByPo:{}, buyerPo:null, apprView:'pending', photoFilter:{}, docFilter:'all', thread:null,
-  batches:[], batchById:{}, batchOfItem:{}, assignments:[], asgByItem:{},
+  batches:[], batchById:{}, batchOfItem:{}, batchItems:[], assignments:[], asgByItem:{},
   rework:[], rwByItem:{}, holds:[], hdByItem:{}, meas:[], msByItem:{}, apprFilter:'pending',
   // which supervisor tile is pressed on each of the five floor screens
   batchRegister:null,
@@ -4833,7 +4852,12 @@ const S = {
   // because it is one date's question and the screen lets you walk back through
   // the week — putting it in the main load would fetch a day nobody asked for
   // on every sign-in.
-  dayReport:null, dayReminders:[], dayDate:null, dayLoading:false
+  dayReport:null, dayReminders:[], dayDate:null, dayLoading:false,
+  // the month, loaded the same way and for the same reason
+  monthReport:null, monthDate:null, monthLoading:false, monthTab:'people',
+  // one person's month, cached per person so opening five records in a row does
+  // not rebuild the whole workshop five times
+  personMonth:{}, personMonthLoading:{}
 };
 
 // Signing out has to empty what this login was allowed to load, not only end
@@ -5073,6 +5097,9 @@ function indexFloor(batches, alloc, asg){
     || String(a.code).localeCompare(String(b.code)));
   S.batchById={}; S.batches.forEach(b=>{ S.batchById[b.id]=b; b.items=[]; });
   S.batchOfItem={};
+  // kept whole, because pieceCodeOf() needs both the piece's number and how many
+  // pieces share its batch
+  S.batchItems=(alloc||[]).slice();
   (alloc||[]).forEach(r=>{
     S.batchOfItem[r.item_id]=r.batch_id;
     const b=S.batchById[r.batch_id]; if(b) b.items.push(r.item_id);
@@ -5183,6 +5210,24 @@ function reviewQueue(status){
 }
 function batchOf(itemId){ return S.batchById[S.batchOfItem[itemId]] || null; }
 function batchCodeOf(itemId){ const b=batchOf(itemId); return b?b.code:''; }
+// The batch code names a SHIPMENT, and a shipment holds several pieces:
+// B-2609-03 covers seven of them. Since the buyer's own reference stopped going
+// to the floor, that code was the only name a piece had down there, so seven
+// different pieces were all called B-2609-03 — on their cards, in the
+// supervisor's queue, and in the reminder that goes out on WhatsApp. The number
+// after it is the piece's position in the batch. It still says nothing about
+// who the piece is for. A batch holding one piece needs no number.
+function pieceNoOf(itemId){
+  const b=batchOf(itemId); if(!b) return null;
+  const row=(S.batchItems||[]).find(r=>r.item_id===itemId && r.batch_id===b.id);
+  return row && row.piece_no!=null ? row.piece_no : null;
+}
+function pieceCodeOf(itemId){
+  const b=batchOf(itemId); if(!b) return '';
+  const inBatch=(S.batchItems||[]).filter(r=>r.batch_id===b.id).length;
+  const n=pieceNoOf(itemId);
+  return (inBatch>1 && n!=null) ? b.code+' · '+n : b.code;
+}
 // How a piece is named to whoever is looking at it.
 //
 // The batch code is issued by the office and says nothing about who the piece
@@ -5193,7 +5238,7 @@ function batchCodeOf(itemId){ const b=batchOf(itemId); return b?b.code:''; }
 // floor gets the batch code and the office gets both, without either screen
 // having to know the rule.
 function pieceRef(it){
-  return it ? [batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · ') : '';
+  return it ? [pieceCodeOf(it.id), it.item_ref].filter(Boolean).join(' · ') : '';
 }
 // The same, for a place where blank would read as a bug. Until the owner puts a
 // piece in a batch there is no code to show, and saying so is better than an
@@ -5408,6 +5453,37 @@ async function loadDayReport(d){
   } finally { S.dayLoading = false; }
   return S.dayReport;
 }
+
+// The month. Same shape of loader as the day: one date's question, asked when
+// the screen is opened rather than on every sign-in.
+async function loadMonthReport(m){
+  const month = m || today().slice(0,8)+'01';
+  S.monthLoading = true;
+  try{
+    const r = await sb.rpc('bt_month_report', {p_month: month});
+    if(r.error) throw r.error;
+    S.monthReport = r.data || null;
+    S.monthDate = month;
+  } finally { S.monthLoading = false; }
+  return S.monthReport;
+}
+
+async function loadPersonMonth(userId, m){
+  if(S.personMonthLoading[userId]) return;
+  S.personMonthLoading[userId] = true;
+  try{
+    const r = await sb.rpc('bt_person_month',
+      {p_user:userId, p_month: m || (today().slice(0,8)+'01')});
+    if(!r.error) S.personMonth[userId] = r.data || {person:null};
+  } finally {
+    S.personMonthLoading[userId] = false;
+    render();
+  }
+}
+
+// Hours a person could not have worked are not a fair denominator, so the two
+// figures that get compared are always drawn from the same month window.
+function hoursOf(mins){ return Math.round((Number(mins)||0)/60*10)/10; }
 
 // A tap-to-send link for the day report, on top of the waLink() that already
 // exists in the utilities — NOT a second copy of it. waNumber() there already
@@ -7498,6 +7574,7 @@ function updateHeader(){
       '<p class="side-nav__group">The floor</p>'+
       link('#/home','Today',c.due)+
       link('#/day','The day',0)+
+      link('#/month','The month',0)+
       link('#/approvals','Check work',c.toReview)+
       link('#/team','Work &amp; people',c.unanswered)+
       link('#/batches','Shipment batches',0)+
@@ -7596,6 +7673,7 @@ function updateHeader(){
       link('#/orders','Orders',q.decisions)+
       link('#/production','Production',q.workshop)+
       link('#/day','The day',0)+
+      link('#/month','The month',0)+
       link('#/batches','Batches',0)+
       link('#/production/review','Review queue',q.approvals,true)+
       link('#/production/missing','Missing today',q.missing,true)+
@@ -11250,6 +11328,7 @@ function render(){
     if(parts[0]==='item' && parts[1]) vItem(parts[1]);
     else if(isSupervisor()){
       if(parts[0]==='day') vDayReport();
+      else if(parts[0]==='month') vMonthReport();
       else if(parts[0]==='batches') vSupBatches();
       else if(parts[0]==='team') vSupTeam();
       else if(parts[0]==='approvals'||parts[0]==='review') vSupApprovals(parts[1]);
@@ -11293,6 +11372,7 @@ function render(){
   else if(parts[0]==='orders') vOrders();
   else if(parts[0]==='production') vProduction(parts[1]||'priority');
   else if(parts[0]==='day') vDayReport();
+  else if(parts[0]==='month') vMonthReport();
   else if(parts[0]==='batches') vSupBatches();
   else if(parts[0]==='clients') vClients(parts[1]);
   else if(parts[0]==='reports') vReports(parts[1]);
@@ -13120,6 +13200,7 @@ function paStaffDetail(){
     (floor?'<section class="pa-section"><button class="button secondary wide" type="button" '+
       'onclick="mStaffPhone(\''+p.user_id+'\')">'+(p.phone?'Change WhatsApp number':'Add WhatsApp number')+
       '</button></section>':'')+
+    (floor?paWorkSection(p):'')+
     (floor?paDetailsSection(p):'')+
     (floor?paPaySection(p):'')+
     '</aside>';
@@ -14187,6 +14268,183 @@ function vSupHome(){
 // behind it, how far the pieces have got, and whether anything is still without
 // a code. The buyer and the order number are the whole reason this is the
 // owner's screen and not the floor's: bt_batch_register() refuses anyone else.
+// ----------------------------------------------------------- the month report
+// Yash asked for an overall monthly view of factory operations, people first
+// and then the pieces. Same rule as the day: no buyer, no order number, no
+// price, for the owner as much as the supervisor.
+function monthPersonRow(p, opts){
+  const o = opts || {};
+  const hrs = hoursOf(p.attendance_minutes), prod = hoursOf(p.productive_minutes);
+  const owed = +p.days_owed || 0;
+  // Productive hours against hours on the clock. Deliberately not called
+  // "efficiency": time spent waiting for stone is on the clock and is not
+  // anybody's fault, and a number with a judgement in its name gets used as one.
+  const onTools = hrs > 0 ? Math.round(prod / hrs * 100) : null;
+  return '<tr'+(owed?' class="mo-row--behind"':'')+'>'+
+    '<td><strong>'+esc(p.name)+'</strong><span class="mo-sub">'+
+      esc(p.role==='worker'?'Artisan':'Supervisor')+'</span></td>'+
+    '<td>'+esc(p.days_present+' of '+p.days_workable)+'<span class="mo-sub">days</span></td>'+
+    '<td>'+esc(String(hrs))+'<span class="mo-sub">on the clock</span></td>'+
+    '<td>'+esc(String(prod))+'<span class="mo-sub">'+
+      (onTools==null?'on the work':'on the work · '+onTools+'%')+'</span></td>'+
+    '<td>'+esc(String(p.records))+'<span class="mo-sub">'+
+      esc((+p.blocked_records?p.blocked_records+' blocked':'records'))+'</span></td>'+
+    '<td'+(owed?' class="mo-bad"':'')+'>'+esc(String(owed))+
+      '<span class="mo-sub">days nothing filed</span></td>'+
+    '<td>'+esc(p.finished+' of '+p.given)+'<span class="mo-sub">'+
+      esc(+p.never_opened?p.never_opened+' never opened':'tasks finished')+'</span></td>'+
+    '<td'+(+p.rework_against_them?' class="mo-bad"':'')+'>'+esc(String(p.rework_against_them))+
+      '<span class="mo-sub">'+esc(+p.rework_second_time?p.rework_second_time+' a second time':'sent back')+'</span></td>'+
+    (o.link?'<td><button class="button quiet small" type="button" onclick="go(\'#/access\');paSelectStaff(\''+
+      jsq(p.user_id)+'\')">Open</button></td>':'')+
+    '</tr>';
+}
+
+function monthStageRow(s){
+  const h = hoursOf(s.minutes), plan = hoursOf(s.planned_minutes);
+  const over = (plan > 0 && h > 0) ? Math.round((h - plan) / plan * 100) : null;
+  return '<tr>'+
+    '<td><strong>'+esc(shortStage(s.stage))+'</strong></td>'+
+    '<td>'+esc(String(s.pieces))+'<span class="mo-sub">finished here</span></td>'+
+    '<td>'+esc(s.avg_days==null?'—':String(s.avg_days))+'<span class="mo-sub">days each</span></td>'+
+    '<td>'+esc(String(h))+'<span class="mo-sub">hours</span></td>'+
+    '<td'+(over!=null&&over>25?' class="mo-bad"':'')+'>'+
+      esc(plan?String(plan):'—')+'<span class="mo-sub">'+
+      esc(over==null?'nothing planned':(over>0?over+'% over plan':Math.abs(over)+'% under'))+'</span></td>'+
+    '<td'+(+s.rework?' class="mo-bad"':'')+'>'+esc(String(s.rework))+'<span class="mo-sub">sent back</span></td>'+
+    '</tr>';
+}
+
+function monthPieceRow(p){
+  const h = hoursOf(p.minutes), plan = hoursOf(p.planned_minutes);
+  return '<tr'+(p.nobody_on_it?' class="mo-row--behind"':'')+'>'+
+    '<td><strong>'+esc(p.batch_code||'no code')+'</strong><span class="mo-sub">'+esc(p.product||'')+'</span></td>'+
+    '<td>'+esc(p.stage?shortStage(p.stage):'not started')+'<span class="mo-sub">'+esc(p.stone||'')+'</span></td>'+
+    '<td'+((+p.days_here||0)>21?' class="mo-bad"':'')+'>'+esc(p.days_here==null?'—':String(p.days_here))+
+      '<span class="mo-sub">days here</span></td>'+
+    '<td>'+esc(String(h))+'<span class="mo-sub">'+esc(plan?'of '+plan+' planned':'no plan set')+'</span></td>'+
+    '<td'+(p.nobody_on_it?' class="mo-bad"':'')+'>'+
+      esc(p.nobody_on_it?'Nobody':'Assigned')+'<span class="mo-sub">'+
+      esc(+p.rework?p.rework+' rework':'')+'</span></td>'+
+    '</tr>';
+}
+
+function vMonthReport(){
+  const month = S.monthDate || (today().slice(0,8)+'01');
+  if(!S.monthReport || S.monthDate!==month){
+    if(!S.monthLoading){ loadMonthReport(month).then(render).catch(e=>toast(e.message,{err:true})); }
+  }
+  const r = S.monthReport;
+  const tab = S.monthTab || 'people';
+  const shift = n => { const d=new Date(month+'T12:00:00'); d.setMonth(d.getMonth()+n);
+                       return d.toISOString().slice(0,8)+'01'; };
+  const thisMonth = today().slice(0,8)+'01';
+
+  let h='<div class="page-heading"><div>'+eyebrow('The month')+
+    '<h1 class="display-title">'+esc(r?r.month:'The month')+'.</h1>'+
+    '<p class="lede">How the workshop actually ran. Built from the records the floor files, '+
+    'so it needs nothing typed for it. Hours, days, what was finished, what came back.</p></div>'+
+    '<div class="page-heading__actions">'+
+      '<button class="button secondary" type="button" onclick="goMonth(\''+jsq(shift(-1))+'\')">Previous month</button>'+
+      (month===thisMonth?'':'<button class="button secondary" type="button" onclick="goMonth(\''+jsq(thisMonth)+'\')">This month</button>')+
+      (month>=thisMonth?'':'<button class="button secondary" type="button" onclick="goMonth(\''+jsq(shift(1))+'\')">Next month</button>')+
+    '</div></div>';
+
+  if(!r) return sfaPaint(h+'<div class="empty-state">Reading the month…</div>');
+
+  // The one figure people will argue about, so the caveat sits above it rather
+  // than in a footnote nobody reads.
+  if(!r.weekly_off_set)
+    h+='<div class="attn attn--warn attn--flat"><span><strong>No weekly off is set.</strong> '+
+       'Sundays are being counted as working days, so "days nothing filed" is higher than it should be. '+
+       'Set it under Settings and this corrects itself for every month, back and forward.</span></div>';
+
+  h+='<div class="fl-tabs space-top-16">'+
+    ['people','stages','pieces'].map(t=>'<button class="fl-tab'+(tab===t?' is-on':'')+'" type="button" '+
+      'onclick="setMonthTab(\''+t+'\')">'+
+      esc({people:'The people', stages:'The stages', pieces:'Where work is sitting'}[t])+'</button>').join('')+
+    '</div>';
+
+  if(tab==='people'){
+    const people = r.people||[];
+    h+='<section class="panel space-top-14"><div class="panel__body">'+
+      (people.length
+        ? '<div class="data-table-wrap"><table class="data-table mo-table"><thead><tr>'+
+          '<th>Who</th><th>Present</th><th>Hours</th><th>On the work</th><th>Records</th>'+
+          '<th>Owed</th><th>Finished</th><th>Sent back</th>'+(isAdmin()?'<th></th>':'')+'</tr></thead><tbody>'+
+          people.map(p=>monthPersonRow(p,{link:isAdmin()})).join('')+'</tbody></table></div>'
+        : '<div class="empty-state">Nobody on the workshop roll for this month.</div>')+
+      '</div></section>'+
+      '<p class="field-hint space-top-10">“On the work” is time on the product timer against time on the '+
+      'clock. Waiting for stone is on the clock and is nobody’s fault, so read it as a picture of the day '+
+      'rather than a score. “Owed” counts days somebody had live work and filed nothing about any of it, '+
+      'leaving out approved leave.</p>';
+  }
+
+  if(tab==='stages'){
+    const st=(r.stages||[]).filter(x=>+x.pieces || +x.records || +x.minutes || +x.rework);
+    h+='<section class="panel space-top-14"><div class="panel__body">'+
+      (st.length
+        ? '<div class="data-table-wrap"><table class="data-table mo-table"><thead><tr>'+
+          '<th>Stage</th><th>Pieces</th><th>Time each</th><th>Hours</th><th>Planned</th><th>Rework</th>'+
+          '</tr></thead><tbody>'+st.map(monthStageRow).join('')+'</tbody></table></div>'
+        : '<div class="empty-state">No stage saw any activity this month.</div>')+
+      '</div></section>'+
+      '<p class="field-hint space-top-10">“Time each” is how long a piece actually sat at that stage, '+
+      'start to finish. Once a few months of this exist it is what a delivery date should be quoted from.</p>';
+  }
+
+  if(tab==='pieces'){
+    const pc=r.pieces||[];
+    const loose=pc.filter(x=>x.nobody_on_it).length;
+    h+='<section class="panel space-top-14"><div class="panel__head"><div>'+
+      '<h3 class="panel__title">Open pieces, longest first</h3>'+
+      '<p class="panel__description">'+pc.length+' still on the floor'+
+      (loose?' · '+loose+' with nobody on '+(loose===1?'it':'them'):'')+'</p></div></div>'+
+      '<div class="panel__body">'+
+      (pc.length
+        ? '<div class="data-table-wrap"><table class="data-table mo-table"><thead><tr>'+
+          '<th>Piece</th><th>Stage</th><th>Sitting</th><th>Hours</th><th>Who</th>'+
+          '</tr></thead><tbody>'+pc.slice(0,80).map(monthPieceRow).join('')+'</tbody></table></div>'+
+          (pc.length>80?'<p class="muted space-top-12">Showing the 80 sitting longest of '+pc.length+'.</p>':'')
+        : '<div class="empty-state">Nothing is open.</div>')+
+      '</div></section>';
+  }
+
+  sfaPaint(h);
+}
+
+// The half of a person's record that was missing: their work, not only their
+// particulars. Sits under their details on People & access.
+function paWorkSection(p){
+  const m=(S.personMonth||{})[p.user_id];
+  if(!m){
+    if(!(S.personMonthLoading||{})[p.user_id]) loadPersonMonth(p.user_id);
+    return '<section class="pa-section"><h3>This month’s work</h3>'+
+      '<div class="pa-note">Reading it…</div></section>';
+  }
+  if(!m.person) return '<section class="pa-section"><h3>This month’s work</h3>'+
+    '<div class="pa-note"><strong>Nothing yet in '+esc(m.month)+'</strong>'+
+    'No hours, no records and no work given out. Either they have not started, or nobody has assigned them anything.</div></section>';
+  const x=m.person;
+  return '<section class="pa-section"><div class="pa-section-head"><h3>'+esc(m.month)+' on the floor</h3>'+
+    '<button class="button quiet small" type="button" onclick="go(\'#/month\')">Whole workshop</button></div>'+
+    paInfoRow('Days present', x.days_present+' of '+x.days_workable)+
+    paInfoRow('Hours on the clock', String(hoursOf(x.attendance_minutes)))+
+    paInfoRow('Hours on the work', String(hoursOf(x.productive_minutes))+
+      (x.rework_minutes?' (plus '+hoursOf(x.rework_minutes)+' redoing)':''))+
+    paInfoRow('Records filed', String(x.records)+
+      (x.blocked_records?' · '+x.blocked_records+' blocked':''))+
+    paInfoRow('Days with nothing filed', String(x.days_owed))+
+    paInfoRow('Tasks finished', x.finished+' of '+x.given+
+      (x.never_opened?' · '+x.never_opened+' never opened':''))+
+    paInfoRow('Work sent back', String(x.rework_against_them)+
+      (x.rework_second_time?' · '+x.rework_second_time+' a second time':''))+
+    (m.weekly_off_set?'':'<div class="pa-note" style="margin-top:8px"><strong>No weekly off is set</strong>'+
+      'Sundays count as working days, so "days with nothing filed" reads high.</div>')+
+    '</section>';
+}
+
 // ------------------------------------------------------------- the day report
 // Yash asked for a daily report to the office about what was given out and what
 // was done, with a reminder going to whoever has not done it. This is the
@@ -15889,6 +16147,13 @@ function goDay(d){
   if(location.hash !== '#/day') go('#/day'); else render();
 }
 
+function goMonth(m){
+  S.monthDate = m;
+  S.monthReport = null;
+  if(location.hash !== '#/month') go('#/month'); else render();
+}
+function setMonthTab(t){ S.monthTab = t; render(); }
+
 // Record that a reminder went out, and by which route, so three people chasing
 // the same artisan in one evening becomes one. The WhatsApp link navigates away
 // at the same moment, which is why nothing here waits on the answer before
@@ -16019,11 +16284,15 @@ function duRenderPreviews(){
   const fs=window.__du.files;
   el.innerHTML = !fs.length ? '' :
     '<p class="field-hint">'+fs.length+' photo'+(fs.length===1?'':'s')+' ready. Remove anything blurred or duplicated.</p>'+
+    // data-blob rather than an address attribute, hydrated below. See the note
+    // in lightbox(): written into the markup string it is a literal in the built
+    // page, and the preload scanner fetches the raw source text as a URL.
     '<div class="photo-grid">'+fs.map(f=>
       '<div class="photo-card"><div class="photo-placeholder is-loaded" style="cursor:zoom-in" onclick="lightbox(\''+f.url+'\',\''+jsq(f.file.name)+'\')">'+
-      '<img alt="" src="'+f.url+'">'+
+      '<img alt="" data-blob="'+esc(f.url)+'">'+
       '<button class="ph-del" type="button" title="Remove" onclick="event.stopPropagation();duRemove(\''+f.id+'\')">✕</button>'+
       '</div></div>').join('')+'</div>';
+  el.querySelectorAll('img[data-blob]').forEach(im=>{ im.src=im.getAttribute('data-blob'); });
 }
 
 async function duSubmit(){
