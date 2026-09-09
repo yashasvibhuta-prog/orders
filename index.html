@@ -4163,9 +4163,93 @@ body.reports-mode .sfa .content{max-width:1700px}
   margin:.4rem 0 0; padding:0 0 0 1.1rem; list-style:disc;
 }
 .sfa .wk-blanks li{ margin:.15rem 0; line-height:1.45; }
+
+/* A sentence in a dialog that has to be read on a phone, in two languages, by
+   somebody who is standing somewhere they cannot record work. Line height is
+   set for Devanagari, which sits taller than Latin and clips at a tighter one. */
+.sfa .wk-say, .modal--artisan .wk-say{
+  margin:.55rem 0 0; font-size:15px; line-height:1.6;
+  color:var(--ink, #1c1a17);
+}
+
+/* Choosing which piece a record belongs to. Two marble table legs look the same
+   in a list of names on a phone, so each row carries the picture, the batch
+   code, the process the person was asked to do and the date it is due. */
+.wk-picks{ display:grid; gap:8px; margin-top:.6rem; }
+.wk-pick{
+  appearance:none; cursor:pointer; font:inherit; text-align:left; width:100%;
+  display:grid; grid-template-columns:64px 1fr; gap:12px; align-items:center;
+  padding:10px; border-radius:12px;
+  border:1px solid var(--line, #e2e2e5); background:var(--surface, #fff);
+}
+.wk-pick:hover, .wk-pick:focus-visible{ border-color:var(--ink, #1c1a17); }
+.wk-pick__img{
+  width:64px; height:64px; border-radius:9px; object-fit:cover; display:block;
+  background:var(--surface-2, #f3f3f4);
+}
+.wk-pick__main{ display:grid; gap:2px; min-width:0; }
+.wk-pick__ref{ font-size:11px; font-weight:750; letter-spacing:.05em; color:var(--muted, #6e6e73); }
+.wk-pick strong{ font-size:16px; line-height:1.3; }
+.wk-pick__meta, .wk-pick__stage, .wk-pick__due{ font-size:13px; color:var(--muted, #6e6e73); }
+.wk-pick__stage{ color:var(--ink, #1c1a17); }
+/* a row is a touch target before it is a layout */
+@media (max-width: 480px){ .wk-pick{ min-height:88px; } }
+
+/* ---- the monthly statement ------------------------------------------------
+   Two lives: a panel inside a dialog that the person reads on the phone, and
+   a sheet the browser prints to PDF. There is no PDF library here on purpose —
+   the statement is half in Hindi, and every JavaScript PDF writer would need a
+   Devanagari font embedded to render it, which is a few hundred kilobytes of
+   binary in a page a workshop opens over a phone connection. The browser
+   already has the fonts and already writes PDFs, so it does the work. */
+.stmt{ background:var(--surface, #fff); color:var(--ink, #1c1a17); }
+.stmt__head{ border-bottom:1.5px solid var(--ink, #1c1a17); padding-bottom:10px; margin-bottom:14px; }
+.stmt__head h4{ font-size:19px; margin:2px 0 4px; }
+.stmt__who{ font-size:13px; color:var(--muted, #6e6e73); }
+.stmt__sec{ margin-top:16px; }
+.stmt__sec > h5{
+  font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted, #6e6e73); margin:0 0 6px; font-weight:750;
+}
+.stmt__figs{ display:grid; grid-template-columns:repeat(auto-fit, minmax(128px, 1fr)); gap:8px; }
+.stmt__fig{ border:1px solid var(--line, #e2e0dc); border-radius:8px; padding:8px 10px; }
+.stmt__fig span{ display:block; font-size:11px; color:var(--muted, #6e6e73); line-height:1.35; }
+.stmt__fig strong{ display:block; font-size:17px; margin-top:2px; }
+.stmt table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+.stmt th{
+  text-align:left; font-weight:750; font-size:10.5px; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--muted, #6e6e73);
+  border-bottom:1px solid var(--line, #e2e0dc); padding:4px 6px 4px 0;
+}
+.stmt td{ padding:4px 6px 4px 0; border-bottom:1px solid var(--line-soft, #f0eeea); vertical-align:top; }
+.stmt td.num, .stmt th.num{ text-align:right; padding-right:0; }
+.stmt tfoot td{ font-weight:750; border-top:1.5px solid var(--ink, #1c1a17); border-bottom:none; }
+.stmt__note{
+  font-size:12px; color:var(--muted, #6e6e73); margin-top:8px;
+  border-left:2px solid var(--line, #e2e0dc); padding-left:9px;
+}
+.stmt__foot{ margin-top:18px; padding-top:9px; border-top:1px solid var(--line, #e2e0dc);
+  font-size:11px; color:var(--muted, #6e6e73); }
+.stmt__scroll{ overflow-x:auto; }
+/* the clone that the print dialog actually sees */
+#stmt-print{ display:none; }
+@media print{
+  html.printing body > *{ display:none !important; }
+  html.printing #stmt-print{ display:block !important; }
+  html.printing .stmt{
+    background:#fff; color:#000;
+    font:12px/1.45 -apple-system, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif;
+  }
+  html.printing .stmt__sec{ break-inside:avoid; page-break-inside:avoid; }
+  html.printing .stmt tr{ break-inside:avoid; page-break-inside:avoid; }
+  html.printing .stmt thead{ display:table-header-group; }
+  html.printing .stmt__scroll{ overflow:visible; }
+  html.printing .stmt__fig{ border-color:#999; }
+  @page{ margin:14mm; }
+}
 </style>
 <body>
-<script>const BUILD_ID='b638bfa967f2';</script>
+<script>const BUILD_ID='b485d938b1a5';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -4998,6 +5082,27 @@ function reviewQueue(status){
 }
 function batchOf(itemId){ return S.batchById[S.batchOfItem[itemId]] || null; }
 function batchCodeOf(itemId){ const b=batchOf(itemId); return b?b.code:''; }
+// How a piece is named to whoever is looking at it.
+//
+// The batch code is issued by the office and says nothing about who the piece
+// is for. The buyer's own reference does the opposite — "PIO ED/26-27/234" is
+// Essentia Designs and "TS-CTR-01" is Test Studio, readable by anyone holding
+// the piece — so bt_staff_items() no longer sends it to the floor at all. This
+// returns whichever of the two the account was actually given, which means the
+// floor gets the batch code and the office gets both, without either screen
+// having to know the rule.
+function pieceRef(it){
+  return it ? [batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · ') : '';
+}
+// The same, for a place where blank would read as a bug. Until the owner puts a
+// piece in a batch there is no code to show, and saying so is better than an
+// empty line the floor has to guess at.
+function pieceRefOr(it, hindi){
+  return pieceRef(it) || (hindi ? 'No batch code yet · अभी बैच कोड नहीं' : 'No batch code yet');
+}
+// Only the owner issues a batch code. bt_create_batch() refuses everybody else,
+// so this only keeps the screens honest about a button that would fail.
+function canBatch(){ return isAdmin(); }
 // The standing assignment for a piece: the one nobody has replaced or finished.
 function openAssignment(itemId, stageId){
   return (S.asgByItem[itemId]||[]).find(a=>!a.superseded_by && !a.done_at &&
@@ -5347,7 +5452,7 @@ async function loadData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd, crv, ial, outp, snap, sdet, ssub] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, abt, abi, aasg, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd, crv, ial, outp, snap, sdet, ssub] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -5388,6 +5493,12 @@ async function loadData(){
     sb.rpc('bt_floor_holds'),
     sb.rpc('bt_floor_measurements'),
     sb.rpc('bt_floor_contributors'),
+    // Shipment batches. Only the owner issues a code, so the owner has to be
+    // able to see the ones that exist and which pieces are still without one.
+    // A buyer has no policy behind these and gets an error the loader ignores.
+    admin ? sb.rpc('bt_floor_batches') : Promise.resolve({data:[]}),
+    admin ? sb.rpc('bt_floor_batch_items') : Promise.resolve({data:[]}),
+    admin ? sb.rpc('bt_floor_assignments') : Promise.resolve({data:[]}),
     // Attendance reaches the office as the day's presence and the corrections
     // waiting on it. A buyer has no policy on any of these and gets nothing.
     admin ? sb.rpc('bt_attendance_day') : Promise.resolve({data:[]}),
@@ -5471,6 +5582,7 @@ async function loadData(){
   indexAccounts((inv&&inv.data)||[], (ewb&&ewb.data)||[], (lsn&&lsn.data)||[], (lln&&lln.data)||[]);
   indexReview((rw&&rw.data)||[], (hd&&hd.data)||[], (ms&&ms.data)||[]);
   S.contributors=(ctb&&ctb.data)||[];
+  indexFloor((abt&&abt.data)||[], (abi&&abi.data)||[], (aasg&&aasg.data)||[]);
   indexAttendance((atd&&atd.data)||[], [], (sites&&sites.data)||[], (pol&&pol.data)||[], (atc&&atc.data)||[]);
   S.myLeave=(lv&&lv.data)||[]; S.absences=S.myLeave;   // the office reads the full table
   indexPay((rates&&rates.data)||[], (ws&&ws.data)||[], (adv&&adv.data)||[], (ot&&ot.data)||[]);
@@ -7790,6 +7902,10 @@ function vWorkshopFloor(){
       '<div class="button-row">'+
         '<button class="button secondary" type="button" onclick="go(\'#/admin/settings\')">'+
           active.length+'-stage guide</button>'+
+        // The batch code is the only name the floor has for a piece, and only
+        // the owner issues it. A piece with no batch is a piece nobody on the
+        // floor can refer to, so the way in belongs on the owner's own screen.
+        '<button class="button secondary" type="button" onclick="go(\'#/batches\')">Shipment batches</button>'+
         '<button class="button" type="button" onclick="setWorkshopFilter(\'missing\')">Show missing updates</button></div>')+
     '<div class="workshop-banner"><p><strong>Purchase-order view</strong> · Open an order to see its products. '+
       'Work is still recorded against the individual product.</p>'+sfaBadge('Internal working view')+'</div>'+
@@ -8907,7 +9023,7 @@ function productCard(it){
     thumbOf(visiblePhotos(S.photosByItem[it.id]||[]), it.id)+
     '<div class="product-card__content">'+
       '<div class="product-card__top"><div>'+
-        eyebrow([it.item_ref, (+it.qty||1)+' '+(it.unit||'pcs')].filter(Boolean).join(' · '))+
+        eyebrow([pieceRef(it), (+it.qty||1)+' '+(it.unit||'pcs')].filter(Boolean).join(' · '))+
         '<h4 class="product-card__name">'+esc(it.product)+'</h4></div>'+
         statusBadge(it)+'</div>'+
       '<div class="product-card__meta">'+
@@ -9468,7 +9584,7 @@ function vItem(id){
     h+='<div class="button-row"><button class="button button--secondary" type="button" onclick="go(\'#/home\')">← Production floor</button></div>';
   }
   h+='<div class="page-heading"><div>'+
-    eyebrow([it.item_ref, (+it.qty||1)+' '+(it.unit||'pcs')].filter(Boolean).join(' · '))+
+    eyebrow([pieceRef(it), (+it.qty||1)+' '+(it.unit||'pcs')].filter(Boolean).join(' · '))+
     '<h1 class="detail-title">'+esc(it.product)+'</h1>'+
     '<p class="detail-subtitle">'+esc([it.stone, it.finish, dimsOf(it)].filter(Boolean).join(' · '))+
       (due?esc((it.target_date?' · target ':' · expected ')+fdate(due)):'')+'</p></div>'+
@@ -9625,7 +9741,7 @@ function staffBuckets(){
   const q=(window.__staffQ||'').toLowerCase();
   let items=(S.items||[]).slice();
   if(q) items=items.filter(it=>((it.product||'')+' '+(it.stone||'')+' '+(it.finish||'')+' '+
-    (it.item_ref||'')+' '+(it.item_code||'')).toLowerCase().indexOf(q)>=0);
+    (it.item_ref||'')+' '+(it.item_code||'')+' '+(batchCodeOf(it.id)||'')).toLowerCase().indexOf(q)>=0);
   const open=items.filter(it=>!['delivered','cancelled','made'].includes(it.status));
   const needs=open.filter(it=>!updateToday(it.id));
   const blocked=open.filter(it=>(S.stByItem[it.id]||[]).some(r=>r.status==='on_hold'));
@@ -9710,7 +9826,7 @@ function staffReworkStrip(){
       const stg=S.stagesById[r.stage_id];
       const late=r.due_date && daysUntil(r.due_date)<0;
       return '<article class="ws-task ws-task--back">'+
-        '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · '))+
+        '<p class="eyebrow">'+esc(pieceRef(it))+
           (r.attempt_no>1?' · '+r.attempt_no+ordSuffix(r.attempt_no)+' time':'')+'</p>'+
         '<button class="ws-task__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+
           esc(it.product)+'</button>'+
@@ -9747,7 +9863,7 @@ function staffTaskStrip(){
                     cannot_start:['Cannot start · नहीं कर सकता','alert']};
       const ans=ansMap[a.ack_state];
       return '<article class="ws-task">'+
-        '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · '))+'</p>'+
+        '<p class="eyebrow">'+esc(pieceRef(it))+'</p>'+
         '<button class="ws-task__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
         '<p class="ws-task__stage">'+esc(stg?stg.name:'')+
           (lead?'':' · helping / मदद')+'</p>'+
@@ -9864,7 +9980,7 @@ function staffProduct(it){
   return '<article class="staff-product">'+
     thumbOf(ph, it.id).replace('class="photo-placeholder','class="photo-placeholder staff-product__thumb ')+
     '<div class="staff-product__top"><div>'+
-      eyebrow(it.item_ref||'')+
+      eyebrow(pieceRefOr(it, isWorker()))+
       '<h3 class="staff-product__name" style="cursor:pointer" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</h3></div>'+
       (st?badge(shortStage(st.name),held?'alert':'pending'):badge('Not started'))+
       (st?'<span class="ws-of">Stage '+(S.stages.filter(x=>x.active).findIndex(x=>x.id===st.id)+1)+
@@ -10983,6 +11099,7 @@ function render(){
   // the console's routes
   else if(parts[0]==='orders') vOrders();
   else if(parts[0]==='production') vProduction(parts[1]||'priority');
+  else if(parts[0]==='batches') vSupBatches();
   else if(parts[0]==='clients') vClients(parts[1]);
   else if(parts[0]==='reports') vReports(parts[1]);
   else if(parts[0]==='access') vAccess();
@@ -13554,7 +13671,7 @@ function vSupResources(){
         const varMin=plannedMin!=null?(r.productive_minutes||0)-plannedMin:null;
         const eq=r.equipment_id?S.equipmentById[r.equipment_id]:null;
         return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+r.item_id+'\')">'+esc(it.product||'')+'</button>'+
-            '<span class="fl-cell-sub">'+esc([batchCodeOf(r.item_id), it.item_ref].filter(Boolean).join(' · '))+'</span></td>'+
+            '<span class="fl-cell-sub">'+esc(pieceRef(it))+'</span></td>'+
           '<td>'+esc(stg?shortStage(stg.name):'')+(r.running?'<span class="fl-cell-sub">Timer running</span>':'')+'</td>'+
           '<td>'+esc(personName(r.lead)||'—')+'</td>'+
           '<td>'+(plannedMin!=null?esc(Number(r.planned_hours).toFixed(1))+' h':'—')+'</td>'+
@@ -13629,7 +13746,7 @@ function materialPanel(){
         const stg=curStage(it);
         return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+r.item_id+'\')">'+
             esc(it.product||'')+'</button><span class="fl-cell-sub">'+
-            esc([batchCodeOf(r.item_id), it.item_ref].filter(Boolean).join(' · '))+'</span></td>'+
+            esc(pieceRef(it))+'</span></td>'+
           '<td>'+esc(r.lot_code||'—')+(r.material?'<span class="fl-cell-sub">'+esc(r.material)+'</span>':'')+'</td>'+
           '<td>'+esc(fqty(r.issued, r.unit))+'</td><td>'+esc(fqty(r.used, r.unit))+'</td>'+
           '<td>'+(Number(r.offcut)?esc(fqty(r.offcut, r.unit)):'—')+'</td>'+
@@ -13694,7 +13811,7 @@ function supPieceRow(it, inBatch){
     thumbOf(ph, it.id).replace('class="photo-placeholder','class="photo-placeholder fl-row__thumb ')+
     '<div class="fl-row__main">'+
       // inside a batch card the code is already the heading above these rows
-      '<p class="eyebrow">'+esc([it.item_ref, inBatch?'':batchCodeOf(it.id)].filter(Boolean).join(' · '))+'</p>'+
+      '<p class="eyebrow">'+esc(inBatch?(it.item_ref||''):pieceRefOr(it))+'</p>'+
       '<button class="fl-row__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
       '<span class="fl-row__meta">'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · '))+'</span>'+
     '</div>'+
@@ -13727,7 +13844,11 @@ function supPieceRow(it, inBatch){
 function supCheck(itemId){
   const it=S.itemsById[itemId]; if(!it) return;
   S.apprFocus='review';
-  window.__staffQ = it.item_ref || it.product || '';
+  // The batch code names a shipment, not a piece, so it is the wrong thing to
+  // search for here: this button exists to land on one piece's pending update.
+  // The buyer's own reference used to do that and no longer reaches the floor,
+  // which leaves the product name as the most specific thing there is.
+  window.__staffQ = it.product || pieceRef(it) || '';
   go('#/approvals');
 }
 
@@ -13787,7 +13908,7 @@ function vSupHome(){
     '<p class="lede">What is on the floor, who has it, and what has not been reported yet. '+
     'Grouped by the shipment each piece leaves in.</p></div>'+
     '<div class="page-heading__actions">'+
-      '<button class="button" type="button" onclick="mCreateBatch()">New shipment batch</button>'+
+      (canBatch()?'<button class="button" type="button" onclick="mCreateBatch()">New shipment batch</button>':'')+
       '<button class="button button--secondary" type="button" onclick="go(\'#/team\')">Assign work</button>'+
     '</div></div>';
 
@@ -13821,7 +13942,7 @@ function vSupHome(){
         const it=S.itemsById[a.item_id]; if(!it) return '';
         const stg=S.stagesById[a.stage_id];
         return '<div class="fl-alert">'+
-          '<div><p class="eyebrow">'+esc([it.item_ref,batchCodeOf(it.id)].filter(Boolean).join(' · '))+'</p>'+
+          '<div><p class="eyebrow">'+esc(pieceRefOr(it))+'</p>'+
           '<button class="fl-row__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
           '<span class="fl-row__meta">'+esc((stg?shortStage(stg.name):'')+' · '+personName(a.assigned_to))+'</span></div>'+
           '<p class="fl-alert__said">'+esc(a.ack_note||'')+'</p>'+
@@ -13845,8 +13966,9 @@ function vSupHome(){
     h+='<section class="panel space-top-16"><div class="panel__head"><div>'+
       '<h3 class="panel__title">Not in a batch yet</h3>'+
       '<p class="panel__description">'+loose.length+' piece'+(loose.length===1?'':'s')+
-      ' with no shipment group. Give them one so the floor knows what leaves together.</p></div>'+
-      '<button class="button secondary small" type="button" onclick="mCreateBatch()">Create a batch</button>'+
+      (canBatch()?' with no shipment group. Give them one so the floor knows what leaves together.'
+                 :' with no shipment group. The owner issues the batch code.')+'</p></div>'+
+      (canBatch()?'<button class="button secondary small" type="button" onclick="mCreateBatch()">Create a batch</button>':'')+
       '</div><div class="panel__body fl-rows">'+loose.map(supPieceRow).join('')+'</div></section>';
   }
 
@@ -13871,13 +13993,15 @@ function vSupBatches(){
     '<p class="lede">Every batch is the set of pieces that leaves together. The code is the floor’s '+
     'reference for it — the office keeps the order number, and it never comes down here.</p></div>'+
     '<div class="page-heading__actions">'+
-      '<button class="button" type="button" onclick="mCreateBatch()">New shipment batch</button></div></div>';
+      (canBatch()?'<button class="button" type="button" onclick="mCreateBatch()">New shipment batch</button>':'')+'</div></div>';
 
   const list=(S.batches||[]).filter(b=>!q||String(b.code).toLowerCase().indexOf(q)>=0||
     (b.items||[]).some(id=>S.itemsById[id]&&((S.itemsById[id].product||'')+' '+(S.itemsById[id].stone||'')).toLowerCase().indexOf(q)>=0));
 
   h+=list.length?list.map(b=>supBatchCard(b)).join('')
-    :'<div class="empty-state">'+(q?'No batch matches that search.':'No batches yet. Create the first one from the pieces waiting below.')+'</div>';
+    :'<div class="empty-state">'+(q?'No batch matches that search.'
+        :canBatch()?'No batches yet. Create the first one from the pieces waiting below.'
+        :'No batches yet. The owner issues the batch code — until then pieces show without one.')+'</div>';
 
   const groups=unbatchedGroups();
   if(groups.length){
@@ -13891,7 +14015,7 @@ function vSupBatches(){
           '<strong>Shipment '+String.fromCharCode(65+i)+'</strong>'+
           '<span>'+g.items.length+' piece'+(g.items.length===1?'':'s')+
           (g.ship?' · expected '+esc(fdate(g.ship)):'')+'</span></div>'+
-          '<button class="button secondary small" type="button" onclick="mCreateBatch(\''+jsq(g.key)+'\')">Batch these</button>'+
+          (canBatch()?'<button class="button secondary small" type="button" onclick="mCreateBatch(\''+jsq(g.key)+'\')">Batch these</button>':'')+
         '</div><div class="fl-rows">'+g.items.map(supPieceRow).join('')+'</div></div>').join('')+
       '</div></section>';
   }
@@ -13953,7 +14077,7 @@ function apprRow(u){
       (shots.length>1?'<span class="fl-check__more">'+shots.length+' photos</span>':'')+
     '</div>'+
     '<div class="fl-check__main">'+
-      '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref, stg?shortStage(stg.name):'']
+      '<p class="eyebrow">'+esc([pieceRef(it), stg?shortStage(stg.name):'']
         .filter(Boolean).join(' · '))+'</p>'+
       '<button class="fl-row__name" type="button" onclick="go(\'#/item/'+it.id+'\')">'+esc(it.product)+'</button>'+
       '<p class="fl-check__by">'+esc(who)+' · '+esc(fdate(u.work_date))+
@@ -14280,7 +14404,7 @@ function vSupTeam(){
                       clarify:['Question asked','pending'],cannot_start:['Cannot start','alert']};
         const ans=ansMap[a.ack_state]||['—',''];
         return '<tr><td><button class="link-button" type="button" onclick="go(\'#/item/'+it.id+'\')">'+
-            esc(it.product)+'</button><span class="fl-cell-sub">'+esc(batchCodeOf(it.id)||it.item_ref||'')+'</span></td>'+
+            esc(it.product)+'</button><span class="fl-cell-sub">'+esc(pieceRef(it))+'</span></td>'+
           '<td>'+esc(stg?shortStage(stg.name):'')+'</td>'+
           '<td>'+esc(personName(a.assigned_to))+(sup.length?'<span class="fl-cell-sub">with '+esc(sup.join(', '))+'</span>':'')+'</td>'+
           '<td>'+esc(a.target_date?fdate(a.target_date):'—')+(a.planned_hours!=null?'<span class="fl-cell-sub">'+esc(Number(a.planned_hours).toFixed(1))+' h planned</span>':'')+'</td>'+
@@ -19890,7 +20014,7 @@ function myPieces(){
     .slice().sort((a,b)=>{
       const sa=(batchOf(a.id)||{}).planned_ship_date||(a.po||{}).expected_ship_date||'9999';
       const sb_=(batchOf(b.id)||{}).planned_ship_date||(b.po||{}).expected_ship_date||'9999';
-      return String(sa).localeCompare(String(sb_)) || String(a.item_ref||'').localeCompare(String(b.item_ref||''));
+      return String(sa).localeCompare(String(sb_)) || String(pieceRef(a)).localeCompare(String(pieceRef(b)));
     });
 }
 function artisanCounts(){
@@ -19898,6 +20022,44 @@ function artisanCounts(){
   const due=mine.filter(it=>!updateToday(it.id));
   const back=(S.rework||[]).filter(r=>!r.resolved_at && S.itemsById[r.item_id]);
   return {mine, due, back};
+}
+
+/* Which piece is this record for?
+   Only ever shown when there is a real choice — one task still goes straight to
+   the form. Each row carries the picture, the internal batch code, the process
+   the person was asked to do and when it is due, because a name alone is not
+   enough to tell two marble table legs apart on a phone in a workshop. */
+function mPickTask(){
+  const c=artisanCounts();
+  const list=c.due.length?c.due:c.mine;
+  if(!list.length) return;
+  if(list.length===1) return mRecordWork(list[0].id);
+
+  const row=it=>{
+    const a=openAssignment(it.id);
+    const stg=a?S.stagesById[a.stage_id]:curStage(it);
+    const ph=(targetImage(it)||(S.photosByItem[it.id]||[])[0]||null);
+    return '<button class="wk-pick" type="button" onclick="closeModal();mRecordWork(\''+jsq(it.id)+'\')">'+
+      (ph?'<img class="wk-pick__img" alt="" data-ph-path="'+esc(ph.path)+'">'
+         :'<span class="wk-pick__img wk-img__none"></span>')+
+      '<span class="wk-pick__main">'+
+        '<span class="wk-pick__ref">'+esc(pieceRefOr(it, true))+'</span>'+
+        '<strong>'+esc(it.product)+'</strong>'+
+        '<span class="wk-pick__meta">'+esc([it.stone, dimsOf(it)].filter(Boolean).join(' · '))+'</span>'+
+        (stg?'<span class="wk-pick__stage">'+stageBi(stg)+'</span>':'')+
+        (a&&a.target_date?'<span class="wk-pick__due">'+bi('Finish by','तक पूरा करें')+': '+esc(fdate(a.target_date))+'</span>':'')+
+      '</span></button>';
+  };
+
+  const m=modal('<p class="eyebrow">'+bi('Record work','काम दर्ज करें')+'</p>'+
+    '<h3>'+bi('Which piece?','कौन सा उत्पाद?')+'</h3>'+
+    '<div class="wk-notice">'+bi('You have '+list.length+' pieces to report on. Choose the one you worked on.',
+      'आपके पास '+list.length+' उत्पाद हैं। जिस पर काम किया वह चुनें।')+'</div>'+
+    '<div class="wk-picks">'+list.map(row).join('')+'</div>'+
+    '<div class="button-row wk-submit"><button class="button button--secondary button--big" type="button" '+
+      'onclick="closeModal()">'+bi('Cancel','रद्द करें')+'</button></div>', {cls:'modal--artisan'});
+  // the thumbnails are signed the same way every other photo on this screen is
+  hydrateImages(m.m);
 }
 
 /* ---- the shell: sidebar on a tablet, dock on a phone ---------------------- */
@@ -20094,7 +20256,7 @@ function artisanCard(it){
           :'<span class="wk-img__none">'+bi('No photo yet','अभी फोटो नहीं')+'</span>')+
       '<b>'+bi('Target product','तैयार करना है')+'</b></button>'+
     '<div class="wk-body">'+
-      '<p class="wk-ref">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · ')||'—')+'</p>'+
+      '<p class="wk-ref">'+esc(pieceRefOr(it, true))+'</p>'+
       '<h2>'+esc(it.product)+'</h2>'+
       artisanStatus(it)+
       '<div class="wk-specs">'+
@@ -20225,6 +20387,11 @@ function artisanMetric(label, hi, value, cue, cueHi, action, tone){
 function vArtisanHome(){
   const c=artisanCounts();
   const due=c.due[0]||c.mine[0]||null;
+  // What the global Record button would offer, which is what decides whether it
+  // can be a shortcut at all. Reading c.due alone missed the case where every
+  // piece has been reported on already: the button then fell through to
+  // c.mine[0] and picked one silently, which is the same fault in another state.
+  const pickFrom=(c.due.length?c.due:c.mine);
   const name=S.profile.full_name||shortLogin(S.profile.email||'');
 
   let h='<div class="page-heading"><div>'+
@@ -20233,7 +20400,12 @@ function vArtisanHome(){
     '<p class="lede">'+esc('Everything needed today: assigned products, due updates and anything sent back.')+
       ' / '+esc('आज के लिए सब कुछ: सौंपे उत्पाद, बाकी अपडेट और वापस आया काम।')+'</p></div>'+
     '<div class="page-heading__actions">'+
-      (due?'<button class="button button--big" type="button" onclick="mRecordWork(\''+due.id+'\')">'+
+      // With more than one piece to report on, this used to open the FIRST one
+      // and say nothing about it. Somebody with two tasks pressed Record and
+      // filed their polishing against the piece they were cutting. A shortcut
+      // is only a shortcut when there is one thing it could mean.
+      (due?'<button class="button button--big" type="button" onclick="'+
+             (pickFrom.length>1?'mPickTask()':'mRecordWork(\''+due.id+'\')')+'">'+
              icon('i-camera','icon--sm')+bi('Record work','काम दर्ज करें')+'</button>':'')+
     '</div></div>';
 
@@ -20247,7 +20419,9 @@ function vArtisanHome(){
       "document.getElementById('assigned-work').scrollIntoView({behavior:'smooth'})")+
     artisanMetric('Update due','अपडेट बाकी', c.due.length,
       c.due.length?'Record now':'All recorded', c.due.length?'अभी दर्ज करें':'सब दर्ज',
-      c.due.length?"mRecordWork('"+c.due[0].id+"')":"document.getElementById('assigned-work').scrollIntoView({behavior:'smooth'})",
+      c.due.length>1?"mPickTask()"
+        :(c.due.length===1?"mRecordWork('"+c.due[0].id+"')"
+          :"document.getElementById('assigned-work').scrollIntoView({behavior:'smooth'})"),
       c.due.length?'warn':'')+
     artisanMetric('Leave request','छुट्टी', (S.myLeave||[]).filter(l=>l.status==='pending').length,
       (S.myLeave||[]).some(l=>l.status==='pending')?'Check status':'Apply for leave',
@@ -20295,6 +20469,8 @@ function vArtisanAttendance(){
     '<div class="page-heading__actions">'+
       '<button class="button button--big" type="button" id="clock-btn" onclick="doClock(\''+(clocked?'clock_out':'clock_in')+'\')">'+
         (clocked?bi('Clock out','बाहर जाने का समय'):bi('Clock in','हाज़िरी लगाएँ'))+'</button>'+
+      '<button class="button secondary" type="button" onclick="mMonthStatement()">'+
+        bi('Monthly statement','मासिक विवरण')+'</button>'+
     '</div></div>';
 
   h+='<div class="utility-grid"><section class="panel"><div class="panel__head"><div>'+
@@ -20343,6 +20519,75 @@ function locate(){
       ()=>res(null), {enableHighAccuracy:true, timeout:10000, maximumAge:0});
   });
 }
+/* ---- the factory perimeter ---------------------------------------------
+   Work is recorded at the factory. The rule lives in the database — this is
+   only so a person who is somewhere else reads a sentence they can act on
+   rather than a policy error.
+
+   The fence is on the WORK RECORD, not on the app. Leave, pay, advances and the
+   statement stay reachable anywhere, because those are what a person needs when
+   they are away: ill, travelling, or standing at a bank. */
+function siteList(){ return (S.sites||[]).filter(s=>s.active!==false); }
+
+function metresFromFactory(pos){
+  const sites=siteList();
+  if(!pos || !sites.length) return null;
+  const R=6371000, rad=d=>d*Math.PI/180;
+  let best=null;
+  sites.forEach(s=>{
+    if(s.lat==null||s.lng==null) return;
+    const dLat=rad(s.lat-pos.lat), dLng=rad(s.lng-pos.lng);
+    const a=Math.sin(dLat/2)**2 +
+      Math.cos(rad(pos.lat))*Math.cos(rad(s.lat))*Math.sin(dLng/2)**2;
+    const d=2*R*Math.asin(Math.min(1,Math.sqrt(a)));
+    if(best==null || d<best) best=d;
+  });
+  return best==null?null:Math.round(best);
+}
+
+// No site configured means the office has not drawn the fence yet, which must
+// not stop the floor working. Same answer the database gives.
+function nearFactory(pos){
+  const sites=siteList();
+  if(!sites.length) return true;
+  if(!pos) return false;
+  const R=6371000, rad=d=>d*Math.PI/180;
+  return sites.some(s=>{
+    if(s.lat==null||s.lng==null) return false;
+    const dLat=rad(s.lat-pos.lat), dLng=rad(s.lng-pos.lng);
+    const a=Math.sin(dLat/2)**2 +
+      Math.cos(rad(pos.lat))*Math.cos(rad(s.lat))*Math.sin(dLng/2)**2;
+    return 2*R*Math.asin(Math.min(1,Math.sqrt(a))) <= (s.radius_m||100);
+  });
+}
+
+// What a person sees instead of a refusal they cannot read. It says where they
+// appear to be, and what to do about it — including the case the fence cannot
+// tell apart from being away: a phone that cannot get a fix under a metal roof.
+function mNotAtFactory(pos){
+  const away=metresFromFactory(pos);
+  modal('<p class="eyebrow">'+bi('Not at the factory','फैक्ट्री पर नहीं')+'</p>'+
+    '<h3>'+bi('Come to the factory to record work','काम दर्ज करने फैक्ट्री आएं')+'</h3>'+
+    '<div class="wk-notice">'+
+      (pos
+        ? bi('Your phone says you are about '+away+' m away.',
+             'आपका फ़ोन बता रहा है कि आप लगभग '+away+' मीटर दूर हैं।')
+        : bi('Your phone could not find where you are.',
+             'आपका फ़ोन आपकी जगह नहीं बता पाया।'))+
+    '</div>'+
+    '<p class="wk-say">'+bi('A day’s work is written down at the factory, so the record says where it was done.',
+      'दिन का काम फैक्ट्री पर ही दर्ज होता है, ताकि रिकॉर्ड में जगह सही रहे।')+'</p>'+
+    '<p class="wk-say">'+(pos
+      ? bi('If you are at the factory and this still says no, tell the supervisor — they can record it under their own name.',
+           'अगर आप फैक्ट्री पर हैं और फिर भी मना कर रहा है, सुपरवाइज़र को बताएं — वे अपने नाम से दर्ज कर सकते हैं।')
+      : bi('Turn on location for this app, or ask the supervisor to record it under their own name.',
+           'इस ऐप के लिए लोकेशन चालू करें, या सुपरवाइज़र से अपने नाम से दर्ज करने को कहें।'))+'</p>'+
+    '<p class="wk-say">'+bi('Your hours, leave, pay and statement work from anywhere — only the work record needs the factory.',
+      'आपके घंटे, छुट्टी, वेतन और स्टेटमेंट कहीं से भी खुलेंगे — सिर्फ़ काम का रिकॉर्ड फैक्ट्री पर।')+'</p>'+
+    '<div class="button-row wk-submit"><button class="button button--big" type="button" onclick="closeModal()">'+
+      bi('Got it','ठीक है')+'</button></div>', {cls:'modal--artisan'});
+}
+
 async function doClock(kind, extra){
   const btn=$('clock-btn'); if(btn){ btn.disabled=true; }
   const pos=await locate();
@@ -20585,7 +20830,12 @@ function vPay(){
   let h='<div class="page-heading"><div>'+
     '<p class="eyebrow">'+L('Private personal records','निजी रिकॉर्ड')+'</p>'+
     '<h1 class="display-title">'+L('Pay & advances','वेतन और एडवांस')+'.</h1>'+
-    '<p class="lede">'+esc('Only you and Admin can see this information.')+(isWorker()?' / '+esc('यह जानकारी केवल आपको और एडमिन को दिखेगी।'):'')+'</p></div></div>';
+    '<p class="lede">'+esc('Only you and Admin can see this information.')+(isWorker()?' / '+esc('यह जानकारी केवल आपको और एडमिन को दिखेगी।'):'')+'</p></div>'+
+    // One month on one sheet, to keep or to hand to somebody. Every screen here
+    // shows a different piece of the same month and none of them left the phone.
+    '<div class="page-heading__actions">'+
+      '<button class="button button--big" type="button" onclick="mMonthStatement()">'+
+        L('Monthly statement','मासिक विवरण')+'</button></div></div>';
   h+='<div class="utility-grid">'+wagePanel(L)+
     '<section class="panel"><div class="panel__head"><div>'+
       '<h3 class="panel__title">'+L('Advance requests','एडवांस अनुरोध')+'</h3>'+
@@ -20594,6 +20844,188 @@ function vPay(){
     '<div class="panel__body">'+(mine.length?mine.map(a=>advanceRow(a, L)).join('')
       :'<div class="empty-state">'+L('No advance requested yet.','अभी कोई एडवांस नहीं माँगा।')+'</div>')+'</div></section></div>';
   sfaPaint(h);
+}
+/* ---- the statement a person can take away ---------------------------------
+   Yash asked for one month on one sheet: attendance, leave, wages payable,
+   advances adjusted, and what is still owed on an advance. Every figure comes
+   back from bt_month_statement() in a single call, so the panel on the phone
+   and the printed sheet cannot disagree with each other, and neither can
+   disagree with payroll — the attendance minutes are the same ones the wage
+   statement is prepared from.
+
+   Nothing here computes a wage. Where the office has published a statement for
+   the month, its figures are printed as published. Where it has not, the sheet
+   says so and prints the hours only. A number invented to fill a gap would be
+   worse than a gap, because somebody would be paid against it. */
+function stmtMonths(n){
+  const out=[], d=new Date();
+  for(let i=0;i<n;i++){
+    const m=new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth()-i, 1));
+    out.push(m.toISOString().slice(0,7));
+  }
+  return out;
+}
+function stmtMonthLabel(ym, hindi){
+  const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const HI =['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+  const i=Number(String(ym).slice(5,7))-1, y=String(ym).slice(0,4);
+  if(i<0||i>11) return String(ym);
+  return hindi ? (MON[i]+' '+y+' · '+HI[i]+' '+y) : (MON[i]+' '+y);
+}
+function mMonthStatement(){
+  const hindi=isWorker(), L=payL();
+  const months=stmtMonths(12);
+  const m=modal('<p class="eyebrow">'+L('Your own record','आपका अपना रिकॉर्ड')+'</p>'+
+    '<h3>'+L('Monthly statement','मासिक विवरण')+'</h3>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full field--big"><label for="st-month">'+L('Month','महीना')+'</label>'+
+        '<select id="st-month">'+months.map((ym,i)=>'<option value="'+esc(ym)+'"'+(i===0?' selected':'')+'>'+
+          esc(stmtMonthLabel(ym, hindi))+'</option>').join('')+'</select></div>'+
+      '<div class="button-row field--full wk-submit">'+
+        '<button class="button button--big" type="button" id="st-go">'+L('Show the month','महीना दिखाएँ')+'</button>'+
+        '<button class="button secondary" type="button" onclick="closeModal()">'+L('Close','बंद करें')+'</button></div>'+
+    '</div><div id="st-out"></div>');
+  m.m.classList.add('modal--artisan');
+  $('st-go').onclick=async e=>{
+    const btn=e.currentTarget, ym=$('st-month').value;
+    btn.disabled=true; $('st-out').innerHTML='<p class="field-hint">'+L('Loading…','लोड हो रहा है…')+'</p>';
+    const {data,error}=await sb.rpc('bt_month_statement',{p_user:null, p_month:ym+'-01'});
+    btn.disabled=false;
+    if(error){ $('st-out').innerHTML=''; toast(error.message,{err:true}); return; }
+    // deliberately not stashed on window: this is one person's pay, and a
+    // scratch global outlives the sign-out that is supposed to end the session.
+    $('st-out').innerHTML='<div class="stmt" id="stmt-sheet">'+stmtSheet(data, hindi)+'</div>'+
+      '<div class="button-row space-top-12">'+
+        '<button class="button" type="button" onclick="stmtPrint()">'+L('Save as PDF','PDF सेव करें')+'</button></div>';
+  };
+}
+/* The browser's own print dialog is the PDF writer. The sheet is cloned to the
+   top of <body> first: printing it where it sits — inside a scrolled dialog —
+   clips it at the fold on every engine I could check. */
+function stmtPrint(){
+  const sheet=$('stmt-sheet'); if(!sheet) return;
+  const old=$('stmt-print'); if(old) old.remove();
+  const box=document.createElement('div');
+  box.id='stmt-print';
+  box.innerHTML='<div class="stmt">'+sheet.innerHTML+'</div>';
+  document.body.appendChild(box);
+  document.documentElement.classList.add('printing');
+  const done=()=>{
+    document.documentElement.classList.remove('printing');
+    const n=$('stmt-print'); if(n) n.remove();
+    window.removeEventListener('afterprint', done);
+  };
+  window.addEventListener('afterprint', done);
+  // Safari on iOS has never fired afterprint reliably; without this the app is
+  // left with its own screen hidden behind a stylesheet nobody can see.
+  setTimeout(done, 60000);
+  window.print();
+}
+function stmtSheet(d, hindi){
+  const B=(en,hi)=>hindi?bi(en,hi):esc(en);
+  const p=d.person||{};
+  const att=d.attendance||[], lv=d.leave||[], ws=d.wage_statements||[], adv=d.advances||[];
+  const rupee=v=>esc(money(Number(v)||0,'INR'));
+
+  let h='<div class="stmt__head">'+
+    '<p class="stmt__who">'+esc(S.settings&&S.settings.company_name?S.settings.company_name:'Gujraj Impex')+'</p>'+
+    '<h4>'+B('Monthly statement','मासिक विवरण')+' — '+esc(stmtMonthLabel(d.month, hindi))+'</h4>'+
+    '<p class="stmt__who">'+esc(p.full_name||'')+
+      [p.employee_code?' · '+p.employee_code:'', p.trade?' · '+p.trade:''].join('')+'</p></div>';
+
+  /* attendance */
+  h+='<div class="stmt__sec"><h5>'+B('Attendance','हाज़िरी')+'</h5>'+
+    '<div class="stmt__figs">'+
+      '<div class="stmt__fig" data-fig="days"><span>'+B('Days present','दिन आए')+'</span><strong>'+esc(String(d.days_present||0))+'</strong></div>'+
+      '<div class="stmt__fig" data-fig="hours"><span>'+B('Hours on the clock','घंटे')+'</span><strong>'+esc(fmins(d.minutes||0))+'</strong></div>'+
+      (Number(d.overtime_hours)>0?'<div class="stmt__fig"><span>'+B('Approved overtime','मंज़ूर ओवरटाइम')+'</span><strong>'+esc(fhours(d.overtime_hours))+'</strong></div>':'')+
+    '</div>';
+  if(att.length){
+    h+='<div class="stmt__scroll"><table><thead><tr>'+
+      '<th>'+B('Date','तारीख़')+'</th><th>'+B('In','आना')+'</th><th>'+B('Out','जाना')+'</th>'+
+      '<th class="num">'+B('Hours','घंटे')+'</th><th>'+B('Where','कहाँ')+'</th></tr></thead><tbody>'+
+      att.map(r=>'<tr><td>'+esc(fdate(r.work_date))+'</td><td>'+esc(fclock(r.first_in))+'</td>'+
+        '<td>'+esc(r.last_out?fclock(r.last_out):'—')+'</td>'+
+        '<td class="num">'+esc(fmins(r.minutes))+'</td>'+
+        '<td>'+(r.within?B('Factory','फैक्ट्री'):B('Away','बाहर'))+
+          (r.corrected?' · '+B('corrected','सुधार'):'')+'</td></tr>').join('')+
+      '</tbody><tfoot><tr><td colspan="3">'+B('Total','कुल')+'</td>'+
+      '<td class="num">'+esc(fmins(d.minutes||0))+'</td><td></td></tr></tfoot></table></div>';
+  } else {
+    h+='<p class="stmt__note">'+B('No attendance was recorded in this month.','इस महीने कोई हाज़िरी दर्ज नहीं हुई।')+'</p>';
+  }
+  if(Number(d.pending_exceptions)>0)
+    h+='<p class="stmt__note">'+B(d.pending_exceptions+' clock'+(d.pending_exceptions===1?'':'s')+' made away from the factory are still waiting for the supervisor.',
+        'फैक्ट्री के बाहर लगी '+d.pending_exceptions+' हाज़िरी पर सुपरवाइज़र की मंज़ूरी बाकी है।')+'</p>';
+  h+='</div>';
+
+  /* leave */
+  h+='<div class="stmt__sec"><h5>'+B('Leave','छुट्टी')+'</h5>';
+  if(lv.length){
+    h+='<div class="stmt__scroll"><table><thead><tr>'+
+      '<th>'+B('Days','दिन')+'</th><th>'+B('Reason','कारण')+'</th><th>'+B('Decision','फ़ैसला')+'</th></tr></thead><tbody>'+
+      lv.map(l=>'<tr><td>'+esc(leaveSpan(l))+(l.full_shift?'':' · '+esc(String(l.from_time).slice(0,5)+'–'+String(l.to_time).slice(0,5)))+'</td>'+
+        '<td>'+esc(leaveReasonLabel(l.reason_code, hindi))+'</td>'+
+        '<td>'+(l.status==='approved'?B('Approved','मंज़ूर'):l.status==='rejected'?B('Not approved','मंज़ूर नहीं'):B('Waiting','बाकी'))+'</td></tr>').join('')+
+      '</tbody></table></div>';
+  } else {
+    h+='<p class="stmt__note">'+B('No leave was applied for in this month.','इस महीने कोई छुट्टी नहीं माँगी गई।')+'</p>';
+  }
+  h+='</div>';
+
+  /* wages — published figures only, never a calculation of mine */
+  h+='<div class="stmt__sec"><h5>'+B('Wages','वेतन')+'</h5>';
+  if(ws.length){
+    h+='<div class="stmt__scroll"><table id="stmt-wages"><thead><tr><th>'+B('Period','अवधि')+'</th>'+
+      '<th class="num">'+B('Hours','घंटे')+'</th><th class="num">'+B('Rate','दर')+'</th>'+
+      '<th class="num">'+B('Gross','कुल वेतन')+'</th><th class="num">'+B('Advance','एडवांस')+'</th>'+
+      '<th class="num">'+B('Other','अन्य कटौती')+'</th><th class="num">'+B('Net payable','कुल देय')+'</th></tr></thead><tbody>'+
+      ws.map(w=>'<tr><td>'+esc(fdate(w.period_start)+' – '+fdate(w.period_end))+'</td>'+
+        '<td class="num">'+esc(fhours(w.approved_hours))+'</td>'+
+        '<td class="num">'+rupee(w.hourly_rate)+'</td>'+
+        '<td class="num">'+rupee(w.gross_pay)+'</td>'+
+        '<td class="num">− '+rupee(w.advances_recovered)+'</td>'+
+        '<td class="num">− '+rupee(w.deductions)+'</td>'+
+        '<td class="num">'+rupee(w.net_payable)+'</td></tr>').join('')+
+      '</tbody><tfoot><tr><td colspan="6">'+B('Net payable for the month','महीने का कुल देय')+'</td>'+
+      '<td class="num">'+rupee(ws.reduce((t,w)=>t+(Number(w.net_payable)||0),0))+'</td></tr></tfoot></table></div>'+
+      // whatever the office wrote by hand about the period, in its own words
+      ws.filter(w=>w.breakdown).map(w=>'<p class="stmt__note">'+esc(w.breakdown)+'</p>').join('')+
+      '<p class="stmt__note">'+B('These are the figures the office published. Approved hours × hourly rate, less advances and deductions.',
+        'ये कार्यालय द्वारा जारी किए गए आँकड़े हैं। मंज़ूर घंटे × प्रति घंटा दर, फिर एडवांस और कटौती।')+'</p>';
+  } else {
+    h+='<p class="stmt__note">'+B('The office has not published a wage statement covering this month yet, so no wage figure is shown. The hours above are what has been recorded.',
+      'इस महीने का वेतन विवरण कार्यालय ने अभी जारी नहीं किया, इसलिए यहाँ कोई रकम नहीं है। ऊपर दिए घंटे दर्ज हो चुके हैं।')+'</p>';
+  }
+  h+='</div>';
+
+  /* advances */
+  h+='<div class="stmt__sec"><h5>'+B('Advances','एडवांस')+'</h5>'+
+    '<div class="stmt__figs">'+
+      '<div class="stmt__fig"><span>'+B('Taken this month','इस महीने लिया')+'</span><strong>'+rupee(d.advance_taken)+'</strong></div>'+
+      '<div class="stmt__fig"><span>'+B('Cut from this month’s pay','इस महीने वेतन से कटा')+'</span><strong>'+rupee(d.advance_recovered_from_pay)+'</strong></div>'+
+      '<div class="stmt__fig"><span>'+B('Closed this month','इस महीने पूरा हुआ')+'</span><strong>'+rupee(d.advance_closed)+'</strong></div>'+
+      '<div class="stmt__fig" data-fig="balance"><span>'+B('Still owed at month end','महीने के अंत में बाकी')+'</span><strong>'+rupee(d.advance_balance)+'</strong></div>'+
+    '</div>';
+  if(adv.length){
+    h+='<div class="stmt__scroll"><table><thead><tr><th>'+B('Approved on','मंज़ूरी की तारीख़')+'</th>'+
+      '<th>'+B('Reason','कारण')+'</th><th class="num">'+B('Amount','रकम')+'</th>'+
+      '<th>'+B('Standing','स्थिति')+'</th></tr></thead><tbody>'+
+      adv.map(a=>'<tr><td>'+esc(a.decided_at?fdate(String(a.decided_at).slice(0,10)):'—')+'</td>'+
+        '<td>'+esc(advanceReasonLabel(a.reason_code, hindi))+'</td>'+
+        '<td class="num">'+rupee(a.approved_amount!=null?a.approved_amount:a.amount)+'</td>'+
+        '<td>'+(a.recovered_at?B('Closed','पूरा')+' · '+esc(fdate(String(a.recovered_at).slice(0,10))):B('Still owed','बाकी'))+'</td></tr>').join('')+
+      '</tbody></table></div>';
+  } else {
+    h+='<p class="stmt__note">'+B('No advance was outstanding in this month.','इस महीने कोई एडवांस बाकी नहीं था।')+'</p>';
+  }
+  h+='</div>';
+
+  h+='<div class="stmt__foot">'+
+    B('Prepared from the workshop record on','कार्यशाला के रिकॉर्ड से बना')+' '+
+    esc(fdate(String(d.generated_at).slice(0,10)))+'. '+
+    B('If anything here is wrong, tell the office.','कुछ ग़लत हो तो कार्यालय को बताएं।')+'</div>';
+  return h;
 }
 function mRequestAdvance(){
   const L=payL(), hindi=isWorker();
@@ -20655,10 +21087,15 @@ function advSyncPresets(){
 function mRecordWork(itemId, stageId){
   const it=S.itemsById[itemId]; if(!it) return;
   const cur=curStage(it);
-  const stage=stageId?S.stagesById[stageId]:cur;
+  const a=openAssignment(it.id);
+  // The process this opens on is the one the person was ASKED to do, not the
+  // one the piece happens to be sitting at. Those differ all the time — a piece
+  // at Block Dressing can be assigned for polishing — and defaulting to the
+  // piece's stage quietly filed the work against the wrong process.
+  const stage = stageId ? S.stagesById[stageId]
+              : ((a && S.stagesById[a.stage_id]) || cur);
   const worker=isWorker();
   const img=targetImage(it)||(S.photosByItem[it.id]||[])[0]||null;
-  const a=openAssignment(it.id);
   const people=floorPeople();
   window.__du={files:[], itemId, stageId:stage?stage.id:null};
   // the credited person's timer time waiting for a record on this product and process
@@ -20683,7 +21120,7 @@ function mRecordWork(itemId, stageId){
         '</select></div></div>';
 
   const m=modal(
-    '<p class="eyebrow">'+esc([batchCodeOf(it.id), it.item_ref].filter(Boolean).join(' · ')||'')+'</p>'+
+    '<p class="eyebrow">'+esc(pieceRef(it))+'</p>'+
     '<h3>'+bi('Record work','काम दर्ज करें')+'</h3>'+
     '<div class="wk-notice wk-notice--product">'+
       (img?'<img alt="" data-ph-path="'+esc(img.path)+'">':'<span class="wk-img__none"></span>')+
@@ -20743,22 +21180,41 @@ function mRecordWork(itemId, stageId){
     '</div></div>'+
     '<div class="field--full" id="du-previews"></div>'+
     '<div class="form-grid">'+
+      // Both of these opened already answered — "Completed today" and "Cutting
+      // or sizing". A person tapping through recorded a completed cut they
+      // never claimed, on a piece they may have been polishing. Neither is a
+      // safe thing to assume on somebody's behalf, so neither is assumed.
       '<div class="field"><label for="rw-status">'+bi('Work status','काम की स्थिति')+'</label><select id="rw-status" onchange="rwToggle()">'+
+        '<option value="">'+bi('Choose','चुनें')+'</option>'+
         '<option value="complete">'+bi('Completed today','आज पूरा हुआ')+'</option>'+
         '<option value="continuing">'+bi('Work continuing','काम जारी है')+'</option>'+
         '<option value="no_work">'+bi('No work today','आज काम नहीं हुआ')+'</option>'+
         '<option value="blocked">'+bi('Blocked','काम रुका है')+'</option></select></div>'+
       '<div class="field" id="rw-act-wrap"><label for="rw-act">'+bi('What was done?','क्या काम हुआ?')+'</label><select id="rw-act" onchange="rwToggle()">'+
+        '<option value="">'+bi('Choose','चुनें')+'</option>'+
         opt(ACTIVITIES)+'</select></div>'+
       '<div class="field field--full" id="rw-other-wrap" hidden><label for="rw-other">'+bi('Other work','अन्य काम लिखें')+'</label>'+
         '<input id="rw-other" placeholder="'+bi('Short detail','छोटा विवरण')+'"></div>'+
       '<div class="field field--full" id="rw-block-wrap" hidden><label for="rw-block">'+bi('What is stopping the work?','काम क्यों रुका है?')+'</label>'+
         '<select id="rw-block" onchange="rwToggle()">'+opt(BLOCKERS)+'</select>'+
         '<input id="rw-block-other" class="space-top-10" aria-label="'+bi('Say what is stopping the work','बताएं काम क्यों रुका है')+'" placeholder="'+bi('Say what','बताएं क्या')+'" hidden></div>'+
+      // "Other" with no way to say what — the reason was stored as the bare
+      // word "Other", which tells the office nothing and cannot be acted on.
       '<div class="field field--full" id="rw-nowork-wrap" hidden><label for="rw-nowork">'+bi('Why no work?','काम क्यों नहीं हुआ?')+'</label>'+
-        '<select id="rw-nowork">'+opt(NO_WORK)+'</select></div>'+
-      '<div class="field field--full" id="rw-meas-wrap"><label for="rw-meas">'+bi('Measurement','माप')+' <span class="muted">(optional / वैकल्पिक)</span></label>'+
-        '<input id="rw-meas" inputmode="numeric" placeholder="1500 × 350 × 160 mm"></div>'+
+        '<select id="rw-nowork" onchange="rwToggle()">'+
+          '<option value="">'+bi('Choose','चुनें')+'</option>'+opt(NO_WORK)+'</select>'+
+        '<input id="rw-nowork-other" class="space-top-10" hidden '+
+          'aria-label="'+bi('Say why there was no work','बताएं काम क्यों नहीं हुआ')+'" '+
+          'placeholder="'+bi('Say what','बताएं क्या')+'"></div>'+
+      // The placeholder was a fixed 1500 × 350 × 160 mm on every piece, which
+      // reads as the size to write down. It is a prompt for what YOU measured;
+      // the piece's approved size is shown above, where it cannot be mistaken
+      // for an answer.
+      '<div class="field field--full" id="rw-meas-wrap"><label for="rw-meas">'+bi('Measurement you took','आपने जो माप लिया')+' <span class="muted">(optional / वैकल्पिक)</span></label>'+
+        '<input id="rw-meas" inputmode="numeric" placeholder="'+
+          bi('length × width × height in mm','लंबाई × चौड़ाई × ऊँचाई मिमी में')+'">'+
+        (dimsOf(it)?'<p class="field-hint">'+bi('Approved size','मंज़ूर नाप')+': '+esc(dimsOf(it))+'</p>':'')+
+      '</div>'+
     '</div>'+
     '<div class="wk-notice"><strong>'+bi('Supervisor review','सुपरवाइज़र जाँच')+'</strong>'+
       esc('The product, process and credited worker are saved with every photo.')+' / '+
@@ -20778,6 +21234,7 @@ function mRecordWork(itemId, stageId){
 function rwToggle(){
   const s=$('rw-status').value;
   $('rw-act-wrap').hidden = s==='no_work';
+  $('rw-nowork-other').hidden = !(s==='no_work' && $('rw-nowork').value==='Other');
   $('rw-other-wrap').hidden = !($('rw-act').value==='Other work' && s!=='no_work');
   $('rw-block-wrap').hidden = s!=='blocked';
   $('rw-block-other').hidden = $('rw-block').value!=='Other';
@@ -20809,11 +21266,18 @@ async function rwSubmit(){
   const act=$('rw-act').value;
   const other=($('rw-other').value||'').trim();
   const meas=($('rw-meas').value||'').trim();
+  const noWorkWhy=$('rw-nowork').value;
+  const noWorkOther=($('rw-nowork-other').value||'').trim();
   const lead=isWorker()?uid():($('rw-lead')?$('rw-lead').value:'');
   const support=!isWorker()&&$('rw-support')?$('rw-support').value:'';
 
   const say=(en,hi)=>toast(en+' · '+hi,{err:true});
+  if(!status) return say('Say how the work went','बताएं काम कैसा रहा');
   if(!stageId) return say('Choose the production process','उत्पादन प्रक्रिया चुनें');
+  if(!noWork && !act) return say('Say what was done','बताएं क्या काम हुआ');
+  if(noWork && !noWorkWhy) return say('Say why there was no work','बताएं काम क्यों नहीं हुआ');
+  if(noWork && noWorkWhy==='Other' && !noWorkOther)
+    return say('Say why there was no work','बताएं काम क्यों नहीं हुआ');
   if(!lead) return say('Say who did the work','बताएं काम किसने किया');
   if(support && support===lead) return say('The same person cannot be lead and support','एक ही व्यक्ति मुख्य और सहायक नहीं हो सकता');
   if(!noWork && !d.files.length) return say('Add at least one photo of the work','काम की कम से कम एक फोटो जोड़ें');
@@ -20840,6 +21304,26 @@ async function rwSubmit(){
   }
 
   const btn=$('du-save'); btn.disabled=true; btn.textContent='Saving… · सेव हो रहा है';
+
+  // Where this is being written from. A day's work is recorded at the factory,
+  // and the database is what decides — this only sends the position and says
+  // something a person can act on when it is refused, instead of showing them
+  // the row-level-security message. The office and the supervisor are not
+  // fenced, so this only runs for a worker.
+  let pos=null;
+  // Only when there is a fence to check. With no site configured the office has
+  // not drawn one, and asking a worker for their location to answer a question
+  // nobody is asking is both rude and slow — the server takes the same view.
+  if(isWorker() && siteList().length){
+    btn.textContent='Checking where you are… · जगह देख रहे हैं';
+    pos=await locate();
+    if(!pos || !nearFactory(pos)){
+      btn.disabled=false; btn.textContent='Save · सेव करें';
+      mNotAtFactory(pos);
+      return;
+    }
+  }
+
   try{
     const summary = noWork ? null
       : (act==='Other work' ? other : act) + (status==='complete' ? ' — completed today.' : '');
@@ -20847,8 +21331,12 @@ async function rwSubmit(){
       item_id:d.itemId, stage_id:stageId, work_date:today(),
       work_status: noWork?'no_work':(blocked?'blocked':'worked'),
       public_summary: summary,
-      no_work_reason: noWork?$('rw-nowork').value:null,
-      review_status:'pending', submitted_by:uid(), worked_by:lead
+      // "Other" alone told the office nothing; the explanation travels with it
+      no_work_reason: noWork
+        ? (noWorkWhy==='Other' ? 'Other — ' + noWorkOther : noWorkWhy)
+        : null,
+      review_status:'pending', submitted_by:uid(), worked_by:lead,
+      lat: pos?pos.lat:null, lng: pos?pos.lng:null
     }).select().single();
     if(ins.error) throw ins.error;
     const updateId=ins.data.id;
