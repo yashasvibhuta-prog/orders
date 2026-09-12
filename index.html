@@ -830,13 +830,20 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 }
 .app-shell--console .mobile-dock{display:grid}
 @media (min-width:1100px){ .app-shell--console .mobile-dock{display:none} }
-/* The dock is a four-column grid everywhere else. The supervisor carries five
-   screens, and the fifth wrapped onto a second row that sat across the middle
-   of the page. Five columns instead, with the labels tightened just enough to
-   fit "Batches" at 390px — the alternative was hiding a screen behind a "More"
-   sheet, and on a floor tablet that is one tap too many for something used
-   every hour. */
-.app-shell--console .mobile-dock{grid-template-columns:repeat(5,1fr)}
+/* The dock is a four-column grid everywhere else. The supervisor carries more
+   screens than that, and the extras wrapped onto a second row that sat across
+   the middle of the page. Hiding a screen behind a "More" sheet was the
+   alternative, and on a floor tablet that is one tap too many for something
+   used every hour.
+   This was fixed once by hard-coding five columns. A sixth screen was added
+   later and it wrapped again, because a number written in the stylesheet has no
+   idea how many links the shell actually draws. The track count now follows the
+   children, so the next screen cannot break it either. */
+.app-shell--console .mobile-dock{
+  grid-template-columns:none;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(0,1fr);
+}
 .app-shell--console .mobile-dock__item{font-size:11px;gap:3px;padding:0 2px;text-align:center}
 .app-shell--console .mobile-dock__item .icon{width:20px;height:20px}
 @media (max-width:359px){
@@ -3707,6 +3714,79 @@ body.reports-mode .sfa .content{max-width:1700px}
 /* His settings shell keeps its header and health strip; the working editor runs
    full width beneath it rather than inside his two-column workspace. */
 .sfa .settings-body{margin-top:12px}
+
+
+/* ---------------------------------------------------------------------------
+   The buyer file: one client, their orders, their pieces and where each is.
+   Reached from People & access by clicking the client's name.
+--------------------------------------------------------------------------- */
+.sfa .pa-row>button{border:0;background:none;font:inherit;color:inherit;text-align:left;
+  cursor:pointer;padding:0;display:grid;gap:2px;align-content:center;min-height:40px}
+.sfa .pa-record--link{grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center}
+.sfa .pa-record--link:hover strong{text-decoration:underline}
+.sfa .pa-chevron--link{justify-items:center;font-size:18px;color:var(--ink-faint)}
+.sfa .pa-chevron--link:hover{color:var(--ink)}
+.sfa .pa-chip--link{border:1px solid var(--line);background:var(--surface);font:inherit;
+  cursor:pointer;color:inherit}
+.sfa .pa-chip--link:hover{background:var(--surface-2);text-decoration:underline}
+
+.sfa .cf-back{border:0;background:none;font:inherit;color:inherit;cursor:pointer;padding:0;
+  text-decoration:underline}
+.sfa .cf-orders{display:grid;gap:14px;margin-top:14px}
+.sfa .cf-order{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.sfa .cf-order-head{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) auto;
+  gap:12px;align-items:center;padding:14px;border-bottom:1px solid var(--line)}
+.sfa .cf-order-title{border:0;background:none;font:inherit;color:inherit;text-align:left;
+  cursor:pointer;padding:0;display:grid;gap:2px}
+.sfa .cf-order-title strong{font-size:16px}
+.sfa .cf-order-title:hover strong{text-decoration:underline}
+.sfa .cf-order-title>span:last-child{font-size:12px;color:var(--ink-faint)}
+.sfa .cf-order-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sfa .cf-order-facts span{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .cf-order-facts strong{font-size:13px}
+.sfa .cf-order-blocker{margin:0;padding:9px 14px;font-size:12.5px;
+  background:var(--surface-2);color:var(--ink-secondary,var(--ink-faint));border-bottom:1px solid var(--line)}
+.sfa .cf-pieces{display:grid}
+.sfa .cf-piece{width:100%;display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) 110px 120px 92px 22px;
+  gap:12px;align-items:center;padding:11px 14px;border:0;border-top:1px solid var(--line);
+  background:var(--surface);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.sfa .cf-piece:first-child{border-top:0}
+.sfa .cf-piece:hover{background:var(--surface-2)}
+.sfa .cf-piece span{display:block;min-width:0}
+.sfa .cf-piece strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sfa .cf-piece-name>span,.sfa .cf-piece-stage>span,.sfa .cf-piece-when>span{
+  font-size:12px;color:var(--ink-faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* The percentage used to be absolutely positioned under the bar. When the row
+   stacked on a phone it landed on top of the target date. Bar and number share
+   one flex line instead, so there is nothing to collide with at any width. */
+/* `.sfa .cf-piece span{display:block}` above is two classes and an element, so
+   it outranks a plain `.sfa .cf-piece-prog` and the flex row silently stayed a
+   block. Matched on the element too, so the two rules are actually comparable. */
+.sfa .cf-piece span.cf-piece-prog{display:flex;align-items:center;gap:8px}
+.sfa .cf-piece span.cf-piece-bar{flex:1 1 auto;min-width:34px;height:6px;border-radius:99px;
+  background:var(--line);overflow:hidden}
+.sfa .cf-piece-bar i{display:block;height:6px;border-radius:99px;background:var(--ink)}
+.sfa .cf-piece-prog b{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--ink-faint)}
+.sfa .cf-people{margin-top:16px}
+
+@media (max-width:900px){
+  .sfa .cf-order-head{grid-template-columns:minmax(0,1fr);gap:10px}
+  .sfa .cf-piece{grid-template-columns:minmax(0,1fr) 110px 22px;gap:10px;row-gap:8px}
+  .sfa .cf-piece-stage{grid-column:1/-1}
+  .sfa .cf-piece-prog{grid-column:1/2;align-self:center}
+  .sfa .cf-piece-when{grid-column:2/3;text-align:right}
+}
+@media (max-width:640px){
+  .sfa .pa-row{grid-template-columns:minmax(0,1fr) 85px 20px}
+  .sfa .cf-order-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sfa .cf-piece{grid-template-columns:minmax(0,1fr) 22px;row-gap:8px}
+  .sfa .cf-piece-prog,.sfa .cf-piece-when,.sfa .cf-piece-stage{grid-column:1/-1}
+  .sfa .cf-piece-when{text-align:left}
+  .sfa .cf-piece-when strong,.sfa .cf-piece-when span{display:inline;font-size:12px}
+  .sfa .cf-piece-when strong:after{content:' · '}
+  .sfa .cf-piece-flag{grid-column:1/-1}
+}
 </style>
 <style>
 /* ---------------------------------------------------------------------------
@@ -4345,7 +4425,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 }
 </style>
 <body>
-<script>const BUILD_ID='ed1e448981f5';</script>
+<script>const BUILD_ID='66555ce8c02b';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -11421,6 +11501,7 @@ function render(){
   else if(parts[0]==='day') vDayReport();
   else if(parts[0]==='month') vMonthReport();
   else if(parts[0]==='batches') vSupBatches();
+  else if(parts[0]==='client' && parts[1]) vClientFile(parts[1]);
   else if(parts[0]==='clients') vClients(parts[1]);
   else if(parts[0]==='reports') vReports(parts[1]);
   else if(parts[0]==='access') vAccess();
@@ -13086,15 +13167,27 @@ function paCompanyRow(b){
   const people=paPeople().filter(p=>p.buyer_id===b.id);
   const missing=paMissing(b);
   const on=(window.__paCompany||(paBuyers()[0]||{}).id)===b.id;
-  return '<button class="pa-row'+(on?' active':'')+'" type="button" '+
-    'data-search="'+esc([b.company,b.legal_name,b.gstin,b.city,b.contact_name].filter(Boolean).join(' '))+'" '+
-    'onclick="paSelectCompany(\''+b.id+'\')">'+
-    '<span class="pa-record"><span class="pa-avatar">'+esc(clientInitials(b.company))+'</span>'+
-      '<span><strong>'+esc(b.company)+'</strong><span>'+esc(b.legal_name||'Legal name not recorded')+'</span></span></span>'+
-    '<span class="pa-cell"><strong>'+pos.length+' purchase order'+(pos.length===1?'':'s')+'</strong>'+
-      '<span>'+people.length+' portal '+(people.length===1?'person':'people')+'</span></span>'+
-    '<span>'+paStatus(missing.length?'pending':'active', missing.length?'Billing incomplete':'Ready')+'</span>'+
-    '<span class="pa-chevron">›</span></button>';
+  // The whole row used to be one button that only swapped the panel on the
+  // right. Clicking a client's name and getting a billing form is not what
+  // anybody means by clicking a client's name, so the name is its own control
+  // and opens their file. The rest of the row still selects, because the
+  // billing panel is what this screen is for.
+  return '<div class="pa-row'+(on?' active':'')+'" '+
+    'data-search="'+esc([b.company,b.legal_name,b.gstin,b.city,b.contact_name].filter(Boolean).join(' '))+'">'+
+    '<button class="pa-record pa-record--link" type="button" '+
+      'title="Open '+esc(b.company)+'’s orders and products" '+
+      'onclick="go(\'#/client/'+b.id+'\')">'+
+      '<span class="pa-avatar">'+esc(clientInitials(b.company))+'</span>'+
+      '<span><strong>'+esc(b.company)+'</strong><span>'+esc(b.legal_name||'Legal name not recorded')+'</span></span></button>'+
+    '<button class="pa-cell pa-cell--select" type="button" '+
+      'title="Show the billing record" onclick="paSelectCompany(\''+b.id+'\')">'+
+      '<strong>'+pos.length+' purchase order'+(pos.length===1?'':'s')+'</strong>'+
+      '<span>'+people.length+' portal '+(people.length===1?'person':'people')+'</span></button>'+
+    '<button class="pa-cell pa-cell--select" type="button" '+
+      'title="Show the billing record" onclick="paSelectCompany(\''+b.id+'\')">'+
+      paStatus(missing.length?'pending':'active', missing.length?'Billing incomplete':'Ready')+'</button>'+
+    '<button class="pa-chevron pa-chevron--link" type="button" aria-label="Open '+esc(b.company)+'" '+
+      'onclick="go(\'#/client/'+b.id+'\')">›</button></div>';
 }
 function paPersonRow(p){
   const b=S.buyersById[p.buyer_id]||{};
@@ -13135,7 +13228,13 @@ function paCompanyDetail(){
   return '<aside class="pa-detail"><header class="pa-detail-top"><div>'+
     '<p class="eyebrow">Buyer company record</p><h2>'+esc(b.company)+'</h2>'+
     '<p>'+esc(b.legal_name||'Legal name not recorded')+'</p></div>'+
-    '<div class="pa-detail-actions"><button class="button secondary small" type="button" '+
+    // This panel answers "who can sign in". The question people are actually
+    // holding when they click a buyer is "where is their work", and that now
+    // has a page rather than living only in the order workspace.
+    '<div class="pa-detail-actions">'+
+      '<button class="button small" type="button" onclick="go(\'#/client/'+b.id+'\')">'+
+        'Open buyer file</button>'+
+      '<button class="button secondary small" type="button" '+
       'onclick="mBuyer(\''+b.id+'\')">Edit whole record</button></div></header>'+
     (waiting?'<div class="pa-note" style="border-left:3px solid var(--pending,#B8860B)">'+
       '<strong>This buyer has sent their details</strong>'+
@@ -13174,12 +13273,171 @@ function paCompanyDetail(){
         '<span>'+esc(p.email)+' · '+esc(paScopeOf(p).length?(paScopeOf(p).length+' assigned orders'):'Every order this company placed')+'</span>'+
         '</button>').join('')
        :'<div class="pa-note"><strong>No login issued</strong>The company exists, but nobody here can sign in.</div>')+
+      // These were plain spans. A purchase-order number that looks like a label
+      // and behaves like nothing is the thing people click twice and then stop
+      // trusting. They open the order now.
       '<div class="pa-chip-list" style="margin-top:8px">'+
-      (pos.length?pos.map(p=>'<span class="pa-chip">'+esc(p.po_number)+'</span>').join('')
+      (pos.length?pos.map(p=>'<button class="pa-chip pa-chip--link" type="button" '+
+          'onclick="go(\'#/po/'+p.id+'\')">'+esc(p.po_number)+'</button>').join('')
         :'<span class="pa-chip">No purchase orders assigned</span>')+'</div></section>'+
     '<section class="pa-section">'+paInfoRow('Last record change', b.updated_at?fdate(String(b.updated_at).slice(0,10)):'')+
       paInfoRow('Shipping address rule', b.default_ship_to||'The purchase order decides')+'</section>'+
     '</aside>';
+}
+/* ---------------------------------------------------------------------------
+   One buyer, everything about them, on a page of its own.
+
+   People & access answers "who can sign in and what may they see". It was the
+   only place a buyer's name appeared, so clicking a name swapped a billing
+   panel and nothing else — no orders, no products, no stages. The question
+   actually being asked in front of that screen is "where is this client's work",
+   and that question had no page.
+
+   This is the buyer's own portal view, with the things the portal deliberately
+   hides put back: money, staff, internal notes, and what has not been released
+   to them yet.
+--------------------------------------------------------------------------- */
+function clientOrders(buyerId){
+  return (S.pos||[]).filter(p=>p.buyer_id===buyerId)
+    .slice().sort((a,b)=>String(b.po_date||b.created_at||'').localeCompare(
+                          String(a.po_date||a.created_at||'')));
+}
+function clientItems(po){
+  return (po.items&&po.items.length)?po.items:(S.items||[]).filter(i=>i.po_id===po.id);
+}
+function cfItemRow(it){
+  const st=curStage(it);
+  const prog=Math.round((it.progress||0)*100);
+  const blocked=(blockedItems()||[]).some(b=>b.item.id===it.id);
+  const waiting=(S.stByItem[it.id]||[]).filter(r=>r.approval==='requested').length;
+  // who is on it right now, which the buyer must never see and the office
+  // always wants to know
+  const live=(S.assignments||[]).filter(a=>a.item_id===it.id && !a.done_at && !a.superseded_by);
+  const who=live.map(a=>{
+    const p=(S.profilesAll||[]).find(x=>x.user_id===a.assigned_to);
+    return (p&&p.full_name)||'someone';
+  });
+  const ups=(S.updByItem[it.id]||[]);
+  const last=ups.length?ups.map(u=>u.work_date).sort().slice(-1)[0]:null;
+  return '<button class="cf-piece" type="button" onclick="go(\'#/item/'+it.id+'\')">'+
+    '<span class="cf-piece-name"><strong>'+esc(it.product)+'</strong>'+
+      '<span>'+esc([pieceRef(it), it.stone, (+it.qty||1)+' pc'].filter(Boolean).join(' · '))+'</span></span>'+
+    '<span class="cf-piece-stage"><strong>'+esc(st?st.name:'Not started')+'</strong>'+
+      '<span>'+esc(who.length?('with '+who.join(', ')):'nobody on it')+'</span></span>'+
+    '<span class="cf-piece-prog"><span class="cf-piece-bar"><i style="width:'+prog+'%"></i></span>'+
+      '<b>'+prog+'%</b></span>'+
+    '<span class="cf-piece-when"><strong>'+esc(it.target_date?fdate(it.target_date):'No date')+'</strong>'+
+      '<span>'+esc(last?('recorded '+fdate(last)):'never recorded')+'</span></span>'+
+    '<span class="cf-piece-flag">'+
+      (blocked?badge('Blocked','alert')
+        :waiting?badge(waiting+' with buyer','pending')
+        :pieceIsMade(it)?badge('Made','success'):'')+'</span>'+
+    '<span class="pa-chevron">›</span></button>';
+}
+function cfOrderCard(po){
+  const items=clientItems(po);
+  const r=poReadiness(po), fin=poFinance(po);
+  const made=items.filter(pieceIsMade).length;
+  return '<section class="cf-order">'+
+    '<header class="cf-order-head">'+
+      '<button class="cf-order-title" type="button" onclick="go(\'#/po/'+po.id+'\')">'+
+        '<span class="eyebrow">'+esc(po.po_number)+'</span>'+
+        '<strong>'+esc(po.project||po.po_number)+'</strong>'+
+        '<span>'+items.length+' product'+(items.length===1?'':'s')+' · '+made+' made · ships '+
+          esc(po.expected_ship_date?fdate(po.expected_ship_date):'date not set')+'</span></button>'+
+      '<div class="cf-order-facts">'+
+        '<div><span>Readiness</span><strong>'+esc(r.stateLabel)+'</strong></div>'+
+        '<div><span>Outstanding</span><strong>'+
+          esc(fin.outstanding>0?money(fin.outstanding,'INR'):'Nil')+'</strong></div>'+
+      '</div>'+
+      '<div class="button-row">'+
+        '<button class="button secondary small" type="button" onclick="go(\'#/po/'+po.id+'\')">Open order</button>'+
+      '</div></header>'+
+    // The empty-products case says so in the list below; printing the readiness
+    // blocker as well says it twice in two different wordings.
+    (r.blocker && items.length?'<p class="cf-order-blocker">'+esc(r.blocker)+'</p>':'')+
+    '<div class="cf-pieces">'+
+      (items.length?items.map(cfItemRow).join('')
+        :'<div class="pa-note"><strong>No products on this order yet</strong>'+
+         'Add the pieces it covers and the workshop can record against them.</div>')+
+    '</div></section>';
+}
+function vClientFile(buyerId){
+  if(!isAdmin()) return vHome();
+  const b=(S.buyers||[]).find(x=>x.id===buyerId) || (S.buyersById||{})[buyerId];
+  if(!b){
+    sfaPaint('<div class="pa-page"><section class="card"><div class="empty">'+
+      '<h2>No such buyer.</h2><p>It may have been removed.</p>'+
+      '<button class="button" type="button" onclick="go(\'#/access\')">Back to People &amp; access</button>'+
+      '</div></section></div>');
+    return;
+  }
+  const orders=clientOrders(b.id);
+  const items=orders.reduce((a,p)=>a.concat(clientItems(p)), []);
+  const people=paPeople().filter(p=>p.buyer_id===b.id);
+  const inProd=items.filter(it=>curStage(it) && !pieceIsMade(it)).length;
+  const withBuyer=items.reduce((a,it)=>
+    a+(S.stByItem[it.id]||[]).filter(r=>r.approval==='requested').length, 0);
+  const blocked=items.filter(it=>(blockedItems()||[]).some(x=>x.item.id===it.id)).length;
+  const outstanding=orders.reduce((a,p)=>a+(poFinance(p).outstanding||0), 0);
+  const missing=paMissing(b);
+
+  sfaPaint('<div class="pa-page cf-page">'+
+    '<header class="pa-head"><div>'+
+      '<p class="eyebrow"><button class="cf-back" type="button" onclick="go(\'#/access\')">'+
+        '‹ People &amp; access</button> · buyer file</p>'+
+      // "Demo Buyer Co." already ends in a full stop. Adding the house one gave
+      // "Demo Buyer Co..", and half of Yash's clients are Pvt. Ltd.
+      '<h1>'+esc(b.company)+(/[.!?]$/.test(String(b.company||''))?'':'.')+'</h1>'+
+      '<p>'+esc([b.legal_name, b.city, b.contact_name].filter(Boolean).join(' · ')||
+        'Legal name not recorded')+'</p></div>'+
+    '<div class="pa-head-actions">'+
+      '<button class="button secondary" type="button" onclick="mBuyer(\''+b.id+'\')">Edit record</button>'+
+      '<button class="button" type="button" onclick="go(\'#/clients/updates\')">Send an update</button>'+
+    '</div></header>'+
+
+    '<section class="pa-summary">'+
+      '<button type="button" onclick="go(\'#/orders\')"><span>Open orders</span>'+
+        '<strong>'+orders.length+'</strong><small>'+items.length+' product'+
+        (items.length===1?'':'s')+' in total</small></button>'+
+      '<button type="button" onclick="go(\'#/production\')"><span>Still being made</span>'+
+        '<strong>'+inProd+'</strong><small>'+(items.length-inProd)+' finished or not started</small></button>'+
+      '<button type="button" onclick="go(\'#/production/review\')"><span>Waiting on the buyer</span>'+
+        '<strong>'+withBuyer+'</strong><small>'+(withBuyer?'Decisions they owe us':'Nothing with them')+'</small></button>'+
+      '<button type="button" onclick="go(\'#/production/priority\')"><span>Reported blocked</span>'+
+        '<strong>'+blocked+'</strong><small>'+(blocked?'The floor has stopped on these':'Nothing stopped')+'</small></button>'+
+      '<button type="button" onclick="go(\'#/finance\')"><span>Outstanding</span>'+
+        '<strong>'+esc(outstanding>0?money(outstanding,'INR'):'Nil')+'</strong>'+
+        '<small>Across every order on this account</small></button>'+
+    '</section>'+
+
+    (missing.length?'<div class="pa-note" style="border-left:3px solid var(--pending,#B8860B)">'+
+      '<strong>Billing record incomplete</strong>Missing: '+esc(missing.join(', '))+
+      '<div class="button-row" style="margin-top:8px">'+
+      '<button class="button secondary small" type="button" onclick="mBuyer(\''+b.id+'\')">Fill it in</button>'+
+      '</div></div>':'')+
+
+    '<section class="cf-orders">'+
+      (orders.length?orders.map(cfOrderCard).join('')
+        :'<div class="empty"><h2>No purchase orders yet.</h2>'+
+          '<p>Create one and its products, stages and shipment gate follow it.</p>'+
+          '<button class="button" type="button" onclick="mNewPO()">+ New PO</button></div>')+
+    '</section>'+
+
+    '<section class="pa-section cf-people"><div class="pa-section-head">'+
+      '<h3>Who can sign in from this company</h3>'+
+      '<button class="button quiet small" type="button" onclick="mNewLogin(\''+b.id+'\')">Add person</button></div>'+
+      (people.length?people.map(p=>'<button class="pa-primary-contact" '+
+        'style="width:100%;text-align:left;margin-top:6px;cursor:pointer" type="button" '+
+        'onclick="paOpenPerson(\''+p.user_id+'\')">'+
+        '<strong>'+esc(p.full_name||p.email)+' · '+
+          esc((PA_ROLES[p.buyer_role||'administrator']||PA_ROLES.administrator).name)+'</strong>'+
+        '<span>'+esc(p.email)+' · '+esc(paScopeOf(p).length?
+          (paScopeOf(p).length+' assigned orders'):'Every order this company placed')+'</span></button>').join('')
+        :'<div class="pa-note"><strong>No login issued</strong>'+
+          'The company exists, but nobody here can sign in.</div>')+
+    '</section></div>');
+  if(typeof hydrateImages==='function') hydrateImages();
 }
 function paPersonDetail(){
   const list=paPeople();
