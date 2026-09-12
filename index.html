@@ -2077,6 +2077,180 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   display:block;border-radius:inherit}
 .sfb .photo{overflow:hidden}
 .sfb .grid-main>*,.sfb .stack>*{min-width:0}
+.sfb .row-note{flex:1;color:var(--muted);font-size:11px}
+</style>
+<style>
+/* ---------------------------------------------------------------------------
+   The buyer's screens on a phone.
+
+   Chitranjan opens this on a phone, and 267 pieces of text on his screens were
+   set under 12px -- some at 7. The 9 September pass raised the artisan's
+   classes and nobody else's, and only the artisan's role was ever audited at
+   phone width, so nothing had looked at the screen the buyer actually uses.
+
+   Every rule below is generated from 09-buyer.css: each selector that sets type
+   under 12px, restated at 640px and narrower with a floor of 12px. The desktop
+   design is untouched -- these rules do not exist above 640px. The order is
+   kept rather than flattened, so what was smaller is still smaller:
+
+       7 and 8px  ->  12px
+       9px        ->  12.5px
+       10 to 11.5 ->  13px
+
+   Regenerate with the block at the top of test/mobiletype.js if the buyer
+   stylesheet changes. Hand-editing a selector here and not there is how the two
+   drift apart.
+--------------------------------------------------------------------------- */
+@media (max-width:640px){
+
+/* was 7/8 px -- 66 rules */
+.sfb .account span,
+.sfb .answer span,
+.sfb .approval-context span,
+.sfb .approval-item-audited figcaption,
+.sfb .approval-meta-line,
+.sfb .attention-row span,
+.sfb .audit-field label,
+.sfb .audit-field small,
+.sfb .badge,
+.sfb .brand-byline,
+.sfb .buyer-filterbar button,
+.sfb .buyer-filterbar span,
+.sfb .buyer-list-row span,
+.sfb .buyer-list-row time,
+.sfb .buyer-permission,
+.sfb .buyer-product-visual figcaption,
+.sfb .comment time,
+.sfb .comment-avatar,
+.sfb .count,
+.sfb .detail-row,
+.sfb .document-kind,
+.sfb .document-summary span,
+.sfb .gallery-footer p,
+.sfb .help-card span,
+.sfb .journey-step,
+.sfb .journey-step i,
+.sfb .ledger-balance span,
+.sfb .metric span,
+.sfb .order-progress span,
+.sfb .order-select b,
+.sfb .order-select span,
+.sfb .payment-step span,
+.sfb .photo span,
+.sfb .photo-group-head p,
+.sfb .po-gallery-product-image span,
+.sfb .po-inherited-shipment span,
+.sfb .po-photo-fact span,
+.sfb .po-photo-title h2 span,
+.sfb .po-photo-toolbar span,
+.sfb .po-readiness span,.sfb .ledger-fact span,
+.sfb .po-shipment-gallery span,
+.sfb .product-page .gallery .photo span,.sfb .all-photos .photo span,
+.sfb .product-preview span,
+.sfb .sf-order-row p,
+.sfb .sf-order-row-meta,
+.sfb .sf-order-visual span,
+.sfb .sf-po-gate span,
+.sfb .sf-po-gate strong,
+.sfb .sf-product-card p,
+.sfb .sf-product-facts span,
+.sfb .sf-product-facts strong,
+.sfb .sf-product-hero figcaption,
+.sfb .sf-product-image span,
+.sfb .sf-stage-card i,
+.sfb .sf-stage-card span,
+.sfb .stage-media-row span,
+.sfb .stage-photo-copy span,
+.sfb .stage-photo-thumbs>span,
+.sfb .status-box span,
+.sfb .table th,
+.sfb .thread-head p,
+.sfb .thread-list-head input,
+.sfb .thread-select small,
+.sfb .thread-select span,
+.sfb .total small,
+.sfb .total span{font-size:12px}
+
+/* was 9 px -- 40 rules */
+.sfb .account strong,
+.sfb .answer strong,
+.sfb .approval-context strong,
+.sfb .approval-hero p,
+.sfb .approval-item-audited p,
+.sfb .approval-question p,
+.sfb .approval-question strong,
+.sfb .attention-row strong,
+.sfb .audit-source,
+.sfb .buyer-list-row strong,
+.sfb .buyer-permission strong,
+.sfb .card-head p,
+.sfb .comment p,
+.sfb .comment strong,
+.sfb .crumbs,
+.sfb .empty p,
+.sfb .eyebrow,
+.sfb .field label,
+.sfb .final-pack-card p,
+.sfb .ledger-top p,
+.sfb .metric small,
+.sfb .nav-label,
+.sfb .news-card p,
+.sfb .notice,
+.sfb .order-row p,
+.sfb .payment-step b,
+.sfb .payment-step strong,
+.sfb .po-gallery-empty,
+.sfb .po-gallery-product-copy>span,
+.sfb .po-photo-fact strong,
+.sfb .po-photo-toolbar button,
+.sfb .po-readiness strong,.sfb .ledger-fact strong,
+.sfb .product-card p,
+.sfb .sf-stage-card strong,
+.sfb .stage-media-row strong,
+.sfb .stage-photo-copy strong,
+.sfb .status-box strong,
+.sfb .table td,
+.sfb .thread-select strong,
+.sfb .welcome-meta{font-size:12.5px}
+
+/* was 10/11 px -- 11 rules */
+.sfb .avatar,
+.sfb .button,
+.sfb .button.small,
+.sfb .document-summary strong,
+.sfb .help-card strong,
+.sfb .news-card strong,
+.sfb .order-progress strong,
+.sfb .order-select strong,
+.sfb .order-sub,
+.sfb .toast,
+.sfb .welcome-meta strong{font-size:13px}
+/* NOT GENERATED. These carry no rule of their own in the buyer stylesheet.
+   A bare <small> inherits the browser's 0.8125em, which lands at 10.4px off a
+   12.8px parent, and .field-hint lives in the shared sheet where raising it
+   would move the owner console too. Scoped into the buyer shell so it does not. */
+.sfb small{font-size:12px}
+.sfb .field-hint,.sfb .stage-note{font-size:12px}
+
+/* Tap targets. 31px and 34px are fine for a mouse and a miss for a thumb; both
+   Apple and Android ask for 44 to 48. Raised only on the phone, so the desktop
+   portal keeps its proportions. */
+.sfb .buyer-filterbar button{min-height:44px;padding:0 12px}
+.sfb .button.small,.sfb .button.quiet{min-height:44px}
+.sfb .button{min-height:44px}
+
+/* An unclassed <span> in a button row, which is where the comment dialog puts
+   "Seen only by your team and Gujraj Impex." */
+.sfb .button-row span{font-size:12px}
+
+.sfb .row-note{font-size:12px}
+
+.sfb .po-photo-toolbar button,
+.sfb .buyer-filterbar button,
+.sfb .thread-list-head input,
+.sfb .button.small,.sfb .button.quiet,.sfb .button{min-height:44px}
+
+}
 </style>
 <style>
 /* the checklist as the office edits it: one line, its gate, and a way out */
@@ -3790,6 +3964,420 @@ body.reports-mode .sfa .content{max-width:1700px}
 </style>
 <style>
 /* ---------------------------------------------------------------------------
+   The console on a phone.
+
+   Kunal runs the floor from a phone and Yash checks it from one. Every rule in
+   10-admin.css that set type under 12px is restated here at 640px and narrower
+   with a floor of 12px, the same treatment the buyer's sheet got. Above 640px
+   none of this exists, so the desktop console is exactly as designed.
+
+       up to 8px  ->  12px
+       9px        ->  12.5px
+       10 to 11.5 ->  13px
+
+   Generated from 10-admin.css. Regenerate rather than hand-editing, or the two
+   drift apart.
+--------------------------------------------------------------------------- */
+@media (max-width:640px){
+
+/* was 6/6.5/7/8 px -- 219 rules */
+.sfa .access-audit-row span,
+.sfa .access-audit-row strong,
+.sfa .access-detail-head p,
+.sfa .access-detail-row,
+.sfa .access-detail-row strong,
+.sfa .access-filter .filter-count,
+.sfa .access-filter-head,
+.sfa .access-filter-note,
+.sfa .access-guide-step,
+.sfa .access-guide-step b,
+.sfa .access-health,
+.sfa .access-list-summary,
+.sfa .access-metric small,
+.sfa .access-metric span,
+.sfa .access-permission,
+.sfa .access-permission i,
+.sfa .access-person span,.sfa .access-cell span,
+.sfa .access-person-hero p,
+.sfa .access-sort,
+.sfa .access-status,
+.sfa .access-table-head,
+.sfa .activity-event time,
+.sfa .activity-mini span,
+.sfa .aging span,
+.sfa .aging-row span,
+.sfa .aging-row strong,
+.sfa .all-photo span,
+.sfa .attention-item span,
+.sfa .audit-row p,
+.sfa .audit-row time,
+.sfa .brand-byline,
+.sfa .chart-summary span,
+.sfa .client-account-head p,
+.sfa .client-action-row span,
+.sfa .client-action-row strong,
+.sfa .client-directory-head input,
+.sfa .client-directory-item small,
+.sfa .client-directory-item span,
+.sfa .client-ops-metric small,
+.sfa .client-ops-metric span,
+.sfa .client-ops-table small,
+.sfa .client-ops-table td,
+.sfa .client-ops-table th,
+.sfa .client-stats span,
+.sfa .co-account-head p:last-child,
+.sfa .co-action span,
+.sfa .co-action strong,
+.sfa .co-activity-row span,.sfa .co-activity-row time,
+.sfa .co-activity-row strong,
+.sfa .co-badge,
+.sfa .co-client-copy small,
+.sfa .co-client-copy span,
+.sfa .co-contact-card span,
+.sfa .co-contact-card strong,
+.sfa .co-detail-row span,
+.sfa .co-detail-row strong,
+.sfa .co-directory-empty,
+.sfa .co-empty p,
+.sfa .co-order-table td,
+.sfa .co-order-table td span,
+.sfa .co-order-table th,
+.sfa .co-panel-head p,
+.sfa .co-summary span,.sfa .co-summary small,
+.sfa .comment-row small,
+.sfa .comment-row time,
+.sfa .comment-row-type span,
+.sfa .confidence-row span,
+.sfa .confirmation,
+.sfa .date-chip span,
+.sfa .donut-centre span,
+.sfa .gantt-bar,
+.sfa .gantt-head,
+.sfa .gantt-label span,
+.sfa .gantt-label strong,
+.sfa .health-grid span,
+.sfa .highlight span,
+.sfa .journey-node,
+.sfa .journey-node i,
+.sfa .journey-row small,
+.sfa .journey-row-number,
+.sfa .learning-step b,
+.sfa .line-chart-labels,
+.sfa .line-chart-y,
+.sfa .media-caption,
+.sfa .order-action-card p,.sfa .order-readiness-card p,
+.sfa .order-action-row span,
+.sfa .order-switcher button,
+.sfa .order-switcher>span,
+.sfa .owner-action-row .button,
+.sfa .owner-action-row p,
+.sfa .owner-action-row strong,
+.sfa .owner-age-row,
+.sfa .owner-alert span,
+.sfa .owner-finance-stat span,
+.sfa .owner-flow-stage b,
+.sfa .owner-flow-stage span,
+.sfa .owner-flow-stage strong,
+.sfa .owner-flow-summary span,
+.sfa .owner-health,
+.sfa .owner-kpi small,
+.sfa .owner-kpi-label,
+.sfa .owner-panel-head p,
+.sfa .owner-period button,
+.sfa .owner-ring-label span,
+.sfa .owner-service-row a,
+.sfa .owner-service-row span,
+.sfa .owner-service-row strong,
+.sfa .owner-sync,
+.sfa .owner-system-grid span,
+.sfa .owner-system-note,
+.sfa .owner-table small,
+.sfa .owner-table td,
+.sfa .owner-table th,
+.sfa .owner-table-progress span,
+.sfa .owner-team-row span,.sfa .owner-team-row strong,
+.sfa .owner-timeline-row span,
+.sfa .owner-timeline-row strong,
+.sfa .owner-timeline-row time,
+.sfa .pa-check,
+.sfa .pa-chip,
+.sfa .pa-completeness div,
+.sfa .pa-detail-top p,
+.sfa .pa-form-error,
+.sfa .pa-form-grid label,
+.sfa .pa-form-section>p,
+.sfa .pa-info-row span,
+.sfa .pa-info-row strong,
+.sfa .pa-list-head,
+.sfa .pa-missing,
+.sfa .pa-note,
+.sfa .pa-onboarding-note span,
+.sfa .pa-pay-row strong,
+.sfa .pa-pay-row>div>span,
+.sfa .pa-permission,
+.sfa .pa-permission i,
+.sfa .pa-primary-contact span,
+.sfa .pa-record span,.sfa .pa-cell span,
+.sfa .pa-role-card span,
+.sfa .pa-status,
+.sfa .pa-summary span,.sfa .pa-summary small,
+.sfa .pa-tabs button,
+.sfa .path-step,
+.sfa .permission-preview p,
+.sfa .photo-prompt,
+.sfa .po-group-detail span,
+.sfa .po-group-status small,
+.sfa .po-group-title p,
+.sfa .po-item-copy b,
+.sfa .po-item-copy small,
+.sfa .po-item-visual em,
+.sfa .po-product-copy>p,
+.sfa .po-product-fact span,
+.sfa .po-product-facts span,
+.sfa .po-product-facts strong,
+.sfa .po-product-image span,
+.sfa .po-product-image span,
+.sfa .po-product-stage span,
+.sfa .po-product-update,
+.sfa .po-shipment-gate span,
+.sfa .po-shipment-gate strong,
+.sfa .po-sort,
+.sfa .prod-cell span,
+.sfa .prod-cell strong,
+.sfa .prod-commitment span,
+.sfa .prod-commitment strong,
+.sfa .prod-commitment time,
+.sfa .prod-filterbar button,
+.sfa .prod-flow-note,
+.sfa .prod-flow-row span,
+.sfa .prod-flow-row strong,
+.sfa .prod-logic-step b,
+.sfa .prod-logic-step span,
+.sfa .prod-logic-step strong,
+.sfa .prod-metric small,
+.sfa .prod-metric span,
+.sfa .prod-panel-head p,
+.sfa .prod-product b,
+.sfa .prod-product small,
+.sfa .prod-reason b,
+.sfa .prod-reason span,
+.sfa .prod-search,
+.sfa .product-answer small,
+.sfa .product-answer span,
+.sfa .product-hero-reference figcaption,
+.sfa .product-hero-reference.detail-image:after,
+.sfa .product-row-visual figcaption,
+.sfa .report-freshness,
+.sfa .report-insight button,
+.sfa .report-insight span,
+.sfa .report-kpi small,
+.sfa .report-kpi-label,
+.sfa .report-legend,
+.sfa .report-nav button,.sfa .report-period button,
+.sfa .report-panel-head p,
+.sfa .report-table small,
+.sfa .report-table td,
+.sfa .report-table th,
+.sfa .role-option span,
+.sfa .setting-row span,
+.sfa .setting-row strong,
+.sfa .setting-value span,
+.sfa .setting-value strong,
+.sfa .settings-card-head p,
+.sfa .settings-health span,
+.sfa .settings-nav button,
+.sfa .settings-stage b,
+.sfa .settings-stage span,
+.sfa .stage-label span,
+.sfa .stage-list-row small,
+.sfa .stage-status-grid span,
+.sfa .thumb span,
+.sfa .wip-note,
+.sfa .wip-row span,
+.sfa .workshop-spec span,
+.sfa .workshop-thumb span,
+.sfa .workshop-thumb.product-record-link:after,.sfa .po-product-image.product-record-link:after,
+/* pay: rate, statements, advances and overtime for one internal person */ .sfa .pa-section h4,
+body.order-mode .sfa .sidebar .nav-item .nav-count,
+body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12px}
+
+/* was 9 px -- 80 rules */
+.sfa .access-detail-section h3,
+.sfa .access-empty p,
+.sfa .access-filter,
+.sfa .access-filter-note strong,
+.sfa .access-person strong,.sfa .access-cell strong,
+.sfa .access-search,
+.sfa .activity-event p,
+.sfa .activity-mini strong,
+.sfa .attention-head p,
+.sfa .audit-row strong,
+.sfa .badge,
+.sfa .calendar-event small,
+.sfa .chart-summary strong,
+.sfa .client-directory-item strong,
+.sfa .client-ops-table strong,
+.sfa .co-client-copy strong,
+.sfa .co-directory-search input,
+.sfa .collection-total small,
+.sfa .command-group,
+.sfa .command-result kbd,
+.sfa .comment-row-type strong,
+.sfa .confidence-row strong,
+.sfa .confirmation strong,
+.sfa .daily-log-rule,
+.sfa .daily-product-name span,.sfa .daily-product-record span,.sfa .daily-product-person,
+.sfa .daily-product-time,
+.sfa .data-table th,
+.sfa .detail-row,
+.sfa .detail-row strong,
+.sfa .eyebrow,
+.sfa .finance-alert small,
+.sfa .finance-alert span,
+.sfa .handover-person,
+.sfa .handover-row p,
+.sfa .handover-time,
+.sfa .learning-step,
+.sfa .media-footer p,
+.sfa .metric-label,
+.sfa .nav-count,
+.sfa .nav-label,
+.sfa .owner-alert strong,
+.sfa .owner-flow-summary strong,
+.sfa .owner-system-grid strong,
+.sfa .owner-table strong,
+.sfa .pa-onboarding-note strong,
+.sfa .pa-primary-contact strong,
+.sfa .pa-record strong,.sfa .pa-cell strong,
+.sfa .pa-role-card strong,
+.sfa .pa-section h3,
+.sfa .pa-toolbar input,.sfa .pa-toolbar select,
+.sfa .path-dot,
+.sfa .permission-preview strong,
+.sfa .phase-detail span,
+.sfa .po-group-title h2 span,
+.sfa .po-item b,
+.sfa .po-item small,
+.sfa .po-item-copy strong,
+.sfa .po-product-copy>p:last-of-type,
+.sfa .po-product-fact strong,
+.sfa .po-product-section-head p,
+.sfa .po-product-stage strong,
+.sfa .po-results p,
+.sfa .product-record-nav button,
+.sfa .queue-group-title,
+.sfa .report-insight strong,
+.sfa .report-table strong,
+.sfa .review-footer small,
+.sfa .role-option strong,
+.sfa .settings-health strong,
+.sfa .side-detail,
+.sfa .stage-number,
+.sfa .stage-task p,
+.sfa .wip-note strong,
+.sfa .wip-row strong,
+.sfa .workshop-kicker,
+.sfa .workshop-photo-more,
+.sfa .workshop-stage span,
+.sfa .workspace-tab,
+body.order-mode .sfa .sidebar .nav-item .nav-count,
+body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
+
+/* was 10/11 px -- 70 rules */
+.form-card__group,
+.sfa .access-page-head p,
+.sfa .activity-event strong,
+.sfa .aging strong,
+.sfa .attention-item strong,
+.sfa .avatar,
+.sfa .button.small,
+.sfa .calendar-event strong,
+.sfa .card-head p,.sfa .card-copy,
+.sfa .check-line,
+.sfa .client-card p,
+.sfa .client-stats strong,
+.sfa .co-head p:last-child,
+.sfa .collection-total span,
+.sfa .comment-row p,
+.sfa .daily-product-log-head p,
+.sfa .daily-product-name strong,.sfa .daily-product-record strong,
+.sfa .data-table strong,
+.sfa .data-table td,
+.sfa .empty p,
+.sfa .exception span,
+.sfa .exception strong,
+.sfa .field label,
+.sfa .freshness,
+.sfa .freshness strong,
+.sfa .handover-row strong,
+.sfa .health-grid strong,
+.sfa .highlight strong,
+.sfa .inspector-head,
+.sfa .journey-row strong,
+.sfa .menu-head,
+.sfa .metric-note,
+.sfa .notice,
+.sfa .owner-head .lead,
+.sfa .owner-timeline-row time b,
+.sfa .pa-head>div>p:last-child,
+.sfa .phase-detail strong,
+.sfa .po-group-detail strong,
+.sfa .po-item strong,
+.sfa .po-sort select,
+.sfa .prod-commitment time b,
+.sfa .product-answer strong,
+.sfa .product-crumbs,
+.sfa .product-row p,
+.sfa .queue-meta,
+.sfa .record-meta,
+.sfa .record-tab,
+.sfa .report-head p,
+.sfa .review-card p,
+.sfa .saved-view,
+.sfa .section-heading p,
+.sfa .seg-tab,
+.sfa .shift-log-head p,
+.sfa .shortcut,
+.sfa .stage-bar,
+.sfa .stage-label-number,
+.sfa .stage-list-row strong,
+.sfa .stage-status-grid strong,
+.sfa .stage-task strong,
+.sfa .subnav button,
+.sfa .toast,
+.sfa .top-search span:after,
+.sfa .upload-zone p,
+.sfa .workshop-banner p,
+.sfa .workshop-count,
+.sfa .workshop-meta,
+.sfa .workshop-spec strong,
+.sfa .workshop-stage strong,
+.sfa .workshop-status,
+.sfa .workshop-status strong{font-size:13px}
+/* NOT GENERATED. Tap targets on a phone. The console's chrome is sized for a mouse: quiet and
+   small buttons land at 21 to 31px and a checkbox at 13. Apple asks for 44,
+   Android for 48. Raised only below 640px, so the desktop console keeps the
+   density it was designed with.
+
+   Scoped to the console shell and to real controls rather than a blanket
+   `button{}`, because the icon buttons inside dense table rows are square by
+   design and stretching them pushes the row apart. */
+.sfa .button,
+.sfa .button.small,
+.sfa .button.quiet,
+.sfa .button--quiet,
+.sfa .button--secondary,
+.sfa .seg-tab,
+.sfa .saved-view,
+.sfa .record-tab,
+.sfa .filter-chip{min-height:44px}
+.sfa input[type=checkbox],
+.sfa input[type=radio]{width:22px;height:22px}
+
+}
+</style>
+<style>
+/* ---------------------------------------------------------------------------
    The workshop floor.
 
    The supervisor screens reuse the owner console's shell, tokens, panels,
@@ -4424,14 +5012,133 @@ body.reports-mode .sfa .content{max-width:1700px}
   .sfa .badge{ font-size:12px; min-height:24px; }
 }
 </style>
+<style>
+/* ---------------------------------------------------------------------------
+   The shared shell on a phone.
+
+   02-style.css is the sheet every role draws from, so the last of the small
+   type lives here: the KPI labels, the stage strip, the "ADD A PHOTO" plate,
+   the table sub-lines. Same treatment and same floor as the buyer and console
+   sheets, at 640px and narrower only.
+
+   A bare <small> and .field-hint are included by hand: they carry the browser
+   default rather than a rule of their own, which is how they survived the first
+   pass on the buyer's screens.
+--------------------------------------------------------------------------- */
+@media (max-width:640px){
+
+/* was 9/9.5 px -- 2 rules */
+.lchart__lbl,
+.po-gate--tight span{font-size:12.5px}
+
+/* was 10/10.5/11/11.5 px -- 71 rules */
+.access-avatar,
+.access-perms i,
+.access-row span,
+.act-group,
+.act__chip,
+.activity-log__time,
+.answer span,
+.answer>span,
+.app-shell--console .mobile-dock__item,
+.app-shell--console .mobile-dock__item,
+.appr-row__img>span,
+.appr-row__meta,
+.att span,
+.buyer-who small,
+.cc-alert span,
+.cc-mini span,
+.cc-stage i,
+.cc-stage span,
+.cc-sync,
+.cmd__kind,
+.cmdbar__key,
+.comment__avatar,
+.comment__head span,
+.conf-row__head span,
+.conf-why,
+.ct-note,
+.data-table th,
+.donut__mid span,
+.fe-ring small,
+.field-hint,
+.filterbar__note,
+.ho__time,
+.ho__who,
+.icon-swatch code,
+.internal-strip__tag,
+.jnode span,
+.kpi__label,
+.milestone__date em,
+.mobile-dock__item .badge,
+.next-row__when,.act-row__when,
+.next-row__who,
+.ord-row__img>span,
+.ord-row__meta,
+.ord-row__side small,
+.ord-row__side span,
+.order-row__side span,
+.order-select b,
+.pf-table td small,
+.photo-placeholder span,
+.photo-stage__meta,
+.photo-stage__no,
+.photo-viewer__meta,
+.po-gate span,
+.product-card2__facts span,
+.product-card2__img>span,
+.ready-row span,
+.ready-row__state,
+.ready-step span,
+.ready-step__tick,
+.rep-ex__item span,
+.rep-mini span,
+.rep-sync small,
+.side-help p,
+.side-nav__group,
+.staff-spec span,
+.stage-now__grid span,
+.stage-now__label span,
+.step__label,
+.wordmark__byline,
+.ws-of,
+.ws-step b{font-size:13px}
+small{font-size:12px}
+.field-hint,.stage-note{font-size:12px}
+
+/* the floor and artisan sheets, same floor */
+.dock-bi small{font-size:12.5px}
+.app-shell--artisan .mobile-dock__item,
+.att-grid span,
+.dock-bi small,
+.fl-check__more,
+.fl-tab__n,
+.handover__row span,
+.mo-sub,
+.stmt th,
+.stmt__fig span,
+.stmt__foot,
+.stmt__sec > h5,
+.timer-strip span,
+.wk-img b,
+.wk-pick__ref,
+.wk-ref,
+.wk-spec span{font-size:13px}
+/* NOT GENERATED. Tap targets on the floor screens: the exception chips and the
+   tab strip sit at 36 to 38px, which is a miss for a thumb in a workshop. */
+.fl-exc__chip,.fl-tab,.mo-tab,.fl-check__btn{min-height:44px}
+
+}
+</style>
 <body>
-<script>const BUILD_ID='8169e16c6c12';</script>
+<script>const BUILD_ID='1f4fc711600a';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
     <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8.5h3l1.5-2h7l1.5 2h3v10H4z"/><circle cx="12" cy="13.5" r="3"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4 4L19 7"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
     <symbol id="stage-confirmed" viewBox="0 0 24 24"><path d="M6 3.5h9l3 3v14H6z"/><path d="M15 3.5v3h3M9 13l2 2 4-5"/></symbol>
     <symbol id="stage-selection" viewBox="0 0 24 24"><path d="m12 3 7 5-2.5 10h-9L5 8z"/><path d="m5 8 7 4 7-4M12 12v6"/></symbol>
@@ -7864,7 +8571,10 @@ function updateHeader(){
 
     dock.hidden=false;
     dock.innerHTML=
-      dockItem('#/home','i-mark','Home',0,active==='home'?' mobile-dock__item--active':'')+
+      // i-mark is the company wordmark in a 2000-unit viewBox. At 22px in the
+      // dock it renders as a dark smudge, so Home read as the one tab with no
+      // icon beside three that had one.
+      dockItem('#/home','i-home','Home',0,active==='home'?' mobile-dock__item--active':'')+
       dockItem('#/orders','stage-planning','Orders',c.open,active==='orders'?' mobile-dock__item--active':'')+
       dockItem('#/approvals','i-check','Decide',c.decisions,active==='approvals'?' mobile-dock__item--active':'')+
       dockItem('#/photos','i-camera','Photos',0,active==='photos'?' mobile-dock__item--active':'');
@@ -15569,7 +16279,7 @@ function mBuyerPhotos(itemId, stageId){
       '<span>'+(i+1)+' of '+shots.length+(x.caption?' · '+esc(x.caption):'')+'</span></div>').join('')+'</div>'
      :'<div class="empty"><p>Nothing released for this stage yet.</p></div>')+
     '<div class="button-row" style="margin-top:12px">'+
-      '<span style="color:var(--muted);font-size:11px;flex:1">Only released images appear here.</span>'+
+      '<span class="row-note">Only released images appear here.</span>'+
       '<button class="button" type="button" onclick="closeModal()">Close gallery</button></div></div>');
   hydrateImages(m.m);
 }
@@ -15587,7 +16297,7 @@ function mBuyerComment(itemId){
     '<div class="audit-field"><label for="bc-text">Comment</label>'+
       '<textarea id="bc-text" rows="4" placeholder="Ask a product-specific question or record a decision"></textarea></div>'+
     '<div class="button-row" style="margin-top:12px">'+
-      '<span style="color:var(--muted);font-size:11px;flex:1">Seen only by your team and '+
+      '<span class="row-note">Seen only by your team and '+
         esc(S.settings.company_name||'Gujraj Impex')+'.</span>'+
       '<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
       '<button class="button" type="button" id="bc-go">Post comment</button></div></div>');
