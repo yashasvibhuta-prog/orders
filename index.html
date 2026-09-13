@@ -3961,6 +3961,100 @@ body.reports-mode .sfa .content{max-width:1700px}
   .sfa .cf-piece-when strong:after{content:' · '}
   .sfa .cf-piece-flag{grid-column:1/-1}
 }
+/* ---------------------------------------------------------------------------
+   Client Hub. Directory as an overlay so the buyer's workspace keeps its width,
+   account tabs, buyer-level finance strip, and purchase orders as cards that
+   open to the products inside them.
+--------------------------------------------------------------------------- */
+.sfa .ch-dir{position:relative;margin:0 0 14px}
+.sfa .ch-dir-toggle{display:inline-flex;align-items:center;gap:10px;min-height:52px;
+  padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);
+  color:inherit;font:inherit;cursor:pointer;text-align:left}
+.sfa .ch-dir-toggle:hover{background:var(--surface-2)}
+.sfa .ch-dir-toggle small{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-dir-toggle strong{display:block;font-size:14px}
+.sfa .ch-dir-count{min-width:24px;height:22px;padding:0 7px;border-radius:8px;
+  background:var(--surface-2);display:grid;place-items:center;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-dir-avatar{width:34px;height:34px;border-radius:50%;background:var(--surface-2);
+  display:grid;place-items:center;font-size:12px;font-weight:700;flex:0 0 auto}
+.sfa .ch-dir-scrim{position:fixed;inset:0;z-index:60;background:rgba(20,20,22,.28)}
+.sfa .ch-dir-panel{position:absolute;z-index:61;top:56px;left:0;width:min(380px,92vw);
+  max-height:min(70vh,560px);overflow:auto;padding:10px;border:1px solid var(--line);
+  border-radius:14px;background:var(--surface);box-shadow:0 24px 60px rgba(20,20,22,.18)}
+.sfa .ch-dir-panel input{width:100%;min-height:44px;margin-bottom:8px;padding:0 12px;
+  border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font:inherit}
+.sfa .ch-dir-row{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;
+  align-items:center;padding:10px;border:0;border-radius:10px;background:transparent;
+  color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px}
+.sfa .ch-dir-row:hover,.sfa .ch-dir-row.active{background:var(--surface-2)}
+.sfa .ch-dir-row strong{display:block;font-size:13px}
+.sfa .ch-dir-row span span{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-dir-row small{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-dir-row small.attention{color:var(--warning,#87744E)}
+
+.sfa .ch-workspace{display:block}
+.sfa .ch-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 12px;
+  border-bottom:1px solid var(--line);padding-bottom:10px}
+.sfa .ch-tab{min-height:44px;padding:0 14px;border:1px solid transparent;border-radius:10px;
+  background:transparent;color:var(--ink-faint);font:inherit;font-weight:650;cursor:pointer}
+.sfa .ch-tab:hover{background:var(--surface-2);color:var(--ink)}
+.sfa .ch-tab.active{background:var(--surface-2);border-color:var(--line);color:var(--ink)}
+
+.sfa .ch-finance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.sfa .ch-finance>div{padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.sfa .ch-finance span{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-finance strong{display:block;margin:4px 0 3px;font-size:19px}
+.sfa .ch-finance small{display:block;font-size:12px;color:var(--ink-faint)}
+
+.sfa .ch-po-toolbar{display:flex;gap:10px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.sfa .ch-po-toolbar input{flex:1;min-height:44px;padding:0 12px;border:1px solid var(--line);
+  border-radius:10px;background:var(--surface-2);font:inherit}
+.sfa .ch-po-list{display:grid}
+.sfa .ch-po{border-top:1px solid var(--line)}
+.sfa .ch-po-list>div:first-child .ch-po{border-top:0}
+.sfa .ch-po-head{width:100%;display:grid;
+  grid-template-columns:auto minmax(0,1.5fr) minmax(0,1fr) minmax(0,.9fr) 22px;
+  gap:14px;align-items:center;padding:13px 14px;border:0;background:var(--surface);
+  color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:44px}
+.sfa .ch-po-head:hover,.sfa .ch-po.open .ch-po-head{background:var(--surface-2)}
+.sfa .ch-po-head strong{display:block;font-size:14px}
+.sfa .ch-po-head span span,.sfa .ch-po-head small{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-thumbs{display:flex;align-items:center;gap:-6px}
+.sfa .ch-thumb{width:46px;height:46px;margin-right:-10px;border:2px solid var(--surface);
+  border-radius:10px;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;flex:0 0 auto}
+.sfa .ch-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.sfa .ch-thumb--none{font-size:12px;color:var(--ink-faint);margin-right:0}
+.sfa .ch-more{margin-left:16px;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-bar{display:block;height:6px;margin-top:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.sfa .ch-bar i{display:block;height:6px;border-radius:99px;background:var(--ink)}
+.sfa .ch-risk{display:inline-block;margin-top:3px;padding:1px 8px;border-radius:99px;
+  background:var(--surface-2);font-size:12px;color:var(--ink-faint)}
+.sfa .ch-risk.warn{background:#F6EFE2;color:#7A6534}
+.sfa .ch-risk.bad{background:#F7ECEB;color:#8E3F39}
+.sfa .ch-chev{justify-self:center;font-size:18px;color:var(--ink-faint)}
+.sfa .ch-po-body{border-top:1px solid var(--line);background:var(--surface-2)}
+.sfa .ch-steps{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px}
+.sfa .ch-step{padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.sfa .ch-step strong{display:block;font-size:12px}
+.sfa .ch-step small{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-step.ok{border-color:#CFDACF;background:#F3F7F3}
+.sfa .ch-po-body .cf-pieces{background:var(--surface)}
+.sfa .ch-empty{padding:22px 16px;color:var(--ink-faint);font-size:13px}
+.sfa .ch-empty strong{display:block;margin-bottom:4px;color:var(--ink);font-size:14px}
+.sfa .co-account-grid.ch-one{grid-template-columns:minmax(0,1fr)}
+
+@media (max-width:900px){
+  .sfa .ch-finance{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sfa .ch-po-head{grid-template-columns:auto minmax(0,1fr) 22px;row-gap:8px}
+  .sfa .ch-po-phase,.sfa .ch-po-due{grid-column:2/3}
+}
+@media (max-width:640px){
+  .sfa .ch-finance{grid-template-columns:minmax(0,1fr)}
+  .sfa .ch-po-head{grid-template-columns:minmax(0,1fr) 22px}
+  .sfa .ch-thumbs{grid-column:1/-1}
+  .sfa .ch-po-main,.sfa .ch-po-phase,.sfa .ch-po-due{grid-column:1/-1}
+}
+
 </style>
 <style>
 /* ---------------------------------------------------------------------------
@@ -5131,7 +5225,7 @@ small{font-size:12px}
 }
 </style>
 <body>
-<script>const BUILD_ID='1f4fc711600a';</script>
+<script>const BUILD_ID='de3a3c534f19';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -5676,7 +5770,8 @@ function sessionStale(g){ return g !== S_GEN; }
 // The scratch globals wiped when the session changes. Kept in step with the
 // code by a check in build.sh; the two deliberate exceptions are named there.
 const SESSION_GLOBALS = [
-  '__accessGroup','__accessQ','__accessSel','__acct','__ccChip','__client',
+  '__accessGroup','__accessQ','__accessSel','__acct','__ccChip','__chAct',
+  '__chDir','__chTab','__client',
   '__cmdRows','__cmdSel','__cmtAttach','__cost','__du','__finSeg','__gq',
   '__impRecs','__inAdminShell','__inReportShell','__moreNav','__openStages',
   '__paCompany','__paPerson','__paStaff','__paTab','__pdfjsLoading','__poFiles',
@@ -9211,109 +9306,316 @@ function clientActivity(b){
   });
   return out.sort((a,b2)=>String(b2[2]).localeCompare(String(a[2]))).slice(0,6);
 }
-function clientDirectory(){
-  const sel=window.__client;
-  const list=(S.buyers||[]).slice().sort((a,b)=>String(a.company).localeCompare(String(b.company)));
-  return '<aside class="co-directory"><div class="co-directory-search">'+
-    '<input id="co-search" type="search" aria-label="Search clients or contacts" '+
-      'placeholder="Search clients or contacts" oninput="filterClientAccounts(this.value)"></div>'+
-    '<div class="co-directory-list" id="co-client-list">'+
-    (list.length?list.map(b=>{
-      const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id&&p.status!=='completed'&&p.status!=='cancelled');
-      const hasLogin=(S.profilesAll||[]).some(p=>p.buyer_id===b.id);
-      return '<button class="co-client-button'+(sel===b.id?' active':'')+'" type="button" '+
-        'aria-pressed="'+(sel===b.id)+'" data-search="'+esc([b.company,b.contact_name,b.email,b.city].filter(Boolean).join(' '))+'" '+
-        'onclick="selectClientAccount(\''+b.id+'\')">'+
-        '<span class="co-client-avatar">'+esc(clientInitials(b.company))+'</span>'+
-        '<span class="co-client-copy"><strong>'+esc(b.company)+'</strong>'+
-        '<span>'+esc([b.contact_name,b.city].filter(Boolean).join(' · ')||'No contact recorded')+'</span>'+
-        '<small class="'+(hasLogin?'':'attention')+'">'+
-          esc(pos.length?(pos.length+' open PO'+(pos.length===1?'':'s')):(hasLogin?'No open orders':'Setup required'))+'</small>'+
-        '</span><span class="pa-chevron">›</span></button>';
-    }).join(''):'<div class="co-directory-empty">No buyers yet.</div>')+
-    '</div></aside>';
+/* ---------------------------------------------------------------------------
+   The Client Hub.
+
+   Built from ChatGPT's STONEFLOW-CLIENT-HUB-FINAL.html (design/client-hub/).
+   The rules that shape it, from that handoff:
+
+     1. The buyer company is the finance boundary. The position comes from the
+        Tally ledger snapshot and the invoices posted against it, never from
+        adding up purchase-order values.
+     2. Production happens per product; completion, payment clearance, packing
+        and shipment stay PO-wise.
+     3. A purchase order opens to its products; a product opens to its own
+        stages and photographs.
+     4. Photographs are prominent, because people recognise a piece by looking
+        at it rather than by reading its code.
+     5. Only buyer-safe activity appears in the timeline.
+     8. The directory is compact by default and expands as an overlay, so the
+        buyer's own workspace never loses width.
+
+   This replaces the earlier Client operations screen AND the separate
+   #/client/<id> page, which was a second answer to the same question and
+   should never have been a second page.
+--------------------------------------------------------------------------- */
+
+// selection and the open purchase order both live in the address, so Back and
+// Forward restore them and a link can be sent to somebody
+function chParts(){
+  const p=(location.hash||'').replace(/^#\/?/,'').split('/');
+  return { buyer:(p[1] && p[1]!=='logins' && p[1]!=='updates')?p[1]:null,
+           po:(p[2]==='po'&&p[3])?p[3]:null };
 }
-function clientAccount(){
-  const list=(S.buyers||[]).slice().sort((a,b)=>String(a.company).localeCompare(String(b.company)));
-  const b=list.find(x=>x.id===window.__client)||list[0];
-  if(!b) return '<main class="co-account"><div class="co-empty"><strong>No buyer companies yet</strong>'+
-    '<p>Add the company first; its purchase orders, logins and finance hang off that record.</p>'+
-    '<button class="button secondary small" type="button" onclick="mBuyer(null)">Add company</button></div></main>';
-  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id)
-    .sort((a,c)=>String(a.expected_ship_date||'9').localeCompare(String(c.expected_ship_date||'9')));
+function chBuyers(){
+  return (S.buyers||[]).slice().sort((a,b)=>String(a.company).localeCompare(String(b.company)));
+}
+function chBuyer(){
+  const list=chBuyers(), want=chParts().buyer;
+  return list.find(x=>x.id===want) || list.find(x=>x.id===window.__client) || list[0] || null;
+}
+function chTab(){ return window.__chTab||'overview'; }
+function chSetTab(k){ window.__chTab=k; render(); }
+function chGo(buyerId, poId){
+  window.__client=buyerId;
+  go('#/clients/'+buyerId+(poId?('/po/'+poId):''));
+}
+function chOpenPo(poId){
+  const b=chBuyer(); if(!b) return;
+  window.__chTab='orders';
+  chGo(b.id, chParts().po===poId?null:poId);
+}
+function chDirOpen(on){
+  window.__chDir=!!on;
+  document.body.classList.toggle('ch-dir-open', !!on);
+  // Render in BOTH directions. The first version only redrew on close, so
+  // opening set a flag and focused a search box that had not been drawn yet:
+  // the state said open and the screen showed nothing.
+  render();
+  if(on){ const el=$('ch-search'); if(el) el.focus(); }
+}
+// Escape and a click outside close it, per rule 8
+function chDirKey(e){ if(e.key==='Escape'){ chDirOpen(false); } }
+
+function chDirectory(){
+  const b=chBuyer(), list=chBuyers(), open=!!window.__chDir;
+  return '<div class="ch-dir'+(open?' open':'')+'">'+
+    '<button class="ch-dir-toggle" type="button" aria-expanded="'+open+'" '+
+      'onclick="chDirOpen('+(!open)+')">'+
+      '<span class="ch-dir-avatar">'+esc(clientInitials(b?b.company:'?'))+'</span>'+
+      '<span><small>Client</small><strong>'+esc(b?b.company:'None yet')+'</strong></span>'+
+      '<span class="ch-dir-count">'+list.length+'</span></button>'+
+    (open?'<div class="ch-dir-scrim" onclick="chDirOpen(false)"></div>'+
+      '<div class="ch-dir-panel" role="dialog" aria-label="Choose a client" onkeydown="chDirKey(event)">'+
+      '<input id="ch-search" type="search" placeholder="Search clients or contacts" '+
+        'aria-label="Search clients or contacts" oninput="chFilter(this.value)">'+
+      '<div id="ch-dir-list">'+
+      (list.length?list.map(x=>{
+        const pos=(S.pos||[]).filter(p=>p.buyer_id===x.id&&p.status!=='completed'&&p.status!=='cancelled');
+        const hasLogin=(S.profilesAll||[]).some(p=>p.buyer_id===x.id);
+        return '<button class="ch-dir-row'+(b&&b.id===x.id?' active':'')+'" type="button" '+
+          'data-search="'+esc([x.company,x.contact_name,x.email,x.city].filter(Boolean).join(' '))+'" '+
+          'onclick="chDirOpen(false);chGo(\''+x.id+'\')">'+
+          '<span class="ch-dir-avatar">'+esc(clientInitials(x.company))+'</span>'+
+          '<span><strong>'+esc(x.company)+'</strong>'+
+          '<span>'+esc([x.contact_name,x.city].filter(Boolean).join(' · ')||'No contact recorded')+'</span>'+
+          '<small'+(hasLogin?'':' class="attention"')+'>'+
+            esc(pos.length?(pos.length+' open PO'+(pos.length===1?'':'s')):(hasLogin?'No open orders':'Setup required'))+
+          '</small></span></button>';
+      }).join(''):'<div class="ch-empty"><strong>No buyers yet.</strong></div>')+
+      '</div></div>':'')+
+    '</div>';
+}
+function chFilter(q){
+  q=String(q||'').toLowerCase().trim();
+  document.querySelectorAll('#ch-dir-list .ch-dir-row').forEach(el=>{
+    el.hidden = !!q && (el.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0;
+  });
+}
+
+// Rule 1. The company is the finance boundary: this reads the accepted Tally
+// snapshot and the invoices posted to the account. Nothing here is derived by
+// adding up what the purchase orders are worth.
+function chFinanceStrip(b){
+  const st=statementStanding(latestStatement(b.id));
+  const invs=(S.invByBuyer[b.id]||[]);
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
+  const cleared=pos.filter(p=>p.finance_cleared).length;
+  return '<div class="ch-finance">'+
+    '<div><span>'+esc(st?st.label:'Latest Tally balance')+'</span>'+
+      '<strong>'+esc(st?money(st.amount,st.currency):'No statement yet')+'</strong>'+
+      '<small>'+esc(st?('As at '+fdate(st.as_of)):'Import a ledger statement to set this')+'</small></div>'+
+    '<div><span>Invoices</span><strong>'+invs.length+'</strong>'+
+      '<small>'+esc(invs.length?'Posted to this account':'Nothing billed yet')+'</small></div>'+
+    '<div><span>PO shipment clearance</span><strong>'+cleared+' of '+pos.length+'</strong>'+
+      '<small>Cleared by you, and checked again by the server</small></div>'+
+    '<div><span>Finance boundary</span><strong>Buyer level</strong>'+
+      '<small>Never derived from purchase-order values</small></div>'+
+  '</div>';
+}
+
+// Rule 4: the thumbnails are the target images of the products inside the order,
+// so an order is recognised by looking rather than by reading a code.
+function chThumbs(items){
+  const shots=items.map(it=>({it, ph:targetImage(it)})).filter(x=>x.ph);
+  const show=shots.slice(0,3);
+  return '<div class="ch-thumbs">'+
+    (show.length?show.map(x=>'<span class="ch-thumb"><img alt="'+esc(x.it.product)+'" '+
+      'data-ph-path="'+esc(x.ph.path)+'"></span>').join('')
+     :'<span class="ch-thumb ch-thumb--none">'+(items.length?'No photo':'—')+'</span>')+
+    (items.length>show.length&&show.length?'<span class="ch-more">+'+(items.length-show.length)+'</span>':'')+
+  '</div>';
+}
+function chPoCard(p){
+  const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+  const r=poReadiness(p);
+  const stg=items.map(i=>curStage(i)).filter(Boolean).sort((a,b)=>a.sort_order-b.sort_order)[0];
+  const late=items.filter(it=>{ const l=lateness(it); return l&&l.state==='late'; }).length;
+  const blocked=items.filter(it=>(blockedItems()||[]).some(x=>x.item.id===it.id)).length;
+  const risk=blocked?'At risk':late?'Attention':'On track';
+  const open=chParts().po===p.id;
+  return '<article class="ch-po'+(open?' open':'')+'">'+
+    '<button class="ch-po-head" type="button" aria-expanded="'+open+'" '+
+      'onclick="chOpenPo(\''+p.id+'\')" title="'+esc(p.po_number+' — '+(p.project||''))+'">'+
+      chThumbs(items)+
+      '<span class="ch-po-main"><strong>'+esc(p.po_number)+'</strong>'+
+        '<span>'+esc((p.project?p.project+' · ':'')+items.length+' product'+(items.length===1?'':'s'))+'</span>'+
+        '<span class="ch-bar"><i style="width:'+r.pct+'%"></i></span></span>'+
+      '<span class="ch-po-phase"><strong>'+esc(r.stateLabel)+'</strong>'+
+        '<span>'+esc(stg?stg.name:'Not started')+' · '+r.pct+'%</span>'+
+        '<span class="ch-risk'+(risk==='At risk'?' bad':risk==='Attention'?' warn':'')+'">'+risk+'</span></span>'+
+      '<span class="ch-po-due"><strong>'+esc(p.expected_ship_date?fdate(p.expected_ship_date):'No date')+'</strong>'+
+        '<small>'+esc(r.shippable?'Ready to ship':(r.blocker||''))+'</small></span>'+
+      '<span class="ch-chev">'+(open?'⌄':'›')+'</span></button>'+
+    (open?'<div class="ch-po-body">'+
+      '<div class="ch-steps">'+r.steps.map(s=>'<span class="ch-step'+(s.ok?' ok':'')+'">'+
+        '<strong>'+esc(s.k)+'</strong><small>'+esc(s.v)+'</small></span>').join('')+'</div>'+
+      '<div class="cf-pieces">'+(items.length?items.map(cfItemRow).join('')
+        :'<div class="ch-empty"><strong>No products on this order yet.</strong></div>')+'</div>'+
+      '<div class="button-row" style="padding:10px 14px">'+
+        '<button class="button secondary small" type="button" onclick="go(\'#/po/'+p.id+'\')">Open the full order</button>'+
+      '</div></div>':'')+
+  '</article>';
+}
+
+function chActivityRows(b){
+  const rows=clientActivity(b)||[];
+  const f=window.__chAct||'All activity';
+  const pick=x=>{
+    const t=String(x[0]||'').toLowerCase();
+    if(f==='All activity') return true;
+    if(f==='Communication') return /question|message|comment|reply/.test(t);
+    if(f==='Approvals')     return /approv|decision|sign/.test(t);
+    if(f==='Finance')       return /invoice|payment|ledger|statement|₹/.test(t);
+    if(f==='Shipping')      return /ship|dispatch|pack|deliver/.test(t);
+    return true;
+  };
+  const list=rows.filter(pick);
+  return list.length?list.map(x=>'<div class="co-activity-row">'+
+      '<span class="co-activity-icon">'+icon('i-message','icon-sm')+'</span>'+
+      '<div><strong>'+esc(x[0])+'</strong><span>'+esc(x[1])+'</span></div>'+
+      '<time>'+esc(x[2]?fdate(String(x[2]).slice(0,10)):'')+'</time></div>').join('')
+    :'<div class="ch-empty"><strong>'+(rows.length?'Nothing under this filter.':'Nothing yet.')+'</strong>'+
+     'Published progress, decisions and messages appear here. Internal workshop notes never do.</div>';
+}
+function chSetActivity(v){ window.__chAct=v; render(); }
+
+function chAccessPanel(b){
   const logins=(S.profilesAll||[]).filter(p=>p.buyer_id===b.id);
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
   const st=statementStanding(latestStatement(b.id));
   const portal=logins.length?(logins.some(l=>l.active!==false)?'Active':'Suspended'):'Setup required';
   const finVis=logins.some(l=>l.finance_access)?'Enabled':'Not enabled';
-  const billing=[b.gstin,b.address,b.city].filter(Boolean).length>=2?'Billing complete':'Billing incomplete';
+  const billing=paMissing(b).length?'Billing incomplete':'Billing complete';
+  return '<aside class="co-panel"><header class="co-panel-head"><div><h2>Account, contacts &amp; access</h2>'+
+    '<p>Check the buyer identity before managing its logins.</p></div>'+
+    '<button class="button quiet small" type="button" onclick="go(\'#/access\')">Manage access</button></header>'+
+    '<div class="co-detail-body">'+
+      (logins.length?logins.map(l=>'<button class="co-contact-card" style="width:100%;text-align:left;cursor:pointer" '+
+        'type="button" onclick="paOpenPerson(\''+l.user_id+'\')">'+
+        '<strong>'+esc(l.full_name||l.email)+'</strong>'+
+        '<span>'+esc(l.email)+' · '+esc(paScopeOf(l).length?(paScopeOf(l).length+' assigned orders'):'Every order this company placed')+'</span>'+
+        '</button>').join('')
+       :'<div class="co-contact-card"><strong>'+esc(b.contact_name||'No contact named')+'</strong>'+
+        '<span>'+esc([b.email,b.phone].filter(Boolean).join(' · ')||'Nobody here can sign in yet')+'</span></div>')+
+      '<div class="co-detail-row"><span>Portal</span><strong>'+esc(portal)+'</strong></div>'+
+      '<div class="co-detail-row"><span>Logins</span><strong>'+logins.length+'</strong></div>'+
+      '<div class="co-detail-row"><span>Purchase orders</span><strong>'+pos.length+'</strong></div>'+
+      '<div class="co-detail-row"><span>Buyer balance</span><strong>'+
+        esc(st?money(st.amount,st.currency)+(st.credit?' in advance':' payable'):'No statement yet')+'</strong></div>'+
+      '<div class="co-detail-row"><span>Finance visibility</span><strong>'+esc(finVis)+'</strong></div>'+
+      '<div class="co-detail-row"><span>Billing record</span><strong>'+esc(billing)+'</strong></div>'+
+      '<div class="button-row" style="margin-top:10px">'+
+        '<button class="button secondary small" type="button" onclick="mNewLogin(\''+b.id+'\')">Add person</button>'+
+        '<button class="button quiet small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit record</button>'+
+      '</div></div></aside>';
+}
+
+function chUpcoming(b){
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id && p.expected_ship_date)
+    .sort((x,y)=>String(x.expected_ship_date).localeCompare(String(y.expected_ship_date))).slice(0,4);
+  return '<aside class="co-panel"><header class="co-panel-head"><div><h2>Upcoming</h2>'+
+    '<p>Shipment commitments on this account, soonest first.</p></div></header>'+
+    '<div class="co-detail-body">'+
+    (pos.length?pos.map(p=>{
+      const r=poReadiness(p);
+      const d=daysUntil?daysUntil(p.expected_ship_date):null;
+      return '<button class="co-detail-row" style="width:100%;cursor:pointer" type="button" '+
+        'onclick="chOpenPo(\''+p.id+'\')"><span>'+esc(p.po_number)+'</span>'+
+        '<strong>'+esc(fdate(p.expected_ship_date))+(r.shippable?' · ready':'')+'</strong></button>';
+    }).join('')
+     :'<div class="ch-empty"><strong>No shipment dates set.</strong>Add an expected ship date to a purchase order and it appears here.</div>')+
+    '</div></aside>';
+}
+
+function chAccount(){
+  const b=chBuyer();
+  if(!b) return '<main class="co-account"><div class="co-empty"><strong>No buyer companies yet</strong>'+
+    '<p>Add the company first; its purchase orders, logins and finance hang off that record.</p>'+
+    '<button class="button secondary small" type="button" onclick="mBuyer(null)">Add company</button></div></main>';
+  window.__client=b.id;
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id)
+    .sort((x,y)=>String(x.expected_ship_date||'9').localeCompare(String(y.expected_ship_date||'9')));
+  const logins=(S.profilesAll||[]).filter(p=>p.buyer_id===b.id);
+  const portal=logins.length?(logins.some(l=>l.active!==false)?'active':'suspended'):'setup required';
+  const finVis=logins.some(l=>l.finance_access)?'enabled':'not enabled';
+  const billing=paMissing(b).length?'Billing incomplete':'Billing complete';
+  const tab=chTab();
+
+  const orders='<section class="co-panel"><header class="co-panel-head"><div>'+
+      '<h2>Purchase orders and shipment readiness</h2>'+
+      '<p>Products are made one at a time. Completion, payment clearance, packing and shipping stay with the order.</p></div>'+
+      '<button class="button quiet small" type="button" onclick="go(\'#/orders\')">All orders</button></header>'+
+      '<div class="ch-po-toolbar">'+
+        '<input id="ch-po-search" type="search" placeholder="Search PO, job, product or stage" '+
+          'aria-label="Search this client\'s purchase orders" oninput="chFilterPos(this.value)">'+
+        '<span class="lead">'+pos.length+' order'+(pos.length===1?'':'s')+'</span></div>'+
+      '<div class="ch-po-list" id="ch-po-list">'+
+      (pos.length?pos.map(p=>{
+        const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
+        return '<div data-search="'+esc([p.po_number,p.project].concat(items.map(i=>i.product)).filter(Boolean).join(' '))+'">'+
+          chPoCard(p)+'</div>';
+      }).join('')
+      :'<div class="ch-empty"><strong>No purchase orders yet.</strong>'+
+        'Complete the billing record before creating an order or giving anyone portal access.'+
+        '<div class="button-row" style="margin-top:12px">'+
+        '<button class="button secondary small" type="button" onclick="mNewPO()">Create the first PO</button></div></div>')+
+      '</div></section>';
+
+  const activity='<section class="co-panel"><header class="co-panel-head"><div>'+
+      '<h2>Client activity</h2>'+
+      '<p>What this buyer has seen and said. Internal workshop notes are excluded by the database, not hidden by the page.</p></div>'+
+      '<select class="button secondary small" aria-label="Filter activity" onchange="chSetActivity(this.value)">'+
+      ['All activity','Communication','Approvals','Finance','Shipping'].map(o=>
+        '<option'+((window.__chAct||'All activity')===o?' selected':'')+'>'+o+'</option>').join('')+
+      '</select></header><div class="co-activity">'+chActivityRows(b)+'</div></section>';
+
+  const actions='<aside class="co-panel"><header class="co-panel-head"><div><h2>Needs action now</h2>'+
+      '<p>Only work belonging to '+esc(b.company)+'.</p></div></header>'+
+      '<div class="co-actions">'+clientActions(b).map(a=>'<article class="co-action">'+
+        '<i class="'+esc(a[0])+'"></i><div><strong>'+esc(a[1])+'</strong><span>'+esc(a[2])+'</span></div>'+
+        '<button class="button secondary small" type="button" onclick="'+a[4]+'">'+esc(a[3])+'</button>'+
+        '</article>').join('')+'</div></aside>';
+
+  const panes = tab==='orders'   ? '<div class="co-account-grid ch-one">'+orders+'</div>'
+              : tab==='activity' ? '<div class="co-account-grid ch-one">'+activity+'</div>'
+              : tab==='access'   ? '<div class="co-account-grid ch-one">'+chAccessPanel(b)+chUpcoming(b)+'</div>'
+              : '<div class="co-account-grid">'+orders+actions+'</div>'+
+                '<div class="co-account-grid">'+activity+chAccessPanel(b)+'</div>';
 
   return '<main class="co-account"><header class="co-account-head"><div>'+
     '<p class="eyebrow">Selected buyer account'+(b.city?' · '+esc(b.city):'')+'</p>'+
     '<h2>'+esc(b.company)+'</h2>'+
     '<p>'+esc([b.contact_name,b.email,b.phone].filter(Boolean).join(' · ')||'No contact details recorded')+'</p></div>'+
     '<div class="co-account-actions">'+
-      '<span class="co-badge">Portal '+esc(portal.toLowerCase())+'</span>'+
-      '<span class="co-badge">Finance '+esc(finVis.toLowerCase())+'</span>'+
+      '<span class="co-badge">Portal '+esc(portal)+'</span>'+
+      '<span class="co-badge">Finance '+esc(finVis)+'</span>'+
       '<span class="co-badge">'+esc(billing)+'</span>'+
       '<button class="button secondary small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit account</button>'+
     '</div></header>'+
-
-    '<div class="co-account-grid"><section class="co-panel"><header class="co-panel-head"><div>'+
-      '<h2>Purchase orders and commercial position</h2>'+
-      '<p>Only this buyer’s orders are shown. Products stay inside their parent purchase order.</p></div>'+
-      '<button class="button quiet small" type="button" onclick="go(\'#/orders\')">All orders</button></header>'+
-      (pos.length?'<div style="overflow:auto"><table class="co-order-table"><thead><tr>'+
-        '<th>Purchase order</th><th>Stage</th><th>Progress</th><th>Delivery</th>'+
-        '<th>Order value</th><th>Receivable</th><th></th></tr></thead><tbody>'+
-        pos.map(p=>{
-          const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
-          const stg=items.map(i=>curStage(i)).filter(Boolean).sort((x,y)=>x.sort_order-y.sort_order)[0];
-          const fin=poFinance(p);
-          return '<tr><td><strong>'+esc(p.po_number)+'</strong><span>'+
-            esc((p.project?p.project+' · ':'')+items.length+' product'+(items.length===1?'':'s'))+'</span></td>'+
-            '<td>'+esc(stg?stg.name:'Not started')+'</td><td>'+sfCompletion(p)+'%</td>'+
-            '<td>'+esc(p.expected_ship_date?fdate(p.expected_ship_date):'Not set')+'</td>'+
-            '<td>'+esc(p.amount_total!=null?money(p.amount_total,'INR'):'—')+'</td>'+
-            '<td>'+esc(fin.outstanding>0?money(fin.outstanding,'INR'):'Nil')+'</td>'+
-            '<td><button class="button quiet small" type="button" '+
-              'onclick="selectOrder(\''+p.id+'\');go(\'#/orders\')">Open PO</button></td></tr>';
-        }).join('')+'</tbody></table></div>'
-      :'<div class="co-empty"><strong>No purchase orders yet</strong>'+
-        '<p>Complete the company record before assigning a purchase order or portal access.</p>'+
-        '<button class="button secondary small" type="button" onclick="mNewPO()">Create first PO</button></div>')+
-      '</section>'+
-    '<aside class="co-panel"><header class="co-panel-head"><div><h2>Account actions</h2>'+
-      '<p>Only work belonging to '+esc(b.company)+'.</p></div></header>'+
-      '<div class="co-actions">'+clientActions(b).map(a=>'<article class="co-action">'+
-        '<i class="'+esc(a[0])+'"></i><div><strong>'+esc(a[1])+'</strong><span>'+esc(a[2])+'</span></div>'+
-        '<button class="button secondary small" type="button" onclick="'+a[4]+'">'+esc(a[3])+'</button>'+
-        '</article>').join('')+'</div></aside></div>'+
-
-    '<div class="co-account-grid"><section class="co-panel"><header class="co-panel-head"><div>'+
-      '<h2>Recent client activity</h2>'+
-      '<p>What this buyer has seen and said — never internal workshop notes.</p></div>'+
-      '<button class="button quiet small" type="button" onclick="go(\'#/reports\')">Full history</button></header>'+
-      '<div class="co-activity">'+
-      (clientActivity(b).length?clientActivity(b).map(x=>'<div class="co-activity-row">'+
-        '<span class="co-activity-icon">'+icon('i-message','icon-sm')+'</span>'+
-        '<div><strong>'+esc(x[0])+'</strong><span>'+esc(x[1])+'</span></div>'+
-        '<time>'+esc(x[2]?fdate(String(x[2]).slice(0,10)):'')+'</time></div>').join('')
-       :'<div class="co-empty"><strong>Nothing yet</strong><p>Published progress, decisions and messages appear here.</p></div>')+
-      '</div></section>'+
-    '<aside class="co-panel"><header class="co-panel-head"><div><h2>Account, contacts &amp; access</h2>'+
-      '<p>Check the buyer identity before managing its logins.</p></div>'+
-      '<button class="button quiet small" type="button" onclick="go(\'#/access\')">Manage access</button></header>'+
-      '<div class="co-detail-body">'+
-        '<div class="co-contact-card"><strong>'+esc(b.contact_name||'No contact named')+'</strong>'+
-        '<span>'+esc([b.email,b.phone].filter(Boolean).join(' · ')||'No email or phone recorded')+'</span></div>'+
-        '<div class="co-detail-row"><span>Portal</span><strong>'+esc(portal)+'</strong></div>'+
-        '<div class="co-detail-row"><span>Logins</span><strong>'+logins.length+'</strong></div>'+
-        '<div class="co-detail-row"><span>Purchase orders</span><strong>'+pos.length+'</strong></div>'+
-        '<div class="co-detail-row"><span>Buyer balance</span><strong>'+
-          esc(st?money(st.amount,st.currency)+(st.credit?' in advance':' payable'):'No statement yet')+'</strong></div>'+
-        '<div class="co-detail-row"><span>Finance visibility</span><strong>'+esc(finVis)+'</strong></div>'+
-        '<div class="co-detail-row"><span>Billing record</span><strong>'+esc(billing)+'</strong></div>'+
-      '</div></aside></div></main>';
+    '<nav class="ch-tabs" role="tablist" aria-label="Client sections">'+
+    [['overview','Overview'],['orders','Purchase orders'],['activity','Activity'],
+     ['access','Contacts & access']].map(([k,label])=>
+      '<button class="ch-tab'+(tab===k?' active':'')+'" type="button" role="tab" '+
+      'aria-selected="'+(tab===k)+'" onclick="chSetTab(\''+k+'\')">'+esc(label)+'</button>').join('')+
+    '</nav>'+
+    chFinanceStrip(b)+panes+'</main>';
+}
+function chFilterPos(q){
+  q=String(q||'').toLowerCase().trim();
+  document.querySelectorAll('#ch-po-list > div[data-search]').forEach(el=>{
+    el.hidden = !!q && (el.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0;
+  });
 }
 
 function vClients(tab){
@@ -9351,7 +9653,11 @@ function vClients(tab){
     '<p>Select any buyer to review only that company’s purchase orders, actions, contacts, portal access and commercial position.</p></div>'+
     '<div class="button-row">'+
       '<button class="button secondary" type="button" onclick="mBuyer(null)">Add company</button>'+
-      '<button class="button" type="button" onclick="go(\'#/clients/updates\')">'+icon('i-plus','icon-sm')+'Send an update</button>'+
+      // scoped to the client on screen, because standing on Essentia's page and
+      // being handed every client's note is how one buyer's progress reaches
+      // another. It falls back to the whole round when nothing is selected.
+      '<button class="button" type="button" onclick="go(\'#/clients/updates'+
+        (chBuyer()?('/'+chBuyer().id):'')+'\')">'+icon('i-plus','icon-sm')+'Send an update</button>'+
     '</div></header>'+
     '<section class="co-summary">'+
       '<div><span>Buyer companies with access</span><strong>'+active+'</strong>'+
@@ -9363,7 +9669,9 @@ function vClients(tab){
       '<div><span>Approved updates unsent</span><strong>'+unsent+'</strong>'+
         '<small>Ready for you to publish</small></div>'+
     '</section>'+
-    '<div class="co-workspace">'+clientDirectory()+clientAccount()+'</div></div>');
+    chDirectory()+
+    '<div class="co-workspace ch-workspace">'+chAccount()+'</div></div>');
+  if(typeof hydrateImages==='function') hydrateImages();
 }
 
 /* ChatGPT's reportsView shell from the final handoff: .report-head with its two
@@ -14103,83 +14411,15 @@ function cfOrderCard(po){
          'Add the pieces it covers and the workshop can record against them.</div>')+
     '</div></section>';
 }
+// #/client/<id> was a second page answering the same question as the Client
+// Hub, built before I checked that #/clients existed. It stays as a redirect so
+// every link and bookmark to it still lands somewhere real, and there is one
+// page rather than two drifting apart.
 function vClientFile(buyerId){
   if(!isAdmin()) return vHome();
-  const b=(S.buyers||[]).find(x=>x.id===buyerId) || (S.buyersById||{})[buyerId];
-  if(!b){
-    sfaPaint('<div class="pa-page"><section class="card"><div class="empty">'+
-      '<h2>No such buyer.</h2><p>It may have been removed.</p>'+
-      '<button class="button" type="button" onclick="go(\'#/access\')">Back to People &amp; access</button>'+
-      '</div></section></div>');
-    return;
-  }
-  const orders=clientOrders(b.id);
-  const items=orders.reduce((a,p)=>a.concat(clientItems(p)), []);
-  const people=paPeople().filter(p=>p.buyer_id===b.id);
-  const inProd=items.filter(it=>curStage(it) && !pieceIsMade(it)).length;
-  const withBuyer=items.reduce((a,it)=>
-    a+(S.stByItem[it.id]||[]).filter(r=>r.approval==='requested').length, 0);
-  const blocked=items.filter(it=>(blockedItems()||[]).some(x=>x.item.id===it.id)).length;
-  const outstanding=orders.reduce((a,p)=>a+(poFinance(p).outstanding||0), 0);
-  const missing=paMissing(b);
-
-  sfaPaint('<div class="pa-page cf-page">'+
-    '<header class="pa-head"><div>'+
-      '<p class="eyebrow"><button class="cf-back" type="button" onclick="go(\'#/access\')">'+
-        '‹ People &amp; access</button> · buyer file</p>'+
-      // "Demo Buyer Co." already ends in a full stop. Adding the house one gave
-      // "Demo Buyer Co..", and half of Yash's clients are Pvt. Ltd.
-      '<h1>'+esc(b.company)+(/[.!?]$/.test(String(b.company||''))?'':'.')+'</h1>'+
-      '<p>'+esc([b.legal_name, b.city, b.contact_name].filter(Boolean).join(' · ')||
-        'Legal name not recorded')+'</p></div>'+
-    '<div class="pa-head-actions">'+
-      '<button class="button secondary" type="button" onclick="mBuyer(\''+b.id+'\')">Edit record</button>'+
-      '<button class="button" type="button" onclick="go(\'#/clients/updates/'+b.id+'\')">'+
-        'Send an update</button>'+
-    '</div></header>'+
-
-    '<section class="pa-summary">'+
-      '<button type="button" onclick="go(\'#/orders\')"><span>Open orders</span>'+
-        '<strong>'+orders.length+'</strong><small>'+items.length+' product'+
-        (items.length===1?'':'s')+' in total</small></button>'+
-      '<button type="button" onclick="go(\'#/production\')"><span>Still being made</span>'+
-        '<strong>'+inProd+'</strong><small>'+(items.length-inProd)+' finished or not started</small></button>'+
-      '<button type="button" onclick="go(\'#/production/review\')"><span>Waiting on the buyer</span>'+
-        '<strong>'+withBuyer+'</strong><small>'+(withBuyer?'Decisions they owe us':'Nothing with them')+'</small></button>'+
-      '<button type="button" onclick="go(\'#/production/priority\')"><span>Reported blocked</span>'+
-        '<strong>'+blocked+'</strong><small>'+(blocked?'The floor has stopped on these':'Nothing stopped')+'</small></button>'+
-      '<button type="button" onclick="go(\'#/finance\')"><span>Outstanding</span>'+
-        '<strong>'+esc(outstanding>0?money(outstanding,'INR'):'Nil')+'</strong>'+
-        '<small>Across every order on this account</small></button>'+
-    '</section>'+
-
-    (missing.length?'<div class="pa-note" style="border-left:3px solid var(--pending,#B8860B)">'+
-      '<strong>Billing record incomplete</strong>Missing: '+esc(missing.join(', '))+
-      '<div class="button-row" style="margin-top:8px">'+
-      '<button class="button secondary small" type="button" onclick="mBuyer(\''+b.id+'\')">Fill it in</button>'+
-      '</div></div>':'')+
-
-    '<section class="cf-orders">'+
-      (orders.length?orders.map(cfOrderCard).join('')
-        :'<div class="empty"><h2>No purchase orders yet.</h2>'+
-          '<p>Create one and its products, stages and shipment gate follow it.</p>'+
-          '<button class="button" type="button" onclick="mNewPO()">+ New PO</button></div>')+
-    '</section>'+
-
-    '<section class="pa-section cf-people"><div class="pa-section-head">'+
-      '<h3>Who can sign in from this company</h3>'+
-      '<button class="button quiet small" type="button" onclick="mNewLogin(\''+b.id+'\')">Add person</button></div>'+
-      (people.length?people.map(p=>'<button class="pa-primary-contact" '+
-        'style="width:100%;text-align:left;margin-top:6px;cursor:pointer" type="button" '+
-        'onclick="paOpenPerson(\''+p.user_id+'\')">'+
-        '<strong>'+esc(p.full_name||p.email)+' · '+
-          esc((PA_ROLES[p.buyer_role||'administrator']||PA_ROLES.administrator).name)+'</strong>'+
-        '<span>'+esc(p.email)+' · '+esc(paScopeOf(p).length?
-          (paScopeOf(p).length+' assigned orders'):'Every order this company placed')+'</span></button>').join('')
-        :'<div class="pa-note"><strong>No login issued</strong>'+
-          'The company exists, but nobody here can sign in.</div>')+
-    '</section></div>');
-  if(typeof hydrateImages==='function') hydrateImages();
+  window.__client=buyerId;
+  window.__chTab='orders';
+  go('#/clients/'+buyerId);
 }
 function paPersonDetail(){
   const list=paPeople();
