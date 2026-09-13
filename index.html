@@ -3962,99 +3962,230 @@ body.reports-mode .sfa .content{max-width:1700px}
   .sfa .cf-piece-flag{grid-column:1/-1}
 }
 /* ---------------------------------------------------------------------------
-   Client Hub. Directory as an overlay so the buyer's workspace keeps its width,
-   account tabs, buyer-level finance strip, and purchase orders as cards that
-   open to the products inside them.
+   Client Hub — the prototype's FINAL REFINEMENT block, scoped under .ch-page so
+   its class names (.directory, .client-row, .po-card, .readiness, .context,
+   .account-tabs, .layout, .side, .stack, .panel) read exactly as ChatGPT wrote
+   them without colliding with the rest of the console.
 --------------------------------------------------------------------------- */
-.sfa .ch-dir{position:relative;margin:0 0 14px}
-.sfa .ch-dir-toggle{display:inline-flex;align-items:center;gap:10px;min-height:52px;
-  padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);
-  color:inherit;font:inherit;cursor:pointer;text-align:left}
-.sfa .ch-dir-toggle:hover{background:var(--surface-2)}
-.sfa .ch-dir-toggle small{display:block;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-dir-toggle strong{display:block;font-size:14px}
-.sfa .ch-dir-count{min-width:24px;height:22px;padding:0 7px;border-radius:8px;
-  background:var(--surface-2);display:grid;place-items:center;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-dir-avatar{width:34px;height:34px;border-radius:50%;background:var(--surface-2);
-  display:grid;place-items:center;font-size:12px;font-weight:700;flex:0 0 auto}
-.sfa .ch-dir-scrim{position:fixed;inset:0;z-index:60;background:rgba(20,20,22,.28)}
-.sfa .ch-dir-panel{position:absolute;z-index:61;top:56px;left:0;width:min(380px,92vw);
-  max-height:min(70vh,560px);overflow:auto;padding:10px;border:1px solid var(--line);
-  border-radius:14px;background:var(--surface);box-shadow:0 24px 60px rgba(20,20,22,.18)}
-.sfa .ch-dir-panel input{width:100%;min-height:44px;margin-bottom:8px;padding:0 12px;
-  border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font:inherit}
-.sfa .ch-dir-row{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;
-  align-items:center;padding:10px;border:0;border-radius:10px;background:transparent;
-  color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px}
-.sfa .ch-dir-row:hover,.sfa .ch-dir-row.active{background:var(--surface-2)}
-.sfa .ch-dir-row strong{display:block;font-size:13px}
-.sfa .ch-dir-row span span{display:block;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-dir-row small{display:block;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-dir-row small.attention{color:var(--warning,#87744E)}
+.sfa .ch-page .hero{min-height:98px;display:flex;justify-content:space-between;align-items:flex-end;
+  gap:24px;padding:18px 4px;margin-bottom:14px;border:0;background:transparent}
+.sfa .ch-page .hero h1{margin-bottom:7px;font-size:44px;letter-spacing:-.045em}
+.sfa .ch-page .hero .lead{max-width:760px;margin:0;color:var(--ink-faint);font-size:13px}
+.sfa .ch-page .hero-actions{display:flex;gap:8px}
+.sfa .ch-page .hero-actions .button{min-width:120px;white-space:nowrap}
 
-.sfa .ch-workspace{display:block}
-.sfa .ch-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 12px;
-  border-bottom:1px solid var(--line);padding-bottom:10px}
-.sfa .ch-tab{min-height:44px;padding:0 14px;border:1px solid transparent;border-radius:10px;
-  background:transparent;color:var(--ink-faint);font:inherit;font-weight:650;cursor:pointer}
-.sfa .ch-tab:hover{background:var(--surface-2);color:var(--ink)}
-.sfa .ch-tab.active{background:var(--surface-2);border-color:var(--line);color:var(--ink)}
+.sfa .ch-page .workspace{display:grid;grid-template-columns:74px minmax(0,1fr);gap:16px;align-items:start}
 
-.sfa .ch-finance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
-.sfa .ch-finance>div{padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-.sfa .ch-finance span{display:block;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-finance strong{display:block;margin:4px 0 3px;font-size:19px}
-.sfa .ch-finance small{display:block;font-size:12px;color:var(--ink-faint)}
+/* the rail: 74px of initials, 310px when expanded, an overlay rather than a column */
+.sfa .ch-page .directory{position:sticky;top:14px;z-index:46;width:74px;max-height:calc(100vh - 28px);
+  overflow:visible;border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  transition:width .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s}
+.sfa .ch-page .directory.expanded{width:310px;box-shadow:0 22px 60px rgba(0,0,0,.13)}
+.sfa .ch-page .directory-toggle{width:100%;height:54px;display:flex;align-items:center;justify-content:center;
+  gap:8px;border:0;border-bottom:1px solid var(--line);border-radius:14px 14px 0 0;background:var(--surface);
+  color:inherit;font:inherit;font-weight:750;cursor:pointer}
+.sfa .ch-page .directory-toggle span{display:none}
+.sfa .ch-page .directory.expanded .directory-toggle span{display:inline}
+.sfa .ch-page .directory-head{display:none;padding:12px;border-bottom:1px solid var(--line)}
+.sfa .ch-page .directory.expanded .directory-head{display:block}
+.sfa .ch-page .directory-head input{width:100%;min-height:40px;padding:0 11px;border:1px solid var(--line);
+  border-radius:9px;background:var(--surface-2);font:inherit}
+.sfa .ch-page .directory-tools{display:flex;align-items:center;justify-content:space-between;margin-top:9px;
+  color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .directory-tools button{border:0;background:transparent;font:inherit;font-weight:750;cursor:pointer;
+  color:var(--ink);min-height:32px;padding:0 6px}
+.sfa .ch-page .client-list{display:grid;gap:2px;padding:6px;max-height:calc(100vh - 140px);overflow:auto}
+.sfa .ch-page .client-row{position:relative;width:100%;min-height:62px;display:grid;grid-template-columns:44px;
+  justify-content:center;gap:10px;align-items:center;padding:8px;border:1px solid transparent;border-radius:10px;
+  background:var(--surface);color:inherit;font:inherit;text-align:left;cursor:pointer}
+.sfa .ch-page .client-row:hover{background:#fafafa}
+.sfa .ch-page .client-row.active{background:var(--surface-2);border-color:var(--line)}
+.sfa .ch-page .client-row.active:before{content:"";position:absolute;left:-1px;top:9px;bottom:9px;width:3px;
+  border-radius:2px;background:var(--ink)}
+.sfa .ch-page .client-row .initial{width:40px;height:40px;border-radius:10px;background:var(--surface-2);
+  display:grid;place-items:center;font-size:12px;font-weight:750;letter-spacing:.02em}
+.sfa .ch-page .client-copy,.sfa .ch-page .client-row .chev,.sfa .ch-page .client-row .selectbox{display:none}
+.sfa .ch-page .directory.expanded .client-row{min-height:78px;grid-template-columns:40px 1fr 18px;
+  justify-content:stretch;padding:10px}
+.sfa .ch-page .directory.expanded .client-copy,.sfa .ch-page .directory.expanded .client-row .chev{display:block}
+.sfa .ch-page .client-copy{min-width:0}
+.sfa .ch-page .client-copy strong,.sfa .ch-page .client-copy span,.sfa .ch-page .client-copy small{display:block;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sfa .ch-page .client-copy strong{font-size:13px}
+.sfa .ch-page .client-copy span{margin-top:3px;color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .client-copy small{margin-top:3px;color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .directory.expanded .selecting .client-row{grid-template-columns:40px 1fr 22px}
+.sfa .ch-page .directory.expanded .selecting .selectbox{display:block;width:18px;height:18px}
+.sfa .ch-page .directory.expanded .selecting .chev{display:none}
+.sfa .ch-page .selection-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint)}
+.sfa .ch-page .directory-scrim{position:fixed;inset:0;z-index:-1}
+.sfa .ch-page .chev{color:var(--ink-faint)}
 
-.sfa .ch-po-toolbar{display:flex;gap:10px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
-.sfa .ch-po-toolbar input{flex:1;min-height:44px;padding:0 12px;border:1px solid var(--line);
-  border-radius:10px;background:var(--surface-2);font:inherit}
-.sfa .ch-po-list{display:grid}
-.sfa .ch-po{border-top:1px solid var(--line)}
-.sfa .ch-po-list>div:first-child .ch-po{border-top:0}
-.sfa .ch-po-head{width:100%;display:grid;
-  grid-template-columns:auto minmax(0,1.5fr) minmax(0,1fr) minmax(0,.9fr) 22px;
-  gap:14px;align-items:center;padding:13px 14px;border:0;background:var(--surface);
-  color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:44px}
-.sfa .ch-po-head:hover,.sfa .ch-po.open .ch-po-head{background:var(--surface-2)}
-.sfa .ch-po-head strong{display:block;font-size:14px}
-.sfa .ch-po-head span span,.sfa .ch-po-head small{display:block;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-thumbs{display:flex;align-items:center;gap:-6px}
-.sfa .ch-thumb{width:46px;height:46px;margin-right:-10px;border:2px solid var(--surface);
-  border-radius:10px;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;flex:0 0 auto}
-.sfa .ch-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.sfa .ch-thumb--none{font-size:12px;color:var(--ink-faint);margin-right:0}
-.sfa .ch-more{margin-left:16px;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-bar{display:block;height:6px;margin-top:7px;border-radius:99px;background:var(--line);overflow:hidden}
-.sfa .ch-bar i{display:block;height:6px;border-radius:99px;background:var(--ink)}
-.sfa .ch-risk{display:inline-block;margin-top:3px;padding:1px 8px;border-radius:99px;
-  background:var(--surface-2);font-size:12px;color:var(--ink-faint)}
-.sfa .ch-risk.warn{background:#F6EFE2;color:#7A6534}
-.sfa .ch-risk.bad{background:#F7ECEB;color:#8E3F39}
-.sfa .ch-chev{justify-self:center;font-size:18px;color:var(--ink-faint)}
-.sfa .ch-po-body{border-top:1px solid var(--line);background:var(--surface-2)}
-.sfa .ch-steps{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px}
-.sfa .ch-step{padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
-.sfa .ch-step strong{display:block;font-size:12px}
-.sfa .ch-step small{display:block;font-size:12px;color:var(--ink-faint)}
-.sfa .ch-step.ok{border-color:#CFDACF;background:#F3F7F3}
-.sfa .ch-po-body .cf-pieces{background:var(--surface)}
-.sfa .ch-empty{padding:22px 16px;color:var(--ink-faint);font-size:13px}
-.sfa .ch-empty strong{display:block;margin-bottom:4px;color:var(--ink);font-size:14px}
-.sfa .co-account-grid.ch-one{grid-template-columns:minmax(0,1fr)}
+/* the account */
+.sfa .ch-page .account{min-width:0}
+.sfa .ch-page .context{position:sticky;z-index:35;top:10px;min-height:112px;display:flex;
+  justify-content:space-between;align-items:center;gap:18px;padding:19px 22px;margin-bottom:14px;
+  border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px)}
+.sfa .ch-page .context h2{margin:0;font-size:clamp(24px,3vw,36px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sfa .ch-page .context .eyebrow{margin:0 0 7px}
+.sfa .ch-page .context p:last-child{margin:5px 0 0;color:var(--ink-faint);font-size:12px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.sfa .ch-page .context-meta{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap}
+.sfa .ch-page .badge{display:inline-flex;align-items:center;gap:6px;min-height:26px;padding:0 10px;
+  border:1px solid var(--line);border-radius:999px;background:var(--surface-2);font-size:12px;font-weight:650;color:var(--ink)}
+.sfa .ch-page .badge:before,.sfa .ch-page .status:before{content:"";width:7px;height:7px;border-radius:50%;background:#68736a}
+.sfa .ch-page .badge.warn:before,.sfa .ch-page .status.warn:before{background:#a18a5d}
+.sfa .ch-page .badge.bad:before,.sfa .ch-page .status.bad:before{background:#a45f57}
 
+.sfa .ch-page .account-tabs{display:flex;gap:4px;padding:0 4px;margin-bottom:14px;border:0;
+  border-bottom:1px solid var(--line);border-radius:0;background:transparent}
+.sfa .ch-page .tab{min-height:38px;padding:0 13px;border:0;border-radius:7px;background:transparent;
+  color:var(--ink-faint);font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
+.sfa .ch-page .tab.active{background:var(--surface-2);color:var(--ink)}
+.sfa .ch-page .shortcut{margin-left:5px;padding:1px 4px;border:1px solid var(--line);border-radius:4px;
+  background:var(--surface);color:var(--ink-faint);font-size:11px;font-weight:700}
+
+.sfa .ch-page .finance-strip{display:grid;grid-template-columns:1.15fr repeat(3,1fr);gap:0;margin-bottom:16px;
+  border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.sfa .ch-page .finance-strip>div{position:relative;min-height:76px;padding:12px 15px}
+.sfa .ch-page .finance-strip>div+div:before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:1px;background:var(--line)}
+.sfa .ch-page .finance-strip span{display:block;color:var(--ink-faint);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.sfa .ch-page .finance-strip strong{display:block;margin-top:11px;font:600 19px/1 var(--serif,Georgia,serif)}
+.sfa .ch-page .finance-strip small{display:block;margin-top:7px;color:var(--ink-faint);font-size:12px}
+
+.sfa .ch-page .layout{display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:16px;align-items:start}
+.sfa .ch-page .stack{display:grid;gap:14px}
+.sfa .ch-page .side{position:sticky;top:140px}
+.sfa .ch-page .panel{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;
+  box-shadow:0 1px 0 rgba(29,29,31,.02)}
+.sfa .ch-page .panel-head{min-height:70px;display:flex;align-items:flex-start;justify-content:space-between;gap:15px;
+  padding:17px 20px;border-bottom:1px solid var(--line)}
+.sfa .ch-page .panel-head h2{margin:0;font-size:25px}
+.sfa .ch-page .panel-head p{margin:3px 0 0;color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .panel-body{padding:18px}
+.sfa .ch-page .empty{padding:26px 18px;color:var(--ink-faint);font-size:13px}
+.sfa .ch-page .empty strong{display:block;margin-bottom:5px;color:var(--ink);font-size:14px}
+
+.sfa .ch-page .po-toolbar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:#fbfbfc}
+.sfa .ch-page .po-toolbar input{min-width:160px;flex:1;height:38px;padding:0 11px;border:1px solid var(--line);border-radius:9px;background:var(--surface);font:inherit}
+.sfa .ch-page .po-toolbar select{height:38px;padding:0 28px 0 10px;border:1px solid var(--line);border-radius:9px;background:var(--surface);font:inherit}
+.sfa .ch-page .po-toolbar .lead{color:var(--ink-faint);font-size:12px;white-space:nowrap}
+
+.sfa .ch-page .po-wrap{border-bottom:1px solid var(--line)}
+.sfa .ch-page .po-wrap:last-child{border-bottom:0}
+.sfa .ch-page .po-card{position:relative;display:grid;
+  grid-template-columns:210px minmax(210px,1.3fr) 160px 164px 116px 24px;min-height:134px;
+  gap:16px;align-items:center;padding:16px 18px;background:var(--surface);color:inherit;text-decoration:none}
+.sfa .ch-page .po-card:hover,.sfa .ch-page .po-wrap.open .po-card{background:#fafafa}
+.sfa .ch-page .thumbs{display:flex;height:98px}
+.sfa .ch-page .thumb{position:relative;width:104px;flex:0 0 104px;margin-right:-20px;border:3px solid var(--surface);
+  border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#cbb49d,#9c7760)}
+.sfa .ch-page .thumb:nth-child(2){background:radial-gradient(circle at 60% 35%,#f7f5f1 0 19%,#d9d4cd 20% 33%,#aaa39a 34% 35%,#e7e3dc 36%)}
+.sfa .ch-page .thumb:nth-child(3){background:linear-gradient(160deg,#e8e2d8 0 35%,#b6a996 36% 43%,#ded8cf 44%)}
+.sfa .ch-page .thumb--empty{background:var(--surface-2)}
+.sfa .ch-page .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.sfa .ch-page .more{position:absolute;right:4px;bottom:4px;padding:2px 5px;border-radius:6px;background:rgba(29,29,31,.86);color:#fff;font-size:11px}
+.sfa .ch-page .po-main,.sfa .ch-page .phase{min-width:0}
+.sfa .ch-page .po-main strong,.sfa .ch-page .po-main span,.sfa .ch-page .phase strong,.sfa .ch-page .phase span{
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sfa .ch-page .po-main strong{font-size:13px}
+.sfa .ch-page .po-main span,.sfa .ch-page .phase span{margin-top:4px;color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .phase strong{font-size:12px}
+.sfa .ch-page .po-main .progress{margin-top:12px;height:4px;border-radius:3px;background:#e4e4e6;overflow:hidden}
+.sfa .ch-page .progress i{display:block;height:100%;background:#77777a}
+.sfa .ch-page .readiness{display:grid;gap:5px;padding-left:14px;border-left:1px solid var(--line)}
+.sfa .ch-page .readiness span{display:flex;justify-content:space-between;gap:10px;color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .readiness b{color:var(--ink);font-weight:750}
+.sfa .ch-page .due{font-size:12px}
+.sfa .ch-page .due strong,.sfa .ch-page .due small{display:block}
+.sfa .ch-page .due small{margin-top:5px;color:var(--ink-faint);line-height:1.35}
+.sfa .ch-page .status{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;font-weight:750}
+.sfa .ch-page .po-card .chev{font-size:18px;justify-self:center}
+
+.sfa .ch-page .po-body{border-top:1px solid var(--line);background:var(--surface-2)}
+.sfa .ch-page .ch-steps{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px}
+.sfa .ch-page .ch-step{padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.sfa .ch-page .ch-step strong{display:block;font-size:12px}
+.sfa .ch-page .ch-step small{display:block;font-size:12px;color:var(--ink-faint)}
+.sfa .ch-page .ch-step.ok{border-color:#CFDACF;background:#F3F7F3}
+.sfa .ch-page .po-body .cf-pieces{background:var(--surface)}
+
+.sfa .ch-page .activity-row{display:grid;grid-template-columns:34px 1fr auto;gap:11px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.sfa .ch-page .activity-row:last-child{border-bottom:0}
+.sfa .ch-page .activity-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:var(--surface-2);font-size:13px}
+.sfa .ch-page .activity-row strong,.sfa .ch-page .activity-row span{display:block}
+.sfa .ch-page .activity-row strong{font-size:12px}
+.sfa .ch-page .activity-row span,.sfa .ch-page .activity-row time{margin-top:3px;color:var(--ink-faint);font-size:12px;white-space:nowrap}
+
+.sfa .ch-page .action-row{display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.sfa .ch-page .action-row:last-child{border-bottom:0}
+.sfa .ch-page .action-row .dot{width:8px;height:8px;border-radius:50%;background:#a18a5d}
+.sfa .ch-page .action-row .dot.warn{background:#a45f57}
+.sfa .ch-page .action-row .dot.good{background:#68736a}
+.sfa .ch-page .action-row strong{display:block;font-size:12px}
+.sfa .ch-page .action-row span{display:block;margin-top:2px;color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .contact-card{padding:12px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.sfa .ch-page .contact-card strong{display:block;font-size:12px}
+.sfa .ch-page .contact-card span{display:block;margin-top:3px;color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .detail{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border:0;border-bottom:1px solid var(--line);
+  background:transparent;font:inherit;color:inherit;text-align:left}
+.sfa .ch-page .detail:last-child{border-bottom:0}
+.sfa .ch-page .detail span{color:var(--ink-faint);font-size:12px}
+.sfa .ch-page .detail strong{font-size:12px;text-align:right}
+.sfa .ch-page .detail-list{margin-top:8px}
+
+/* The console's own sidebar takes 236px the prototype did not have, so the
+   prototype's 1200px breakpoint fires here at 1560px: below that the four
+   readiness figures drop to a row under the card rather than being clipped. */
+@media (max-width:1560px){
+  .sfa .ch-page .po-card{grid-template-columns:170px minmax(180px,1.2fr) 145px 135px 26px;row-gap:10px}
+  .sfa .ch-page .thumbs{height:76px}
+  .sfa .ch-page .thumb{width:82px;flex-basis:82px;margin-right:-17px}
+  /* every cell placed by hand: auto-placement put the chevron in column one
+     the moment the due date was pinned to row one */
+  .sfa .ch-page .po-card .thumbs{grid-column:1;grid-row:1}
+  .sfa .ch-page .po-card .po-main{grid-column:2;grid-row:1}
+  .sfa .ch-page .po-card .phase{grid-column:3;grid-row:1}
+  .sfa .ch-page .po-card .due{grid-column:4;grid-row:1}
+  .sfa .ch-page .po-card .chev{grid-column:5;grid-row:1}
+  .sfa .ch-page .po-card .readiness{grid-column:2/6;grid-row:2;padding:8px 0 0;border-left:0;border-top:1px solid var(--line);grid-template-columns:repeat(4,1fr)}
+  .sfa .ch-page .po-card .readiness span{flex-direction:column;gap:2px}
+  .sfa .ch-page .layout{grid-template-columns:minmax(0,1fr) 290px}
+}
 @media (max-width:900px){
-  .sfa .ch-finance{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .sfa .ch-po-head{grid-template-columns:auto minmax(0,1fr) 22px;row-gap:8px}
-  .sfa .ch-po-phase,.sfa .ch-po-due{grid-column:2/3}
+  .sfa .ch-page .workspace{grid-template-columns:minmax(0,1fr)}
+  .sfa .ch-page .directory{position:relative;top:auto;width:100%;max-height:none}
+  .sfa .ch-page .directory.expanded{width:100%}
+  .sfa .ch-page .directory-toggle{justify-content:flex-start;padding:0 14px}
+  .sfa .ch-page .directory-toggle span{display:inline}
+  .sfa .ch-page .directory-head{display:block}
+  .sfa .ch-page .client-list{display:none}
+  .sfa .ch-page .directory.expanded .client-list{display:grid;max-height:300px}
+  .sfa .ch-page .layout{grid-template-columns:1fr}
+  .sfa .ch-page .side{position:static}
+  .sfa .ch-page .context{position:static}
+  .sfa .ch-page .po-card{grid-template-columns:126px minmax(0,1fr) 24px}
+  .sfa .ch-page .po-card .phase,.sfa .ch-page .po-card .readiness,.sfa .ch-page .po-card .due{grid-column:2/3}
+  .sfa .ch-page .po-card .readiness{grid-template-columns:1fr;border-top:0;padding-top:0}
+  .sfa .ch-page .finance-strip{grid-template-columns:repeat(2,1fr)}
+  .sfa .ch-page .finance-strip>div:nth-child(3):before{display:none}
 }
 @media (max-width:640px){
-  .sfa .ch-finance{grid-template-columns:minmax(0,1fr)}
-  .sfa .ch-po-head{grid-template-columns:minmax(0,1fr) 22px}
-  .sfa .ch-thumbs{grid-column:1/-1}
-  .sfa .ch-po-main,.sfa .ch-po-phase,.sfa .ch-po-due{grid-column:1/-1}
+  .sfa .ch-page .hero{padding-inline:4px;flex-direction:column;align-items:flex-start}
+  .sfa .ch-page .hero h1{font-size:38px}
+  .sfa .ch-page .hero-actions{width:100%}
+  .sfa .ch-page .hero-actions .button{flex:1}
+  .sfa .ch-page .context{align-items:flex-start;flex-direction:column;min-height:0}
+  .sfa .ch-page .context-meta{justify-content:flex-start}
+  .sfa .ch-page .finance-strip{grid-template-columns:1fr 1fr}
+  .sfa .ch-page .po-card{grid-template-columns:108px minmax(0,1fr) 20px;padding:11px;gap:10px}
+  .sfa .ch-page .thumbs{height:70px}
+  .sfa .ch-page .thumb{width:68px;flex-basis:68px;margin-right:-14px}
+  .sfa .ch-page .po-toolbar{align-items:stretch;flex-direction:column}
+  .sfa .ch-page .po-toolbar input{width:100%}
+  .sfa .ch-page .account-tabs{overflow:auto}
 }
-
 </style>
 <style>
 /* ---------------------------------------------------------------------------
@@ -5225,7 +5356,7 @@ small{font-size:12px}
 }
 </style>
 <body>
-<script>const BUILD_ID='de3a3c534f19';</script>
+<script>const BUILD_ID='5c3ef0d5976f';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -5771,7 +5902,7 @@ function sessionStale(g){ return g !== S_GEN; }
 // code by a check in build.sh; the two deliberate exceptions are named there.
 const SESSION_GLOBALS = [
   '__accessGroup','__accessQ','__accessSel','__acct','__ccChip','__chAct',
-  '__chDir','__chTab','__client',
+  '__chDir','__chPicked','__chSelecting','__chSort','__chTab','__client',
   '__cmdRows','__cmdSel','__cmtAttach','__cost','__du','__finSeg','__gq',
   '__impRecs','__inAdminShell','__inReportShell','__moreNav','__openStages',
   '__paCompany','__paPerson','__paStaff','__paTab','__pdfjsLoading','__poFiles',
@@ -9309,29 +9440,28 @@ function clientActivity(b){
 /* ---------------------------------------------------------------------------
    The Client Hub.
 
-   Built from ChatGPT's STONEFLOW-CLIENT-HUB-FINAL.html (design/client-hub/).
-   The rules that shape it, from that handoff:
+   Built to ChatGPT's STONEFLOW-CLIENT-HUB-FINAL.html (design/client-hub/), and
+   this time to its layout as well as its rules. The first cut bound the data
+   correctly and drew its own page around it; Yash looked at the two side by
+   side and said so. The structure below follows the prototype's "FINAL
+   REFINEMENT" block: a 74px client rail that expands on demand, a sticky
+   context header, tabs that scroll to sections on one page, a joined finance
+   strip, and purchase-order cards with the product photographs at 104px and
+   the four readiness figures shown before the order is opened.
 
-     1. The buyer company is the finance boundary. The position comes from the
-        Tally ledger snapshot and the invoices posted against it, never from
-        adding up purchase-order values.
-     2. Production happens per product; completion, payment clearance, packing
-        and shipment stay PO-wise.
-     3. A purchase order opens to its products; a product opens to its own
-        stages and photographs.
-     4. Photographs are prominent, because people recognise a piece by looking
-        at it rather than by reading its code.
-     5. Only buyer-safe activity appears in the timeline.
-     8. The directory is compact by default and expands as an overlay, so the
-        buyer's own workspace never loses width.
+   The rules, from the handoff:
+     1. The buyer company is the finance boundary: Tally statement and posted
+        invoices, never a sum of purchase-order values.
+     3. An order opens to its products; a product opens to its own page.
+     4. Photographs are prominent.
+     5. Only buyer-safe activity in the timeline.
+     8. The directory is compact by default and expands as an overlay.
+     9. Every order row shows production, final-photo, packing and payment
+        readiness before it opens.
 
-   This replaces the earlier Client operations screen AND the separate
-   #/client/<id> page, which was a second answer to the same question and
-   should never have been a second page.
+   This replaced the earlier Client operations screen AND the separate
+   #/client/<id> page, which was a second answer to the same question.
 --------------------------------------------------------------------------- */
-
-// selection and the open purchase order both live in the address, so Back and
-// Forward restore them and a link can be sent to somebody
 function chParts(){
   const p=(location.hash||'').replace(/^#\/?/,'').split('/');
   return { buyer:(p[1] && p[1]!=='logins' && p[1]!=='updates')?p[1]:null,
@@ -9344,278 +9474,336 @@ function chBuyer(){
   const list=chBuyers(), want=chParts().buyer;
   return list.find(x=>x.id===want) || list.find(x=>x.id===window.__client) || list[0] || null;
 }
-function chTab(){ return window.__chTab||'overview'; }
-function chSetTab(k){ window.__chTab=k; render(); }
 function chGo(buyerId, poId){
   window.__client=buyerId;
   go('#/clients/'+buyerId+(poId?('/po/'+poId):''));
 }
+// a real anchor, so Ctrl/Cmd-click and middle-click open the order in a new tab
+// as the handoff asks; a plain click expands it in place
+function chCardClick(e, poId){
+  if(e && (e.ctrlKey||e.metaKey||e.button===1)) return true;
+  if(e) e.preventDefault();
+  chOpenPo(poId);
+  return false;
+}
 function chOpenPo(poId){
   const b=chBuyer(); if(!b) return;
-  window.__chTab='orders';
   chGo(b.id, chParts().po===poId?null:poId);
+}
+// tabs scroll to their section on the one page, as the prototype does; they do
+// not swap content
+function chTab(k){
+  window.__chTab=k;
+  document.querySelectorAll('.co-page .account-tabs .tab').forEach(t=>
+    t.classList.toggle('active', t.getAttribute('data-tab')===k));
+  const id={overview:'ch-account',orders:'ch-orders',activity:'ch-activity',access:'ch-access'}[k];
+  const el=id&&$(id); if(el) el.scrollIntoView({block:'start',behavior:'smooth'});
 }
 function chDirOpen(on){
   window.__chDir=!!on;
-  document.body.classList.toggle('ch-dir-open', !!on);
-  // Render in BOTH directions. The first version only redrew on close, so
-  // opening set a flag and focused a search box that had not been drawn yet:
-  // the state said open and the screen showed nothing.
+  if(!on){ window.__chSelecting=false; window.__chPicked=null; }
   render();
   if(on){ const el=$('ch-search'); if(el) el.focus(); }
 }
-// Escape and a click outside close it, per rule 8
-function chDirKey(e){ if(e.key==='Escape'){ chDirOpen(false); } }
+function chDirKey(e){ if(e.key==='Escape') chDirOpen(false); }
+function chSelecting(on){ window.__chSelecting=!!on; if(!on) window.__chPicked=null; render(); }
+function chPick(id){
+  const set=window.__chPicked||(window.__chPicked={});
+  if(set[id]) delete set[id]; else set[id]=1;
+  render();
+}
+// one client picked opens that client's note; several open the round, which
+// already lists everybody
+function chBulkUpdate(){
+  const ids=Object.keys(window.__chPicked||{});
+  chDirOpen(false);
+  go(ids.length===1?('#/clients/updates/'+ids[0]):'#/clients/updates');
+}
 
 function chDirectory(){
-  const b=chBuyer(), list=chBuyers(), open=!!window.__chDir;
-  return '<div class="ch-dir'+(open?' open':'')+'">'+
-    '<button class="ch-dir-toggle" type="button" aria-expanded="'+open+'" '+
-      'onclick="chDirOpen('+(!open)+')">'+
-      '<span class="ch-dir-avatar">'+esc(clientInitials(b?b.company:'?'))+'</span>'+
-      '<span><small>Client</small><strong>'+esc(b?b.company:'None yet')+'</strong></span>'+
-      '<span class="ch-dir-count">'+list.length+'</span></button>'+
-    (open?'<div class="ch-dir-scrim" onclick="chDirOpen(false)"></div>'+
-      '<div class="ch-dir-panel" role="dialog" aria-label="Choose a client" onkeydown="chDirKey(event)">'+
+  const b=chBuyer(), list=chBuyers(), open=!!window.__chDir, selecting=!!window.__chSelecting;
+  const picked=window.__chPicked||{}; const n=Object.keys(picked).length;
+  return '<aside class="directory'+(open?' expanded':'')+'" aria-label="Clients" onkeydown="chDirKey(event)">'+
+    '<button class="directory-toggle" type="button" aria-expanded="'+open+'" onclick="chDirOpen('+(!open)+')">'+
+      icon('i-search','icon-sm')+'<span>'+(open?'Close':'Clients')+'</span></button>'+
+    '<div class="directory-head">'+
       '<input id="ch-search" type="search" placeholder="Search clients or contacts" '+
         'aria-label="Search clients or contacts" oninput="chFilter(this.value)">'+
-      '<div id="ch-dir-list">'+
-      (list.length?list.map(x=>{
-        const pos=(S.pos||[]).filter(p=>p.buyer_id===x.id&&p.status!=='completed'&&p.status!=='cancelled');
-        const hasLogin=(S.profilesAll||[]).some(p=>p.buyer_id===x.id);
-        return '<button class="ch-dir-row'+(b&&b.id===x.id?' active':'')+'" type="button" '+
-          'data-search="'+esc([x.company,x.contact_name,x.email,x.city].filter(Boolean).join(' '))+'" '+
-          'onclick="chDirOpen(false);chGo(\''+x.id+'\')">'+
-          '<span class="ch-dir-avatar">'+esc(clientInitials(x.company))+'</span>'+
-          '<span><strong>'+esc(x.company)+'</strong>'+
+      '<div class="directory-tools"><span id="ch-result-count">'+list.length+' client'+(list.length===1?'':'s')+'</span>'+
+        '<button type="button" onclick="chSelecting('+(!selecting)+')">'+(selecting?'Done':'Select')+'</button></div>'+
+    '</div>'+
+    '<div class="client-list'+(selecting?' selecting':'')+'" id="ch-dir-list" role="listbox">'+
+    (list.length?list.map(x=>{
+      const pos=(S.pos||[]).filter(p=>p.buyer_id===x.id&&p.status!=='completed'&&p.status!=='cancelled');
+      const acts=clientActions(x).filter(a=>a[0]!=='good').length;
+      const active=b&&b.id===x.id&&!selecting;
+      return '<button class="client-row'+(active?' active':'')+'" type="button" role="option" '+
+        'aria-selected="'+(!!active)+'" title="Open '+esc(x.company)+'" '+
+        'data-search="'+esc([x.company,x.contact_name,x.email,x.city,x.phone].filter(Boolean).join(' '))+'" '+
+        'onclick="'+(selecting?('chPick(\''+x.id+'\')'):('chDirOpen(false);chGo(\''+x.id+'\')'))+'">'+
+        '<span class="initial">'+esc(clientInitials(x.company))+'</span>'+
+        '<span class="client-copy"><strong>'+esc(x.company)+'</strong>'+
           '<span>'+esc([x.contact_name,x.city].filter(Boolean).join(' · ')||'No contact recorded')+'</span>'+
-          '<small'+(hasLogin?'':' class="attention"')+'>'+
-            esc(pos.length?(pos.length+' open PO'+(pos.length===1?'':'s')):(hasLogin?'No open orders':'Setup required'))+
-          '</small></span></button>';
-      }).join(''):'<div class="ch-empty"><strong>No buyers yet.</strong></div>')+
-      '</div></div>':'')+
-    '</div>';
+          '<small>'+esc(pos.length+' open PO'+(pos.length===1?'':'s')+(acts?(' · '+acts+' action'+(acts===1?'':'s')):''))+'</small></span>'+
+        (selecting?'<input class="selectbox" type="checkbox" tabindex="-1" '+(picked[x.id]?'checked':'')+
+          ' aria-label="Select '+esc(x.company)+'">':'')+
+        '<span class="chev">›</span></button>';
+    }).join(''):'<div class="empty"><strong>No clients yet.</strong>Add the company first.</div>')+
+    '</div>'+
+    (selecting?'<div class="selection-bar show"><span>'+n+' selected</span>'+
+      '<button class="button small" type="button" '+(n?'':'disabled ')+'onclick="chBulkUpdate()">Send an update</button></div>':'')+
+    (open?'<div class="directory-scrim" onclick="chDirOpen(false)"></div>':'')+
+  '</aside>';
 }
 function chFilter(q){
-  q=String(q||'').toLowerCase().trim();
-  document.querySelectorAll('#ch-dir-list .ch-dir-row').forEach(el=>{
-    el.hidden = !!q && (el.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0;
+  q=String(q||'').toLowerCase().trim(); let n=0;
+  document.querySelectorAll('#ch-dir-list .client-row').forEach(el=>{
+    const hit=!q || (el.getAttribute('data-search')||'').toLowerCase().indexOf(q)>=0;
+    el.hidden=!hit; if(hit) n++;
   });
+  const c=$('ch-result-count'); if(c) c.textContent=n+' client'+(n===1?'':'s');
 }
 
-// Rule 1. The company is the finance boundary: this reads the accepted Tally
-// snapshot and the invoices posted to the account. Nothing here is derived by
-// adding up what the purchase orders are worth.
+// Rule 1. The company is the finance boundary: the accepted Tally snapshot and
+// the invoices posted to the account. Nothing here adds up purchase-order values.
 function chFinanceStrip(b){
-  const st=statementStanding(latestStatement(b.id));
-  const invs=(S.invByBuyer[b.id]||[]);
+  const sn=latestStatement(b.id), st=statementStanding(sn);
+  const invs=(S.invByBuyer[b.id]||[]).slice().sort((x,y)=>String(y.invoice_date||'').localeCompare(String(x.invoice_date||'')));
   const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
   const cleared=pos.filter(p=>p.finance_cleared).length;
-  return '<div class="ch-finance">'+
-    '<div><span>'+esc(st?st.label:'Latest Tally balance')+'</span>'+
-      '<strong>'+esc(st?money(st.amount,st.currency):'No statement yet')+'</strong>'+
-      '<small>'+esc(st?('As at '+fdate(st.as_of)):'Import a ledger statement to set this')+'</small></div>'+
-    '<div><span>Invoices</span><strong>'+invs.length+'</strong>'+
-      '<small>'+esc(invs.length?'Posted to this account':'Nothing billed yet')+'</small></div>'+
-    '<div><span>PO shipment clearance</span><strong>'+cleared+' of '+pos.length+'</strong>'+
-      '<small>Cleared by you, and checked again by the server</small></div>'+
+  const age=st&&st.as_of?daysSince(st.as_of):null;
+  return '<div class="finance-strip">'+
+    '<div><span>Latest Tally balance</span>'+
+      '<strong>'+esc(st?(money(st.amount,st.currency)+(st.credit?' Cr':' Dr')):'No statement')+'</strong>'+
+      '<small>'+esc(st?('Uploaded '+fdate(st.as_of)+(age!=null?(' · '+(age===0?'today':age+' day'+(age===1?'':'s')+' ago')):'')):'Import a Tally ledger to set this')+'</small></div>'+
+    '<div><span>Invoices</span><strong>'+invs.length+' invoice'+(invs.length===1?'':'s')+'</strong>'+
+      '<small>'+esc(invs.length?('latest '+fdate(invs[0].invoice_date)):'Nothing billed yet')+'</small></div>'+
+    '<div><span>PO shipment clearance</span><strong>'+cleared+' of '+pos.length+' PO'+(pos.length===1?'':'s')+' cleared</strong>'+
+      '<small>Owner-controlled verification, checked again by the server</small></div>'+
     '<div><span>Finance boundary</span><strong>Buyer level</strong>'+
-      '<small>Never derived from purchase-order values</small></div>'+
+      '<small>Never derived from PO values</small></div>'+
   '</div>';
 }
+function daysSince(d){
+  if(!d) return null;
+  const a=new Date(String(d).slice(0,10)+'T12:00:00'), b=new Date(today()+'T12:00:00');
+  return Math.round((b-a)/864e5);
+}
 
-// Rule 4: the thumbnails are the target images of the products inside the order,
-// so an order is recognised by looking rather than by reading a code.
+// Rule 4 and rule 9: the photographs at full size, and the four readiness
+// figures on the card before it is opened.
 function chThumbs(items){
-  const shots=items.map(it=>({it, ph:targetImage(it)})).filter(x=>x.ph);
+  const shots=items.map(it=>({it, ph:targetImage(it)}));
   const show=shots.slice(0,3);
-  return '<div class="ch-thumbs">'+
-    (show.length?show.map(x=>'<span class="ch-thumb"><img alt="'+esc(x.it.product)+'" '+
-      'data-ph-path="'+esc(x.ph.path)+'"></span>').join('')
-     :'<span class="ch-thumb ch-thumb--none">'+(items.length?'No photo':'—')+'</span>')+
-    (items.length>show.length&&show.length?'<span class="ch-more">+'+(items.length-show.length)+'</span>':'')+
+  return '<div class="thumbs">'+
+    show.map(x=>'<span class="thumb">'+(x.ph?'<img alt="'+esc(x.it.product)+'" data-ph-path="'+esc(x.ph.path)+'">':'')+'</span>').join('')+
+    (items.length>3?'<span class="more">+'+(items.length-3)+'</span>':'')+
+    (!items.length?'<span class="thumb thumb--empty"></span>':'')+
   '</div>';
 }
 function chPoCard(p){
+  const b=chBuyer();
   const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
-  const r=poReadiness(p);
-  const stg=items.map(i=>curStage(i)).filter(Boolean).sort((a,b)=>a.sort_order-b.sort_order)[0];
+  const r=poReadiness(p), fin=poFinance(p);
+  const order=(S.stages||[]).filter(s=>s.active).slice().sort((x,y)=>(x.sort_order||0)-(y.sort_order||0));
+  const stg=items.map(i=>curStage(i)).filter(Boolean).sort((x,y)=>x.sort_order-y.sort_order)[0];
+  const stageNo=stg?(order.findIndex(s=>s.id===stg.id)+1):0;
   const late=items.filter(it=>{ const l=lateness(it); return l&&l.state==='late'; }).length;
   const blocked=items.filter(it=>(blockedItems()||[]).some(x=>x.item.id===it.id)).length;
-  const risk=blocked?'At risk':late?'Attention':'On track';
+  const risk=blocked?['At risk','bad']:late?['Attention','warn']:['On track',''];
   const open=chParts().po===p.id;
-  return '<article class="ch-po'+(open?' open':'')+'">'+
-    '<button class="ch-po-head" type="button" aria-expanded="'+open+'" '+
-      'onclick="chOpenPo(\''+p.id+'\')" title="'+esc(p.po_number+' — '+(p.project||''))+'">'+
+  const finals=items.length?items.filter(it=>!pieceIsMade(it)).length:0;
+  return '<article class="po-wrap'+(open?' open':'')+'" data-search="'+
+      esc([p.po_number,p.project].concat(items.map(i=>i.product)).concat(stg?[stg.name]:[]).filter(Boolean).join(' '))+'" '+
+      'data-sort-delivery="'+esc(p.expected_ship_date||'9999')+'" data-sort-progress="'+r.pct+'" '+
+      'data-sort-attention="'+(blocked?0:late?1:2)+'" data-sort-po="'+esc(p.po_number)+'">'+
+    '<a class="po-card" href="#/clients/'+(b?b.id:'')+'/po/'+p.id+'" data-po="'+p.id+'" '+
+      'aria-expanded="'+open+'" title="Open '+esc(p.po_number)+(p.project?' — '+esc(p.project):'')+'" '+
+      'onclick="return chCardClick(event,\''+p.id+'\')">'+
       chThumbs(items)+
-      '<span class="ch-po-main"><strong>'+esc(p.po_number)+'</strong>'+
+      '<div class="po-main"><strong>'+esc(p.po_number)+'</strong>'+
         '<span>'+esc((p.project?p.project+' · ':'')+items.length+' product'+(items.length===1?'':'s'))+'</span>'+
-        '<span class="ch-bar"><i style="width:'+r.pct+'%"></i></span></span>'+
-      '<span class="ch-po-phase"><strong>'+esc(r.stateLabel)+'</strong>'+
-        '<span>'+esc(stg?stg.name:'Not started')+' · '+r.pct+'%</span>'+
-        '<span class="ch-risk'+(risk==='At risk'?' bad':risk==='Attention'?' warn':'')+'">'+risk+'</span></span>'+
-      '<span class="ch-po-due"><strong>'+esc(p.expected_ship_date?fdate(p.expected_ship_date):'No date')+'</strong>'+
-        '<small>'+esc(r.shippable?'Ready to ship':(r.blocker||''))+'</small></span>'+
-      '<span class="ch-chev">'+(open?'⌄':'›')+'</span></button>'+
-    (open?'<div class="ch-po-body">'+
+        '<div class="progress"><i style="width:'+r.pct+'%"></i></div></div>'+
+      '<div class="phase"><strong>'+esc(stg?stg.name:'Not started')+'</strong>'+
+        '<span>'+esc(stg?('Stage '+stageNo+' of '+order.length+' · '+r.pct+'%'):(r.pct+'%'))+'</span>'+
+        '<span class="status'+(risk[1]?' '+risk[1]:'')+'">'+risk[0]+'</span></div>'+
+      '<div class="readiness" aria-label="Purchase order readiness">'+
+        '<span>Production<b>'+r.made+'/'+r.pieces+'</b></span>'+
+        '<span>Final photos<b>'+(items.length?(finals?('missing '+finals):'Done'):'—')+'</b></span>'+
+        '<span>Packing<b>'+(r.packed?'Packed':'Not yet')+'</b></span>'+
+        '<span>Payment<b>'+esc(r.cleared?'Cleared':(fin.state==='not_invoiced'?'Not invoiced':'Pending'))+'</b></span></div>'+
+      '<div class="due"><strong>'+esc(p.expected_ship_date?fdate(p.expected_ship_date):'No date')+'</strong>'+
+        '<small>'+esc(r.shippable?'Ready to ship':(p.expected_ship_date?'Ships by':'Set a ship date'))+'</small></div>'+
+      '<span class="chev">'+(open?'⌄':'›')+'</span></a>'+
+    (open?'<div class="po-body">'+
       '<div class="ch-steps">'+r.steps.map(s=>'<span class="ch-step'+(s.ok?' ok':'')+'">'+
         '<strong>'+esc(s.k)+'</strong><small>'+esc(s.v)+'</small></span>').join('')+'</div>'+
       '<div class="cf-pieces">'+(items.length?items.map(cfItemRow).join('')
-        :'<div class="ch-empty"><strong>No products on this order yet.</strong></div>')+'</div>'+
-      '<div class="button-row" style="padding:10px 14px">'+
+        :'<div class="empty"><strong>No products on this order yet.</strong></div>')+'</div>'+
+      '<div class="button-row" style="padding:10px 18px 14px">'+
         '<button class="button secondary small" type="button" onclick="go(\'#/po/'+p.id+'\')">Open the full order</button>'+
       '</div></div>':'')+
   '</article>';
+}
+function chSortPos(v){ window.__chSort=v; chApplyPoFilters(); }
+function chApplyPoFilters(){
+  const q=String(($('ch-po-search')||{}).value||'').toLowerCase().trim();
+  const list=$('ch-po-list'); if(!list) return;
+  const rows=[...list.querySelectorAll('.po-wrap')];
+  rows.forEach(el=>{ el.hidden = !!q && (el.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0; });
+  const k=window.__chSort||'delivery';
+  const key=el=>el.getAttribute('data-sort-'+k)||'';
+  rows.sort((a,b)=>{
+    if(k==='progress') return (+key(b))-(+key(a));
+    return String(key(a)).localeCompare(String(key(b)), undefined, {numeric:true});
+  }).forEach(el=>list.appendChild(el));
+  const c=$('ch-po-count'); if(c){ const n=rows.filter(r=>!r.hidden).length; c.textContent=n+' open'; }
 }
 
 function chActivityRows(b){
   const rows=clientActivity(b)||[];
   const f=window.__chAct||'All activity';
-  const pick=x=>{
-    const t=String(x[0]||'').toLowerCase();
-    if(f==='All activity') return true;
-    if(f==='Communication') return /question|message|comment|reply/.test(t);
-    if(f==='Approvals')     return /approv|decision|sign/.test(t);
-    if(f==='Finance')       return /invoice|payment|ledger|statement|₹/.test(t);
-    if(f==='Shipping')      return /ship|dispatch|pack|deliver/.test(t);
-    return true;
+  const kind=t=>{
+    t=String(t||'').toLowerCase();
+    return /invoice|payment|ledger|statement|₹/.test(t)?'Finance'
+         : /ship|dispatch|pack|deliver/.test(t)?'Shipping'
+         : /approv|decision|sign|selection/.test(t)?'Approvals':'Communication';
   };
-  const list=rows.filter(pick);
-  return list.length?list.map(x=>'<div class="co-activity-row">'+
-      '<span class="co-activity-icon">'+icon('i-message','icon-sm')+'</span>'+
+  const glyph={Communication:'✉',Approvals:'✓',Finance:'₹',Shipping:'◫'};
+  const list=rows.filter(x=>f==='All activity'||kind(x[0])===f);
+  const when=t=>{
+    if(!t) return '';
+    const d=String(t).slice(0,10), dd=daysSince(d);
+    const time=String(t).length>10?new Date(t).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Kolkata'}):'';
+    return (dd===0?'Today':dd===1?'Yesterday':fdate(d))+(time?(' · '+time):'');
+  };
+  return list.length?list.map(x=>'<div class="activity-row">'+
+      '<span class="activity-icon">'+glyph[kind(x[0])]+'</span>'+
       '<div><strong>'+esc(x[0])+'</strong><span>'+esc(x[1])+'</span></div>'+
-      '<time>'+esc(x[2]?fdate(String(x[2]).slice(0,10)):'')+'</time></div>').join('')
-    :'<div class="ch-empty"><strong>'+(rows.length?'Nothing under this filter.':'Nothing yet.')+'</strong>'+
-     'Published progress, decisions and messages appear here. Internal workshop notes never do.</div>';
+      '<time>'+esc(when(x[2]))+'</time></div>').join('')
+    :'<div class="empty"><strong>'+(rows.length?'Nothing under this filter.':'No buyer-visible activity.')+'</strong>'+
+     'Approved publications and buyer responses appear here.</div>';
 }
 function chSetActivity(v){ window.__chAct=v; render(); }
 
+function chActionsPanel(b){
+  const acts=clientActions(b);
+  const open=acts.filter(a=>a[0]!=='good').length;
+  const keys=['A','F','P','O','S'];
+  return '<section class="panel" id="ch-actions"><header class="panel-head"><div><h2>Needs action now</h2>'+
+    '<p>Prioritised by what can delay work, shipment or response.</p></div>'+
+    '<span class="badge'+(open?' warn':'')+'">'+open+' open</span></header>'+
+    '<div class="panel-body actions">'+acts.map((a,i)=>'<div class="action-row">'+
+      '<span class="dot'+(a[0]==='warn'?' warn':a[0]==='good'?' good':'')+'"></span>'+
+      '<div><strong>'+esc(a[1])+'</strong><span>'+esc(a[2])+'</span></div>'+
+      '<button class="button secondary small" type="button" onclick="'+a[4]+'">'+esc(a[3])+
+        (i<keys.length?'<span class="shortcut">'+keys[i]+'</span>':'')+'</button></div>').join('')+
+    '</div></section>';
+}
 function chAccessPanel(b){
   const logins=(S.profilesAll||[]).filter(p=>p.buyer_id===b.id);
   const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
-  const st=statementStanding(latestStatement(b.id));
   const portal=logins.length?(logins.some(l=>l.active!==false)?'Active':'Suspended'):'Setup required';
   const finVis=logins.some(l=>l.finance_access)?'Enabled':'Not enabled';
-  const billing=paMissing(b).length?'Billing incomplete':'Billing complete';
-  return '<aside class="co-panel"><header class="co-panel-head"><div><h2>Account, contacts &amp; access</h2>'+
-    '<p>Check the buyer identity before managing its logins.</p></div>'+
-    '<button class="button quiet small" type="button" onclick="go(\'#/access\')">Manage access</button></header>'+
-    '<div class="co-detail-body">'+
-      (logins.length?logins.map(l=>'<button class="co-contact-card" style="width:100%;text-align:left;cursor:pointer" '+
-        'type="button" onclick="paOpenPerson(\''+l.user_id+'\')">'+
-        '<strong>'+esc(l.full_name||l.email)+'</strong>'+
-        '<span>'+esc(l.email)+' · '+esc(paScopeOf(l).length?(paScopeOf(l).length+' assigned orders'):'Every order this company placed')+'</span>'+
-        '</button>').join('')
-       :'<div class="co-contact-card"><strong>'+esc(b.contact_name||'No contact named')+'</strong>'+
-        '<span>'+esc([b.email,b.phone].filter(Boolean).join(' · ')||'Nobody here can sign in yet')+'</span></div>')+
-      '<div class="co-detail-row"><span>Portal</span><strong>'+esc(portal)+'</strong></div>'+
-      '<div class="co-detail-row"><span>Logins</span><strong>'+logins.length+'</strong></div>'+
-      '<div class="co-detail-row"><span>Purchase orders</span><strong>'+pos.length+'</strong></div>'+
-      '<div class="co-detail-row"><span>Buyer balance</span><strong>'+
-        esc(st?money(st.amount,st.currency)+(st.credit?' in advance':' payable'):'No statement yet')+'</strong></div>'+
-      '<div class="co-detail-row"><span>Finance visibility</span><strong>'+esc(finVis)+'</strong></div>'+
-      '<div class="co-detail-row"><span>Billing record</span><strong>'+esc(billing)+'</strong></div>'+
-      '<div class="button-row" style="margin-top:10px">'+
+  const billing=paMissing(b).length?'Incomplete':'Complete';
+  const last=logins.map(l=>l.last_sign_in_at).filter(Boolean).sort().slice(-1)[0];
+  const primary=logins[0];
+  return '<section class="panel" id="ch-access"><header class="panel-head"><div><h2>Account, contacts &amp; access</h2>'+
+    '<p>Contacts are not automatically portal logins.</p></div>'+
+    '<button class="button quiet small" type="button" onclick="go(\'#/access\')">Manage</button></header>'+
+    '<div class="panel-body">'+
+      '<div class="contact-card"><strong>Primary contact</strong>'+
+        '<span>'+esc((primary&&primary.full_name)||b.contact_name||'No contact named')+'</span>'+
+        '<span>'+esc([(primary&&primary.email)||b.email,b.phone].filter(Boolean).join(' · ')||'No email or phone recorded')+'</span></div>'+
+      '<div class="detail"><span>Portal status</span><strong>'+esc(portal)+'</strong></div>'+
+      '<div class="detail"><span>Authorised purchase orders</span><strong>'+pos.length+'</strong></div>'+
+      '<div class="detail"><span>Finance visibility</span><strong>'+esc(finVis)+'</strong></div>'+
+      '<div class="detail"><span>Billing record</span><strong>'+esc(billing)+'</strong></div>'+
+      '<div class="detail"><span>Last portal visit</span><strong>'+esc(last?fdate(String(last).slice(0,10)):'Never')+'</strong></div>'+
+      (logins.length?'<div class="detail-list">'+logins.map(l=>'<button class="detail" style="width:100%;cursor:pointer" type="button" '+
+        'onclick="paOpenPerson(\''+l.user_id+'\')"><span>'+esc(l.full_name||l.email)+'</span>'+
+        '<strong>'+esc((PA_ROLES[l.buyer_role||'administrator']||PA_ROLES.administrator).name)+'</strong></button>').join('')+'</div>':'')+
+      '<div class="button-row" style="margin-top:12px">'+
         '<button class="button secondary small" type="button" onclick="mNewLogin(\''+b.id+'\')">Add person</button>'+
         '<button class="button quiet small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit record</button>'+
-      '</div></div></aside>';
+      '</div></div></section>';
 }
-
 function chUpcoming(b){
-  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id && p.expected_ship_date)
-    .sort((x,y)=>String(x.expected_ship_date).localeCompare(String(y.expected_ship_date))).slice(0,4);
-  return '<aside class="co-panel"><header class="co-panel-head"><div><h2>Upcoming</h2>'+
-    '<p>Shipment commitments on this account, soonest first.</p></div></header>'+
-    '<div class="co-detail-body">'+
-    (pos.length?pos.map(p=>{
-      const r=poReadiness(p);
-      const d=daysUntil?daysUntil(p.expected_ship_date):null;
-      return '<button class="co-detail-row" style="width:100%;cursor:pointer" type="button" '+
-        'onclick="chOpenPo(\''+p.id+'\')"><span>'+esc(p.po_number)+'</span>'+
-        '<strong>'+esc(fdate(p.expected_ship_date))+(r.shippable?' · ready':'')+'</strong></button>';
-    }).join('')
-     :'<div class="ch-empty"><strong>No shipment dates set.</strong>Add an expected ship date to a purchase order and it appears here.</div>')+
-    '</div></aside>';
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
+  const ids=pos.map(p=>p.id);
+  const soonest=pos.filter(p=>p.expected_ship_date).sort((x,y)=>String(x.expected_ship_date).localeCompare(String(y.expected_ship_date)))[0];
+  const reply=(S.comments||[]).filter(c=>c.author_role==='buyer'&&!c.resolved_at&&S.itemsById[c.item_id]&&ids.indexOf(S.itemsById[c.item_id].po_id)>=0).length;
+  const sn=latestStatement(b.id); const age=sn?daysSince(sn.as_of):null;
+  return '<section class="panel" id="ch-upcoming"><header class="panel-head"><div><h2>Upcoming</h2>'+
+    '<p>Next seven days for this account.</p></div></header>'+
+    '<div class="panel-body">'+
+      '<div class="detail"><span>Buyer reply due</span><strong>'+(reply?(reply+' waiting'):'Nothing owed')+'</strong></div>'+
+      '<div class="detail"><span>Shipment milestone</span><strong>'+esc(soonest?fdate(soonest.expected_ship_date):'None set')+'</strong></div>'+
+      '<div class="detail"><span>Tally freshness</span><strong>'+esc(sn?('Uploaded '+fdate(sn.as_of)+(age!=null?(' · '+(age===0?'today':age+' day'+(age===1?'':'s')+' ago')):'')):'No statement')+'</strong></div>'+
+    '</div></section>';
 }
 
 function chAccount(){
   const b=chBuyer();
-  if(!b) return '<main class="co-account"><div class="co-empty"><strong>No buyer companies yet</strong>'+
-    '<p>Add the company first; its purchase orders, logins and finance hang off that record.</p>'+
-    '<button class="button secondary small" type="button" onclick="mBuyer(null)">Add company</button></div></main>';
+  if(!b) return '<main class="account" id="ch-account"><div class="empty"><strong>No buyer companies yet.</strong>'+
+    'Add the company first; its purchase orders, logins and finance hang off that record.<br>'+
+    '<button class="button secondary small" style="margin-top:14px" type="button" onclick="mBuyer(null)">Add company</button></div></main>';
   window.__client=b.id;
   const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id)
     .sort((x,y)=>String(x.expected_ship_date||'9').localeCompare(String(y.expected_ship_date||'9')));
   const logins=(S.profilesAll||[]).filter(p=>p.buyer_id===b.id);
-  const portal=logins.length?(logins.some(l=>l.active!==false)?'active':'suspended'):'setup required';
-  const finVis=logins.some(l=>l.finance_access)?'enabled':'not enabled';
-  const billing=paMissing(b).length?'Billing incomplete':'Billing complete';
-  const tab=chTab();
+  const portal=logins.length?(logins.some(l=>l.active!==false)?'Active':'Suspended'):'Setup required';
+  const finVis=logins.some(l=>l.finance_access)?'Enabled':'Not enabled';
+  const billing=paMissing(b).length?'Incomplete':'Complete';
+  const tab=window.__chTab||'overview';
+  const sort=window.__chSort||'delivery';
 
-  const orders='<section class="co-panel"><header class="co-panel-head"><div>'+
-      '<h2>Purchase orders and shipment readiness</h2>'+
-      '<p>Products are made one at a time. Completion, payment clearance, packing and shipping stay with the order.</p></div>'+
-      '<button class="button quiet small" type="button" onclick="go(\'#/orders\')">All orders</button></header>'+
-      '<div class="ch-po-toolbar">'+
-        '<input id="ch-po-search" type="search" placeholder="Search PO, job, product or stage" '+
-          'aria-label="Search this client\'s purchase orders" oninput="chFilterPos(this.value)">'+
-        '<span class="lead">'+pos.length+' order'+(pos.length===1?'':'s')+'</span></div>'+
-      '<div class="ch-po-list" id="ch-po-list">'+
-      (pos.length?pos.map(p=>{
-        const items=(p.items&&p.items.length)?p.items:(S.items||[]).filter(i=>i.po_id===p.id);
-        return '<div data-search="'+esc([p.po_number,p.project].concat(items.map(i=>i.product)).filter(Boolean).join(' '))+'">'+
-          chPoCard(p)+'</div>';
-      }).join('')
-      :'<div class="ch-empty"><strong>No purchase orders yet.</strong>'+
-        'Complete the billing record before creating an order or giving anyone portal access.'+
-        '<div class="button-row" style="margin-top:12px">'+
-        '<button class="button secondary small" type="button" onclick="mNewPO()">Create the first PO</button></div></div>')+
-      '</div></section>';
-
-  const activity='<section class="co-panel"><header class="co-panel-head"><div>'+
-      '<h2>Client activity</h2>'+
-      '<p>What this buyer has seen and said. Internal workshop notes are excluded by the database, not hidden by the page.</p></div>'+
-      '<select class="button secondary small" aria-label="Filter activity" onchange="chSetActivity(this.value)">'+
-      ['All activity','Communication','Approvals','Finance','Shipping'].map(o=>
-        '<option'+((window.__chAct||'All activity')===o?' selected':'')+'>'+o+'</option>').join('')+
-      '</select></header><div class="co-activity">'+chActivityRows(b)+'</div></section>';
-
-  const actions='<aside class="co-panel"><header class="co-panel-head"><div><h2>Needs action now</h2>'+
-      '<p>Only work belonging to '+esc(b.company)+'.</p></div></header>'+
-      '<div class="co-actions">'+clientActions(b).map(a=>'<article class="co-action">'+
-        '<i class="'+esc(a[0])+'"></i><div><strong>'+esc(a[1])+'</strong><span>'+esc(a[2])+'</span></div>'+
-        '<button class="button secondary small" type="button" onclick="'+a[4]+'">'+esc(a[3])+'</button>'+
-        '</article>').join('')+'</div></aside>';
-
-  const panes = tab==='orders'   ? '<div class="co-account-grid ch-one">'+orders+'</div>'
-              : tab==='activity' ? '<div class="co-account-grid ch-one">'+activity+'</div>'
-              : tab==='access'   ? '<div class="co-account-grid ch-one">'+chAccessPanel(b)+chUpcoming(b)+'</div>'
-              : '<div class="co-account-grid">'+orders+actions+'</div>'+
-                '<div class="co-account-grid">'+activity+chAccessPanel(b)+'</div>';
-
-  return '<main class="co-account"><header class="co-account-head"><div>'+
-    '<p class="eyebrow">Selected buyer account'+(b.city?' · '+esc(b.city):'')+'</p>'+
-    '<h2>'+esc(b.company)+'</h2>'+
-    '<p>'+esc([b.contact_name,b.email,b.phone].filter(Boolean).join(' · ')||'No contact details recorded')+'</p></div>'+
-    '<div class="co-account-actions">'+
-      '<span class="co-badge">Portal '+esc(portal)+'</span>'+
-      '<span class="co-badge">Finance '+esc(finVis)+'</span>'+
-      '<span class="co-badge">'+esc(billing)+'</span>'+
+  return '<main class="account" id="ch-account" tabindex="-1">'+
+    '<header class="context" id="ch-context"><div style="min-width:0">'+
+      '<p class="eyebrow">Selected buyer account'+(b.city?' · '+esc(b.city):'')+'</p>'+
+      '<h2>'+esc(b.company)+'</h2>'+
+      '<p>'+esc([b.contact_name,b.email,b.phone].filter(Boolean).join(' · ')||'No contact details recorded')+'</p></div>'+
+    '<div class="context-meta">'+
+      '<span class="badge'+(portal==='Active'?'':' warn')+'">Portal '+esc(portal)+'</span>'+
+      '<span class="badge'+(finVis==='Enabled'?'':' warn')+'">Finance '+esc(finVis)+'</span>'+
+      '<span class="badge'+(billing==='Complete'?'':' warn')+'">Billing '+esc(billing)+'</span>'+
       '<button class="button secondary small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit account</button>'+
     '</div></header>'+
-    '<nav class="ch-tabs" role="tablist" aria-label="Client sections">'+
-    [['overview','Overview'],['orders','Purchase orders'],['activity','Activity'],
-     ['access','Contacts & access']].map(([k,label])=>
-      '<button class="ch-tab'+(tab===k?' active':'')+'" type="button" role="tab" '+
-      'aria-selected="'+(tab===k)+'" onclick="chSetTab(\''+k+'\')">'+esc(label)+'</button>').join('')+
+    '<nav class="account-tabs" role="tablist" aria-label="Client sections">'+
+      '<button class="tab'+(tab==='overview'?' active':'')+'" data-tab="overview" type="button" onclick="chTab(\'overview\')">Overview</button>'+
+      '<button class="tab'+(tab==='orders'?' active':'')+'" data-tab="orders" type="button" onclick="chTab(\'orders\')">Purchase orders <span class="shortcut">O</span></button>'+
+      '<button class="tab'+(tab==='activity'?' active':'')+'" data-tab="activity" type="button" onclick="chTab(\'activity\')">Activity</button>'+
+      '<button class="tab'+(tab==='access'?' active':'')+'" data-tab="access" type="button" onclick="chTab(\'access\')">Contacts &amp; access <span class="shortcut">M</span></button>'+
     '</nav>'+
-    chFinanceStrip(b)+panes+'</main>';
-}
-function chFilterPos(q){
-  q=String(q||'').toLowerCase().trim();
-  document.querySelectorAll('#ch-po-list > div[data-search]').forEach(el=>{
-    el.hidden = !!q && (el.getAttribute('data-search')||'').toLowerCase().indexOf(q)<0;
-  });
+    chFinanceStrip(b)+
+    '<div class="layout"><div class="stack">'+
+      '<section class="panel" id="ch-orders"><header class="panel-head"><div>'+
+        '<h2>Purchase orders and shipment readiness</h2>'+
+        '<p>Products are made individually, but completion, payment clearance, packing and shipping remain PO-wise.</p></div>'+
+        '<button class="button quiet small" type="button" onclick="go(\'#/orders\')">All orders</button></header>'+
+        '<div class="po-toolbar">'+
+          '<input id="ch-po-search" type="search" placeholder="Search PO, job, product or stage" '+
+            'aria-label="Search this client\'s purchase orders" oninput="chApplyPoFilters()">'+
+          '<select id="ch-po-sort" aria-label="Sort purchase orders" onchange="chSortPos(this.value)">'+
+            [['delivery','Delivery: earliest'],['attention','Attention first'],['progress','Progress'],['po','PO number']]
+              .map(([k,l])=>'<option value="'+k+'"'+(sort===k?' selected':'')+'>'+l+'</option>').join('')+'</select>'+
+          '<span class="lead" id="ch-po-count">'+pos.length+' open</span></div>'+
+        '<div class="po-list" id="ch-po-list">'+
+        (pos.length?pos.map(chPoCard).join('')
+        :'<div class="empty"><strong>No purchase orders yet.</strong>'+
+          'Complete billing and contact information before creating or assigning portal access to a PO.<br>'+
+          '<button class="button secondary small" style="margin-top:14px" type="button" onclick="mNewPO()">Create first PO</button></div>')+
+        '</div></section>'+
+      '<section class="panel" id="ch-activity"><header class="panel-head"><div>'+
+        '<h2>Client activity</h2>'+
+        '<p>Buyer-visible communication, approvals, finance and shipping—never internal workshop notes.</p></div>'+
+        '<select class="button secondary small" aria-label="Filter activity" onchange="chSetActivity(this.value)">'+
+        ['All activity','Communication','Approvals','Finance','Shipping'].map(o=>
+          '<option'+((window.__chAct||'All activity')===o?' selected':'')+'>'+o+'</option>').join('')+
+        '</select></header><div class="panel-body activity">'+chActivityRows(b)+'</div></section>'+
+    '</div>'+
+    '<aside class="stack side">'+chActionsPanel(b)+chAccessPanel(b)+chUpcoming(b)+'</aside>'+
+    '</div></main>';
 }
 
 function vClients(tab){
@@ -9639,38 +9827,31 @@ function vClients(tab){
       ['updates','Send an update','#/clients/updates', q.clientUpdates]], 'updates');
     return;
   }
-  const buyers=S.buyers||[];
-  const active=buyers.filter(b=>(S.profilesAll||[]).some(p=>p.buyer_id===b.id&&p.active!==false)).length;
-  const openOrders=(S.pos||[]).filter(p=>p.status!=='completed'&&p.status!=='cancelled').length;
-  const actions=buyers.reduce((a,b)=>a+clientActions(b).filter(x=>x[0]!=='good').length,0);
-  const attention=buyers.filter(b=>!(S.profilesAll||[]).some(p=>p.buyer_id===b.id)).length;
-  const unsent=(S.updates||[]).filter(u=>
-    (u.review_status==='approved'||u.review_status==='partially_approved')&&!u.published_at).length;
-
-  sfaPaint('<div class="co-page"><header class="co-head"><div>'+
+  // The prototype's FINAL REFINEMENT hides the four summary tiles and takes the
+  // card off the hero, so the page opens straight onto the client.
+  sfaPaint('<div class="co-page ch-page"><header class="hero"><div>'+
     '<p class="eyebrow">Accounts, contacts, access and communication</p>'+
     '<h1>Client operations.</h1>'+
-    '<p>Select any buyer to review only that company’s purchase orders, actions, contacts, portal access and commercial position.</p></div>'+
-    '<div class="button-row">'+
+    '<p class="lead">Select a buyer to work inside that company’s purchase orders, actions, approved activity, Tally position and controlled portal access.</p></div>'+
+    '<div class="hero-actions">'+
       '<button class="button secondary" type="button" onclick="mBuyer(null)">Add company</button>'+
-      // scoped to the client on screen, because standing on Essentia's page and
-      // being handed every client's note is how one buyer's progress reaches
-      // another. It falls back to the whole round when nothing is selected.
+      // scoped to the client on screen: standing on Essentia's page and being
+      // handed every client's note is how one buyer's progress reaches another
       '<button class="button" type="button" onclick="go(\'#/clients/updates'+
-        (chBuyer()?('/'+chBuyer().id):'')+'\')">'+icon('i-plus','icon-sm')+'Send an update</button>'+
+        (chBuyer()?('/'+chBuyer().id):'')+'\')">Send an update</button>'+
     '</div></header>'+
-    '<section class="co-summary">'+
-      '<div><span>Buyer companies with access</span><strong>'+active+'</strong>'+
-        '<small>'+openOrders+' open purchase order'+(openOrders===1?'':'s')+'</small></div>'+
-      '<div><span>Account actions open</span><strong>'+actions+'</strong>'+
-        '<small>Across all buyer accounts</small></div>'+
-      '<div><span>Accounts needing setup</span><strong>'+attention+'</strong>'+
-        '<small>No login created yet</small></div>'+
-      '<div><span>Approved updates unsent</span><strong>'+unsent+'</strong>'+
-        '<small>Ready for you to publish</small></div>'+
-    '</section>'+
-    chDirectory()+
-    '<div class="co-workspace ch-workspace">'+chAccount()+'</div></div>');
+    '<div class="workspace">'+chDirectory()+chAccount()+'</div></div>');
+  // keyboard: O and M jump to sections, as the prototype's shortcut chips promise
+  if(!window.__chKeys){
+    window.__chKeys=1;
+    document.addEventListener('keydown', e=>{
+      if(!/^#\/clients(\/|$)/.test(location.hash||'') || /#\/clients\/(updates|logins)/.test(location.hash||'')) return;
+      const t=e.target; if(t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+      if(e.key==='o'||e.key==='O') chTab('orders');
+      if(e.key==='m'||e.key==='M') chTab('access');
+      if(e.key==='Escape' && window.__chDir) chDirOpen(false);
+    });
+  }
   if(typeof hydrateImages==='function') hydrateImages();
 }
 
