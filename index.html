@@ -2103,7 +2103,6 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 --------------------------------------------------------------------------- */
 @media (max-width:640px){
 
-/* was 7/8 px -- 66 rules */
 .sfb .account span,
 .sfb .answer span,
 .sfb .approval-context span,
@@ -2171,7 +2170,6 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfb .total small,
 .sfb .total span{font-size:12px}
 
-/* was 9 px -- 40 rules */
 .sfb .account strong,
 .sfb .answer strong,
 .sfb .approval-context strong,
@@ -2213,7 +2211,6 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfb .thread-select strong,
 .sfb .welcome-meta{font-size:12.5px}
 
-/* was 10/11 px -- 11 rules */
 .sfb .avatar,
 .sfb .button,
 .sfb .button.small,
@@ -2223,6 +2220,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 .sfb .order-progress strong,
 .sfb .order-select strong,
 .sfb .order-sub,
+.sfb .row-note,
 .sfb .toast,
 .sfb .welcome-meta strong{font-size:13px}
 /* NOT GENERATED. These carry no rule of their own in the buyer stylesheet.
@@ -3343,45 +3341,13 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .client-action-row i.warn{background:var(--warning)}
 .sfa .client-action-row strong{display:block;font-size:8px}
 .sfa .client-action-row span{display:block;margin-top:2px;color:var(--muted);font-size:7px}
-.sfa .settings-page{display:grid;gap:11px}
-.sfa .settings-head{padding:18px 20px;border:1px solid var(--line-extra-light);border-radius:13px;background:var(--surface);display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
-.sfa .settings-head h1{font-size:clamp(35px,3.7vw,49px)}
-.sfa .settings-health{padding:8px;border:1px solid var(--line-extra-light);border-radius:10px;background:var(--surface);display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.sfa .settings-health div{padding:9px;border-radius:7px;background:var(--surface-2)}
-.sfa .settings-health span{display:block;color:var(--muted);font-size:7px}
-.sfa .settings-health strong{display:block;margin-top:3px;font-size:9px}
-.sfa .settings-workspace{display:grid;grid-template-columns:190px minmax(0,1fr);gap:10px;align-items:start}
-.sfa .settings-nav{padding:6px;border:1px solid var(--line-extra-light);border-radius:11px;background:var(--surface);position:sticky;top:calc(var(--topbar) + 14px)}
-.sfa .settings-nav button{width:100%;min-height:36px;padding:0 9px;border:0;border-radius:7px;background:transparent;color:var(--muted);display:flex;align-items:center;gap:8px;text-align:left;font-size:8px}
-.sfa .settings-nav button:hover,.sfa .settings-nav button.active{background:var(--selected);color:var(--ink)}
-.sfa .settings-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.sfa .settings-card{border:1px solid var(--line-extra-light);border-radius:11px;background:var(--surface);overflow:hidden}
-.sfa .settings-card.wide{grid-column:1/-1}
-.sfa .settings-card-head{padding:12px 14px;border-bottom:1px solid var(--line-extra-light);display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.sfa .settings-card-head h2{font-size:21px}
-.sfa .settings-card-head p{margin:3px 0 0;color:var(--muted);font-size:7px}
-.sfa .setting-row{min-height:54px;padding:9px 14px;border-top:1px solid var(--line-extra-light);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
-.sfa .setting-row:first-child{border-top:0}
-.sfa .setting-row strong{display:block;font-size:8px}
-.sfa .setting-row span{display:block;margin-top:2px;color:var(--muted);font-size:7px}
-.sfa .setting-value{text-align:right}
-.sfa .setting-value strong{font-size:8px}
-.sfa .setting-value span{font-size:7px}
-.sfa .settings-stage-list{padding:11px 14px;display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
-.sfa .settings-stage{padding:8px 6px;border:1px solid var(--line-extra-light);border-radius:7px;background:var(--surface-2);text-align:center}
-.sfa .settings-stage b{display:block;font-size:8px}
-.sfa .settings-stage span{display:block;margin-top:3px;color:var(--muted);font-size:6px;line-height:1.2}
-@media(max-width:1050px){.sfa .client-account-grid{grid-template-columns:1fr}
-.sfa .settings-groups{grid-template-columns:1fr}
-.sfa .settings-card.wide{grid-column:auto}
-.sfa .settings-stage-list{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:760px){.sfa .client-ops-head,.sfa .settings-head{align-items:flex-start;flex-direction:column}
-.sfa .client-ops-summary,.sfa .settings-health{grid-template-columns:repeat(2,1fr)}
-.sfa .client-ops-grid,.sfa .settings-workspace{grid-template-columns:1fr}
-.sfa .client-directory,.sfa .settings-nav{position:static}
-.sfa .client-directory-list,.sfa .settings-nav{display:flex;overflow:auto}
-.sfa .client-directory-item,.sfa .settings-nav button{min-width:170px}
-.sfa .settings-stage-list{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1050px){.sfa .client-account-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.sfa .client-ops-head{align-items:flex-start;flex-direction:column}
+.sfa .client-ops-summary{grid-template-columns:repeat(2,1fr)}
+.sfa .client-ops-grid{grid-template-columns:1fr}
+.sfa .client-directory{position:static}
+.sfa .client-directory-list{display:flex;overflow:auto}
+.sfa .client-directory-item{min-width:170px}}
 .sfa .product-row{grid-template-columns:176px minmax(0,1fr) 112px;gap:17px;align-items:center;padding:14px 0}
 .sfa .product-row-visual{height:124px;margin:0;border:1px solid var(--line-extra-light);border-radius:10px;background:var(--surface-2);overflow:hidden;position:relative}
 .sfa .product-row-visual img{width:100%;height:100%;display:block;object-fit:cover}
@@ -3887,7 +3853,6 @@ body.reports-mode .sfa .content{max-width:1700px}
 
 /* His settings shell keeps its header and health strip; the working editor runs
    full width beneath it rather than inside his two-column workspace. */
-.sfa .settings-body{margin-top:12px}
 
 
 /* ---------------------------------------------------------------------------
@@ -4186,6 +4151,259 @@ body.reports-mode .sfa .content{max-width:1700px}
   .sfa .ch-page .po-toolbar input{width:100%}
   .sfa .ch-page .account-tabs{overflow:auto}
 }
+
+/* ---------------------------------------------------------------------------
+   Admin settings — the prototype's stylesheet, scoped under .st-page so its
+   class names (.settings-nav, .find, .group, .nav-icon, .page-head, .metrics,
+   .metric, .grid, .panel, .setup-row, .quick, .field-grid, .savebar, .stage,
+   .pill, .legacy, .resource, .register-table, .danger-zone, .search-results)
+   read exactly as ChatGPT wrote them. Two departures, both deliberate: the
+   rail is a sticky column inside the console rather than a fixed strip beside
+   a second sidebar the console does not have, and no text is set under 12px.
+--------------------------------------------------------------------------- */
+.sfa .st-page{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px;align-items:start}
+.sfa .st-page .settings-main{min-width:0}
+.sfa .st-page .content{max-width:1180px}
+
+/* the rail */
+.sfa .st-page .settings-nav{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto;padding:18px 12px 14px;
+  border:1px solid var(--line);border-radius:14px;background:#fbfbfc}
+.sfa .st-page .settings-nav-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 6px 12px}
+.sfa .st-page .settings-nav h2{margin:0;font-size:24px}
+.sfa .st-page .settings-close{display:none;width:36px;height:36px;border:1px solid var(--line);border-radius:9px;background:var(--surface);
+  font-size:18px;line-height:1;cursor:pointer;color:var(--ink)}
+.sfa .st-page .find{position:relative;min-height:40px;margin-bottom:6px;padding:0 11px;border:1px solid var(--line-strong);border-radius:9px;
+  background:var(--surface);display:flex;align-items:center;gap:8px;color:var(--muted)}
+.sfa .st-page .find input{width:100%;min-height:38px;border:0;outline:0;background:transparent;font:inherit;color:var(--ink)}
+.sfa .st-page .search-results{position:absolute;z-index:90;top:44px;left:0;right:0;padding:6px;border:1px solid var(--line-strong);border-radius:11px;
+  background:var(--surface);box-shadow:0 18px 45px rgba(0,0,0,.13);display:none}
+.sfa .st-page .search-results.show{display:grid}
+.sfa .st-page .search-result{width:100%;min-height:44px;border:0;border-radius:8px;background:var(--surface);padding:8px 10px;text-align:left;
+  font:inherit;color:var(--ink);cursor:pointer}
+.sfa .st-page .search-result:hover,.sfa .st-page .search-result:focus-visible{background:var(--surface-2);outline:0}
+.sfa .st-page .search-result strong,.sfa .st-page .search-result small{display:block}
+.sfa .st-page .search-result strong{font-size:13px}
+.sfa .st-page .search-result small{margin-top:2px;color:var(--muted);font-size:12px}
+.sfa .st-page .search-empty{padding:12px;color:var(--muted);font-size:12px}
+.sfa .st-page .group{margin:16px 8px 6px;color:var(--faint);font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.sfa .st-page .settings-nav>button{width:100%;min-height:50px;border:0;border-radius:10px;background:transparent;padding:8px 10px;
+  display:flex;align-items:center;gap:10px;text-align:left;font:inherit;color:var(--ink);cursor:pointer}
+.sfa .st-page .settings-nav>button:hover,.sfa .st-page .settings-nav>button.active{background:var(--surface-2)}
+.sfa .st-page .settings-nav>button.active{box-shadow:inset 2px 0 var(--active-indicator)}
+.sfa .st-page .nav-icon{flex:none;width:30px;height:30px;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+  display:grid;place-items:center;font-size:12px;font-weight:750}
+.sfa .st-page .nav-copy{min-width:0;flex:1}
+.sfa .st-page .nav-copy strong,.sfa .st-page .nav-copy small{display:block}
+.sfa .st-page .nav-copy strong{font-size:13px}
+.sfa .st-page .nav-copy small{margin-top:2px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sfa .st-page .dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--success)}
+.sfa .st-page .dot.warn{background:var(--warning)}
+.sfa .st-page .settings-scrim{display:none}
+
+/* the page */
+.sfa .st-page .page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px}
+.sfa .st-page .page-head h1{margin-bottom:8px;font-size:clamp(34px,3.6vw,50px);letter-spacing:-.045em}
+.sfa .st-page .page-head .lead{max-width:720px;margin:0;font-size:14px}
+.sfa .st-page .page-actions{display:flex;align-items:center;gap:8px;flex:none}
+.sfa .st-page .page-actions .button{white-space:nowrap}
+.sfa .st-page .st-sections{display:none}
+.sfa .st-page .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.sfa .st-page .panel{grid-column:span 12;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sfa .st-page .panel.half{grid-column:span 6}
+.sfa .st-page .panel.third{grid-column:span 4}
+.sfa .st-page .panel.two-third{grid-column:span 8}
+.sfa .st-page .panel-head{min-height:70px;padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;
+  align-items:flex-start;gap:15px}
+.sfa .st-page .panel-head h2{margin:0;font-size:25px}
+.sfa .st-page .panel-head p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.sfa .st-page .panel-head .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.sfa .st-page .panel-body{padding:20px}
+.sfa .st-page .panel+.notice{margin-top:14px}
+.sfa .st-page .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px}
+.sfa .st-page .metrics.two{grid-template-columns:1fr 1fr}
+.sfa .st-page .metric{min-height:105px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-align:left;
+  font:inherit;color:var(--ink);cursor:default}
+.sfa .st-page button.metric{cursor:pointer}
+.sfa .st-page button.metric:hover{background:#fafafa}
+.sfa .st-page .metric span{display:block;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.sfa .st-page .metric strong{display:block;margin-top:12px;font:600 27px/1 var(--display)}
+.sfa .st-page .metric small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+.sfa .st-page .status{display:inline-flex;align-items:center;gap:6px;flex:none;font-size:12px;font-weight:750;white-space:nowrap}
+.sfa .st-page .status:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--success)}
+.sfa .st-page .status.warn:before{background:var(--warning)}
+.sfa .st-page .status.bad:before{background:var(--critical)}
+.sfa .st-page .setup-list,.sfa .st-page .activity{display:grid}
+.sfa .st-page .setup-row,.sfa .st-page .activity-row{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;padding:13px 0;
+  border-bottom:1px solid var(--line)}
+.sfa .st-page .setup-row:last-child,.sfa .st-page .activity-row:last-child{border-bottom:0}
+.sfa .st-page .setup-icon{width:38px;height:38px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-size:13px;font-weight:800}
+.sfa .st-page .setup-row strong,.sfa .st-page .setup-row small,.sfa .st-page .activity-row strong,.sfa .st-page .activity-row small{display:block}
+.sfa .st-page .setup-row strong,.sfa .st-page .activity-row strong{font-size:13px}
+.sfa .st-page .setup-row small,.sfa .st-page .activity-row small{margin-top:3px;color:var(--muted);font-size:12px;line-height:1.4}
+.sfa .st-page .quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.sfa .st-page .quick{min-height:82px;border:1px solid var(--line);border-radius:11px;background:var(--surface);text-align:left;padding:13px;
+  font:inherit;color:var(--ink);cursor:pointer}
+.sfa .st-page .quick:hover{background:var(--surface-2)}
+.sfa .st-page .quick strong,.sfa .st-page .quick small{display:block}
+.sfa .st-page .quick strong{font-size:13px}
+.sfa .st-page .quick small{margin-top:7px;color:var(--muted);font-size:12px}
+.sfa .st-page .notice{padding:13px 15px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--muted);font-size:12px;line-height:1.45}
+.sfa .st-page .notice strong{display:block;margin-bottom:4px;color:var(--ink)}
+.sfa .st-page .panel-body>.notice{margin-top:14px}
+.sfa .st-page .panel-body>.notice:first-child{margin-top:0}
+.sfa .st-page .empty{padding:42px 20px;text-align:center;color:var(--muted);font-size:13px}
+.sfa .st-page .empty strong{display:block;margin-bottom:8px;color:var(--ink);font:600 23px/1.1 var(--display)}
+.sfa .st-page .empty .button{margin-top:16px}
+.sfa .st-page .help{color:var(--muted);font-size:12px}
+
+/* forms */
+.sfa .st-page .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sfa .st-page .field{display:grid;gap:6px;margin:0;align-content:start}
+.sfa .st-page .field.full{grid-column:1/-1}
+.sfa .st-page .field>span{font-size:12px;font-weight:750}
+.sfa .st-page .field input,.sfa .st-page .field select{width:100%;height:44px;border:1px solid var(--line-strong);border-radius:9px;background:var(--surface);
+  padding:0 12px;outline:0;font:inherit;color:var(--ink)}
+.sfa .st-page .field input:focus,.sfa .st-page .field select:focus{border-color:var(--focus-border);box-shadow:0 0 0 4px var(--focus-ring)}
+.sfa .st-page .field input[readonly]{background:var(--surface-2);color:var(--muted)}
+.sfa .st-page .field.check-row{grid-template-columns:auto 1fr;align-items:center;gap:10px;min-height:44px;font-size:13px;font-weight:500}
+.sfa .st-page .field.check-row input{width:18px;height:18px;margin:0}
+.sfa .st-page .masked{display:flex;gap:8px;align-items:center}
+.sfa .st-page .masked input{flex:1;min-width:0}
+.sfa .st-page .savebar{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sfa .st-page .savebar span{color:var(--muted);font-size:12px}
+.sfa .st-page .savebar .button{flex:none}
+.sfa .st-page .field-flash{animation:st-flash 1.6s}
+@keyframes st-flash{0%,35%{box-shadow:0 0 0 4px rgba(29,29,31,.14)}100%{box-shadow:none}}
+
+/* workflow */
+.sfa .st-page .stage-list{display:grid;gap:8px}
+.sfa .st-page .stage{display:grid;grid-template-columns:34px minmax(0,1fr) 140px 95px auto;gap:11px;align-items:center;padding:10px;
+  border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.sfa .st-page .stage-no{width:30px;height:30px;border-radius:8px;background:var(--surface-2);display:grid;place-items:center;font-weight:800;font-size:12px}
+.sfa .st-page .stage strong,.sfa .st-page .stage small{display:block}
+.sfa .st-page .stage strong{font-size:13px}
+.sfa .st-page .stage small{margin-top:2px;color:var(--muted);font-size:12px}
+.sfa .st-page .stage .actions{display:flex;gap:5px}
+.sfa .st-page .pill{display:inline-flex;min-height:27px;align-items:center;padding:0 9px;border:1px solid var(--line);border-radius:14px;
+  background:var(--surface-2);font-size:12px;white-space:nowrap}
+.sfa .st-page .pill.req{border-color:#CFDACF;background:#F3F7F3}
+.sfa .st-page .legacy{margin-top:13px;border:1px solid var(--line);border-radius:10px;background:#fafafa}
+.sfa .st-page .legacy.in-panel{margin:14px 20px 20px}
+.sfa .st-page .legacy summary{cursor:pointer;padding:13px 15px;font-weight:750;font-size:13px}
+.sfa .st-page .legacy>div{padding:0 15px 14px;color:var(--muted);font-size:12px}
+.sfa .st-page .card-list{display:grid;gap:9px}
+.sfa .st-page .resource{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);
+  border-radius:10px;background:var(--surface)}
+.sfa .st-page .resource-icon{width:44px;height:44px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-size:13px;font-weight:750}
+.sfa .st-page .resource strong,.sfa .st-page .resource small{display:block}
+.sfa .st-page .resource strong{font-size:13px}
+.sfa .st-page .resource small{margin-top:3px;color:var(--muted);font-size:12px}
+.sfa .st-page .qc-items{display:grid;gap:4px;padding:6px 0 4px 14px}
+.sfa .st-page .qc-item{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 0 8px 12px;
+  border-left:2px solid var(--line);font-size:13px}
+
+/* registers */
+.sfa .st-page .register-tools{display:flex;align-items:center;gap:8px;padding:12px;border-bottom:1px solid var(--line);background:#fafafa}
+.sfa .st-page .register-tools input{height:40px;min-width:0;flex:1;border:1px solid var(--line-strong);border-radius:9px;background:var(--surface);
+  padding:0 12px;font:inherit}
+.sfa .st-page .register-wrap{overflow:auto}
+.sfa .st-page .register-table{width:100%;border-collapse:collapse}
+.sfa .st-page .register-table th,.sfa .st-page .register-table td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.sfa .st-page .register-table tr:last-child td{border-bottom:0}
+.sfa .st-page .register-table th{color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.sfa .st-page .register-table td{font-size:13px}
+.sfa .st-page .register-table td strong,.sfa .st-page .register-table td small{display:block}
+.sfa .st-page .register-table td small{margin-top:3px;color:var(--muted);font-size:12px}
+.sfa .st-page .register-table td.actions{white-space:nowrap;text-align:right}
+.sfa .st-page .register-table td.actions .button+.button{margin-left:4px}
+.sfa .st-page .panel-head .actions [aria-pressed="true"]{background:var(--primary-action);border-color:var(--primary-action-border);color:var(--ink)}
+
+/* danger */
+.sfa .st-page .danger-zone{border-color:#ead8d6}
+.sfa .st-page .danger-zone .panel-head{background:#fbf7f6}
+
+/* the settings' own dialogs */
+.modal-bg.st-dialog .modal{padding:0;width:min(620px,100%)}
+.modal-bg.st-dialog .st-modal .modal-head,.modal-bg.st-dialog .st-modal .modal-foot{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.modal-bg.st-dialog .st-modal .modal-head{border-bottom:1px solid var(--line);align-items:flex-start}
+.modal-bg.st-dialog .st-modal .modal-head h3{margin:0;font-size:26px}
+.modal-bg.st-dialog .st-modal .modal-head .eyebrow{margin:0 0 6px}
+.modal-bg.st-dialog .st-modal .modal-body{padding:20px;display:grid;gap:14px}
+.modal-bg.st-dialog .st-modal .modal-foot{border-top:1px solid var(--line)}
+.modal-bg.st-dialog .st-modal .modal-foot .help{color:var(--muted);font-size:12px}
+.modal-bg.st-dialog .st-modal .x{width:38px;height:38px;border:0;border-radius:50%;background:var(--surface-2);font-size:18px;line-height:1;cursor:pointer;color:var(--ink)}
+.modal-bg.st-dialog .st-modal .notice{padding:13px 15px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--muted);font-size:12px;line-height:1.45}
+.modal-bg.st-dialog .st-modal .notice strong{display:block;margin-bottom:4px;color:var(--ink)}
+.modal-bg.st-dialog .st-modal .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-bg.st-dialog .st-modal .field{display:grid;gap:6px;margin:0;align-content:start}
+.modal-bg.st-dialog .st-modal .field.full{grid-column:1/-1}
+.modal-bg.st-dialog .st-modal .field>span{font-size:12px;font-weight:750}
+.modal-bg.st-dialog .st-modal .field input,.modal-bg.st-dialog .st-modal .field select{width:100%;height:44px;border:1px solid var(--line-strong);border-radius:9px;
+  background:var(--surface);padding:0 12px;font:inherit;margin:0}
+.modal-bg.st-dialog .st-modal .field input:focus,.modal-bg.st-dialog .st-modal .field select:focus{outline:0;border-color:var(--focus-border);box-shadow:0 0 0 4px var(--focus-ring)}
+.modal-bg.st-dialog .st-modal .card-list{display:grid;gap:9px}
+.modal-bg.st-dialog .st-modal .resource{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px}
+.modal-bg.st-dialog .st-modal .resource-icon{width:44px;height:44px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;font-size:13px;font-weight:750}
+.modal-bg.st-dialog .st-modal .resource strong,.modal-bg.st-dialog .st-modal .resource small{display:block}
+.modal-bg.st-dialog .st-modal .resource strong{font-size:13px}
+.modal-bg.st-dialog .st-modal .resource small{margin-top:3px;color:var(--muted);font-size:12px}
+.modal-bg.st-dialog .st-modal .danger-confirm{display:grid;gap:13px}
+.modal-bg.st-dialog .st-modal .danger-counts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.modal-bg.st-dialog .st-modal .danger-counts div{padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.modal-bg.st-dialog .st-modal .danger-counts strong,.modal-bg.st-dialog .st-modal .danger-counts span{display:block}
+.modal-bg.st-dialog .st-modal .danger-counts strong{font:600 23px/1 var(--display)}
+.modal-bg.st-dialog .st-modal .danger-counts span{margin-top:5px;color:var(--muted);font-size:12px}
+.modal-bg.st-dialog .st-modal .confirm-check{display:flex;align-items:flex-start;gap:9px;font-size:13px;min-height:24px}
+.modal-bg.st-dialog .st-modal .confirm-check input{width:18px;height:18px;margin:2px 0 0;flex:none}
+.modal-bg.st-dialog .st-modal .button-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
+/* narrower than the prototype's laptop */
+@media (max-width:1180px){
+  .sfa .st-page{grid-template-columns:230px minmax(0,1fr)}
+  .sfa .st-page .metrics{grid-template-columns:repeat(2,1fr)}
+  .sfa .st-page .panel.half,.sfa .st-page .panel.third,.sfa .st-page .panel.two-third{grid-column:span 12}
+  .sfa .st-page .stage{grid-template-columns:34px minmax(0,1fr) auto}
+  .sfa .st-page .stage .stage-group,.sfa .st-page .stage .gate{display:none}
+}
+/* the rail becomes the prototype's drawer */
+@media (max-width:900px){
+  .sfa .st-page{display:block}
+  .sfa .st-page .settings-nav{position:fixed;z-index:115;top:0;bottom:0;left:0;width:min(320px,88vw);max-height:none;border-radius:0;
+    border-right:1px solid var(--line);transform:translateX(-100%);transition:transform .2s cubic-bezier(.2,.8,.2,1);box-shadow:20px 0 50px rgba(0,0,0,.13)}
+  .sfa .st-page .settings-nav.open{transform:none}
+  .sfa .st-page .settings-close{display:grid;place-items:center}
+  .sfa .st-page.nav-open .settings-scrim{display:block;position:fixed;inset:0;z-index:114;background:rgba(29,29,31,.35)}
+  .sfa .st-page .st-sections{display:inline-flex}
+  .sfa .st-page .page-head{align-items:flex-start;flex-direction:column;gap:12px}
+  .sfa .st-page .page-actions{flex-wrap:wrap}
+  .sfa .st-page .field-grid{grid-template-columns:1fr}
+  .sfa .st-page .field.full{grid-column:auto}
+  .sfa .st-page .savebar{align-items:stretch;flex-direction:column}
+  .sfa .st-page .savebar .button{width:100%}
+  .sfa .st-page .stage{grid-template-columns:32px minmax(0,1fr)}
+  .sfa .st-page .stage .actions{grid-column:1/-1;justify-content:flex-end}
+  .modal-bg.st-dialog .st-modal .field-grid{grid-template-columns:1fr}
+  .modal-bg.st-dialog .st-modal .field.full{grid-column:auto}
+  .modal-bg.st-dialog .st-modal .danger-counts{grid-template-columns:1fr}
+  .sfa .st-page .register-table{white-space:nowrap}
+  .sfa .st-page .register-tools input{min-height:44px}
+}
+@media (max-width:500px){
+  .sfa .st-page .metrics{grid-template-columns:1fr}
+  .sfa .st-page .quick-grid{grid-template-columns:1fr}
+  .sfa .st-page .panel-head{padding:16px;flex-direction:column}
+  .sfa .st-page .panel-head .actions{justify-content:flex-start}
+  .sfa .st-page .panel-body{padding:16px}
+  .sfa .st-page .resource{grid-template-columns:40px minmax(0,1fr)}
+  .sfa .st-page .resource .button{grid-column:1/-1;justify-self:start}
+  .sfa .st-page .setup-row{grid-template-columns:38px minmax(0,1fr)}
+  .sfa .st-page .setup-row .button{grid-column:2;justify-self:start}
+  .sfa .st-page .register-tools{align-items:stretch;flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  .sfa .st-page .settings-nav{transition:none}
+  .sfa .st-page .field-flash{animation:none}
+}
 </style>
 <style>
 /* ---------------------------------------------------------------------------
@@ -4205,7 +4423,6 @@ body.reports-mode .sfa .content{max-width:1700px}
 --------------------------------------------------------------------------- */
 @media (max-width:640px){
 
-/* was 6/6.5/7/8 px -- 219 rules */
 .sfa .access-audit-row span,
 .sfa .access-audit-row strong,
 .sfa .access-detail-head p,
@@ -4361,7 +4578,6 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .po-product-facts span,
 .sfa .po-product-facts strong,
 .sfa .po-product-image span,
-.sfa .po-product-image span,
 .sfa .po-product-stage span,
 .sfa .po-product-update,
 .sfa .po-shipment-gate span,
@@ -4404,15 +4620,6 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .report-table td,
 .sfa .report-table th,
 .sfa .role-option span,
-.sfa .setting-row span,
-.sfa .setting-row strong,
-.sfa .setting-value span,
-.sfa .setting-value strong,
-.sfa .settings-card-head p,
-.sfa .settings-health span,
-.sfa .settings-nav button,
-.sfa .settings-stage b,
-.sfa .settings-stage span,
 .sfa .stage-label span,
 .sfa .stage-list-row small,
 .sfa .stage-status-grid span,
@@ -4426,7 +4633,6 @@ body.reports-mode .sfa .content{max-width:1700px}
 body.order-mode .sfa .sidebar .nav-item .nav-count,
 body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12px}
 
-/* was 9 px -- 80 rules */
 .sfa .access-detail-section h3,
 .sfa .access-empty p,
 .sfa .access-filter,
@@ -4495,7 +4701,6 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12px}
 .sfa .report-table strong,
 .sfa .review-footer small,
 .sfa .role-option strong,
-.sfa .settings-health strong,
 .sfa .side-detail,
 .sfa .stage-number,
 .sfa .stage-task p,
@@ -4508,7 +4713,6 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12px}
 body.order-mode .sfa .sidebar .nav-item .nav-count,
 body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 
-/* was 10/11 px -- 70 rules */
 .form-card__group,
 .sfa .access-page-head p,
 .sfa .activity-event strong,
@@ -4518,6 +4722,8 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .sfa .button.small,
 .sfa .calendar-event strong,
 .sfa .card-head p,.sfa .card-copy,
+.sfa .ch-page .more,
+.sfa .ch-page .shortcut,
 .sfa .check-line,
 .sfa .client-card p,
 .sfa .client-stats strong,
@@ -5252,11 +5458,10 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 --------------------------------------------------------------------------- */
 @media (max-width:640px){
 
-/* was 9/9.5 px -- 2 rules */
+.dock-bi small,
 .lchart__lbl,
 .po-gate--tight span{font-size:12.5px}
 
-/* was 10/10.5/11/11.5 px -- 71 rules */
 .access-avatar,
 .access-perms i,
 .access-row span,
@@ -5265,11 +5470,12 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .activity-log__time,
 .answer span,
 .answer>span,
-.app-shell--console .mobile-dock__item,
+.app-shell--artisan .mobile-dock__item,
 .app-shell--console .mobile-dock__item,
 .appr-row__img>span,
 .appr-row__meta,
 .att span,
+.att-grid span,
 .buyer-who small,
 .cc-alert span,
 .cc-mini span,
@@ -5284,10 +5490,14 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .conf-why,
 .ct-note,
 .data-table th,
+.dock-bi small,
 .donut__mid span,
 .fe-ring small,
 .field-hint,
 .filterbar__note,
+.fl-check__more,
+.fl-tab__n,
+.handover__row span,
 .ho__time,
 .ho__who,
 .icon-swatch code,
@@ -5295,6 +5505,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .jnode span,
 .kpi__label,
 .milestone__date em,
+.mo-sub,
 .mobile-dock__item .badge,
 .next-row__when,.act-row__when,
 .next-row__who,
@@ -5325,21 +5536,6 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .stage-now__grid span,
 .stage-now__label span,
 .step__label,
-.wordmark__byline,
-.ws-of,
-.ws-step b{font-size:13px}
-small{font-size:12px}
-.field-hint,.stage-note{font-size:12px}
-
-/* the floor and artisan sheets, same floor */
-.dock-bi small{font-size:12.5px}
-.app-shell--artisan .mobile-dock__item,
-.att-grid span,
-.dock-bi small,
-.fl-check__more,
-.fl-tab__n,
-.handover__row span,
-.mo-sub,
 .stmt th,
 .stmt__fig span,
 .stmt__foot,
@@ -5348,7 +5544,10 @@ small{font-size:12px}
 .wk-img b,
 .wk-pick__ref,
 .wk-ref,
-.wk-spec span{font-size:13px}
+.wk-spec span,
+.wordmark__byline,
+.ws-of,
+.ws-step b{font-size:13px}
 /* NOT GENERATED. Tap targets on the floor screens: the exception chips and the
    tab strip sit at 36 to 38px, which is a miss for a thumb in a workshop. */
 .fl-exc__chip,.fl-tab,.mo-tab,.fl-check__btn{min-height:44px}
@@ -5356,7 +5555,7 @@ small{font-size:12px}
 }
 </style>
 <body>
-<script>const BUILD_ID='5c3ef0d5976f';</script>
+<script>const BUILD_ID='9817f4da617d';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -5904,11 +6103,11 @@ const SESSION_GLOBALS = [
   '__accessGroup','__accessQ','__accessSel','__acct','__ccChip','__chAct',
   '__chDir','__chPicked','__chSelecting','__chSort','__chTab','__client',
   '__cmdRows','__cmdSel','__cmtAttach','__cost','__du','__finSeg','__gq',
-  '__impRecs','__inAdminShell','__inReportShell','__moreNav','__openStages',
+  '__impRecs','__inReportShell','__moreNav','__openStages',
   '__paCompany','__paPerson','__paStaff','__paTab','__pdfjsLoading','__poFiles',
   '__poFilter','__poParse','__poTab','__poView','__prodFilter','__prodSearch',
   '__recTab','__repDays','__repSec','__selfie','__sheet','__staffFilter',
-  '__staffQ','__wsFile','__wsFilter','__wsQuery','__wsSort',
+  '__staffQ','__stFlash','__stNav','__wsFile','__wsFilter','__wsQuery','__wsSort',
   // built by name in _loadScript, so the build check cannot see it in the source
   '__loading_JSZip'
 ];
@@ -9920,41 +10119,774 @@ function vReports(tab){
 function vReportsActivity(){ vActivity(); $('app').innerHTML=reportChrome('activity')+$('app').innerHTML; }
 function vReportsLog(){ vDaily(); $('app').innerHTML=reportChrome('activity')+$('app').innerHTML; hydrateImages(); }
 
-/* ChatGPT's adminView shell from the final handoff: .settings-head, the four
-   .settings-health figures, and .settings-workspace with his .settings-nav rail
-   beside the cards. His health strip is fixed sample text; these four figures
-   are real, and the stage count is the workflow the workshop actually runs. */
+/* ---------------------------------------------------------------------------
+   Admin settings — ChatGPT's STONEFLOW-FINAL-ADMIN-SETTINGS.html.
+
+   A rail of ten sections with a field-level search, one focused editor at a
+   time beside it, and an overview that says what is configured, what needs
+   attention and what changed recently. The prototype's figures are sample
+   text; every one here is counted from the records, and "Recent configuration
+   changes" reads the config_* rows the database writes whenever one of the
+   seven configuration tables changes (settings_changes_are_recorded.sql).
+
+   The editors save the way they always did — each one is a real write to its
+   own table, refused by the database for anyone but the owner. What the
+   prototype simulated with timers is not simulated here: a button that has no
+   working implementation behind it is not drawn.
+--------------------------------------------------------------------------- */
+const ST_SECTIONS=[
+  ['overview',  'Overview',                 'Status, setup and recent changes', 'Start here'],
+  ['company',   'Company profile',          'Buyer-facing name and messages',   'Business'],
+  ['workflow',  'Production workflow',      'Product stages and gates',         'Business'],
+  ['quality',   'Quality checklists',       'Stage sign-off requirements',      'Business'],
+  ['attendance','Factory & attendance',     'Site, fence and working policy',   'Factory operations'],
+  ['equipment', 'Equipment & work centres', 'Machines, areas and service',      'Factory operations'],
+  ['materials', 'Materials & inventory',    'Stone lots and consumables',       'Factory operations'],
+  ['data',      'Data & imports',           'Imports, exports and history',     'System'],
+  ['security',  'Security & sign-in',       'Password and account safeguards',  'System'],
+  ['danger',    'Danger zone',              'Retire or permanently remove',     'System']
+];
+// Field-level search: a hit opens the section and lights the field it named,
+// rather than a menu label. [label, where it lives, section, element to light]
+const ST_INDEX=[
+  ['Company name','Buyer-facing identity','company','#set-name'],
+  ['Tagline','Buyer-facing identity','company','#set-tag'],
+  ['WhatsApp number','Buyer communication','company','#st-wa'],
+  ['Tracker link','Buyer messages','company','#set-url'],
+  ['Production stages','Product workflow','workflow','#st-stages'],
+  ['Buyer approval gate','Stage decisions','workflow','#st-stages'],
+  ['Archived stages','Historical workflow','workflow','#st-legacy'],
+  ['Factory site','Location used for clock-in','attendance','#st-sites'],
+  ['Fence radius','Factory location and geofence','attendance','#st-sites'],
+  ['Working day','Attendance policy','attendance','#pol-start'],
+  ['Late after','Attendance policy','attendance','#pol-grace'],
+  ['Reporting threshold','Attendance policy','attendance','#pol-threshold'],
+  ['Weekly off','Attendance policy','attendance','#pol-off'],
+  ['Selfie outside the fence','Attendance policy','attendance','#st-selfie'],
+  ['Paid leave','Attendance policy','attendance','#st-paid'],
+  ['Equipment register','Machines and work centres','equipment','#st-eq'],
+  ['Service date','Equipment maintenance','equipment','#st-eq'],
+  ['Stone lots','Material traceability','materials','#st-lots'],
+  ['Consumables','Material traceability','materials','#st-lots'],
+  ['Quality checklist','Production sign-off','quality','#st-qc'],
+  ['Import','Purchase orders and spreadsheets','data','#st-import'],
+  ['Configuration export','Stages, sites and policies','data','#st-export'],
+  ['Audit history','Actor, before and after','data','#st-audit'],
+  ['Password','Owner sign-in','security','#st-signin'],
+  ['Office-issued passwords','Account safeguards','security','#st-issued'],
+  ['Retire a factory site','Restricted action','danger','#st-retire-site'],
+  ['Delete a buyer','Permanent deletion','danger','#st-delete']
+];
+const ST_WORDS=['zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve'];
+
+// Everything the rail, the overview and the sections count, computed once per
+// paint from the loaded records.
+function stState(){
+  const s=S.settings||{};
+  const stages=(S.stages||[]).slice().sort((a,b)=>a.sort_order-b.sort_order);
+  const active=stages.filter(x=>x.active);
+  const sites=(S.sites||[]).filter(x=>x.active!==false);
+  const eq=(S.equipment||[]).filter(e=>e.active!==false);
+  const lots=(S.lots||[]).filter(l=>l.active!==false);
+  const qc=(S.checklist||[]).filter(c=>c.active!==false);
+  const qcCommon=qc.filter(c=>c.stage_id==null);
+  const qcSpecific=qc.filter(c=>c.stage_id!=null);
+  const people=(S.profilesAll||[]).filter(p=>p.active!==false && p.user_id!==uid());
+  const p=k=>policyVal(k, {work_start:'09:00',work_end:'18:00',late_grace_min:15,report_threshold_hours:5,
+    geofence_default_m:100,selfie_on_exception:true,paid_leave:false,weekly_off:null}[k]);
+  return {
+    settings:s, company:s.company_name||'Gujraj Impex',
+    companyOk:!!(s.company_name && s.admin_whatsapp),
+    stages, active, legacy:stages.filter(x=>!x.active), gates:active.filter(x=>x.approval_gate),
+    sites, policy:{work_start:p('work_start'),work_end:p('work_end'),late_grace_min:p('late_grace_min'),
+      report_threshold_hours:p('report_threshold_hours'),geofence_default_m:p('geofence_default_m'),
+      selfie_on_exception:p('selfie_on_exception'),paid_leave:p('paid_leave'),weekly_off:p('weekly_off')},
+    eq, eqDown:eq.filter(e=>e.status && e.status!=='available'),
+    eqRetired:(S.equipment||[]).filter(e=>e.active===false),
+    lots, stone:lots.filter(l=>l.kind!=='consumable'), cons:lots.filter(l=>l.kind==='consumable'),
+    lotsRetired:(S.lots||[]).filter(l=>l.active===false),
+    qc, qcCommon, qcSpecific, qcRequired:qc.filter(c=>c.required),
+    uncovered:active.filter(st=>!qcCommon.length && !qcSpecific.some(c=>c.stage_id===st.id)),
+    people, issued:people.filter(x=>!x.password_set_at),
+    changes:(S.activity||[]).filter(a=>/^config_/.test(String(a.action||'')))
+  };
+}
+
 function vAdmin(tab){
   if(!isAdmin()) return vHome();
-  const sec = tab==='import' ? 'import' : 'settings';
-  const active=S.stages.filter(s=>s.active);
-  const gates=(S.revisions||[]).length;
-  const held=pendingPhotos().length;
+  if(!S.settings.__priv){ S.settings.__priv=1; loadPrivateSettings().then(()=>render()); }
+  const known=ST_SECTIONS.map(x=>x[0]);
+  const cur = tab==='import' ? 'data' : (known.indexOf(tab)>=0 ? tab : 'overview');
+  const st=stState();
+  const body={overview:stOverview, company:stCompany, workflow:stWorkflow, quality:stQuality,
+    attendance:stAttendance, equipment:stEquipment, materials:stMaterials, data:stData,
+    security:stSecurity, danger:stDanger}[cur](st, tab==='import');
+  sfaPaint('<div class="settings-page st-page'+(window.__stNav?' nav-open':'')+'">'+
+    stRail(cur, st)+
+    '<div class="settings-scrim" onclick="stNav(0)"></div>'+
+    '<main class="settings-main"><div class="content">'+
+      '<section class="view active" id="view-'+cur+'">'+body+'</section>'+
+    '</div></main></div>');
+  // a search hit lights the field it named once its section is on screen
+  const flash=window.__stFlash; window.__stFlash=null;
+  if(flash) requestAnimationFrame(()=>{ const t=document.querySelector(flash); if(!t) return;
+    t.scrollIntoView({block:'center'}); t.classList.add('field-flash');
+    setTimeout(()=>t.classList.remove('field-flash'), 1700); });
+}
+function stGo(k){ window.__stNav=0; go(k==='overview'?'#/admin':'#/admin/'+k); }
+function stNav(open){ window.__stNav=open?1:0;
+  const pg=document.querySelector('.st-page'); if(pg) pg.classList.toggle('nav-open', !!open);
+  const nav=document.getElementById('st-nav'); if(nav) nav.classList.toggle('open', !!open);
+  if(open){ const f=document.getElementById('st-find'); if(f) f.focus(); }
+}
 
-  window.__inAdminShell=1;
-  try{ if(sec==='import') vImport(); else vSettings(); }
-  finally{ window.__inAdminShell=0; }
-  const inner=$('app').innerHTML;
+function stRail(cur, st){
+  const dots={company:st.companyOk?'':'warn', workflow:st.active.length?'':'warn',
+    quality:st.uncovered.length?'warn':'', attendance:st.sites.length?'':'warn',
+    equipment:(st.eq.length && !st.eqDown.length)?'':'warn', materials:st.lots.length?'':'warn'};
+  const icons={overview:'⌂', company:initials(st.company), workflow:String(st.active.length), quality:'✓',
+    attendance:'⌖', equipment:'⚙', materials:'◫', data:'⇅', security:'◇', danger:'!'};
+  let h='<aside class="settings-nav'+(window.__stNav?' open':'')+'" id="st-nav" aria-label="Settings sections">'+
+    '<div class="settings-nav-top"><h2>Admin settings</h2>'+
+      '<button class="settings-close" type="button" aria-label="Close the section list" onclick="stNav(0)">×</button></div>'+
+    '<div class="find"><span aria-hidden="true">⌕</span>'+
+      '<input id="st-find" placeholder="Find a setting" aria-label="Find a setting" autocomplete="off" '+
+        'oninput="stSearch(this.value)" onkeydown="stFindKey(event)">'+
+      '<div class="search-results" id="st-results" role="listbox" aria-label="Matching settings"></div></div>';
+  let grp='';
+  ST_SECTIONS.forEach(([k,name,sub,g])=>{
+    if(g!==grp){ grp=g; h+='<div class="group">'+esc(g)+'</div>'; }
+    h+='<button type="button" class="'+(cur===k?'active':'')+'" aria-current="'+(cur===k?'page':'false')+'" '+
+      'data-view="'+k+'" onclick="stGo(\''+k+'\')">'+
+      '<span class="nav-icon">'+esc(icons[k])+'</span>'+
+      '<span class="nav-copy"><strong>'+esc(name)+'</strong><small>'+
+        esc(k==='workflow'?(st.active.length+' product stages and gates'):sub)+'</small></span>'+
+      (dots[k]!==undefined?'<i class="dot'+(dots[k]?' '+dots[k]:'')+'"></i>':'')+'</button>';
+  });
+  return h+'</aside>';
+}
+// The search: every field in the index, matched on its label and where it
+// lives. Enter takes the first hit, Escape clears.
+function stSearch(q){
+  const box=document.getElementById('st-results'); if(!box) return;
+  q=String(q||'').trim().toLowerCase();
+  if(!q){ box.classList.remove('show'); box.innerHTML=''; return; }
+  const hits=[]; ST_INDEX.forEach((x,i)=>{ if((x[0]+' '+x[1]+' '+x[2]).toLowerCase().indexOf(q)>=0) hits.push(i); });
+  box.innerHTML = hits.length
+    ? hits.slice(0,7).map(i=>'<button class="search-result" type="button" role="option" onclick="stJump('+i+')">'+
+        '<strong>'+esc(ST_INDEX[i][0])+'</strong><small>'+esc(ST_INDEX[i][1])+'</small></button>').join('')
+    : '<div class="search-empty">Nothing here is called that. Try the section list below.</div>';
+  box.classList.add('show');
+}
+function stFindKey(e){
+  if(e.key==='Escape'){ e.target.value=''; stSearch(''); return; }
+  if(e.key==='Enter'){ e.preventDefault(); const first=document.querySelector('#st-results .search-result'); if(first) first.click(); }
+  if(e.key==='ArrowDown'){ const first=document.querySelector('#st-results .search-result'); if(first){ e.preventDefault(); first.focus(); } }
+}
+function stJump(i){
+  const hit=ST_INDEX[i]; if(!hit) return;
+  const f=document.getElementById('st-find'); if(f) f.value='';
+  window.__stFlash=hit[3];
+  window.__stNav=0;
+  const target=hit[2]==='overview'?'#/admin':'#/admin/'+hit[2];
+  go(target);
+}
 
-  sfaPaint('<div class="settings-page"><header class="settings-head"><div>'+
-    '<p class="eyebrow">Low-frequency configuration · owner administrator</p>'+
-    '<h1>Settings &amp; controls.</h1>'+
-    '<p class="lead">The company record, the production model, buyer publication and data operations — '+
-    'kept out of the daily work.</p></div>'+
-    '<button class="button secondary" type="button" onclick="go(\'#/admin/import\')">Import data</button>'+
-    '</header>'+
-    '<section class="settings-health">'+
-      '<div><span>Production model</span><strong>'+active.length+' stages · active</strong></div>'+
-      '<div><span>Approval rounds recorded</span><strong>'+gates+'</strong></div>'+
-      '<div><span>Photographs awaiting you</span><strong>'+held+'</strong></div>'+
-      '<div><span>Buyer logins</span><strong>'+
-        (S.profilesAll||[]).filter(p=>p.role==='buyer').length+' active</strong></div>'+
-    '</section>'+
-    // His shell puts a nav rail beside the cards. That rail repeats the sidebar
-    // this console already has, and its grid squeezes a working editor into a
-    // column it was not drawn for — so the header and health strip are kept and
-    // the editor runs full width beneath them.
-    '<div class="settings-body">'+inner+'</div></div>');
+/* ---- shared pieces ---- */
+function stHead(eyebrowText, title, lead, actions){
+  return '<header class="page-head"><div><p class="eyebrow">'+esc(eyebrowText)+'</p><h1>'+esc(title)+'</h1>'+
+    '<p class="lead">'+esc(lead)+'</p></div><div class="page-actions">'+
+    '<button class="button secondary small st-sections" type="button" onclick="stNav(1)" aria-controls="st-nav">☰ Sections</button>'+
+    (actions||'')+'</div></header>';
+}
+function stPanel(o){
+  return '<article class="panel'+(o.cls?' '+o.cls:'')+'"'+(o.id?' id="'+o.id+'"':'')+'>'+
+    '<header class="panel-head"><div><h2>'+esc(o.title)+'</h2>'+(o.sub?'<p>'+esc(o.sub)+'</p>':'')+'</div>'+(o.right||'')+'</header>'+
+    (o.raw!=null ? o.raw : '<div class="panel-body'+(o.bodyCls?' '+o.bodyCls:'')+'">'+o.body+'</div>')+'</article>';
+}
+function stStatus(text, kind){ return '<span class="status'+(kind?' '+kind:'')+'">'+esc(text)+'</span>'; }
+function stEmpty(title, text, action){
+  return '<div class="empty"><strong>'+esc(title)+'</strong>'+esc(text)+(action?'<br>'+action:'')+'</div>';
+}
+function stVal(v){ if(v===null||v===undefined||v==='') return '—'; if(typeof v==='object') return JSON.stringify(v); return String(v); }
+function stPlural(n, one, many){ return n+' '+(n===1?one:(many||one+'s')); }
+// A dialog in the settings' own dress: eyebrow, title, body, and a footer that
+// says the change is audited. The buttons are the caller's.
+function stModal(o){
+  const m=modal('<div class="st-modal"><header class="modal-head"><div>'+
+      '<p class="eyebrow">'+esc(o.eyebrow||'Admin setting')+'</p><h3>'+esc(o.title||'Edit')+'</h3></div>'+
+      '<button class="x" type="button" aria-label="Close" onclick="closeModal()">×</button></header>'+
+    '<div class="modal-body">'+(o.body||'')+'</div>'+
+    '<footer class="modal-foot"><span class="help">'+esc(o.foot||'Changes are audited.')+'</span>'+
+      '<div class="button-row">'+(o.buttons||'')+'</div></footer></div>');
+  m.bg.classList.add('sfa'); m.bg.classList.add('st-dialog');
+  return m;
+}
+// Runs one of the existing save actions and closes the dialog only if it
+// reported success; a refused save keeps the form and its values on screen.
+async function stSubmit(fn){
+  const btn=document.activeElement && document.activeElement.tagName==='BUTTON' ? document.activeElement : null;
+  if(btn){ btn.disabled=true; btn.setAttribute('aria-busy','true'); }
+  let ok=false;
+  try{ ok=await fn(); }
+  finally{ if(btn){ btn.disabled=false; btn.removeAttribute('aria-busy'); } }
+  if(ok) closeModal();
+}
+function stChangeRow(a, st){
+  let d={}; try{ d=JSON.parse(a.detail||'{}'); }catch(e){ d={}; }
+  if(!d || typeof d!=='object') d={};
+  const op=String(a.action||'').replace('config_','');
+  const verb={insert:'added', update:'updated', delete:'removed'}[op]||op;
+  const area=String(d.area||'Setting');
+  const icons={'Company profile':initials(st.company),'Production workflow':String(st.active.length),
+    'Quality checklist':'✓','Factory site':'⌖','Attendance policy':'⌖','Equipment':'⚙','Material lot':'◫'};
+  const ch=Object.keys(d.changes||{}).map(k=>{ const c=(d.changes||{})[k]||{};
+    if(c.changed===true) return k.replace(/_/g,' ')+' changed';
+    return k.replace(/_/g,' ')+' '+stVal(c.from)+' → '+stVal(c.to); });
+  const summary=ch.slice(0,3).join(' · ')+(ch.length>3?' · +'+(ch.length-3)+' more':'');
+  return '<div class="activity-row"><span class="setup-icon">'+esc(icons[area]||'·')+'</span>'+
+    '<div><strong>'+esc(area+' '+verb)+'</strong><small>'+
+      esc([d.name, summary, a.actor_name].filter(Boolean).join(' · '))+'</small></div>'+
+    '<span class="status">'+esc(ftime(a.created_at))+'</span></div>';
+}
+
+/* ---- overview ---- */
+function stSetupRows(st){
+  const rows=[];
+  if(!st.companyOk) rows.push({icon:initials(st.company), section:'company', done:false,
+    title:st.settings.company_name?'Add your WhatsApp number':'Name the company',
+    small:'Buyer messages, reminders and the sign-in screen carry it.'});
+  rows.push(st.eq.length
+    ? {icon:'⚙', section:'equipment', done:true, title:'Equipment and work centres',
+       small:stPlural(st.eq.length,'machine or work area','machines and work areas')+
+         (st.eqDown.length?' · '+st.eqDown.length+' out of service':' · all available to the floor')+'.'}
+    : {icon:'⚙', section:'equipment', done:false, title:'Add equipment and work centres',
+       small:'Supervisors cannot plan work against machines until these exist.'});
+  rows.push(st.lots.length
+    ? {icon:'◫', section:'materials', done:true, title:'Stone lots and consumables',
+       small:stPlural(st.lots.length,'lot')+' the floor can issue from · '+st.stone.length+' stone, '+st.cons.length+' consumable.'}
+    : {icon:'◫', section:'materials', done:false, title:'Add stone lots and consumables',
+       small:'The floor cannot record material issue without a valid lot.'});
+  rows.push(st.active.length
+    ? {icon:'✓', section:'workflow', done:true, title:(ST_WORDS[st.active.length]||st.active.length)+'-stage production workflow',
+       small:st.active.length+' product stages active · '+stPlural(st.gates.length,'buyer gate')+'.'}
+    : {icon:'✓', section:'workflow', done:false, title:'Set up the production workflow',
+       small:'No stage is active, so a new product has nowhere to go.'});
+  rows.push(st.sites.length
+    ? {icon:'⌖', section:'attendance', done:true, title:'Factory attendance policy',
+       small:(st.sites.length===1?'One active site':st.sites.length+' active sites')+' · '+
+         st.policy.work_start+'–'+st.policy.work_end+' working day · '+(st.sites[0].radius_m||st.policy.geofence_default_m)+' m fence.'}
+    : {icon:'⌖', section:'attendance', done:false, title:'Set the factory location',
+       small:'Nobody can clock in until the site and its fence exist.'});
+  if(st.uncovered.length) rows.push({icon:'✓', section:'quality', done:false, title:'Stages with no quality check',
+    small:st.uncovered.map(x=>shortStage(x.name)).join(', ')+' — sign-off would ask for nothing.'});
+  return rows;
+}
+function stOverview(st){
+  const rows=stSetupRows(st);
+  const need=rows.filter(r=>!r.done).length;
+  const metrics=[
+    ['Production model', String(st.active.length), st.active.length
+      ? stPlural(st.gates.length,'buyer gate')+' · healthy' : 'no active stage · setup needed', 'workflow'],
+    ['Equipment', String(st.eq.length), st.eq.length
+      ? (st.eqDown.length?st.eqDown.length+' out of service · flagged on the floor':'all available to the floor')
+      : 'setup needed before allocation', 'equipment'],
+    ['Stone & consumables', String(st.lots.length), st.lots.length
+      ? st.stone.length+' stone · '+st.cons.length+' consumable' : 'no lots available to the floor', 'materials'],
+    ['Security', st.issued.length?'Check':'Good', st.issued.length
+      ? stPlural(st.issued.length,'office-issued password')+' still in use' : 'owner sign-in active · everyone on their own password', 'security']
+  ];
+  return stHead('Owner administration · low-frequency configuration','Settings overview.',
+      'See what is configured, what needs attention and where to make a change — without scrolling through every setting.',
+      '<button class="button secondary" type="button" onclick="go(\'#/admin/import\')">Import data</button>')+
+    '<div class="metrics">'+metrics.map(m=>'<button class="metric" type="button" onclick="stGo(\''+m[3]+'\')">'+
+      '<span>'+esc(m[0])+'</span><strong>'+esc(m[1])+'</strong><small>'+esc(m[2])+'</small></button>').join('')+'</div>'+
+    '<div class="grid">'+
+    stPanel({cls:'two-third', id:'st-setup', title:'Setup status', sub:'Complete the items that directly affect daily floor work.',
+      right:stStatus(need?need+' need'+(need===1?'s':'')+' attention':'All set', need?'warn':''),
+      bodyCls:'setup-list', body:rows.map(r=>'<div class="setup-row"><span class="setup-icon">'+esc(r.icon)+'</span>'+
+        '<div><strong>'+esc(r.title)+'</strong><small>'+esc(r.small)+'</small></div>'+
+        '<button class="button small'+(r.done?' secondary':'')+'" type="button" onclick="stGo(\''+r.section+'\')">'+
+          (r.done?'Review':'Set up')+'</button></div>').join('')})+
+    '<aside class="panel third"><header class="panel-head"><div><h2>Quick settings</h2><p>Most-used configuration areas.</p></div></header>'+
+      '<div class="panel-body quick-grid">'+[['company','Company profile','Brand and messages'],['workflow','Stages','Order and gates'],
+        ['attendance','Attendance','Site and hours'],['quality','Quality','Checklists']].map(q=>
+        '<button class="quick" type="button" onclick="stGo(\''+q[0]+'\')"><strong>'+esc(q[1])+'</strong><small>'+esc(q[2])+'</small></button>').join('')+
+      '</div></aside>'+
+    stPanel({cls:'two-third', id:'st-changes', title:'Recent configuration changes', sub:'Who changed what. Full audit history remains available.',
+      right:'<button class="button secondary small" type="button" onclick="go(\'#/reports/activity\')">Full history</button>',
+      bodyCls:'activity', body: st.changes.length ? st.changes.slice(0,6).map(a=>stChangeRow(a, st)).join('')
+        : stEmpty('Nothing recorded yet.','From now on every change made here is written down with who made it and when.')})+
+    '<aside class="panel third"><header class="panel-head"><div><h2>Configuration principle</h2><p>Keep daily work out of settings.</p></div></header>'+
+      '<div class="panel-body"><div class="notice"><strong>Settings define the rules.</strong>Orders, assignments, production updates, '+
+      'approvals and daily exceptions belong in their operational workspaces — not here.</div></div></aside>'+
+    '</div>';
+}
+
+/* ---- company ---- */
+function stMaskPhone(n){
+  const d=String(n||'').replace(/[^0-9]/g,''); if(!d) return '';
+  const cc=d.length>10?d.slice(0,d.length-10):''; const tail=d.slice(-4);
+  return (cc?'+'+cc+' ':'')+'••••• '+tail;
+}
+function stPreviewText(name, tag){ return (name||'Gujraj Impex')+(tag?' · '+tag:''); }
+function stPreview(){
+  const t=document.getElementById('st-preview-text'); if(!t) return;
+  t.textContent=stPreviewText(($('set-name')||{}).value, ($('set-tag')||{}).value);
+}
+// The number is masked on the page. Change swaps the mask for the real field,
+// so what is saved is what was typed and never the mask.
+function stRevealWa(){
+  const wrap=document.getElementById('st-wa'); const hid=$('set-wa'); if(!wrap||!hid) return;
+  const v=hid.value;
+  // the hidden field goes before the visible one takes its id, or a save would
+  // read the first #set-wa in the document — the old number — and keep it
+  hid.remove();
+  wrap.querySelector('.masked').outerHTML='<input id="set-wa" inputmode="numeric" value="'+esc(v)+'" placeholder="9198xxxxxxxx" aria-label="WhatsApp number">';
+  const f=$('set-wa'); if(f){ f.focus(); try{ f.select(); }catch(e){} }
+  const help=wrap.querySelector('.help'); if(help) help.textContent='With the country code. Save the profile to keep the new number.';
+}
+function stCompany(st){
+  const s=st.settings;
+  return stHead('Business · buyer-facing identity','Company profile.','Information shown on sign-in, buyer messages and generated documents.')+
+    stPanel({title:'Public company details', sub:'Review the preview before saving buyer-facing changes.',
+      right:stStatus(st.companyOk?'Complete':'Incomplete', st.companyOk?'':'warn'),
+      body:'<div class="field-grid">'+
+        '<label class="field"><span>Company name</span><input id="set-name" value="'+esc(s.company_name||'')+'" oninput="stPreview()"></label>'+
+        '<label class="field"><span>Tagline</span><input id="set-tag" value="'+esc(s.tagline||'')+'" placeholder="Craft in progress." oninput="stPreview()"></label>'+
+        '<div class="field" id="st-wa"><span>WhatsApp number</span>'+
+          (s.admin_whatsapp
+            ? '<input type="hidden" id="set-wa" value="'+esc(s.admin_whatsapp)+'">'+
+              '<span class="masked"><input value="'+esc(stMaskPhone(s.admin_whatsapp))+'" readonly aria-label="WhatsApp number, masked">'+
+              '<button class="button secondary small" type="button" onclick="stRevealWa()">Change</button></span>'+
+              '<small class="help">Masked once saved. The full number is never shown in summaries or in the change log.</small>'
+            : '<input id="set-wa" inputmode="numeric" value="" placeholder="9198xxxxxxxx" aria-label="WhatsApp number">'+
+              '<small class="help">With the country code. Buyer messages and reminders open a chat with it.</small>')+
+        '</div>'+
+        '<label class="field"><span>Tracker link used in messages</span><input id="set-url" value="'+esc(s.tracker_url||'')+'" '+
+          'placeholder="'+esc(location.origin+location.pathname)+'"></label>'+
+      '</div>'+
+      '<div class="notice" id="st-preview"><strong>How buyers see it</strong><span id="st-preview-text">'+
+        esc(stPreviewText(s.company_name, s.tagline))+'</span></div>'+
+      '<div class="savebar"><span>Changes are logged with administrator and time.</span>'+
+        '<button class="button" type="button" onclick="saveSettings()">Save company profile</button></div>'});
+}
+
+/* ---- workflow ---- */
+function stStageRow(stg, i, n){
+  const at=(S.items||[]).filter(it=>{ const c=curStage(it); return c && c.id===stg.id; }).length;
+  return '<div class="stage" id="st-stage-'+stg.id+'"><span class="stage-no">'+(i+1)+'</span>'+
+    '<div><strong>'+esc(stg.name)+'</strong><small>Key '+esc(stg.key)+' · '+(at?stPlural(at,'product')+' here now':'no product here now')+'</small></div>'+
+    '<span class="pill stage-group">'+esc(stg.grp||'—')+'</span>'+
+    '<span class="pill gate">'+(stg.approval_gate?'Buyer gate':'No gate')+'</span>'+
+    '<div class="actions">'+
+      '<button class="button secondary small" type="button" aria-label="Move '+esc(stg.name)+' up" '+(i===0?'disabled':'')+' onclick="moveStage('+stg.id+',-1)">↑</button>'+
+      '<button class="button secondary small" type="button" aria-label="Move '+esc(stg.name)+' down" '+(i===n-1?'disabled':'')+' onclick="moveStage('+stg.id+',1)">↓</button>'+
+      '<button class="button secondary small" type="button" onclick="stEditStage('+stg.id+')">Edit</button></div></div>';
+}
+function stWorkflow(st){
+  const n=st.active.length;
+  return stHead('Business · production model','Production workflow.',
+      'One canonical product journey. Packing, shipping and delivery remain purchase-order shipment states.',
+      '<button class="button secondary" type="button" onclick="addStage()">Add stage</button>')+
+    stPanel({title:'Active product stages', sub:'Move, rename and set approval gates. Changes affect every floor view.',
+      right:stStatus(n+' active'),
+      body:(n?'<div class="stage-list" id="st-stages">'+st.active.map((s,i)=>stStageRow(s,i,n)).join('')+'</div>'
+        :stEmpty('No stage is active.','A new product has nowhere to go until one is.',
+          '<button class="button" type="button" onclick="addStage()">Add the first stage</button>'))+
+      (st.legacy.length?'<details class="legacy" id="st-legacy"><summary>Archived legacy stages · '+st.legacy.length+'</summary>'+
+        '<div class="card-list">'+st.legacy.map(s=>'<div class="resource"><span class="resource-icon">—</span>'+
+          '<div><strong>'+esc(s.name)+'</strong><small>Archived · key '+esc(s.key)+' · history kept under its original name</small></div>'+
+          '<button class="button secondary small" type="button" onclick="stEditStage('+s.id+')">Edit</button></div>').join('')+
+        '</div></details>':'')+
+      '<div class="savebar"><span>Each change is saved when you confirm it. Existing history keeps its original stage name and key.</span></div>'});
+}
+function stEditStage(id){
+  const stg=(S.stages||[]).find(s=>s.id===id); if(!stg) return;
+  const groups=[...new Set((S.stages||[]).map(s=>s.grp).filter(Boolean))];
+  const at=(S.items||[]).filter(it=>{ const c=curStage(it); return c && c.id===stg.id; }).length;
+  const m=stModal({eyebrow:'Production workflow', title:'Edit production stage',
+    body:'<div class="notice"><strong>Historical safety</strong>The stage key '+esc(stg.key)+' and completed product history do not change. '+
+        (at?stPlural(at,'active product')+' '+(at===1?'is':'are')+' at this stage now and will show the new name.':'No active product is at this stage now.')+'</div>'+
+      '<div class="field-grid">'+
+      '<label class="field"><span>Stage name</span><input id="es-name" value="'+esc(stg.name)+'"></label>'+
+      '<label class="field"><span>Stage group</span><input id="es-grp" value="'+esc(stg.grp||'')+'" list="es-groups" placeholder="Production">'+
+        '<datalist id="es-groups">'+groups.map(g=>'<option value="'+esc(g)+'">').join('')+'</datalist></label>'+
+      '<label class="field"><span>Buyer approval gate</span><select id="es-gate"><option value="0"'+(stg.approval_gate?'':' selected')+'>No gate</option>'+
+        '<option value="1"'+(stg.approval_gate?' selected':'')+'>Buyer gate — the buyer signs this stage off</option></select></label>'+
+      '<label class="field"><span>In use</span><select id="es-active"><option value="1"'+(stg.active?' selected':'')+'>Active — new products pass through it</option>'+
+        '<option value="0"'+(stg.active?'':' selected')+'>Archived — kept for history only</option></select></label>'+
+      '</div>',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
+      '<button class="button" type="button" id="es-go">Save change</button>'});
+  m.m.querySelector('#es-go').onclick=()=>stSubmit(async ()=>{
+    const name=$('es-name').value.trim(); if(!name){ toast('Give the stage a name.',{err:true}); return false; }
+    return updStage(id, {name, grp:$('es-grp').value.trim()||null,
+      approval_gate:$('es-gate').value==='1', active:$('es-active').value==='1'});
+  });
+}
+
+/* ---- quality ---- */
+function stQuality(st){
+  const byStage={}; st.qc.forEach(c=>{ const k=c.stage_id==null?'all':String(c.stage_id); (byStage[k]=byStage[k]||[]).push(c); });
+  const order=['all'].concat(st.active.map(s=>String(s.id)));
+  const groups=order.filter(k=>byStage[k]).map(k=>{
+    const stg=k==='all'?null:S.stagesById[Number(k)];
+    const items=byStage[k].slice().sort((a,b)=>(a.sort_order-b.sort_order)||(a.id-b.id));
+    const req=items.filter(c=>c.required).length;
+    return '<div class="qc-group"><div class="resource"><span class="resource-icon">✓</span>'+
+      '<div><strong>'+esc(stg?shortStage(stg.name):'Every stage')+' · '+stPlural(items.length,'check')+'</strong>'+
+        '<small>'+esc(req?req+' required'+(items.length>req?', '+(items.length-req)+' advisory':''):'advisory only')+'</small></div>'+
+      '<button class="button secondary small" type="button" aria-expanded="false" onclick="stToggle(this,\'qc-'+k+'\')">Open</button></div>'+
+      '<div class="qc-items" id="qc-'+k+'" hidden>'+items.map(c=>'<div class="qc-item"><span>'+esc(c.label)+'</span>'+
+        '<span class="pill'+(c.required?' req':'')+'">'+(c.required?'Required':'Advisory')+'</span>'+
+        '<button class="button quiet small" type="button" onclick="retireChecklist('+c.id+')">Remove</button></div>').join('')+'</div></div>';
+  }).join('');
+  const covered=st.qcCommon.length?st.active.length:st.active.filter(s=>st.qcSpecific.some(c=>c.stage_id===s.id)).length;
+  return stHead('Business · quality control','Quality checklists.',
+      'Review common requirements once, then open a stage only when its checklist needs adjustment.',
+      '<button class="button" type="button" onclick="stAddChecklist()">Add checklist item</button>')+
+    '<div class="grid">'+
+    stPanel({cls:'two-third', id:'st-qc', title:'Checklist by process', sub:'Required items block Supervisor sign-off at the database.',
+      right:stStatus(st.qcRequired.length+' required', st.qcRequired.length?'':'warn'),
+      bodyCls:'card-list', body:groups||stEmpty('No checklist line yet.','Sign-off asks for nothing until one is here.',
+        '<button class="button" type="button" onclick="stAddChecklist()">Add the first line</button>')})+
+    '<aside class="panel third"><header class="panel-head"><div><h2>Coverage</h2><p>'+
+      esc(st.uncovered.length?stPlural(st.uncovered.length,'active stage')+' with no requirement.':(st.active.length?'Every active stage has requirements.':'No active stage yet.'))+'</p></div></header>'+
+      '<div class="panel-body"><div class="metrics two"><div class="metric"><span>Common</span><strong>'+st.qcCommon.length+'</strong><small>every stage</small></div>'+
+      '<div class="metric"><span>Specific</span><strong>'+st.qcSpecific.length+'</strong><small>'+esc(covered+' of '+st.active.length+' stages covered')+'</small></div></div>'+
+      '<div class="notice"><strong>Keep checklists observable.</strong>Ask for visible facts, measurements or photographs — not subjective “looks good” confirmations.</div></div></aside>'+
+    '</div>';
+}
+function stToggle(btn, id){
+  const box=document.getElementById(id); if(!box) return;
+  box.hidden=!box.hidden; btn.setAttribute('aria-expanded', String(!box.hidden)); btn.textContent=box.hidden?'Open':'Close';
+}
+function stAddChecklist(){
+  const m=stModal({eyebrow:'Quality control', title:'Add checklist item',
+    body:'<div class="notice"><strong>Observable, not a feeling.</strong>Write the thing the supervisor will look at, measure or photograph.</div>'+
+      '<div class="field-grid">'+
+      '<label class="field full"><span>Checklist line</span><input id="qc-label" placeholder="e.g. Edges chamfered to the drawing"></label>'+
+      '<label class="field"><span>Process</span><select id="qc-stage"><option value="">Every stage</option>'+
+        (S.stages||[]).filter(s=>s.active).map(s=>'<option value="'+s.id+'">'+esc(shortStage(s.name))+'</option>').join('')+'</select></label>'+
+      '<label class="field"><span>Sign-off rule</span><select id="qc-req"><option value="1">Required — blocks sign-off</option><option value="0">Advisory</option></select></label>'+
+      '</div>',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
+      '<button class="button" type="button" id="qc-go">Add to the checklist</button>'});
+  m.m.querySelector('#qc-go').onclick=()=>stSubmit(saveChecklist);
+}
+
+/* ---- factory & attendance ---- */
+function stAttendance(st){
+  const p=st.policy;
+  return stHead('Factory operations · attendance','Factory & attendance.','Manage physical sites separately from wage and attendance policy.')+
+    '<div class="grid">'+
+    stPanel({cls:'half', id:'st-sites', title:'Factory sites', sub:'Location used for clock-in validation.',
+      right:'<button class="button secondary small" type="button" onclick="stEditSite(null)">Add site</button>',
+      bodyCls:'card-list', body: st.sites.length ? st.sites.map(s=>'<div class="resource"><span class="resource-icon">⌖</span>'+
+          '<div><strong>'+esc(s.name)+'</strong><small>Active · '+esc(String(s.radius_m||p.geofence_default_m))+' m fence · precise coordinates protected</small></div>'+
+          '<button class="button secondary small" type="button" onclick="stEditSite(\''+jsq(s.id)+'\')">Edit</button></div>').join('')+
+          (st.sites.length>1?'<p class="help">'+st.sites.length+' sites are active; a phone clocks in at the nearest one.</p>':'')
+        : stEmpty('No factory site yet.','Nobody can clock in until the site and its fence exist.',
+          '<button class="button" type="button" onclick="stEditSite(null)">Add first site</button>')})+
+    stPanel({cls:'half', id:'st-policy', title:'Working-time policy', sub:'Actual approved hours remain the wage basis.', right:stStatus('Active'),
+      body:'<div class="field-grid">'+
+        '<label class="field"><span>Working day starts</span><input id="pol-start" type="time" value="'+esc(p.work_start)+'"></label>'+
+        '<label class="field"><span>Working day ends</span><input id="pol-end" type="time" value="'+esc(p.work_end)+'"></label>'+
+        '<label class="field"><span>Late after (minutes)</span><input id="pol-grace" inputmode="numeric" value="'+esc(String(p.late_grace_min))+'"></label>'+
+        '<label class="field"><span>Reporting threshold (hours)</span><input id="pol-threshold" inputmode="decimal" value="'+esc(String(p.report_threshold_hours))+'"></label>'+
+        '<label class="field"><span>Default fence (metres)</span><input id="pol-fence" inputmode="numeric" value="'+esc(String(p.geofence_default_m))+'"></label>'+
+        '<label class="field"><span>Weekly off</span><select id="pol-off"><option value="">None — current policy</option>'+
+          ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].map(d=>'<option'+(p.weekly_off===d?' selected':'')+'>'+d+'</option>').join('')+'</select></label>'+
+        '<label class="check-row field full" id="st-selfie"><input type="checkbox" id="pol-selfie" '+(p.selfie_on_exception?'checked':'')+'><span>Ask for a selfie when clocking in away from the factory</span></label>'+
+        '<label class="check-row field full" id="st-paid"><input type="checkbox" id="pol-paid" '+(p.paid_leave?'checked':'')+'><span>Paid leave (off under current policy)</span></label>'+
+        '</div>'+
+        '<div class="notice"><strong>No half-day or full-day wage calculation.</strong>Attendance and wages use actual approved hours. The threshold is a reporting line only.</div>'+
+        '<div class="savebar"><span>Policy changes apply from the next clock-in.</span>'+
+          '<button class="button" type="button" onclick="savePolicy()">Save attendance policy</button></div>'})+
+    '</div>';
+}
+function stEditSite(id){
+  const site=id?((S.sites||[]).find(s=>s.id===id)||{}):{};
+  const fence=policyVal('geofence_default_m',100);
+  const m=stModal({eyebrow:'Factory attendance', title:id?'Edit factory site':'Set the factory location',
+    body:'<div class="notice"><strong>Protected coordinates</strong>They are used to check a clock-in and are never shown in lists or in the change log. '+
+        'Stand at the factory gate and press “Use where I am” to fill them in.</div>'+
+      '<div class="field-grid">'+
+      '<label class="field full"><span>Site name</span><input id="site-name" value="'+esc(site.name||(id?'':'Gujraj Impex, Udaipur'))+'"></label>'+
+      '<label class="field"><span>Latitude</span><input id="site-lat" inputmode="decimal" value="'+esc(site.lat!=null?String(site.lat):'')+'" placeholder="24.5854"></label>'+
+      '<label class="field"><span>Longitude</span><input id="site-lng" inputmode="decimal" value="'+esc(site.lng!=null?String(site.lng):'')+'" placeholder="73.7125"></label>'+
+      '<label class="field"><span>Fence radius (metres)</span><input id="site-radius" inputmode="numeric" value="'+esc(String(site.radius_m||fence))+'"></label>'+
+      '<div class="field"><span>&nbsp;</span><button class="button secondary" type="button" onclick="useHereForSite()">Use where I am</button></div>'+
+      '</div>',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
+      '<button class="button" type="button" id="site-go">'+(id?'Save site':'Set the factory location')+'</button>'});
+  m.m.querySelector('#site-go').onclick=()=>stSubmit(()=>saveSite(id||null));
+}
+
+/* ---- equipment ---- */
+function stFilterRows(tableId, q, kind){
+  const t=document.getElementById(tableId); if(!t) return;
+  if(q!==undefined && q!==null) t.setAttribute('data-q', String(q).toLowerCase().trim());
+  if(kind!==undefined && kind!==null) t.setAttribute('data-kind', kind);
+  const qq=t.getAttribute('data-q')||'', kk=t.getAttribute('data-kind')||'';
+  t.querySelectorAll('tbody tr').forEach(tr=>{
+    const okQ=!qq || (tr.getAttribute('data-search')||'').indexOf(qq)>=0;
+    const okK=!kk || (tr.getAttribute('data-kind')||'').split(' ').indexOf(kk)>=0;
+    tr.hidden=!(okQ&&okK);
+  });
+  t.parentNode.querySelectorAll('.register-tools button').forEach(b=>b.setAttribute('aria-pressed', String((b.getAttribute('data-kind')||'')===kk)));
+}
+function stEquipment(st){
+  const dueSoon=e=>e.next_service && (new Date(e.next_service+'T00:00:00')-Date.now())<14*86400000;
+  const rows=st.eq.map(e=>{ const s=EQUIPMENT_STATUS[e.status]||[e.status||'Available',''];
+    const kinds=[e.status||'available', dueSoon(e)?'due':''].filter(Boolean).join(' ');
+    return '<tr data-search="'+esc(((e.name||'')+' '+(e.area||'')+' '+(e.status_note||'')).toLowerCase())+'" data-kind="'+esc(kinds)+'">'+
+      '<td><strong>'+esc(e.name)+'</strong>'+(e.status_note?'<small>'+esc(e.status_note)+'</small>':'')+'</td>'+
+      '<td>'+esc(e.area||'—')+'</td>'+
+      '<td>'+stStatus(s[0], e.status==='unavailable'?'bad':(e.status==='reduced'?'warn':''))+'</td>'+
+      '<td>'+esc(e.next_service?fdate(e.next_service):'—')+'</td>'+
+      '<td class="actions">'+(e.status && e.status!=='available'
+        ?'<button class="button small" type="button" onclick="restoreEquipment(\''+jsq(e.id)+'\')">Available again</button>':'')+
+        '<button class="button quiet small" type="button" onclick="stRetireEquipment(\''+jsq(e.id)+'\')">Retire</button></td></tr>'; }).join('');
+  return stHead('Factory operations · capacity','Equipment & work centres.',
+      'A compact register with status, location, maintenance and affected work.',
+      '<button class="button" type="button" onclick="stAddEquipment()">Add equipment</button>')+
+    stPanel({id:'st-eq', title:'Equipment register', sub:'Unavailable equipment cannot receive new task allocations.',
+      right:'<div class="actions">'+
+        '<button class="button secondary small" type="button" data-kind="" aria-pressed="true" onclick="stFilterRows(\'st-eq-table\',null,\'\')">All status</button>'+
+        '<button class="button secondary small" type="button" data-kind="due" aria-pressed="false" onclick="stFilterRows(\'st-eq-table\',null,\'due\')">Service due</button>'+
+        '<button class="button secondary small" type="button" data-kind="unavailable" aria-pressed="false" onclick="stFilterRows(\'st-eq-table\',null,\'unavailable\')">Out of service</button></div>',
+      raw: st.eq.length
+        ? '<div class="register-tools"><input aria-label="Search equipment" placeholder="Search equipment or work centre" oninput="stFilterRows(\'st-eq-table\',this.value,null)"></div>'+
+          '<div class="register-wrap"><table class="register-table" id="st-eq-table"><thead><tr><th>Equipment</th><th>Work centre</th><th>Status</th><th>Next service</th><th></th></tr></thead>'+
+          '<tbody>'+rows+'</tbody></table></div>'+
+          (st.eqRetired.length?'<details class="legacy in-panel"><summary>Retired equipment · '+st.eqRetired.length+'</summary><div class="card-list">'+
+            st.eqRetired.map(e=>'<div class="resource"><span class="resource-icon">—</span><div><strong>'+esc(e.name)+'</strong><small>Retired · its old time entries are kept</small></div></div>').join('')+
+            '</div></details>':'')
+        : stEmpty('No equipment has been added.','Add the first machine or work area so Supervisors can plan capacity and report issues.',
+          '<button class="button" type="button" onclick="stAddEquipment()">Add first equipment</button>')});
+}
+function stAddEquipment(){
+  const m=stModal({eyebrow:'Factory capacity', title:'Add equipment',
+    body:'<div class="field-grid">'+
+      '<label class="field"><span>Equipment name</span><input id="eq-name" placeholder="e.g. Bridge saw 02"></label>'+
+      '<label class="field"><span>Work centre</span><input id="eq-area" placeholder="e.g. Dressing bay 1"></label>'+
+      '<label class="field full"><span>Next service (optional)</span><input id="eq-service" type="date"></label>'+
+      '</div>',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
+      '<button class="button" type="button" id="eq-go">Add equipment</button>'});
+  m.m.querySelector('#eq-go').onclick=()=>stSubmit(saveEquipment);
+}
+async function stRetireEquipment(id){
+  const e=(S.equipment||[]).find(x=>x.id===id)||{};
+  if(!await ask({title:'Retire '+(e.name||'this equipment')+'?',
+    body:'It leaves the list a supervisor can plan onto. Every time entry already recorded against it is kept.',
+    confirmLabel:'Retire it'})) return;
+  await retireEquipment(id);
+}
+
+/* ---- materials ---- */
+function stMaterials(st){
+  // what is left in a lot: the opening quantity, less what the floor has drawn,
+  // plus the reusable offcuts it brought back — the server's own register figures
+  const rows=st.lots.map(l=>{
+    const reg=(S.matRegister||[]).filter(r=>r.lot_id===l.id);
+    const issued=reg.reduce((t,r)=>t+Number(r.issued||0),0);
+    const back=reg.reduce((t,r)=>t+Number(r.offcut||0),0);
+    const left=l.opening_qty!=null ? Number(l.opening_qty)-issued+back : null;
+    const last=(S.movements||[]).filter(m=>m.lot_id===l.id).map(m=>m.recorded_at).sort().pop();
+    return '<tr data-search="'+esc(((l.code||'')+' '+(l.material||'')+' '+(l.source_note||'')).toLowerCase())+'" data-kind="'+(l.kind==='consumable'?'consumable':'stone')+'">'+
+      '<td><strong>'+esc(l.code)+'</strong><small>'+(l.kind==='consumable'?'Consumable lot':'Traceable stone lot')+(l.source_note?' · '+esc(l.source_note):'')+'</small></td>'+
+      '<td>'+esc(l.material)+'</td>'+
+      '<td>'+(left!=null?esc(fqty(left,l.unit)):'<span class="help">no opening quantity</span>')+
+        (l.opening_qty!=null?'<small>of '+esc(fqty(l.opening_qty,l.unit))+(issued?' · '+esc(fqty(issued,l.unit))+' issued':'')+'</small>':'')+'</td>'+
+      '<td>'+(last?esc(ftime(last)):'—')+'</td>'+
+      '<td class="actions"><button class="button quiet small" type="button" onclick="stRetireLot(\''+jsq(l.id)+'\')">Retire</button></td></tr>'; }).join('');
+  return stHead('Factory operations · traceability','Materials & inventory.',
+      'Searchable registers for stone lots and consumables. What a lot cost stays with the office; no rate is shown to the workshop.',
+      '<button class="button" type="button" onclick="stAddLot()">Add material lot</button>')+
+    stPanel({id:'st-lots', title:'Available lots', sub:'Quantities use the unit defined when the lot is created.',
+      right:'<div class="actions">'+
+        '<button class="button secondary small" type="button" data-kind="" aria-pressed="true" onclick="stFilterRows(\'st-lot-table\',null,\'\')">All</button>'+
+        '<button class="button secondary small" type="button" data-kind="stone" aria-pressed="false" onclick="stFilterRows(\'st-lot-table\',null,\'stone\')">Stone</button>'+
+        '<button class="button secondary small" type="button" data-kind="consumable" aria-pressed="false" onclick="stFilterRows(\'st-lot-table\',null,\'consumable\')">Consumables</button></div>',
+      raw: st.lots.length
+        ? '<div class="register-tools"><input aria-label="Search material lots" placeholder="Search lot code or material" oninput="stFilterRows(\'st-lot-table\',this.value,null)"></div>'+
+          '<div class="register-wrap"><table class="register-table" id="st-lot-table"><thead><tr><th>Lot</th><th>Material</th><th>Available</th><th>Last movement</th><th></th></tr></thead>'+
+          '<tbody>'+rows+'</tbody></table></div>'+
+          (st.lotsRetired.length?'<details class="legacy in-panel"><summary>Retired lots · '+st.lotsRetired.length+'</summary><div class="card-list">'+
+            st.lotsRetired.map(l=>'<div class="resource"><span class="resource-icon">—</span><div><strong>'+esc(l.code)+'</strong><small>'+esc(l.material)+' · retired · what it already gave a piece is kept</small></div></div>').join('')+
+            '</div></details>':'')
+        : stEmpty('No material lot is available.','The floor cannot record an issue until an Owner creates a traceable lot.',
+          '<button class="button" type="button" onclick="stAddLot()">Add first lot</button>')});
+}
+function stAddLot(){
+  const m=stModal({eyebrow:'Material traceability', title:'Add material lot',
+    body:'<div class="field-grid">'+
+      '<label class="field"><span>Lot code</span><input id="lot-code" placeholder="e.g. MK-2026-014"></label>'+
+      '<label class="field"><span>Material</span><input id="lot-mat" placeholder="e.g. Makrana white"></label>'+
+      '<label class="field"><span>Kind</span><select id="lot-kind"><option value="stone">Stone</option><option value="consumable">Consumable</option></select></label>'+
+      '<label class="field"><span>Unit</span><select id="lot-unit">'+UNITS.map(u=>'<option value="'+u[0]+'">'+esc(u[1])+'</option>').join('')+'</select></label>'+
+      '<label class="field"><span>Opening quantity (optional)</span><input id="lot-qty" type="number" min="0" step="0.001" inputmode="decimal"></label>'+
+      '<label class="field"><span>Source note (optional)</span><input id="lot-src" placeholder="e.g. Ambaji quarry, challan 812"></label>'+
+      '</div>',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
+      '<button class="button" type="button" id="lot-go">Add lot</button>'});
+  m.m.querySelector('#lot-go').onclick=()=>stSubmit(saveLot);
+}
+async function stRetireLot(id){
+  const l=(S.lots||[]).find(x=>x.id===id)||{};
+  if(!await ask({title:'Retire lot '+(l.code||'')+'?',
+    body:'The floor can no longer issue from it. Every movement already recorded against it is kept.',
+    confirmLabel:'Retire it'})) return;
+  await retireLot(id);
+}
+
+/* ---- data & imports ---- */
+function stData(st, importOpen){
+  return stHead('System · controlled data operations','Data & imports.','Separate routine imports, exports and audit history from permanent deletion.')+
+    '<div class="grid">'+
+    stPanel({cls:importOpen?'':'half', id:'st-import', title:'Import business data', sub:'Validate before anything is written.',
+      right:importOpen?'<button class="button secondary small" type="button" onclick="go(\'#/admin/data\')">Close</button>':'',
+      body: importOpen ? importPanels()
+        : '<div class="notice"><strong>Safe three-step import</strong>Upload → preview → confirm rows. Nothing is written until you press Import, '+
+          'and invalid or duplicate lines stay outside the records.</div>'+
+          '<button class="button" type="button" style="margin-top:14px" onclick="go(\'#/admin/import\')">Start import</button>'})+
+    (importOpen?'':stPanel({cls:'half', title:'Export and audit', sub:'Download the configuration and read the change history.',
+      bodyCls:'quick-grid', body:'<button class="quick" type="button" id="st-export" onclick="stExportConfig()"><strong>Configuration export</strong><small>Stages, sites, policy, checklists, equipment and lots as a file</small></button>'+
+        '<button class="quick" type="button" id="st-audit" onclick="go(\'#/reports/activity\')"><strong>Audit history</strong><small>Who changed what, with before and after</small></button>'}))+
+    '</div>';
+}
+// The configuration as a file. Coordinates and the WhatsApp number stay out of
+// it: the design keeps them off every list and summary, and a file is both.
+function stExportConfig(){
+  const st=stState();
+  const strip=(o,keys)=>{ const c=Object.assign({},o); keys.forEach(k=>{ delete c[k]; }); return c; };
+  const out={exported_at:new Date().toISOString(), company:strip(st.settings,['admin_whatsapp','__priv']),
+    stages:st.stages, factory_sites:st.sites.map(s=>strip(s,['lat','lng'])), attendance_policy:st.policy,
+    quality_checklists:st.qc, equipment:(S.equipment||[]), material_lots:(S.lots||[])};
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='stoneflow-configuration-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+  toast('Configuration exported. Coordinates and the WhatsApp number are left out on purpose.');
+}
+
+/* ---- security ---- */
+function stSecurity(st){
+  const me=S.profile||{};
+  return stHead('System · owner account','Security & sign-in.','Account security is separate from company configuration and destructive data controls.')+
+    '<div class="grid">'+
+    stPanel({cls:'half', id:'st-signin', title:'Your sign-in', sub:'Owner administrator account.', right:stStatus('Active'),
+      body:'<div class="resource"><span class="resource-icon">'+esc(initials(me.full_name||me.email||'Owner'))+'</span>'+
+        '<div><strong>'+esc(me.full_name||'Owner administrator')+'</strong><small>'+esc(me.email||'')+' · the one password nobody can reset for you</small></div>'+
+        '<button class="button secondary small" type="button" onclick="stChangePassword()">Change password</button></div>'})+
+    stPanel({cls:'half', title:'Account safeguards', sub:'What stands between an old password and the records.',
+      bodyCls:'setup-list', body:
+        '<div class="setup-row" id="st-issued"><span class="setup-icon">'+st.issued.length+'</span>'+
+          '<div><strong>Office-issued passwords still in use</strong><small>'+esc(st.issued.length
+            ?st.issued.map(p=>p.full_name||shortLogin(p.email||'')).slice(0,4).join(', ')+(st.issued.length>4?' and '+(st.issued.length-4)+' more':'')+' have never replaced the password the office sent. Reset them from People & access.'
+            :'Everyone has chosen their own password.')+'</small></div>'+
+          '<button class="button'+(st.issued.length?'':' secondary')+' small" type="button" onclick="go(\'#/access\')">'+(st.issued.length?'Review':'People & access')+'</button></div>'+
+        '<div class="setup-row"><span class="setup-icon">◇</span>'+
+          '<div><strong>Leaked-password protection</strong><small>Refuses a password that has appeared in a known breach. Switched on in the Supabase dashboard (Authentication → Password security), not here — waiting on your decision.</small></div></div>'+
+        '<div class="setup-row"><span class="setup-icon">2</span>'+
+          '<div><strong>Multi-factor authentication</strong><small>Not built into StoneFlow yet. If you want a code from your phone at sign-in, it is a piece of work to plan — not a switch here.</small></div></div>'})+
+    '</div>';
+}
+function stChangePassword(){
+  const m=stModal({eyebrow:'Owner security', title:'Change your password',
+    body:'<div class="notice"><strong>Private by design</strong>The password is changed through the sign-in service. Only the fact of a change is audited; the value never enters settings or logs. '+
+        'You stay signed in on this device; anywhere else you will need the new one.</div>'+
+      '<div class="field-grid">'+
+      '<label class="field full"><span>New password</span><input id="own-pw" autocomplete="new-password" value="'+esc(genPassword())+'"></label>'+
+      '<div class="field full"><button class="button secondary small" type="button" onclick="suggestOwnPassword()">Suggest another</button></div>'+
+      '</div>',
+    foot:'Password values never appear in the change log.',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
+      '<button class="button" type="button" id="own-pw-go">Change my password</button>'});
+  m.m.querySelector('#own-pw-go').onclick=()=>stSubmit(changeOwnPassword);
+}
+
+/* ---- danger zone ---- */
+function stBuyerCounts(b){
+  const pos=(S.pos||[]).filter(p=>p.buyer_id===b.id);
+  const poIds={}; pos.forEach(p=>{ poIds[p.id]=1; });
+  const items=(S.items||[]).filter(i=>poIds[i.po_id]);
+  const itemIds={}; items.forEach(i=>{ itemIds[i.id]=1; });
+  const photos=(S.photos||[]).filter(ph=>itemIds[ph.item_id]||poIds[ph.po_id]).length;
+  const comments=(S.comments||[]).filter(c=>itemIds[c.item_id]||poIds[c.po_id]).length;
+  const logins=(S.profilesAll||[]).filter(p=>p.buyer_id===b.id).length;
+  return {pos:pos.length, items:items.length, photos, comments, logins,
+    total:pos.length+items.length+photos+comments+logins+1};
+}
+function stDanger(st){
+  const buyers=(S.buyers||[]);
+  return stHead('System · restricted actions','Danger zone.','Infrequent, destructive actions are isolated and never mixed with normal Save buttons.')+
+    stPanel({cls:'danger-zone', title:'Retire or remove data', sub:'Prefer reversible retirement. Permanent deletion asks for the name to be typed and cannot be undone.',
+      bodyCls:'setup-list', body:
+        '<div class="setup-row" id="st-retire-site"><span class="setup-icon">⌖</span>'+
+          '<div><strong>Retire a factory site</strong><small>Stops new clock-ins there without deleting a single attendance record.</small></div>'+
+          '<button class="button secondary small" type="button" onclick="stReviewSites()"'+(st.sites.length?'':' disabled')+'>Review sites</button></div>'+
+        '<div class="setup-row" id="st-delete"><span class="setup-icon">!</span>'+
+          '<div><strong>Delete a buyer and everything under it</strong><small>Purchase orders, products, photographs, comments and logins go with the buyer. '+
+            (buyers.length?stPlural(buyers.length,'buyer')+' on record.':'No buyer on record.')+'</small></div>'+
+          '<button class="button danger small" type="button" onclick="stReviewDeletion()"'+(buyers.length?'':' disabled')+'>Review deletion</button></div>'})+
+    '<div class="notice"><strong>Removing every buyer at once is not a button.</strong>A full reset is run against the database with a backup in hand, '+
+      'from the steps you were given — never from one tap on a phone.</div>';
+}
+function stReviewSites(){
+  const sites=(S.sites||[]).filter(x=>x.active!==false);
+  stModal({eyebrow:'Factory site · reversible', title:'Retire a factory site',
+    body:'<div class="notice"><strong>History is kept.</strong>A retired site stops accepting clock-ins. Every attendance record made there stays exactly as it was.</div>'+
+      '<div class="card-list">'+sites.map(s=>'<div class="resource"><span class="resource-icon">⌖</span>'+
+        '<div><strong>'+esc(s.name)+'</strong><small>Active · '+esc(String(s.radius_m||''))+' m fence</small></div>'+
+        '<button class="button secondary small" type="button" onclick="stRetireSite(\''+jsq(s.id)+'\')">Retire</button></div>').join('')+'</div>',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Close</button>'});
+}
+async function stRetireSite(id){
+  const s=(S.sites||[]).find(x=>x.id===id)||{};
+  const others=(S.sites||[]).filter(x=>x.active!==false && x.id!==id).length;
+  if(!await ask({title:'Retire '+(s.name||'this site')+'?',
+    body:(others?'':'It is the only active site, so nobody can clock in until another is set. ')+'Its attendance records are kept.',
+    confirmLabel:'Retire the site'})) return;
+  closeModal();
+  await retireSite(id);
+}
+function stReviewDeletion(){
+  const buyers=(S.buyers||[]).slice().sort((a,b)=>String(a.company).localeCompare(String(b.company)));
+  stModal({eyebrow:'Permanent deletion · step 1 of 2', title:'Choose what to delete',
+    body:'<div class="notice"><strong>Counted from the records loaded on this screen.</strong>The database deletes everything that belongs to the buyer whatever these counts say; they are here so you know what you are about to lose.</div>'+
+      '<div class="card-list">'+buyers.map(b=>{ const c=stBuyerCounts(b);
+        return '<div class="resource"><span class="resource-icon">'+esc(initials(b.company))+'</span>'+
+          '<div><strong>'+esc(b.company)+'</strong><small>'+esc(stPlural(c.pos,'purchase order')+' · '+stPlural(c.items,'product')+' · '+
+            stPlural(c.photos,'photograph')+' · '+stPlural(c.comments,'comment')+' · '+stPlural(c.logins,'login'))+'</small></div>'+
+          '<button class="button danger small" type="button" onclick="stConfirmDeletion(\''+jsq(b.id)+'\')">Review…</button></div>'; }).join('')+'</div>',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'});
+}
+function stConfirmDeletion(id){
+  const b=(S.buyers||[]).find(x=>x.id===id); if(!b) return;
+  const c=stBuyerCounts(b);
+  const phrase='DELETE '+String(b.company||'').toUpperCase();
+  const m=stModal({eyebrow:'Permanent deletion · step 2 of 2', title:'Delete '+b.company,
+    body:'<div class="danger-confirm"><div class="notice"><strong>What goes</strong>'+
+        esc(stPlural(c.pos,'purchase order')+', '+stPlural(c.items,'product')+', '+stPlural(c.photos,'photograph')+', '+
+          stPlural(c.comments,'comment')+' and '+stPlural(c.logins,'buyer login')+'. Nothing about this can be undone.')+'</div>'+
+      '<div class="danger-counts"><div><strong>'+c.total+'</strong><span>records affected</span></div>'+
+        '<div><strong>'+c.pos+'</strong><span>purchase orders</span></div><div><strong>'+c.photos+'</strong><span>photographs</span></div></div>'+
+      '<label class="field"><span>Type '+esc(phrase)+' to continue</span><input id="dz-phrase" autocomplete="off" spellcheck="false"></label>'+
+      '<label class="confirm-check"><input id="dz-understand" type="checkbox"> I understand that this cannot be undone.</label>'+
+      '<label class="confirm-check"><input id="dz-reviewed" type="checkbox"> I reviewed the affected-record count and have a backup.</label>'+
+      '</div>',
+    foot:'The database refuses this for anyone but the owner.',
+    buttons:'<button class="button secondary" type="button" onclick="closeModal()">Cancel</button>'+
+      '<button class="button danger" type="button" id="dz-go" disabled>Delete '+c.total+' records</button>'});
+  const go_=m.m.querySelector('#dz-go');
+  const validate=()=>{ go_.disabled=!($('dz-phrase').value.trim()===phrase && $('dz-understand').checked && $('dz-reviewed').checked); };
+  m.m.querySelectorAll('#dz-phrase,#dz-understand,#dz-reviewed').forEach(x=>{ x.addEventListener('input',validate); x.addEventListener('change',validate); });
+  go_.onclick=()=>stSubmit(()=>deleteBuyerEverything(id));
 }
 
 // The order book, which used to be the admin home.
@@ -12146,199 +13078,6 @@ function vBuyers(){
   $('app').innerHTML=h;
 }
 
-function vSettings(){
-  if(!isAdmin()) return vHome();
-  if(!S.settings.__priv){ S.settings.__priv=1; loadPrivateSettings().then(()=>render()); }
-  const s=S.settings||{};
-  // inside his .settings-page shell the header is drawn once, by the shell
-  let h=window.__inAdminShell?'':('<div class="page-heading"><div>'+eyebrow('Configuration')+
-    '<h1 class="display-title">Settings</h1><p class="lede">Company details and the production stages every new product follows.</p></div></div>');
-
-  h+='<div class="utility-grid utility-grid--wide"><div class="utility-stack">'+
-    '<section class="form-card"><div class="form-card__head"><div>'+
-      '<h3 class="form-card__title">Company</h3>'+
-      '<p class="form-card__description">Shown to buyers on the sign-in screen and in WhatsApp messages.</p></div></div>'+
-    '<div class="form-grid">'+
-      '<div class="field"><label for="set-name">Company name</label><input id="set-name" value="'+esc(s.company_name||'')+'"></div>'+
-      '<div class="field"><label for="set-tag">Tagline</label><input id="set-tag" value="'+esc(s.tagline||'')+'"></div>'+
-      '<div class="field"><label for="set-wa">Your WhatsApp number (with country code)</label><input id="set-wa" inputmode="numeric" value="'+esc(s.admin_whatsapp||'')+'" placeholder="9198xxxxxxxx"></div>'+
-      '<div class="field"><label for="set-url">Tracker link used in messages</label><input id="set-url" value="'+esc(s.tracker_url||'')+'" placeholder="'+esc(location.origin+location.pathname)+'"></div>'+
-      '<div class="button-row field--full"><button class="button" type="button" onclick="saveSettings()">Save</button></div>'+
-    '</div></section>'+
-
-    '<section class="form-card"><div class="form-card__head"><div>'+
-      '<h3 class="form-card__title">Production stages</h3>'+
-      '<p class="form-card__description">Renaming applies everywhere. New stages apply to newly created products. '+
-      'Approval-gate stages ask the buyer to sign off.</p></div>'+
-      '<button class="button button--secondary" type="button" onclick="addStage()">+ Add stage</button></div>'+
-    '<div class="data-table-wrap space-top-14"><table class="data-table">'+
-      '<tr><th>Order</th><th>Name</th><th>Group</th><th>Gate</th><th>Active</th><th>Key</th></tr>'+
-      S.stages.map((st,i)=>'<tr>'+
-        '<td class="nowrap"><button class="button button--quiet" type="button" '+(i===0?'disabled':'')+' onclick="moveStage('+st.id+',-1)">↑</button> '+
-          '<button class="button button--quiet" type="button" '+(i===S.stages.length-1?'disabled':'')+' onclick="moveStage('+st.id+',1)">↓</button></td>'+
-        // each cell says which stage and which column it is, so tabbing through
-        // the table is not four anonymous boxes per row
-        '<td><div class="field"><input value="'+esc(st.name)+'" aria-label="Name of stage '+(i+1)+'" onchange="updStage('+st.id+',{name:this.value})"></div></td>'+
-        '<td><div class="field"><input value="'+esc(st.grp||'')+'" aria-label="Group for '+esc(st.name)+'" onchange="updStage('+st.id+',{grp:this.value})"></div></td>'+
-        '<td><input type="checkbox" '+(st.approval_gate?'checked':'')+' aria-label="'+esc(st.name)+' needs the buyer to approve it" onchange="updStage('+st.id+',{approval_gate:this.checked})" style="width:auto;min-height:0"></td>'+
-        '<td><input type="checkbox" '+(st.active?'checked':'')+' aria-label="'+esc(st.name)+' is in use" onchange="updStage('+st.id+',{active:this.checked})" style="width:auto;min-height:0"></td>'+
-        '<td><small>'+esc(st.key)+'</small></td></tr>').join('')+
-    '</table></div></section>'+
-
-    settingsAttendanceCard()+
-    settingsEquipmentCard()+
-    settingsLotsCard()+
-    settingsChecklistCard()+
-
-    '<section class="form-card"><div class="form-card__head"><div>'+
-      '<h3 class="form-card__title">Your sign-in</h3>'+
-      '<p class="form-card__description">Everyone else&rsquo;s password is reset for them in People &amp; access. '+
-      'Yours is the one nobody can reset for you, so it is changed here. '+
-      'You stay signed in on this device; anywhere else you will need the new one.</p></div></div>'+
-    '<div class="form-grid">'+
-      '<div class="field field--full"><label for="own-pw">New password</label>'+
-        '<input id="own-pw" autocomplete="new-password" value="'+esc(genPassword())+'"></div>'+
-      '<div class="button-row field--full">'+
-        '<button class="button" type="button" onclick="changeOwnPassword()">Change my password</button>'+
-        '<button class="button button--secondary" type="button" onclick="suggestOwnPassword()">Suggest another</button>'+
-      '</div>'+
-    '</div></section>'+
-
-    '<section class="form-card"><div class="form-card__head"><div><h3 class="form-card__title">Housekeeping</h3>'+
-      '<p class="form-card__description">The demo buyer and its sample orders can be removed once your real data is in: '+
-      'Buyers &amp; logins → Demo Buyer Co. → Edit → Delete buyer. Deleting a buyer removes its POs, products, photos and comments.</p></div></div></section>'+
-  '</div></div>';
-  $('app').innerHTML=h;
-}
-
-// Where the factory is and what the working day is. Both are numbers the
-// office owns; neither is written into code anywhere.
-function settingsAttendanceCard(){
-  const sites=(S.sites||[]).filter(x=>x.active!==false);
-  const site=sites[0]||{};
-  const p=k=>policyVal(k, {work_start:'09:00',work_end:'18:00',late_grace_min:15,report_threshold_hours:5,
-    geofence_default_m:100,selfie_on_exception:true,paid_leave:false,weekly_off:null}[k]);
-  return '<section class="form-card"><div class="form-card__head"><div>'+
-      '<h3 class="form-card__title">Factory &amp; attendance</h3>'+
-      '<p class="form-card__description">The place a phone has to be to clock in, and the working day the floor is measured against. '+
-      'Stand at the factory gate and press “Use where I am” to fill the position in.</p></div></div>'+
-    '<div class="form-grid">'+
-      '<div class="field field--full"><label for="site-name">Factory site</label><input id="site-name" value="'+esc(site.name||'Gujraj Impex, Udaipur')+'"></div>'+
-      '<div class="field"><label for="site-lat">Latitude</label><input id="site-lat" inputmode="decimal" value="'+esc(site.lat!=null?String(site.lat):'')+'" placeholder="24.5854"></div>'+
-      '<div class="field"><label for="site-lng">Longitude</label><input id="site-lng" inputmode="decimal" value="'+esc(site.lng!=null?String(site.lng):'')+'" placeholder="73.7125"></div>'+
-      '<div class="field"><label for="site-radius">Fence radius (metres)</label><input id="site-radius" inputmode="numeric" value="'+esc(String(site.radius_m||p('geofence_default_m')))+'"></div>'+
-      '<div class="button-row field--full">'+
-        '<button class="button" type="button" onclick="saveSite('+(site.id?"'"+jsq(site.id)+"'":'null')+')">'+(site.id?'Save site':'Set the factory location')+'</button>'+
-        '<button class="button button--secondary" type="button" onclick="useHereForSite()">Use where I am</button>'+
-        (site.id?'<button class="button button--quiet" type="button" onclick="retireSite(\''+jsq(site.id)+'\')">Retire this site</button>':'')+
-      '</div>'+
-      (sites.length>1?'<p class="field-hint field--full">'+sites.length+' sites are active; the nearest one is used. Only the first is edited here.</p>':'')+
-    '</div>'+
-    '<div class="form-grid space-top-14">'+
-      '<div class="field"><label for="pol-start">Working day starts</label><input id="pol-start" type="time" value="'+esc(p('work_start'))+'"></div>'+
-      '<div class="field"><label for="pol-end">Working day ends</label><input id="pol-end" type="time" value="'+esc(p('work_end'))+'"></div>'+
-      '<div class="field"><label for="pol-grace">Late after (minutes)</label><input id="pol-grace" inputmode="numeric" value="'+esc(String(p('late_grace_min')))+'"></div>'+
-      '<div class="field"><label for="pol-threshold">Reporting threshold (hours)</label><input id="pol-threshold" inputmode="decimal" value="'+esc(String(p('report_threshold_hours')))+'">'+
-        '<p class="field-hint">A reporting line only. Wages are actual hours × rate; there is no half-day.</p></div>'+
-      '<div class="field"><label for="pol-fence">Default fence (metres)</label><input id="pol-fence" inputmode="numeric" value="'+esc(String(p('geofence_default_m')))+'"></div>'+
-      '<div class="field"><label for="pol-off">Weekly off</label><select id="pol-off"><option value="">None (current policy)</option>'+
-        ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].map(d=>'<option'+(p('weekly_off')===d?' selected':'')+'>'+d+'</option>').join('')+'</select></div>'+
-      '<label class="check-row field--full"><input type="checkbox" id="pol-selfie" '+(p('selfie_on_exception')?'checked':'')+'><span>Ask for a selfie when clocking away from the factory</span></label>'+
-      '<label class="check-row field--full"><input type="checkbox" id="pol-paid" '+(p('paid_leave')?'checked':'')+'><span>Paid leave (off under current policy)</span></label>'+
-      '<div class="button-row field--full"><button class="button" type="button" onclick="savePolicy()">Save policy</button></div>'+
-    '</div></section>';
-}
-
-// The machines the floor may name on a task. Availability is the floor's to
-// change (a breakdown is reported there); the list itself is the office's.
-function settingsEquipmentCard(){
-  const list=(S.equipment||[]).filter(e=>e.active!==false);
-  return '<section class="form-card"><div class="form-card__head"><div>'+
-      '<h3 class="form-card__title">Equipment &amp; work centres</h3>'+
-      '<p class="form-card__description">A supervisor plans a task onto one of these and reports when one breaks. '+
-      'A machine marked unavailable cannot be chosen for new work, and every standing task on it is flagged on the floor.</p></div></div>'+
-    (list.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Equipment</th><th>Area</th><th>Status</th><th>Next service</th><th></th></tr></thead><tbody>'+
-      list.map(e=>{ const st=EQUIPMENT_STATUS[e.status]||[e.status,'']; return '<tr><td><strong>'+esc(e.name)+'</strong>'+(e.status_note?'<span class="fl-cell-sub">'+esc(e.status_note)+'</span>':'')+'</td>'+
-        '<td>'+esc(e.area||'—')+'</td><td>'+badge(st[0],st[1])+'</td><td>'+esc(e.next_service?fdate(e.next_service):'—')+'</td>'+
-        '<td class="nowrap">'+(e.status!=='available'?'<button class="button small" type="button" onclick="restoreEquipment(\''+e.id+'\')">Available again</button> ':'')+
-          '<button class="button quiet small" type="button" onclick="retireEquipment(\''+e.id+'\')">Retire</button></td></tr>'; }).join('')+
-      '</tbody></table></div>':'<p class="field-hint">No equipment listed yet.</p>')+
-    '<div class="form-grid space-top-14">'+
-      '<div class="field"><label for="eq-name">Equipment</label><input id="eq-name" placeholder="e.g. Bridge saw 02"></div>'+
-      '<div class="field"><label for="eq-area">Area / work centre</label><input id="eq-area" placeholder="e.g. Dressing bay 1"></div>'+
-      '<div class="field"><label for="eq-service">Next service (optional)</label><input id="eq-service" type="date"></div>'+
-      '<div class="button-row field--full"><button class="button" type="button" onclick="saveEquipment()">Add equipment</button></div>'+
-    '</div></section>';
-}
-
-// The stone lots the floor may draw on. A lot is a quantity and a source note;
-// what it cost is priced by the office against its own versioned rates (#105),
-// so there is no rate column here for a supervisor to read.
-function settingsLotsCard(){
-  const list=(S.lots||[]).filter(l=>l.active!==false);
-  return '<section class="form-card"><div class="form-card__head"><div>'+
-      '<h3 class="form-card__title">Stone lots &amp; consumables</h3>'+
-      '<p class="form-card__description">What the floor may issue to a piece. A movement has to name a lot, '+
-      'and the quantity has to be in that lot’s unit. No rate is shown to the workshop.</p></div></div>'+
-    (list.length?'<div class="data-table-wrap"><table class="data-table"><thead><tr>'+
-      '<th>Code</th><th>Material</th><th>Kind</th><th>Unit</th><th>Opening</th><th>Issued so far</th><th>Source</th><th></th></tr></thead><tbody>'+
-      list.map(l=>{ const used=(S.matRegister||[]).filter(r=>r.lot_id===l.id)
-          .reduce((t,r)=>t+Number(r.issued||0),0);
-        return '<tr><td><strong>'+esc(l.code)+'</strong></td><td>'+esc(l.material)+'</td>'+
-          '<td>'+esc(l.kind==='consumable'?'Consumable':'Stone')+'</td><td>'+esc(unitLabel(l.unit))+'</td>'+
-          '<td>'+(l.opening_qty!=null?esc(fqty(l.opening_qty,l.unit)):'—')+'</td>'+
-          '<td>'+(used?esc(fqty(used,l.unit)):'—')+'</td>'+
-          '<td>'+esc(l.source_note||'—')+'</td>'+
-          '<td class="nowrap"><button class="button quiet small" type="button" onclick="retireLot(\''+l.id+'\')">Retire</button></td></tr>'; }).join('')+
-      '</tbody></table></div>':'<p class="field-hint">No lot listed yet. The floor cannot record stone until one is here.</p>')+
-    '<div class="form-grid space-top-14">'+
-      '<div class="field"><label for="lot-code">Lot code</label><input id="lot-code" placeholder="e.g. MK-2026-014"></div>'+
-      '<div class="field"><label for="lot-mat">Material</label><input id="lot-mat" placeholder="e.g. Makrana white"></div>'+
-      '<div class="field"><label for="lot-kind">Kind</label><select id="lot-kind">'+
-        '<option value="stone">Stone</option><option value="consumable">Consumable</option></select></div>'+
-      '<div class="field"><label for="lot-unit">Unit</label><select id="lot-unit">'+
-        UNITS.map(u=>'<option value="'+u[0]+'">'+esc(u[1])+'</option>').join('')+'</select></div>'+
-      '<div class="field"><label for="lot-qty">Opening quantity (optional)</label>'+
-        '<input id="lot-qty" type="number" min="0" step="0.001" inputmode="decimal"></div>'+
-      '<div class="field"><label for="lot-src">Source note (optional)</label>'+
-        '<input id="lot-src" placeholder="e.g. Ambaji quarry, challan 812"></div>'+
-      '<div class="button-row field--full"><button class="button" type="button" onclick="saveLot()">Add lot</button></div>'+
-    '</div></section>';
-}
-
-// The checklist a supervisor works down before a stage can be signed off. An
-// item with no stage applies to every stage. Required items are the gate: the
-// server refuses the sign-off until each one is ticked.
-function settingsChecklistCard(){
-  const list=(S.checklist||[]).filter(c=>c.active!==false);
-  const byStage={}; list.forEach(c=>{ const k=c.stage_id==null?'all':String(c.stage_id); (byStage[k]=byStage[k]||[]).push(c); });
-  const order=['all'].concat((S.stages||[]).filter(s=>s.active).map(s=>String(s.id)));
-  return '<section class="form-card"><div class="form-card__head"><div>'+
-      '<h3 class="form-card__title">Quality checklist</h3>'+
-      '<p class="form-card__description">What a supervisor must confirm before a stage is signed off. '+
-      'An item with no process applies to every one. Required items are refused by the database, not only by the screen.</p></div></div>'+
-    (list.length?order.filter(k=>byStage[k]).map(k=>{
-      const stg=k==='all'?null:S.stagesById[Number(k)];
-      return '<div class="space-top-12"><p class="form-card__group">'+esc(stg?shortStage(stg.name):'Every stage')+'</p>'+
-        byStage[k].slice().sort((a,b)=>(a.sort_order-b.sort_order)||(a.id-b.id))
-          .map(c=>'<div class="qc-admin-row"><span>'+esc(c.label)+'</span>'+
-            badge(c.required?'Required':'Optional','')+
-            '<button class="button quiet small" type="button" onclick="retireChecklist('+c.id+')">Remove</button></div>').join('')+
-        '</div>'; }).join('')
-      :'<p class="field-hint">No checklist item yet. Sign-off will not ask for anything.</p>')+
-    '<div class="form-grid space-top-14">'+
-      '<div class="field field--full"><label for="qc-label">Checklist line</label>'+
-        '<input id="qc-label" placeholder="e.g. Edges chamfered to the drawing"></div>'+
-      '<div class="field"><label for="qc-stage">Process</label><select id="qc-stage">'+
-        '<option value="">Every stage</option>'+
-        (S.stages||[]).filter(s=>s.active).map(s=>'<option value="'+s.id+'">'+esc(shortStage(s.name))+'</option>').join('')+
-        '</select></div>'+
-      '<div class="field"><label for="qc-req">Required</label><select id="qc-req">'+
-        '<option value="1">Yes — blocks sign-off</option><option value="0">No — advisory</option></select></div>'+
-      '<div class="button-row field--full"><button class="button" type="button" onclick="saveChecklist()">Add to the checklist</button></div>'+
-    '</div></section>';
-}
-
 // Product cost: the office's own view, and the only screen in the application
 // where an internal rate or a cost appears. §13A is explicit that none of this
 // reaches a supervisor or an artisan, and none of it is loaded for them either.
@@ -12576,10 +13315,15 @@ function vAccounts(){
 
 function vImport(){
   if(!isAdmin()) return vHome();
-  const h='<div class="page-heading"><div>'+eyebrow('Bulk entry')+
+  $('app').innerHTML='<div class="page-heading"><div>'+eyebrow('Bulk entry')+
     '<h1 class="display-title">Import an order</h1>'+
     '<p class="lede">Drop the buyer\'s spreadsheet or purchase-order PDF and it fills itself in.</p></div></div>'+
-  '<section class="form-card"><div class="form-card__head"><div>'+
+    importPanels();
+}
+// The three ways an order comes in. Drawn inside Data & imports on the settings
+// page; nothing is written until Import is pressed on the preview.
+function importPanels(){
+  return '<section class="form-card"><div class="form-card__head"><div>'+
     '<h3 class="form-card__title">From a PO PDF</h3>'+
     '<p class="form-card__description">Reads the order number, dates, value, terms and the product lines. '+
     'You check everything before anything is saved.</p></div>'+badge('Fastest')+'</div>'+
@@ -12620,7 +13364,6 @@ function vImport(){
         '<button class="button button--secondary" type="button" onclick="$(\'imp-file\').click()">Choose file</button>'+
         '<button class="button" type="button" onclick="impPreview()">Preview import</button></div>'+
     '</div></section>';
-  $('app').innerHTML=h;
 }
 
 /* ---------------------------------------------------------------------------
@@ -18255,12 +18998,23 @@ function mBuyer(id, section){
         body:'Every purchase order, product, photograph, comment and login belonging to them is '+
              'deleted. Nothing about this can be undone.',
         confirmLabel:'Delete the buyer and all of it'})) return;
-    const logins=S.profilesAll.filter(x=>x.buyer_id===id);
-    for(const l of logins){ await adminApi({action:'delete_user', user_id:l.user_id}); }
-    const {error}=await sb.from('bt_buyers').delete().eq('id',id);
-    if(error){ toast(error.message,{err:true}); return; }
-    closeModal(); await loadData(); go('#/buyers');
+    if(await deleteBuyerEverything(id)){ closeModal(); go('#/buyers'); }
   };
+}
+// The one deletion in the application. Their logins go first, through the
+// admin function, then the buyer row; the database cascades the purchase
+// orders, products, photographs and comments under it. The confirmation is
+// the caller's — the buyer editor asks once, the Danger zone asks for the
+// company name to be typed.
+async function deleteBuyerEverything(id){
+  const logins=(S.profilesAll||[]).filter(x=>x.buyer_id===id);
+  try{ for(const l of logins){ await adminApi({action:'delete_user', user_id:l.user_id}); } }
+  catch(e){ toast('Could not remove a login: '+(e.message||e),{err:true}); return false; }
+  const {error}=await sb.from('bt_buyers').delete().eq('id',id);
+  if(error){ toast(error.message,{err:true}); return false; }
+  await loadData(); render();
+  toast('Deleted.');
+  return true;
 }
 async function adminApi(body){
   const {data:{session}}=await sb.auth.getSession();
@@ -18576,7 +19330,7 @@ async function changeOwnPassword(){
   const pw=String(f.value||'').trim();
   if(pw.length<8){ toast('Use at least 8 characters.',{err:true}); return; }
   const {error}=await sb.auth.updateUser({password:pw});
-  if(error){ toast(error.message,{err:true}); return; }
+  if(error){ toast(error.message,{err:true}); return false; }
   // high-risk action, so it leaves a trace in the activity log
   try{ await sb.rpc('bt_log_password_change'); }catch(e){}
   try{ await sb.rpc('bt_mark_password_set',{p_user:null}); }catch(e){}
@@ -18584,12 +19338,14 @@ async function changeOwnPassword(){
   toast('Password changed. Save it somewhere safe — nobody can look it up for you.',
     {action:'Copy ▸', onAction:()=>copyText('StoneFlow: '+trackerUrl()+
       (who?'\nLogin: '+shortLogin(who):'')+'\nPassword: '+pw)});
+  return true;
 }
 
 async function updStage(id, patch){
   const {error}=await sb.from('bt_stages').update(patch).eq('id',id);
-  if(error){ toast(error.message,{err:true}); return; }
+  if(error){ toast(error.message,{err:true}); return false; }
   await loadCore(); await loadData(); render();
+  return true;
 }
 async function moveStage(id, dir){
   const idx=S.stages.findIndex(s=>s.id===id); const other=S.stages[idx+dir];
@@ -21404,8 +22160,9 @@ async function saveEquipment(){
   const name=$('eq-name').value.trim(), area=$('eq-area').value.trim(), svc=$('eq-service').value||null;
   if(!name){ toast('Give the equipment a name.',{err:true}); return; }
   const r=await sb.from('bt_equipment').insert({name, area:area||null, next_service:svc, created_by:uid()});
-  if(r.error){ toast(r.error.message,{err:true}); return; }
+  if(r.error){ toast(r.error.message,{err:true}); return false; }
   await refresh(); toast('Added.');
+  return true;
 }
 async function retireEquipment(id){
   const r=await sb.from('bt_equipment').update({active:false, updated_at:new Date().toISOString()}).eq('id', id);
@@ -21740,8 +22497,9 @@ async function saveLot(){
   const r=await sb.from('bt_material_lots').insert({code, material, kind:$('lot-kind').value,
     unit:$('lot-unit').value, opening_qty:qty===''?null:Number(qty),
     source_note:$('lot-src').value.trim()||null, created_by:uid()});
-  if(r.error){ toast(r.error.message,{err:true}); return; }
+  if(r.error){ toast(r.error.message,{err:true}); return false; }
   await refresh(); toast('Lot added.');
+  return true;
 }
 async function retireLot(id){
   const r=await sb.from('bt_material_lots').update({active:false}).eq('id', id);
@@ -21755,8 +22513,9 @@ async function saveChecklist(){
   const r=await sb.from('bt_quality_checklists').insert({label, stage_id:stage?Number(stage):null,
     required:$('qc-req').value==='1', sort_order:(S.checklist||[]).length?
       Math.max.apply(null,(S.checklist||[]).map(c=>c.sort_order||0))+10:10, created_by:uid()});
-  if(r.error){ toast(r.error.message,{err:true}); return; }
+  if(r.error){ toast(r.error.message,{err:true}); return false; }
   await refresh(); toast('Added to the checklist.');
+  return true;
 }
 async function retireChecklist(id){
   const r=await sb.from('bt_quality_checklists').update({active:false}).eq('id', id);
@@ -22096,8 +22855,9 @@ async function saveSite(id){
   const row={name, lat, lng, radius_m:radius, active:true};
   const r= id ? await sb.from('bt_factory_sites').update(row).eq('id', id)
               : await sb.from('bt_factory_sites').insert(Object.assign({created_by:uid()}, row));
-  if(r.error){ toast(r.error.message,{err:true}); return; }
+  if(r.error){ toast(r.error.message,{err:true}); return false; }
   await refresh(); toast('Factory location saved.');
+  return true;
 }
 async function useHereForSite(){
   const pos=await locate();
