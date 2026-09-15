@@ -772,7 +772,10 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
   .app-shell--console > .topbar{grid-column:1 / -1}
   .app-shell--console > .side-nav{display:block;grid-row:2;border-right:1px solid var(--line);padding:8px 10px 40px;
     position:sticky;top:0;align-self:start;max-height:calc(100vh - 64px);overflow:auto}
-  .app-shell--console > .page{grid-row:2;min-width:0}
+  /* margin:auto on .page centres a SHORT page vertically inside the grid row,
+     so a screen with little on it opened a third of the way down the window.
+     Horizontal centring is all that was ever wanted here. */
+  .app-shell--console > .page{grid-row:2;min-width:0;align-self:start;margin-block:0}
 }
 
 .kpi-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:20px}
@@ -4448,6 +4451,92 @@ body.reports-mode .sfa .content{max-width:1700px}
   .sfa .st-page .settings-nav{transition:none}
   .sfa .st-page .field-flash{animation:none}
 }
+
+
+/* ── Your desk ──────────────────────────────────────────────────────────
+   A worklist, drawn as a worklist. Three columns: what it is, how long it has
+   been sitting there, and the one thing to do about it. The screen this
+   replaced had five, two of which said the same thing twice and one of which
+   said "You" on fourteen rows out of fifteen. */
+.sfa .desk{max-width:1120px}
+.sfa .desk-head{display:flex;flex-wrap:wrap;gap:18px 24px;justify-content:space-between;
+  align-items:flex-end;margin-bottom:22px}
+.sfa .desk-head h1{font-family:var(--font-display);font-size:44px;line-height:1;
+  letter-spacing:-.01em;margin:0 0 8px;color:var(--ink)}
+.sfa .desk-head .lead{margin:0;font-size:14.5px;color:var(--ink-faint);max-width:56ch}
+.sfa .desk-head .lead strong{color:var(--rust);font-weight:750}
+.sfa .desk-tools{display:flex;gap:9px;align-items:center;flex:0 0 auto}
+.sfa .desk-tools .search{display:flex;align-items:center;min-width:250px}
+.sfa .desk-tools .search input{width:100%;min-height:42px;padding:0 13px;border:1px solid var(--line-strong);
+  border-radius:9px;background:var(--surface);font:inherit;font-size:13.5px;color:var(--ink)}
+.sfa .desk-tools .button{min-height:42px;white-space:nowrap}
+
+.sfa .desk-group{margin-top:24px}
+.sfa .desk-group__head{display:flex;align-items:baseline;gap:12px;padding:0 2px 9px;
+  border-bottom:1px solid var(--line-strong)}
+.sfa .desk-group__head h2{margin:0;font-size:13px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink)}
+.sfa .desk-group__n{font-variant-numeric:tabular-nums;font-size:12px;font-weight:800;color:var(--ink-faint);
+  border:1px solid var(--line-strong);border-radius:999px;padding:1px 8px;background:var(--surface)}
+.sfa .desk-group__head p{margin:0 0 0 auto;font-size:12.5px;color:var(--ink-faint);text-align:right}
+.sfa .desk-group--stopped .desk-group__head{border-bottom-color:var(--rust)}
+.sfa .desk-group--stopped .desk-group__head h2{color:var(--rust)}
+
+.sfa .desk-rows{background:var(--surface);border:1px solid var(--line);border-top:0;
+  border-radius:0 0 11px 11px;overflow:hidden}
+.sfa .desk-row{display:grid;grid-template-columns:44px minmax(0,1fr) 96px 118px;gap:14px;
+  align-items:center;padding:13px 15px;border-top:1px solid var(--line)}
+.sfa .desk-row:first-child{border-top:0}
+.sfa .desk-face{width:44px;height:44px;border-radius:7px;background:var(--canvas);
+  border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.sfa .desk-face img{width:100%;height:100%;object-fit:cover;display:block}
+.sfa .desk-face--code,.sfa .desk-face--who{font-size:9.5px;font-weight:800;color:var(--sand);
+  letter-spacing:.02em;text-align:center;padding:2px;line-height:1.1;overflow:hidden;
+  word-break:break-all}
+.sfa .desk-face--who{border-radius:50%;background:var(--surface-soft);color:var(--ink-soft);font-size:12.5px}
+.sfa .desk-what{min-width:0}
+.sfa .desk-what h3{margin:0 0 3px;font-size:14.5px;font-weight:750;color:var(--ink);line-height:1.25;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sfa .desk-what p{margin:0;font-size:12.5px;color:var(--ink-faint);line-height:1.35}
+.sfa .desk-kind{display:inline-flex;align-items:center;gap:5px;margin-right:7px;
+  font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.sfa .desk-kind i{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;flex:0 0 auto}
+.sfa .desk-kind--bad{color:var(--rust)}
+.sfa .desk-kind--warn{color:var(--amber)}
+.sfa .desk-kind--info{color:var(--action-primary)}
+.sfa .desk-kind--good{color:var(--sage)}
+.sfa .desk-kind--mute{color:var(--ink-soft)}
+.sfa .desk-age{font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;color:var(--ink-soft);
+  text-align:right;white-space:nowrap}
+.sfa .desk-age small{display:block;font-size:10.5px;font-weight:700;color:var(--ink-faint);
+  letter-spacing:.05em;text-transform:uppercase;margin-top:1px}
+.sfa .desk-age--never{color:var(--rust)}
+.sfa .desk-do{display:flex;justify-content:flex-end}
+.sfa .desk-do .button{white-space:nowrap}
+.sfa .desk-empty{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:34px 22px;text-align:center;color:var(--ink-faint);font-size:14px}
+.sfa .desk-empty strong{display:block;font-family:var(--font-display);font-size:26px;
+  font-weight:400;color:var(--ink);margin-bottom:6px}
+
+@media(max-width:900px){
+  .sfa .desk-head h1{font-size:36px}
+  .sfa .desk-head{display:block}
+  .sfa .desk-tools{margin-top:14px}
+  .sfa .desk-tools .search{flex:1;min-width:0}
+  .sfa .desk-group__head p{display:none}
+  .sfa .desk-row{grid-template-columns:40px minmax(0,1fr);row-gap:9px;padding:12px}
+  .sfa .desk-face{width:40px;height:40px}
+  .sfa .desk-what h3{white-space:normal}
+  /* nothing on a phone under 12px */
+  .sfa .desk-kind{font-size:12px}
+  .sfa .desk-what p{font-size:13px}
+  .sfa .desk-age{grid-column:2;text-align:left;display:flex;gap:6px;align-items:baseline;font-size:14px}
+  .sfa .desk-age small{margin:0;font-size:12px}
+  .sfa .desk-group__n{font-size:12px}
+  .sfa .desk-face--code,.sfa .desk-face--who{font-size:12px}
+  .sfa .desk-do{grid-column:2;justify-content:flex-start}
+  .sfa .desk-do .button{min-height:44px}
+}
 </style>
 <style>
 /* ---------------------------------------------------------------------------
@@ -5917,7 +6006,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 }
 </style>
 <body>
-<script>const BUILD_ID='4584bdd21fc5';</script>
+<script>const BUILD_ID='6f80dd369d12';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -6464,7 +6553,7 @@ function sessionStale(g){ return g !== S_GEN; }
 const SESSION_GLOBALS = [
   '__accessGroup','__accessQ','__accessSel','__acct','__ccChip','__chAct',
   '__chDir','__chPicked','__chSelecting','__chSort','__chTab','__client',
-  '__cmdRows','__cmdSel','__cmtAttach','__cost','__du','__finSeg','__gq',
+  '__cmdRows','__cmdSel','__cmtAttach','__cost','__deskQ','__du','__finSeg','__gq',
   '__impRecs','__inReportShell','__moreNav','__openStages',
   '__paCompany','__paPerson','__paStaff','__paTab','__pdfjsLoading','__poFiles',
   '__poFilter','__poParse','__poTab','__poView','__prodFilter','__prodSearch',
@@ -7836,6 +7925,19 @@ function overdueBuyers(){
   }).filter(Boolean).sort((a,b)=>b.amount-a.amount);
 }
 
+/* How long a row has been waiting, which is the one fact that decides what gets
+   done first and the one the old five-column row left out altogether. A row with
+   no date at all says so rather than pretending to be new. */
+function queueAge(since, never){
+  if(never) return {days:9999, label:'never', never:true};
+  if(!since) return {days:-1, label:'—'};
+  const n=dayGap(String(since).slice(0,10), today());
+  if(n==null) return {days:-1, label:'—'};
+  if(n<=0)    return {days:0, label:'today'};
+  if(n===1)   return {days:1, label:'1 day'};
+  return {days:n, label:n+' days'};
+}
+
 /* One prioritised list of everything waiting on Yash, drawn from the queues that
    used to live on four separate screens. Each row knows its own urgency, which
    filter chip it belongs to, and the single button that deals with it.
@@ -7848,6 +7950,9 @@ function ownerActions(){
   overdueBuyers().forEach(o=>{
     const days=dayGap(o.as_of, today());
     push({ urgency:0, chip:'finance', chipLabel:'Finance', icon:'stage-planning',
+      group:'else', subject:o.buyer.company, kind:'Money owed', tone:'mute',
+      since:o.as_of, ageWord:'old',
+      detail:money(o.amount,o.currency)+' outstanding on the statement of '+fdate(o.as_of),
       type:'finance', title:'Outstanding on the latest statement',
       meta:o.buyer.company+' · '+money(o.amount,o.currency)+' · as at '+fdate(o.as_of),
       sort:-o.amount, action:{label:'Open', go:"go('#/finance')"},
@@ -7857,6 +7962,9 @@ function ownerActions(){
   // The floor has reported a piece stuck.
   blockedItems().forEach(b=>{
     push({ urgency:0, chip:'blocked', chipLabel:'Blocked', icon:'stage-sealing',
+      group:'stopped', subject:b.item.product, kind:'Work stopped', tone:'bad',
+      since:b.update&&b.update.work_date, ageWord:'stopped',
+      detail:[(b.reason||'no reason recorded'), b.owner?('with '+b.owner):'', poRef(b.item)].filter(Boolean).join(' · '),
       type:'blocked', item:b.item, title:b.item.product+' reported blocked',
       meta:poRef(b.item)+' · '+(b.reason||'no reason recorded'),
       action:{label:'Open', go:"go('#/item/"+b.item.id+"')"},
@@ -7866,6 +7974,9 @@ function ownerActions(){
   // A hold Yash placed himself, still not lifted.
   heldStages().forEach(hd=>{
     push({ urgency:0, chip:'blocked', chipLabel:'Blocked', icon:'stage-sealing',
+      group:'stopped', subject:hd.item.product, kind:'Held by you', tone:'bad',
+      since:hd.hold.updated_at||hd.row.updated_at, ageWord:'on hold',
+      detail:[(hd.stage?hd.stage.name:'A stage'), hd.hold.hold_reason, poRef(hd.item)].filter(Boolean).join(' · '),
       type:'blocked', item:hd.item, stage:hd.stage, title:(hd.stage?hd.stage.name:'A stage')+' on hold',
       meta:hd.item.product+' · '+poRef(hd.item)+(hd.hold.hold_reason?' · '+hd.hold.hold_reason:''),
       action:{label:'Lift hold', go:"go('#/item/"+hd.item.id+"')"} });
@@ -7876,6 +7987,9 @@ function ownerActions(){
   (S.equipment||[]).filter(e=>e.active!==false && e.status==='unavailable').forEach(e=>{
     const n=(S.assignments||[]).filter(a=>!a.superseded_by && !a.done_at && a.equipment_id===e.id).length;
     push({ urgency:0, chip:'blocked', chipLabel:'Equipment', icon:'stage-sizing',
+      group:'stopped', subject:e.name, kind:'Machine out of service', tone:'bad',
+      since:e.updated_at, ageWord:'down',
+      detail:[e.area, e.status_note||'no note', n?(n+' task'+(n===1?'':'s')+' on it'):''].filter(Boolean).join(' · '),
       type:'blocked', title:e.name+' is out of service',
       meta:(e.area?e.area+' · ':'')+(e.status_note||'no note')+(n?' · '+n+' task'+(n===1?'':'s')+' on it':''),
       action:{label:'Open', go:"go('#/admin/settings')"} });
@@ -7887,6 +8001,9 @@ function ownerActions(){
   (S.holds||[]).filter(h=>h.decision==='pending' && S.itemsById[h.item_id]).forEach(h=>{
     const it=S.itemsById[h.item_id], st=S.stagesById[h.stage_id];
     push({ urgency:0, chip:'blocked', chipLabel:'Hold asked for', icon:'stage-sealing',
+      group:'desk', subject:it.product, kind:'Stop requested', tone:'bad',
+      since:h.requested_at, ageWord:'asked',
+      detail:[(st?st.name:'a stage'), h.reason, personName(h.requested_by)?('asked by '+personName(h.requested_by)):'', poRef(it)].filter(Boolean).join(' · '),
       type:'quality', item:it, stage:st,
       title:'The floor wants to stop '+(st?st.name:'a stage'),
       meta:it.product+' · '+poRef(it)+' · '+h.reason,
@@ -7900,6 +8017,9 @@ function ownerActions(){
     .forEach(r=>{
       const it=S.itemsById[r.item_id], st=S.stagesById[r.stage_id];
       push({ urgency:1, chip:'late', chipLabel:'Repeat rework', icon:'stage-finishing',
+        group:'desk', subject:it.product, kind:'Sent back twice', tone:'warn',
+        since:r.created_at, ageWord:'open',
+        detail:[(st?st.name:'A stage')+' sent back '+r.attempt_no+' times', r.defect_category, poRef(it)].filter(Boolean).join(' · '),
         type:'quality', item:it, stage:st,
         title:(st?st.name:'A stage')+' has been sent back '+r.attempt_no+' times',
         meta:it.product+' · '+poRef(it)+' · '+r.defect_category,
@@ -7913,6 +8033,9 @@ function ownerActions(){
   Object.keys(S.staffSubPending||{}).forEach(uid2=>{
     const sub=S.staffSubPending[uid2];
     push({ urgency:1, chip:'approval', chipLabel:'Details', icon:'stage-selection',
+      group:'desk', subject:personName(uid2)||'Someone', kind:'Details to check', tone:'info',
+      since:sub.submitted_at, ageWord:'sent',
+      detail:Object.keys(sub.payload||{}).length+' field(s) sent for checking',
       type:'staff_details',
       title:(personName(uid2)||'Someone')+' sent their details',
       meta:Object.keys(sub.payload||{}).length+' field(s) · sent '+fdate(String(sub.submitted_at).slice(0,10)),
@@ -7923,6 +8046,9 @@ function ownerActions(){
   // and hours — and so wages — follow whatever it decides.
   (S.attCorrections||[]).filter(c=>c.decision==='pending').forEach(c=>{
     push({ urgency:1, chip:'approval', chipLabel:'Attendance', icon:'stage-confirmed',
+      group:'desk', subject:personName(c.user_id)||'A worker', kind:'Attendance correction', tone:'warn',
+      since:c.created_at||c.work_date, ageWord:'proposed',
+      detail:[fdate(c.work_date)+' · '+fclock(c.proposed_in)+' – '+fclock(c.proposed_out), c.reason, personName(c.proposed_by)?('proposed by '+personName(c.proposed_by)):''].filter(Boolean).join(' · '),
       type:'people', title:'Attendance correction for '+(personName(c.user_id)||'a worker'),
       meta:fdate(c.work_date)+' · '+fclock(c.proposed_in)+' – '+fclock(c.proposed_out)+' · '+c.reason,
       note:'Proposed by '+(personName(c.proposed_by)||'a supervisor'),
@@ -7933,6 +8059,9 @@ function ownerActions(){
   // this is the office's screen; it goes nowhere else.
   (S.myLeave||[]).filter(l=>l.status==='pending').forEach(l=>{
     push({ urgency:1, chip:'approval', chipLabel:'Leave', icon:'stage-confirmed',
+      group:'desk', subject:personName(l.user_id)||'A worker', kind:'Leave asked for', tone:'warn',
+      since:l.requested_at||l.created_at, ageWord:'asked',
+      detail:['Leave '+leaveSpan(l), leaveReasonLabel(l.reason_code), l.reason_text, l.emergency?'taken already':''].filter(Boolean).join(' · '),
       type:'people', title:(personName(l.user_id)||'A worker')+' asks for leave · '+leaveSpan(l),
       meta:leaveReasonLabel(l.reason_code)+(l.reason_text?' · '+l.reason_text:'')+
            (l.full_shift?' · full shift':' · '+String(l.from_time||'').slice(0,5)+'–'+String(l.to_time||'').slice(0,5))+
@@ -7945,6 +8074,9 @@ function ownerActions(){
   // exists on the owner's screen and nowhere else.
   (S.advances||[]).filter(a=>a.status==='pending').forEach(a=>{
     push({ urgency:1, chip:'approval', chipLabel:'Advance', icon:'i-wallet',
+      group:'desk', subject:personName(a.user_id)||'A worker', kind:'Advance asked for', tone:'warn',
+      since:a.requested_at||a.created_at, ageWord:'asked',
+      detail:[money(a.amount,'INR'), advanceReasonLabel(a.reason_code), 'needed by '+fdate(a.needed_by), recoveryLabel(a.recovery_plan)].filter(Boolean).join(' · '),
       type:'people', title:(personName(a.user_id)||'A worker')+' asks for an advance of '+money(a.amount,'INR'),
       meta:advanceReasonLabel(a.reason_code)+(a.reason_text?' — '+a.reason_text:'')+' · needed by '+fdate(a.needed_by)+' · '+recoveryLabel(a.recovery_plan),
       sort:-(Number(a.amount)||0),
@@ -7955,6 +8087,9 @@ function ownerActions(){
   // hours become money on the statement, so the office says yes or no.
   (S.overtime||[]).filter(o=>o.status==='pending').forEach(o=>{
     push({ urgency:1, chip:'approval', chipLabel:'Overtime', icon:'stage-confirmed',
+      group:'desk', subject:personName(o.user_id)||'A worker', kind:'Overtime proposed', tone:'warn',
+      since:o.requested_at||o.created_at, ageWord:'proposed',
+      detail:[Number(o.hours)+' h on '+fdate(o.work_date), o.reason, personName(o.proposed_by)?('proposed by '+personName(o.proposed_by)):''].filter(Boolean).join(' · '),
       type:'people', title:'Overtime for '+(personName(o.user_id)||'a worker')+' · '+Number(o.hours)+' h on '+fdate(o.work_date),
       meta:o.reason, note:'Proposed by '+(personName(o.proposed_by)||'a supervisor'),
       action:{label:'Decide', go:"mDecideOvertime('"+o.id+"')"} });
@@ -7967,6 +8102,9 @@ function ownerActions(){
     const it=S.itemsById[u.item_id], st=S.stagesById[u.stage_id];
     const ph=(S.photosByUpdate[u.id]||[]).length;
     push({ urgency:1, chip:'approval', chipLabel:'Approvals', icon:'i-camera',
+      group:'desk', subject:it?it.product:'A piece', kind:'Record to check', tone:'info',
+      since:u.work_date||u.submitted_at, ageWord:'waiting',
+      detail:[(st?st.name:''), fdate(u.work_date), ph?(ph+' photograph'+(ph===1?'':'s')):'no photograph', 'not published yet'].filter(Boolean).join(' · '),
       type:'review', item:it, stage:st, update:u,
       title:'Review the record on '+(it?it.product:'a piece'),
       meta:[st?st.name:'', fdate(u.work_date), ph?(ph+' photograph'+(ph===1?'':'s')):'no photograph']
@@ -7977,6 +8115,9 @@ function ownerActions(){
   pendingPhotos().forEach(p=>{
     const it=S.itemsById[p.item_id], st=S.stagesById[p.stage_id];
     push({ urgency:1, chip:'approval', chipLabel:'Approvals', icon:'i-camera',
+      group:'desk', subject:it?it.product:'A piece', kind:'Photograph to approve', tone:'info',
+      since:p.created_at, ageWord:'waiting',
+      detail:[(st?st.name:''), it?poRef(it):'', 'the buyer cannot see it until you approve'].filter(Boolean).join(' · '),
       type:'review', item:it, stage:st,
       title:'Approve a photograph of '+(it?it.product:'a piece'),
       meta:[st?st.name:'', it?poRef(it):''].filter(Boolean).join(' · '),
@@ -7988,6 +8129,9 @@ function ownerActions(){
   itemsMissingToday().forEach(it=>{
     const d=daysSinceUpdate(it.id);
     push({ urgency:1, chip:'missing', chipLabel:'Missing', icon:'stage-planning',
+      group:'else', subject:it.product, kind:'No record today', tone:'warn',
+      since:lastUpdateDate(it.id), never:d===null, ageWord:d===null?'recorded':'since',
+      detail:[d===null?'nobody has ever recorded work on this piece':('last record '+fdate(lastUpdateDate(it.id))), poRef(it)].filter(Boolean).join(' · '),
       type:'missing', item:it, title:'No record today on '+it.product,
       meta:[poRef(it), d===null?'never updated':(d+' day'+(d===1?'':'s')+' since the last one')]
         .filter(Boolean).join(' · '),
@@ -8003,6 +8147,9 @@ function ownerActions(){
     return {it, left:y.issued-y.used-y.offcut-y.scrap, unit:y.unit};
   }).filter(x=>x.left>0.0005).forEach(x=>{
     push({ urgency:1, chip:'missing', chipLabel:'Stone', icon:'stage-selection',
+      group:'else', subject:x.it.product, kind:'Stone unaccounted for', tone:'warn',
+      since:null, ageWord:'',
+      detail:[fqty(x.left, x.unit)+' still on its name', poRef(x.it)].filter(Boolean).join(' · '),
       type:'material', item:x.it,
       title:'Stone unaccounted for on '+x.it.product,
       meta:[poRef(x.it), fqty(x.left, x.unit)+' still on its name'].filter(Boolean).join(' · '),
@@ -8013,6 +8160,9 @@ function ownerActions(){
   // the nav is the length of this list, so a cap here would make it a lie.
   lateStages().forEach(l=>{
     push({ urgency:1, chip:'late', chipLabel:'Running late', icon:'stage-shipped',
+      group:'desk', subject:l.item.product, kind:'Past its date', tone:'warn',
+      since:l.delay.planned, ageWord:'over',
+      detail:(l.stage?l.stage.name:'A stage')+' was planned for '+fdate(l.delay.planned)+' and is still open · '+poRef(l.item),
       type:'stage', item:l.item, stage:l.stage,
       title:(l.stage?l.stage.name:'A stage')+' is '+l.delay.days+' day'+(l.delay.days===1?'':'s')+' over',
       meta:l.item.product+' · '+poRef(l.item),
@@ -8023,8 +8173,13 @@ function ownerActions(){
   const due=(S.buyers||[]).filter(b=>b.active && updateAge(b).k==='you' &&
     (S.pos||[]).some(p=>p.buyer_id===b.id && p.status==='open'));
   due.forEach(b=>push({ urgency:1, chip:'client', chipLabel:'Client updates', icon:'stage-selection',
+    group:'desk', subject:b.company, kind:'Ready to send', tone:'good',
+    since:b.last_update_sent, never:!b.last_update_sent, ageWord:b.last_update_sent?'unsent':'sent',
+    detail:'Approved progress they have not been shown · '+updateAge(b).t,
     type:'publish', title:'Approved progress not sent to '+b.company,
-    meta:updateAge(b).label,
+    // updateAge() returns {t,k}; .label was undefined, so this row's detail
+    // column has been rendering empty since the queue was written.
+    meta:updateAge(b).t,
     // This row names one buyer, so it opens that buyer's note rather than
     // every client's.
     action:{label:'Preview', go:"go('#/clients/updates/"+b.id+"')"} }));
@@ -8033,6 +8188,9 @@ function ownerActions(){
   openDecisions().forEach(c=>{
     const it=S.itemsById[c.item_id];
     push({ urgency:1, chip:'decision', chipLabel:'Questions', icon:'stage-selection',
+      group:'desk', subject:buyerOfItem(it)||'The buyer', kind:'Question', tone:'info',
+      since:c.created_at, ageWord:'asked',
+      detail:[(it?it.product:''), '\u201c'+String(c.body||'').slice(0,90)+'\u201d'].filter(Boolean).join(' · '),
       type:'publish', item:it, title:'Question from the buyer',
       meta:(it?it.product+' · ':'')+String(c.body||'').slice(0,90),
       action:{label:'Open', go:"go('#/item/"+c.item_id+"')"} });
@@ -8041,16 +8199,42 @@ function ownerActions(){
   // Sent to the buyer and now his move, so it sits below Yash's own work.
   pendingApprovals().forEach(a=>{
     push({ urgency:2, chip:'waiting', chipLabel:'With the buyer', icon:'i-check',
+      group:'else', subject:buyerOfItem(a.item)||'The buyer', kind:'With the buyer', tone:'mute',
+      since:a.row&&a.row.approval_at, ageWord:'waiting',
+      detail:'Waiting on their answer · '+a.item.product+(a.stage?(' · '+a.stage.name):''),
       type:'waiting', item:a.item, stage:a.stage,
       title:'Waiting on '+(a.item.po?(S.buyersById[a.item.po.buyer_id]||{}).company||'the buyer':'the buyer'),
       meta:a.item.product+' · '+(a.stage?a.stage.name:''),
       action:{label:'Open', go:"go('#/item/"+a.item.id+"')"} });
   });
 
-  return rows.sort((a,b)=>(a.urgency-b.urgency)||((a.sort||0)-(b.sort||0)));
+  // Three groups, and OLDEST FIRST inside each one, which is the order the
+  // screen states. The old sort put an urgency band first and then a single
+  // number that was sometimes rupees, sometimes days and sometimes a
+  // placeholder, so a statement outranked a piece that had stopped and nobody
+  // could have said why.
+  const GROUP={stopped:0, desk:1, else:2};
+  rows.forEach(r=>{ r.group=r.group||'desk'; r.age=queueAge(r.since, r.never); });
+  return rows.sort((a,b)=>
+    (GROUP[a.group]-GROUP[b.group]) ||
+    (b.age.days-a.age.days) ||
+    String(a.subject||a.title).localeCompare(String(b.subject||b.title)));
 }
 
 function poRef(item){ return item && item.po ? item.po.po_number : ''; }
+// Which company an item belongs to. The queue names the buyer on the rows that
+// are ABOUT a buyer, so the subject of a row is always the thing it concerns.
+function buyerOfItem(item){
+  if(!item) return '';
+  const po=item.po||S.posById[item.po_id];
+  return po ? ((S.buyersById[po.buyer_id]||{}).company||'') : '';
+}
+// The newest work date on a piece, or null when nobody has ever recorded one.
+function lastUpdateDate(itemId){
+  let d=null;
+  (S.updByItem[itemId]||[]).forEach(u=>{ if(!d || String(u.work_date)>d) d=String(u.work_date); });
+  return d;
+}
 
 // Dated commitments for the week ahead: deliveries, planned stages, nothing invented.
 function nextSevenDays(){
@@ -9380,24 +9564,29 @@ function updateHeader(){
     const link=(hash,label,count,sub)=>'<a class="side-nav__link'+(sub?' side-nav__link--sub':'')+
       (navActive(hash)?' side-nav__link--active':'')+'" href="javascript:void(0)" onclick="go(\''+hash+'\')">'+
       '<span>'+label+'</span>'+(count?'<span class="badge badge--alert">'+count+'</span>':'')+'</a>';
-    // Grouped by the question a person is asking, with the three filters of the
-    // decision queue indented under the screen they belong to rather than
-    // stranded after Batches. Every label here is the title of the page it
-    // opens: "Review queue" leading to "Today in the workshop." was one word
-    // for two things, and there were six more like it.
+    // Grouped by the question a person is asking. Every label here is the
+    // title of the page it opens: "Review queue" leading to "Today in the
+    // workshop." was one word for two things, and there were six more like it.
+    //
+    // One number per thing. The owner's queue is counted once, on Production
+    // control. Command centre, Evidence review, Clients and Finance used to
+    // carry slices of that same number (urgent, approvals, client updates,
+    // overdue), so one held piece put a badge on four rows before anyone had
+    // opened it, and 1 + 17 + 1 under a 24 invited a person to add them up.
+    // Orders counts a different list (orders at risk of their promise date)
+    // and People & access another (logins to sort out), so those two keep
+    // theirs.
     nav.className='side-nav';
     nav.innerHTML=
       grp('Today')+
-      link('#/home','Command centre',q.urgent)+
+      link('#/home','Command centre',0)+
       link('#/production','Production control',q.all)+
-      link('#/production/review','Evidence review',q.approvals,true)+
-      link('#/production/missing','Missing records',q.missing,true)+
-      link('#/production/blocked','Work stopped',q.blocked,true)+
+      link('#/production/review','Evidence review',0,true)+
       link('#/production/floor','Workshop floor',0)+
       grp('Orders and money')+
       link('#/orders','Orders',q.decisions)+
-      link('#/clients','Clients',q.clientUpdates)+
-      link('#/finance','Finance',q.overdueCount)+
+      link('#/clients','Clients',0)+
+      link('#/finance','Finance',0)+
       // Reachable only from the command palette and a button on Finance until
       // now, which is why Yash asked whether the Tally upload had been built.
       link('#/accounts','Tally documents',0)+
@@ -9413,18 +9602,17 @@ function updateHeader(){
     // Everything the sidebar offers and the dock does not. Batches, the two
     // reports, the evidence filters and People & access could not be reached
     // from a phone at all.
-    window.__moreNav=[['#/production/review','Evidence review',q.approvals],
-      ['#/production/missing','Missing records',q.missing],
-      ['#/production/blocked','Work stopped',q.blocked],
+    window.__moreNav=[['#/production','Production control',q.all],
+      ['#/production/review','Evidence review',0],
       ['#/production/floor','Workshop floor',0],
-      ['#/clients','Clients',q.clientUpdates],['#/finance','Finance',q.overdueCount],
+      ['#/clients','Clients',0],['#/finance','Finance',0],
       ['#/accounts','Tally documents',0],
       ['#/day','The day',0],['#/month','The month',0],['#/batches','Shipment batches',0],
       ['#/reports','Reports',0],['#/access','People & access',accessNeedsAttention()],
       ['#/admin','Admin settings',0]];
     dock.hidden=false;
     dock.innerHTML=
-      dockItem('#/home','stage-confirmed','Today',q.urgent,navActive('#/home')?' nav-link--active':'')+
+      dockItem('#/home','stage-confirmed','Today',0,navActive('#/home')?' nav-link--active':'')+
       dockItem('#/production','i-camera','Production',q.all,navActive('#/production')?' nav-link--active':'')+
       dockItem('#/orders','stage-planning','Orders',q.decisions,navActive('#/orders')?' nav-link--active':'')+
       '<a class="mobile-dock__item" href="javascript:void(0)" onclick="mMore()">'+icon('i-more')+
@@ -11817,7 +12005,10 @@ function ownerOrderRows(){
   const rows=portfolioRows();
   if(!rows.length) return '<tr><td colspan="8"><div class="empty">'+
     '<h2>No open orders.</h2><p>New purchase orders appear here as soon as they are raised.</p></div></td></tr>';
-  return rows.map(r=>{
+  return rows.map(ownerOrderRow).join('');
+}
+function ownerOrderRow(r){
+  return (function(){
     const tone=r.level>=2?'critical':r.level===1?'warn':'';
     const pct=Math.round((r.prog||0)*100);
     const b=S.buyersById[r.po.buyer_id]||{};
@@ -11836,7 +12027,7 @@ function ownerOrderRows(){
         '<small>'+esc(r.bal?'Invoiced, unpaid':'Nothing owed')+'</small></td>'+
       '<td><span class="owner-health '+tone+'"><i></i>'+esc(r.health)+'</span></td>'+
       '<td><button class="button quiet small" type="button" onclick="go(\'#/po/'+r.po.id+'\')">Open</button></td></tr>';
-  }).join('');
+  })();
 }
 function ownerActionRows(){
   const items=ownerActions();
@@ -11883,6 +12074,139 @@ function ownerProductionFlow(){
 }
 
 function vHome(){ return vCommandCentre(); }
+/* ---------------------------------------------------------------------------
+   Your desk — the one screen the office lands on.
+
+   Until 14 September this was the Command centre: an exceptions strip, six
+   figures, a portfolio table and eight of the fifteen queue rows, with the
+   other seven on a second screen called Production control that queued the same
+   work again behind its own tiles and its own chips. Three controls, one list,
+   and three different sets of words for the same filters.
+
+   What is left is the work. Three groups, because those are the three questions
+   a person actually opens the screen with: what has stopped, what is on me, and
+   what is on somebody else. Oldest first inside each group, which the page says
+   out loud and which anybody can check. No tiles: the group headings carry the
+   counts, and a search box narrows the list when it is long.
+
+   The figures moved to Reports, where a person goes to look at figures, and the
+   portfolio table moved to Orders, which was already that list with fewer
+   columns.
+--------------------------------------------------------------------------- */
+const DESK_GROUPS=[
+  ['stopped','Stopped','No work can happen on these until you clear them.'],
+  ['desk','On your desk','A decision, a look, or a reply from you.'],
+  ['else','On somebody else','You can chase them, but the move is theirs.']
+];
+
+function deskSearch(v){
+  window.__deskQ=v;
+  const host=$('desk-groups');
+  if(host){ host.innerHTML=deskGroups(); hydrateImages(); }
+}
+function deskRows(){
+  const q=String(window.__deskQ||'').trim().toLowerCase();
+  return ownerActions().filter(r=>{
+    if(!q) return true;
+    const it=r.item;
+    return ((r.subject||'')+' '+(r.kind||'')+' '+(r.title||'')+' '+(r.meta||'')+' '+
+            (r.note||'')+' '+(it?(it.product+' '+(it.item_code||'')+' '+poRef(it)):'')
+           ).toLowerCase().indexOf(q)>=0;
+  });
+}
+// The face of a row: a piece shows its photograph, a person their initials, a
+// buyer theirs. Nothing in this column is decorative — it is how the eye finds
+// the same piece again three rows down.
+function deskFace(r){
+  const it=r.item;
+  if(it){
+    const t=targetImage(it);
+    if(t) return '<span class="desk-face"><img alt="" data-ph-path="'+esc(t.path)+'"></span>';
+    return '<span class="desk-face desk-face--code">'+esc(it.item_code||shortRef(it)||'—')+'</span>';
+  }
+  return '<span class="desk-face desk-face--who">'+esc(initials(r.subject||'?'))+'</span>';
+}
+function shortRef(it){ return it&&it.item_ref?String(it.item_ref).split('/').pop():''; }
+
+function deskRow(r){
+  const age=r.age||queueAge(r.since, r.never);
+  const primary = r.group==='stopped' || r.tone==='info' || r.tone==='bad';
+  return '<article class="desk-row">'+
+    deskFace(r)+
+    '<div class="desk-what">'+
+      '<h3>'+esc(r.subject||r.title)+'</h3>'+
+      '<p><span class="desk-kind desk-kind--'+(r.tone||'mute')+'"><i></i>'+esc(r.kind||'Needs you')+'</span>'+
+        esc(r.detail||[r.meta, r.note].filter(Boolean).join(' · '))+'</p>'+
+    '</div>'+
+    '<div class="desk-age'+(age.never?' desk-age--never':'')+'">'+esc(age.label)+
+      (r.ageWord?'<small>'+esc(r.ageWord)+'</small>':'')+'</div>'+
+    '<div class="desk-do"><button class="button'+(primary?'':' secondary')+' small" type="button" '+
+      'onclick="'+(r.action&&r.action.go||'')+'">'+esc(r.action&&r.action.label||'Open')+'</button></div>'+
+  '</article>';
+}
+
+function deskGroups(){
+  const rows=deskRows();
+  const q=String(window.__deskQ||'').trim();
+  if(!rows.length) return '<div class="desk-empty"><strong>'+
+    (q?'Nothing matches “'+esc(q)+'”.':'Nothing is waiting on you.')+'</strong>'+
+    (q?'Clear the search to see the whole list.'
+      :'Every decision, review and reply is closed. The floor carries on without you.')+'</div>';
+  return DESK_GROUPS.map(([k,label,why])=>{
+    const list=rows.filter(r=>r.group===k);
+    if(!list.length) return '';
+    return '<section class="desk-group desk-group--'+k+'">'+
+      '<header class="desk-group__head"><h2>'+esc(label)+'</h2>'+
+      '<span class="desk-group__n">'+list.length+'</span>'+
+      '<p>'+esc(why)+'</p></header>'+
+      '<div class="desk-rows">'+list.map(deskRow).join('')+'</div></section>';
+  }).join('');
+}
+
+/* The photographs and records the floor has sent up, with the grids and the
+   bulk approve that a list row cannot carry. This is the only part of the old
+   Production control that was a working screen rather than a second drawing of
+   the queue, so it is the only part that survives as a screen of its own. */
+function vEvidence(){
+  if(!isAdmin()) return vHome();
+  const n=pendingUpdates().length+pendingPhotos().length;
+  sfaPaint('<div class="desk"><header class="desk-head"><div>'+
+    '<p class="eyebrow">Nothing reaches the buyer until you publish it</p>'+
+    '<h1>Evidence review.</h1>'+
+    '<p class="lead">'+esc(n?(n+' record'+(n===1?'':'s')+' and photograph'+(n===1?'':'s')+
+      ' from the floor, waiting on you.'):'Nothing is waiting to be checked.')+'</p>'+
+    '</div><div class="desk-tools">'+
+      '<a class="button secondary" href="#/production">Production control</a></div></header>'+
+    '<div class="prod-queue">'+evidenceReviewRows()+'</div></div>');
+}
+
+function vDesk(){
+  if(!isAdmin()) return isStaff()?vStaffHome():vBuyerHome();
+  const all=ownerActions();
+  const n=all.length;
+
+  let h='<div class="desk">'+
+    '<header class="desk-head"><div>'+
+      '<p class="eyebrow">Owner and office · everything waiting on you</p>'+
+      '<h1>Production control.</h1>'+
+      // The Stopped heading carries the alarm, so the lead does not have to
+      // shout it a second line down.
+      '<p class="lead">'+esc(n
+        ? (n+' thing'+(n===1?' is':'s are')+' waiting on you. Oldest first inside each group.')
+        : 'Nothing is waiting on you. Every decision, review and reply is closed.')+'</p>'+
+    '</div><div class="desk-tools">'+
+      '<div class="search"><input id="desk-q" type="search" '+
+        'placeholder="Search a product, order or person" aria-label="Search the queue" '+
+        'value="'+esc(window.__deskQ||'')+'" oninput="deskSearch(this.value)"></div>'+
+      '<a class="button secondary" href="#/home">Command centre</a>'+
+      '<a class="button secondary" href="#/production/floor">Workshop floor</a>'+
+    '</div></header>'+
+    '<div id="desk-groups">'+deskGroups()+'</div>'+
+  '</div>';
+  sfaPaint(h);
+}
+
+// Kept so every old link, bookmark and WhatsApp message still lands somewhere.
 function vCommandCentre(){
   if(!isAdmin()) return isStaff()?vStaffHome():vBuyerHome();
   const w=reportWindow();
@@ -11908,7 +12232,7 @@ function vCommandCentre(){
   let h='<div class="owner-command">'+
     '<header class="owner-head"><div>'+
       '<p class="eyebrow">'+esc((S.settings.company_name||'Gujraj Impex')+' · owner workspace')+'</p>'+
-      '<h1>Command centre.</h1>'+
+      '<h1>Owner command centre.</h1>'+
       '<p class="lead">'+esc(periodCopy)+'. Orders, floor activity, delivery, clients, money and access in one operating picture.</p>'+
     '</div><div class="owner-head-tools">'+ownerPeriodControls()+
       '<span class="owner-sync"><i></i>'+esc(ev.covered+' of '+ev.of+' products recorded today')+'</span>'+
@@ -11918,14 +12242,28 @@ function vCommandCentre(){
     al.map(a=>ownerAlert(a.k, a.s, a.v, a.tone||'', a.run)).join('')+
     '</section>';
 
-  // Six more tiles used to sit here between the exceptions and the queue, so a
-  // person opening the screen scrolled past fifteen figures before reaching the
-  // first thing to do. Two of them said what the strip above already said
-  // ("Receivable", "Your decisions"); the other four are figures to LOOK at
-  // rather than act on, and they are on Reports, which is where a person goes
-  // to look at figures. What is left is the exceptions, the orders and the
-  // queue.
-  void openVal; void kp; void fin;
+  // ChatGPT's six tiles, element for element. The only change is the second
+  // link: his 'Products on the floor' pointed at '#/production', which is now
+  // the owner's queue; the tile is about the floor, so it opens the floor.
+  h+='<section class="owner-kpis">'+
+    ownerKpi('Open orders', String(rows.length),
+      (S.buyers||[]).filter(b=>b.active).length+' buyers · '+onFloor+' products',
+      rows.length?100:0, "go('#/orders')")+
+    ownerKpi('Open order value', openVal?money(openVal,'INR'):'—',
+      'Recorded purchase-order value', openVal?100:0, "go('#/orders')")+
+    ownerKpi('Products on the floor', String(onFloor),
+      ev.covered+' recorded work today', ev.pct, "go('#/production/floor')", ev.pct>=80?'good':'warn')+
+    ownerKpi('On-time forecast', kp.onTime==null?'—':(kp.onTime+'%'),
+      rows.filter(r=>r.level>=1).length+' order'+(rows.filter(r=>r.level>=1).length===1?'':'s')+' at risk',
+      kp.onTime||0, "go('#/reports')", (kp.onTime!=null&&kp.onTime<80)?'warn':'good')+
+    ownerKpi('Receivable', fin.n?money(fin.outstanding,fin.currency):'—',
+      fin.overdue?(money(fin.overdue,fin.currency)+' aged over 30 days'):'Nothing aged',
+      fin.invoiced?Math.round((fin.outstanding/fin.invoiced)*100):0,
+      "go('#/reports/finance')", fin.overdue?'warn':'')+
+    ownerKpi('Your decisions', String(acts.filter(a=>a.urgency<2).length),
+      'Blockers, reviews and replies', Math.min(100,acts.length*12),
+      "go('#/production')", acts.some(a=>a.urgency===0)?'critical':'warn')+
+    '</section>';
 
   h+='<div class="owner-primary-grid">'+
     '<section class="owner-panel"><header class="owner-panel-head"><div>'+
@@ -12030,6 +12368,7 @@ function vCommandCentre(){
   h+='</div></div>';
   sfaPaint(h);
 }
+
 function sfaBadge(text, tone){ return '<span class="badge '+(tone||'')+'">'+esc(text)+'</span>'; }
 
 function activityItem(a){
@@ -13901,7 +14240,15 @@ function render(){
   else if(parts[0]==='item' && parts[1]) vItem(parts[1]);
   // the console's routes
   else if(parts[0]==='orders') vOrders();
-  else if(parts[0]==='production') vProduction(parts[1]||'priority');
+  // Production control is gone: its queue IS the desk, and the one part of it
+  // that was a working screen rather than a second copy of the list — the
+  // photographs — has its own route. Every old sub-route still lands somewhere.
+  else if(parts[0]==='production' && parts[1]==='floor') vWorkshopFloor();
+  else if(parts[0]==='production' && (parts[1]==='review'||parts[1]==='photos')) vEvidence();
+  // Production control IS the queue now: three groups, oldest first, one row per
+  // thing to do. The Command centre above it is ChatGPT's dashboard and stays
+  // exactly as he drew it.
+  else if(parts[0]==='production') vDesk();
   else if(parts[0]==='day') vDayReport();
   else if(parts[0]==='month') vMonthReport();
   else if(parts[0]==='batches') vSupBatches();
@@ -13913,8 +14260,8 @@ function render(){
   // the routes that existed before the console, still honoured so that a
   // bookmark, a WhatsApp link or an old habit never lands on a blank page
   else if(parts[0]==='updates') vClients('updates');
-  else if(parts[0]==='approvals') vProduction('review');
-  else if(parts[0]==='review') vProduction('review');
+  else if(parts[0]==='approvals') vEvidence();
+  else if(parts[0]==='review') vEvidence();
   else if(parts[0]==='finance') vFinance();
   else if(parts[0]==='accounts') vAccounts();
   else if(parts[0]==='daily') vReports('log');
