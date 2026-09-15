@@ -2868,6 +2868,9 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{position:absolute;right:1px
 .sfa .stage-status-grid div{padding:10px;border-radius:8px;background:var(--surface-2)}
 .sfa .stage-status-grid span{display:block;color:var(--muted);font-size:8px}
 .sfa .stage-status-grid strong{display:block;margin-top:4px;font-size:10px}
+/* five cells now: the fifth says who is holding the piece */
+.sfa .stage-status-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.sfa .product-on-it--none strong{color:var(--danger)}
 .sfa .stage-task{padding:12px;border-left:2px solid var(--active-indicator);background:var(--selected);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .sfa .stage-task strong{display:block;font-size:10px}
 .sfa .stage-task p{margin:3px 0 0;color:var(--muted);font-size:9px}
@@ -3570,6 +3573,7 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .po-product-fact.wide{grid-column:1/-1}
 .sfa .po-product-fact span{display:block;color:var(--muted);font-size:7px}
 .sfa .po-product-fact strong{display:block;margin-top:3px;font-size:9px}
+.sfa .po-product-who--none strong{color:var(--danger)}
 .sfa .po-product-update{margin-top:8px;display:flex;gap:7px;align-items:flex-start;color:var(--muted);font-size:8px}
 .sfa .po-product-update i{flex:0 0 auto;margin-top:2px}
 .sfa .po-product-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
@@ -5255,6 +5259,40 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .day-piece__said--none{ color:var(--danger); font-weight:600; }
 .day-piece__next{ grid-column:1 / -1; color:var(--muted); font-size:12.5px; }
 
+.day-person__side{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.day-person--idle{ border-style:dashed; }
+.day-piece__move{ justify-self:end; min-height:32px; }
+/* the pieces nobody is holding: face, what it is, one button */
+.day-loose{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.day-loose__row{
+  display:grid; grid-template-columns:44px 1fr auto; gap:12px; align-items:center;
+  padding:8px 10px; border:1px solid var(--line); border-radius:11px; background:var(--surface);
+}
+.day-loose__face{
+  width:44px; height:44px; border-radius:9px; overflow:hidden; background:var(--soft, rgba(0,0,0,.05));
+  display:grid; place-items:center; font-size:12px; font-weight:700; color:var(--muted); text-align:center;
+}
+.day-loose__face img{ width:100%; height:100%; object-fit:cover; display:block; }
+.day-loose__what strong{ display:block; font-size:14px; }
+.day-loose__what small{ display:block; color:var(--muted); font-size:12.5px; margin-top:1px; }
+
+/* a task from the office: what was asked, where it stands, one row of answers */
+.office-tasks{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.office-task{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap;
+  padding:11px 13px; border:1px solid var(--line); border-radius:11px; background:var(--surface);
+}
+.office-task--over{ opacity:.72; }
+.office-task__what{ min-width:0; flex:1 1 320px; }
+.office-task__what strong{ display:block; font-size:12.5px; color:var(--muted); font-weight:600; letter-spacing:.02em; }
+.office-task__text{ display:block; font-size:15px; margin-top:2px; line-height:1.35; }
+.office-task__meta{ display:block; color:var(--muted); font-size:12.5px; margin-top:4px; }
+.office-task__answer{ display:block; font-size:13.5px; margin-top:6px; padding:6px 9px; border-radius:8px; background:var(--soft, rgba(0,0,0,.04)); }
+.office-task__side{ display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+.office-task__do{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+.office-tasks--strip{ padding:12px 14px; }
+.sup-office-tasks{ border-color:var(--danger); margin-bottom:14px; }
+
 .day-reminders{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
 .day-reminder{
   display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
@@ -5272,6 +5310,13 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 @media (max-width: 640px){
   .day-piece{ grid-template-columns:auto 1fr; }
   .day-piece__said{ grid-column:1 / -1; }
+  .day-piece__move{ grid-column:1 / -1; justify-self:start; min-height:44px; }
+  .day-person__side{ width:100%; justify-content:space-between; }
+  .day-person__side .button{ min-height:44px; }
+  .day-loose__row .button{ min-height:44px; }
+  .office-task__side{ width:100%; flex-direction:row; align-items:center; justify-content:space-between; }
+  .office-task__do{ justify-content:flex-start; }
+  .office-task__do .button{ min-height:44px; }
   .day-reminder{ align-items:stretch; }
   .day-reminder__do{ width:100%; }
   .day-reminder__do .button, .day-reminder__do a.button{ flex:1 1 auto; text-align:center; }
@@ -6006,7 +6051,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 }
 </style>
 <body>
-<script>const BUILD_ID='6f80dd369d12';</script>
+<script>const BUILD_ID='e67715e653bb';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -7168,6 +7213,22 @@ function waReminderLink(phone, text){
   return (num && num.length >= 8) ? waLink(num, text||'') : '';
 }
 
+// Who may hand work out: the supervisors as their job, the owner when he needs
+// to. bt_assign_work refuses everybody else regardless.
+function canGiveWork(){ return isAdmin() || isSupervisor(); }
+
+// The pieces nobody is holding, by the same rule the day report counts them
+// with (bt_floor_expects_work): a piece paused, ready or shipped has nobody on
+// it by design and is not a gap. The two figures must agree, and test/dictate.js
+// holds them to it.
+const FLOOR_EXPECTS_WORK_NOT = ['cancelled','delivered','made','ready','shipped','on_hold'];
+function loosePieces(){
+  return (S.items||[]).filter(it=>
+    FLOOR_EXPECTS_WORK_NOT.indexOf(String(it.status||''))<0 && !openAssignment(it.id))
+    .slice().sort((a,b)=>String(batchCodeOf(a.id)||'~').localeCompare(String(batchCodeOf(b.id)||'~')) ||
+                         String(a.product||'').localeCompare(String(b.product||'')));
+}
+
 function dayFigures(){
   const t = (S.dayReport && S.dayReport.totals) || {};
   return {
@@ -7393,8 +7454,29 @@ function buyerMoney(buyerId){
   return Object.values(byCur).sort((a,b)=>b.due-a.due);
 }
 
+// Tasks from the office to a supervisor. The policy hands the office every
+// row and a supervisor their own; an artisan or a buyer gets none, so the
+// same call is safe from any login and the list is simply empty.
+async function loadOfficeTasks(){
+  if(!(isAdmin() || isSupervisor())){ S.officeTasks=[]; return; }
+  const r = await sb.from('bt_office_tasks').select('*').order('created_at',{ascending:false});
+  S.officeTasks = (r && r.data) || [];
+}
+// Open means somebody still has to do something about it: not closed by the
+// office, not marked done by the person.
+function openOfficeTasks(){
+  return (S.officeTasks||[]).filter(t=>!t.closed_at && t.ack_state!=='done');
+}
+function officeTasksFor(userId){
+  return (S.officeTasks||[]).filter(t=>t.to_user===userId && !t.closed_at);
+}
+
 async function loadData(){
-  if(isStaff()) return loadStaffData();
+  if(isStaff()){ await loadStaffData(); await loadOfficeTasks(); return; }
+  await loadOwnerData();
+  await loadOfficeTasks();
+}
+async function loadOwnerData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
@@ -8206,6 +8288,22 @@ function ownerActions(){
       title:'Waiting on '+(a.item.po?(S.buyersById[a.item.po.buyer_id]||{}).company||'the buyer':'the buyer'),
       meta:a.item.product+' · '+(a.stage?a.stage.name:''),
       action:{label:'Open', go:"go('#/item/"+a.item.id+"')"} });
+  });
+
+  // A task Yash sent a supervisor. Unanswered or accepted, it is on THEM;
+  // a question or a cannot is back on his desk. Done and closed are gone.
+  openOfficeTasks().forEach(t=>{
+    const who=personName(t.to_user)||'A supervisor';
+    const back = t.ack_state==='clarify' || t.ack_state==='cannot';
+    push({ urgency: back?1:2, chip: back?'approval':'waiting', chipLabel:'Task', icon:'i-doc',
+      group: back?'desk':'else', subject:who,
+      kind: t.ack_state==='pending'?'Task not answered' : t.ack_state==='accepted'?'Task accepted' : t.ack_state==='clarify'?'Asks a question':'Cannot do it',
+      tone: back?'warn':'mute',
+      since: back?(t.ack_at||t.created_at):t.created_at, ageWord: back?'answered':'sent',
+      detail:['“'+String(t.task||'').slice(0,90)+'”', t.due_date?('by '+fdate(t.due_date)):'', t.ack_note?('— '+String(t.ack_note).slice(0,90)):''].filter(Boolean).join(' · '),
+      type:'task', task:t, title:(t.ack_state==='pending'?'Task not answered by ':'Task with ')+who,
+      meta:String(t.task||'').slice(0,90)+(t.ack_note?' — '+String(t.ack_note).slice(0,60):''),
+      action:{label: back?'Reply':'Open', go:"go('#/day')"} });
   });
 
   // Three groups, and OLDEST FIRST inside each one, which is the order the
@@ -10108,6 +10206,7 @@ function wsProductRow(it){
   const label=state==='blocked'?'Work stopped':state==='missing'?'No record today'
     :state==='ready'?'Ready for the next stage':'Recorded today';
   const blocker=(blockedItems()||[]).find(x=>x.item.id===it.id);
+  const asg=openAssignment(it.id);
   return '<article class="po-product-row '+state+'">'+
     '<figure class="po-product-image product-record-link" onclick="go(\'#/item/'+it.id+'\')">'+
       (img?'<img alt="'+esc(it.product)+' target product" data-ph-path="'+esc(img.path)+'">':'')+
@@ -10120,6 +10219,11 @@ function wsProductRow(it){
       '<div class="po-product-fact"><span>Stone</span><strong>'+esc(it.stone||'—')+'</strong></div>'+
       '<div class="po-product-fact"><span>Quantity</span><strong>'+esc(String(+it.qty||1))+'</strong></div>'+
       '<div class="po-product-fact wide"><span>Finished size</span><strong>'+esc(dimsOf(it)||'—')+'</strong></div>'+
+      // who is holding it, because the owner reads this row to find out and
+      // used to have to ask
+      '<div class="po-product-fact wide po-product-who'+(asg?'':' po-product-who--none')+'"><span>On it</span><strong>'+
+        esc(asg?personName(asg.assigned_to)||'Somebody':'Nobody')+
+        (asg&&asg.target_date?' · by '+esc(fdate(asg.target_date)):'')+'</strong></div>'+
     '</div>'+
     '<div class="po-product-update"><i class="status-dot '+dot+'"></i><span>'+
       '<strong>'+esc(label)+(last?' · '+esc(fdate(last.work_date)):'')+'</strong><br>'+
@@ -10128,6 +10232,7 @@ function wsProductRow(it){
     '<div class="po-product-actions">'+
       '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\')">'+icon('i-camera','icon-sm')+
         'Record today’s work'+'</button>'+
+      (canGiveWork()?'<button class="button secondary" type="button" onclick="mAssign(\''+it.id+'\')">'+(asg?'Reassign':'Assign')+'</button>':'')+
       (it.drawing_path
         ?'<button class="button secondary" type="button" onclick="openDoc(\''+jsq(it.drawing_path)+'\')">Drawing</button>'
         :'<button class="button secondary" type="button" disabled>No drawing</button>')+
@@ -14410,6 +14515,7 @@ function vItemOwner(it){
     '<div class="product-hero-actions">'+
       '<button class="button secondary" type="button" onclick="mItem(\''+p.id+'\',\''+it.id+'\')">Edit product</button>'+
       '<button class="button secondary" type="button" onclick="waItem(\''+it.id+'\')">WhatsApp update</button>'+
+      '<button class="button secondary" type="button" onclick="mAssign(\''+it.id+'\')">'+(openAssignment(it.id)?'Reassign':'Assign')+'</button>'+
       '<button class="button" type="button" onclick="mDailyUpdate(\''+it.id+'\','+((now&&now.stage)?now.stage.id:'null')+')">'+icon('i-camera','icon-sm')+'Record today’s work</button>'+
     '</div></div>'+
     '<div class="product-answer-grid" aria-label="Product status summary">'+answers.map((a,i)=>
@@ -14447,6 +14553,10 @@ function vItemOwner(it){
         '<div><span>Started</span><strong>'+(now.row.started_at?esc(fdate(now.row.started_at)):'Not yet')+'</strong></div>'+
         '<div><span>Time in stage</span><strong>'+(inStage!==null?(inStage+' day'+(inStage===1?'':'s')):'—')+'</strong></div>'+
         '<div><span>Last update by</span><strong>'+esc((lastUpd&&staffName(lastUpd.submitted_by))||'—')+'</strong></div>'+
+        (function(){ const a=openAssignment(it.id);
+          return '<div class="product-on-it'+(a?'':' product-on-it--none')+'"><span>On it</span><strong>'+
+            esc(a?(personName(a.assigned_to)||'Somebody'):'Nobody')+
+            (a&&a.target_date?' · by '+esc(fdate(a.target_date)):'')+'</strong></div>'; })()+
       '</div>'+
       (st.description||int_.hold_reason?'<div class="stage-task"><div>'+
         '<strong>'+(now.held?'Why it is held':'What this stage must produce')+'</strong>'+
@@ -17103,10 +17213,16 @@ function paWorkSection(p){
 // was done, with a reminder going to whoever has not done it. This is the
 // screen for both halves. It never names a buyer or an order: it answers
 // whether the work happened, and the batch code is what the floor calls a piece.
-function dayPersonCard(p){
+// `plan` is true on today's screen for somebody who may hand work out: every
+// card then carries a way to give this person something, and a piece that is
+// late or never opened carries a way to move it. A past day is a record and
+// gets none of that.
+function dayPersonCard(p, plan){
   const pieces = p.pieces||[];
   const late = pieces.filter(x=>x.overdue).length;
   const mins = +p.minutes||0;
+  const move = x => (plan && x.item_id && (x.overdue || (!x.reported && x.ack_state==='pending')))
+    ? '<button class="button quiet small day-piece__move" type="button" onclick="mAssign(\''+jsq(x.item_id)+'\')">Reassign</button>' : '';
   const chip = x =>
     '<li class="day-piece'+(x.reported?' day-piece--done':'')+(x.overdue?' day-piece--late':'')+'">'+
       '<span class="day-piece__code">'+esc(x.batch_code||x.product||'—')+'</span>'+
@@ -17118,19 +17234,114 @@ function dayPersonCard(p){
             : (x.summary||'Recorded'))+'</span>'
         : '<span class="day-piece__said day-piece__said--none">'+esc(
             x.ack_state==='pending' ? 'Not opened yet' : 'Nothing recorded')+'</span>')+
+      move(x)+
       (x.next_planned?'<span class="day-piece__next">Next: '+esc(x.next_planned)+'</span>':'')+
     '</li>';
-  return '<article class="day-person'+(p.outstanding?' day-person--behind':'')+'">'+
+  const sup = p.role!=='worker';
+  const nothing = !p.assigned;
+  return '<article class="day-person'+(p.outstanding?' day-person--behind':'')+(nothing?' day-person--idle':'')+'" data-user="'+esc(p.user_id||'')+'">'+
     '<div class="day-person__head">'+
       '<div><strong>'+esc(p.name)+'</strong>'+
-        '<span class="day-person__meta">'+esc(p.role==='worker'?'Artisan':'Supervisor')+
+        '<span class="day-person__meta">'+esc(sup?'Supervisor':'Artisan')+
         ' · '+(p.clocked_in?esc(fmins(mins))+' on the clock':'did not clock in')+
         (late?' · '+late+' past its date':'')+'</span></div>'+
-      badge(p.outstanding ? p.reported+' of '+p.assigned+' recorded' : 'All '+p.assigned+' recorded',
-            p.outstanding ? 'alert' : 'success')+
+      '<div class="day-person__side">'+
+        (nothing ? badge('Nothing given out', plan?'alert':'')
+                 : badge(p.outstanding ? p.reported+' of '+p.assigned+' recorded' : 'All '+p.assigned+' recorded',
+                         p.outstanding ? 'alert' : 'success'))+
+        (plan ? '<button class="button secondary small" type="button" onclick="mAssign(null,null,\''+jsq(p.user_id)+'\')">Give out work</button>'
+              : '')+
+        // a supervisor can also be TOLD something that is not a piece
+        (plan && sup && isAdmin() ? '<button class="button small" type="button" onclick="mOfficeTask(\''+jsq(p.user_id)+'\')">Send a task</button>'
+              : '')+
+      '</div>'+
     '</div>'+
-    '<ul class="day-pieces">'+pieces.map(chip).join('')+'</ul>'+
+    (pieces.length ? '<ul class="day-pieces">'+pieces.map(chip).join('')+'</ul>' : '')+
   '</article>';
+}
+
+// One task from the office, as a row: who, what, by when, and where it stands.
+// The office sees Close and Send again; the addressee sees the four answers.
+function officeTaskRow(t, mine){
+  const st = t.closed_at ? ['Closed', ''] :
+    t.ack_state==='pending'  ? ['Not answered', 'alert'] :
+    t.ack_state==='accepted' ? ['Accepted', 'pending'] :
+    t.ack_state==='clarify'  ? ['Asks a question', 'warn'] :
+    t.ack_state==='cannot'   ? ['Cannot do it', 'alert'] : ['Done', 'success'];
+  const it = t.item_id ? S.itemsById[t.item_id] : null;
+  const open = !t.closed_at && t.ack_state!=='done';
+  const answer = t.ack_note ? '<span class="office-task__answer">'+esc(personName(t.to_user)||'They')+': “'+esc(t.ack_note)+'”</span>' : '';
+  const when = [fdate(String(t.created_at||'').slice(0,10)), t.due_date?('by '+fdate(t.due_date)):''].filter(Boolean).join(' · ');
+  let buttons='';
+  if(mine && open){
+    // Accept and Done need no words; a question or a refusal does.
+    buttons = (t.ack_state==='pending'
+        ? '<button class="button small" type="button" onclick="answerOfficeTask(\''+jsq(t.id)+'\',\'accepted\')">Accept · ठीक है</button>' : '')+
+      '<button class="button secondary small" type="button" onclick="answerOfficeTask(\''+jsq(t.id)+'\',\'clarify\')">Ask · सवाल</button>'+
+      '<button class="button secondary small" type="button" onclick="answerOfficeTask(\''+jsq(t.id)+'\',\'cannot\')">Cannot · नहीं हो सकता</button>'+
+      '<button class="button small" type="button" onclick="answerOfficeTask(\''+jsq(t.id)+'\',\'done\')">Done · हो गया</button>';
+  } else if(isAdmin() && !t.closed_at){
+    buttons = (t.ack_state==='clarify' || t.ack_state==='cannot'
+        ? '<button class="button small" type="button" onclick="mOfficeTask(\''+jsq(t.to_user)+'\',\''+jsq(t.id)+'\')">Send again</button>' : '')+
+      '<button class="button secondary small" type="button" onclick="closeOfficeTask(\''+jsq(t.id)+'\')">Close</button>';
+  }
+  return '<li class="office-task'+(open?'':' office-task--over')+'" data-task="'+esc(t.id)+'" data-state="'+esc(t.closed_at?'closed':t.ack_state)+'">'+
+    '<div class="office-task__what">'+
+      '<strong>'+esc(mine?'From the office':(personName(t.to_user)||'A supervisor'))+'</strong>'+
+      '<span class="office-task__text">'+esc(t.task)+'</span>'+
+      '<span class="office-task__meta">'+esc(when)+(it?' · '+esc(it.product):'')+'</span>'+answer+
+    '</div>'+
+    '<div class="office-task__side">'+badge(st[0], st[1])+
+      (buttons?'<div class="office-task__do">'+buttons+'</div>':'')+'</div>'+
+  '</li>';
+}
+
+// On The day: the office sees every task it has sent that is still open, plus
+// what was finished today; a supervisor sees the ones addressed to them.
+function dayTasksPanel(){
+  const t = today();
+  const all = (S.officeTasks||[]).filter(x =>
+    (!x.closed_at && x.ack_state!=='done') ||
+    (x.ack_state==='done' && String(x.ack_at||'').slice(0,10)===t) ||
+    (x.closed_at && String(x.closed_at).slice(0,10)===t));
+  const mine = !isAdmin();
+  const list = all.filter(x => !mine || x.to_user===uid());
+  const open = list.filter(x => !x.closed_at && x.ack_state!=='done').length;
+  return '<section class="panel space-top-14" id="day-tasks"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">'+(mine?'From the office':'Tasks to the supervisors')+'</h3>'+
+    '<p class="panel__description">'+(mine
+      ? (open ? open+' waiting for your answer.' : 'Nothing from the office today.')
+      : (open ? open+' open. A task stays here, and on Production control, until it is answered.'
+              : 'Nothing open. Send one from a supervisor’s card below.'))+'</p></div></div>'+
+    '<div class="panel__body">'+
+    (list.length ? '<ul class="office-tasks">'+list.map(x=>officeTaskRow(x, mine)).join('')+'</ul>'
+                 : '<div class="empty-state">'+(mine?'Nothing to answer.':'No tasks out.')+'</div>')+
+    '</div></section>';
+}
+
+// The pieces nobody is holding, each with the one button that fixes it.
+function dayLoosePanel(){
+  const loose = loosePieces();
+  const thumb = it => { const ph=targetImage(it)||(S.photosByItem[it.id]||[])[0];
+    return ph ? '<img alt="" data-ph-path="'+esc(ph.path)+'">' : '<span>'+esc(shortRef(it)||it.item_code||'—')+'</span>'; };
+  return '<section class="panel space-top-14" id="day-loose"><div class="panel__head"><div>'+
+    '<h3 class="panel__title">Nobody on it</h3>'+
+    '<p class="panel__description">'+(loose.length
+      ? loose.length+' piece'+(loose.length===1?' is':'s are')+' on the floor with nobody holding '+(loose.length===1?'it':'them')+'. '+
+        (loose.length===1?'It':'They')+' cannot fall behind on this report, because nobody has been asked for '+(loose.length===1?'it':'them')+'.'
+      : 'Every piece on the floor has somebody on it.')+'</p></div>'+
+    (loose.length>1?'<button class="button" type="button" onclick="mAssign(\''+jsq(loose[0].id)+'\')">Start with the first</button>':'')+
+    '</div><div class="panel__body">'+
+    (loose.length ? '<ul class="day-loose">'+loose.map(it=>{
+      const st=curStage(it);
+      return '<li class="day-loose__row" data-item="'+esc(it.id)+'">'+
+        '<span class="day-loose__face">'+thumb(it)+'</span>'+
+        '<div class="day-loose__what"><strong>'+esc(it.product)+'</strong>'+
+          '<small>'+esc([batchCodeOf(it.id), st?shortStage(st.name):'Not started', it.stone].filter(Boolean).join(' · '))+'</small></div>'+
+        '<button class="button small" type="button" onclick="mAssign(\''+jsq(it.id)+'\')">Give out</button>'+
+      '</li>'; }).join('')+'</ul>'
+      : '<div class="empty-state">Nothing to hand out.</div>')+
+    '</div></section>';
 }
 
 function dayRemindersPanel(){
@@ -17179,13 +17390,18 @@ function vDayReport(){
   const shift = n => { const d=new Date(day+'T12:00:00'); d.setDate(d.getDate()+n);
                        return d.toISOString().slice(0,10); };
   const isToday = day===today();
+  // Today is also the planning screen: the supervisors hand work out here as
+  // their job, and Yash does when he needs to. A past day is a record.
+  const plan = isToday && canGiveWork();
 
   let h='<div class="page-heading"><div>'+eyebrow('The day')+
     '<h1 class="display-title">'+(isToday?'Today on the floor.':esc(fdate(day))+'.')+'</h1>'+
-    '<p class="lede">What was given out, what came back, and who has not answered. '+
+    '<p class="lede">What was given out, what came back, and who has not answered'+
+      (plan?', with the pieces still to hand out':'')+'. '+
       'It builds itself from the records the floor files, so nobody fills a second form for it. '+
       'The reminder sweep runs at five, and the day is closed off at eight.</p></div>'+
     '<div class="page-heading__actions">'+
+      (plan?'<button class="button" type="button" onclick="mAssign()">Give out work</button>':'')+
       '<button class="button secondary" type="button" onclick="goDay(\''+jsq(shift(-1))+'\')">Previous day</button>'+
       (isToday?'':'<button class="button secondary" type="button" onclick="goDay(\''+jsq(today())+'\')">Today</button>')+
       (isToday?'':'<button class="button secondary" type="button" onclick="goDay(\''+jsq(shift(1))+'\')">Next day</button>')+
@@ -17209,24 +17425,42 @@ function vDayReport(){
             f.nobody?'pieces with no artisan':'every piece has somebody', null, !!f.nobody)+
     '</div>';
 
+  // The gap first, because it is the one thing on this screen nobody else is
+  // going to fix: a piece with no artisan sends no reminder and misses nothing.
+  if(plan) h+=dayLoosePanel();
+  if(isToday && (isAdmin() || isSupervisor())) h+=dayTasksPanel();
+
   h+=dayRemindersPanel();
 
-  const people = rep.people||[];
+  // On today's screen everybody on the floor gets a card, whether or not they
+  // were given anything: a person with nothing to do is the other gap, and the
+  // way to fill it is on the card. Supervisors first, then the artisans.
+  let people = (rep.people||[]).slice();
+  if(plan){
+    const seen = {};
+    people.forEach(p=>{ seen[p.user_id]=true; });
+    floorPeople().forEach(p=>{
+      if(seen[p.user_id]) return;
+      people.push({user_id:p.user_id, name:p.full_name, role:p.role, phone:p.phone,
+                   minutes:0, clocked_in:false, assigned:0, reported:0, outstanding:0, pieces:[]});
+    });
+    const rank = p => p.role==='worker' ? 1 : 0;
+    people.sort((a,b)=> (rank(a)-rank(b)) || String(a.name).localeCompare(String(b.name)));
+  }
   h+='<section class="panel space-top-14"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Person by person</h3>'+
-    '<p class="panel__description">'+(people.length
-      ? 'Everybody who had work on this date.'
-      : 'Nobody had work on this date.')+'</p></div></div>'+
+    '<p class="panel__description">'+(plan
+      ? 'Everybody on the floor, and what each has for today. Give out work from the card.'
+      : people.length ? 'Everybody who had work on this date.' : 'Nobody had work on this date.')+'</p></div></div>'+
     '<div class="panel__body">'+
-    (people.length ? '<div class="day-people">'+people.map(dayPersonCard).join('')+'</div>'
+    (people.length ? '<div class="day-people">'+people.map(p=>dayPersonCard(p, plan)).join('')+'</div>'
                    : '<div class="empty-state">No work was given out for this day.</div>')+
     '</div></section>';
 
-  if(f.nobody)
+  if(f.nobody && !plan)
     h+='<div class="attn attn--warn attn--flat space-top-14"><span><strong>'+f.nobody+
-       ' piece'+(f.nobody===1?' is':'s are')+' on the floor with nobody on '+(f.nobody===1?'it':'them')+
-       '.</strong> They cannot fall behind on this report, because nobody was asked for them. '+
-       'Give them out from Work &amp; people.</span></div>';
+       ' piece'+(f.nobody===1?' was':'s were')+' on the floor with nobody on '+(f.nobody===1?'it':'them')+
+       ' that day.</strong> '+(f.nobody===1?'It':'They')+' could not fall behind on this report, because nobody was asked for '+(f.nobody===1?'it':'them')+'.</span></div>';
 
   sfaPaint(h);
 }
@@ -17560,6 +17794,14 @@ function supCommitments(){
       :'<div class="empty-state">No shipment date set yet.</div>')+'</div>');
 }
 
+function supOfficeTasks(){
+  const mine = officeTasksFor(uid()).filter(t=>t.ack_state!=='done');
+  if(!mine.length) return '';
+  return supPanel('From the office · दफ़्तर से', mine.length+' task'+(mine.length===1?'':'s')+' waiting for your answer.',
+    '<button class="button quiet small" type="button" onclick="go(\'#/day\')">The day</button>',
+    '<ul class="office-tasks office-tasks--strip">'+mine.map(t=>officeTaskRow(t, true)).join('')+'</ul>', 'sup-office-tasks');
+}
+
 function vSupHome(){
   const c=supCounts();
   const focus=S.supFocus||'all';
@@ -17572,6 +17814,9 @@ function vSupHome(){
     (canBatch()?'<button class="button secondary" type="button" onclick="mCreateBatch()">Create internal batch</button>':'')+
     '<button class="button" type="button" onclick="supPickPiece(null)">'+icon('i-camera','icon-sm')+'Record floor work</button>');
   h+=supExceptionStrip();
+  // What the office has asked of THIS supervisor, before anything else on the
+  // screen: it is the one thing here that came from Yash and wants an answer.
+  h+=supOfficeTasks();
   // Every tile is a button: pressing it narrows the table to the pieces it
   // counted, and a line says what is being shown with a way back.
   h+=supTileGrid('supFocus',[
@@ -22355,7 +22600,7 @@ function mAssign(itemId, stageId, presetPerson){
 
   const m=modal('<h3>'+(cur?'Change who is on this':'Give out work')+'</h3>'+
     '<div class="sub">The person answers on their own screen — accepted, a question, or cannot start. '+
-    'You will see which on the Today page.</div>'+
+    'You will see which on '+(isAdmin()?'The day':'the Today page')+'.</div>'+
     '<div class="form-grid">'+
       pieceField+
       '<div class="field"><label for="as-stage">Stage</label><select id="as-stage">'+
@@ -22471,6 +22716,8 @@ function mAssign(itemId, stageId, presetPerson){
     btn.disabled=false;
     if(error){ toast(error.message,{err:true}); return; }
     closeModal();
+    // The day report is cached per date; what was just given out belongs on it.
+    S.dayReport=null;
     await refresh();
     toast(personName(lead)+' has been given this work.');
   };
@@ -23467,6 +23714,98 @@ function mProposeOvertime(userId){
     closeModal(); await refresh(); toast('Sent to the office.');
   };
 }
+/* ---------------------------------------------------------------------------
+   A task for a supervisor. Yash sends it from The day; the supervisor answers
+   it from their Today page or from The day; it sits on Production control
+   until there is an answer. Work for an artisan is a piece, and goes through
+   mAssign — the server refuses a task addressed to a worker.
+--------------------------------------------------------------------------- */
+function mOfficeTask(toUser, againId){
+  if(!isAdmin()){ toast('Only the office sends a task.',{err:true}); return; }
+  const sups=floorPeople().filter(p=>p.role!=='worker');
+  if(!sups.length){ toast('No supervisor login yet — the office creates them under People & access.',{err:true}); return; }
+  const prev=againId?(S.officeTasks||[]).find(t=>t.id===againId):null;
+  const m=modal('<h3>'+(prev?'Send it again':'Send a task')+'</h3>'+
+    '<div class="sub">'+(prev
+      ? esc(personName(prev.to_user)||'They')+' answered “'+esc(prev.ack_note||'')+'”. Say it again with what they need; the earlier task is closed.'
+      : 'They answer on their own screen — accepted, a question, cannot, or done. You will see which here and on Production control.')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="field field--full"><label for="ot-to">To</label><select id="ot-to">'+
+        sups.map(p=>'<option value="'+esc(p.user_id)+'"'+(p.user_id===toUser?' selected':'')+'>'+esc(p.full_name)+'</option>').join('')+
+        '</select></div>'+
+      '<div class="field field--full"><label for="ot-text">The task</label>'+
+        '<textarea id="ot-text" rows="3" placeholder="e.g. Give out the fourteen pieces nobody is on, and tell me by lunch who has what">'+esc(prev?prev.task:'')+'</textarea></div>'+
+      '<div class="field"><label for="ot-due">By when (optional)</label>'+
+        '<input id="ot-due" type="date" value="'+esc(prev&&prev.due_date?prev.due_date:'')+'"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="ot-go">Send</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel</button></div>'+
+    '</div>');
+  m.m.querySelector('#ot-go').onclick=async (e)=>{
+    const btn=e.currentTarget;
+    const text=$('ot-text').value.trim();
+    if(!text){ toast('Say what the task is.',{err:true}); return; }
+    btn.disabled=true;
+    const {error}=await sb.rpc('bt_send_office_task',{
+      p_to:$('ot-to').value, p_task:text, p_due:$('ot-due').value||null, p_item:prev&&prev.item_id?prev.item_id:null });
+    if(!error && prev){ await sb.rpc('bt_close_office_task',{p_id:prev.id, p_reason:'sent again'}); }
+    btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal();
+    await refresh();
+    toast('Sent to '+(personName($('ot-to')?$('ot-to').value:'')||'the supervisor')+'.');
+  };
+}
+
+// The addressee's answer. Accept and Done go straight through; a question or
+// a cannot has to say something, and the server refuses it otherwise.
+async function answerOfficeTask(id, state){
+  const t=(S.officeTasks||[]).find(x=>x.id===id);
+  if(!t){ toast('That task is no longer there.',{err:true}); return; }
+  const send=async (note, btn)=>{
+    if(btn) btn.disabled=true;
+    const {error}=await sb.rpc('bt_answer_office_task',{p_id:id, p_state:state, p_note:note||null});
+    if(btn) btn.disabled=false;
+    if(error){ toast(error.message,{err:true}); return false; }
+    closeModal();
+    await refresh();
+    toast(state==='accepted'?'Accepted · ठीक है':state==='done'?'Marked done · हो गया':'Sent to the office · दफ़्तर को भेज दिया');
+    return true;
+  };
+  if(state==='accepted' || state==='done'){ await send(null); return; }
+  const m=modal('<h3>'+(state==='clarify'?'Ask the office · दफ़्तर से पूछें':'Cannot do it · नहीं हो सकता')+'</h3>'+
+    '<div class="sub">“'+esc(t.task)+'”</div>'+
+    '<div class="form-grid"><div class="field field--full"><label for="oa-note">'+
+      (state==='clarify'?'What do you need to know? · क्या जानना है?':'Why not? · क्यों नहीं?')+'</label>'+
+      '<textarea id="oa-note" rows="3"></textarea></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="oa-go">Send · भेजें</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Cancel · रद्द</button></div></div>');
+  m.m.querySelector('#oa-go').onclick=async e=>{
+    const note=$('oa-note').value.trim();
+    if(!note){ toast(state==='clarify'?'Say what you need to know.':'Say why it cannot be done.',{err:true}); return; }
+    await send(note, e.currentTarget);
+  };
+}
+
+// The office takes a task off the list: done another way, overtaken, or no
+// longer needed. The row stays, with the reason.
+function closeOfficeTask(id){
+  const t=(S.officeTasks||[]).find(x=>x.id===id);
+  if(!t){ toast('That task is no longer there.',{err:true}); return; }
+  const m=modal('<h3>Close this task</h3>'+
+    '<div class="sub">“'+esc(t.task)+'” · '+esc(personName(t.to_user)||'')+'</div>'+
+    '<div class="form-grid"><div class="field field--full"><label for="oc-why">Why (optional)</label>'+
+      '<input id="oc-why" placeholder="e.g. done by Hitesh instead"></div>'+
+      '<div class="button-row field--full"><button class="button" type="button" id="oc-go">Close it</button>'+
+      '<button class="button button--secondary" type="button" onclick="closeModal()">Keep it open</button></div></div>');
+  m.m.querySelector('#oc-go').onclick=async e=>{
+    e.currentTarget.disabled=true;
+    const {error}=await sb.rpc('bt_close_office_task',{p_id:id, p_reason:$('oc-why').value.trim()||null});
+    e.currentTarget.disabled=false;
+    if(error){ toast(error.message,{err:true}); return; }
+    closeModal(); await refresh(); toast('Closed.');
+  };
+}
+
 function mDecideOvertime(id){
   const o=(S.overtime||[]).find(x=>x.id===id);
   if(!o){ toast('That proposal is no longer there.',{err:true}); return; }
