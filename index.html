@@ -5248,7 +5248,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .day-person__meta{ display:block; color:var(--muted); font-size:12.5px; margin-top:2px; }
 .day-pieces{ list-style:none; margin:10px 0 0; padding:0; display:grid; gap:7px; }
 .day-piece{
-  display:grid; grid-template-columns:auto auto 1fr; gap:4px 10px; align-items:baseline;
+  display:grid; grid-template-columns:auto auto 1fr auto; gap:4px 10px; align-items:center;
   padding:7px 10px; border-radius:9px; background:var(--danger-soft, rgba(180,60,50,.07));
 }
 .day-piece--done{ background:var(--soft, rgba(0,0,0,.035)); }
@@ -5261,11 +5261,11 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 
 .day-person__side{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 .day-person--idle{ border-style:dashed; }
-.day-piece__move{ justify-self:end; min-height:32px; }
+.day-piece__move{ grid-column:4; justify-self:end; align-self:center; min-height:32px; }
 /* the pieces nobody is holding: face, what it is, one button */
 .day-loose{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
 .day-loose__row{
-  display:grid; grid-template-columns:44px 1fr auto; gap:12px; align-items:center;
+  display:grid; grid-template-columns:44px 1fr auto auto; gap:12px; align-items:center;
   padding:8px 10px; border:1px solid var(--line); border-radius:11px; background:var(--surface);
 }
 .day-loose__face{
@@ -5275,6 +5275,34 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 .day-loose__face img{ width:100%; height:100%; object-fit:cover; display:block; }
 .day-loose__what strong{ display:block; font-size:14px; }
 .day-loose__what small{ display:block; color:var(--muted); font-size:12.5px; margin-top:1px; }
+.day-loose__when{ font-size:12.5px; color:var(--muted); white-space:nowrap; text-align:right; }
+.day-loose__when--now{ color:var(--danger); font-weight:600; }
+.day-loose__head{
+  margin:14px 0 6px; font-size:12px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink, #1c1a17);
+}
+.day-loose__head:first-child{ margin-top:0; }
+.day-loose__head span{
+  font-weight:400; letter-spacing:0; text-transform:none; color:var(--muted); margin-left:6px;
+}
+/* a panel with nothing in it keeps its head and drops its body */
+.panel--quiet .panel__head{ padding-bottom:14px; }
+.panel__count{ font-variant-numeric:tabular-nums; color:var(--muted); font-weight:400; }
+
+/* the folded half of the assign form */
+.as-more{ border:1px solid var(--line); border-radius:10px; padding:0 12px; }
+.as-more > summary{
+  cursor:pointer; padding:11px 0; font-size:13.5px; color:var(--muted);
+  list-style:none; min-height:44px; display:flex; align-items:center;
+}
+.as-more > summary::-webkit-details-marker{ display:none; }
+.as-more > summary::before{ content:'+'; margin-right:8px; font-weight:700; }
+.as-more[open] > summary::before{ content:'\2212'; }
+.as-more[open] > summary{ border-bottom:1px solid var(--line); margin-bottom:12px; }
+.as-more > .form-grid{ padding-bottom:12px; }
+/* .form-grid{display:grid} is an author rule and outranks the browser's own
+   "hide the children of a shut details", so the fold has to say it itself. */
+.as-more:not([open]) > .form-grid{ display:none; }
 
 /* a task from the office: what was asked, where it stands, one row of answers */
 .office-tasks{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
@@ -5313,7 +5341,9 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
   .day-piece__move{ grid-column:1 / -1; justify-self:start; min-height:44px; }
   .day-person__side{ width:100%; justify-content:space-between; }
   .day-person__side .button{ min-height:44px; }
-  .day-loose__row .button{ min-height:44px; }
+  .day-loose__row{ grid-template-columns:44px 1fr auto; }
+  .day-loose__when{ grid-column:2 / -1; text-align:left; }
+  .day-loose__row .button{ min-height:44px; grid-row:1; grid-column:3; }
   .office-task__side{ width:100%; flex-direction:row; align-items:center; justify-content:space-between; }
   .office-task__do{ justify-content:flex-start; }
   .office-task__do .button{ min-height:44px; }
@@ -6051,7 +6081,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 }
 </style>
 <body>
-<script>const BUILD_ID='e67715e653bb';</script>
+<script>const BUILD_ID='ad891d2d9e9a';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -7222,11 +7252,51 @@ function canGiveWork(){ return isAdmin() || isSupervisor(); }
 // it by design and is not a gap. The two figures must agree, and test/dictate.js
 // holds them to it.
 const FLOOR_EXPECTS_WORK_NOT = ['cancelled','delivered','made','ready','shipped','on_hold'];
+
+// When a piece is wanted by: its own finish-by date if it has one, otherwise
+// the date its order ships. A piece with neither is not urgent, it is unplanned,
+// and it sorts last rather than first.
+function pieceNeededBy(it){
+  const own = it && it.target_date;
+  const po  = it && (S.posById[it.po_id]||{}).expected_ship_date;
+  const both = [own, po].filter(Boolean).sort();
+  return both[0] || null;
+}
+// How many days from today until that date; null when there is no date at all.
+function daysUntilNeeded(it){
+  const d = pieceNeededBy(it);
+  return d ? dayGap(today(), d) : null;
+}
+
+// The pieces nobody is holding, by the same rule the day report counts them
+// with (bt_floor_expects_work): a piece paused, ready or shipped has nobody on
+// it by design and is not a gap. The two figures must agree, and test/dictate.js
+// holds them to it.
+//
+// Ordered by when the work is wanted, because this list exists to answer "what
+// do I hand out next". Batch-code order put a piece shipping in November above
+// two shipping in October.
 function loosePieces(){
   return (S.items||[]).filter(it=>
     FLOOR_EXPECTS_WORK_NOT.indexOf(String(it.status||''))<0 && !openAssignment(it.id))
-    .slice().sort((a,b)=>String(batchCodeOf(a.id)||'~').localeCompare(String(batchCodeOf(b.id)||'~')) ||
-                         String(a.product||'').localeCompare(String(b.product||'')));
+    .slice().sort((a,b)=>{
+      const da=pieceNeededBy(a), db=pieceNeededBy(b);
+      if(da&&db && da!==db) return da<db?-1:1;
+      if(da&&!db) return -1;
+      if(db&&!da) return 1;
+      return String(batchCodeOf(a.id)||'~').localeCompare(String(batchCodeOf(b.id)||'~')) ||
+             String(a.product||'').localeCompare(String(b.product||''));
+    });
+}
+// The same list split at the seven-day line, which is the horizon Yash asked
+// this screen to carry: what is wanted this week, and what can wait.
+function loosePiecesByWhen(){
+  const soon=[], later=[];
+  loosePieces().forEach(it=>{
+    const n=daysUntilNeeded(it);
+    (n!=null && n<=7 ? soon : later).push(it);
+  });
+  return {soon, later};
 }
 
 function dayFigures(){
@@ -17217,10 +17287,15 @@ function paWorkSection(p){
 // card then carries a way to give this person something, and a piece that is
 // late or never opened carries a way to move it. A past day is a record and
 // gets none of that.
-function dayPersonCard(p, plan){
+function dayPersonCard(p, plan, showClock){
   const pieces = p.pieces||[];
   const late = pieces.filter(x=>x.overdue).length;
   const mins = +p.minutes||0;
+  // What this person is holding right now, across every day, which is the
+  // number you want before deciding who gets the next piece. It used to live
+  // only inside the assign dialog, so you opened the form to learn the thing
+  // you needed in order to open the form.
+  const load = (workloadByPerson()[p.user_id]||0);
   const move = x => (plan && x.item_id && (x.overdue || (!x.reported && x.ack_state==='pending')))
     ? '<button class="button quiet small day-piece__move" type="button" onclick="mAssign(\''+jsq(x.item_id)+'\')">Reassign</button>' : '';
   const chip = x =>
@@ -17243,7 +17318,10 @@ function dayPersonCard(p, plan){
     '<div class="day-person__head">'+
       '<div><strong>'+esc(p.name)+'</strong>'+
         '<span class="day-person__meta">'+esc(sup?'Supervisor':'Artisan')+
-        ' · '+(p.clocked_in?esc(fmins(mins))+' on the clock':'did not clock in')+
+        // the clock only speaks when somebody on the floor has actually used
+        // it; "did not clock in" on every card, every day, is not information
+        (showClock ? ' · '+(p.clocked_in?esc(fmins(mins))+' on the clock':'not in yet') : '')+
+        ' · '+(load?('holding '+load+' piece'+(load===1?'':'s')):'holding nothing')+
         (late?' · '+late+' past its date':'')+'</span></div>'+
       '<div class="day-person__side">'+
         (nothing ? badge('Nothing given out', plan?'alert':'')
@@ -17307,40 +17385,62 @@ function dayTasksPanel(){
   const mine = !isAdmin();
   const list = all.filter(x => !mine || x.to_user===uid());
   const open = list.filter(x => !x.closed_at && x.ack_state!=='done').length;
-  return '<section class="panel space-top-14" id="day-tasks"><div class="panel__head"><div>'+
+  return '<section class="panel space-top-14'+(list.length?'':' panel--quiet')+'" id="day-tasks"><div class="panel__head"><div>'+
     '<h3 class="panel__title">'+(mine?'From the office':'Tasks to the supervisors')+'</h3>'+
     '<p class="panel__description">'+(mine
       ? (open ? open+' waiting for your answer.' : 'Nothing from the office today.')
       : (open ? open+' open. A task stays here, and on Production control, until it is answered.'
               : 'Nothing open. Send one from a supervisor’s card below.'))+'</p></div></div>'+
-    '<div class="panel__body">'+
-    (list.length ? '<ul class="office-tasks">'+list.map(x=>officeTaskRow(x, mine)).join('')+'</ul>'
-                 : '<div class="empty-state">'+(mine?'Nothing to answer.':'No tasks out.')+'</div>')+
-    '</div></section>';
+    (list.length ? '<div class="panel__body"><ul class="office-tasks">'+
+                     list.map(x=>officeTaskRow(x, mine)).join('')+'</ul></div>' : '')+
+    '</section>';
 }
 
 // The pieces nobody is holding, each with the one button that fixes it.
+// The pieces nobody is holding, soonest wanted first, split at the seven-day
+// line so this week's gap is separate from the rest. Each row says the date
+// that put it where it is, because a list ordered by a hidden number is a list
+// a person cannot check.
+function dayLooseRow(it){
+  const ph=targetImage(it)||(S.photosByItem[it.id]||[])[0];
+  const face = ph ? '<img alt="" data-ph-path="'+esc(ph.path)+'">'
+                  : '<span>'+esc(shortRef(it)||it.item_code||'—')+'</span>';
+  const st=curStage(it);
+  const n=daysUntilNeeded(it), by=pieceNeededBy(it);
+  const when = by==null ? 'No date set'
+    : n<0  ? (-n)+' day'+(n===-1?'':'s')+' over'
+    : n===0? 'Wanted today'
+    : n===1? 'Wanted tomorrow'
+    : 'Wanted '+fdate(by);
+  const tone = by!=null && n<=2 ? ' day-loose__when--now' : '';
+  return '<li class="day-loose__row" data-item="'+esc(it.id)+'">'+
+    '<span class="day-loose__face">'+face+'</span>'+
+    '<div class="day-loose__what"><strong>'+esc(it.product)+'</strong>'+
+      '<small>'+esc([batchCodeOf(it.id), st?shortStage(st.name):'Not started', it.stone].filter(Boolean).join(' · '))+'</small></div>'+
+    '<span class="day-loose__when'+tone+'">'+esc(when)+'</span>'+
+    '<button class="button small" type="button" onclick="mAssign(\''+jsq(it.id)+'\')">Give out</button>'+
+  '</li>';
+}
 function dayLoosePanel(){
-  const loose = loosePieces();
-  const thumb = it => { const ph=targetImage(it)||(S.photosByItem[it.id]||[])[0];
-    return ph ? '<img alt="" data-ph-path="'+esc(ph.path)+'">' : '<span>'+esc(shortRef(it)||it.item_code||'—')+'</span>'; };
+  const {soon, later} = loosePiecesByWhen();
+  const n = soon.length + later.length;
+  const group = (rows, head, note) => rows.length
+    ? '<p class="day-loose__head">'+esc(head)+' <span>'+esc(note)+'</span></p>'+
+      '<ul class="day-loose">'+rows.map(dayLooseRow).join('')+'</ul>'
+    : '';
   return '<section class="panel space-top-14" id="day-loose"><div class="panel__head"><div>'+
-    '<h3 class="panel__title">Nobody on it</h3>'+
-    '<p class="panel__description">'+(loose.length
-      ? loose.length+' piece'+(loose.length===1?' is':'s are')+' on the floor with nobody holding '+(loose.length===1?'it':'them')+'. '+
-        (loose.length===1?'It':'They')+' cannot fall behind on this report, because nobody has been asked for '+(loose.length===1?'it':'them')+'.'
+    '<h3 class="panel__title">Nobody on it <span class="panel__count">'+n+'</span></h3>'+
+    '<p class="panel__description">'+(n
+      ? (soon.length
+          ? soon.length+' of them '+(soon.length===1?'is':'are')+' wanted within the week. Soonest first.'
+          : 'None of them is wanted within the week.')+
+        ' Nothing here can fall behind on this report, because nobody has been asked for it.'
       : 'Every piece on the floor has somebody on it.')+'</p></div>'+
-    (loose.length>1?'<button class="button" type="button" onclick="mAssign(\''+jsq(loose[0].id)+'\')">Start with the first</button>':'')+
+    (soon.length?'<button class="button" type="button" onclick="mAssign(\''+jsq(soon[0].id)+'\')">Start with the soonest</button>':'')+
     '</div><div class="panel__body">'+
-    (loose.length ? '<ul class="day-loose">'+loose.map(it=>{
-      const st=curStage(it);
-      return '<li class="day-loose__row" data-item="'+esc(it.id)+'">'+
-        '<span class="day-loose__face">'+thumb(it)+'</span>'+
-        '<div class="day-loose__what"><strong>'+esc(it.product)+'</strong>'+
-          '<small>'+esc([batchCodeOf(it.id), st?shortStage(st.name):'Not started', it.stone].filter(Boolean).join(' · '))+'</small></div>'+
-        '<button class="button small" type="button" onclick="mAssign(\''+jsq(it.id)+'\')">Give out</button>'+
-      '</li>'; }).join('')+'</ul>'
-      : '<div class="empty-state">Nothing to hand out.</div>')+
+    (n ? group(soon,'This week','wanted in the next seven days')+
+         group(later,'After that','wanted later than seven days, or no date set')
+       : '<div class="empty-state">Nothing to hand out.</div>')+
     '</div></section>';
 }
 
@@ -17350,7 +17450,9 @@ function dayRemindersPanel(){
   const who = id => ((S.dayReport&&S.dayReport.people)||[]).find(p=>p.user_id===id) || null;
   const label = {no_record:'has recorded nothing', not_accepted:'has not opened the task',
                  floor_summary:'should chase the floor'};
-  return '<section class="panel space-top-14"><div class="panel__head"><div>'+
+  // An empty panel keeps its head and drops its body: a 263px box saying there
+  // is nothing in it was a quarter of this page when two of them stacked.
+  return '<section class="panel space-top-14'+(open.length?'':' panel--quiet')+'"><div class="panel__head"><div>'+
     '<h3 class="panel__title">Reminders</h3>'+
     '<p class="panel__description">'+
       (open.length
@@ -17358,8 +17460,8 @@ function dayRemindersPanel(){
         : 'Nothing is waiting to be sent.')+
       (sent?' · '+sent+' already sent today':'')+'</p></div>'+
     '<button class="button secondary" type="button" onclick="queueRemindersNow()">Check again now</button>'+
-    '</div><div class="panel__body">'+
-    (open.length ? '<ul class="day-reminders">'+open.map(r=>{
+    '</div>'+
+    (open.length ? '<div class="panel__body"><ul class="day-reminders">'+open.map(r=>{
       const p = who(r.user_id);
       const link = waReminderLink(p&&p.phone, r.message);
       return '<li class="day-reminder">'+
@@ -17374,9 +17476,9 @@ function dayRemindersPanel(){
           '<button class="button secondary" type="button" '+
             'onclick="markReminderSent(\''+jsq(r.id)+'\',\'spoke_to_them\')">I spoke to them</button>'+
         '</div></li>';
-    }).join('')+'</ul>'
-      : '<div class="empty-state">Everybody has recorded their day.</div>')+
-    '</div></section>';
+    }).join('')+'</ul></div>'
+      : '')+
+    '</section>';
 }
 
 function vDayReport(){
@@ -17414,15 +17516,15 @@ function vDayReport(){
        esc(ftime(rep.generated_at))+'. It is what the day looked like then, not what the database says now.</span></div>';
 
   h+='<div class="kpi-grid space-top-14">'+
+    // Three, where there were five. "Still to answer" was the complement of
+    // "Recorded" and now rides in its note, and "Nobody on it" said the same
+    // number as the panel directly beneath it.
     kpiTile('On the clock', f.onClock+' of '+f.people,
-            f.onClock<f.people?'somebody did not clock in':'everybody clocked in', null, f.onClock<f.people)+
+            f.onClock<f.people?(f.people-f.onClock)+' not in yet':'everybody clocked in', null, f.onClock<f.people)+
     kpiTile('Given out', String(f.assigned), f.notAccepted?f.notAccepted+' not opened yet':'all opened', null, !!f.notAccepted)+
     kpiTile('Recorded', f.reported+' of '+f.assigned,
-            f.reported<f.assigned?'the rest is still owed':'the whole day is in', null, f.reported<f.assigned)+
-    kpiTile('Still to answer', String(f.outstanding),
-            f.outstanding?'a reminder is queued for each':'nothing outstanding', null, !!f.outstanding)+
-    kpiTile('Nobody on it', String(f.nobody),
-            f.nobody?'pieces with no artisan':'every piece has somebody', null, !!f.nobody)+
+            f.outstanding?f.outstanding+' still owed, a reminder queued for each':'the whole day is in',
+            null, f.reported<f.assigned)+
     '</div>';
 
   // The gap first, because it is the one thing on this screen nobody else is
@@ -17436,6 +17538,9 @@ function vDayReport(){
   // were given anything: a person with nothing to do is the other gap, and the
   // way to fill it is on the card. Supervisors first, then the artisans.
   let people = (rep.people||[]).slice();
+  // Attendance speaks only once somebody has used it. Until then the clock is
+  // silent on every card rather than telling four people they did not clock in.
+  const showClock = (rep.people||[]).some(p=>p.clocked_in) || !!f.onClock;
   if(plan){
     const seen = {};
     people.forEach(p=>{ seen[p.user_id]=true; });
@@ -17453,7 +17558,7 @@ function vDayReport(){
       ? 'Everybody on the floor, and what each has for today. Give out work from the card.'
       : people.length ? 'Everybody who had work on this date.' : 'Nobody had work on this date.')+'</p></div></div>'+
     '<div class="panel__body">'+
-    (people.length ? '<div class="day-people">'+people.map(p=>dayPersonCard(p, plan)).join('')+'</div>'
+    (people.length ? '<div class="day-people">'+people.map(p=>dayPersonCard(p, plan, showClock)).join('')+'</div>'
                    : '<div class="empty-state">No work was given out for this day.</div>')+
     '</div></section>';
 
@@ -22614,24 +22719,31 @@ function mAssign(itemId, stageId, presetPerson){
           esc(p.full_name)+' — '+((workloadByPerson()[p.user_id]||0))+' piece'+
           ((workloadByPerson()[p.user_id]||0)===1?'':'s')+' now</option>').join('')+
         '</select></div>'+
+      '<div class="field field--full"><label for="as-note">What to do</label>'+
+        '<textarea id="as-note" rows="2" placeholder="e.g. Flute the four legs to the drawing, 12 mm spacing">'+
+        esc(cur&&cur.instruction?cur.instruction:'')+'</textarea></div>'+
+      // (R05) Telling somebody to work to a drawing that is not on file sends
+      // them to the bench with a question. The artisan's card now says so; this
+      // says it here, while it can still be fixed, rather than after. It stays
+      // above the fold: a warning nobody opens is not a warning.
+      '<p class="field-hint field--full attn attn--warn attn--flat" id="as-nodrawing" hidden></p>'+
+      // (R04) and whether this stage makes sense on this piece at all
+      '<p class="field-hint field--full attn attn--warn attn--flat" id="as-stagefit" hidden></p>'+
+      // Four fields do nearly every handout. The rest are real and stay, folded
+      // away, because a nine-field form one piece at a time is what stopped
+      // this being usable for planning a morning.
+      '<details class="as-more field--full"'+(cur&&((cur.support||[]).length||cur.evidence_required||cur.planned_hours!=null||cur.equipment_id)?' open':'')+'>'+
+      '<summary>More: a helper, what to send back, hours and the machine</summary>'+
+      '<div class="form-grid">'+
       '<div class="field field--full"><label>Helping (optional)</label>'+
         '<div class="pick-list pick-list--tight" id="as-support">'+people.map(p=>
           '<label class="pick"><input type="checkbox" value="'+esc(p.user_id)+'"'+
           ((cur&&(cur.support||[]).indexOf(p.user_id)>=0)?' checked':'')+'>'+
           '<span><strong>'+esc(p.full_name)+'</strong></span></label>').join('')+'</div>'+
         '<p class="field-hint">Their time is recorded separately. The same person cannot both lead and help.</p></div>'+
-      '<div class="field field--full"><label for="as-note">What to do</label>'+
-        '<textarea id="as-note" rows="2" placeholder="e.g. Flute the four legs to the drawing, 12 mm spacing">'+
-        esc(cur&&cur.instruction?cur.instruction:'')+'</textarea></div>'+
       '<div class="field field--full"><label for="as-ev">What to send back</label>'+
         '<input id="as-ev" placeholder="e.g. two photos and the tape measure on the width" value="'+
         esc(cur&&cur.evidence_required?cur.evidence_required:'')+'"></div>'+
-      // (R05) Telling somebody to work to a drawing that is not on file sends
-      // them to the bench with a question. The artisan's card now says so; this
-      // says it here, while it can still be fixed, rather than after.
-      '<p class="field-hint field--full attn attn--warn attn--flat" id="as-nodrawing" hidden></p>'+
-      // (R04) and whether this stage makes sense on this piece at all
-      '<p class="field-hint field--full attn attn--warn attn--flat" id="as-stagefit" hidden></p>'+
       // the plan in hours and the machine it needs; an unavailable machine is
       // shown and disabled, and the server refuses it regardless (test 48)
       // these two belong together and their row partner used to depend on what
@@ -22646,6 +22758,7 @@ function mAssign(itemId, stageId, presetPerson){
         '</select></div>'+
       '</div></div>'+
       '<p class="field-hint field--full">Planned hours guide workload and later variance. No wage rate or cost is attached to them.</p>'+
+      '</div></details>'+
       (cur?'<div class="field field--full"><label for="as-why">Why the change (optional)</label>'+
         '<input id="as-why" placeholder="e.g. moved to the bench saw"></div>':'')+
       '<div class="button-row field--full"><button class="button" type="button" id="as-go">'+
