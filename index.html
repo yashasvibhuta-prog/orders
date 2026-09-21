@@ -4070,6 +4070,33 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .ch-page .finance-strip strong{display:block;margin-top:11px;font:600 19px/1 var(--serif,Georgia,serif)}
 .sfa .ch-page .finance-strip small{display:block;margin-top:7px;color:var(--ink-faint);font-size:12px}
 
+/* Tally against StoneFlow's own arithmetic. Office-only, so it reads as a
+   working note rather than as something to show a buyer: no headline number of
+   its own, the two figures side by side, and the reason underneath. */
+.sfa .ch-page .recon{margin-bottom:16px;border:1px solid var(--line);border-left:3px solid var(--warning);
+  border-radius:12px;background:var(--surface);overflow:hidden}
+.sfa .ch-page .recon--ok{border-left-color:var(--success)}
+.sfa .ch-page .recon__head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;
+  padding:14px 16px 12px}
+.sfa .ch-page .recon__head h3{margin:0;font-size:19px}
+.sfa .ch-page .recon__head p{margin:5px 0 0;color:var(--ink-faint);font-size:12.5px}
+.sfa .ch-page .recon__tick{color:var(--success);font-weight:700}
+.sfa .ch-page .recon__cross{color:var(--critical);font-weight:700}
+.sfa .ch-page .recon__figures{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid var(--line)}
+.sfa .ch-page .recon__figures>div{position:relative;padding:12px 16px}
+.sfa .ch-page .recon__figures>div+div:before{content:"";position:absolute;left:0;top:13px;bottom:13px;
+  width:1px;background:var(--line)}
+.sfa .ch-page .recon__figures span{display:block;color:var(--ink-faint);font-size:12px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase}
+.sfa .ch-page .recon__figures strong{display:block;margin-top:10px;font:600 19px/1 var(--serif,Georgia,serif)}
+.sfa .ch-page .recon__figures small{display:block;margin-top:7px;color:var(--ink-faint);font-size:12px;line-height:1.45}
+.sfa .ch-page .recon__why{margin:0;padding:12px 16px 12px 32px;border-top:1px solid var(--line);
+  font-size:13px;line-height:1.55}
+.sfa .ch-page .recon__why li+li{margin-top:5px}
+.sfa .ch-page .recon__acts{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}
+.sfa .ch-page .recon__foot{margin:0;padding:0 16px 14px;color:var(--ink-faint);font-size:12px;line-height:1.5}
+
 .sfa .ch-page .layout{display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:16px;align-items:start}
 .sfa .ch-page .stack{display:grid;gap:14px}
 .sfa .ch-page .side{position:sticky;top:140px}
@@ -4186,6 +4213,10 @@ body.reports-mode .sfa .content{max-width:1700px}
   .sfa .ch-page .po-card .readiness{grid-template-columns:1fr;border-top:0;padding-top:0}
   .sfa .ch-page .finance-strip{grid-template-columns:repeat(2,1fr)}
   .sfa .ch-page .finance-strip>div:nth-child(3):before{display:none}
+  /* three money columns will not read at this width; stacked, the divider has
+     to move from the left edge to the top or the figures run together */
+  .sfa .ch-page .recon__figures{grid-template-columns:1fr}
+  .sfa .ch-page .recon__figures>div+div:before{left:16px;right:16px;top:0;bottom:auto;width:auto;height:1px}
 }
 @media (max-width:640px){
   .sfa .ch-page .hero{padding-inline:4px;flex-direction:column;align-items:flex-start}
@@ -6081,7 +6112,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 }
 </style>
 <body>
-<script>const BUILD_ID='666d2d404bf5';</script>
+<script>const BUILD_ID='b97c31576bf2';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -7985,9 +8016,17 @@ function indexAccounts(invoices, ewaybills, snapshots, lines){
 }
 
 // The most recent statement for a buyer that the reader is allowed to see.
+//
+// Two statements can carry the same as_of: the same Tally ledger imported
+// twice, which is what happens when the first import was wrong and the office
+// sends the PDF through again. Sorting on the date alone left which one showed
+// to chance. The later IMPORT supersedes, so a corrected statement always wins
+// without anyone having to delete the first one.
 function latestStatement(buyerId){
+  const when = s => String(s.created_at||s.as_of||'');
   return (S.ledgerSnaps||[]).filter(s=>s.buyer_id===buyerId)
-    .sort((a,b)=>String(b.as_of).localeCompare(String(a.as_of)))[0] || null;
+    .sort((a,b)=>String(b.as_of).localeCompare(String(a.as_of)) ||
+                 when(b).localeCompare(when(a)))[0] || null;
 }
 
 // A figure with a direction. "Balance" on its own is the ambiguity we are
@@ -8005,6 +8044,119 @@ function statementStanding(sn){
       ? 'Paid in advance and not yet drawn against. Nothing is due from you.'
       : 'This amount is payable to Gujraj Impex.',
     as_of: sn.as_of
+  };
+}
+
+/* ---- does StoneFlow agree with Tally? -------------------------------------
+   The app holds two money figures and they are built from different things.
+   The Tally snapshot is a photograph of the books on a date, and it is what the
+   buyer's Statement panel shows him. The app's own figure is every invoice that
+   has been PUBLISHED, less every payment that has been RECORDED here. They are
+   not one number worked out twice, so nothing makes them agree by construction,
+   and until now nothing on any screen said when they had stopped agreeing.
+
+   That silence is what let five Essentia invoices sit as drafts against a Tally
+   closing of ₹8,82,926.04 with no receipts entered at all, and the only reason
+   anybody found out was that the owner asked.
+
+   The comparison is made over the snapshot's OWN period, because that is the
+   only window both sides can be asked about. Tally's opening balance is the
+   shared starting point — the app has no opening of its own and inventing one
+   would make the two figures agree for the wrong reason.
+
+   Sign convention throughout: a debit is positive (the buyer owes it), a credit
+   is negative (we hold it). A credit closing balance is an advance in hand. */
+function statementReconcile(buyerId){
+  const sn = latestStatement(buyerId);
+  if(!sn || sn.closing == null) return null;
+  const cur = sn.currency || 'INR';
+  const from = sn.from_date ? String(sn.from_date).slice(0,10) : null;
+  const to   = sn.as_of ? String(sn.as_of).slice(0,10) : null;
+  // A document belongs to the period when it is dated inside it. A document with
+  // no date cannot be placed, so it is counted as unplaceable rather than
+  // silently dropped into or out of the window.
+  const inWindow = d => {
+    if(!d) return null;
+    const s = String(d).slice(0,10);
+    if(from && s < from) return false;
+    if(to   && s > to)   return false;
+    return true;
+  };
+  const sameCur = x => (x.currency || 'INR') === cur;
+
+  const allInv = (S.invByBuyer[buyerId] || []).filter(sameCur);
+  const billed   = allInv.filter(i=>i.published_at && inWindow(i.invoice_date)===true);
+  const drafts   = allInv.filter(i=>!i.published_at && inWindow(i.invoice_date)===true);
+  const undated  = allInv.filter(i=>inWindow(i.invoice_date)===null);
+  const outside  = allInv.filter(i=>inWindow(i.invoice_date)===false);
+  const paid     = (S.payByBuyer[buyerId] || []).filter(sameCur)
+                     .filter(p=>inWindow(p.paid_on)===true);
+
+  const sum = (rows, k) => rows.reduce((a,r)=>a+num(r[k]), 0);
+  const invoiced = sum(billed,'total');
+  const received = sum(paid,'amount');
+  const draftTotal = sum(drafts,'total');
+
+  const openingKnown = sn.opening != null;
+  const opening = openingKnown
+    ? (sn.opening_side === 'credit' ? -num(sn.opening) : num(sn.opening)) : 0;
+  const tally = sn.closing_side === 'credit' ? -num(sn.closing) : num(sn.closing);
+  const app = opening + invoiced - received;
+  const gap = app - tally;
+
+  // What Tally itself recorded over the period, so the size of the gap can be
+  // named rather than just stated. These come off the imported lines, which are
+  // only present once a statement has been imported with its detail.
+  const lines = (S.ledgerLines[sn.id] || []);
+  const ledgerDebit  = lines.filter(l=>l.side==='debit').reduce((a,l)=>a+num(l.amount),0);
+  const ledgerCredit = lines.filter(l=>l.side==='credit').reduce((a,l)=>a+num(l.amount),0);
+
+  // Why they differ, in the order worth acting on. Only reasons that are
+  // actually true of this account are listed — a guessed explanation is worse
+  // than none, because it sends the office looking in the wrong place.
+  const reasons = [];
+  if(drafts.length) reasons.push({
+    kind:'drafts', count:drafts.length, amount:draftTotal,
+    text: drafts.length+' invoice'+(drafts.length===1?'':'s')+' worth '+money(draftTotal,cur)+
+          ' '+(drafts.length===1?'is':'are')+' still a draft. Publish '+
+          (drafts.length===1?'it':'them')+' and this account starts counting '+
+          (drafts.length===1?'it':'them')+'.'
+  });
+  if(!paid.length && ledgerCredit > 0) reasons.push({
+    kind:'no_receipts', count:0, amount:ledgerCredit,
+    text:'Tally shows '+money(ledgerCredit,cur)+' received over this period and StoneFlow has no '+
+         'payment recorded against this account. Record them and the two agree from here on.'
+  });
+  else if(paid.length && ledgerCredit > 0 && Math.abs(received-ledgerCredit) >= 1) reasons.push({
+    kind:'receipts_differ', count:paid.length, amount:ledgerCredit-received,
+    text:'Tally shows '+money(ledgerCredit,cur)+' received over this period; StoneFlow holds '+
+         money(received,cur)+'.'
+  });
+  if(ledgerDebit > 0 && Math.abs(invoiced-ledgerDebit) >= 1 && !drafts.length) reasons.push({
+    kind:'billing_differs', count:billed.length, amount:ledgerDebit-invoiced,
+    text:'Tally billed '+money(ledgerDebit,cur)+' over this period; StoneFlow holds '+
+         money(invoiced,cur)+' in published invoices.'
+  });
+  if(!openingKnown) reasons.push({
+    kind:'no_opening', count:0, amount:0,
+    text:'This statement carries no opening balance, so the comparison starts from nil.'
+  });
+  if(undated.length) reasons.push({
+    kind:'undated', count:undated.length, amount:sum(undated,'total'),
+    text: undated.length+' invoice'+(undated.length===1?'':'s')+' '+(undated.length===1?'has':'have')+
+          ' no date and could not be placed in the period.'
+  });
+
+  return {
+    cur, from, to, as_of: to,
+    agrees: Math.abs(gap) < 1,
+    tally, app, gap,
+    opening, openingKnown,
+    invoiced, received, invoices: billed.length, payments: paid.length,
+    drafts: drafts.length, draftTotal,
+    outside: outside.length,
+    ledgerDebit, ledgerCredit, ledgerLines: lines.length,
+    reasons
   };
 }
 
@@ -8109,6 +8261,27 @@ function ownerActions(){
       meta:o.buyer.company+' · '+money(o.amount,o.currency)+' · as at '+fdate(o.as_of),
       sort:-o.amount, action:{label:'Open', go:"go('#/finance')"},
       note:days>0?('Statement is '+days+' day'+(days===1?'':'s')+' old'):'' });
+  });
+
+  // The books and the app have stopped agreeing. Kept out of the 'finance' type
+  // on purpose: that type counts buyers who owe money, and a bookkeeping gap is
+  // not a debt. It is office work — usually a bill nobody published, or a
+  // receipt nobody entered — and until it appeared here the only way to find it
+  // was to open the client and look.
+  (S.buyers||[]).forEach(b=>{
+    const r = statementReconcile(b.id);
+    if(!r || r.agrees) return;
+    const first = (r.reasons[0]||{}).text || '';
+    push({ urgency:1, chip:'finance', chipLabel:'Finance', icon:'stage-planning',
+      group:'desk', subject:b.company, kind:'Books disagree', tone:'warn',
+      since:r.as_of, ageWord:'old',
+      detail:'Tally and StoneFlow differ by '+money(Math.abs(r.gap), r.cur)+
+             (first?' · '+first:''),
+      type:'books', title:'Tally and StoneFlow do not agree',
+      meta:b.company+' · out by '+money(Math.abs(r.gap), r.cur)+' as at '+fdate(r.as_of),
+      sort:-Math.abs(r.gap),
+      action:{label:'Open', go:"go('#/clients/"+b.id+"')"},
+      note:first });
   });
 
   // The floor has reported a piece stuck.
@@ -10081,7 +10254,7 @@ const PROD_TYPES=[['all','All decisions'],['blocked','Work stopped'],['quality',
                   ['missing','Missing records'],['stage','Stage decisions'],['publish','Publish to buyer']];
 const PROD_LABEL={blocked:'Work stopped',quality:'Quality',review:'Review evidence',people:'People',missing:'Missing record',
                   stage:'Stage decision',publish:'Publish to buyer',waiting:'With the buyer',
-                  finance:'Finance',other:'Decision'};
+                  finance:'Finance',books:'Books disagree',other:'Decision'};
 function prodRows(){
   return ownerActions().map(a=>Object.assign({}, a, {type:a.type||'other'}));
 }
@@ -10697,6 +10870,54 @@ function daysSince(d){
   return Math.round((b-a)/864e5);
 }
 
+/* Tally against StoneFlow's own arithmetic, on the office's screen only.
+   The buyer is shown the Tally figure and nothing else — he is not the person
+   who publishes an invoice or records a receipt, so a discrepancy is ours to
+   fix, not his to read about. Guarded here as well as by the policies, because
+   a panel that leaks once has leaked. */
+function chReconcile(b){
+  if(!isAdmin()) return '';
+  const r = statementReconcile(b.id);
+  if(!r) return '';
+  const sign = n => (n<0?'−':'')+money(Math.abs(n), r.cur);
+  const period = (r.from?fdate(r.from)+' – ':'to ')+fdate(r.to);
+  const head = '<div class="recon__head"><div><h3>Tally and StoneFlow'+
+    (r.agrees?'<span class="recon__tick"> agree</span>':'<span class="recon__cross"> do not agree</span>')+'</h3>'+
+    '<p>'+esc(period)+'</p></div>'+
+    '<span class="badge'+(r.agrees?'':' warn')+'">'+
+      esc(r.agrees?'Reconciled':'Out by '+money(Math.abs(r.gap), r.cur))+'</span></div>';
+
+  const figures='<div class="recon__figures">'+
+    '<div><span>Tally says</span><strong>'+esc(sign(r.tally))+'</strong>'+
+      '<small>Closing balance off the imported statement. This is what the buyer sees.</small></div>'+
+    '<div><span>StoneFlow works out</span><strong>'+esc(sign(r.app))+'</strong>'+
+      '<small>'+esc((r.openingKnown?sign(r.opening)+' opening, plus ':'')+
+        money(r.invoiced,r.cur)+' published across '+r.invoices+' invoice'+(r.invoices===1?'':'s')+
+        ', less '+money(r.received,r.cur)+' received across '+r.payments+' payment'+(r.payments===1?'':'s'))+'</small></div>'+
+    '<div><span>Difference</span><strong>'+esc(r.agrees?'Nil':sign(r.gap))+'</strong>'+
+      '<small>'+esc(r.agrees
+        ? 'Both sides hold the same documents for this period.'
+        : (r.gap<0 ? 'StoneFlow is short of Tally by this much.'
+                   : 'StoneFlow is ahead of Tally by this much.'))+'</small></div>'+
+  '</div>';
+
+  const why = r.agrees || !r.reasons.length ? '' :
+    '<ul class="recon__why">'+r.reasons.map(x=>'<li>'+esc(x.text)+'</li>').join('')+'</ul>';
+
+  const acts = '<div class="recon__acts">'+
+    (r.drafts?'<button class="button secondary small" type="button" onclick="go(\'#/accounts\')">'+
+      'Publish '+r.drafts+' draft invoice'+(r.drafts===1?'':'s')+'</button>':'')+
+    '<button class="button quiet small" type="button" onclick="mPayment(\''+jsq(b.id)+'\',null)">Record payment</button>'+
+    '<button class="button quiet small" type="button" onclick="go(\'#/accounts\')">Import a fresh ledger</button>'+
+  '</div>';
+
+  const foot = '<p class="recon__foot">These are two separate records, not one figure worked out twice. '+
+    'They agree when StoneFlow is holding the same invoices and receipts Tally is. '+
+    'A bill posts on its own; the ledger import is what brings the buyer-facing balance up to date.</p>';
+
+  return '<section class="recon'+(r.agrees?' recon--ok':'')+'">'+head+figures+why+acts+foot+'</section>';
+}
+
 // Rule 4 and rule 9: the photographs at full size, and the four readiness
 // figures on the card before it is opened.
 function chThumbs(items){
@@ -10883,6 +11104,7 @@ function chAccount(){
       '<button class="tab'+(tab==='access'?' active':'')+'" data-tab="access" type="button" onclick="chTab(\'access\')">Contacts &amp; access <span class="shortcut">M</span></button>'+
     '</nav>'+
     chFinanceStrip(b)+
+    chReconcile(b)+
     '<div class="layout"><div class="stack">'+
       '<section class="panel" id="ch-orders"><header class="panel-head"><div>'+
         '<h2>Purchase orders and shipment readiness</h2>'+
