@@ -4070,6 +4070,25 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .ch-page .finance-strip strong{display:block;margin-top:11px;font:600 19px/1 var(--serif,Georgia,serif)}
 .sfa .ch-page .finance-strip small{display:block;margin-top:7px;color:var(--ink-faint);font-size:12px}
 
+/* The owner, looking through a buyer's eyes. Outside .sfa on purpose: the bar
+   sits above the whole document and has to survive the buyer portal's own
+   stylesheet, which is scoped to .sfb and knows nothing about it. */
+.preview-bar{position:sticky;top:0;z-index:900;display:flex;align-items:center;gap:12px;
+  padding:10px 16px;background:#1D1D1F;color:#fff;
+  font:500 13px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif}
+.preview-bar__eye{display:inline-flex;flex:0 0 auto;opacity:.75}
+.preview-bar__text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1 1 auto}
+.preview-bar__text strong{font-weight:650}
+.preview-bar__text span{color:rgba(255,255,255,.72);font-size:12px}
+.preview-bar .button{flex:0 0 auto}
+.preview-bar .button--secondary{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2);color:#fff}
+.preview-bar .button--secondary:hover{background:rgba(255,255,255,.22)}
+@media (max-width:640px){
+  .preview-bar{flex-wrap:wrap;gap:8px;padding:9px 14px}
+  .preview-bar__text span{display:none}
+  .preview-bar .button{width:100%}
+}
+
 /* Tally against StoneFlow's own arithmetic. Office-only, so it reads as a
    working note rather than as something to show a buyer: no headline number of
    its own, the two figures side by side, and the reason underneath. */
@@ -6112,7 +6131,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 }
 </style>
 <body>
-<script>const BUILD_ID='ab062b7a47dd';</script>
+<script>const BUILD_ID='e0fed8447672';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -6645,7 +6664,10 @@ const S = {
   monthReport:null, monthDate:null, monthLoading:false, monthTab:'people',
   // one person's month, cached per person so opening five records in a row does
   // not rebuild the whole workshop five times
-  personMonth:{}, personMonthLoading:{}
+  personMonth:{}, personMonthLoading:{},
+  // set only while the owner is looking at the portal as one of his buyers;
+  // holds everything of his own that was put aside to make room for theirs
+  preview:null
 };
 
 // Signing out has to empty what this login was allowed to load, not only end
@@ -7298,6 +7320,23 @@ function waReminderLink(phone, text){
 // to. bt_assign_work refuses everybody else regardless.
 function canGiveWork(){ return isAdmin() || isSupervisor(); }
 
+/* Has this person ever chosen their own password?
+   bt_office_issued_password sets must_change_password, and every login made
+   since it existed carries it. Six accounts on the live database predate it:
+   they are still on a password the office typed and sent, from a generator
+   weak enough to be worth treating every one of its outputs as spent, and
+   nothing was making them change it — the flag was simply never set.
+   Backfilling the flag would have fixed those six and left the next account
+   made by some path that forgets to call it in exactly the same state. So the
+   question is asked of the fact rather than of the flag: a login that has
+   never recorded choosing its own password has not chosen one, whatever any
+   column says, and it gets the choose-a-password screen and nothing else. */
+function mustChoosePassword(){
+  const p = S.profile;
+  if(!p) return false;
+  return !!p.must_change_password || !p.password_set_at;
+}
+
 // The pieces nobody is holding, by the same rule the day report counts them
 // with (bt_floor_expects_work): a piece paused, ready or shipped has nobody on
 // it by design and is not a gap. The two figures must agree, and test/dictate.js
@@ -7593,6 +7632,10 @@ function officeTasksFor(userId){
 }
 
 async function loadData(){
+  // A refresh while the owner is looking through a buyer's eyes would put his
+  // own rows back behind a screen labelled as the buyer's, which is the one
+  // way this feature could lie. It waits.
+  if(inBuyerPreview()) return;
   if(isStaff()){ await loadStaffData(); await loadOfficeTasks(); return; }
   await loadOwnerData();
   await loadOfficeTasks();
@@ -8178,6 +8221,170 @@ function statementReconcile(buyerId){
     ledgerDebit, ledgerCredit, ledgerLines: lines.length,
     reasons
   };
+}
+
+/* ---- looking at the portal through the buyer's eyes ------------------------
+   "Owner view" was a label on a chip, and Yash asked more than once for a way
+   to see what Chitranjan actually sees before sending him something. Reading
+   the code to work out what would be hidden is not an answer.
+
+   The honest way to build this is the dangerous way to build it. Rendering the
+   buyer's screens against the OWNER's data would show him a portal carrying
+   pending photographs, unpublished statements and other buyers' orders, and he
+   would believe the buyer could see them. So the preview does not dress up the
+   owner's data: it empties the whole of S and fills back only what that buyer
+   is entitled to, and it makes isAdmin() false so every guard, every filter and
+   every view behaves as it does for the buyer, with no branch anywhere saying
+   "unless we are pretending".
+
+   The list below is an ALLOW list on purpose. Anything not named is emptied, so
+   a collection added to S next month leaks nothing into the preview until
+   somebody decides it should be there. A deny list would have the opposite
+   default, and the default is the whole safety property. */
+const PREVIEW_FILL = ['buyers','buyersById','pos','posById','items','itemsById','stByItem',
+  'comments','commentsByItem','photos','photosByItem','photosByPo','dailyByDate',
+  'updates','updByItem','photosByUpdate','docsByPo','docsByItem','readMarks',
+  'invoices','invByBuyer','ewaybills','ewbByDoc','ledgerSnaps','ledgerLines',
+  'revisions','decisionByRev','revByStage','allocations','allocByPo','subs','subPending'];
+// Kept as they are: the session's own identity and the shape of the workflow.
+const PREVIEW_HOLD = ['session','settings','stages','stagesById','ready','urlCache','lastLoad'];
+
+/* Writing is off while the preview is on, and it is off at the database client
+   rather than on each button, because a guard on each button is a list and a
+   list is a thing somebody forgets to add to.
+
+   Reading stays on, and has to: a portal whose photographs will not load is not
+   a preview of anything. Storage links and plain selects pass through to the
+   real client; everything that changes a row, calls a procedure or uploads a
+   file is refused with a sentence rather than a stack trace. What stops a read
+   from undoing the narrowing is loadData(), which does nothing while this is
+   on — otherwise a background refresh would quietly put the owner's own rows
+   back into a screen labelled as the buyer's. */
+function previewClient(real){
+  const no = () => { throw new Error('Nothing can be changed while you are looking at the buyer’s view.'); };
+  return {
+    from(t){
+      const q = real.from(t);
+      return { select:(...a)=>q.select.apply(q,a),
+               insert:no, update:no, upsert:no, delete:no };
+    },
+    rpc: no,
+    storage: { from(b){
+      const s = real.storage.from(b);
+      return { createSignedUrl:(...a)=>s.createSignedUrl.apply(s,a),
+               download:(...a)=>s.download.apply(s,a),
+               upload:no, remove:no };
+    } },
+    auth: real.auth,
+    __preview: true
+  };
+}
+
+function inBuyerPreview(){ return !!(S.preview && S.preview.buyer_id); }
+
+function enterBuyerPreview(buyerId){
+  if(inBuyerPreview()) return;
+  if(!isAdmin()) return;                       // and the policies say so as well
+  const buyer = S.buyersById[buyerId];
+  if(!buyer) return;
+
+  // Which of that company's people to look through. The portal differs by
+  // person — a project user sees fewer orders, a login without finance access
+  // sees no money at all — so the preview uses a real login where one exists
+  // rather than inventing the most privileged reader.
+  const people = (S.profilesAll||[]).filter(p=>p.buyer_id===buyerId && p.active!==false);
+  const as = people.filter(p=>(p.buyer_role||'administrator')==='administrator')[0] || people[0] || null;
+
+  const saved = {};
+  Object.keys(S).forEach(k=>{ saved[k]=S[k]; });
+  const owner = S.profile;
+
+  // Everything goes, then only what he is owed comes back.
+  Object.keys(S).forEach(k=>{
+    if(PREVIEW_HOLD.indexOf(k)>=0) return;
+    const v=S[k];
+    if(Array.isArray(v)) S[k]=[];
+    else if(v && typeof v==='object') S[k]={};
+    else if(typeof v==='number') S[k]=0;
+    else if(typeof v==='boolean') S[k]=false;
+    else S[k]=null;
+  });
+
+  S.profile = { user_id: as?as.user_id:owner.user_id,
+                full_name: as?as.full_name:buyer.company,
+                email: as?as.email:null,
+                role:'buyer', buyer_id:buyerId,
+                buyer_role: as?(as.buyer_role||'administrator'):'administrator',
+                finance_access: as ? as.finance_access!==false : true,
+                // carried across, not invented: if that person has never chosen
+                // their own password they are met by the choose-a-password
+                // screen, and the owner should see that rather than a portal
+                // they would not reach yet
+                password_set_at: as ? as.password_set_at : new Date().toISOString(),
+                must_change_password: as ? !!as.must_change_password : false };
+
+  const pos = (saved.pos||[]).filter(p=>p.buyer_id===buyerId);
+  // A project user only holds the orders he has been given.
+  const scoped = (saved.poScope||[]).filter(s=>s.user_id===S.profile.user_id);
+  const keep = (S.profile.buyer_role==='project' && scoped.length)
+    ? pos.filter(p=>scoped.some(s=>s.po_id===p.id)) : pos;
+  const poId={}; keep.forEach(p=>poId[p.id]=1);
+  S.pos = keep; S.posById={}; keep.forEach(p=>S.posById[p.id]=p);
+  S.items = (saved.items||[]).filter(i=>poId[i.po_id]);
+  S.itemsById={}; S.stByItem={};
+  S.items.forEach(i=>{ S.itemsById[i.id]=i; S.stByItem[i.id]=saved.stByItem[i.id]||[]; });
+  const itemId={}; S.items.forEach(i=>itemId[i.id]=1);
+
+  S.buyers=[buyer]; S.buyersById={}; S.buyersById[buyerId]=buyer;
+
+  // Only published updates exist for him at all; the rest never arrive.
+  S.updates = (saved.updates||[]).filter(u=>u.published_at && itemId[u.item_id]);
+  const pubUpd={}; S.updates.forEach(u=>pubUpd[u.id]=1);
+
+  // visiblePhotos() applies the approved-and-published rule itself, and with
+  // isAdmin() false it is now applying it to him. Narrowing here as well keeps
+  // another buyer's approved photograph out of the list in the first place.
+  // Photographs first, because indexUpdates() reads them to hang each one on
+  // the update it belongs to.
+  indexPhotos((saved.photos||[]).filter(p=>
+    p.status==='approved' && (!p.update_id || pubUpd[p.update_id]) &&
+    ((p.item_id && itemId[p.item_id]) || (p.po_id && poId[p.po_id]))));
+  indexUpdates();
+
+  S.comments = (saved.comments||[]).filter(c=>itemId[c.item_id]);
+  S.commentsByItem={};
+  S.comments.forEach(c=>{ (S.commentsByItem[c.item_id]=S.commentsByItem[c.item_id]||[]).push(c); });
+
+  S.docsByPo={}; S.docsByItem={};
+  Object.keys(saved.docsByPo||{}).forEach(k=>{ if(poId[k]) S.docsByPo[k]=saved.docsByPo[k]; });
+  Object.keys(saved.docsByItem||{}).forEach(k=>{ if(itemId[k]) S.docsByItem[k]=saved.docsByItem[k]; });
+
+  S.readMarks={};
+  Object.keys(saved.readMarks||{}).forEach(k=>{ if(itemId[k]) S.readMarks[k]=saved.readMarks[k]; });
+
+  indexApprovals((saved.revisions||[]).filter(r=>itemId[r.item_id]),
+                 Object.values(saved.decisionByRev||{}));
+  indexAllocations((saved.allocations||[]).filter(a=>poId[a.po_id]));
+  indexAccounts((saved.invoices||[]).filter(i=>i.buyer_id===buyerId && i.published_at),
+                (saved.ewaybills||[]).filter(e=>e.buyer_id===buyerId && e.published_at),
+                (saved.ledgerSnaps||[]).filter(s=>s.buyer_id===buyerId && s.published_at),
+                [].concat.apply([], Object.values(saved.ledgerLines||{})));
+  S.subs = (saved.subs||[]).filter(s=>s.buyer_id===buyerId);
+  S.subPending={}; S.subs.forEach(s=>{ if(s.status==='pending' && !S.subPending[s.buyer_id]) S.subPending[s.buyer_id]=s; });
+
+  S.preview = { buyer_id: buyerId, company: buyer.company, as: S.profile.full_name,
+                role: S.profile.buyer_role, finance: S.profile.finance_access,
+                owner: owner, saved: saved, client: sb };
+  sb = previewClient(S.preview.client);
+}
+
+function leaveBuyerPreview(){
+  if(!inBuyerPreview()) return;
+  const p = S.preview;
+  sb = p.client;
+  Object.keys(p.saved).forEach(k=>{ S[k]=p.saved[k]; });
+  S.profile = p.owner;
+  S.preview = null;
 }
 
 // e-way bills that belong to an order: matched through the invoices raised on it
@@ -11115,6 +11322,7 @@ function chAccount(){
       '<span class="badge'+(portal==='Active'?'':' warn')+'">Portal '+esc(portal)+'</span>'+
       '<span class="badge'+(finVis==='Enabled'?'':' warn')+'">Finance '+esc(finVis)+'</span>'+
       '<span class="badge'+(billing==='Complete'?'':' warn')+'">Billing '+esc(billing)+'</span>'+
+      '<button class="button secondary small" type="button" onclick="viewAsBuyer(\''+jsq(b.id)+'\')">See their view</button>'+
       '<button class="button secondary small" type="button" onclick="mBuyer(\''+b.id+'\')">Edit account</button>'+
     '</div></header>'+
     '<nav class="account-tabs" role="tablist" aria-label="Client sections">'+
@@ -14585,6 +14793,32 @@ function vChoosePassword(){
   ['cp-pw','cp-pw2'].forEach(id=>{ const el=$(id); if(el) el.onkeydown=e=>{ if(e.key==='Enter') go(); }; });
 }
 
+/* A bar across the top of every screen while the owner is looking through a
+   buyer's eyes. It is deliberately hard to miss and deliberately says whose
+   eyes and which person's, because a preview you forget you are in is how
+   somebody concludes the buyer cannot see a photograph that he can. It also
+   says plainly that nothing can be changed from here, since every write is
+   refused while it is on and a refusal with no explanation reads as a bug. */
+function previewBar(){
+  let el = document.getElementById('preview-bar');
+  if(!inBuyerPreview()){ if(el) el.remove(); document.body.classList.remove('is-preview'); return; }
+  if(!el){
+    el = document.createElement('div');
+    el.id = 'preview-bar'; el.className = 'preview-bar';
+    document.body.insertBefore(el, document.body.firstChild);
+  }
+  document.body.classList.add('is-preview');
+  const p = S.preview;
+  const who = p.as ? esc(p.as) : 'their administrator';
+  const role = p.role==='project' ? 'a project login' : 'an administrator login';
+  el.innerHTML =
+    '<span class="preview-bar__eye">'+icon('i-users','icon--sm')+'</span>'+
+    '<span class="preview-bar__text"><strong>You are seeing the portal as '+esc(p.company)+' sees it</strong>'+
+    '<span>Through '+who+', '+role+(p.finance?', with finance access':', without finance access')+
+    '. Nothing can be changed from here.</span></span>'+
+    '<button class="button button--secondary" type="button" onclick="exitPreview()">Back to my console</button>';
+}
+
 function render(){
   if(!S.ready) return;
   if(!S.session){ vLogin(); return; }
@@ -14604,7 +14838,12 @@ function render(){
   // password: it has travelled through a phone, and more than one person has
   // seen it. It gets them in once and then this screen is all there is until
   // they choose their own.
-  if(S.profile.must_change_password){ vChoosePassword(); return; }
+  // Before the password gate, not after. If the person being previewed has
+  // never chosen their own password, the honest thing to show the owner is the
+  // screen they will actually get — and without the bar drawn first he would
+  // be looking at it with no way back to his own console.
+  previewBar();
+  if(mustChoosePassword()){ vChoosePassword(); return; }
   updateHeader();
   const hash=location.hash||'#/home';
   const parts=hash.slice(2).split('/');
@@ -22371,6 +22610,28 @@ async function commitAcctImport(){
 }
 
 // Publishing is the only thing that lets a buyer see any of this.
+/* Into and out of the buyer's view. Both land the reader somewhere that makes
+   sense rather than on whatever hash they were on: the buyer's home going in,
+   because #/production means nothing to him, and the client he was looking at
+   coming back out. */
+function viewAsBuyer(buyerId){
+  if(!isAdmin()){ toast('Only the owner can do that.',{err:true}); return; }
+  const b=S.buyersById[buyerId];
+  if(!b){ toast('That client is not loaded.',{err:true}); return; }
+  enterBuyerPreview(buyerId);
+  if(!inBuyerPreview()){ toast('Could not open the buyer’s view.',{err:true}); return; }
+  go('#/home');
+  render();
+  toast('Looking at the portal as '+b.company+' sees it.');
+}
+function exitPreview(){
+  if(!inBuyerPreview()) return;
+  const id=S.preview.buyer_id;
+  leaveBuyerPreview();
+  go('#/clients/'+id);
+  render();
+}
+
 async function publishAcct(table, id, on){
   const {error}=await sb.from(table).update({published_at: on?new Date().toISOString():null}).eq('id', id);
   if(error){ toast(error.message,{err:true}); return; }
