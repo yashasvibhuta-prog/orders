@@ -4299,6 +4299,16 @@ body.reports-mode .sfa .content{max-width:1700px}
 .sfa .st-page .nav-copy small{margin-top:2px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sfa .st-page .dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--success)}
 .sfa .st-page .dot.warn{background:var(--warning)}
+.sfa .st-page .dot.bad{background:var(--critical)}
+/* the backup panel: a short history under the three rows, and the one line
+   about what no backup can hold */
+.sfa .st-page #st-backup{grid-column:1/-1}
+.sfa .st-page .bk-hist{margin-top:6px;padding-top:10px;border-top:1px solid var(--line)}
+.sfa .st-page .bk-hist-head{margin:0 0 2px;color:var(--muted);font-size:11px;font-weight:750;letter-spacing:.06em;text-transform:uppercase}
+.sfa .st-page .bk-run{padding:8px 0}
+.sfa .st-page .bk-run .setup-icon{width:28px;height:28px;border-radius:8px;font-size:12px}
+.sfa .st-page .bk-run{grid-template-columns:28px 1fr auto}
+.sfa .st-page .bk-foot{margin:12px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
 .sfa .st-page .settings-scrim{display:none}
 
 /* the page */
@@ -6131,7 +6141,7 @@ body.product-mode .sfa .sidebar .nav-item .nav-count{font-size:12.5px}
 }
 </style>
 <body>
-<script>const BUILD_ID='e0fed8447672';</script>
+<script>const BUILD_ID='76f88b697b85';</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-mark" viewBox="0 0 2000 2000"><g transform="translate(0,2000) scale(0.1,-0.1)"><path d="M9356 19209 c-118 -17 -309 -90 -501 -190 -67 -35 -824 -413 -1275 -637 -234 -115 -825 -409 -1315 -652 -489 -243 -1041 -516 -1225 -607 -184 -90 -343 -169 -353 -174 -10 -5 -148 -75 -306 -154 -249 -124 -294 -150 -328 -189 -70 -80 -82 -199 -29 -290 41 -70 95 -103 339 -210 145 -64 209 -93 382 -176 72 -34 195 -90 275 -125 80 -34 222 -99 317 -144 95 -44 175 -81 177 -81 3 0 44 -18 93 -41 48 -23 151 -71 228 -107 147 -68 247 -114 610 -280 121 -55 281 -129 355 -165 74 -35 200 -93 280 -127 80 -34 172 -77 205 -95 33 -17 139 -67 235 -110 96 -42 293 -133 437 -201 144 -68 264 -124 267 -124 7 0 91 -39 241 -110 331 -158 679 -314 749 -336 137 -43 291 -54 467 -34 119 14 200 40 368 121 79 38 145 69 146 69 2 0 39 16 82 36 43 20 121 56 173 79 52 24 167 77 255 118 223 105 546 254 770 357 280 128 299 137 435 202 69 33 179 83 245 112 66 29 210 96 320 149 183 88 552 258 785 362 52 23 129 58 170 77 41 20 147 67 235 106 88 39 210 94 270 122 61 29 193 89 295 135 102 46 237 107 300 137 63 31 149 70 190 88 240 105 306 154 334 251 20 66 20 82 0 148 -20 68 -77 130 -152 167 -31 15 -523 259 -1092 542 -569 283 -1228 610 -1465 727 -236 117 -835 414 -1330 660 -1114 553 -1128 560 -1300 591 -86 15 -264 17 -359 3z M3130 15734 c-114 -86 -384 -299 -496 -389 -789 -644 -1204 -1212 -1359 -1859 -49 -209 -60 -303 -60 -561 0 -707 237 -1174 745 -1468 84 -49 429 -230 790 -415 102 -52 235 -120 295 -152 224 -118 702 -363 1130 -580 242 -123 467 -239 500 -257 33 -18 161 -85 285 -147 124 -63 277 -142 340 -175 63 -34 205 -107 315 -162 110 -56 252 -130 316 -165 65 -35 141 -74 171 -87 30 -14 165 -83 299 -154 134 -72 305 -162 379 -200 261 -135 598 -345 792 -495 249 -192 316 -249 483 -415 403 -400 602 -731 714 -1193 65 -269 64 -616 -4 -935 -69 -320 -276 -762 -510 -1085 -37 -51 -64 -94 -62 -97 5 -4 388 189 414 209 6 5 78 44 160 87 317 166 489 258 513 273 14 8 86 47 160 85 74 39 155 81 180 95 95 53 184 100 455 243 154 81 300 159 325 173 25 14 77 42 115 62 338 176 423 221 510 270 55 31 147 81 205 110 58 29 138 73 178 97 41 24 75 43 77 43 17 0 380 217 535 319 219 145 404 310 502 446 61 84 147 257 170 341 33 123 31 337 -6 458 -136 452 -560 848 -1295 1210 -564 278 -1379 544 -2516 821 -1882 459 -2460 632 -3215 965 -280 123 -646 311 -840 431 -230 141 -325 205 -459 304 -640 477 -1059 1018 -1257 1621 -118 359 -157 605 -157 984 1 364 34 607 134 963 29 102 112 342 144 415 21 47 4 41 -95 -34z M15865 15676 c-83 -19 -324 -121 -680 -286 -82 -39 -152 -69 -480 -210 -60 -27 -182 -80 -270 -120 -88 -39 -230 -102 -315 -140 -85 -37 -190 -84 -232 -104 -97 -45 -217 -98 -433 -191 -93 -40 -208 -91 -255 -113 -47 -22 -166 -74 -265 -117 -99 -42 -213 -92 -253 -111 -41 -19 -75 -34 -77 -34 -2 0 -54 -24 -116 -53 -63 -29 -130 -59 -149 -67 -19 -7 -60 -24 -90 -38 -30 -13 -109 -48 -175 -77 -66 -29 -151 -67 -190 -85 -38 -18 -91 -41 -117 -51 -26 -10 -84 -37 -128 -59 -44 -22 -133 -62 -198 -89 -199 -83 -292 -131 -330 -171 -72 -73 -92 -193 -48 -285 31 -67 61 -93 186 -160 131 -71 185 -101 213 -119 12 -7 56 -31 97 -53 113 -59 318 -172 380 -208 30 -18 87 -49 125 -70 39 -21 99 -54 135 -75 36 -20 106 -59 155 -85 215 -114 391 -215 820 -469 440 -262 614 -404 826 -676 215 -276 350 -561 422 -895 54 -251 59 -329 67 -1030 l7 -640 26 -93 c86 -300 241 -479 552 -638 72 -37 274 -140 450 -229 176 -90 451 -229 610 -310 160 -81 432 -219 605 -307 173 -88 319 -163 325 -167 37 -30 540 -272 582 -281 131 -28 290 49 347 170 l21 45 3 3605 c2 2593 0 3622 -8 3665 -55 297 -198 511 -445 662 -52 32 -164 101 -247 154 -84 52 -198 123 -253 156 -55 33 -212 129 -348 212 -263 161 -320 190 -432 222 -92 27 -331 35 -420 15z M4667 15262 c-16 -25 -39 -299 -38 -457 1 -727 311 -1410 920 -2028 535 -545 1281 -951 2103 -1146 337 -80 633 -145 968 -210 168 -33 359 -71 425 -84 66 -13 165 -32 220 -41 249 -43 326 -58 405 -76 47 -11 173 -38 280 -60 1026 -214 1749 -449 2455 -800 251 -125 508 -272 644 -367 36 -26 107 -75 157 -110 112 -78 311 -237 464 -371 l115 -100 3 37 c6 58 -27 219 -97 476 -74 272 -255 655 -445 940 -120 181 -241 340 -331 435 -44 47 -105 113 -135 148 -69 82 -349 330 -515 457 -591 451 -1397 805 -2505 1099 -74 20 -209 56 -300 81 -91 25 -244 66 -340 91 -96 25 -197 51 -225 59 -27 7 -178 48 -335 90 -157 43 -377 104 -490 137 -113 33 -259 75 -325 94 -66 20 -212 65 -325 101 -185 59 -257 83 -540 186 -47 17 -174 66 -282 109 -108 43 -199 78 -202 78 -15 0 -302 140 -491 240 -336 177 -653 402 -889 630 -124 120 -326 343 -326 359 0 12 -16 15 -23 3z M1360 10680 c-176 -30 -293 -152 -321 -334 -7 -41 -9 -867 -6 -2362 4 -2602 -5 -2360 87 -2549 53 -109 121 -193 204 -254 44 -32 306 -191 511 -309 33 -19 76 -44 95 -55 19 -11 85 -48 145 -82 61 -34 153 -87 205 -117 52 -30 160 -93 240 -138 80 -46 289 -167 465 -269 176 -101 406 -233 510 -291 105 -59 242 -137 305 -175 63 -37 156 -90 205 -117 118 -66 321 -183 467 -270 208 -123 282 -147 445 -148 149 0 300 63 671 282 46 27 125 69 175 94 82 41 192 102 412 227 39 22 167 92 285 157 397 216 425 232 486 276 112 79 189 199 218 341 24 114 26 2596 2 2730 -40 225 -110 368 -261 531 -104 112 -131 129 -545 345 -69 35 -199 104 -290 152 -91 48 -286 149 -435 224 -148 76 -288 148 -310 161 -22 13 -152 80 -290 150 -137 70 -331 169 -430 220 -198 103 -333 170 -339 170 -2 0 -33 16 -68 36 -34 20 -184 98 -333 174 -498 252 -789 402 -885 455 -52 29 -113 62 -135 73 -81 40 -437 223 -672 346 -133 69 -245 126 -248 126 -4 0 -37 17 -73 39 -256 149 -361 183 -492 161z M14003 7366 c-63 -20 -105 -50 -143 -101 -145 -193 -733 -641 -1154 -879 -135 -76 -494 -269 -596 -321 -63 -32 -189 -96 -280 -142 -91 -47 -365 -185 -610 -308 -1263 -630 -2477 -1239 -2735 -1370 -159 -82 -425 -217 -590 -300 -2113 -1071 -1956 -985 -1989 -1096 -20 -66 -20 -102 -1 -166 30 -102 75 -134 475 -338 52 -27 120 -63 150 -81 30 -17 105 -57 165 -89 61 -32 202 -108 315 -170 212 -116 290 -158 495 -265 66 -35 144 -76 173 -92 30 -16 124 -66 210 -110 87 -44 162 -83 167 -88 11 -9 295 -160 495 -263 74 -38 240 -125 368 -194 260 -139 334 -168 466 -184 239 -30 403 19 760 225 52 30 139 78 193 107 54 29 133 72 177 96 43 23 80 43 81 43 1 0 46 25 100 55 53 30 99 55 101 55 2 0 21 10 42 23 20 13 75 44 122 69 134 71 289 157 360 198 36 20 106 59 155 85 150 80 398 217 425 235 14 10 75 43 135 75 143 75 224 119 310 168 78 44 133 74 250 137 131 70 206 111 275 150 36 20 126 70 200 110 74 40 230 126 345 190 116 65 280 155 365 200 85 46 182 100 215 120 33 20 168 94 300 164 132 71 257 140 278 153 21 13 111 64 200 112 89 49 241 132 337 186 194 107 356 197 440 242 30 17 111 62 180 100 69 39 213 119 320 179 107 59 227 125 265 147 39 21 108 60 155 85 47 25 130 71 185 102 55 32 132 74 170 95 39 21 99 55 135 75 36 20 101 57 145 80 44 24 94 51 110 60 17 10 59 34 93 54 35 20 66 36 70 36 3 0 28 18 57 39 148 112 197 338 113 519 -49 106 -101 141 -499 342 -200 100 -368 186 -374 190 -5 4 -298 153 -650 330 -352 177 -739 373 -860 435 -207 106 -756 386 -909 465 -79 40 -178 50 -253 26z"/></g></symbol>
@@ -6655,6 +6665,11 @@ const S = {
   costRates:[], indirectAlloc:[], outside:[], costSnaps:[], snapByItem:{},
   // people's own particulars: what they sent, and what the office accepted
   staffDetails:[], staffDetailsById:{}, staffSubs:[], staffSubPending:{}, myDetails:null, mySub:null,
+  // the nightly backup's own record of each run, newest first. Owner only.
+  backups:[],
+  // the file archive's own count (bt_archive_status), asked for when the
+  // backup panel is opened rather than on every load. Owner only.
+  archive:null,
   // The day report. Loaded when the screen is opened rather than with the rest,
   // because it is one date's question and the screen lets you walk back through
   // the week — putting it in the main load would fetch a day nobody asked for
@@ -6706,7 +6721,7 @@ const SESSION_GLOBALS = [
   '__paCompany','__paPerson','__paStaff','__paTab','__pdfjsLoading','__poFiles',
   '__poFilter','__poParse','__poTab','__poView','__prodFilter','__prodSearch',
   '__recTab','__repDays','__repSec','__selfie','__sheet','__staffFilter',
-  '__showDoneStages',
+  '__showDoneStages','__archLoading',
   '__staffQ','__stFlash','__stNav','__wsFile','__wsFilter','__wsQuery','__wsSort',
   // built by name in _loadScript, so the build check cannot see it in the source
   '__loading_JSZip'
@@ -6731,6 +6746,7 @@ function clearSession(){
   S.buyerFilter=''; S.apprView='pending'; S.apprFilter='pending'; S.docFilter='all';
   S.supFocus='all'; S.apprFocus='all'; S.attFocus='all'; S.teamFocus='all'; S.resFocus='all';
   S.supSort='ship';
+  S.archive=null;   // not {}: an empty object would read as an archive with nothing in it
   // Every scratch global the app parks on window: an imported workbook
   // (__sheet), an accounting import (__acct), a half-written daily record with
   // its photographs (__du), a selfie (__selfie) — all of it is the last
@@ -7644,7 +7660,7 @@ async function loadOwnerData(){
   const admin = isAdmin();
   let poQ = sb.from('bt_purchase_orders').select('*, bt_order_items(*, bt_item_stages(*))').order('po_date',{ascending:false}).order('created_at',{ascending:false});
   if(admin && S.buyerFilter) poQ = poQ.eq('buyer_id', S.buyerFilter);
-  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, abt, abi, aasg, breg, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd, crv, ial, outp, snap, sdet, ssub] = await Promise.all([
+  const [b, po, cm, ph, dc, rm, ac, pr, pay, chg, upd, updi, sti, inv, ewb, lsn, lln, arev, adec, alloc, scope, subs, rw, hd, ms, ctb, abt, abi, aasg, breg, atd, sites, pol, atc, lv, rates, ws, adv, ot, eq, eqe, wte, ite, reg, wtc, lots, mm, mreg, qcl, qd, crv, ial, outp, snap, sdet, ssub, bk] = await Promise.all([
     sb.from('bt_buyers').select('*').order('company'),
     poQ,
     sb.from('bt_comments').select('*').order('created_at'),
@@ -7726,7 +7742,10 @@ async function loadOwnerData(){
     admin ? sb.from('bt_outside_processing').select('*').order('created_at',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_product_cost_snapshots').select('*').order('computed_at',{ascending:false}) : Promise.resolve({data:[]}),
     admin ? sb.from('bt_staff_details').select('*') : Promise.resolve({data:[]}),
-    admin ? sb.from('bt_staff_submissions').select('*').order('submitted_at',{ascending:false}) : Promise.resolve({data:[]})
+    admin ? sb.from('bt_staff_submissions').select('*').order('submitted_at',{ascending:false}) : Promise.resolve({data:[]}),
+    // The backup log. The table's only policy is the owner's; a month of
+    // nights is plenty to say whether the last one worked and when it last did.
+    admin ? sb.from('bt_backup_log').select('*').order('requested_at',{ascending:false}).limit(40) : Promise.resolve({data:[]})
   ]);
   const err = [b,po,cm,ph,dc,rm,ac,pr,pay,chg,upd].find(r=>r.error);
   if(err) throw err.error;
@@ -7786,6 +7805,8 @@ async function loadOwnerData(){
   indexMaterial((lots&&lots.data)||[], (mm&&mm.data)||[], (mreg&&mreg.data)||[], (qcl&&qcl.data)||[], (qd&&qd.data)||[]);
   indexCosting((crv&&crv.data)||[], (ial&&ial.data)||[], (outp&&outp.data)||[], (snap&&snap.data)||[]);
   indexStaffDetails((sdet&&sdet.data)||[], (ssub&&ssub.data)||[]);
+  S.backups=(bk&&bk.data)||[];
+  S.archive=null;   // counted again the next time the backup panel is drawn
   indexUpdates();
   S.lastLoad = Date.now();
 }
@@ -8473,6 +8494,46 @@ function queueAge(since, never){
    used to live on four separate screens. Each row knows its own urgency, which
    filter chip it belongs to, and the single button that deals with it.
      urgency 0 = urgent now, 1 = due today, 2 = waiting on others            */
+/* ---- the nightly backup ------------------------------------------------------
+   Every night at 02:00 IST the database is copied to two places, and each run
+   leaves a row in bt_backup_log saying what happened at each. Backblaze is the
+   copy that must be there every morning; the function reads it back and checks
+   it before it writes "ok". GitHub is the second copy, and it cannot work until
+   the owner has made a token for it — until then it says "not_set_up", which is
+   a true statement, not a failure and not a success.
+
+   Nothing on this side decides that a backup worked. It reads what the function
+   recorded after the fact. A run still marked "requested" after a quarter of an
+   hour never answered, and bt_backup_request() turns those into failures the
+   next time it runs; here it simply stops counting as running. */
+const BACKUP_STALE_HOURS = 36;     // a night missed, plus the morning after it
+function backupHealth(now){
+  const t = now || Date.now();
+  const at = r => r ? new Date(r.finished_at || r.requested_at).getTime() : null;
+  const hrs = ms => ms===null ? null : (t - ms) / 3600000;
+  const rows = (S.backups||[]).slice().sort((a,b)=>String(b.requested_at).localeCompare(String(a.requested_at)));
+  const running = rows.find(r => r.status==='requested' && hrs(new Date(r.requested_at).getTime()) < 0.25) || null;
+  const done = rows.filter(r => r.status!=='requested');
+  const last = done[0] || null;
+  const lastB2 = done.find(r => r.b2_status==='ok') || null;
+  const lastGit = done.find(r => r.git_status==='ok') || null;
+  const b2Hours = hrs(at(lastB2)), gitHours = hrs(at(lastGit));
+  // Where each copy stands after the latest finished run. A night that failed
+  // outright says "failed" for both, whatever the columns were left as.
+  const b2 = !last ? 'none' : (last.b2_status || (last.status==='failed' ? 'failed' : 'none'));
+  const git = !last ? 'none' : (last.git_status || (last.status==='failed' ? 'failed' : 'none'));
+  return { rows, done, last, lastB2, lastGit, running, b2, git, b2Hours, gitHours,
+    // no good Backblaze copy inside the window, including never having had one
+    b2Stale: b2Hours===null || b2Hours > BACKUP_STALE_HOURS,
+    gitSetUp: done.some(r => r.git_status && r.git_status!=='not_set_up') };
+}
+function backupAgo(h){
+  if(h===null || h===undefined) return 'never';
+  if(h < 1) return Math.max(1, Math.round(h*60))+' min ago';
+  if(h < 48) return Math.round(h)+' h ago';
+  return Math.round(h/24)+' days ago';
+}
+
 function ownerActions(){
   const rows=[];
   const push=(o)=>rows.push(o);
@@ -8510,6 +8571,45 @@ function ownerActions(){
       action:{label:'Open', go:"go('#/clients/"+b.id+"')"},
       note:first });
   });
+
+  // The backup. Only the owner's queue, only when something is actually wrong:
+  // Backblaze has had no good copy for a day and a half, or the GitHub copy was
+  // working and has stopped (the usual reason is a token that expired). A
+  // second copy never set up is a standing gap rather than news, so it waits
+  // at the back of the queue instead of the front.
+  if(isAdmin() && !inBuyerPreview()){
+    const bh = backupHealth();
+    if(bh.b2Stale){
+      push({ urgency:0, chip:'missing', chipLabel:'Backup', icon:'i-doc',
+        group:'desk', subject:'Database backup', kind:'No backup', tone:'bad',
+        since:bh.lastB2 ? (bh.lastB2.finished_at||bh.lastB2.requested_at) : null, never:!bh.lastB2, ageWord:'since',
+        detail: bh.lastB2
+          ? 'The last good copy in Backblaze is from '+fdate(bh.lastB2.finished_at||bh.lastB2.requested_at)+' — '+backupAgo(bh.b2Hours)
+          : 'There is no good copy in Backblaze at all',
+        type:'backup', title:'The database has not been backed up',
+        meta: bh.last && bh.last.b2_error ? String(bh.last.b2_error).slice(0,120) : 'Backblaze · nightly at 02:00',
+        action:{label:'Open', go:"go('#/admin/data')"},
+        note: bh.last && (bh.last.b2_error||bh.last.error) ? String(bh.last.b2_error||bh.last.error).slice(0,120) : '' });
+    }
+    if(bh.git==='failed' && bh.b2!=='failed'){
+      push({ urgency:1, chip:'missing', chipLabel:'Backup', icon:'i-doc',
+        group:'desk', subject:'Database backup', kind:'GitHub copy failing', tone:'warn',
+        since:bh.last.finished_at||bh.last.requested_at, ageWord:'since',
+        detail:'Backblaze has last night’s copy; GitHub refused it'+(bh.last.git_error?' · '+String(bh.last.git_error).slice(0,90):''),
+        type:'backup', title:'The GitHub copy of the backup failed',
+        meta:'GitHub · '+(bh.last.git_error?String(bh.last.git_error).slice(0,90):'no reason given'),
+        action:{label:'Open', go:"go('#/admin/data')"} });
+    }
+    if(bh.git==='not_set_up' && !bh.b2Stale){
+      push({ urgency:2, chip:'missing', chipLabel:'Backup', icon:'i-doc',
+        group:'else', subject:'Database backup', kind:'Second copy not set up', tone:'mute',
+        since:null, ageWord:'',
+        detail:'Backblaze has it every night. The GitHub copy is waiting for your token.',
+        type:'backup', title:'The GitHub copy is not set up',
+        meta:'Backblaze only · GitHub needs a token',
+        action:{label:'Open', go:"go('#/admin/data')"} });
+    }
+  }
 
   // The floor has reported a piece stuck.
   blockedItems().forEach(b=>{
@@ -10481,7 +10581,7 @@ const PROD_TYPES=[['all','All decisions'],['blocked','Work stopped'],['quality',
                   ['missing','Missing records'],['stage','Stage decisions'],['publish','Publish to buyer']];
 const PROD_LABEL={blocked:'Work stopped',quality:'Quality',review:'Review evidence',people:'People',missing:'Missing record',
                   stage:'Stage decision',publish:'Publish to buyer',waiting:'With the buyer',
-                  finance:'Finance',books:'Books disagree',other:'Decision'};
+                  finance:'Finance',books:'Books disagree',backup:'Backup',other:'Decision'};
 function prodRows(){
   return ownerActions().map(a=>Object.assign({}, a, {type:a.type||'other'}));
 }
@@ -11530,6 +11630,8 @@ const ST_INDEX=[
   ['Import','Purchase orders and spreadsheets','data','#st-import'],
   ['Configuration export','Stages, sites and policies','data','#st-export'],
   ['Audit history','Actor, before and after','data','#st-audit'],
+  ['Backup','Nightly copy to Backblaze and GitHub','data','#st-backup'],
+  ['Back up now','Database backup','data','#st-backup-now'],
   ['Password','Owner sign-in','security','#st-signin'],
   ['Office-issued passwords','Account safeguards','security','#st-issued'],
   ['Retire a factory site','Restricted action','danger','#st-retire-site'],
@@ -11601,7 +11703,8 @@ function stNav(open){ window.__stNav=open?1:0;
 function stRail(cur, st){
   const dots={company:st.companyOk?'':'warn', workflow:st.active.length?'':'warn',
     quality:st.uncovered.length?'warn':'', attendance:st.sites.length?'':'warn',
-    equipment:(st.eq.length && !st.eqDown.length)?'':'warn', materials:st.lots.length?'':'warn'};
+    equipment:(st.eq.length && !st.eqDown.length)?'':'warn', materials:st.lots.length?'':'warn',
+    data:(()=>{ const bh=backupHealth(); return bh.b2Stale?'bad':(bh.git==='ok'?'':'warn'); })()};
   const icons={overview:'⌂', company:initials(st.company), workflow:String(st.active.length), quality:'✓',
     attendance:'⌖', equipment:'⚙', materials:'◫', data:'⇅', security:'◇', danger:'!'};
   let h='<aside class="settings-nav'+(window.__stNav?' open':'')+'" id="st-nav" aria-label="Settings sections">'+
@@ -12114,7 +12217,103 @@ function stData(st, importOpen){
     (importOpen?'':stPanel({cls:'half', title:'Export and audit', sub:'Download the configuration and read the change history.',
       bodyCls:'quick-grid', body:'<button class="quick" type="button" id="st-export" onclick="stExportConfig()"><strong>Configuration export</strong><small>Stages, sites, policy, checklists, equipment and lots as a file</small></button>'+
         '<button class="quick" type="button" id="st-audit" onclick="go(\'#/reports/activity\')"><strong>Audit history</strong><small>Who changed what, with before and after</small></button>'}))+
+    (importOpen?'':stBackupPanel())+
     '</div>';
+}
+
+// The nightly backup, as the log records it. Every sentence here is read off a
+// row the backup function wrote after it finished; the page never says a copy
+// exists because a button was pressed.
+function bkWhen(ts){
+  if(!ts) return '';
+  const d=new Date(ts); if(isNaN(d)) return '';
+  return fdate(dayOf(ts))+', '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+function bkSize(n){ n=Number(n)||0; return n>=1048576 ? (n/1048576).toFixed(1)+' MB' : Math.max(1,Math.round(n/1024))+' KB'; }
+const BK_WORD={ok:'Copied', failed:'Failed', not_set_up:'Not set up', none:'—'};
+// The photographs and documents are not in the nightly file: each one is copied
+// to Backblaze as it arrives, by b2-archive, and bt_archive_status() counts what
+// is there against what is in storage. Asked for once when the panel opens.
+function stArchiveRow(){
+  const a=S.archive;
+  const known = !!(a && (a.error || a.files_in_bucket!==undefined));
+  if(!known && !window.__archLoading && !inBuyerPreview()){
+    window.__archLoading=1;
+    sb.rpc('bt_archive_status').then(({data, error})=>{
+      S.archive = error ? {error:error.message} : (data||{error:'no answer'});
+      window.__archLoading=0; render();
+    }, e=>{ S.archive={error:String(e&&e.message||e)}; window.__archLoading=0; render(); });
+  }
+  let line, status;
+  if(!known){ line='Counting…'; status=''; }
+  else if(a.error){ line='The archive would not say how it stands: '+String(a.error).slice(0,140); status=stStatus('Unknown','warn'); }
+  else {
+    const total=Number(a.files_in_bucket)||0, done=Number(a.archived)||0, missing=Number(a.not_yet_archived)||0, failed=Number(a.failed)||0;
+    if(!missing){
+      line=(total ? (total===done ? 'All '+stPlural(total,'file') : done+' of '+stPlural(total,'file'))+' are in Backblaze' : 'Nothing has been uploaded yet')+
+        '. Each photograph and document is copied as it arrives, not once a night.';
+      status=stStatus('Current');
+    } else {
+      line=missing+' of '+stPlural(total,'file')+' not yet in Backblaze'+(failed?' ('+failed+' failed at the last try)':'')+
+        '. The archive tries again every 30 minutes by itself.';
+      status=stStatus(failed?'Behind':'Catching up','warn');
+    }
+  }
+  return '<div class="setup-row" id="st-backup-files"><span class="setup-icon">▣</span>'+
+    '<div><strong>Photographs and documents</strong><small>'+esc(line)+'</small></div>'+status+'</div>';
+}
+function stBackupPanel(){
+  const bh=backupHealth();
+  const last=bh.last;
+  const b2Line = bh.lastB2
+    ? 'Last good copy '+bkWhen(bh.lastB2.finished_at||bh.lastB2.requested_at)+' · '+backupAgo(bh.b2Hours)+'. Read back after writing and checked against its fingerprint.'
+    : 'No good copy has ever reached Backblaze.';
+  const b2Err = (bh.b2==='failed' && last) ? (last.b2_error||last.error||'') : '';
+  const b2Status = bh.b2Stale ? stStatus(bh.lastB2?'Out of date':'None yet','bad')
+                 : bh.b2==='failed' ? stStatus('Last night failed','warn') : stStatus('Current');
+  let gitLine, gitStatus;
+  if(bh.git==='ok'){
+    gitLine='Last committed '+bkWhen(bh.lastGit.finished_at||bh.lastGit.requested_at)+' · '+backupAgo(bh.gitHours)+', as database/stoneflow.json in the private repository.';
+    gitStatus=stStatus('Current');
+  } else if(bh.git==='failed'){
+    gitLine='GitHub refused the copy'+(last&&last.git_error?': '+String(last.git_error).slice(0,160):'.')+
+      (bh.lastGit?' The last one it took was '+bkWhen(bh.lastGit.finished_at||bh.lastGit.requested_at)+'.':'')+
+      ' A token that has expired is the usual reason; make a new one the same way and replace GITHUB_BACKUP_TOKEN.';
+    gitStatus=stStatus('Failing','warn');
+  } else {
+    gitLine='Not set up. It needs a token only you can make: on GitHub, a fine-grained token for yashasvibhuta-prog/stoneflow with Contents read and write; '+
+      'then in Supabase, under Edge Functions → Secrets, GITHUB_BACKUP_TOKEN set to that token and GITHUB_BACKUP_REPO set to yashasvibhuta-prog/stoneflow.';
+    gitStatus=stStatus('Not set up','warn');
+  }
+  const head = bh.b2Stale ? stStatus('Not backed up','bad')
+             : bh.git==='ok' ? stStatus('Both copies current')
+             : stStatus('Backblaze only','warn');
+  const lastLine = last
+    ? bkWhen(last.finished_at||last.requested_at)+(last.requested_by?' · started by hand':' · the nightly run')+
+      (last.row_total!=null?' · '+stPlural(Number(last.row_total),'row')+' in '+stPlural(Number(last.tables||0),'table'):'')+
+      (last.bytes?' · '+bkSize(last.bytes):'')+(last.sha256?' · fingerprint '+String(last.sha256).slice(0,12):'')
+    : 'Nothing has run yet. The first nightly run is at 02:00.';
+  const hist = bh.done.slice(0,7).map(r=>
+    '<div class="activity-row bk-run"><span class="setup-icon">'+(r.status==='ok'?'✓':r.status==='partial'?'½':'✕')+'</span>'+
+      '<div><strong>'+esc(bkWhen(r.finished_at||r.requested_at))+'</strong>'+
+      '<small>Backblaze: '+esc(BK_WORD[r.b2_status||'none']||r.b2_status)+' · GitHub: '+esc(BK_WORD[r.git_status||'none']||r.git_status)+
+        (r.row_total!=null?' · '+esc(String(r.row_total))+' rows':'')+'</small></div>'+
+      '<span></span></div>').join('');
+  const busy = !!bh.running;
+  return stPanel({id:'st-backup', title:'Database backup',
+    sub:'Every night at 02:00, the whole database is copied to two places.', right:head,
+    bodyCls:'setup-list', body:
+      '<div class="setup-row" id="st-backup-b2"><span class="setup-icon">B2</span>'+
+        '<div><strong>Backblaze</strong><small>'+esc(b2Line)+(b2Err?' Last attempt: '+esc(String(b2Err).slice(0,160)):'')+'</small></div>'+b2Status+'</div>'+
+      '<div class="setup-row" id="st-backup-git"><span class="setup-icon">GH</span>'+
+        '<div><strong>GitHub</strong><small>'+esc(gitLine)+'</small></div>'+gitStatus+'</div>'+
+      stArchiveRow()+
+      '<div class="setup-row"><span class="setup-icon">⇅</span>'+
+        '<div><strong>Last run</strong><small id="st-backup-last">'+esc(lastLine)+'</small></div>'+
+        '<button class="button'+(bh.b2Stale?'':' secondary')+' small" type="button" id="st-backup-now" '+(busy?'disabled ':'')+
+          'onclick="backupNow()">'+(busy?'Running…':'Back up now')+'</button></div>'+
+      (hist?'<div class="bk-hist"><p class="bk-hist-head">The last '+stPlural(Math.min(7,bh.done.length),'run')+'</p>'+hist+'</div>':'')+
+      '<p class="bk-foot">Not in any backup: passwords, and the keys held in Supabase. After a restore, logins are issued again.</p>'});
 }
 // The configuration as a file. Coordinates and the WhatsApp number stay out of
 // it: the design keeps them off every list and summary, and a file is both.
@@ -20975,6 +21174,50 @@ async function delLogin(userId, email){
       confirmLabel:'Remove the login'})) return;
   try{ await adminApi({action:'delete_user', user_id:userId}); await loadData(); render(); }
   catch(e){ toast(e.message,{err:true}); }
+}
+
+/* ---------- the backup, by hand ----------
+   Asks the database to start one (bt_backup_now: owner only, one at a time),
+   then reads the log until the function has written what happened. The toast
+   at the end quotes that row. If the function never answers inside the minute,
+   it says so, rather than implying the copy was made. */
+const BACKUP_POLL_MS = 4000, BACKUP_POLL_TRIES = 15;
+async function refreshBackups(){
+  const {data, error}=await sb.from('bt_backup_log').select('*').order('requested_at',{ascending:false}).limit(40);
+  if(!error && data) S.backups=data;
+  return !error;
+}
+async function backupNow(){
+  const btn=document.getElementById('st-backup-now');
+  if(btn){ btn.disabled=true; btn.textContent='Running…'; }
+  let id;
+  try{
+    const {data, error}=await sb.rpc('bt_backup_now');
+    if(error) throw error;
+    id=data;
+  }catch(e){
+    toast(e.message||'The backup could not be started.',{err:true});
+    if(btn){ btn.disabled=false; btn.textContent='Back up now'; }
+    return;
+  }
+  toast('Backup started. The result appears here when both places have answered.');
+  await refreshBackups(); render();
+  for(let i=0;i<BACKUP_POLL_TRIES;i++){
+    await new Promise(r=>setTimeout(r, BACKUP_POLL_MS));
+    await refreshBackups();
+    const row=(S.backups||[]).find(r=>r.id===id);
+    if(row && row.status!=='requested'){
+      render();
+      const w=k=>({ok:'copied', failed:'failed', not_set_up:'not set up'}[k]||k||'no answer');
+      const msg='Backblaze: '+w(row.b2_status)+' · GitHub: '+w(row.git_status);
+      if(row.status==='ok') toast('Backed up. '+msg);
+      else if(row.status==='partial') toast('Backed up to one place. '+msg);
+      else toast('The backup failed. '+(row.error||msg),{err:true});
+      return;
+    }
+  }
+  render();
+  toast('No answer from the backup yet. Look again in a minute; the log will say what happened.',{err:true});
 }
 
 /* ---------- settings & stages ---------- */
